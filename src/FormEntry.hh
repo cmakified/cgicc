@@ -1,4 +1,4 @@
-/* $Id: FormEntry.hh,v 1.3 1998/04/02 20:15:14 sbooth Exp $ */
+/* $Id: FormEntry.hh,v 1.4 1998/04/02 20:20:41 sbooth Exp $ */
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1
@@ -84,7 +84,7 @@ public:
    * @param value The location to store the result.
    * @exception Exception
    */
-  void getValueStripped(char* &value) const throw(Exception);
+  void getStrippedValue(char* &value) const throw(Exception);
 
   /**
    * Get the value of the form element, stripped of all line breaks
@@ -95,7 +95,7 @@ public:
    * @param value The location to store the result.
    * @exception Exception
    */
-  void getValueStripped(int 	maxChars,
+  void getStrippedValue(int 	maxChars,
 			char* 	&value) const throw(Exception);
 
   /**
