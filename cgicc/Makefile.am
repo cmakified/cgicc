@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.11 2000/10/07 18:38:01 sbooth Exp $
+## $Id: Makefile.am,v 1.12 2001/03/09 22:38:41 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -8,7 +8,7 @@ lib_LTLIBRARIES = libcgicc.la
 libcgicc_la_SOURCES = CgiEnvironment.cpp CgiUtils.cpp Cgicc.cpp	\
 FormEntry.cpp FormFile.cpp HTMLAttributes.cpp HTMLElements.cpp	\
 HTTPHeaders.cpp MStreamable.cpp
-libcgicc_la_LDFLAGS = -version-info 2:3:1
+libcgicc_la_LDFLAGS = -version-info 3:0:2
 
 pkginclude_HEADERS = CgiDefs.h CgiEnvironment.h CgiUtils.h Cgicc.h	\
 FormEntry.h FormFile.h HTMLAttributes.h HTMLClasses.h HTMLElements.h	\
