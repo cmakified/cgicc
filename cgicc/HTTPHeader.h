@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPHeader.h,v 1.2 2001/09/05 02:16:59 sbooth Exp $
+ *  $Id: HTTPHeader.h,v 1.3 2002/01/09 15:04:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -44,7 +44,7 @@ CGICC_BEGIN_NAMESPACE
 // ============================================================
 
 /*! \class HTTPHeader HTTPHeader.h cgicc/HTTPHeader.h
- * Abstract base class for all simple HTTP response headers.
+ * \brief Abstract base class for all simple HTTP response headers.
  *
  */
 class CGICC_API HTTPHeader : public MStreamable 
