@@ -1,6 +1,6 @@
 /* -*-html-*- */
 /*
- *  $Id: tutorial.tmpl,v 1.4 2002/03/09 18:30:37 sbooth Exp $
+ *  $Id: tutorial.tmpl,v 1.5 2002/03/16 18:17:26 sbooth Exp $
  *
  *  Copyright (C) 2001 - 2002 Stephen F. Booth
  *
@@ -344,6 +344,7 @@ code given above.
 #include <string>
 
 #include "cgicc/Cgicc.h"
+#include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 
 using namespace std;
@@ -360,7 +361,7 @@ main(int argc,
       cout << HTTPHTMLHeader() << endl;
 
       // Set up the HTML document
-      cout << html() << << head(title("Cgicc example")) << endl;
+      cout << html() << head(title("Cgicc example")) << endl;
       cout << body() << endl;
 
       // Print out the submitted element
