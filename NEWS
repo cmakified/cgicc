@@ -17,7 +17,7 @@
 
 * New method add() added to HTMLElement, to allow multiple embedded elements.
 
-* Visual C++ 6.0 project files added.
+* Visual C++ 6.0 project files added, in win/ subdirectory.
 
 * All .cc files renamed to .cpp, and .hh files to .h (for Win32 support).
 

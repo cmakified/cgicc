@@ -1,3 +1,7 @@
+1999-08-11  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* cgicc/CgiDefs.h.in: Disable warning 4251 in WIN32 section
+
 1999-08-10  Stephen F. Booth  <sbooth@ride.cupertino.ibm.com>
 
 	* info/tutorial.texinfo: Updated for new HTML generation
