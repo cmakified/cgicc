@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLAttribute.h,v 1.3 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTMLAttribute.h,v 1.4 2002/12/04 17:04:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -42,194 +42,194 @@
 #include "cgicc/CgiDefs.h"
 #include "cgicc/MStreamable.h"
 
-CGICC_BEGIN_NAMESPACE
-
-// ============================================================
-// Class HTMLAttribute
-// ============================================================
-
-/*! \class HTMLAttribute HTMLAttribute.h cgicc/HTMLAttribute.h
- * \brief Class representing a name or a single name/value pair
- *
- * An HTMLAttribute represents a single name/value
- * pair inside an HTMLElement.  For example, in the HTML code:
- \verbatim
- <a href="mailto:sbooth@gnu.org">Send mail</a>
- \endverbatim
- * The (name, value) pair <tt>(href, mailto:%sbooth@gnu.org)</tt> is
- * an HTMLAttribute.
- * HTMLAttribute objects are usually not created directly, but
- * using the set() methods.  To generate the HTML above using
- * %cgicc, write
- * \code
- * cout << cgicc::a("Send Mail").set("href", "mailto:sbooth@gnu.org");
- * \endcode
- * \sa HTMLAttributeList
- */
-class CGICC_API HTMLAttribute : public MStreamable 
-{
-public:
+namespace cgicc {
+  
+  // ============================================================
+  // Class HTMLAttribute
+  // ============================================================
+  
+  /*! \class HTMLAttribute HTMLAttribute.h cgicc/HTMLAttribute.h
+   * \brief Class representing a name or a single name/value pair
+   *
+   * An HTMLAttribute represents a single name/value
+   * pair inside an HTMLElement.  For example, in the HTML code:
+   \verbatim
+   <a href="mailto:sbooth@gnu.org">Send mail</a>
+   \endverbatim
+   * The (name, value) pair <tt>(href, mailto:%sbooth@gnu.org)</tt> is
+   * an HTMLAttribute.
+   * HTMLAttribute objects are usually not created directly, but
+   * using the set() methods.  To generate the HTML above using
+   * %cgicc, write
+   * \code
+   * cout << cgicc::a("Send Mail").set("href", "mailto:sbooth@gnu.org");
+   * \endcode
+   * \sa HTMLAttributeList
+   */
+  class CGICC_API HTMLAttribute : public MStreamable 
+  {
+  public:
     
-  // ============================================================
-
-  /*! \name Constructors and Destructor */
-  //@{
-  
-  /*!
-   * \brief Create an empty HTMLAttribute. 
-   *
-   * The name and value are set to an empty string.
-   */
-  HTMLAttribute();
-  
-  /*!
-   * \brief Create an HTMLAttribute with the given name.
-   *
-   * This will simply set the name and value to the same value.
-   * \param name The name of the attribute.
-   */
-  HTMLAttribute(const STDNS string& name);
-  
-  /*!
-   * \brief Create an HTMLAttribute with the given name and value.
-   *
-   * Most attributes are of this form
-   * \param name The attribute's name, for example \c href
-   * \param value The attributes's alue, for exampe \c foo.html
-   */
-  HTMLAttribute(const STDNS string& name, 
-		const STDNS string& value);
-
-  /*!
-   * \brief Copy constructor.
-   *
-   * Sets the name of value of this attribute to those of \c attribute
-   * \param attribute The HTMLAttribute to copy.
-   */
-  HTMLAttribute(const HTMLAttribute& attribute);
-  
-  /*!
-   * \brief Destructor 
-   *
-   * Delete this HTMLAttribute object
-   */
-  virtual ~HTMLAttribute();
-  //@}
-
-  // ============================================================
-
-  /*! \name Overloaded Operators */
-  //@{
-
-  /*!
-   * \brief Compare two HTMLAttributes for equality.
-   *
-   * HTMLAttributes are equal if they have the same name and value.
-   * \param att The HTMLAttribute to compare to this one.
-   * \return \c true if the two HTMLAttributes are equal, \c false otherwise.
-   */
-  bool 
-  operator== (const HTMLAttribute& att) 		const;
-
-  /*!
-   * \brief Compare two HTMLAttributes for inequality.
-   *
-   * HTMLAttributes are equal if they have the same name and value.
-   * \param att The HTMLAttribute to compare to this one.
-   * \return \c false if the two HTMLAttributes are equal, \c true otherwise.
-   */
-  inline bool 
-  operator!= (const HTMLAttribute& att) 		const
+    // ============================================================
+    
+    /*! \name Constructors and Destructor */
+    //@{
+    
+    /*!
+     * \brief Create an empty HTMLAttribute. 
+     *
+     * The name and value are set to an empty string.
+     */
+    HTMLAttribute();
+    
+    /*!
+     * \brief Create an HTMLAttribute with the given name.
+     *
+     * This will simply set the name and value to the same value.
+     * \param name The name of the attribute.
+     */
+    HTMLAttribute(const std::string& name);
+    
+    /*!
+     * \brief Create an HTMLAttribute with the given name and value.
+     *
+     * Most attributes are of this form
+     * \param name The attribute's name, for example \c href
+     * \param value The attributes's alue, for exampe \c foo.html
+     */
+    HTMLAttribute(const std::string& name, 
+		  const std::string& value);
+    
+    /*!
+     * \brief Copy constructor.
+     *
+     * Sets the name of value of this attribute to those of \c attribute
+     * \param attribute The HTMLAttribute to copy.
+     */
+    HTMLAttribute(const HTMLAttribute& attribute);
+    
+    /*!
+     * \brief Destructor 
+     *
+     * Delete this HTMLAttribute object
+     */
+    virtual ~HTMLAttribute();
+    //@}
+    
+    // ============================================================
+    
+    /*! \name Overloaded Operators */
+    //@{
+    
+    /*!
+     * \brief Compare two HTMLAttributes for equality.
+     *
+     * HTMLAttributes are equal if they have the same name and value.
+     * \param att The HTMLAttribute to compare to this one.
+     * \return \c true if the two HTMLAttributes are equal, \c false otherwise.
+     */
+    bool 
+    operator== (const HTMLAttribute& att) 		const;
+    
+    /*!
+     * \brief Compare two HTMLAttributes for inequality.
+     *
+     * HTMLAttributes are equal if they have the same name and value.
+     * \param att The HTMLAttribute to compare to this one.
+     * \return \c false if the two HTMLAttributes are equal, \c true otherwise.
+     */
+    inline bool 
+    operator!= (const HTMLAttribute& att) 		const
     { return ! operator==(att); }
-
+    
 #ifdef WIN32
-  /* Dummy operator for MSVC++ */
-  inline bool
-  operator< (const HTMLAttribute& att) const
-  { return false; }
+    /* Dummy operator for MSVC++ */
+    inline bool
+    operator< (const HTMLAttribute& att) const
+    { return false; }
 #endif
-
-  /*!
-   * \brief Assign one HTMLAttribute to another.
-   *
-   * Sets the name of value of this attribute to those of \c att
-   * \param att The HTMLAttribute to copy.
-   * \return A reference to this.
-   */
-  HTMLAttribute& 
-  operator= (const HTMLAttribute& att);
-  //@}  
-  
-  // ============================================================
-
-  /*! \name Accessor Methods 
-   * Information on the attribute
-   */
-  //@{
-
-  /*!
-   * \brief Get the name of this HTMLAttribute.
-   *
-   * For example, \c HREF
-   * \return The attribute's name.
-   */
-  inline STDNS string 
-  getName() 						const
+    
+    /*!
+     * \brief Assign one HTMLAttribute to another.
+     *
+     * Sets the name of value of this attribute to those of \c att
+     * \param att The HTMLAttribute to copy.
+     * \return A reference to this.
+     */
+    HTMLAttribute& 
+    operator= (const HTMLAttribute& att);
+    //@}  
+    
+    // ============================================================
+    
+    /*! \name Accessor Methods 
+     * Information on the attribute
+     */
+    //@{
+    
+    /*!
+     * \brief Get the name of this HTMLAttribute.
+     *
+     * For example, \c HREF
+     * \return The attribute's name.
+     */
+    inline std::string 
+    getName() 						const
     { return fName; }
-  
-  /*!
-   * \brief Get the value of this HTMLAttribute.
-   *
-   * For example, \c http://www.gnu.org
-   * \return The attribute's value.
-   */
-  inline STDNS string
-  getValue() 						const
+    
+    /*!
+     * \brief Get the value of this HTMLAttribute.
+     *
+     * For example, \c http://www.gnu.org
+     * \return The attribute's value.
+     */
+    inline std::string
+    getValue() 						const
     { return fValue; }
-  //@}
+    //@}
   
-  // ============================================================
-
-  /*! \name Mutator Methods 
-   * Set properties of the attribute
-   */
-  //@{
-
-  /*!
-   * \brief Set the name of this HTMLAttribute.
-   *
-   * Use this method if the name wasn't specified in the constructor
-   * \param name The new name of the attribute.
-   */
-  inline void 
-  setName(const STDNS string& name)
+    // ============================================================
+    
+    /*! \name Mutator Methods 
+     * Set properties of the attribute
+     */
+    //@{
+    
+    /*!
+     * \brief Set the name of this HTMLAttribute.
+     *
+     * Use this method if the name wasn't specified in the constructor
+     * \param name The new name of the attribute.
+     */
+    inline void 
+    setName(const std::string& name)
     { fName = name; }
-  
-  /*!
-   * \brief Set the value of this HTMLAttribute.
-   *
-   * Use this method if the value wasn't specified in the constructor
-   * \param value The new value of the attribute.
-   */
-  inline void 
-  setValue(const STDNS string& value)
+    
+    /*!
+     * \brief Set the value of this HTMLAttribute.
+     *
+     * Use this method if the value wasn't specified in the constructor
+     * \param value The new value of the attribute.
+     */
+    inline void 
+    setValue(const std::string& value)
     { fValue = value; }
-  //@}
+    //@}
+    
+    /*!
+     * \brief Render this attribute to an ostream
+     *
+     * This is used for output purposes
+     * \param out The ostream to which to write
+     */
+    virtual void 
+    render(std::ostream& out) 				const;
+    
+  private:
+    std::string fName;
+    std::string fValue;
+  };
   
-  /*!
-   * \brief Render this attribute to an ostream
-   *
-   * This is used for output purposes
-   * \param out The ostream to which to write
-   */
-  virtual void 
-  render(STDNS ostream& out) 				const;
-  
-private:
-  STDNS string fName;
-  STDNS string fValue;
-};
-
-CGICC_END_NAMESPACE
+} // namespace cgicc
 
 #endif /* ! _HTMLATTRIBUTE_H_ */

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPCookie.cpp,v 1.3 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPCookie.cpp,v 1.4 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -28,27 +28,27 @@
 // ============================================================
 // Class HTTPCookie
 // ============================================================
-CGICCNS HTTPCookie::HTTPCookie()
-  : fMaxAge(0), 
+cgicc::HTTPCookie::HTTPCookie()
+  : fMaxAge(0),
     fSecure(false)
 {}
 
-CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name, 
-			       const STDNS string& value)
-  : fName(name), 
+cgicc::HTTPCookie::HTTPCookie(const std::string& name, 
+			      const std::string& value)
+  : fName(name),
     fValue(value),
     fMaxAge(0),
     fSecure(false)
 {}
 
-CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name, 
-			       const STDNS string& value, 
-			       const STDNS string& comment, 
-			       const STDNS string& domain, 
-			       unsigned long maxAge, 
-			       const STDNS string& path,
-			       bool secure)
-  : fName(name), 
+cgicc::HTTPCookie::HTTPCookie(const std::string& name, 
+			      const std::string& value, 
+			      const std::string& comment, 
+			      const std::string& domain, 
+			      unsigned long maxAge, 
+			      const std::string& path,
+			      bool secure)
+  : fName(name),
     fValue(value), 
     fComment(comment), 
     fDomain(domain), 
@@ -57,7 +57,7 @@ CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name,
     fSecure(secure)
 {}
 
-CGICCNS HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
+cgicc::HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
   : MStreamable(),
     fName(cookie.getName()), 
     fValue(cookie.getValue()), 
@@ -68,11 +68,11 @@ CGICCNS HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
     fSecure(cookie.isSecure())
 {}
 
-CGICCNS HTTPCookie::~HTTPCookie()
+cgicc::HTTPCookie::~HTTPCookie()
 {}
 
 bool 
-CGICCNS HTTPCookie::operator== (const HTTPCookie& cookie) const
+cgicc::HTTPCookie::operator== (const HTTPCookie& cookie) const
 {
   return (stringsAreEqual(fName, cookie.fName)
 	  && stringsAreEqual(fValue, cookie.fValue)
@@ -84,7 +84,7 @@ CGICCNS HTTPCookie::operator== (const HTTPCookie& cookie) const
 }
 
 void 
-CGICCNS HTTPCookie::render(STDNS ostream& out) 	const
+cgicc::HTTPCookie::render(std::ostream& out) 	const
 {
   out << "Set-Cookie:" << getName() << '=' << getValue();
   if(fComment.empty() == false)

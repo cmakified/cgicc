@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLElement.cpp,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTMLElement.cpp,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -30,7 +30,7 @@
 // ============================================================
 // Class HTMLElement
 // ============================================================
-CGICCNS HTMLElement::HTMLElement(const HTMLElement& element)
+cgicc::HTMLElement::HTMLElement(const HTMLElement& element)
   : MStreamable(),
     fAttributes(0),
     fEmbedded(0)
@@ -38,19 +38,18 @@ CGICCNS HTMLElement::HTMLElement(const HTMLElement& element)
   this->operator= (element);
 }
 
-CGICCNS HTMLElement::HTMLElement(const HTMLAttributeList *attributes,
-				 const HTMLElement *embedded,
-				 const STDNS string *data,
-				 EElementType type)
+cgicc::HTMLElement::HTMLElement(const HTMLAttributeList *attributes,
+				const HTMLElement *embedded,
+				const std::string *data,
+				EElementType type)
   : fAttributes(0),
     fEmbedded(0),
     fData(),
     fType(type),
     fDataSpecified(false)
 {
-  if(attributes != 0) {
+  if(attributes != 0)
     fAttributes = new HTMLAttributeList(*attributes);
-  }
 
   if(embedded != 0)
     fEmbedded = new HTMLElementList(*embedded);
@@ -61,22 +60,22 @@ CGICCNS HTMLElement::HTMLElement(const HTMLAttributeList *attributes,
   }
 }
 
-CGICCNS HTMLElement::~HTMLElement()
+cgicc::HTMLElement::~HTMLElement()
 {
   delete fAttributes;
   delete fEmbedded;
 }
 
 bool
-CGICCNS HTMLElement::operator== (const HTMLElement& element) const
+cgicc::HTMLElement::operator== (const HTMLElement& element) const
 {
   // this is really lame, but only necessary for template instantiation
   return (strcmp(getName(), element.getName()) == 0
 	  && fDataSpecified == element.fDataSpecified);
 }
 
-CGICCNS HTMLElement&
-CGICCNS HTMLElement::operator= (const HTMLElement& element)
+cgicc::HTMLElement&
+cgicc::HTMLElement::operator= (const HTMLElement& element)
 {
   // avoid memory leak; bug fix from Francois Degros
   delete fAttributes;
@@ -91,29 +90,29 @@ CGICCNS HTMLElement::operator= (const HTMLElement& element)
   // perform a deep copy
   if(fAttributes != 0)
     fAttributes = new HTMLAttributeList(*fAttributes);
-
+  
   if(fEmbedded != 0)
     fEmbedded = new HTMLElementList(*fEmbedded);
-
+  
   return *this;
 }
 
 void 
-CGICCNS HTMLElement::setAttributes(const HTMLAttributeList& attributes)
+cgicc::HTMLElement::setAttributes(const HTMLAttributeList& attributes)
 { 
   delete fAttributes;
   fAttributes = new HTMLAttributeList(attributes);
 }
 
 void
-CGICCNS HTMLElement::setEmbedded(const HTMLElementList& embedded)
+cgicc::HTMLElement::setEmbedded(const HTMLElementList& embedded)
 {
   delete fEmbedded;
   fEmbedded = new HTMLElementList(embedded);
 }
 
-CGICCNS HTMLElement&
-CGICCNS HTMLElement::add(const HTMLElement& element)
+cgicc::HTMLElement&
+cgicc::HTMLElement::add(const HTMLElement& element)
 {
   if(fEmbedded == 0)
     fEmbedded = new HTMLElementList();
@@ -121,8 +120,8 @@ CGICCNS HTMLElement::add(const HTMLElement& element)
   return *this;
 }
 
-CGICCNS HTMLElement&
-CGICCNS HTMLElement::add(HTMLElement *element)
+cgicc::HTMLElement&
+cgicc::HTMLElement::add(HTMLElement *element)
 {
   if(fEmbedded == 0)
     fEmbedded = new HTMLElementList();
@@ -130,8 +129,8 @@ CGICCNS HTMLElement::add(HTMLElement *element)
   return *this;
 }
 
-CGICCNS HTMLElement&
-CGICCNS HTMLElement::set(const STDNS string& name)
+cgicc::HTMLElement&
+cgicc::HTMLElement::set(const std::string& name)
 {
   if(fAttributes == 0)
     fAttributes = new HTMLAttributeList();
@@ -139,9 +138,9 @@ CGICCNS HTMLElement::set(const STDNS string& name)
   return *this;
 }
 
-CGICCNS  HTMLElement&
-CGICCNS HTMLElement::set(const STDNS string& name,
-			 const STDNS string& value)
+cgicc:: HTMLElement&
+cgicc::HTMLElement::set(const std::string& name,
+			 const std::string& value)
 {
   if(fAttributes == 0)
     fAttributes = new HTMLAttributeList();
@@ -150,7 +149,7 @@ CGICCNS HTMLElement::set(const STDNS string& name,
 }
 
 void
-CGICCNS HTMLElement::render(STDNS ostream& out) 	const
+cgicc::HTMLElement::render(std::ostream& out) 	const
 {
   if(getType() == eBoolean && dataSpecified() == false) {
     /* no embedded elements */

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPRedirectHeader.h,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPRedirectHeader.h,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -35,48 +35,48 @@
 
 #include "cgicc/HTTPHeader.h"
 
-CGICC_BEGIN_NAMESPACE
+namespace cgicc {
   
-// ============================================================
-// Class HTTPRedirectHeader
-// ============================================================
-
-/*! \class HTTPRedirectHeader HTTPRedirectHeader.h cgicc/HTTPRedirectHeader.h
- * \brief Class for redirecting the client to a different URI
- *
- */
-class CGICC_API HTTPRedirectHeader : public HTTPHeader 
-{
-public:
-
-  /*! \name Constructor and Destructor */
-  //@{
-
-  /*!
-   * \brief Create a new redirection header.
-   * \param url The redirection URL.
-   */
-  HTTPRedirectHeader(const STDNS string& url);
-    
-  /*! 
-   * \brief Destructor 
+  // ============================================================
+  // Class HTTPRedirectHeader
+  // ============================================================
+  
+  /*! \class HTTPRedirectHeader HTTPRedirectHeader.h cgicc/HTTPRedirectHeader.h
+   * \brief Class for redirecting the client to a different URI
    *
    */
-  virtual ~HTTPRedirectHeader();
-  //@}
+  class CGICC_API HTTPRedirectHeader : public HTTPHeader 
+  {
+  public:
     
-  // ============================================================
-
-  /*! \name Inherited Methods */
-  //@{ 
-  virtual void 
-  render(STDNS ostream& out) 			const;
-  //@}
+    /*! \name Constructor and Destructor */
+    //@{
     
-private:
-  HTTPRedirectHeader();
-};
-
-CGICC_END_NAMESPACE
+    /*!
+     * \brief Create a new redirection header.
+     * \param url The redirection URL.
+     */
+    HTTPRedirectHeader(const std::string& url);
+    
+    /*! 
+     * \brief Destructor 
+     *
+     */
+    virtual ~HTTPRedirectHeader();
+    //@}
+    
+    // ============================================================
+    
+    /*! \name Inherited Methods */
+    //@{ 
+    virtual void 
+    render(std::ostream& out) 			const;
+    //@}
+    
+  private:
+    HTTPRedirectHeader();
+  };
+  
+} // namespace cgicc
 
 #endif /* ! _HTTPREDIRECTHEADER_H_ */

@@ -1,5 +1,5 @@
 /*
- * $Id: fcgi-test.cpp,v 1.1 2002/03/17 20:56:37 sbooth Exp $ 
+ * $Id: fcgi-test.cpp,v 1.2 2002/12/04 17:04:07 sbooth Exp $ 
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -33,16 +33,11 @@
 // To use the debug logging feature, the variable gLogFile MUST be
 // defined, and it _must_ be an ofstream
 #if DEBUG
-  ofstream gLogFile( "/change_this_path/cgicc.log", ios::app );
+  std::ofstream gLogFile( "/change_this_path/cgicc.log", std::ios::app );
 #endif
 
-#if CGICC_USE_NAMESPACES
-  using namespace std;
-  using namespace cgicc;
-#else
-#  define div div_
-#  define select select_
-#endif
+using namespace std;
+using namespace cgicc;
 
 int 
 main(int /*argc*/, 

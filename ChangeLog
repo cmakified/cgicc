@@ -1,3 +1,21 @@
+2002-12-04  Stephen F. Booth  <sbooth@gnu.org>
+
+	* acinclude.m4: Generate error if namespaces not supported
+	* configure.ac: Removed enabling/disabling of namespaces
+	* cgicc/CgiDefs.h.in: Removed CGICC_USE_NAMESPACES
+	* cgicc/*.{h,cpp}: CGICC_BEGIN_NAMESPACE, CGICC_END_NAMESPACE, 
+	STDNS macros removed
+	* demo/*.cpp: CGICC_BEGIN_NAMESPACE, CGICC_END_NAMESPACE, 
+	STDNS macros removed
+	* contrib/*.{h,cpp}: CGICC_BEGIN_NAMESPACE, CGICC_END_NAMESPACE, 
+	STDNS macros removed
+	* doc/Doxyfile.in: Reference to obsolete macros removed
+
+2002-11-24  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.ac: Change $debug to $cgicc_debug
+	* contrib/nph-hello.cpp: Added STDNS qualifier to ofstream and ios
+
 2002-11-23  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/FormEntry.{h,cpp}: Added getIntegerValue(int, int, bool&)
@@ -7,6 +25,8 @@
 	* cgicc/CgiUtils.cpp(readString): Fixed memory leak reported 
 	by bostjan@optonline.net (fix submitted by alexoss@verizon.net)
 	* THANKS: Added Bostjan Lah and Carsten Gehrke
+	* cgicc/CgiInput.cpp(getenv): Explicitly return STDNS string from
+	ternary ? operator
 
 2002-09-04  Stephen F. Booth  <sbooth@gnu.org>
 

@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.8 2002/11/23 20:45:23 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.9 2002/12/04 17:04:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -33,16 +33,16 @@
 // This code based on code from 
 // "The C++ Programming Language, Third Edition" by Bjarne Stroustrup
 bool 
-CGICCNS stringsAreEqual(const STDNS string& s1, 
-			const STDNS string& s2)
+cgicc::stringsAreEqual(const std::string& s1, 
+		       const std::string& s2)
 {
-  STDNS string::const_iterator p1 = s1.begin();
-  STDNS string::const_iterator p2 = s2.begin();
-  STDNS string::const_iterator l1 = s1.end();
-  STDNS string::const_iterator l2 = s2.end();
+  std::string::const_iterator p1 = s1.begin();
+  std::string::const_iterator p2 = s2.begin();
+  std::string::const_iterator l1 = s1.end();
+  std::string::const_iterator l2 = s2.end();
 
   while(p1 != l1 && p2 != l2) {
-    if(STDNS toupper(*(p1++)) != STDNS toupper(*(p2++)))
+    if(std::toupper(*(p1++)) != std::toupper(*(p2++)))
       return false;
   }
 
@@ -51,18 +51,18 @@ CGICCNS stringsAreEqual(const STDNS string& s1,
 
 // case-insensitive string comparison
 bool 
-CGICCNS stringsAreEqual(const STDNS string& s1, 
-			const STDNS string& s2,
-			size_t n)
+cgicc::stringsAreEqual(const std::string& s1, 
+		       const std::string& s2,
+		       size_t n)
 {
-  STDNS string::const_iterator p1 = s1.begin();
-  STDNS string::const_iterator p2 = s2.begin();
+  std::string::const_iterator p1 = s1.begin();
+  std::string::const_iterator p2 = s2.begin();
   bool good = (n <= s1.length() && n <= s2.length());
-  STDNS string::const_iterator l1 = good ? (s1.begin() + n) : s1.end();
-  STDNS string::const_iterator l2 = good ? (s2.begin() + n) : s2.end();
+  std::string::const_iterator l1 = good ? (s1.begin() + n) : s1.end();
+  std::string::const_iterator l2 = good ? (s2.begin() + n) : s2.end();
 
   while(p1 != l1 && p2 != l2) {
-    if(STDNS toupper(*(p1++)) != STDNS toupper(*(p2++)))
+    if(std::toupper(*(p1++)) != std::toupper(*(p2++)))
       return false;
   }
   
@@ -70,8 +70,8 @@ CGICCNS stringsAreEqual(const STDNS string& s1,
 }
 
 char
-CGICCNS hexToChar(char first, 
-		  char second)
+cgicc::hexToChar(char first, 
+		 char second)
 {
   int digit;
   digit = (first >= 'A' ? ((first & 0xDF) - 'A') + 10 : (first - '0'));
@@ -80,11 +80,11 @@ CGICCNS hexToChar(char first,
   return static_cast<char>(digit);
 }
 
-STDNS string
-CGICCNS unescapeString(const STDNS string& src)
+std::string
+cgicc::unescapeString(const std::string& src)
 {
-  STDNS string result;
-  STDNS string::const_iterator iter;
+  std::string result;
+  std::string::const_iterator iter;
   char c;
 
   for(iter = src.begin(); iter != src.end(); ++iter) {
@@ -108,19 +108,19 @@ CGICCNS unescapeString(const STDNS string& src)
 }
 
 // locate data between separators, and return it
-STDNS string
-CGICCNS extractBetween(const STDNS string& data, 
-		       const STDNS string& separator1, 
-		       const STDNS string& separator2)
+std::string
+cgicc::extractBetween(const std::string& data, 
+		      const std::string& separator1, 
+		      const std::string& separator2)
 {
-  STDNS string result;
+  std::string result;
   unsigned int start, limit;
   
   start = data.find(separator1, 0);
-  if(start != STDNS string::npos) {
+  if(start != std::string::npos) {
     start += separator1.length();
     limit = data.find(separator2, start);
-    if(limit != STDNS string::npos)
+    if(limit != std::string::npos)
       result = data.substr(start, limit - start);
   }
   
@@ -129,8 +129,8 @@ CGICCNS extractBetween(const STDNS string& data,
 
 // write a string
 void 
-CGICCNS writeString(STDNS ostream& out, 
-		    const STDNS string& s)
+cgicc::writeString(std::ostream& out, 
+		   const std::string& s)
 { 
   out << s.length() << ' ';
   out.write(s.data(), s.length()); 
@@ -138,41 +138,41 @@ CGICCNS writeString(STDNS ostream& out,
 
 // write a long
 void 
-CGICCNS writeLong(STDNS ostream& out, 
-		  unsigned long l)
+cgicc::writeLong(std::ostream& out, 
+		 unsigned long l)
 { 
   out << l << ' '; 
 }
 
 // read a string
-STDNS string
-CGICCNS readString(STDNS istream& in)
+std::string
+cgicc::readString(std::istream& in)
 {
-  STDNS string::size_type dataSize = 0;
+  std::string::size_type dataSize = 0;
   
   in >> dataSize;
   in.get(); // skip ' '
   
   // Avoid allocation of a zero-length vector
   if(dataSize == 0) {
-    return STDNS string("");
+    return std::string("");
   }
 
   // Don't use auto_ptr, but vector instead
   // Bug reported by bostjan@optonline.net / fix by alexoss@verizon.net
-  STDNS vector<char> temp(dataSize);
+  std::vector<char> temp(dataSize);
 
   in.read(&temp[0], dataSize);
-  if((STDNS string::size_type)in.gcount() != dataSize) {
-    throw STDNS runtime_error("I/O error");
+  if((std::string::size_type)in.gcount() != dataSize) {
+    throw std::runtime_error("I/O error");
   }
 
-  return STDNS string(&temp[0], dataSize);
+  return std::string(&temp[0], dataSize);
 }
 
 // read a long
 unsigned long
-CGICCNS readLong(STDNS istream& in)
+cgicc::readLong(std::istream& in)
 {
   unsigned long l;
 

@@ -1,5 +1,5 @@
 /*
- *  $Id: upload.cpp,v 1.5 2002/03/03 17:41:44 sbooth Exp $
+ *  $Id: upload.cpp,v 1.6 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -48,17 +48,11 @@
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
 #if DEBUG
-  STDNS ofstream gLogFile( "/change_this_path/cgicc.log", STDNS ios::app );
+  std::ofstream gLogFile( "/change_this_path/cgicc.log", std::ios::app );
 #endif
 
-#if CGICC_USE_NAMESPACES
-  using namespace std;
-  using namespace cgicc;
-#else
-#  define div div_
-#  define link link_
-#  define select select_
-#endif
+using namespace std;
+using namespace cgicc;
 
 // Main Street, USA
 int
@@ -132,7 +126,6 @@ main(int /*argc*/,
 	 << ", " << env.getRemoteHost() 
 	 << '(' << env.getRemoteAddr() << ")!" << h4() << endl;  
     
-
     // Show the uploaded file
     cout << h2("File Uploaded via FormFile") << endl;
   
@@ -140,7 +133,7 @@ main(int /*argc*/,
     file = cgi.getFile("userfile");
 				
     if(file != cgi.getFiles().end()) {
-      cout << CGICCNS div().set("align","center") << endl;
+      cout << cgicc::div().set("align","center") << endl;
     
       cout << table().set("border","0").set("rules","none").set("frame","void")
 	.set("cellspacing","2").set("cellpadding","2")
@@ -177,21 +170,21 @@ main(int /*argc*/,
       
       cout << pre() << td() << tr() << endl;
       
-      cout << table() << CGICCNS div() << endl;
+      cout << table() << cgicc::div() << endl;
     }
     else {
-      cout << p() << CGICCNS div().set("class", "notice") << endl;
-      cout << "No file was uploaded." << endl << CGICCNS div() << p() << endl;
+      cout << p() << cgicc::div().set("class", "notice") << endl;
+      cout << "No file was uploaded." << endl << cgicc::div() << p() << endl;
     }
 
     // Now print out a footer with some fun info
-    cout << p() << CGICCNS div().set("align","center");
+    cout << p() << cgicc::div().set("align","center");
     cout << a("Back to form").set("href", cgi.getEnvironment().getReferrer()) 
 	 << endl;
-    cout << CGICCNS div() << br() << hr(set("class","half")) << endl;
+    cout << cgicc::div() << br() << hr(set("class","half")) << endl;
     
     // Information on cgicc
-    cout << CGICCNS div().set("align","center").set("class","smaller") << endl;
+    cout << cgicc::div().set("align","center").set("class","smaller") << endl;
     cout << "GNU cgi" << span("cc").set("class","red") << " v";
     cout << cgi.getVersion() << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime();
@@ -221,7 +214,7 @@ main(int /*argc*/,
 #endif
 
     // End of document
-    cout << CGICCNS div() << endl;
+    cout << cgicc::div() << endl;
     cout << body() << html() << endl;
 
     // No chance for failure in this example
@@ -229,7 +222,7 @@ main(int /*argc*/,
   }
 
   // Did any errors occur?
-  catch(const STDNS exception& e) {
+  catch(const std::exception& e) {
 
     // This is a dummy exception handler, as it doesn't really do
     // anything except print out information.
@@ -239,7 +232,7 @@ main(int /*argc*/,
     html::reset(); 	head::reset(); 		body::reset();
     title::reset(); 	h1::reset(); 		h4::reset();
     comment::reset(); 	td::reset(); 		tr::reset(); 
-    table::reset();	CGICCNS div::reset(); 	p::reset(); 
+    table::reset();	cgicc::div::reset(); 	p::reset(); 
     a::reset();		h2::reset(); 		colgroup::reset();
 
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
@@ -268,12 +261,12 @@ main(int /*argc*/,
     cout << h1() << "GNU cgi" << span("cc", set("class","red"))
 	 << " caught an exception" << h1() << endl; 
   
-    cout << CGICCNS div().set("align","center").set("class","notice") << endl;
+    cout << cgicc::div().set("align","center").set("class","notice") << endl;
 
     cout << h2(e.what()) << endl;
 
     // End of document
-    cout << CGICCNS div() << endl;
+    cout << cgicc::div() << endl;
     cout << hr().set("class","half") << endl;
     cout << body() << html() << endl;
     

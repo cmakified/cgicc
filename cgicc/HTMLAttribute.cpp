@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttribute.cpp,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTMLAttribute.cpp,v 1.3 2002/12/04 17:04:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -28,38 +28,38 @@
 // ============================================================
 // Class HTMLAttribute
 // ============================================================
-CGICCNS HTMLAttribute::HTMLAttribute()
+cgicc::HTMLAttribute::HTMLAttribute()
 {}
 
-CGICCNS HTMLAttribute::HTMLAttribute(const STDNS string& name)
+cgicc::HTMLAttribute::HTMLAttribute(const std::string& name)
   : fName(name),
     fValue(name)
 {}
 
-CGICCNS HTMLAttribute::HTMLAttribute(const STDNS string& name, 
-				     const STDNS string& value)
+cgicc::HTMLAttribute::HTMLAttribute(const std::string& name, 
+				     const std::string& value)
   : fName(name), 
     fValue(value)
 {}
 
-CGICCNS HTMLAttribute::HTMLAttribute(const HTMLAttribute& attribute)
+cgicc::HTMLAttribute::HTMLAttribute(const HTMLAttribute& attribute)
   : MStreamable(),
     fName(attribute.fName), 
     fValue(attribute.fValue)
 {}
 
-CGICCNS HTMLAttribute::~HTMLAttribute()
+cgicc::HTMLAttribute::~HTMLAttribute()
 {}
 
 bool
-CGICCNS HTMLAttribute::operator== (const HTMLAttribute& att) 	const
+cgicc::HTMLAttribute::operator== (const HTMLAttribute& att) 	const
 {
   return (stringsAreEqual(fName, att.fName) 
 	  && stringsAreEqual(fValue, att.fValue));
 }
 
-CGICCNS HTMLAttribute& 
-CGICCNS HTMLAttribute::operator= (const HTMLAttribute& att) 
+cgicc::HTMLAttribute& 
+cgicc::HTMLAttribute::operator= (const HTMLAttribute& att) 
 {
   fName 	= att.fName;
   fValue 	= att.fValue;
@@ -68,7 +68,7 @@ CGICCNS HTMLAttribute::operator= (const HTMLAttribute& att)
 }
 
 void 
-CGICCNS HTMLAttribute::render(STDNS ostream& out) 		const
+cgicc::HTMLAttribute::render(std::ostream& out) 		const
 {
   out << getName() << "=\"" << getValue() << "\"";
 }

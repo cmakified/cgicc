@@ -1,3 +1,7 @@
+2002-12-04  Stephen F. Booth  <sbooth@gnu.org>
+
+	* example.cpp: Removed CGICC_USE_NAMESPACES macro
+
 2002-03-12  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc.m4: Use ' ' instead of ':' as path separator

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHTMLHeader.cpp,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPHTMLHeader.cpp,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,9 +27,9 @@
 // ============================================================
 // Class HTTPHTMLHeader
 // ============================================================
-CGICCNS HTTPHTMLHeader::HTTPHTMLHeader()
+cgicc::HTTPHTMLHeader::HTTPHTMLHeader()
   : HTTPContentHeader("text/html")
 {}
 
-CGICCNS HTTPHTMLHeader::~HTTPHTMLHeader()
+cgicc::HTTPHTMLHeader::~HTTPHTMLHeader()
 {}

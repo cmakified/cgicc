@@ -1,5 +1,5 @@
 /*
- * $Id: example.cpp,v 1.5 2002/03/09 18:37:29 sbooth Exp $ 
+ * $Id: example.cpp,v 1.6 2002/12/04 17:04:07 sbooth Exp $ 
  *
  * Skeleton of a CGI application written using the GNU cgicc library
  */
@@ -17,13 +17,8 @@
   ofstream gLogFile( "/change_this_path/cgicc.log", ios::app );
 #endif
 
-#if CGICC_USE_NAMESPACES
-  using namespace std;
-  using namespace cgicc;
-#else
-#  define div div_
-#  define select select_
-#endif
+using namespace std;
+using namespace cgicc;
 
 int
 main(int argc, 

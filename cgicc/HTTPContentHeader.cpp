@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPContentHeader.cpp,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPContentHeader.cpp,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,21 +27,21 @@
 // ============================================================
 // Class HTTPContentHeader
 // ============================================================
-CGICCNS HTTPContentHeader::HTTPContentHeader(const STDNS string& mimeType) 
+cgicc::HTTPContentHeader::HTTPContentHeader(const std::string& mimeType) 
   : HTTPHeader(mimeType)
 {}
 
-CGICCNS HTTPContentHeader::~HTTPContentHeader()
+cgicc::HTTPContentHeader::~HTTPContentHeader()
 {}
 
 void 
-CGICCNS HTTPContentHeader::render(STDNS ostream& out)	const
+cgicc::HTTPContentHeader::render(std::ostream& out)	const
 {
-  out << "Content-Type: " << getData() << STDNS endl;
-
-  STDNS vector<HTTPCookie>::const_iterator iter; 
-  for(iter = getCookies().begin(); iter != getCookies().end(); ++iter)
-    out << *iter << STDNS endl;
+  out << "Content-Type: " << getData() << std::endl;
   
-  out << STDNS endl;
+  std::vector<HTTPCookie>::const_iterator iter; 
+  for(iter = getCookies().begin(); iter != getCookies().end(); ++iter)
+    out << *iter << std::endl;
+  
+  out << std::endl;
 }

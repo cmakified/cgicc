@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLElementList.h,v 1.3 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTMLElementList.h,v 1.4 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -40,127 +40,127 @@
 #include "cgicc/HTMLAttribute.h"
 #include "cgicc/HTMLElement.h"
 
-CGICC_BEGIN_NAMESPACE
-
-// ============================================================
-// Class HTMLElementList
-// ============================================================
-
-#ifdef WIN32
-  template class CGICC_API STDNS vector<HTMLElement*>;
-#endif
-
-/*! \class HTMLElementList HTMLElementList.h cgicc/HTMLElementList.h
- * \brief An expandable list of HTMLElement objects
- *
- * An HTMLElementList represents any number of HTMLElement objects.  
- * To add HTMLElement objects to the list, use the add() methods:
- * \code
- * cgicc::HTMLElementList list;
- * list.add(br());
- * \endcode
- * \see HTMLAttribute
- * \see HTMLElement
- */
-class CGICC_API HTMLElementList
-{
-public:
+namespace cgicc {
   
   // ============================================================
-
-  /*! \name Constructors and Destructor */
-  //@{
-
-  /*!
-   * \brief Create an empty HTMLElementList. 
-   *
-   * HTMLElementLists are most often created with the add() functions
-   */
-  HTMLElementList();
-
-  /*!
-   * \brief Create a new HTMLElementList, specifying the first element.
-   *
-   * The first element in the list is set to \c head
-   * \param head The first element of the list
-   */
-  HTMLElementList(const HTMLElement& head);
-
-  /*!
-   * \brief Copy constructor.
-   *
-   * Sets the elements in this list to those of \c list
-   * \param list The HTMLElementList to copy.
-   */
-  HTMLElementList(const HTMLElementList& list);
-
-  /*!
-   * \brief Destructor 
-   *
-   * Deletes this HTMLElementList object
-   */
-  ~HTMLElementList();
-  //@}
-
+  // Class HTMLElementList
   // ============================================================
-
-  /*! \name Overloaded Operators */
-  //@{
-
-  /*!
-   * \brief Assignment operator 
+  
+#ifdef WIN32
+  template class CGICC_API std::vector<HTMLElement*>;
+#endif
+  
+  /*! \class HTMLElementList HTMLElementList.h cgicc/HTMLElementList.h
+   * \brief An expandable list of HTMLElement objects
    *
-   * Sets the elements in this list to those of \c list
-   * \param list The HTMLElementList to copy
-   * \return A reference to \c this
+   * An HTMLElementList represents any number of HTMLElement objects.  
+   * To add HTMLElement objects to the list, use the add() methods:
+   * \code
+   * cgicc::HTMLElementList list;
+   * list.add(br());
+   * \endcode
+   * \see HTMLAttribute
+   * \see HTMLElement
    */
-  HTMLElementList&
-  operator= (const HTMLElementList& list);
-  //@}
-
-  // ============================================================
-
-  /*! \name List Management 
-   * Manage the elements in the list
-   */
-  //@{
-
-  /*!
-   * \brief Add an HTMLElement to the list.
-   *
-   * \param element The HTMLElement to add.
-   * \return A reference to \c this
-   */
-  HTMLElementList&
-  add(const HTMLElement& element);
-
-  /*!
-   * \brief Add an HTMLElement to the list.
-   *
-   * \param element The HTMLElement to add.
-   * \return A reference to the \c this
-   */
-  HTMLElementList&
-  add(HTMLElement *element);
-  //@}
-
-  /*! Utility Methods */
-  //@{
-
-  /*!
-   * \brief Render this HTMLElementList 
-   *
-   * \param out The ostream to which to write
-   */
-  void 
-  render(STDNS ostream& out) 				const;
-  //@}
-
-private:
-  STDNS vector<HTMLElement*> fElements;
-  // elements must be stored as pointers, otherwise polymorphism does not work
-};
-
-CGICC_END_NAMESPACE
+  class CGICC_API HTMLElementList
+  {
+  public:
+    
+    // ============================================================
+    
+    /*! \name Constructors and Destructor */
+    //@{
+    
+    /*!
+     * \brief Create an empty HTMLElementList. 
+     *
+     * HTMLElementLists are most often created with the add() functions
+     */
+    HTMLElementList();
+    
+    /*!
+     * \brief Create a new HTMLElementList, specifying the first element.
+     *
+     * The first element in the list is set to \c head
+     * \param head The first element of the list
+     */
+    HTMLElementList(const HTMLElement& head);
+    
+    /*!
+     * \brief Copy constructor.
+     *
+     * Sets the elements in this list to those of \c list
+     * \param list The HTMLElementList to copy.
+     */
+    HTMLElementList(const HTMLElementList& list);
+    
+    /*!
+     * \brief Destructor 
+     *
+     * Deletes this HTMLElementList object
+     */
+    ~HTMLElementList();
+    //@}
+    
+    // ============================================================
+    
+    /*! \name Overloaded Operators */
+    //@{
+    
+    /*!
+     * \brief Assignment operator 
+     *
+     * Sets the elements in this list to those of \c list
+     * \param list The HTMLElementList to copy
+     * \return A reference to \c this
+     */
+    HTMLElementList&
+    operator= (const HTMLElementList& list);
+    //@}
+    
+    // ============================================================
+    
+    /*! \name List Management 
+     * Manage the elements in the list
+     */
+    //@{
+    
+    /*!
+     * \brief Add an HTMLElement to the list.
+     *
+     * \param element The HTMLElement to add.
+     * \return A reference to \c this
+     */
+    HTMLElementList&
+    add(const HTMLElement& element);
+    
+    /*!
+     * \brief Add an HTMLElement to the list.
+     *
+     * \param element The HTMLElement to add.
+     * \return A reference to the \c this
+     */
+    HTMLElementList&
+    add(HTMLElement *element);
+    //@}
+    
+    /*! Utility Methods */
+    //@{
+    
+    /*!
+     * \brief Render this HTMLElementList 
+     *
+     * \param out The ostream to which to write
+     */
+    void 
+    render(std::ostream& out) 				const;
+    //@}
+    
+  private:
+    std::vector<HTMLElement*> fElements;
+    // elements must be stored as pointers, otherwise polymorphism doesn't work
+  };
+  
+} // namespace cgicc
 
 #endif /* ! _HTMLELEMENTLIST_H_ */

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPContentHeader.h,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPContentHeader.h,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -35,45 +35,45 @@
 
 #include "cgicc/HTTPHeader.h"
 
-CGICC_BEGIN_NAMESPACE
+namespace cgicc {
   
-// ============================================================
-// Class HTTPContentHeader
-// ============================================================
-/*! \class HTTPContentHeader HTTPContentHeader.h cgicc/HTTPContentHeader.h
- * \brief HTTP header for data of a specified MIME type. 
- *
- */
-class CGICC_API HTTPContentHeader : public HTTPHeader 
-{
-public:
-
-  /*! \name Constructor and Destructor */
-  //@{
-
-  /*!
-   * \brief Create a new MIME type header.
-   * \param mimeType The MIME type of the data which will be sent.
-   */
-  HTTPContentHeader(const STDNS string& mimeType);
-    
-  /*!
-   * \brief Destructor 
+  // ============================================================
+  // Class HTTPContentHeader
+  // ============================================================
+  /*! \class HTTPContentHeader HTTPContentHeader.h cgicc/HTTPContentHeader.h
+   * \brief HTTP header for data of a specified MIME type. 
    *
    */
-  virtual ~HTTPContentHeader();
-  //@}
-
-  /*! \name Inherited Methods */
-  //@{ 
-  virtual void 
-  render(STDNS ostream& out) 			const;
-  //@}
-
-private:
-  HTTPContentHeader();
-};
+  class CGICC_API HTTPContentHeader : public HTTPHeader 
+  {
+  public:
+    
+    /*! \name Constructor and Destructor */
+    //@{
+    
+    /*!
+     * \brief Create a new MIME type header.
+     * \param mimeType The MIME type of the data which will be sent.
+     */
+    HTTPContentHeader(const std::string& mimeType);
+    
+    /*!
+     * \brief Destructor 
+     *
+     */
+    virtual ~HTTPContentHeader();
+    //@}
+    
+    /*! \name Inherited Methods */
+    //@{ 
+    virtual void 
+    render(std::ostream& out) 			const;
+    //@}
+    
+  private:
+    HTTPContentHeader();
+  };
   
-CGICC_END_NAMESPACE
+} // namespace cgicc
 
 #endif /* ! _HTTPCONTENTHEADER_H_ */

@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.14 2002/11/23 20:29:04 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.15 2002/12/04 17:04:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -38,7 +38,7 @@
 
 // ========== Constructor/Destructor
 
-CGICCNS CgiEnvironment::CgiEnvironment(CgiInput *input)
+cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
 {
   LOGLN("CgiEnvironment::CgiEnvironment")
   
@@ -68,45 +68,45 @@ CGICCNS CgiEnvironment::CgiEnvironment(CgiInput *input)
   else if(stringsAreEqual(getRequestMethod(), "post")) {
     LOGLN("POST method recognized");
           
-    STDNS auto_ptr<char> data(new char[getContentLength()]);
+    std::auto_ptr<char> data(new char[getContentLength()]);
 
     // If input is 0, use the default implementation of CgiInput
     if(input == 0) {
       if(local_input.read(data.get(),getContentLength()) != getContentLength())
-	throw STDNS runtime_error("I/O error");
+	throw std::runtime_error("I/O error");
     }
     else {
       if(input->read(data.get(), getContentLength()) != getContentLength())
-	throw STDNS runtime_error("I/O error");
+	throw std::runtime_error("I/O error");
     }
 
-    fPostData = STDNS string(data.get(), getContentLength());
+    fPostData = std::string(data.get(), getContentLength());
   }
   
   fCookies.reserve(10);
   parseCookies();
 }
 
-CGICCNS CgiEnvironment::~CgiEnvironment()
+cgicc::CgiEnvironment::~CgiEnvironment()
 {
   LOGLN("CgiEnvironment::~CgiEnvironment")
 }
 
 void
-CGICCNS CgiEnvironment::parseCookies()
+cgicc::CgiEnvironment::parseCookies()
 {
-  STDNS string data = getCookies();
+  std::string data = getCookies();
 
   if(! data.empty()) {
-    STDNS string::size_type pos;
-    STDNS string::size_type oldPos = 0;
+    std::string::size_type pos;
+    std::string::size_type oldPos = 0;
 
     while(true) {
       // find the ';' terminating a name=value pair
       pos = data.find(";", oldPos);
 
       // if no ';' was found, the rest of the string is a single cookie
-      if(pos == STDNS string::npos) {
+      if(pos == std::string::npos) {
 	parseCookie(data.substr(oldPos));
 	return;
       }
@@ -122,40 +122,40 @@ CGICCNS CgiEnvironment::parseCookies()
 }
 
 void
-CGICCNS CgiEnvironment::parseCookie(const STDNS string& data)
+cgicc::CgiEnvironment::parseCookie(const std::string& data)
 {
   // find the '=' separating the name and value
-  STDNS string::size_type pos = data.find("=", 0);
+  std::string::size_type pos = data.find("=", 0);
 
   // if no '=' was found, return
-  if(pos == STDNS string::npos)
+  if(pos == std::string::npos)
     return;
 
   // skip leading whitespace - " \f\n\r\t\v"
-  STDNS string::size_type wscount = 0;
-  STDNS string::const_iterator data_iter;
+  std::string::size_type wscount = 0;
+  std::string::const_iterator data_iter;
   
   for(data_iter = data.begin(); data_iter != data.end(); ++data_iter,++wscount)
-    if(STDNS isspace(*data_iter) == 0)
+    if(std::isspace(*data_iter) == 0)
       break;			
   
   // Per RFC 2091, do not unescape the data (thanks to afm@othello.ch)
-  STDNS string name 	= data.substr(wscount, pos - wscount);
-  STDNS string value 	= data.substr(++pos);
+  std::string name 	= data.substr(wscount, pos - wscount);
+  std::string value 	= data.substr(++pos);
 
   fCookies.push_back(HTTPCookie(name, value));
 }
 
 // Read in all the environment variables
 void
-CGICCNS CgiEnvironment::readEnvironmentVariables(CgiInput *input)
+cgicc::CgiEnvironment::readEnvironmentVariables(CgiInput *input)
 {
   fServerSoftware 	= input->getenv("SERVER_SOFTWARE");
   fServerName 		= input->getenv("SERVER_NAME");
   fGatewayInterface 	= input->getenv("GATEWAY_INTERFACE");
   fServerProtocol 	= input->getenv("SERVER_PROTOCOL");
 
-  STDNS string port 	= input->getenv("SERVER_PORT");
+  std::string port 	= input->getenv("SERVER_PORT");
   fServerPort 		= atol(port.c_str());
 
   fRequestMethod 	= input->getenv("REQUEST_METHOD");
@@ -170,7 +170,7 @@ CGICCNS CgiEnvironment::readEnvironmentVariables(CgiInput *input)
   fRemoteIdent 		= input->getenv("REMOTE_IDENT");
   fContentType 		= input->getenv("CONTENT_TYPE");
 
-  STDNS string length 	= input->getenv("CONTENT_LENGTH");
+  std::string length 	= input->getenv("CONTENT_LENGTH");
   fContentLength 	= atol(length.c_str());
 
   fAccept 		= input->getenv("HTTP_ACCEPT");
@@ -183,7 +183,7 @@ CGICCNS CgiEnvironment::readEnvironmentVariables(CgiInput *input)
 
 #ifdef WIN32
   // Win32 bug fix by Peter Goedtkindt
-  STDNS string https 	= input->getenv("HTTPS");
+  std::string https 	= input->getenv("HTTPS");
   if(stringsAreEqual(https, "on"))
     fUsingHTTPS = true;
   else
@@ -194,13 +194,13 @@ CGICCNS CgiEnvironment::readEnvironmentVariables(CgiInput *input)
 }
 
 void
-CGICCNS CgiEnvironment::save(const STDNS string& filename) 	const
+cgicc::CgiEnvironment::save(const std::string& filename) 	const
 {
   LOGLN("CgiEnvironment::save")
-  STDNS ofstream file( filename.c_str(), STDNS ios::out );
+  std::ofstream file( filename.c_str(), std::ios::out );
 
   if( ! file )
-    throw STDNS runtime_error("I/O error");
+    throw std::runtime_error("I/O error");
 
   writeLong(file, getContentLength());
   writeLong(file, getServerPort());
@@ -233,21 +233,21 @@ CGICCNS CgiEnvironment::save(const STDNS string& filename) 	const
     writeString(file, getPostData());
 
   if(file.bad() || file.fail())
-    throw STDNS runtime_error("I/O error");
+    throw std::runtime_error("I/O error");
 
   file.close();
 }
 
 void
-CGICCNS CgiEnvironment::restore(const STDNS string& filename)
+cgicc::CgiEnvironment::restore(const std::string& filename)
 {
   LOGLN("CgiEnvironment::restore()")
-  STDNS ifstream file( filename.c_str(), STDNS ios::in );
+  std::ifstream file( filename.c_str(), std::ios::in );
 
   if( ! file )
-    throw STDNS runtime_error("I/O error");
+    throw std::runtime_error("I/O error");
 
-  file.flags(file.flags() & STDNS ios::skipws);
+  file.flags(file.flags() & std::ios::skipws);
 
   fContentLength 	= readLong(file);
   fServerPort 		= readLong(file);

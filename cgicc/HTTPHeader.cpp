@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeader.cpp,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPHeader.cpp,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,22 +27,22 @@
 // ============================================================
 // Class HTTPHeader
 // ============================================================
-CGICCNS HTTPHeader::HTTPHeader()
+cgicc::HTTPHeader::HTTPHeader()
 {
   fCookies.reserve(5);
 }
 
-CGICCNS HTTPHeader::HTTPHeader(const STDNS string& data)
+cgicc::HTTPHeader::HTTPHeader(const std::string& data)
   : fData(data)
 {
   fCookies.reserve(5);
 }
 
-CGICCNS HTTPHeader::HTTPHeader(const HTTPHeader& header)
+cgicc::HTTPHeader::HTTPHeader(const HTTPHeader& header)
   : MStreamable(),
     fData(header.getData()),
     fCookies(header.getCookies())
 {}
 
-CGICCNS HTTPHeader::~HTTPHeader()
+cgicc::HTTPHeader::~HTTPHeader()
 {}

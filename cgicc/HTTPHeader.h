@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPHeader.h,v 1.4 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPHeader.h,v 1.5 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -37,100 +37,100 @@
 #include "cgicc/MStreamable.h"
 #include "cgicc/HTTPCookie.h"
 
-CGICC_BEGIN_NAMESPACE
+namespace cgicc {
   
-// ============================================================
-// Class HTTPHeader
-// ============================================================
-
-/*! \class HTTPHeader HTTPHeader.h cgicc/HTTPHeader.h
- * \brief Abstract base class for all simple HTTP response headers.
- *
- */
-class CGICC_API HTTPHeader : public MStreamable 
-{
-public:
-    
-  /*! \name Constructors and Destructor */
-  //@{
-
-  /*!
-   * \brief Constructor.
-   * \param data The header data.
-   */
-  HTTPHeader(const STDNS string& data);
-
-  /*!
-   * \brief Copy constructor.
-   * \param header The HTTPHeader to copy.
-   */
-  HTTPHeader(const HTTPHeader& header);
-    
-  /*! 
-   * \brief Destructor 
+  // ============================================================
+  // Class HTTPHeader
+  // ============================================================
+  
+  /*! \class HTTPHeader HTTPHeader.h cgicc/HTTPHeader.h
+   * \brief Abstract base class for all simple HTTP response headers.
    *
    */
-  virtual ~HTTPHeader();
-  //@}
-
-  // ============================================================
-
-  /*! \name Cookie Management */
-  //@{
-
-  /*!
-   * \brief Set a cookie to go out with this HTTPResponseHeader
-   * \param cookie The HTTPCookie to set
-   */
-  inline HTTPHeader&
-  setCookie(const HTTPCookie& cookie)
-  { fCookies.push_back(cookie); return *this; }
-
-  /*!
-   * \brief Get a list of all cookies associated with this header
-   * \return All the cookies associated with this header
-   */
-  inline const STDNS vector<HTTPCookie>&
-  getCookies() 					const
-  { return fCookies; }
-  //@}
-
-  // ============================================================
-
-  /*! \name Accessor Method */
-  //@{
-
-  /*!
-   * Get the data contained in this HTTP header.
-   * @return The data contained in this header.
-   */
-  inline STDNS string 
-  getData() 					const
+  class CGICC_API HTTPHeader : public MStreamable 
+  {
+  public:
+    
+    /*! \name Constructors and Destructor */
+    //@{
+    
+    /*!
+     * \brief Constructor.
+     * \param data The header data.
+     */
+    HTTPHeader(const std::string& data);
+    
+    /*!
+     * \brief Copy constructor.
+     * \param header The HTTPHeader to copy.
+     */
+    HTTPHeader(const HTTPHeader& header);
+    
+    /*! 
+     * \brief Destructor 
+     *
+     */
+    virtual ~HTTPHeader();
+    //@}
+    
+    // ============================================================
+    
+    /*! \name Cookie Management */
+    //@{
+    
+    /*!
+     * \brief Set a cookie to go out with this HTTPResponseHeader
+     * \param cookie The HTTPCookie to set
+     */
+    inline HTTPHeader&
+    setCookie(const HTTPCookie& cookie)
+    { fCookies.push_back(cookie); return *this; }
+    
+    /*!
+     * \brief Get a list of all cookies associated with this header
+     * \return All the cookies associated with this header
+     */
+    inline const std::vector<HTTPCookie>&
+    getCookies() 					const
+    { return fCookies; }
+    //@}
+    
+    // ============================================================
+    
+    /*! \name Accessor Method */
+    //@{
+    
+    /*!
+     * Get the data contained in this HTTP header.
+     * @return The data contained in this header.
+     */
+    inline std::string 
+    getData() 					const
     { return fData; }
-  //@}
-
-  // ============================================================
-
-  /*! \name Subclass Methods */
-  //@{
-
-  /*!
-   * \brief Write this HTTPHeader to a stream.  
-   *
-   * Subclasses must implement this function.
-   * \param out The ostream to which to write.
-   */
-  virtual void 
-  render(STDNS ostream& out) 			const = 0;
-  //@}
+    //@}
     
-private:
-  HTTPHeader();
-
-  STDNS string fData;
-  STDNS vector<HTTPCookie> fCookies;
-};
-
-CGICC_END_NAMESPACE
+    // ============================================================
+    
+    /*! \name Subclass Methods */
+    //@{
+    
+    /*!
+     * \brief Write this HTTPHeader to a stream.  
+     *
+     * Subclasses must implement this function.
+     * \param out The ostream to which to write.
+     */
+    virtual void 
+    render(std::ostream& out) 			const = 0;
+    //@}
+    
+  private:
+    HTTPHeader();
+    
+    std::string fData;
+    std::vector<HTTPCookie> fCookies;
+  };
+  
+} // namespace cgicc
 
 #endif /* ! _HTTPHEADER_H_ */

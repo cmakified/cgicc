@@ -1,5 +1,5 @@
 /*
- *  $Id: FCgiIO.cpp,v 1.1 2002/03/17 20:56:37 sbooth Exp $
+ *  $Id: FCgiIO.cpp,v 1.2 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 2002 Steve McAndrewSmith
  *  Copyright (C) 2002 Stephen F. Booth
@@ -30,31 +30,31 @@
 #include "FCgiIO.h"
 
 CGICCNS FCgiIO::FCgiIO(FCGX_Request& request)
-  : ostream(&fOutBuf),
-    fRequest(request), 
-    fOutBuf(request.out), 
-    fErrBuf(request.err), 
-    fErr(&fErrBuf)
+  : std::ostream(&fOutBuf),
+	 fRequest(request), 
+	 fOutBuf(request.out), 
+	 fErrBuf(request.err), 
+	 fErr(&fErrBuf)
 {
   rdbuf(&fOutBuf);
   fErr.rdbuf(&fErrBuf);
 
   // Parse environment
   for(char **e = fRequest.envp; *e != NULL; ++e) {
-    STDNS string s(*e);
-    STDNS string::size_type i = s.find('=');
-    if(i != STDNS string::npos)
-      throw STDNS runtime_error("Illegally formed environment");
+    std::string s(*e);
+    std::string::size_type i = s.find('=');
+    if(i != std::string::npos)
+      throw std::runtime_error("Illegally formed environment");
     fEnv[s.substr(0, i)] = s.substr(i + 1);
   }
 }
 
 CGICCNS FCgiIO::FCgiIO(const FCgiIO& io)
-  : CgiInput(io), 
-  ostream(&fOutBuf),
-  fRequest(io.fRequest), 
-  fErr(&fErrBuf), 
-  fEnv(io.fEnv)
+  : CgiInput(io),
+    std::ostream(&fOutBuf),
+	 fRequest(io.fRequest), 
+	 fErr(&fErrBuf), 
+	 fEnv(io.fEnv)
 {
   rdbuf(&fOutBuf);
   fErr.rdbuf(&fErrBuf);

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiUtils.h,v 1.6 2002/04/02 17:54:06 sbooth Exp $
+ *  $Id: CgiUtils.h,v 1.7 2002/12/04 17:04:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -41,7 +41,7 @@
 
 #if DEBUG
 
-extern STDNS ofstream gLogFile;
+extern std::ofstream gLogFile;
 #define LOGLN(s) 	gLogFile << s << STDNS endl;
 #define LOG(s) 		gLogFile << s;
 
@@ -66,139 +66,139 @@ extern STDNS ofstream gLogFile;
 #endif
 
 
-CGICC_BEGIN_NAMESPACE
-
-/*!
- * \brief Compare two strings for equality, ignoring case.
- *
- * For case-sensitive comparison, use (s1 == s2);
- * \param s1 The first string to compare
- * \param s2 The second string to compare
- * \return \c true if the strings are equal, \c false if they are not
- */
-CGICC_API bool
-stringsAreEqual(const STDNS string& s1, 
-		const STDNS string& s2);
-
-/*!
- * \brief Compare two strings for equality, ignoring case.
- *
- * For case-sensitive comparison, use (s1 == s2);
- * \param s1 The first string to compare
- * \param s2 The second string to compare
- * \param n The number of characters to compare.
- * \return \c true if the strings are equal, \c false if they are not
- */
-CGICC_API bool
-stringsAreEqual(const STDNS string& s1, 
-		const STDNS string& s2,
-		size_t n);
-
-/*!
- * \brief Convert encoded characters in form data to normal ASCII. 
- *
- * For example, %21 is converted to ! and + is converted to a space.
- * Normally, this is called internally to decode the query string or post 
- * data.
- * \param src The src string containing the encoded characters
- * \return The converted string
- */
-CGICC_API STDNS string
-unescapeString(const STDNS string& src);
-
-/*!
- * \brief Convert a hex-encoded character to its ASCII equivalent.
- *
- * For example, after the call
- * \code
- * char c = hexToChar('2', '1');
- * \endcode
- * \c c will have a value of  '!'.
- * Normally, this is called internally to decode encoded characters in
- * the query string or post data.
- * \param first The first character of the hex value
- * \param second the second character of the hex value
- * \return The ASCII character
- */
-CGICC_API char
-hexToChar(char first, 
-	  char second);
-
-/*!
- * \brief Extract a substring contained within two separators.
- *
- * For example, after the call
- * \code
- * STDNS string data = "11foo22";
- * STDNS string res;
- * res = extractBetween(data, "11", "22");
- * \endcode
- * \c res will be "foo".
- * \param data The data to search.
- * \param separator1 The first logical separator.
- * \param separator2 The second logical separator.
- * \return The substring between the separators.
- */
-STDNS string
-extractBetween(const STDNS string& data, 
-	       const STDNS string& separator1, 
-	       const STDNS string& separator2);
-
-/*!
- * \brief Extract a substring contained between a separator.
- *
- * This function is used internally to decode \c multipart/form-data
- * \param data The data to search.
- * \param separator The separator.
- * \return The substring between the separator.
- */
-inline STDNS string
-extractBetween(const STDNS string& data, 
-	       const STDNS string& separator)
-{ return extractBetween(data, separator, separator); }
-
-/*!
- * \brief Write a string to an ostream.
- *
- * This function is used internally  for saving environments.
- * \param out The ostream to which to write.
- * \param s The string to write.
- */
-void 
-writeString(STDNS ostream& out, 
-	    const STDNS string& s);
-
-/*!
- * \brief Write a long to an ostream.
- *
- * This function is used internally for saving environments.
- * \param out The ostream to which to write.
- * \param l The long to write.
- */
-void 
-writeLong(STDNS ostream& out, 
-	  unsigned long l);
-
-/*!
- * \brief Read a string from an istream.
- *
- * This function is used internally by cgicc for restoring environments.
- * \param in The istream from which to read.
- * \return The string read.
- */
-STDNS string
-readString(STDNS istream& in);
-
-/*!
- * \brief Read a long from an istream.
- *
- * This function is used internally by cgicc for restoring environments.
- * \param in The istream from which to read.
- * \return The long read.
- */
-unsigned long
-readLong(STDNS istream& in);
-
-CGICC_END_NAMESPACE
+namespace cgicc {
+  
+  /*!
+   * \brief Compare two strings for equality, ignoring case.
+   *
+   * For case-sensitive comparison, use (s1 == s2);
+   * \param s1 The first string to compare
+   * \param s2 The second string to compare
+   * \return \c true if the strings are equal, \c false if they are not
+   */
+  CGICC_API bool
+  stringsAreEqual(const std::string& s1, 
+		  const std::string& s2);
+  
+  /*!
+   * \brief Compare two strings for equality, ignoring case.
+   *
+   * For case-sensitive comparison, use (s1 == s2);
+   * \param s1 The first string to compare
+   * \param s2 The second string to compare
+   * \param n The number of characters to compare.
+   * \return \c true if the strings are equal, \c false if they are not
+   */
+  CGICC_API bool
+  stringsAreEqual(const std::string& s1, 
+		  const std::string& s2,
+		  size_t n);
+  
+  /*!
+   * \brief Convert encoded characters in form data to normal ASCII. 
+   *
+   * For example, %21 is converted to ! and + is converted to a space.
+   * Normally, this is called internally to decode the query string or post 
+   * data.
+   * \param src The src string containing the encoded characters
+   * \return The converted string
+   */
+  CGICC_API std::string
+  unescapeString(const std::string& src);
+  
+  /*!
+   * \brief Convert a hex-encoded character to its ASCII equivalent.
+   *
+   * For example, after the call
+   * \code
+   * char c = hexToChar('2', '1');
+   * \endcode
+   * \c c will have a value of  '!'.
+   * Normally, this is called internally to decode encoded characters in
+   * the query string or post data.
+   * \param first The first character of the hex value
+   * \param second the second character of the hex value
+   * \return The ASCII character
+   */
+  CGICC_API char
+  hexToChar(char first, 
+	    char second);
+  
+  /*!
+   * \brief Extract a substring contained within two separators.
+   *
+   * For example, after the call
+   * \code
+   * std::string data = "11foo22";
+   * std::string res;
+   * res = extractBetween(data, "11", "22");
+   * \endcode
+   * \c res will be "foo".
+   * \param data The data to search.
+   * \param separator1 The first logical separator.
+   * \param separator2 The second logical separator.
+   * \return The substring between the separators.
+   */
+  std::string
+  extractBetween(const std::string& data, 
+		 const std::string& separator1, 
+		 const std::string& separator2);
+  
+  /*!
+   * \brief Extract a substring contained between a separator.
+   *
+   * This function is used internally to decode \c multipart/form-data
+   * \param data The data to search.
+   * \param separator The separator.
+   * \return The substring between the separator.
+   */
+  inline std::string
+  extractBetween(const std::string& data, 
+		 const std::string& separator)
+  { return extractBetween(data, separator, separator); }
+  
+  /*!
+   * \brief Write a string to an ostream.
+   *
+   * This function is used internally  for saving environments.
+   * \param out The ostream to which to write.
+   * \param s The string to write.
+   */
+  void 
+  writeString(std::ostream& out, 
+	      const std::string& s);
+  
+  /*!
+   * \brief Write a long to an ostream.
+   *
+   * This function is used internally for saving environments.
+   * \param out The ostream to which to write.
+   * \param l The long to write.
+   */
+  void 
+  writeLong(std::ostream& out, 
+	    unsigned long l);
+  
+  /*!
+   * \brief Read a string from an istream.
+   *
+   * This function is used internally by cgicc for restoring environments.
+   * \param in The istream from which to read.
+   * \return The string read.
+   */
+  std::string
+  readString(std::istream& in);
+  
+  /*!
+   * \brief Read a long from an istream.
+   *
+   * This function is used internally by cgicc for restoring environments.
+   * \param in The istream from which to read.
+   * \return The long read.
+   */
+  unsigned long
+  readLong(std::istream& in);
+  
+} // namespace cgicc
 
 #endif /* ! _CGIUTILS_H_ */

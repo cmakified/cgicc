@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiInput.cpp,v 1.2 2002/03/03 17:39:52 sbooth Exp $
+ *  $Id: CgiInput.cpp,v 1.3 2002/12/04 17:04:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -29,22 +29,22 @@
 
 // ========== Destructor
 
-CGICCNS CgiInput::~CgiInput()
+cgicc::CgiInput::~CgiInput()
 {}
 
 // ========== Members
 
 size_t 
-CGICCNS CgiInput::read(char *data, 
+cgicc::CgiInput::read(char *data, 
 		       size_t length)
 {
-  STDNS cin.read(data, length);
-  return STDNS cin.gcount();
+  std::cin.read(data, length);
+  return std::cin.gcount();
 }
 
-STDNS string
-CGICCNS CgiInput::getenv(const char *varName)
+std::string
+cgicc::CgiInput::getenv(const char *varName)
 {
-  char *var = STDNS getenv(varName);
-  return (var == 0) ? "" : var;
+  char *var = std::getenv(varName);
+  return (var == 0) ? std::string("") : var;
 }

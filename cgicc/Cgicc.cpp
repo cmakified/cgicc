@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.13 2002/03/06 02:46:21 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.14 2002/12/04 17:04:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -37,144 +37,144 @@
 #include "cgicc/Cgicc.h"
 
 
-CGICC_BEGIN_NAMESPACE
+namespace cgicc {
 
-// ============================================================
-// Class FE_nameCompare
-// ============================================================
-class FE_nameCompare : public STDNS unary_function<FormEntry, bool>
-{
-public:
-  
-  inline explicit FE_nameCompare(const STDNS string& name)
-    : fName(name) {}
-  
-  inline bool operator() (const FormEntry& entry) 	const
+  // ============================================================
+  // Class FE_nameCompare
+  // ============================================================
+  class FE_nameCompare : public std::unary_function<FormEntry, bool>
+  {
+  public:
+    
+    inline explicit FE_nameCompare(const std::string& name)
+      : fName(name) {}
+    
+    inline bool operator() (const FormEntry& entry) 	const
     { return stringsAreEqual(fName, entry.getName()); }
+    
+  private:
+    std::string fName;
+  };
   
-private:
-  STDNS string fName;
-};
-
-// ============================================================
-// Class FE_valueCompare
-// ============================================================
-class FE_valueCompare : public STDNS unary_function<FormEntry, bool>
-{
-public:
-  
-  inline explicit FE_valueCompare(const STDNS string& value)
-    : fValue(value) {}
-  
-  inline bool operator() (const FormEntry& entry) 	const
+  // ============================================================
+  // Class FE_valueCompare
+  // ============================================================
+  class FE_valueCompare : public std::unary_function<FormEntry, bool>
+  {
+  public:
+    
+    inline explicit FE_valueCompare(const std::string& value)
+      : fValue(value) {}
+    
+    inline bool operator() (const FormEntry& entry) 	const
     { return stringsAreEqual(fValue, entry.getValue()); }
+    
+  private:
+    std::string fValue;
+  };
   
-private:
-  STDNS string fValue;
-};
-
-
-// ============================================================
-// Class FF_compare
-// ============================================================
-class FF_compare : public STDNS unary_function<FormFile, bool>
-{
-public:
   
-  inline explicit FF_compare(const STDNS string& name)
-    : fName(name) {}
-  
-  inline bool operator() (const FormFile& entry) 	const
+  // ============================================================
+  // Class FF_compare
+  // ============================================================
+  class FF_compare : public std::unary_function<FormFile, bool>
+  {
+  public:
+    
+    inline explicit FF_compare(const std::string& name)
+      : fName(name) {}
+    
+    inline bool operator() (const FormFile& entry) 	const
     { return stringsAreEqual(fName, entry.getName()); }
+    
+  private:
+    std::string fName;
+  };
   
-private:
-  STDNS string fName;
-};
-
-// ============================================================
-// Function copy_if (handy, missing from STL)
-// ============================================================
-// This code taken directly from 
-// "The C++ Programming Language, Third Edition" by Bjarne Stroustrup
-template<class In, class Out, class Pred>
-Out 
-copy_if(In first, 
-	In last, 
-	Out res, 
-	Pred p)
-{
-  while(first != last) {
-    if(p(*first))
-      *res++ = *first;
-    ++first;
+  // ============================================================
+  // Function copy_if (handy, missing from STL)
+  // ============================================================
+  // This code taken directly from 
+  // "The C++ Programming Language, Third Edition" by Bjarne Stroustrup
+  template<class In, class Out, class Pred>
+  Out 
+  copy_if(In first, 
+	  In last, 
+	  Out res, 
+	  Pred p)
+  {
+    while(first != last) {
+      if(p(*first))
+	*res++ = *first;
+      ++first;
+    }
+    return res;
   }
-  return res;
-}
-
-CGICC_END_NAMESPACE
+  
+} // namespace cgicc
 
 // ============================================================
 // Class MultipartHeader
 // ============================================================
-class CGICCNS MultipartHeader 
+class cgicc::MultipartHeader 
 {
 public:
   
-  MultipartHeader(const STDNS string& disposition,
-		  const STDNS string& name,
-		  const STDNS string& filename,
-		  const STDNS string& cType);
-
+  MultipartHeader(const std::string& disposition,
+		  const std::string& name,
+		  const std::string& filename,
+		  const std::string& cType);
+  
   MultipartHeader(const MultipartHeader& head);
   ~MultipartHeader();
 
   MultipartHeader&
   operator= (const MultipartHeader& head);
   
-  inline STDNS string 
+  inline std::string 
   getContentDisposition() 				const
     { return fContentDisposition; }
   
-  inline STDNS string
+  inline std::string
   getName() 						const
     { return fName; }
 
-  inline STDNS string 
+  inline std::string 
   getFilename() 					const
     { return fFilename; }
 
-  inline STDNS string 
+  inline std::string 
   getContentType() 					const
     { return fContentType; }
 
 private:
-  STDNS string fContentDisposition;
-  STDNS string fName;
-  STDNS string fFilename;
-  STDNS string fContentType;
+  std::string fContentDisposition;
+  std::string fName;
+  std::string fFilename;
+  std::string fContentType;
 };
 
-CGICCNS MultipartHeader::MultipartHeader(const STDNS string& disposition,
-					 const STDNS string& name,
-					 const STDNS string& filename,
-					 const STDNS string& cType)
+cgicc::MultipartHeader::MultipartHeader(const std::string& disposition,
+					const std::string& name,
+					const std::string& filename,
+					const std::string& cType)
   : fContentDisposition(disposition),
     fName(name),
     fFilename(filename),
     fContentType(cType)
 {}
 
-CGICCNS MultipartHeader::MultipartHeader(const MultipartHeader& head)
+cgicc::MultipartHeader::MultipartHeader(const MultipartHeader& head)
 { 
   // call operator=
   *this = head;
 }
 
-CGICCNS MultipartHeader::~MultipartHeader()
+cgicc::MultipartHeader::~MultipartHeader()
 {}
 
-CGICCNS MultipartHeader&
-CGICCNS MultipartHeader::operator= (const MultipartHeader& head)
+cgicc::MultipartHeader&
+cgicc::MultipartHeader::operator= (const MultipartHeader& head)
 {
   fContentDisposition 	= head.fContentDisposition;
   fName 		= head.fName;
@@ -187,7 +187,7 @@ CGICCNS MultipartHeader::operator= (const MultipartHeader& head)
 // ============================================================
 // Class Cgicc
 // ============================================================
-CGICCNS Cgicc::Cgicc(CgiInput *input)
+cgicc::Cgicc::Cgicc(CgiInput *input)
   : fEnvironment(input)
 {
 #if DEBUG
@@ -216,37 +216,37 @@ CGICCNS Cgicc::Cgicc(CgiInput *input)
     parseFormInput(getEnvironment().getQueryString());
 }
 
-CGICCNS Cgicc::~Cgicc()
+cgicc::Cgicc::~Cgicc()
 {
   LOGLN("Cleaning up...")
   LOGLN("Cgicc debugging log closed.")
 }
 
 const char*
-CGICCNS Cgicc::getCompileDate() 				const
+cgicc::Cgicc::getCompileDate() 					const
 { return __DATE__; }
 
 const char*
-CGICCNS Cgicc::getCompileTime() 				const
+cgicc::Cgicc::getCompileTime() 					const
 { return __TIME__; }
 
 const char*
-CGICCNS Cgicc::getVersion() 					const
+cgicc::Cgicc::getVersion() 					const
 { return VERSION; }
 
 const char*
-CGICCNS Cgicc::getHost() 					const
+cgicc::Cgicc::getHost() 					const
 { return HOST; }
 
 void
-CGICCNS Cgicc::save(const STDNS string& filename) 		const
+cgicc::Cgicc::save(const std::string& filename) 		const
 {
   LOGLN("Cgicc::save")
   getEnvironment().save(filename);
 }
 
 void
-CGICCNS Cgicc::restore(const STDNS string& filename)
+cgicc::Cgicc::restore(const std::string& filename)
 {
   LOGLN("Cgicc::restore")
   
@@ -262,75 +262,75 @@ CGICCNS Cgicc::restore(const STDNS string& filename)
 }
 
 bool 
-CGICCNS Cgicc::queryCheckbox(const STDNS string& elementName) 	const
+cgicc::Cgicc::queryCheckbox(const std::string& elementName) 	const
 {
   const_form_iterator iter = getElement(elementName);
   return ((iter != fFormData.end()) && 
 	  stringsAreEqual( (*iter).getValue(), "on"));
 }
 
-CGICCNS form_iterator 
-CGICCNS Cgicc::getElement(const STDNS string& name)
+cgicc::form_iterator 
+cgicc::Cgicc::getElement(const std::string& name)
 {
-  return STDNS find_if(fFormData.begin(), fFormData.end(), 
+  return std::find_if(fFormData.begin(), fFormData.end(), 
 		       FE_nameCompare(name));
 }
 
-CGICCNS const_form_iterator 
-CGICCNS Cgicc::getElement(const STDNS string& name) 		const
+cgicc::const_form_iterator 
+cgicc::Cgicc::getElement(const std::string& name) 		const
 {
-  return STDNS find_if(fFormData.begin(), fFormData.end(), 
+  return std::find_if(fFormData.begin(), fFormData.end(), 
 		       FE_nameCompare(name));
 }
 
 bool 
-CGICCNS Cgicc::getElement(const STDNS string& name, 
-			  STDNS vector<FormEntry>& result) 	const
+cgicc::Cgicc::getElement(const std::string& name, 
+			  std::vector<FormEntry>& result) 	const
 { 
   return findEntries(name, true, result); 
 }
 
-CGICCNS form_iterator 
-CGICCNS Cgicc::getElementByValue(const STDNS string& value)
+cgicc::form_iterator 
+cgicc::Cgicc::getElementByValue(const std::string& value)
 {
-  return STDNS find_if(fFormData.begin(), fFormData.end(), 
+  return std::find_if(fFormData.begin(), fFormData.end(), 
 		       FE_valueCompare(value));
 }
 
-CGICCNS const_form_iterator 
-CGICCNS Cgicc::getElementByValue(const STDNS string& value) 	const
+cgicc::const_form_iterator 
+cgicc::Cgicc::getElementByValue(const std::string& value) 	const
 {
-  return STDNS find_if(fFormData.begin(), fFormData.end(), 
+  return std::find_if(fFormData.begin(), fFormData.end(), 
 		       FE_valueCompare(value));
 }
 
 bool 
-CGICCNS Cgicc::getElementByValue(const STDNS string& value, 
-				 STDNS vector<FormEntry>& result) 	const
+cgicc::Cgicc::getElementByValue(const std::string& value, 
+				 std::vector<FormEntry>& result)	const
 { 
   return findEntries(value, false, result); 
 }
 
-CGICCNS file_iterator 
-CGICCNS Cgicc::getFile(const STDNS string& name)
+cgicc::file_iterator 
+cgicc::Cgicc::getFile(const std::string& name)
 {
-  return STDNS find_if(fFormFiles.begin(), fFormFiles.end(), 
+  return std::find_if(fFormFiles.begin(), fFormFiles.end(), 
 		       FF_compare(name));
 }
 
-CGICCNS const_file_iterator 
-CGICCNS Cgicc::getFile(const STDNS string& name) 		const
+cgicc::const_file_iterator 
+cgicc::Cgicc::getFile(const std::string& name) 			const
 {
-  return STDNS find_if(fFormFiles.begin(), fFormFiles.end(), 
+  return std::find_if(fFormFiles.begin(), fFormFiles.end(), 
 		       FF_compare(name));
 }
 
 
 // implementation method
 bool
-CGICCNS Cgicc::findEntries(const STDNS string& param, 
-			   bool byName,
-			   STDNS vector<FormEntry>& result) 	const
+cgicc::Cgicc::findEntries(const std::string& param, 
+			  bool byName,
+			  std::vector<FormEntry>& result) 	const
 {
   // empty the target vector
   result.clear();
@@ -338,49 +338,49 @@ CGICCNS Cgicc::findEntries(const STDNS string& param,
   if(byName)
     copy_if(fFormData.begin(), 
 	    fFormData.end(), 
-	    STDNS back_inserter(result),
+	    std::back_inserter(result),
 	    FE_nameCompare(param));
   else
     copy_if(fFormData.begin(), 
 	    fFormData.end(), 
-	    STDNS back_inserter(result),
+	    std::back_inserter(result),
 	    FE_valueCompare(param));
 
   return ! result.empty();
 }
 
 void
-CGICCNS Cgicc::parseFormInput(const STDNS string& data)
+cgicc::Cgicc::parseFormInput(const std::string& data)
 {
-  STDNS string env 	= getEnvironment().getContentType();
-  STDNS string cType 	= "multipart/form-data";
-
+  std::string env 	= getEnvironment().getContentType();
+  std::string cType 	= "multipart/form-data";
+  LOGLN(data)
   if(stringsAreEqual(cType, env, cType.length())) {
     LOGLN("Multipart data detected.")
 
     // Find out what the separator is
-    STDNS string 		bType 	= "boundary=";
-    STDNS string::size_type 	pos 	= env.find(bType);
+    std::string 		bType 	= "boundary=";
+    std::string::size_type 	pos 	= env.find(bType);
 
     // generate the separators
-    STDNS string sep = env.substr(pos + bType.length());
+    std::string sep = env.substr(pos + bType.length());
     sep.append("\r\n");
     sep.insert(0, "--");
 
-    STDNS string sep2 = env.substr(pos + bType.length());
+    std::string sep2 = env.substr(pos + bType.length());
     sep2.append("--\r\n");
     sep2.insert(0, "--");
 
     // Find the data between the separators
-    STDNS string::size_type start  = data.find(sep);
-    STDNS string::size_type sepLen = sep.length();
-    STDNS string::size_type oldPos = start + sepLen;
+    std::string::size_type start  = data.find(sep);
+    std::string::size_type sepLen = sep.length();
+    std::string::size_type oldPos = start + sepLen;
 
     while(true) {
       pos = data.find(sep, oldPos);
 
       // If sep wasn't found, the rest of the data is an item
-      if(pos == STDNS string::npos)
+      if(pos == std::string::npos)
 	break;
 
       // parse the data
@@ -393,20 +393,20 @@ CGICCNS Cgicc::parseFormInput(const STDNS string& data)
     // The data is terminated by sep2
     pos = data.find(sep2, oldPos);
     // parse the data, if found
-    if(pos != STDNS string::npos) {
+    if(pos != std::string::npos) {
       parseMIME(data.substr(oldPos, pos - oldPos));
     }
   }
   else if(! data.empty()) {
-    STDNS string::size_type pos;
-    STDNS string::size_type oldPos = 0;
+    std::string::size_type pos;
+    std::string::size_type oldPos = 0;
 
     while(true) {
       // find the '&' separating a name=value pairs
       pos = data.find_first_of("&", oldPos);
 
       // if no '&' was found, the rest of the string is a pair
-      if(pos == STDNS string::npos) {
+      if(pos == std::string::npos) {
 	parsePair(data.substr(oldPos));
 	break;
       }
@@ -420,19 +420,19 @@ CGICCNS Cgicc::parseFormInput(const STDNS string& data)
   }
 }
 
-CGICCNS MultipartHeader
-CGICCNS Cgicc::parseHeader(const STDNS string& data)
+cgicc::MultipartHeader
+cgicc::Cgicc::parseHeader(const std::string& data)
 {
-  STDNS string disposition;
+  std::string disposition;
   disposition = extractBetween(data, "Content-Disposition: ", ";");
   
-  STDNS string name;
+  std::string name;
   name = extractBetween(data, "name=\"", "\"");
   
-  STDNS string filename;
+  std::string filename;
   filename = extractBetween(data, "filename=\"", "\"");
 
-  STDNS string cType;
+  std::string cType;
   cType = extractBetween(data, "Content-Type: ", "\r\n\r\n");
 
   // This is hairy: Netscape and IE don't encode the filenames
@@ -443,37 +443,37 @@ CGICCNS Cgicc::parseHeader(const STDNS string& data)
 }
 
 void
-CGICCNS Cgicc::parsePair(const STDNS string& data)
+cgicc::Cgicc::parsePair(const std::string& data)
 {
   // find the '=' separating the name and value
-  STDNS string::size_type pos = data.find_first_of("=", 0);
+  std::string::size_type pos = data.find_first_of("=", 0);
 
   // if no '=' was found, return
-  if(pos == STDNS string::npos)
+  if(pos == std::string::npos)
     return;
   
   // unescape the data, and add to the form entry list
-  STDNS string name 	= unescapeString(data.substr(0, pos));
-  STDNS string value 	= unescapeString(data.substr(++pos, 
-						     STDNS string::npos));
+  std::string name 	= unescapeString(data.substr(0, pos));
+  std::string value 	= unescapeString(data.substr(++pos, 
+						     std::string::npos));
   
   fFormData.push_back(FormEntry(name, value));
 }
 
 void
-CGICCNS Cgicc::parseMIME(const STDNS string& data)
+cgicc::Cgicc::parseMIME(const std::string& data)
 {
   // Find the header
-  STDNS string end = "\r\n\r\n";
-  STDNS string::size_type headLimit = data.find(end, 0);
+  std::string end = "\r\n\r\n";
+  std::string::size_type headLimit = data.find(end, 0);
   
   // Detect error
-  if(headLimit == STDNS string::npos)
+  if(headLimit == std::string::npos)
     return;
 
   // Extract the value - there is still a trailing CR/LF to be subtracted off
-  STDNS string::size_type valueStart = headLimit + end.length();
-  STDNS string value = data.substr(valueStart, data.length() - valueStart - 2);
+  std::string::size_type valueStart = headLimit + end.length();
+  std::string value = data.substr(valueStart, data.length() - valueStart - 2);
 
   // Parse the header - pass trailing CR/LF x 2 to parseHeader
   MultipartHeader head = parseHeader(data.substr(0, valueStart));

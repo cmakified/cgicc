@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPPlainHeader.cpp,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPPlainHeader.cpp,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,9 +27,9 @@
 // ============================================================
 // Class HTTPPlainHeader
 // ============================================================
-CGICCNS HTTPPlainHeader::HTTPPlainHeader()
+cgicc::HTTPPlainHeader::HTTPPlainHeader()
   : HTTPContentHeader("text/plain")
 {}
 
-CGICCNS HTTPPlainHeader::~HTTPPlainHeader()
+cgicc::HTTPPlainHeader::~HTTPPlainHeader()
 {}

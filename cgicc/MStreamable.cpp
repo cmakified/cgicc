@@ -1,5 +1,5 @@
 /*
- *  $Id: MStreamable.cpp,v 1.4 2002/03/02 06:31:07 sbooth Exp $
+ *  $Id: MStreamable.cpp,v 1.5 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,9 +27,9 @@
 // ============================================================
 // Class MStreamable
 // ============================================================
-STDNS ostream& 
-CGICCNS operator<<(STDNS ostream& out, 
-		   const MStreamable& obj)
+std::ostream& 
+cgicc::operator<<(std::ostream& out, 
+		  const MStreamable& obj)
 {
   obj.render(out);
   return out; 

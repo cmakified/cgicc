@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLAtomicElement.h,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTMLAtomicElement.h,v 1.3 2002/12/04 17:04:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -31,82 +31,82 @@
 
 #include "cgicc/HTMLElement.h"
 
-CGICC_BEGIN_NAMESPACE
-
-// ============================================================
-// Template for concrete atomic HTML element classes
-// ============================================================
-
-/*! \class HTMLAtomicElement HTMLAtomicElement.h cgicc/HTMLAtomicElement.h
- * \brief Template for concrete atomic HTMLElement subclasses
- *
- * An atomic HTML element is an element in which the opening and closing 
- * tags are combined.  For example, in the HTML code
- \verbatim
- <meta link="made" href="mailto:sbooth@gnu.org" />
- \endverbatim
- * The \c meta tag is an atomic HTML element because the opening and closing
- * tags appear together.
- * \sa HTMLElement
- * \sa HTMLBooleanElement
- */
-template<class Tag>
-class HTMLAtomicElement : public HTMLElement 
-{
-public:
+namespace cgicc {
 
   // ============================================================
-
-  /*! \name Constructors and Destructor */
-  //@{
-
-  /*!
-   * \brief Create a new empty atomic element. 
-   *
-   */
-  HTMLAtomicElement()
-    : HTMLElement(0, 0, 0, eAtomic)
-  {}
+  // Template for concrete atomic HTML element classes
+  // ============================================================
   
-  /*!
-   * \brief Create a new element, specifying the HTMLAttributes.
+  /*! \class HTMLAtomicElement HTMLAtomicElement.h cgicc/HTMLAtomicElement.h
+   * \brief Template for concrete atomic HTMLElement subclasses
    *
-   * \param attributes The HTMLAttributes contained within the element.
+   * An atomic HTML element is an element in which the opening and closing 
+   * tags are combined.  For example, in the HTML code
+   \verbatim
+   <meta link="made" href="mailto:sbooth@gnu.org" />
+   \endverbatim
+   * The \c meta tag is an atomic HTML element because the opening and closing
+   * tags appear together.
+   * \sa HTMLElement
+   * \sa HTMLBooleanElement
    */
-  HTMLAtomicElement(const HTMLAttributeList& attributes)
-    : HTMLElement(&attributes, 0, 0, eAtomic)
-  {}
-
+  template<class Tag>
+  class HTMLAtomicElement : public HTMLElement 
+  {
+  public:
+    
+    // ============================================================
+    
+    /*! \name Constructors and Destructor */
+    //@{
+    
+    /*!
+     * \brief Create a new empty atomic element. 
+     *
+     */
+    HTMLAtomicElement()
+      : HTMLElement(0, 0, 0, eAtomic)
+    {}
+    
+    /*!
+     * \brief Create a new element, specifying the HTMLAttributes.
+     *
+     * \param attributes The HTMLAttributes contained within the element.
+     */
+    HTMLAtomicElement(const HTMLAttributeList& attributes)
+      : HTMLElement(&attributes, 0, 0, eAtomic)
+    {}
+    
+    
+    /*!
+     * \brief Destructor 
+     *
+     */
+    virtual ~HTMLAtomicElement()
+    {}
+    //@}
+    
+    /*! 
+     * \brief Clone this element
+     *
+     * \return A newly-allocated copy of this element
+     */
+    virtual inline HTMLElement* 
+    clone() 					const
+    { return new HTMLAtomicElement<Tag>(*this); }
+    
+    
+    /*!
+     * \brief Get the name of this element.  
+     *
+     * For example, \c meta.
+     * \return The name of this element
+     */
+    virtual inline const char* 
+    getName() 					const
+    { return Tag::getName(); }
+  };
   
-  /*!
-   * \brief Destructor 
-   *
-   */
-  virtual ~HTMLAtomicElement()
-  {}
-  //@}
-
-  /*! 
-   * \brief Clone this element
-   *
-   * \return A newly-allocated copy of this element
-   */
-  virtual inline HTMLElement* 
-  clone() 					const
-  { return new HTMLAtomicElement<Tag>(*this); }
-
-  
-  /*!
-   * \brief Get the name of this element.  
-   *
-   * For example, \c meta.
-   * \return The name of this element
-   */
-  virtual inline const char* 
-  getName() 					const
-  { return Tag::getName(); }
-};
-
-CGICC_END_NAMESPACE
+} // namespace cgicc
 
 #endif /* ! _HTMLATOMICELEMENT_H_ */

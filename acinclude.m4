@@ -1,4 +1,4 @@
-dnl $Id: acinclude.m4,v 1.6 2002/02/05 23:44:07 sbooth Exp $
+dnl $Id: acinclude.m4,v 1.7 2002/12/04 17:04:06 sbooth Exp $
 
 dnl @TOP@
 
@@ -54,6 +54,9 @@ AC_DEFUN(CGICC_CHECK_CPP_NAMESPACES, [
 			cgicc_cv_cpp_namespaces=no)
 			AC_LANG_RESTORE
 		])
+	if (test "$cgicc_cv_cpp_namespaces" = no); then 
+		AC_MSG_ERROR([namespace support required])
+	fi
 ])
 
 dnl CGICC_CHECK_ACC

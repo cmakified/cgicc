@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: MStreamable.h,v 1.7 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: MStreamable.h,v 1.8 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -37,61 +37,61 @@
 
 #include "cgicc/CgiDefs.h"
 
-CGICC_BEGIN_NAMESPACE
+namespace cgicc {
 
-class MStreamable;
-
-/*!
- * Prototype for overloading streaming operator 
- * \param out The ostream to which to write
- * \param obj The MStreamable object to write
- * \return A reference to \c out
- */
-CGICC_API STDNS ostream& 
-operator<<(STDNS ostream& out, const MStreamable& obj);
-
-// ============================================================
-// Class MStreamable
-// ============================================================
-
-/*! \class MStreamable MStreamable.h cgicc/MStreamable.h
- * \brief Mix-in streamable interface.
- *
- * Abstract mix-in class which makes classes streamable via
- * the \c << operator.
- * Written in the spirit of a Java interface.
- */
-class CGICC_API MStreamable 
-{
-  
-  friend CGICC_API STDNS ostream& 
-  operator<<(STDNS ostream& out, const MStreamable& obj);
-  
-public:
-  /*! 
-   * \brief Empty constructor 
-   *
-   */
-  inline MStreamable() 
-  {}
-
-  /*! 
-   * \brief Empty destructor 
-   *
-   */
-  inline virtual ~MStreamable() 
-  {}
+  class MStreamable;
 
   /*!
-   * \brief Write this object to a stream.  
-   *
-   * Subclasses must implement this function.
-   * \param out The ostream to which to write.
+   * Prototype for overloading streaming operator 
+   * \param out The ostream to which to write
+   * \param obj The MStreamable object to write
+   * \return A reference to \c out
    */
-  virtual void
-  render(STDNS ostream& out) 				const = 0;
-};
+  CGICC_API std::ostream& 
+  operator<<(std::ostream& out, const MStreamable& obj);
   
-CGICC_END_NAMESPACE
+  // ============================================================
+  // Class MStreamable
+  // ============================================================
+  
+  /*! \class MStreamable MStreamable.h cgicc/MStreamable.h
+   * \brief Mix-in streamable interface.
+   *
+   * Abstract mix-in class which makes classes streamable via
+   * the \c << operator.
+   * Written in the spirit of a Java interface.
+   */
+  class CGICC_API MStreamable 
+  {
+    
+    friend CGICC_API std::ostream& 
+    operator<<(std::ostream& out, const MStreamable& obj);
+    
+  public:
+    /*! 
+     * \brief Empty constructor 
+     *
+     */
+    inline MStreamable() 
+    {}
+    
+    /*! 
+     * \brief Empty destructor 
+     *
+     */
+    inline virtual ~MStreamable() 
+    {}
+    
+    /*!
+     * \brief Write this object to a stream.  
+     *
+     * Subclasses must implement this function.
+     * \param out The ostream to which to write.
+     */
+    virtual void
+    render(std::ostream& out) 				const = 0;
+  };
+  
+} // namespace cgicc
 
 #endif /* ! _MSTREAMABLE_H_ */

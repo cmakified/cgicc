@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPResponseHeader.cpp,v 1.3 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPResponseHeader.cpp,v 1.4 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,9 +27,9 @@
 // ============================================================
 // Class HTTPResponseHeader
 // ============================================================
-CGICCNS HTTPResponseHeader::HTTPResponseHeader(const STDNS string& version,
-					       int status_code,
-					       const STDNS string& reason)
+cgicc::HTTPResponseHeader::HTTPResponseHeader(const std::string& version,
+					      int status_code,
+					      const std::string& reason)
   : MStreamable(),
     fHTTPVersion(version),
     fStatusCode(status_code),
@@ -38,47 +38,47 @@ CGICCNS HTTPResponseHeader::HTTPResponseHeader(const STDNS string& version,
   fHeaders.reserve(5);
 }
 
-CGICCNS HTTPResponseHeader::~HTTPResponseHeader()
+cgicc::HTTPResponseHeader::~HTTPResponseHeader()
 {}
 
-CGICCNS HTTPResponseHeader&
-CGICCNS HTTPResponseHeader::addHeader(const STDNS string& header)
+cgicc::HTTPResponseHeader&
+cgicc::HTTPResponseHeader::addHeader(const std::string& header)
 {
   fHeaders.push_back(header); 
   return *this; 
 }
 
-CGICCNS HTTPResponseHeader&
-CGICCNS HTTPResponseHeader::addHeader(const STDNS string& name,
-				      const STDNS string& value)
+cgicc::HTTPResponseHeader&
+cgicc::HTTPResponseHeader::addHeader(const std::string& name,
+				     const std::string& value)
 { 
   fHeaders.push_back(name + ": " + value); 
   return *this; 
 }
 
-CGICCNS HTTPResponseHeader&
-CGICCNS HTTPResponseHeader::setCookie(const HTTPCookie& cookie)
+cgicc::HTTPResponseHeader&
+cgicc::HTTPResponseHeader::setCookie(const HTTPCookie& cookie)
 { 
   fCookies.push_back(cookie); 
   return *this; 
 }
 
 void 
-CGICCNS HTTPResponseHeader::render(STDNS ostream& out)	const
+cgicc::HTTPResponseHeader::render(std::ostream& out)	const
 {
-  STDNS vector<STDNS string>::const_iterator iter;
-  STDNS vector<HTTPCookie>::const_iterator cookie_iter; 
+  std::vector<std::string>::const_iterator iter;
+  std::vector<HTTPCookie>::const_iterator cookie_iter; 
   
   out << fHTTPVersion << ' ' << fStatusCode << ' ' << fReasonPhrase 
-      << STDNS endl;
+      << std::endl;
   
   for(iter = fHeaders.begin(); iter != fHeaders.end(); ++iter)
-    out << *iter << STDNS endl;
+    out << *iter << std::endl;
   
   for(cookie_iter = getCookies().begin(); 
       cookie_iter != getCookies().end(); 
       ++cookie_iter)
-    out << *cookie_iter << STDNS endl;
-
-  out << STDNS endl;
+    out << *cookie_iter << std::endl;
+  
+  out << std::endl;
 }

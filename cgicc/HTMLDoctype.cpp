@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLDoctype.cpp,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTMLDoctype.cpp,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -28,15 +28,15 @@
 // Class HTMLDoctype
 // ============================================================
 
-CGICCNS HTMLDoctype::HTMLDoctype(EDocumentType type)
+cgicc::HTMLDoctype::HTMLDoctype(EDocumentType type)
   : fType(type)
 {}
 
-CGICCNS HTMLDoctype::~HTMLDoctype()
+cgicc::HTMLDoctype::~HTMLDoctype()
 {}
 
 void
-CGICCNS HTMLDoctype::render(STDNS ostream &out) 	const
+cgicc::HTMLDoctype::render(std::ostream &out) 	const
 {
   out << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0";
   

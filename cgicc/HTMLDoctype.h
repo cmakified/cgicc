@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLDoctype.h,v 1.3 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTMLDoctype.h,v 1.4 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -35,56 +35,56 @@
 
 #include "cgicc/MStreamable.h"
 
-CGICC_BEGIN_NAMESPACE
+namespace cgicc {
   
-// ============================================================
-// Class HTMLDoctype
-// ============================================================
-
-/*! \class HTMLDoctype HTMLDoctype.h cgicc/HTMLDoctype.h
- * \brief Specifies the DTD of the HTML 4 document
- *
- * To use this class, simply write an object of this type to an ostream:
- * \code
- * out << cgicc::HTMLDoctype();
- * \endcode
- * For more information, see \c http://www.w3.org/MarkUp/ and 
- * \c http://www.w3.org/TR/REC-html40/
- */
-class CGICC_API HTMLDoctype : public MStreamable 
-{
-public:
-    
-  /*! The DTD used by this document. */
-  enum EDocumentType {
-    /*! The HTML 4.0 strict DTD (the default) */
-    eStrict,
-    /*! The HTML 4.0 Transitional DTD */
-    eTransitional,
-    /*! The HTML 4.0 Frameset DTD */
-    eFrames
-  };
-
-    
-  /*!
-   * \brief Constructor.
-   * \param type The version of the HTML 4.0 DTD used by this document.
-   */
-  HTMLDoctype(EDocumentType type = eStrict);
-    
-  /*!
-   * \brief Destructor 
+  // ============================================================
+  // Class HTMLDoctype
+  // ============================================================
+  
+  /*! \class HTMLDoctype HTMLDoctype.h cgicc/HTMLDoctype.h
+   * \brief Specifies the DTD of the HTML 4 document
    *
+   * To use this class, simply write an object of this type to an ostream:
+   * \code
+   * out << cgicc::HTMLDoctype();
+   * \endcode
+   * For more information, see \c http://www.w3.org/MarkUp/ and 
+   * \c http://www.w3.org/TR/REC-html40/
    */
-  virtual ~HTMLDoctype();
+  class CGICC_API HTMLDoctype : public MStreamable 
+  {
+  public:
     
-  virtual void 
-  render(STDNS ostream& out) 			const;
+    /*! The DTD used by this document. */
+    enum EDocumentType {
+      /*! The HTML 4.0 strict DTD (the default) */
+      eStrict,
+      /*! The HTML 4.0 Transitional DTD */
+      eTransitional,
+      /*! The HTML 4.0 Frameset DTD */
+      eFrames
+    };
     
-private:
-  EDocumentType fType;
-};
-
-CGICC_END_NAMESPACE
+    
+    /*!
+     * \brief Constructor.
+     * \param type The version of the HTML 4.0 DTD used by this document.
+     */
+    HTMLDoctype(EDocumentType type = eStrict);
+    
+    /*!
+     * \brief Destructor 
+     *
+     */
+    virtual ~HTMLDoctype();
+    
+    virtual void 
+    render(std::ostream& out) 			const;
+    
+  private:
+    EDocumentType fType;
+  };
+  
+} // namespace cgicc
 
 #endif /* ! _HTMLDOCTYPE_H_ */

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPStatusHeader.cpp,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPStatusHeader.cpp,v 1.3 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,29 +27,29 @@
 // ============================================================
 // Class HTTPStatusHeader
 // ============================================================
-CGICCNS HTTPStatusHeader::HTTPStatusHeader()
-  : HTTPHeader(""), 
+cgicc::HTTPStatusHeader::HTTPStatusHeader()
+  : HTTPHeader(""),
     fStatus(-1)
 {}
 
-CGICCNS HTTPStatusHeader::HTTPStatusHeader(int status, 
-					   const STDNS string& message) 
-  : HTTPHeader(message), 
+cgicc::HTTPStatusHeader::HTTPStatusHeader(int status, 
+					  const std::string& message) 
+  : HTTPHeader(message),
     fStatus(status)
 {}
 
-CGICCNS HTTPStatusHeader::~HTTPStatusHeader()
+cgicc::HTTPStatusHeader::~HTTPStatusHeader()
 {}
 
 void 
-CGICCNS HTTPStatusHeader::render(STDNS ostream& out) 	const
+cgicc::HTTPStatusHeader::render(std::ostream& out) 	const
 {
-  STDNS vector<HTTPCookie>::const_iterator iter; 
+  std::vector<HTTPCookie>::const_iterator iter; 
 
-  out << "Status: " << getStatusCode() << ' ' << getData() << STDNS endl;
+  out << "Status: " << getStatusCode() << ' ' << getData() << std::endl;
   
   for(iter = getCookies().begin(); iter != getCookies().end(); ++iter)
-    out << *iter << STDNS endl;
+    out << *iter << std::endl;
 
-  out << STDNS endl;
+  out << std::endl;
 }

@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.18 2002/03/03 17:41:44 sbooth Exp $
+ *  $Id: test.cpp,v 1.19 2002/12/04 17:04:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -47,17 +47,11 @@
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
 #if DEBUG
-  STDNS ofstream gLogFile( "/change_this_path/cgicc.log", STDNS ios::app );
+  std::ofstream gLogFile( "/change_this_path/cgicc.log", std::ios::app );
 #endif
 
-#if CGICC_USE_NAMESPACES
-  using namespace std;
-  using namespace cgicc;
-#else
-#  define div div_
-#  define link link_
-#  define select select_
-#endif
+using namespace std;
+using namespace cgicc;
 
 // Function prototypes
 void dumpEnvironment(const CgiEnvironment& env);
@@ -80,7 +74,7 @@ main(int /*argc*/,
     
     // If the user wants to throw an exception, go ahead and do it
     if(cgi.queryCheckbox("throw") && ! cgi.queryCheckbox("restore"))
-      throw STDNS runtime_error("User-requested Exception thrown in main()");
+      throw std::runtime_error("User-requested Exception thrown in main()");
     
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
     cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
@@ -141,12 +135,13 @@ main(int /*argc*/,
     
     // If the user wants to save the submission, do it
     if(cgi.queryCheckbox("save")) {
+      // Make sure the save file is readable and writable by the CGI process
       cgi.save("save");
       cout << p(h2("Data Saved")) << endl;
       
-      cout << CGICCNS div().set("class", "notice") << endl;
+      cout << cgicc::div().set("class", "notice") << endl;
       cout << "Your data has been saved, and may be restored (by anyone) "
-	   << "via the same form." << endl << CGICCNS div() << p() << endl;
+	   << "via the same form." << endl << cgicc::div() << p() << endl;
     }
 
     // If the user wants to restore from the last submission, do it
@@ -154,9 +149,9 @@ main(int /*argc*/,
       cgi.restore("save");
       cout << p(h2("Data Restored")) << endl;
       
-      cout << CGICCNS div().set("class", "notice") << endl;
+      cout << cgicc::div().set("class", "notice") << endl;
       cout << "The data displayed has been restored from a file on disk."
-	   << endl << CGICCNS div() << p() << endl;
+	   << endl << cgicc::div() << p() << endl;
     }
     
     // If the user requested a dump of the environment,
@@ -181,13 +176,13 @@ main(int /*argc*/,
       showForm(cgi);
 
     // Now print out a footer with some fun info
-    cout << p() << CGICCNS div().set("align","center");
+    cout << p() << cgicc::div().set("align","center");
     cout << a("Back to form").set("href", cgi.getEnvironment().getReferrer()) 
 	 << endl;
-    cout << CGICCNS div() << br() << hr(set("class","half")) << endl;
+    cout << cgicc::div() << br() << hr(set("class","half")) << endl;
     
     // Information on cgicc
-    cout << CGICCNS div().set("align","center").set("class","smaller") << endl;
+    cout << cgicc::div().set("align","center").set("class","smaller") << endl;
     cout << "GNU cgi" << span("cc").set("class","red") << " v";
     cout << cgi.getVersion() << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime();
@@ -217,7 +212,7 @@ main(int /*argc*/,
 #endif
 
     // End of document
-    cout << CGICCNS div() << endl;
+    cout << cgicc::div() << endl;
     cout << body() << html() << endl;
 
     // No chance for failure in this example
@@ -225,7 +220,7 @@ main(int /*argc*/,
   }
 
   // Did any errors occur?
-  catch(const STDNS exception& e) {
+  catch(const std::exception& e) {
 
     // This is a dummy exception handler, as it doesn't really do
     // anything except print out information.
@@ -235,7 +230,7 @@ main(int /*argc*/,
     html::reset(); 	head::reset(); 		body::reset();
     title::reset(); 	h1::reset(); 		h4::reset();
     comment::reset(); 	td::reset(); 		tr::reset(); 
-    table::reset();	CGICCNS div::reset(); 	p::reset(); 
+    table::reset();	cgicc::div::reset(); 	p::reset(); 
     a::reset();		h2::reset(); 		colgroup::reset();
 
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
@@ -264,12 +259,12 @@ main(int /*argc*/,
     cout << h1() << "GNU cgi" << span("cc", set("class","red"))
 	 << " caught an exception" << h1() << endl; 
   
-    cout << CGICCNS div().set("align","center").set("class","notice") << endl;
+    cout << cgicc::div().set("align","center").set("class","notice") << endl;
 
     cout << h2(e.what()) << endl;
 
     // End of document
-    cout << CGICCNS div() << endl;
+    cout << cgicc::div() << endl;
     cout << hr().set("class","half") << endl;
     cout << body() << html() << endl;
     
@@ -285,7 +280,7 @@ dumpEnvironment(const CgiEnvironment& env)
   // Almost all of this code is for HTML formatting
   cout << h2("Environment information from CgiEnvironment") << endl;
   
-  cout << CGICCNS div().set("align","center") << endl;
+  cout << cgicc::div().set("align","center") << endl;
   
   cout << table().set("border","0").set("rules","none").set("frame","void")
 		 .set("cellspacing","2").set("cellpadding","2")
@@ -355,7 +350,7 @@ dumpEnvironment(const CgiEnvironment& env)
   cout << tr() << td("Redirect Status").set("class","title") 
        << td(env.getRedirectStatus()).set("class","data") << tr() << endl;
   
-  cout << table() << CGICCNS div() << endl;
+  cout << table() << cgicc::div() << endl;
 }
 
 // Print out the value of every form element
@@ -364,7 +359,7 @@ dumpList(const Cgicc& formData)
 {
   cout << h2("Form Data via vector") << endl;
   
-  cout << CGICCNS div().set("align","center") << endl;
+  cout << cgicc::div().set("align","center") << endl;
   
   cout << table().set("border","0").set("rules","none").set("frame","void")
 		 .set("cellspacing","2").set("cellpadding","2")
@@ -384,7 +379,7 @@ dumpList(const Cgicc& formData)
     cout << tr().set("class","data") << td(iter->getName()) 
 	 << td(iter->getValue()) << tr() << endl;
   }
-  cout << table() << CGICCNS div() << endl;
+  cout << table() << cgicc::div() << endl;
 }
 
 // Print out information customized for each element
@@ -395,7 +390,7 @@ showForm(const Cgicc& formData)
   // I am using an if statement to check if each element is found
   cout << h2("Form Data via Cgicc") << endl;
   
-  cout << CGICCNS div().set("class","notice") << endl;
+  cout << cgicc::div().set("class","notice") << endl;
 
   //getElement
   const_form_iterator name = formData.getElement("name");
@@ -423,7 +418,7 @@ showForm(const Cgicc& formData)
   // getElement and getStrippedValue
   const_form_iterator thoughts = formData.getElement("thoughts");
   if(thoughts != (*formData).end() && ! (*thoughts).isEmpty()) {
-    STDNS string temp = (*thoughts).getStrippedValue();
+    std::string temp = (*thoughts).getStrippedValue();
     cout << "Your thoughts : " << temp << br() << endl;
   }
   else
@@ -436,11 +431,11 @@ showForm(const Cgicc& formData)
     cout << "You are not hungry." << br() << endl;
 
   // getElement
-  STDNS vector<FormEntry> flavors;
+  std::vector<FormEntry> flavors;
   formData.getElement("flavors", flavors);
   if(! flavors.empty()) {
     cout << "You like ";
-    for(STDNS string::size_type i = 0; i < flavors.size(); i++) {
+    for(std::string::size_type i = 0; i < flavors.size(); i++) {
       cout << flavors[i].getValue();
       if(i < flavors.size() - 2)
 	cout << ", ";
@@ -466,11 +461,11 @@ showForm(const Cgicc& formData)
     cout << "This should never happen. ERROR!" << br() << endl;
   
   // getElement
-  STDNS vector<FormEntry> friends;
+  std::vector<FormEntry> friends;
   formData.getElement("friends", friends);
   if(! friends.empty()) {
     cout << "You like ";
-    for(STDNS string::size_type i = 0; i < friends.size(); i++) {
+    for(std::string::size_type i = 0; i < friends.size(); i++) {
       cout << friends[i].getValue();
       if(i < friends.size() - 2)
 	cout << ", ";
@@ -482,5 +477,5 @@ showForm(const Cgicc& formData)
   else
     cout << "You don't watch Friends!?" << br() << endl;
   
-  cout << CGICCNS div() << endl;
+  cout << cgicc::div() << endl;
 }
