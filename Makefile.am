@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.36 2004/06/19 04:25:52 sbooth Exp $
+## $Id: Makefile.am,v 1.37 2004/06/22 01:38:08 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-bzip2
 
@@ -12,7 +12,7 @@ SUBDIRS = cgicc doc support $(DEMO)
 
 CLEANFILES = *~
 
-MAINTAINERCLEANFILES = aclocal.m4 cgicc-*.tar.gz cgicc-*.diff
+MAINTAINERCLEANFILES = aclocal.m4 cgicc-*.tar.*
 
 EXTRA_DIST = BUGS README.WIN COPYING.DOC example win
 
@@ -22,31 +22,26 @@ dist-hook:
 	rm -f $(distdir)/example/autogen
 	rm -rf $(distdir)/win/CVS
 
-if MAINTAINER_MODE
-################################################################
-##
-## Everything past here is useful to the maintainer, but probably not
-## to anybody else (taken from libtool/Makefile.am).
-##
-
-## set it to `:' to avoid CVS operations
-CVS = cvs
-
 ## Tag sources before making distribution, but don't make a
 ## distribution if checks fail.
+CVS = cvs
 cvs-dist: distcheck
 	cd $(srcdir) && \
 	 $(CVS) -q tag `echo "release-$(VERSION)" | sed 's/\./-/g'`
 	$(MAKE) dist
 
-## Generate a context diff file containing the patch info for the
-## current version.
-cvs-diff:
-	thisver=`echo "release-$(VERSION)" | sed 's/\./-/g'`; \
-	if test -z "$$OLDVERSION"; then \
-	  prevno=`echo "$(VERSION)" - 0.01 | bc | sed 's/^\./0./'`; \
-	else prevno="$$OLDVERSION"; fi; \
-	prevver=release-`echo $$prevno | sed 's/\./-/g'`; \
-	$(CVS) -f rdiff -c -r $$prevver -r $$thisver $(PACKAGE) \
-	    > $(PACKAGE)-$$prevno-$(VERSION).diff
-endif
+## Generate detached signature files
+GPG = gpg -ba
+gpg-dist:
+	for file in $(DIST_ARCHIVES); do \
+		echo " $(GPG) $$file"; \
+		$(GPG) $$file; \
+	done
+
+## Generate md5 checksum files
+MD5 = md5sum
+md5-dist:
+	for file in $(DIST_ARCHIVES); do \
+		echo " $(MD5) $$file > $$file.md5"; \
+		$(MD5) $$file > $$file.md5; \
+	done
