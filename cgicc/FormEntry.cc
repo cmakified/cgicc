@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.cc,v 1.1 1999/06/03 23:14:46 sbooth Exp $
+ *  $Id: FormEntry.cc,v 1.2 1999/06/04 00:07:37 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -25,8 +25,8 @@
 #include <new>
 #include <cstdlib>
 
-#include "FormEntry.hh"
-#include "CgiUtils.hh"
+#include "cgicc/FormEntry.hh"
+#include "cgicc/CgiUtils.hh"
 
 // local macro for integer maximum
 #define MAX(a, b) ((a) > (b) ? (a) : (b))

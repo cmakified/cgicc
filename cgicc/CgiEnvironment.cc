@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cc,v 1.1 1999/06/03 23:14:45 sbooth Exp $
+ *  $Id: CgiEnvironment.cc,v 1.2 1999/06/04 00:07:36 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -27,7 +27,7 @@
 #include <stdexcept>
 #include <cstdlib>
 
-#include "CgiEnvironment.hh"
+#include "cgicc/CgiEnvironment.hh"
 
 // ========== Constructor/Destructor
 

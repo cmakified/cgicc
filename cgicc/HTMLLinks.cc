@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLLinks.cc,v 1.1 1999/06/03 23:14:52 sbooth Exp $
+ *  $Id: HTMLLinks.cc,v 1.2 1999/06/04 00:07:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -22,7 +22,7 @@
 #pragma implementation
 #endif
 
-#include "HTMLLinks.hh"
+#include "cgicc/HTMLLinks.hh"
 
 // ============================================================
 // Statics

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.cc,v 1.1 1999/06/03 23:14:48 sbooth Exp $
+ *  $Id: HTMLAttributes.cc,v 1.2 1999/06/04 00:07:37 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -22,8 +22,8 @@
 #pragma implementation
 #endif
 
-#include "HTMLAttributes.hh"
-#include "CgiUtils.hh"
+#include "cgicc/HTMLAttributes.hh"
+#include "cgicc/CgiUtils.hh"
 
 // ============================================================
 // Class HTMLAttribute

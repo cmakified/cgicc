@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLClasses.hh,v 1.1 1999/06/03 23:14:48 sbooth Exp $
+ *  $Id: HTMLClasses.hh,v 1.2 1999/06/04 00:07:37 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,17 +18,17 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "HTTPHeaders.hh"
-#include "HTMLAttributes.hh"
-#include "HTMLElements.hh"
-#include "HTMLDirLang.hh"
-#include "HTMLForms.hh"
-#include "HTMLGlobal.hh"
-#include "HTMLGraphics.hh"
-#include "HTMLLinks.hh"
-#include "HTMLLists.hh"
-#include "HTMLObjects.hh"
-#include "HTMLScripts.hh"
-#include "HTMLStyles.hh"
-#include "HTMLTables.hh"
-#include "HTMLText.hh"
+#include "cgicc/HTTPHeaders.hh"
+#include "cgicc/HTMLAttributes.hh"
+#include "cgicc/HTMLElements.hh"
+#include "cgicc/HTMLDirLang.hh"
+#include "cgicc/HTMLForms.hh"
+#include "cgicc/HTMLGlobal.hh"
+#include "cgicc/HTMLGraphics.hh"
+#include "cgicc/HTMLLinks.hh"
+#include "cgicc/HTMLLists.hh"
+#include "cgicc/HTMLObjects.hh"
+#include "cgicc/HTMLScripts.hh"
+#include "cgicc/HTMLStyles.hh"
+#include "cgicc/HTMLTables.hh"
+#include "cgicc/HTMLText.hh"

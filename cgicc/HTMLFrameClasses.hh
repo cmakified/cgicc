@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLFrameClasses.hh,v 1.1 1999/06/03 23:14:50 sbooth Exp $
+ *  $Id: HTMLFrameClasses.hh,v 1.2 1999/06/04 00:07:38 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,5 +18,5 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "HTMLClasses.hh"
-#include "HTMLFrames.hh"
+#include "cgicc/HTMLClasses.hh"
+#include "cgicc/HTMLFrames.hh"

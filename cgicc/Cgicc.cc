@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cc,v 1.1 1999/06/03 23:14:46 sbooth Exp $
+ *  $Id: Cgicc.cc,v 1.2 1999/06/04 00:07:36 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -33,8 +33,8 @@
 #include <time.h>
 #endif
 
-#include "CgiUtils.hh"
-#include "Cgicc.hh"
+#include "cgicc/CgiUtils.hh"
+#include "cgicc/Cgicc.hh"
 
 
 CGICC_BEGIN_NAMESPACE

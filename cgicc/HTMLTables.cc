@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLTables.cc,v 1.1 1999/06/03 23:14:55 sbooth Exp $
+ *  $Id: HTMLTables.cc,v 1.2 1999/06/04 00:07:41 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -22,7 +22,7 @@
 #pragma implementation
 #endif
 
-#include "HTMLTables.hh"
+#include "cgicc/HTMLTables.hh"
 
 // ============================================================
 // Statics

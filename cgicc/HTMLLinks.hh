@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLLinks.hh,v 1.1 1999/06/03 23:14:53 sbooth Exp $
+ *  $Id: HTMLLinks.hh,v 1.2 1999/06/04 00:07:40 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -27,7 +27,7 @@
 
 #include <string>
 
-#include "HTMLElements.hh"
+#include "cgicc/HTMLElements.hh"
 
 CGICC_BEGIN_NAMESPACE
 

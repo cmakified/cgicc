@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.hh,v 1.1 1999/06/03 23:14:48 sbooth Exp $
+ *  $Id: HTMLAttributes.hh,v 1.2 1999/06/04 00:07:37 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -29,8 +29,8 @@
 #include <iostream>
 #include <vector>
 
-#include "CgiDefs.hh"
-#include "MStreamable.hh"
+#include "cgicc/CgiDefs.hh"
+#include "cgicc/MStreamable.hh"
 
 CGICC_BEGIN_NAMESPACE
 

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLForms.hh,v 1.1 1999/06/03 23:14:50 sbooth Exp $
+ *  $Id: HTMLForms.hh,v 1.2 1999/06/04 00:07:38 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -27,8 +27,8 @@
 
 #include <string>
 
-#include "CgiDefs.hh"
-#include "HTMLElements.hh"
+#include "cgicc/CgiDefs.hh"
+#include "cgicc/HTMLElements.hh"
 
 CGICC_BEGIN_NAMESPACE
 

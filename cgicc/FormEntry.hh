@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.hh,v 1.1 1999/06/03 23:14:47 sbooth Exp $
+ *  $Id: FormEntry.hh,v 1.2 1999/06/04 00:07:37 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -30,7 +30,7 @@
 #include <climits>
 #include <cfloat>
 
-#include "CgiDefs.hh"
+#include "cgicc/CgiDefs.hh"
 
 CGICC_BEGIN_NAMESPACE
 

@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.hh,v 1.1 1999/06/03 23:14:45 sbooth Exp $
+ *  $Id: CgiEnvironment.hh,v 1.2 1999/06/04 00:07:36 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -28,9 +28,9 @@
 #include <vector>
 #include <string>
 
-#include "CgiDefs.hh"
-#include "CgiUtils.hh"
-#include "HTTPHeaders.hh"
+#include "cgicc/CgiDefs.hh"
+#include "cgicc/CgiUtils.hh"
+#include "cgicc/HTTPHeaders.hh"
 
 CGICC_BEGIN_NAMESPACE
 
