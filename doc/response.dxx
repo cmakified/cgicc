@@ -1,0 +1,152 @@
+<!-- $Id: response.dxx,v 1.1 1998/04/04 04:32:40 sbooth Exp $ -->
+
+/**@name Response Generation
+
+<P>
+All responses to form data must begin with some type of HTTP header.  
+Cgicc provides classes for most commonly-used HTTP headers.
+</P>
+
+<P>
+To set up an HTML response:
+<PRE class="code">
+cout &lt;&lt; HTTPHTMLHeader();
+</PRE>
+</P>
+
+<P>
+To redirect the caller to another URL:
+<PRE CLASS="code">
+cout &lt;&lt; HTTPRedirectHeader("http://www.foo.com/newurl.html");
+</PRE>
+</P>
+
+<P>
+To set a cookie, followed by an HTML response:
+<PRE CLASS="code">
+cout &lt;&lt; HTTPCookie("count", "2") &lt;&lt; HTTPHTMLHeader();
+</PRE>
+</P>
+
+<P>
+After setting up the HTTP headers, an HTML document is usually generated.
+There is a unique class for each HTML 4.0 tag.
+</P>
+
+<P>
+First, a question of terminology.  In the following HTML:
+<PRE class="html">
+&lt;LINK HREF="cgicc.css" rel="stylesheet" type="text/css"&gt;
+</PRE>
+The <TT>\Ref{HTMLElement}</TT> is <TT>LINK</TT>, and the element contains three
+<TT>\Ref{HTMLAttribute}</TT> name/value pairs.  These attributes are: 
+(<TT>href</TT>, <TT>cgicc.css</TT>), (<TT>rel</TT>, <TT>stylesheet</TT>), 
+(<TT>type</TT>, <TT>text/css</TT>).
+</P>
+
+<P>
+To generate that HTML, you would write the following code:
+<PRE class="code">
+cout &lt;&lt; link_(add("href","cgicc.css").add("rel","stylesheet")
+	.add("type","text/css"));
+</PRE>
+</P>
+
+<P>
+In most cases, the name of the class is the same as the corresponding HTML
+element.  In the above example, to avoid ambiguity with the library function
+<TT>link</TT> in <TT>unistd.h</TT>, the names do not correspond exactly.
+</P>
+
+<P>
+In general, HTML responses consist of a document type, followed by an
+header and a body.  This could look like:
+<PRE class="code">
+cout &lt;&lt; HTMLDoctype(HTMLDoctype::eStrict) &lt;&lt; endl;
+cout &lt;&lt; html(add("lang","EN")) &lt;&lt; endl;
+  
+// Document header
+cout &lt;&lt; head() &lt;&lt; endl;
+cout &lt;&lt; title("Title") &lt;&lt; endl;
+cout &lt;&lt; meta(add("name", "author").add("content", "Stephen F. Booth")) &lt;&lt; endl;
+cout &lt;&lt; link_(add("href","cgicc.css").add("rel","stylesheet")
+	.add("type","text/css")) &lt;&lt; endl;
+cout &lt;&lt; head() &lt;&lt; endl;
+
+// Document body
+cout &lt;&lt; body() &lt;&lt; endl;
+
+// some kind of HTML in here
+
+cout &lt;&lt; body() &lt;&lt; html() &lt;&lt; endl;
+</PRE>
+</P>
+
+<P>
+Note that in the above example, <TT>endl</TT> was added for ease of reading the
+produced HTML, and is not necessary.  The produced HTML would look like:
+<PRE class="html">
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;HTML lang="EN"&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Title&lt;/TITLE&gt;
+&lt;META name="author" content="Stephen F. Booth"&gt;
+&lt;LINK href="cgicc.css" rel="stylesheet" type="text/css"&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;/BODY&gt;&lt;/HTML&gt;
+</PRE>
+</P>
+
+<P>
+<TT>\Ref{HTMLElement}s</TT> can be embedded in each other.  For example:
+<PRE class="code">
+cout &lt;&lt; em(h1("emphasized header text")) &lt;&lt; endl;
+</PRE>
+</P>
+
+<P>
+produces
+<PRE class="html">
+&lt;EM&gt;&lt;H1&gt;emphasized header text&lt;/H1&gt;&lt;/EM&gt;
+</PRE>
+</P>
+
+<P>
+Finally, a slightly more complicated example showing the power of Cgicc's HTML
+generation:
+<PRE class="code">
+cout &lt;&lt; em(h1("emphasized header text"), add("class", "red")) &lt;&lt; endl;
+</PRE>
+</P>
+
+<P>
+Presuming that <TT>H1.red</TT> is declared in some stylesheet, the HTML will
+produce
+<PRE class="html">
+&lt;EM class="red"&gt;&lt;H1&gt;emphasized header text&lt;/H1&gt;&lt;/EM&gt;
+</PRE>
+</P>
+
+<P>
+For more information on HTML 4.0 and cascading stylesheets, see 
+<TT>\URL{http://www.w3.org/MarkUp/}</TT> and 
+<TT>\URL{http://www.w3.org/TR/REC-html40/}</TT>
+</P>
+
+
+*/
+//@{
+
+	/**@name HTTP response classes */
+	//@{
+		//@Include: ../include/HTTPHeaders.hh
+	//@}
+
+
+	/**@name HTML generation classes */
+	//@{
+		//@Include: ../include/HTML*.hh
+	//@}
+
+//@}
