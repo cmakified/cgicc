@@ -1,7 +1,7 @@
 /*
- *  $Id: Cgicc.cpp,v 1.5 1999/10/02 19:10:10 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.6 2001/03/05 14:25:46 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -473,12 +473,12 @@ CGICCNS Cgicc::parseMIME(const STDNS string& data)
   if(headLimit == STDNS string::npos)
     return;
 
-  // Parse the header
-  MultipartHeader head = parseHeader(data.substr(0, headLimit));
-
   // Extract the value - there is still a trailing CR/LF to be subtracted off
   STDNS string::size_type valueStart = headLimit + end.length();
   STDNS string value = data.substr(valueStart, data.length() - valueStart - 2);
+
+  // Parse the header - pass trailing CR/LF x 2 to parseHeader
+  MultipartHeader head = parseHeader(data.substr(0, headLimit));
 
   if(head.getFilename().empty())
     fFormData.push_back(FormEntry(head.getName(), value));
