@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.5 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.6 2002/04/02 17:54:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -24,18 +24,10 @@
 
 #include <stdexcept>
 #include <memory>
-#include <cstdlib> 	// for getenv, system
+#include <cstdlib> 	// for getenv
 #include <cctype> 	// for toupper
 
 #include "cgicc/CgiUtils.h"
-
-// Fetch an environment variable
-STDNS string
-CGICCNS safeGetenv(const char *varName)
-{
-  char *var = getenv(varName);
-  return (var == 0) ? "" : var;
-}
 
 // case-insensitive string comparison
 // This code based on code from 
@@ -50,7 +42,7 @@ CGICCNS stringsAreEqual(const STDNS string& s1,
   STDNS string::const_iterator l2 = s2.end();
 
   while(p1 != l1 && p2 != l2) {
-    if(toupper(*(p1++)) != toupper(*(p2++)))
+    if(STDNS toupper(*(p1++)) != STDNS toupper(*(p2++)))
       return false;
   }
 
@@ -70,42 +62,22 @@ CGICCNS stringsAreEqual(const STDNS string& s1,
   STDNS string::const_iterator l2 = good ? (s2.begin() + n) : s2.end();
 
   while(p1 != l1 && p2 != l2) {
-    if(toupper(*(p1++)) != toupper(*(p2++)))
+    if(STDNS toupper(*(p1++)) != STDNS toupper(*(p2++)))
       return false;
   }
   
   return good;
 }
 
-// A safer alternative to system()
-int 
-CGICCNS saferSystem(const STDNS string& command)
-{
-  STDNS string s = command;
-  STDNS string::size_type pos = 0;
-
-  // escape out all semicolons, pipes, and redirects
-  while(true) {
-    pos = s.find_first_of(";|<>", pos);
-    if(pos == STDNS string::npos)
-      break;
-    s.insert(pos++, 1, '\\');
-    ++pos;
-  }
-
-  // make the call
-  return system(s.c_str());
-}
-
 char
 CGICCNS hexToChar(char first, 
 		  char second)
 {
-  char digit;
+  int digit;
   digit = (first >= 'A' ? ((first & 0xDF) - 'A') + 10 : (first - '0'));
   digit *= 16;
   digit += (second >= 'A' ? ((second & 0xDF) - 'A') + 10 : (second - '0'));
-  return digit;
+  return static_cast<char>(digit);
 }
 
 STDNS string

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiUtils.h,v 1.5 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: CgiUtils.h,v 1.6 2002/04/02 17:54:06 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -69,17 +69,6 @@ extern STDNS ofstream gLogFile;
 CGICC_BEGIN_NAMESPACE
 
 /*!
- * \brief Query the value of an environment variable
- *
- * This function is used internally by CgiEnvironment
- * \param varName The name of an environment variable
- * \return The value of the requested environment variable, or an empty
- * string if not found.
- */
-CGICC_API STDNS string
-safeGetenv(const char *varName);
-
-/*!
  * \brief Compare two strings for equality, ignoring case.
  *
  * For case-sensitive comparison, use (s1 == s2);
@@ -104,17 +93,6 @@ CGICC_API bool
 stringsAreEqual(const STDNS string& s1, 
 		const STDNS string& s2,
 		size_t n);
-
-/*!
- * \brief A safer alternative to system().
- *
- * This command will escape out (by prepending \) all semicolons, pipes 
- * and redirects (;|<>) present in the command string.
- * \param command The command to be sanitized and run
- * \return The result of running the sanitized version of \e command
- */
-CGICC_API int
-saferSystem(const STDNS string& command);
 
 /*!
  * \brief Convert encoded characters in form data to normal ASCII. 
