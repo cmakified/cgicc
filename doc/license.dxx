@@ -1,10 +1,10 @@
-<!-- $Id: license.dxx,v 1.1 1998/04/01 20:54:20 sbooth Exp $ -->
+<!-- $Id: license.dxx,v 1.2 1998/10/05 19:38:19 sbooth Exp $ -->
 
 /**@name Cgicc license and notes
 
 <P>
-Cgicc is written by <A HREF="http://www2.hmc.edu/~sbooth">Stephen F. Booth</A>
-/ <A HREF="mailto:sbooth@hmc.edu?Subject=Cgicc"><TT>sbooth@hmc.edu</TT></A>
+Cgicc is written by <A HREF="http://www.lmi.net/~sbooth">Stephen F. Booth</A>
+/ <A HREF="mailto:sbooth@lmi.net?Subject=Cgicc"><TT>sbooth@lmi.net</TT></A>
 </P>
 
 <P>
@@ -18,8 +18,8 @@ Cgicc may not be used in for-profit situations without my consent.
 
 <P>
 If you have any questions or comments, or find bugs in Cgicc, <EM>please</EM> 
-contact me at <A HREF="mailto:sbooth@hmc.edu?Subject=Cgicc">
-<TT>sbooth@hmc.edu</TT></A>.  I can't find and squash every bug by myself.  
+contact me at <A HREF="mailto:sbooth@lmi.net?Subject=Cgicc">
+<TT>sbooth@lmi.net</TT></A>.  I can't find and squash every bug by myself.  
 Additionally, if you modify Cgicc, please let me know; I am always trying 
 to improve things.
 </P>
