@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.1 1998/04/01 20:53:09 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.2 1998/04/04 04:32:16 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -158,13 +158,8 @@ gcc-2.8.1 -Wall -c -I./include \
 src/CgiEnvironment.cc -o obj/CgiEnvironment.o
 gcc-2.8.1 -Wall -c -I./include \
 -DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
-src/CgiForm.cc -o obj/CgiForm.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
 src/Cgicc.cc -o obj/Cgicc.o
-src/Cgicc.cc: In function `int main(int, char **)':
-src/Cgicc.cc:173: warning: value computed is not used
-ar rcv ./lib/libCgicc.a ./obj/Exception.o  ./obj/MStreamable.o  ./obj/HTTPHeaders.o  ./obj/HTMLAttributes.o  ./obj/HTMLElements.o  ./obj/HTMLDirLang.o  ./obj/HTMLForms.o  ./obj/HTMLFrames.o  ./obj/HTMLGlobal.o  ./obj/HTMLGraphics.o  ./obj/HTMLLinks.o  ./obj/HTMLLists.o  ./obj/HTMLObjects.o  ./obj/HTMLScripts.o  ./obj/HTMLStyles.o  ./obj/HTMLTables.o  ./obj/HTMLText.o  ./obj/CgiDefs.o  ./obj/FormEntry.o  ./obj/FormFile.o  ./obj/CgiEnvironment.o  ./obj/CgiForm.o  ./obj/Cgicc.o
+ar rcv ./lib/libCgicc.a ./obj/Exception.o  ./obj/MStreamable.o  ./obj/HTTPHeaders.o  ./obj/HTMLAttributes.o  ./obj/HTMLElements.o  ./obj/HTMLDirLang.o  ./obj/HTMLForms.o  ./obj/HTMLFrames.o  ./obj/HTMLGlobal.o  ./obj/HTMLGraphics.o  ./obj/HTMLLinks.o  ./obj/HTMLLists.o  ./obj/HTMLObjects.o  ./obj/HTMLScripts.o  ./obj/HTMLStyles.o  ./obj/HTMLTables.o  ./obj/HTMLText.o  ./obj/CgiDefs.o  ./obj/FormEntry.o  ./obj/FormFile.o  ./obj/CgiEnvironment.o  ./obj/Cgicc.o
 a - ./obj/Exception.o
 a - ./obj/MStreamable.o
 a - ./obj/HTTPHeaders.o
@@ -186,7 +181,6 @@ a - ./obj/CgiDefs.o
 a - ./obj/FormEntry.o
 a - ./obj/FormFile.o
 a - ./obj/CgiEnvironment.o
-a - ./obj/CgiForm.o
 a - ./obj/Cgicc.o
 ar: writing ./lib/libCgicc.a
 gcc-2.8.1 -Wall  -I./include \
@@ -212,7 +206,7 @@ directory or equivalent.  Load the form, and have some fun!
 </P>
 
 <P>
-Incidentally, to see how transparently Cgi<SPAN CLASS="red">cc</SPAN> handles 
+Incidentally, to see how transparently Cgicc handles 
 the difference between <TT>POST</TT> and <TT>GET</TT> type forms, try 
 changing the request method and see what happens.  You won't notice a 
 difference except in the call to the application.
