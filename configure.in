@@ -1,8 +1,8 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.20 1999/08/09 23:38:12 sbooth Exp $
+dnl $Id: configure.in,v 1.21 1999/08/17 17:16:04 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION($Revision: 1.20 $)
+AC_REVISION($Revision: 1.21 $)
 AC_INIT(cgicc/Cgicc.cpp)
 AC_CONFIG_AUX_DIR(support)
 AM_INIT_AUTOMAKE(cgicc, 3.1)
@@ -56,11 +56,11 @@ AC_ARG_ENABLE(namespaces,
 		esac], 
 	namespaces=true)
 if (test "$namespaces" = true && test "$cgicc_cv_cpp_namespaces" = yes); then
-	USE_NAMESPACES=1
+	CGICC_USE_NAMESPACES=1
 else
-	USE_NAMESPACES=0
+	CGICC_USE_NAMESPACES=0
 fi
-AC_SUBST(USE_NAMESPACES)
+AC_SUBST(CGICC_USE_NAMESPACES)
 
 dnl enable/disable the demos, if specified
 AC_ARG_ENABLE(demos, 

@@ -1,3 +1,10 @@
+1999-08-17  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* configure.in: Renamed USE_NAMESPACES to CGICC_USE_NAMESPACES
+	* cgicc/CgiDefs.h.in,HTMLClasses.h: Same.
+	* demo/dns.cpp,test.cpp: Same.
+	* example/yourSource.cpp: Same
+
 1999-08-16  Christof Danzl  <cdanzl@cosy.sbg.ac.at>
 
 	* cgicc/FormEntry.cpp(makeString): Only increment src once
