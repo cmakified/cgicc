@@ -1,4 +1,4 @@
-<!-- $Id: versions.dxx,v 1.1 1998/04/04 04:32:16 sbooth Exp $ -->
+<!-- $Id: versions.dxx,v 1.2 1998/04/06 11:11:30 sbooth Exp $ -->
 
 /**@name Cgicc version history
 
@@ -22,7 +22,7 @@
 
 <TR>
 <TD CLASS="dkgray">2.2</TD>
-<TD CLASS="dkgray">4/3/98</TD>
+<TD CLASS="dkgray">4/6/98</TD>
 <TD CLASS="dkgray">Removed <TT>HTMLDocument</TT> class, and added a set of 
 classes for generating HTML 4.0. Added support for HTTP file upload.
 Removed polymorphic exception handling.  Removed <TT>cgiMain()</TT>.  Created
