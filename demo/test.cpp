@@ -1,7 +1,7 @@
 /*
- *  $Id: test.cpp,v 1.14 2000/10/17 00:22:54 sbooth Exp $
+ *  $Id: test.cpp,v 1.15 2001/09/02 19:38:09 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,6 +16,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+/*! \file test.cpp
+ * cgicc test application
  */
 
 #include <new>
@@ -77,7 +81,7 @@ main(int /*argc*/,
     
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
     cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
-    cout << html().set("lang", "EN").set("dir", "LTR") << endl;
+    cout << html().set("lang", "en").set("dir", "ltr") << endl;
 
     // Set up the page's header and title.
     // I will put in lfs to ease reading of the produced HTML. 
@@ -85,28 +89,28 @@ main(int /*argc*/,
 
     // Output the style sheet portion of the header
     cout << style() << comment() << endl;
-    cout << "BODY { color: black; background-color: white; }" << endl;
-    cout << "HR.half { width: 60%; align: center; }" << endl;
-    cout << "SPAN.red, STRONG.red { color: red; }" << endl;
-    cout << "DIV.smaller { font-size: small; }" << endl;
-    cout << "DIV.notice { border: solid thin; padding: 1em; margin: 1em 0; "
-	 << "background: #DDD; }" << endl;
-    cout << "SPAN.blue { color: blue; }" << endl;
-    cout << "COL.title { color: white; background-color: black; ";
+    cout << "body { color: black; background-color: white; }" << endl;
+    cout << "hr.half { width: 60%; align: center; }" << endl;
+    cout << "span.red, strong.red { color: red; }" << endl;
+    cout << "div.smaller { font-size: small; }" << endl;
+    cout << "div.notice { border: solid thin; padding: 1em; margin: 1em 0; "
+	 << "background: #ddd; }" << endl;
+    cout << "span.blue { color: blue; }" << endl;
+    cout << "col.title { color: white; background-color: black; ";
     cout << "font-weight: bold; text-align: center; }" << endl;
-    cout << "COL.data { background-color: #DDD; text-align: left; }" << endl;
-    cout << "TD.data, TR.data { background-color: #DDD; text-align: left; }"
+    cout << "col.data { background-color: #DDD; text-align: left; }" << endl;
+    cout << "td.data, tr.data { background-color: #ddd; text-align: left; }"
 	 << endl;
-    cout << "TD.grayspecial { background-color: #DDD; text-align: left; }"
+    cout << "td.grayspecial { background-color: #ddd; text-align: left; }"
 	 << endl;
-    cout << "TD.ltgray, TR.ltgray { background-color: #DDD; }" << endl;
-    cout << "TD.dkgray, TR.dkgray { background-color: #BBB; }" << endl;
-    cout << "COL.black, TD.black, TD.title, TR.title { color: white; " 
+    cout << "td.ltgray, tr.ltgray { background-color: #ddd; }" << endl;
+    cout << "td.dkgray, tr.dkgray { background-color: #bbb; }" << endl;
+    cout << "col.black, td.black, td.title, tr.title { color: white; " 
 	 << "background-color: black; font-weight: bold; text-align: center; }"
 	 << endl;
-    cout << "COL.gray, TD.gray { background-color: #DDD; text-align: center; }"
+    cout << "col.gray, td.gray { background-color: #ddd; text-align: center; }"
 	 << endl;
-    cout << "TABLE.cgi { left-margin: auto; right-margin: auto; width: 90%; }"
+    cout << "table.cgi { left-margin: auto; right-margin: auto; width: 90%; }"
 	 << endl;
 
     cout << comment() << style() << endl;
@@ -186,8 +190,7 @@ main(int /*argc*/,
     cout << "GNU cgi" << span("cc").set("class","red") << " v";
     cout << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth")
-                       .set("href", "http://home.earthlink.net/~sfbooth/") 
-	 << br() << endl;
+      .set("href", "mailto:sbooth@gnu.org") << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime();
     cout << " on " << cgi.getCompileDate() << br() << endl;
 
@@ -238,7 +241,7 @@ main(int /*argc*/,
 
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
     cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
-    cout << html().set("lang","EN").set("dir","LTR") << endl;
+    cout << html().set("lang","en").set("dir","ltr") << endl;
 
     // Set up the page's header and title.
     // I will put in lfs to ease reading of the produced HTML. 
@@ -246,11 +249,11 @@ main(int /*argc*/,
 
     // Output the style sheet portion of the header
     cout << style() << comment() << endl;
-    cout << "BODY { color: black; background-color: white; }" << endl;
-    cout << "HR.half { width: 60%; align: center; }" << endl;
-    cout << "SPAN.red, STRONG.red { color: red; }" << endl;
-    cout << "DIV.notice { border: solid thin; padding: 1em; margin: 1em 0; "
-	 << "background: #DDD; }" << endl;
+    cout << "body { color: black; background-color: white; }" << endl;
+    cout << "hr.half { width: 60%; align: center; }" << endl;
+    cout << "span.red, STRONG.red { color: red; }" << endl;
+    cout << "div.notice { border: solid thin; padding: 1em; margin: 1em 0; "
+	 << "background: #ddd; }" << endl;
 
     cout << comment() << style() << endl;
 
@@ -421,13 +424,13 @@ showForm(const Cgicc& formData)
     cout << "You haven't wasted any time on the web." << br() << endl;
 
   // getElement and getStrippedValue
-  const_form_iterator sheep = formData.getElement("sheep");
-  if(sheep != (*formData).end() && ! (*sheep).isEmpty()) {
-    STDNS string temp = (*sheep).getStrippedValue();
-    cout << "Your thoughts about sheep cloning: " << temp << br() << endl;
+  const_form_iterator thoughts = formData.getElement("thoughts");
+  if(thoughts != (*formData).end() && ! (*thoughts).isEmpty()) {
+    STDNS string temp = (*thoughts).getStrippedValue();
+    cout << "Your thoughts : " << temp << br() << endl;
   }
   else
-    cout << "You don't have any thoughts about sheep!?" << br() << endl;
+    cout << "You don't have any thoughts!?" << br() << endl;
   
   // queryCheckbox
   if(formData.queryCheckbox("hungry"))
