@@ -1,7 +1,7 @@
-#!/bin/sh
+#! /bin/sh
 
 ##
-##  $Id: cgicc-config.in,v 1.2 2000/11/07 06:01:21 sbooth Exp $
+##  $Id: cgicc-config.in,v 1.3 2000/11/15 06:31:10 sbooth Exp $
 ##
 ##  Copyright (C) 2000 Stephen F. Booth
 ##
@@ -22,23 +22,22 @@
 
 prefix=@prefix@
 exec_prefix=@exec_prefix@
+includedir=@includedir@
+libdir=@libdir@
 
 ## Usage info
 usage()
 {
     cat <<EOF
-Usage: cgicc-config [OPTIONS] [LIBRARIES]
+Usage: cgicc-config [OPTIONS]
 Options:
     --prefix       Display architecture-independent installation dir
     --exec-prefix  Display architecture-dependent installation dir
-    --cxxflags     Display C++ compiler flags
-    --ldflags      Display linker flags
-    --libs         Display linking information
+    --includedir   Display header file installation dir
+    --libdir       Display object-code installation dir
     --host         Display host information
     --version      Display version information
     --help         Display this message
-Libraries:
-    cgicc
 EOF
     exit $1
 }
@@ -48,86 +47,34 @@ if test $# -eq 0; then
     usage 1 1>&2
 fi
 
-## Automatically link to cgicc
-lib_cgicc=yes
-
 ## Parse command line
 while test $# -gt 0; do
     case "$1" in
-	-*=*) optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'` ;;
-	*) optarg= ;;
+	-*=*)          optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'` ;;
+	*)             optarg= ;;
     esac
 
     case $1 in
-
 	## Architecture-independent dir
-	--prefix)
-	    echo $prefix
-	    exit 0
-	    ;;
+        --prefix)      echo $prefix && exit 0 ;;
 
 	## Architecture-dependent dir
-	--exec_prefix)
-	    echo $exec_prefix
-	    exit 0
-	    ;;
+	--exec-prefix) echo $exec_prefix && exit 0 ;;
 
-	## C++ compiler flags
-	--cxxflags)
-	    if test "${prefix}/include" != /usr/include ; then
-		includes="-I${prefix}/include"
-	    fi
-	    echo_cxxflags=yes
-	    ;;
+	## Object code dir
+	--libdir)      echo $libdir && exit 0 ;;
 
-	## Linking information
-	--ldflags)
-	    echo @LDFLAGS@
-	    exit 0
-	    ;;
-
-	## Linking information
-	--libs)
-	    echo_libs=yes
-	    ;;
+	## Header file dir
+	--includedir)  echo $includedir && exit 0 ;;
 
 	## Host information
-	--host)
-	    echo @host@
-	    exit 0
-	    ;;	    
+	--host)        echo @host@ && exit 0 ;;	    
 
 	## Version information
-	--version)
-	    echo @VERSION@
-	    exit 0
-	    ;;
-
-        ## cgicc lib
-	cgicc)
-	    lib_cgicc=yes
-	    ;;
+	--version)     echo @VERSION@ && exit 0 ;;
 
 	## Everything else
-	*)
-	    usage 1 1>&2
-	    ;;
+	*)             usage 1 1>&2 ;;
     esac
     shift
 done
-
-## C++ compiler flags
-if test "$echo_cxxflags" = "yes"; then
-    cxxflags="@CXXFLAGS@"
-    echo $includes $cxxflags
-fi
-
-## Linking info
-if test "$echo_libs" = "yes"; then
-    libs="@LIBS@"
-    if test "$lib_cgicc" = "yes"; then
-	libs="$libs -lcgicc"
-    fi
-    echo "-L${exec_prefix}/lib $libs"
-fi
-
