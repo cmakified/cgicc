@@ -1,4 +1,4 @@
-/* $Id: FormEntry.hh,v 1.8 1998/09/24 01:37:49 sbooth Exp $ */
+/* $Id: FormEntry.hh,v 1.9 1998/10/02 19:01:59 sbooth Exp $ */
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1
@@ -14,6 +14,8 @@
 #ifndef __CGI_DEFS__
 #include "CgiDefs.hh"
 #endif
+
+#include <float.h>
 
 /** Immutable class representing a single HTML form entry (name/value pair). */
 class FormEntry : public MStreamable
