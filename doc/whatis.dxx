@@ -1,0 +1,29 @@
+<!-- $Id: whatis.dxx,v 1.1 1998/04/01 20:55:40 sbooth Exp $ -->
+
+/**@name What is Cgicc?
+
+<P>
+Cgicc is an ANSI C++ compliant class library that greatly simplifies the
+creation of CGI applications for the World Wide Web.  Cgicc performs the 
+following functions:
+</P>
+
+<P>
+<UL>
+	<LI>Parses both GET and POST form data transparently
+	<LI>Provides string, integer, floating-point and single- and 
+	multiple-choice retrieval methods for form data
+	<LI>Provides methods for saving and restoring CGI environments to 
+	aid in application debugging
+	<LI>Provides full on-the-fly HTML generation capabilities, with 
+	support for cookies and file inclusion
+	<LI>Supports HTTP file upload
+</UL>
+</P>
+
+<P class="red">
+To see Cgicc in action, please look at the <A HREF="testform.html">sample 
+application</A>
+</P>
+
+*/
