@@ -97,10 +97,12 @@ This is Edition @value{EDITION} of the Cgicc documentation, @value{UPDATED}.
 * class FormFile::              Represents a file uploaded via HTTP
 * classes for HTTP headers::    Used for generating response information
 * classes for HTML output::     Used for generating a client response
+* Reporting Bugs::              How to report a bug in Cgicc
 * Copying::                     Your rights to distribute Cgicc
 * Concept Index::               Index of concepts introduced in the manual
 * Function Index::              Index of member functions
 * Data Type Index::             Index of classes
+
 
 
 
@@ -118,6 +120,7 @@ This is Edition @value{EDITION} of the Cgicc documentation, @value{UPDATED}.
 @include class-formfile.texinfo
 @include classes-http.texinfo
 @include classes-html.texinfo
+@include reporting-bugs.texinfo
 @include gpl.texinfo
 @include concept-index.texinfo
 @include function-index.texinfo

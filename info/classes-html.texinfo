@@ -1,5 +1,5 @@
 @comment -*-texinfo-*-
-@node classes for HTML output, Copying, classes for HTTP headers, Top
+@node classes for HTML output, Reporting Bugs, classes for HTTP headers, Top
 @unnumbered classes for HTML output
 
 For an introduction to Cgicc's HTML output, please see @xref{A tutorial

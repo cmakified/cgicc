@@ -1,5 +1,5 @@
 @comment -*-texinfo-*-
-@node Copying, Concept Index, classes for HTML output, Top
+@node Copying, Concept Index, Reporting Bugs, Top
 @appendix GNU General Public License
 
 @center Version 2, June 1991
