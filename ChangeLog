@@ -1,3 +1,8 @@
+2004-06-11  Stephen F. Booth  <sbooth@gnu.org>
+
+	* BUGS: Created file
+	* Makefile.am: Distribute BUGS
+
 2004-06-09  Stephen F. Booth  <sbooth@gnu.org>
 
 	* contrib/FCgiIO.cpp: Removed (amazingly obsolete) refs to CGICCNS
