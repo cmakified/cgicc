@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.33 2002/03/17 20:56:37 sbooth Exp $
+## $Id: Makefile.am,v 1.34 2002/03/17 21:46:18 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip dist-bzip2
 
@@ -17,7 +17,7 @@ MAINTAINERCLEANFILES = aclocal.m4 cgicc-*.tar.gz cgicc-*.diff
 EXTRA_DIST = README.WIN COPYING.DOC example win
 
 dist-hook:
-	cd $(distdir)/example && make distclean
+	cd $(distdir)/example && (make distclean || exit 0)
 	rm -rf $(distdir)/example/CVS
 	rm -f $(distdir)/example/autogen
 	rm -rf $(distdir)/win/CVS
