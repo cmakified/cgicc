@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.cc,v 1.2 1999/06/04 00:07:37 sbooth Exp $
+ *  $Id: HTMLAttributes.cc,v 1.3 1999/06/24 20:56:22 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -29,17 +29,25 @@
 // Class HTMLAttribute
 // ============================================================
 CGICCNS HTMLAttribute::HTMLAttribute()
+  : fAtomic(false)
+{}
+
+CGICCNS HTMLAttribute::HTMLAttribute(const STDNS string& name)
+  : fName(name),
+    fAtomic(true)
 {}
 
 CGICCNS HTMLAttribute::HTMLAttribute(const STDNS string& name, 
 				     const STDNS string& value)
   : fName(name), 
-    fValue(value)
+    fValue(value),
+    fAtomic(false)
 {}
 
 CGICCNS HTMLAttribute::HTMLAttribute(const HTMLAttribute& attribute)
   : fName(attribute.fName), 
-    fValue(attribute.fValue)
+    fValue(attribute.fValue),
+    fAtomic(attribute.fAtomic)
 {}
 
 CGICCNS HTMLAttribute::~HTMLAttribute()
@@ -48,7 +56,8 @@ CGICCNS HTMLAttribute::~HTMLAttribute()
 bool
 CGICCNS HTMLAttribute::operator== (const HTMLAttribute& att) 	const
 {
-  return (stringsAreEqual(fName, att.fName) 
+  return (fAtomic == att.fAtomic 
+	  && stringsAreEqual(fName, att.fName) 
 	  && stringsAreEqual(fValue, att.fValue));
 }
 
@@ -57,6 +66,7 @@ CGICCNS HTMLAttribute::operator= (const HTMLAttribute& att)
 {
   fName 	= att.fName;
   fValue 	= att.fValue;
+  fAtomic 	= att.fAtomic;
 
   return *this;
 }
@@ -64,30 +74,10 @@ CGICCNS HTMLAttribute::operator= (const HTMLAttribute& att)
 void 
 CGICCNS HTMLAttribute::render(STDNS ostream& out) 		const
 {
-  out << getName() << "=\"" << getValue() << "\"";
-}
-
-// ============================================================
-// Class HTMLAtomicAttribute
-// ============================================================
-CGICCNS HTMLAtomicAttribute::HTMLAtomicAttribute()
-{}
-
-CGICCNS HTMLAtomicAttribute::HTMLAtomicAttribute(const STDNS string& name) 
-  : HTMLAttribute(name, "")
-{}
-
-CGICCNS HTMLAtomicAttribute::HTMLAtomicAttribute(const HTMLAtomicAttribute& attribute)
-  : HTMLAttribute(attribute)
-{}
-
-CGICCNS HTMLAtomicAttribute::~HTMLAtomicAttribute()
-{}
-
-void 
-CGICCNS HTMLAtomicAttribute::render(STDNS ostream& out) 	const
-{
-  out << getName();
+  if(fAtomic)
+    out << getName();
+  else
+    out << getName() << "=\"" << getValue() << "\"";
 }
 
 // ============================================================
@@ -114,7 +104,7 @@ CGICCNS HTMLAttributeList::~HTMLAttributeList()
 CGICCNS HTMLAttributeList&
 CGICCNS HTMLAttributeList::add(const STDNS string& name)
 { 
-  fAttributes.push_back(HTMLAtomicAttribute(name));
+  fAttributes.push_back(HTMLAttribute(name));
   return *this;
 }
 
