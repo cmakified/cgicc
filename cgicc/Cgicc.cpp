@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.1 1999/08/09 18:25:33 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.2 1999/08/10 00:40:03 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -222,19 +222,19 @@ CGICCNS Cgicc::~Cgicc()
   LOGLN("Cgicc debugging log closed.")
 }
 
-STDNS string
+const char*
 CGICCNS Cgicc::getCompileDate() 				const
 { return __DATE__; }
 
-STDNS string
+const char*
 CGICCNS Cgicc::getCompileTime() 				const
 { return __TIME__; }
 
-STDNS string
+const char*
 CGICCNS Cgicc::getVersion() 					const
 { return VERSION; }
 
-STDNS string
+const char*
 CGICCNS Cgicc::getHost() 					const
 { return HOST; }
 

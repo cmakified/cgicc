@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.3 1999/08/10 00:40:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -90,7 +90,7 @@ public:
    * <P>This is a string of the form mmm dd yyyy.</P>
    * @return The compile date
    */
-  STDNS string
+  const char*
   getCompileDate() 					const;
   
   /**
@@ -98,7 +98,7 @@ public:
    * <P>This is a string of the form hh:mm:ss in 24-hour time.</P>
    * @return The compile time
    */
-  STDNS string
+  const char*
   getCompileTime() 					const;
   
   /**
@@ -106,7 +106,7 @@ public:
    * <P>The version number is a string of the form #.#.</P>
    * @return The version number
    */
-  STDNS string
+  const char*
   getVersion() 						const;
 
   /** 
@@ -114,7 +114,7 @@ public:
    * <P>The host is a string of the form processor-manufacturer-os</P>
    * @return The host triplet.
    */
-  STDNS string
+  const char*
   getHost() 						const;
 
   
