@@ -1,4 +1,4 @@
-<!-- $Id: cgicc.dxx.in,v 1.2 1998/04/01 20:55:05 sbooth Exp $ -->
+<!-- $Id: cgicc.dxx.in,v 1.3 1998/04/06 10:47:52 sbooth Exp $ -->
 
 /**@name Cgicc
 
@@ -59,6 +59,7 @@ If you are interested in hosting Cgicc, please e-mail
 	//@Include: obtaining.dxx
 	//@Include: building.dxx
 	//@Include: writing.dxx
+	//@Include: mailing.dxx
 	//@Include: versions.dxx
 	//@Include: examples.dxx
 	//@Include: classmember.dxx
