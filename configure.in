@@ -1,11 +1,11 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.21 1999/08/17 17:16:04 sbooth Exp $
+dnl $Id: configure.in,v 1.22 1999/08/31 17:38:11 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION($Revision: 1.21 $)
+AC_REVISION($Revision: 1.22 $)
 AC_INIT(cgicc/Cgicc.cpp)
 AC_CONFIG_AUX_DIR(support)
-AM_INIT_AUTOMAKE(cgicc, 3.1)
+AM_INIT_AUTOMAKE(cgicc, 3.1.1)
 AM_CONFIG_HEADER(cgicc/config.h)
 AM_MAINTAINER_MODE
 
@@ -45,6 +45,19 @@ dnl Checks for library functions.
 AC_HEADER_STDC
 AC_HEADER_TIME
 AC_CHECK_FUNCS(strftime gettimeofday uname)
+
+dnl enable/disable compiler warnings (using gcc), if specified
+AC_ARG_ENABLE(warnings,
+	[  --disable-warnings      disable compiler warnings [default=no]],
+	[case "${enableval}" in
+		yes) warnings=true ;;
+		no)  warnings=false ;;
+		*) AC_MSG_ERROR(bad value ${enableval} for --enable-warnings) ;;
+		esac], 
+	warnings=true)
+if (test "$warnings" = true && test "$ac_cv_prog_gcc" = yes); then
+	CXXFLAGS="-Wall -W -pedantic $CXXFLAGS"
+fi
 
 dnl enable/disable namespaces, if specified
 AC_ARG_ENABLE(namespaces,
