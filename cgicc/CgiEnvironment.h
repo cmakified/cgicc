@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.11 2002/03/03 17:40:38 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.12 2002/03/06 02:46:21 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -96,7 +96,7 @@ public:
    * \param input A CgiInput object to use for reading input
    * \see Cgicc::getEnvironment
    */
-  CgiEnvironment(CgiInput input);
+  CgiEnvironment(CgiInput *input);
   
   /*!
    * \brief Destructor 
@@ -487,7 +487,7 @@ private:
   
   // Read in all the environment variables
   void 
-  readEnvironmentVariables(CgiInput& input);
+  readEnvironmentVariables(CgiInput *input);
   
   unsigned long 		fServerPort;
   unsigned long 		fContentLength;

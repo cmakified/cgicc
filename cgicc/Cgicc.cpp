@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.12 2002/03/03 17:40:38 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.13 2002/03/06 02:46:21 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -187,7 +187,7 @@ CGICCNS MultipartHeader::operator= (const MultipartHeader& head)
 // ============================================================
 // Class Cgicc
 // ============================================================
-CGICCNS Cgicc::Cgicc(CgiInput input)
+CGICCNS Cgicc::Cgicc(CgiInput *input)
   : fEnvironment(input)
 {
 #if DEBUG

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.9 2002/03/03 17:40:38 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.10 2002/03/06 02:46:21 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -115,7 +115,7 @@ public:
    * variables will be used.
    * \param input A CgiInput object to use for reading input
    */
-  Cgicc(CgiInput input = CgiInput());
+  Cgicc(CgiInput *input = 0);
   
   /*! 
    * \brief Destructor 

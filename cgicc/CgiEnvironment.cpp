@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.11 2002/03/03 17:40:38 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.12 2002/03/06 02:46:21 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -38,11 +38,20 @@
 
 // ========== Constructor/Destructor
 
-CGICCNS CgiEnvironment::CgiEnvironment(CgiInput input)
+CGICCNS CgiEnvironment::CgiEnvironment(CgiInput *input)
 {
   LOGLN("CgiEnvironment::CgiEnvironment")
   
-  readEnvironmentVariables(input);
+  // Create a local CgiInput object for us to use
+  // In the vast majority of cases, this will be used
+  // For FastCGI applications it won't but the performance hit of
+  // an empty inline constructor is negligible
+  CgiInput local_input;
+
+  if(input == 0)
+    readEnvironmentVariables(&local_input);
+  else
+    readEnvironmentVariables(input);
 
   // On Win32, use binary read to avoid CRLF conversion
 #ifdef WIN32
@@ -61,9 +70,15 @@ CGICCNS CgiEnvironment::CgiEnvironment(CgiInput input)
           
     STDNS auto_ptr<char> data(new char[getContentLength()]);
 
-    // use the CgiInput data source
-    if(input.read(data.get(), getContentLength()) != getContentLength())
-      throw STDNS runtime_error("I/O error");
+    // If input is 0, use the default implementation of CgiInput
+    if(input == 0) {
+      if(local_input.read(data.get(),getContentLength()) != getContentLength())
+	throw STDNS runtime_error("I/O error");
+    }
+    else {
+      if(input->read(data.get(), getContentLength()) != getContentLength())
+	throw STDNS runtime_error("I/O error");
+    }
 
     fPostData = STDNS string(data.get(), getContentLength());
   }
@@ -133,42 +148,42 @@ CGICCNS CgiEnvironment::parseCookie(const STDNS string& data)
 
 // Read in all the environment variables
 void
-CGICCNS CgiEnvironment::readEnvironmentVariables(CgiInput& input)
+CGICCNS CgiEnvironment::readEnvironmentVariables(CgiInput *input)
 {
-  fServerSoftware 	= input.getenv("SERVER_SOFTWARE");
-  fServerName 		= input.getenv("SERVER_NAME");
-  fGatewayInterface 	= input.getenv("GATEWAY_INTERFACE");
-  fServerProtocol 	= input.getenv("SERVER_PROTOCOL");
+  fServerSoftware 	= input->getenv("SERVER_SOFTWARE");
+  fServerName 		= input->getenv("SERVER_NAME");
+  fGatewayInterface 	= input->getenv("GATEWAY_INTERFACE");
+  fServerProtocol 	= input->getenv("SERVER_PROTOCOL");
 
-  STDNS string port 	= input.getenv("SERVER_PORT");
+  STDNS string port 	= input->getenv("SERVER_PORT");
   fServerPort 		= atol(port.c_str());
 
-  fRequestMethod 	= input.getenv("REQUEST_METHOD");
-  fPathInfo 		= input.getenv("PATH_INFO");
-  fPathTranslated 	= input.getenv("PATH_TRANSLATED");
-  fScriptName 		= input.getenv("SCRIPT_NAME");
-  fQueryString 		= input.getenv("QUERY_STRING");
-  fRemoteHost 		= input.getenv("REMOTE_HOST");
-  fRemoteAddr 		= input.getenv("REMOTE_ADDR");
-  fAuthType 		= input.getenv("AUTH_TYPE");
-  fRemoteUser 		= input.getenv("REMOTE_USER");
-  fRemoteIdent 		= input.getenv("REMOTE_IDENT");
-  fContentType 		= input.getenv("CONTENT_TYPE");
+  fRequestMethod 	= input->getenv("REQUEST_METHOD");
+  fPathInfo 		= input->getenv("PATH_INFO");
+  fPathTranslated 	= input->getenv("PATH_TRANSLATED");
+  fScriptName 		= input->getenv("SCRIPT_NAME");
+  fQueryString 		= input->getenv("QUERY_STRING");
+  fRemoteHost 		= input->getenv("REMOTE_HOST");
+  fRemoteAddr 		= input->getenv("REMOTE_ADDR");
+  fAuthType 		= input->getenv("AUTH_TYPE");
+  fRemoteUser 		= input->getenv("REMOTE_USER");
+  fRemoteIdent 		= input->getenv("REMOTE_IDENT");
+  fContentType 		= input->getenv("CONTENT_TYPE");
 
-  STDNS string length 	= input.getenv("CONTENT_LENGTH");
+  STDNS string length 	= input->getenv("CONTENT_LENGTH");
   fContentLength 	= atol(length.c_str());
 
-  fAccept 		= input.getenv("HTTP_ACCEPT");
-  fUserAgent 		= input.getenv("HTTP_USER_AGENT");
-  fRedirectRequest 	= input.getenv("REDIRECT_REQUEST");
-  fRedirectURL 		= input.getenv("REDIRECT_URL");
-  fRedirectStatus 	= input.getenv("REDIRECT_STATUS");
-  fReferrer 		= input.getenv("HTTP_REFERER");
-  fCookie 		= input.getenv("HTTP_COOKIE");
+  fAccept 		= input->getenv("HTTP_ACCEPT");
+  fUserAgent 		= input->getenv("HTTP_USER_AGENT");
+  fRedirectRequest 	= input->getenv("REDIRECT_REQUEST");
+  fRedirectURL 		= input->getenv("REDIRECT_URL");
+  fRedirectStatus 	= input->getenv("REDIRECT_STATUS");
+  fReferrer 		= input->getenv("HTTP_REFERER");
+  fCookie 		= input->getenv("HTTP_COOKIE");
 
 #ifdef WIN32
   // Win32 bug fix by Peter Goedtkindt
-  STDNS string https 	= input.getenv("HTTPS");
+  STDNS string https 	= input->getenv("HTTPS");
   if(stringsAreEqual(https, "on"))
     fUsingHTTPS = true;
   else
