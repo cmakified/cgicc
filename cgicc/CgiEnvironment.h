@@ -1,8 +1,8 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.4 1999/08/20 20:51:43 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.5 2001/03/09 23:22:37 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,6 +36,9 @@
 
 CGICC_BEGIN_NAMESPACE
 
+// A stream-reader function
+typedef size_t (* reader_function_t)(void *, size_t);
+
 #ifdef WIN32
   template class CGICC_API STDNS vector<HTTPCookie>;
 #endif
@@ -55,7 +58,7 @@ public:
   friend class Cgicc;
   
   /** Read in the environment */
-  CgiEnvironment();
+  CgiEnvironment(reader_function_t stream_reader);
   
   /** Destructor */
   ~CgiEnvironment();

@@ -1,8 +1,8 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.5 1999/09/30 17:38:19 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.6 2001/03/09 23:22:37 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -93,7 +93,7 @@ class CGICC_API Cgicc {
 public:
   
   /** Constructor */
-  Cgicc();
+  Cgicc(reader_function_t stream_reader = NULL);
   
   /** Destructor */
   ~Cgicc();

@@ -1,7 +1,7 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.4 2000/10/07 18:41:18 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.5 2001/03/09 23:22:37 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@
 
 // ========== Constructor/Destructor
 
-CGICCNS CgiEnvironment::CgiEnvironment()
+CGICCNS CgiEnvironment::CgiEnvironment(reader_function_t stream_reader)
 {
   LOGLN("CgiEnvironment::CgiEnvironment")
   
@@ -57,11 +57,23 @@ CGICCNS CgiEnvironment::CgiEnvironment()
     // should work, but not in egcs-1.1.2 or gcc-2.95
     //auto_ptr<char> temp = new char[getContentLength()];
     char *temp = new char[getContentLength()];
-    STDNS cin.read(temp, getContentLength());
-    if(STDNS cin.gcount() != getContentLength()) {
-      delete [] temp;
-      throw STDNS runtime_error("I/O error");
+
+    // use the appropriate reader function
+    if(stream_reader == NULL) {
+      STDNS cin.read(temp, getContentLength());
+      if(STDNS cin.gcount() != getContentLength()) {
+	delete [] temp;
+	throw STDNS runtime_error("I/O error");
+      }
     }
+    else {
+      // user specified a reader function
+      if((*stream_reader)(temp, getContentLength()) != getContentLength()) {
+	delete [] temp;
+	throw STDNS runtime_error("I/O error");
+      }
+    }
+
     fPostData = STDNS string(temp, getContentLength());
     delete [] temp;
   }

@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.7 2001/03/05 14:30:55 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.8 2001/03/09 23:22:37 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -187,8 +187,8 @@ CGICCNS MultipartHeader::operator= (const MultipartHeader& head)
 // ============================================================
 // Class Cgicc
 // ============================================================
-CGICCNS Cgicc::Cgicc()
-  : fEnvironment()
+CGICCNS Cgicc::Cgicc(reader_function_t stream_reader)
+  : fEnvironment(stream_reader)
 {
 #if DEBUG
 #if HAVE_STRFTIME
