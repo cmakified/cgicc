@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.3 1999/08/16 17:40:04 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.4 1999/08/20 20:51:43 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -28,6 +28,7 @@
 
 #include <vector>
 #include <string>
+#include <cstdlib>
 
 #include "cgicc/CgiDefs.h"
 #include "cgicc/CgiUtils.h"
@@ -267,7 +268,16 @@ public:
   getUserAgent() 				const
     { return fUserAgent; }
 
+
+  /**
+   * Determine whether this is a secure request (using https).
+   * @return true if this connection is via https
+   */
+  inline bool
+  usingHTTPS() 					const
+  { return (getenv("HTTPS") != 0); }
   
+
   /**
    * Get the redirect request.
    * This will only be valid if you are using this script as a script
