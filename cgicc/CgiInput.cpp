@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiInput.cpp,v 1.1 2002/03/02 06:21:15 sbooth Exp $
+ *  $Id: CgiInput.cpp,v 1.2 2002/03/03 17:39:52 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,10 +27,7 @@
 
 #include "cgicc/CgiInput.h"
 
-// ========== Constructor/Destructor
-
-CGICCNS CgiInput::CgiInput()
-{}
+// ========== Destructor
 
 CGICCNS CgiInput::~CgiInput()
 {}

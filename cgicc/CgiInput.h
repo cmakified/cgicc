@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiInput.h,v 1.1 2002/03/02 06:21:15 sbooth Exp $
+ *  $Id: CgiInput.h,v 1.2 2002/03/03 17:39:52 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -67,7 +67,20 @@ class CGICC_API CgiInput
    *
    * Create a new CgiInput object
    */
-  CgiInput();
+  inline
+  CgiInput()
+  {}
+
+  /*! 
+   * \brief Copy constructor
+   *
+   * If you subclass CgiInput, you <strong>must</strong> overload
+   * operator=
+   * \param input The CgiInput object to copy
+   */
+  inline
+  CgiInput(const CgiInput& input)
+  { operator=(input); }
 
   /*!
    * \brief Destructor 
@@ -75,6 +88,46 @@ class CGICC_API CgiInput
    * Delete this CgiInput object
    */
   virtual ~CgiInput();
+  //@}
+
+
+  // ============================================================
+
+  /*! \name Overloaded Operators */
+  //@{
+
+  /*!
+   * \brief Compare two CgiInput objects for equality
+   *
+   * In the default implementation all CgiInput objects are equal
+   * \param input The CgiInput object to compare to this one
+   * \return \c true
+   */
+  inline bool 
+  operator== (const CgiInput& /*input*/) 		const
+    { return true; }
+  
+  /*!
+   * \brief Compare two CgiInput objects for inequality
+   *
+   * In the default implementation all CgiInput objects are equal
+   * \param input The CgiInput object to compare to this one
+   * \return \c false
+   */
+  inline bool
+  operator!= (const CgiInput& input) 			const
+    { return ! operator==(input); }
+
+  /*!
+   * \brief Assign one CgiInput to another
+   *
+   * Does nothing in the default implementation
+   * \param input The CgiInput object to copy
+   * \return A reference to this.
+   */
+  inline CgiInput& 
+  operator= (const CgiInput& /*input*/)
+  { return *this; }
   //@}
 
   // ============================================================
