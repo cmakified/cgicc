@@ -1,4 +1,4 @@
-/* $Id: Node.hh,v 1.1 1998/03/30 00:54:36 sbooth Exp $ */
+/* $Id: Node.hh,v 1.2 1998/04/01 20:48:23 sbooth Exp $ */
 
 #ifndef __NODE__
 #define __NODE__ 1
@@ -16,15 +16,15 @@
 // Class Node
 // ============================================================
 template <class T>
+class LinkedList;
+template <class T>
 class Node : public MStreamable {
   
   friend class LinkedList<T>;
-  friend class LinkedList<T>::Iterator;
-  friend class LinkedList<T>::ConstIterator;
   
 public:
   Node();
-  Node(const T *data);
+  Node(const T& data);
   Node(const Node<T>& x); 
   virtual ~Node();
   
@@ -33,8 +33,8 @@ public:
   Node<T>& operator= (const Node<T>& rhs) 
   { if(this != &rhs) fData = rhs.getData(); return *this; }
   
-  bool operator== (const Node<T>& x) const   
-  { return (*getData() == *(x.getData())); }
+  bool operator== (const Node<T>& x) const     
+  { return (*getData() == *x); }
 
   bool operator!= (const Node<T>& x) const   	{ return ! (*this == x); }
   
@@ -44,6 +44,7 @@ public:
   inline const Node<T>* getPrevious() const 	{ return fPrevious; } 
   
   inline const T* getData() const 		{ return fData; };
+  inline T& getDataReference()			{ return (T&) *fData; }
   
   inline void setData(const T *data) 		{ fData = data; };
   inline void setData(const T& data) 		{ fData = &data; };
@@ -51,13 +52,11 @@ public:
 protected:
   inline void setNext(const Node<T> *next) 	{ fNext = next; }
   inline void setPrevious(const Node<T> *prev) 	{ fPrevious = prev; }
-  
-  inline T& getDataReference()			{ return (T&) *fData; }
-  
+    
 private:
   const Node<T> *fNext;
   const Node<T> *fPrevious;
-  const T *fData;
+  T *fData;
 };
 
 // ============================================================
@@ -70,18 +69,21 @@ Node<T>::Node()
 {}
 
 template <class T>
-Node<T>::Node(const T *data)
-  : fNext(NULL), fPrevious(NULL), fData(data)
-{}
+Node<T>::Node(const T& data)
+  : fNext(NULL), fPrevious(NULL), fData(NULL) {
+    fData = new T(data);
+}
 
 template <class T>
 Node<T>::Node(const Node<T>& x)
-  : fNext(NULL), fPrevious(NULL), fData(x.getData())
-{}
+  : fNext(NULL), fPrevious(NULL), fData() {
+    fData = new T(x.getData());
+}
 
 template <class T>
-Node<T>::~Node()
-{}
+Node<T>::~Node() {
+  delete fData;
+}
 
 template <class T>
 void 
