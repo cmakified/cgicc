@@ -1,9 +1,10 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.32 2001/09/03 16:22:12 sbooth Exp $
+dnl $Id: configure.ac,v 1.1 2001/09/03 22:09:25 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION([$Revision: 1.32 $])
-AC_INIT(cgicc/Cgicc.cpp)
+AC_INIT(cgicc, 3.2, bug-cgicc@gnu.org)
+AC_CONFIG_SRCDIR(cgicc/Cgicc.cpp)
+AC_REVISION([$Revision: 1.1 $])
 AC_CONFIG_AUX_DIR(support)
 AC_PREFIX_DEFAULT(/usr)
 AM_INIT_AUTOMAKE(cgicc, 3.2)
@@ -53,13 +54,13 @@ dnl enable/disable compiler warnings (using gcc), if specified
 AC_ARG_ENABLE(warnings,
   [  --disable-warnings      disable gcc warnings [default=no]],
   [case "${enableval}" in
-    yes) warnings=yes ;; 
-    no)  warnings=no ;;
+    yes) cgicc_warnings=yes ;; 
+    no)  cgicc_warnings=no ;;
     *) AC_MSG_ERROR(bad value ${enableval} for --enable-warnings) ;;
-  esac], warnings=yes)
+  esac], cgicc_warnings=yes)
 AC_MSG_CHECKING(whether to use gcc verbose warnings)
-AC_MSG_RESULT($warnings)
-if (test "$warnings" = true && test "$ac_cv_prog_gcc" = yes); then
+AC_MSG_RESULT($cgicc_warnings)
+if (test "$cgicc_warnings" = yes && test "$GCC" = yes); then
   CXXFLAGS="-Wall -W -pedantic $CXXFLAGS"
 fi
 
@@ -67,13 +68,13 @@ dnl enable/disable namespaces, if specified
 AC_ARG_ENABLE(namespaces,
   [  --enable-namespaces     enable namespace support [default=yes]],
   [case "${enableval}" in
-    yes) namespaces=yes ;;
-    no)  namespaces=no ;;
+    yes) cgicc_namespaces=yes ;;
+    no)  cgicc_namespaces=no ;;
     *) AC_MSG_ERROR(bad value ${enableval} for --enable-namespaces) ;;
-  esac], namespaces=yes)
+  esac], cgicc_namespaces=yes)
 AC_MSG_CHECKING(whether to use the cgicc namespace)
-AC_MSG_RESULT($namespaces)
-if (test "$namespaces" = yes && test "$cgicc_cv_cpp_namespaces" = yes); then
+AC_MSG_RESULT($cgicc_namespaces)
+if (test "$cgicc_namespaces" = yes && test "$cgicc_cv_cpp_namespaces" = yes); then
   CGICC_USE_NAMESPACES=1
 else
   CGICC_USE_NAMESPACES=0
@@ -84,12 +85,12 @@ dnl enable/disable debug logging, if specified
 AC_ARG_ENABLE(debug-logging,
   [  --enable-debug-logging  enable debug logging [default=no]],
   [case "${enableval}" in
-    yes) debug=yes ;;
-    no)  debug=no ;;
+    yes) cgicc_debug=yes ;;
+    no)  cgicc_debug=no ;;
     *) AC_MSG_ERROR(bad value ${enableval} for --enable-debug-logging) ;;
-  esac], debug=no)
+  esac], cgicc_debug=no)
 AC_MSG_CHECKING(whether to enable debug logging)
-AC_MSG_RESULT($debug)
+AC_MSG_RESULT($cgicc_debug)
 if test "$debug" = yes; then
   AC_DEFINE(DEBUG,1)
 else
@@ -100,15 +101,16 @@ dnl enable/disable the demos, if specified
 AC_ARG_ENABLE(demos, 
   [  --enable-demos          build demos [default=yes]],
   [case "${enableval}" in
-    yes) demos=yes ;;
-    no)  demos=no ;;
+    yes) cgicc_demos=yes ;;
+    no)  cgicc_demos=no ;;
     *) AC_MSG_ERROR(bad value ${enableval} for --enable-demos) ;;
-  esac], demos=yes)
+  esac], cgicc_demos=yes)
 AC_MSG_CHECKING(whether to build the cgicc demos)
-AC_MSG_RESULT($demos)
-AM_CONDITIONAL(DEMOS, test "$demos" = yes)
+AC_MSG_RESULT($cgicc_demos)
+AM_CONDITIONAL(DEMOS, test "$cgicc_demos" = yes)
 
-AC_OUTPUT([Makefile cgicc/Makefile cgicc/CgiDefs.h demo/Makefile 
+AC_CONFIG_FILES([Makefile cgicc/Makefile cgicc/CgiDefs.h demo/Makefile 
   support/Makefile support/cgicc-config html/Makefile html/cgicc.html
-  doc/Makefile doc/Doxyfile])
+  doc/Makefile doc/Doxyfile contrib/Makefile])
+AC_OUTPUT
 
