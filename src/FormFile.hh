@@ -1,4 +1,4 @@
-/* $Id: FormFile.hh,v 1.2 1998/04/02 11:09:34 sbooth Exp $ */
+/* $Id: FormFile.hh,v 1.3 1998/04/02 11:16:25 sbooth Exp $ */
 
 #ifndef __FORM_FILE__
 #define __FORM_FILE__ 1
@@ -79,7 +79,7 @@ public:
   
   /**
    * Get the file data.  
-   * <P CLASS="red">This is not necessarily null-terminated</P>.
+   * <BR><STRONG CLASS="red">This is not necessarily null-terminated.</STRONG>
    * @return The file data.
    */
   const char* getData() const 		{ return fData; }
