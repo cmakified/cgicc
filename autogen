@@ -2,6 +2,9 @@
 
 ## Simple script to automate common automake-related tasks
 
+echo "== Creating support dir =="
+/usr/bin/mkdir support
+ 
 echo "== Running aclocal =="
 /usr/local/bin/aclocal
 
