@@ -1,4 +1,5 @@
-## $Id: cgicc.spec.in,v 1.1 2000/04/08 04:42:53 sbooth Exp $
+## -*-sh-*-
+## $Id: cgicc.spec.in,v 1.2 2000/04/11 01:27:29 sbooth Exp $
 
 ## Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 ## This file is free software; the Free Software Foundation
@@ -11,7 +12,7 @@
 ## PARTICULAR PURPOSE.
 
 ## Macros defined by autoconf
-t%define name @PACKAGE@
+%define name @PACKAGE@
 %define version @VERSION@
 
 Summary: A C++ class library for developing CGI applications
@@ -54,10 +55,10 @@ make install
 %files
 
 ## Documenation
-%{_prefix}/doc/%{name}-%{version}/INSTALL 
+#%{_prefix}/doc/%{name}-%{version}/INSTALL 
+%{_prefix}/doc/%{name}-%{version}/README 
 %{_prefix}/doc/%{name}-%{version}/AUTHORS
 %{_prefix}/doc/%{name}-%{version}/COPYING
-%{_prefix}/doc/%{name}-%{version}/README
 %{_prefix}/doc/%{name}-%{version}/NEWS
 %{_prefix}/doc/%{name}-%{version}/ChangeLog
 %{_prefix}/doc/%{name}-%{version}/THANKS
