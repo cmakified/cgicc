@@ -1,0 +1,153 @@
+<!-- $Id: writing.dxx,v 1.1 1998/04/04 04:32:16 sbooth Exp $ -->
+
+/**@name Writing applications using Cgicc
+
+<P>
+Let's say you have the following HTML form:
+</P>
+
+<PRE class="html">
+&lt;FORM&gt;
+Your name: &lt;INPUT TYPE="TEXT" NAME="name"&gt;&lt;BR&gt;
+Your age:&lt;INPUT TYPE="TEXT" NAME="age"&gt;&lt;BR&gt;
+Your sex: &lt;INPUT TYPE="RADIO" NAME="sex" VALUE="male"&gt; 
+&lt;INPUT TYPE="RADIO" NAME="sex" VALUE="female"&gt;
+&lt;/FORM&gt;
+</PRE>
+
+<P>
+To write an application to process this form, you will write a <TT>main</TT>
+function as usual:
+</P>
+
+<PRE CLASS="code">
+int 
+main(int argc, char ** argv) {
+	<SPAN CLASS="green">// CGI processing will go here</SPAN>
+}
+</PRE>
+
+<P>
+The main classes of Cgicc you will use are <TT>\Ref{Cgicc}</TT>,
+<TT>\Ref{CgiEnvironment}</TT>, <TT>\Ref{LinkedList}</TT> and
+<TT>\Ref{FormEntry}</TT>.  However, all of Cgicc's functionality is
+accessed through the Cgicc class.  Thus, the first step of any CGI 
+is to instantiate an object of this type:
+</P>
+
+<PRE CLASS="code">
+int 
+main(int argc, char ** argv) {
+	Cgicc *cgi = new Cgicc();
+}
+</PRE>
+
+<P>
+Since errors are handled using <TT>\Ref{Exception}s</TT>, you may wish to
+wrap your CGI code in a <TT>try</TT> block:
+</P>
+
+<PRE CLASS="code">
+int 
+main(int argc, char ** argv) {
+  try {
+    Cgicc *cgi = new Cgicc();
+      if( ! cgi )
+        throw Exception("Insufficient memory", ERRINFO);
+  }
+
+  catch(const Exception& e) {
+    <SPAN CLASS="green">// Handle the Exception</SPAN>
+  }
+}
+</PRE>
+
+<P>
+In the above simple HTML form, a user will submit their name, age, and sex.
+A simple CGI which would spit back these values would look like:
+</P>
+
+<PRE CLASS="code">
+int 
+main(int argc, char ** argv) {
+  try {
+    Cgicc *cgi = new Cgicc();
+      if( ! cgi )
+        throw Exception("Insufficient memory", ERRINFO);
+    
+    <SPAN CLASS="green">// Set up the HTML page</SPAN>
+    cout &lt;&lt; HTTPHTMLHeader() &lt;&lt; HTMLDoctype(HTMLDoctype::eStrict) &lt;&lt; endl;
+    cout &lt;&lt; html(add("lang", "EN")) &lt;&lt; head(title("Your Information")) &lt;&lt; endl;
+    cout &lt;&lt; body() &lt;&lt; h1("Your Information:") &lt;&lt; endl;
+
+    <SPAN CLASS="green">// Get the value of name</SPAN>
+    LinkedList&lt;FormEntry&gt;::Iterator nameIter = cgi-&gt;getElement("name");
+    <SPAN CLASS="green">// Get the value of age</SPAN>
+    LinkedList&lt;FormEntry&gt;::Iterator ageIter = cgi-&gt;getElement("age");
+    <SPAN CLASS="green">// Get the radio button</SPAN>
+    LinkedList&lt;FormEntry&gt;::Iterator sexIter = cgi-&gt;getElement("sex");
+
+    <SPAN CLASS="green">// Spit back the info</SPAN>
+    cout << h3() << "You are ";
+
+    if(ageIter.isValid() && ! (*ageIter).isEmpty() )
+      cout &lt;&lt; "a " &lt;&lt; **ageIter &lt;&lt; " year-old "  &lt;&lt; endl;
+    else if(ageIter.isValid())
+      cout &lt;&lt; "an ageless " &lt;&lt; endl;
+
+    if(sexIter.isValid() && ! (*sexIter).isEmpty() )
+      cout &lt;&lt; **sexIter &lt;&lt; ' ' &lt;&lt; endl;
+    else if(ageIter.isValid())
+      cout &lt;&lt; "sexless person " &lt;&lt; endl;
+
+    if(nameIter.isValid() && ! (*nameIter).isEmpty() )
+      cout &lt;&lt; "named " &lt;&lt; **nameIter &lt;&lt; endl;
+    else if(nameIter.isValid())
+      cout &lt;&lt; "without a name" &lt;&lt; endl;
+
+    cout &lt;&lt; '.' &lt;&lt; h3() &lt;&lt; endl;
+  }
+
+  catch(const Exception& e) {
+    <SPAN CLASS="green">// Handle the Exception</SPAN>
+
+    <SPAN CLASS="green">// Set up the HTML page</SPAN>
+    cout &lt;&lt; HTTPHTMLHeader() &lt;&lt; HTMLDoctype(HTMLDoctype::eStrict) &lt;&lt; endl;
+    cout &lt;&lt; html(add("lang", "EN")) &lt;&lt; head(title("Error")) &lt;&lt; endl;
+
+    <SPAN CLASS="green">// Print out the Exception info</SPAN>
+    cout &lt;&lt; body() &lt;&lt; h1() &lt;&lt; "An error occurred: " &lt;&lt; e.getMessage() 
+    &lt;&lt; h1() &lt;&lt; body() &lt;&lt; endl;
+    cout &lt;&lt; html() &lt;&lt; endl;
+  }
+}
+</PRE>
+
+<P>
+There are a few things to notice from the above example:
+<OL>
+<LI>The <TT>getElement</TT> methods in <TT>\Ref{Cgicc}</TT> work equally
+well for radio buttons, text fields, and lists.</LI>
+
+<LI>The <TT>getElement</TT> methods in <TT>\Ref{Cgicc}</TT> return
+<TT>\Ref{LinkedList::Iterator}s</TT>, not <TT>\Ref{FormEntry}s</TT>.</LI>
+
+<LI><TT>\Ref{FormEntry}s</TT> are accessed through
+<TT>\Ref{LinkedList::Iterator}s</TT>.</LI>
+
+<LI><TT>\Ref{LinkedList::Iterator}s</TT> should be checked for validity
+before dereferencing; values of <TT>\Ref{FormEntry}s</TT> may be easily 
+accessed from <TT>\Ref{LinkedList::Iterator}s</TT> by dereferencing twice.
+
+<LI><TT>\Ref{HTMLElement}s</TT> can be embedded into each other, and may
+contain an unlimited number of <TT>\Ref{HTMLAttribute}s</TT>.</LI>
+</OL>
+</P>
+
+<P>
+For examples of more complicated CGI programs using Cgicc, look at the
+<A HREF="test.cc">test application source code</A>, or at the 
+\Ref{Cgicc examples} page.
+</P>
+
+*/

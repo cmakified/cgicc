@@ -1,0 +1,8 @@
+<!-- $Id: general.dxx,v 1.1 1998/04/04 04:32:16 sbooth Exp $ -->
+
+/**@name General classes */
+//@{
+	//@Include: ../include/Exception.hh
+	//@Include: ../include/MStreamable.hh
+	//@Include: ../include/LinkedList.hh
+//@}

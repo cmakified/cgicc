@@ -1,0 +1,56 @@
+<!-- $Id: versions.dxx,v 1.1 1998/04/04 04:32:16 sbooth Exp $ -->
+
+/**@name Cgicc version history
+
+<DIV ALIGN="center">
+
+<P>
+<TABLE BORDER="0" RULES="none" FRAME="void" CELLSPACING="2" CELLPADDING="2" 
+        CLASS="form">
+
+<COLGROUP SPAN="3">
+<COL ALIGN="right" SPAN="1">
+<COL ALIGN="center" SPAN="1">
+<COL ALIGN="left" SPAN="1">
+</COLGROUP>
+
+<TR>
+<TD CLASS="black">Version</TD>
+<TD CLASS="black">Date</TD>
+<TD CLASS="black">Description</TD>
+</TR>
+
+<TR>
+<TD CLASS="dkgray">2.2</TD>
+<TD CLASS="dkgray">4/3/98</TD>
+<TD CLASS="dkgray">Removed <TT>HTMLDocument</TT> class, and added a set of 
+classes for generating HTML 4.0. Added support for HTTP file upload.
+Removed polymorphic exception handling.  Removed <TT>cgiMain()</TT>.  Created
+class <TT>Cgicc</TT>.</TD>
+</TR>
+
+<TR>
+<TD CLASS="ltgray">2.1</TD>
+<TD CLASS="ltgray">10/10/97</TD>
+<TD CLASS="ltgray">Added support for cookies, and for insertion of files into
+<TT>HTMLDocument</TT>s via the <TT>putFile()</TT> method.</TD>
+</TR>
+
+<TR>
+<TD CLASS="dkgray">2.0.1</TD>
+<TD CLASS="dkgray">9/10/97</TD>
+<TD CLASS="dkgray">Fixed bug in <TT>image()</TT> method of 
+<TT>HTMLDocument</TT></TD>
+</TR>
+
+<TR>
+<TD CLASS="ltgray">2.0</TD>
+<TD CLASS="ltgray">8/24/97</TD>
+<TD CLASS="ltgray">Initial release of v2.0</TD>
+</TR>
+
+</TABLE></P>
+
+</DIV>
+
+*/

@@ -1,0 +1,9 @@
+<!-- $Id: cgi.dxx,v 1.1 1998/04/04 04:32:16 sbooth Exp $ -->
+
+/**@name CGI data and manipulation classes */
+//@{
+	//@Include: ../include/FormEntry.hh
+	//@Include: ../include/FormFile.hh
+	//@Include: ../include/CgiEnvironment.hh
+	//@Include: ../include/Cgicc.hh
+//@}

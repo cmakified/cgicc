@@ -1,0 +1,7 @@
+<!-- $Id: functions.dxx,v 1.1 1998/04/04 04:32:16 sbooth Exp $ -->
+
+
+/**@name Functions and macros */
+//@{
+	//@Include: ../include/CgiDefs.hh
+//@}
