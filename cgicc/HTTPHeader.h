@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPHeader.h,v 1.1 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: HTTPHeader.h,v 1.2 2001/09/05 02:16:59 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -32,6 +32,7 @@
  */
 
 #include <string>
+#include <vector>
 
 #include "cgicc/MStreamable.h"
 #include "cgicc/HTTPCookie.h"

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPResponseHeader.h,v 1.1 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: HTTPResponseHeader.h,v 1.2 2001/09/05 02:16:59 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -34,6 +34,7 @@
  */
 
 #include <string>
+#include <vector>
 
 #include "cgicc/MStreamable.h"
 #include "cgicc/HTTPCookie.h"
@@ -102,9 +103,18 @@ public:
    * \param header The text of the header to add
    * \return A reference to this
    */
-  inline HTTPResponseHeader&
-  addHeader(const STDNS string& header)
-  { fHeaders.push_back(header); return *this; }
+  HTTPResponseHeader&
+  addHeader(const STDNS string& header);
+
+  /*!
+   * \brief Add a general, response, or entity header to this one
+   * 
+   * \param header The text of the header to add
+   * \return A reference to this
+   */
+  HTTPResponseHeader&
+  addHeader(const STDNS string& name,
+	    const STDNS string& value);
 
   /*!
    * \brief Get a list of all additional headers
@@ -123,9 +133,8 @@ public:
    * \brief Set a cookie to go out with this HTTPResponseHeader
    * \param cookie The HTTPCookie to set
    */
-  inline HTTPResponseHeader&
-  setCookie(const HTTPCookie& cookie)
-  { fCookies.push_back(cookie); return *this; }
+  HTTPResponseHeader&
+  setCookie(const HTTPCookie& cookie);
 
   /*!
    * \brief Get a list of all cookies associated with this header
@@ -169,7 +178,7 @@ public:
    * The reason phrase is a human-readable interpretation of the status code
    * \return The reason phrase
    */
-  inline const STDNS string&
+  inline STDNS string
   getReasonPhrase() 				const
   { return fReasonPhrase; }
   //@}
