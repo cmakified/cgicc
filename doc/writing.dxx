@@ -1,4 +1,4 @@
-<!-- $Id: writing.dxx,v 1.1 1998/04/04 04:32:16 sbooth Exp $ -->
+<!-- $Id: writing.dxx,v 1.2 1998/10/05 22:33:14 sbooth Exp $ -->
 
 /**@name Writing applications using Cgicc
 
@@ -21,10 +21,10 @@ function as usual:
 </P>
 
 <PRE CLASS="code">
-int 
-main(int argc, char ** argv) {
-	<SPAN CLASS="green">// CGI processing will go here</SPAN>
-}
+. int 
+. main(int argc, char ** argv) {
+.   <SPAN CLASS="green">// CGI processing will go here</SPAN>
+. }
 </PRE>
 
 <P>
@@ -36,10 +36,10 @@ is to instantiate an object of this type:
 </P>
 
 <PRE CLASS="code">
-int 
-main(int argc, char ** argv) {
-	Cgicc *cgi = new Cgicc();
-}
+. int 
+. main(int argc, char ** argv) {
+.   Cgicc *cgi = new Cgicc();
+. }
 </PRE>
 
 <P>
@@ -48,18 +48,18 @@ wrap your CGI code in a <TT>try</TT> block:
 </P>
 
 <PRE CLASS="code">
-int 
-main(int argc, char ** argv) {
-  try {
-    Cgicc *cgi = new Cgicc();
-      if( ! cgi )
-        throw Exception("Insufficient memory", ERRINFO);
-  }
-
-  catch(const Exception& e) {
-    <SPAN CLASS="green">// Handle the Exception</SPAN>
-  }
-}
+. int 
+. main(int argc, char ** argv) {
+.   try {
+.     Cgicc *cgi = new Cgicc();
+.     if( ! cgi )
+.       throw Exception("Insufficient memory", ERRINFO);
+.   }
+.
+.  catch(const Exception& e) {
+.    <SPAN CLASS="green">// Handle the Exception</SPAN>
+.  }
+. }
 </PRE>
 
 <P>
@@ -68,59 +68,59 @@ A simple CGI which would spit back these values would look like:
 </P>
 
 <PRE CLASS="code">
-int 
-main(int argc, char ** argv) {
-  try {
-    Cgicc *cgi = new Cgicc();
-      if( ! cgi )
-        throw Exception("Insufficient memory", ERRINFO);
-    
-    <SPAN CLASS="green">// Set up the HTML page</SPAN>
-    cout &lt;&lt; HTTPHTMLHeader() &lt;&lt; HTMLDoctype(HTMLDoctype::eStrict) &lt;&lt; endl;
-    cout &lt;&lt; html(add("lang", "EN")) &lt;&lt; head(title("Your Information")) &lt;&lt; endl;
-    cout &lt;&lt; body() &lt;&lt; h1("Your Information:") &lt;&lt; endl;
+. int 
+. main(int argc, char ** argv) {
+.   try {
+.     Cgicc *cgi = new Cgicc();
+.       if( ! cgi )
+.         throw Exception("Insufficient memory", ERRINFO);
+.    
+.     <SPAN CLASS="green">// Set up the HTML page</SPAN>
+.     cout &lt;&lt; HTTPHTMLHeader() &lt;&lt; HTMLDoctype(HTMLDoctype::eStrict) &lt;&lt; endl;
+.     cout &lt;&lt; html(add("lang", "EN")) &lt;&lt; head(title("Your Information")) &lt;&lt; endl;
+.     cout &lt;&lt; body() &lt;&lt; h1("Your Information:") &lt;&lt; endl;
 
-    <SPAN CLASS="green">// Get the value of name</SPAN>
-    LinkedList&lt;FormEntry&gt;::Iterator nameIter = cgi-&gt;getElement("name");
-    <SPAN CLASS="green">// Get the value of age</SPAN>
-    LinkedList&lt;FormEntry&gt;::Iterator ageIter = cgi-&gt;getElement("age");
-    <SPAN CLASS="green">// Get the radio button</SPAN>
-    LinkedList&lt;FormEntry&gt;::Iterator sexIter = cgi-&gt;getElement("sex");
-
-    <SPAN CLASS="green">// Spit back the info</SPAN>
-    cout << h3() << "You are ";
-
-    if(ageIter.isValid() && ! (*ageIter).isEmpty() )
-      cout &lt;&lt; "a " &lt;&lt; **ageIter &lt;&lt; " year-old "  &lt;&lt; endl;
-    else if(ageIter.isValid())
-      cout &lt;&lt; "an ageless " &lt;&lt; endl;
-
-    if(sexIter.isValid() && ! (*sexIter).isEmpty() )
-      cout &lt;&lt; **sexIter &lt;&lt; ' ' &lt;&lt; endl;
-    else if(ageIter.isValid())
-      cout &lt;&lt; "sexless person " &lt;&lt; endl;
-
-    if(nameIter.isValid() && ! (*nameIter).isEmpty() )
-      cout &lt;&lt; "named " &lt;&lt; **nameIter &lt;&lt; endl;
-    else if(nameIter.isValid())
-      cout &lt;&lt; "without a name" &lt;&lt; endl;
-
-    cout &lt;&lt; '.' &lt;&lt; h3() &lt;&lt; endl;
-  }
-
-  catch(const Exception& e) {
-    <SPAN CLASS="green">// Handle the Exception</SPAN>
-
-    <SPAN CLASS="green">// Set up the HTML page</SPAN>
-    cout &lt;&lt; HTTPHTMLHeader() &lt;&lt; HTMLDoctype(HTMLDoctype::eStrict) &lt;&lt; endl;
-    cout &lt;&lt; html(add("lang", "EN")) &lt;&lt; head(title("Error")) &lt;&lt; endl;
-
-    <SPAN CLASS="green">// Print out the Exception info</SPAN>
-    cout &lt;&lt; body() &lt;&lt; h1() &lt;&lt; "An error occurred: " &lt;&lt; e.getMessage() 
-    &lt;&lt; h1() &lt;&lt; body() &lt;&lt; endl;
-    cout &lt;&lt; html() &lt;&lt; endl;
-  }
-}
+.     <SPAN CLASS="green">// Get the value of name</SPAN>
+.     LinkedList&lt;FormEntry&gt;::Iterator nameIter = cgi-&gt;getElement("name");
+.     <SPAN CLASS="green">// Get the value of age</SPAN>
+.     LinkedList&lt;FormEntry&gt;::Iterator ageIter = cgi-&gt;getElement("age");
+.     <SPAN CLASS="green">// Get the radio button</SPAN>
+.     LinkedList&lt;FormEntry&gt;::Iterator sexIter = cgi-&gt;getElement("sex");
+.
+.     <SPAN CLASS="green">// Spit back the info</SPAN>
+.     cout << h3() << "You are ";
+.
+.     if(ageIter.isValid() && ! (*ageIter).isEmpty() )
+.       cout &lt;&lt; "a " &lt;&lt; **ageIter &lt;&lt; " year-old "  &lt;&lt; endl;
+.     else if(ageIter.isValid())
+.       cout &lt;&lt; "an ageless " &lt;&lt; endl;
+.
+.     if(sexIter.isValid() && ! (*sexIter).isEmpty() )
+.       cout &lt;&lt; **sexIter &lt;&lt; ' ' &lt;&lt; endl;
+.     else if(ageIter.isValid())
+.       cout &lt;&lt; "sexless person " &lt;&lt; endl;
+.
+.    if(nameIter.isValid() && ! (*nameIter).isEmpty() )
+.      cout &lt;&lt; "named " &lt;&lt; **nameIter &lt;&lt; endl;
+.    else if(nameIter.isValid())
+.      cout &lt;&lt; "without a name" &lt;&lt; endl;
+.
+.     cout &lt;&lt; '.' &lt;&lt; h3() &lt;&lt; endl;
+.   }
+.
+.   catch(const Exception& e) {
+.     <SPAN CLASS="green">// Handle the Exception</SPAN>
+.
+.     <SPAN CLASS="green">// Set up the HTML page</SPAN>
+.     cout &lt;&lt; HTTPHTMLHeader() &lt;&lt; HTMLDoctype(HTMLDoctype::eStrict) &lt;&lt; endl;
+.     cout &lt;&lt; html(add("lang", "EN")) &lt;&lt; head(title("Error")) &lt;&lt; endl;
+.
+.     <SPAN CLASS="green">// Print out the Exception info</SPAN>
+.     cout &lt;&lt; body() &lt;&lt; h1() &lt;&lt; "An error occurred: " &lt;&lt; e.getMessage() 
+.          &lt;&lt; h1() &lt;&lt; body() &lt;&lt; endl;
+.     cout &lt;&lt; html() &lt;&lt; endl;
+.   }
+. }
 </PRE>
 
 <P>

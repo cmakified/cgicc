@@ -1,4 +1,4 @@
-<!-- $Id: versions.dxx,v 1.2 1998/04/06 11:11:30 sbooth Exp $ -->
+<!-- $Id: versions.dxx,v 1.3 1998/10/05 22:33:14 sbooth Exp $ -->
 
 /**@name Cgicc version history
 
@@ -18,6 +18,14 @@
 <TD CLASS="black">Version</TD>
 <TD CLASS="black">Date</TD>
 <TD CLASS="black">Description</TD>
+</TR>
+
+<TR>
+<TD CLASS="ltgray">2.2.1</TD>
+<TD CLASS="ltgray">10/6/98</TD>
+<TD CLASS="ltgray">Fixed small bugs in parsing which could lead to a
+<TT>LinkedList</TT> of length 1 when the submitted data was empty. Added
+support for shared library compilation.  Moved to www.lmi.net.</TD>
 </TR>
 
 <TR>

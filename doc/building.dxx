@@ -1,30 +1,41 @@
-<!-- $Id: building.dxx,v 1.6 1998/04/06 11:05:35 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.7 1998/10/05 22:33:14 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
 <P>
 Once your source distribution is unpacked, a few customizations are
 necessary in order to compile the library.  Using your text editor
-of choice, open the file <TT>Makefile</TT> in the Cgicc directory.
-Scroll down through <TT>Makefile</TT> until you see the following lines:
+of choice, open the file <TT>Makefile.incl</TT> in the Cgicc directory.
+Scroll down through <TT>Makefile.incl</TT> until you see the following lines:
 </P>
 
 <PRE CLASS="file">
 ## The macro CGIDIR should contain the path to the directory where you
-##  would like the compiled executable to be saved.  This will usually
-##  be $(HOME)/public_html/cgi-bin.  
+##  would like the compiled executable to be saved.  This is also
+##  the directory where the shared library will be saved if you choose
+##  to compile Cgicc as a shared library. 
+##  This will usually be $(HOME)/public_html/cgi-bin.  
 ##  If $(HOME) is not defined, be sure and supply the ABSOLUTE path.
-CGIDIR=         $(HOME)/public_html/cgi-bin
+CGIDIR=         $(HOME)/cgi-bin
 
-## If you are using a compiler other than GNU's C++ compiler (g++),
-##  change the following line
-CC=             g++
+## If you are using a compiler other than GNU's C++ compiler (g++)
+##  you'll probably want to change the following line
+CC=             /usr/local/bin/g++
 
 ## If your system does not support uname, set the following to 0
 HASUNAME=       -DHAS_UNAME=1
 
 ## If you want to enable debug logging, set the following to 1
 DEBUG=          -DDEBUG=0
+
+## If you are not using g++, change the following to the command 
+## for making a shared library.
+## On BSD, this should be -shared.  On Solaris, use -G.
+MAKE_SHARED=    $(CC) -shared
+
+## If you are not using g++, change the following to the command 
+## for generating a depend file
+MAKE_DEPEND=    $(CC) -E -M 
 </PRE>
 
 <P>
@@ -62,119 +73,78 @@ If you want to enable the debug log, change this to 1.<BR>
 ofstream <TT>gLogFile</TT>.</STRONG>
 </LI>
 
+<LI>
+<STRONG>MAKE_SHARED</STRONG> contains the command for creating a shared
+library.  If you are using UNIX System V, such as Solaris, this should
+be <TT>$(CC) -G</TT>.  If you are using Mach UNIX, such as BSD, this should be
+<TT>$(CC) -shared</TT>.  If you don't want to compile Cgicc as a shared 
+library, ignore this line.
+</LI>
+
+<LI>
+<STRONG>MAKE_DEPEND</STRONG> contains the command for generating a dependency
+list from a source tree.  If you aren't using g++ or a compatible compiler,
+change this to suit your particular setup.
+</LI>
 </OL>
 
 <P>
 Once you are finished with the necessary customization, save 
-<TT>Makefile</TT> and exit your editor. At the UNIX prompt, type
+<TT>Makefile</TT> and exit your editor. Cgicc may be compiled either as
+a static library (<TT>libCgicc.a</TT>) or a dynamically-linked shared library 
+(<TT>libCgicc.so</TT>). If your system supports it, I recommend compiling 
+the shared version. At the UNIX prompt, type
 </P>
 
 <PRE CLASS="unix">
-% make install
+% make shared test.cgi_shared
 </PRE>
+
+<P>for the shared version, or</P>
+
+<PRE CLASS="unix">
+% make static test.cgi_static
+</PRE>
+
+<P>for the static version.<BR>
+Please note that if you elect to compile the shared
+version, you need to supply <STRONG>absolute</STRONG> paths in 
+<TT>Makefile.incl</TT>.</P>
 
 <P>
 You should see output similar to (will vary depending on your configuration):
 </P>
 
 <PRE class="unix">
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/Exception.cc -o obj/Exception.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/MStreamable.cc -o obj/MStreamable.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTTPHeaders.cc -o obj/HTTPHeaders.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLAttributes.cc -o obj/HTMLAttributes.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLElements.cc -o obj/HTMLElements.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLDirLang.cc -o obj/HTMLDirLang.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLForms.cc -o obj/HTMLForms.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLFrames.cc -o obj/HTMLFrames.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLGlobal.cc -o obj/HTMLGlobal.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLGraphics.cc -o obj/HTMLGraphics.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLLinks.cc -o obj/HTMLLinks.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLLists.cc -o obj/HTMLLists.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLObjects.cc -o obj/HTMLObjects.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLScripts.cc -o obj/HTMLScripts.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLStyles.cc -o obj/HTMLStyles.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLTables.cc -o obj/HTMLTables.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/HTMLText.cc -o obj/HTMLText.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/CgiDefs.cc -o obj/CgiDefs.o
-src/CgiDefs.cc: In function `int findBytes(const char *, int, const char *)':
-src/CgiDefs.cc:106: warning: value computed is not used
-src/CgiDefs.cc:110: warning: value computed is not used
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/FormEntry.cc -o obj/FormEntry.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/FormFile.cc -o obj/FormFile.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/CgiEnvironment.cc -o obj/CgiEnvironment.o
-gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
-src/Cgicc.cc -o obj/Cgicc.o
-ar rcv ./lib/libCgicc.a ./obj/Exception.o  ./obj/MStreamable.o  ./obj/HTTPHeaders.o  ./obj/HTMLAttributes.o  ./obj/HTMLElements.o  ./obj/HTMLDirLang.o  ./obj/HTMLForms.o  ./obj/HTMLFrames.o  ./obj/HTMLGlobal.o  ./obj/HTMLGraphics.o  ./obj/HTMLLinks.o  ./obj/HTMLLists.o  ./obj/HTMLObjects.o  ./obj/HTMLScripts.o  ./obj/HTMLStyles.o  ./obj/HTMLTables.o  ./obj/HTMLText.o  ./obj/CgiDefs.o  ./obj/FormEntry.o  ./obj/FormFile.o  ./obj/CgiEnvironment.o  ./obj/Cgicc.o
-a - ./obj/Exception.o
-a - ./obj/MStreamable.o
-a - ./obj/HTTPHeaders.o
-a - ./obj/HTMLAttributes.o
-a - ./obj/HTMLElements.o
-a - ./obj/HTMLDirLang.o
-a - ./obj/HTMLForms.o
-a - ./obj/HTMLFrames.o
-a - ./obj/HTMLGlobal.o
-a - ./obj/HTMLGraphics.o
-a - ./obj/HTMLLinks.o
-a - ./obj/HTMLLists.o
-a - ./obj/HTMLObjects.o
-a - ./obj/HTMLScripts.o
-a - ./obj/HTMLStyles.o
-a - ./obj/HTMLTables.o
-a - ./obj/HTMLText.o
-a - ./obj/CgiDefs.o
-a - ./obj/FormEntry.o
-a - ./obj/FormFile.o
-a - ./obj/CgiEnvironment.o
-a - ./obj/Cgicc.o
-ar: writing ./lib/libCgicc.a
-gcc-2.8.1 -Wall  -I./include \
--DDEBUG=1 -DHAS_UNAME=1 \
--o /home/sbooth/public_html/cgi-bin/test.cgi test.cc \
--L./lib -lCgicc -lstdc++
+gmake[1]: Entering directory `/usr/home/sbooth/cgicc'
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/Exception.cc -o obj/Exception.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/MStreamable.cc -o obj/MStreamable.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTTPHeaders.cc -o obj/HTTPHeaders.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLAttributes.cc -o obj/HTMLAttributes.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLElements.cc -o obj/HTMLElements.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLDirLang.cc -o obj/HTMLDirLang.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLForms.cc -o obj/HTMLForms.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLFrames.cc -o obj/HTMLFrames.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLGlobal.cc -o obj/HTMLGlobal.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLGraphics.cc -o obj/HTMLGraphics.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLLinks.cc -o obj/HTMLLinks.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLLists.cc -o obj/HTMLLists.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLObjects.cc -o obj/HTMLObjects.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLScripts.cc -o obj/HTMLScripts.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLStyles.cc -o obj/HTMLStyles.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLTables.cc -o obj/HTMLTables.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLText.cc -o obj/HTMLText.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/CgiDefs.cc -o obj/CgiDefs.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/FormEntry.cc -o obj/FormEntry.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/FormFile.cc -o obj/FormFile.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/CgiEnvironment.cc -o obj/CgiEnvironment.o
+/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/Cgicc.cc -o obj/Cgicc.o
+/usr/local/bin/g++ -shared -o /usr/home/sbooth/cgi-bin/libCgicc.so ./obj/Exception.o ./obj/MStreamable.o ./obj/HTTPHeaders.o ./obj/HTMLAttributes.o ./obj/HTMLElements.o ./obj/HTMLDirLang.o ./obj/HTMLForms.o ./obj/HTMLFrames.o ./obj/HTMLGlobal.o ./obj/HTMLGraphics.o ./obj/HTMLLinks.o ./obj/HTMLLists.o ./obj/HTMLObjects.o ./obj/HTMLScripts.o ./obj/HTMLStyles.o ./obj/HTMLTables.o ./obj/HTMLText.o ./obj/CgiDefs.o ./obj/FormEntry.o ./obj/FormFile.o ./obj/CgiEnvironment.o ./obj/Cgicc.o
+gmake[1]: Leaving directory `/usr/home/sbooth/cgicc'
+gmake[1]: Entering directory `/usr/home/sbooth/cgicc'
+/usr/local/bin/g++ -shared -o /usr/home/sbooth/cgi-bin/libCgicc.so ./obj/Exception.o ./obj/MStreamable.o ./obj/HTTPHeaders.o ./obj/HTMLAttributes.o ./obj/HTMLElements.o ./obj/HTMLDirLang.o ./obj/HTMLForms.o ./obj/HTMLFrames.o ./obj/HTMLGlobal.o ./obj/HTMLGraphics.o ./obj/HTMLLinks.o ./obj/HTMLLists.o ./obj/HTMLObjects.o ./obj/HTMLScripts.o ./obj/HTMLStyles.o ./obj/HTMLTables.o ./obj/HTMLText.o ./obj/CgiDefs.o ./obj/FormEntry.o ./obj/FormFile.o ./obj/CgiEnvironment.o ./obj/Cgicc.o
+/usr/local/bin/g++ -Wall -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 /usr/home/sbooth/cgi-bin/libCgicc.so -o /usr/home/sbooth/cgi-bin/test.cgi test.cc -lstdc++ 
+gmake[1]: Leaving directory `/usr/home/sbooth/cgicc'
 </PRE>
 
 <P>
