@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.15 1998/12/11 23:03:12 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.16 1998/12/11 23:03:54 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -85,7 +85,7 @@ used options.
 </P>
 
 <P>
-So, for example, to install Cgicc's libraries and headers in 
+So, for example, to install Cgicc's libraries, headers, and documentation in 
 <TT>/usr/local/Cgicc</TT>, but the test programs in 
 <TT>/usr/local/apache/share/htdocs/cgi-bin</TT>:
 <PRE CLASS="unix">
