@@ -1,0 +1,10 @@
+1999-01-05  Stephen Booth       <sbooth@saaba.lmi.net>
+
+	* Fixed problem in src/Makefile.am that caused config.h to 
+	not be installed
+	* Added example/ directory containing a skeleton CGI and Makefile
+	
+1998-12-11  Stephen Booth	<sbooth@saaba.lmi.net>
+
+	* Reworked to use autoconf/automake/libtool
+	* Re-released under the GNU Library General Public License
