@@ -1,7 +1,10 @@
-GNU cgicc contributed programs
-==============================
+GNU cgicc contributed and extra programs
+========================================
 
-This directory contains contributed applications:
+This directory contains contributed and extra applications:
+
+  'nph-hello.cgi', an example of how to use cgicc to generate true
+   HTTP headers
 
   'nph-login.cgi', an example of how to use cgicc to generate true
    HTTP headers 
