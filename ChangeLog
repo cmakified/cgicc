@@ -1,6 +1,10 @@
 2000-10-15  Stephen F. Booth  <sbooth@gnu.org>
 
 	* example/yourSource.cpp: Changed instances of 'Cgicc' to 'cgicc'
+	* demo/test.cpp: 'Cgicc' -> 'cgicc'
+	* demo/dns.cpp: 'Cgicc' -> 'cgicc'
+	* demo/testform.html: Updated e-mail address
+	* info/version.texi: Updated for 3.1.4
 
 2000-10-07  Stephen F. Booth  <sbooth@gnu.org>
 
