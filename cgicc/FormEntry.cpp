@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.cpp,v 1.4 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: FormEntry.cpp,v 1.5 2002/11/23 20:26:22 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -44,10 +44,32 @@ CGICCNS FormEntry::getIntegerValue(long min,
 				   long max) 		const
 {
   long value = atol(fValue.c_str());
+
   if(value > max)
     value = max;
   else if(value < min)
     value = min;
+  
+  return value;
+}
+
+long
+CGICCNS FormEntry::getIntegerValue(long min, 
+				   long max,
+				   bool& bounded) 	const
+{
+  long value = atol(fValue.c_str());
+
+  bounded = false;
+
+  if(value > max) {
+    value = max;
+    bounded = true;
+  }
+  else if(value < min) {
+    value = min;
+    bounded = true;
+  }
   
   return value;
 }
@@ -61,6 +83,27 @@ CGICCNS FormEntry::getDoubleValue(double min,
     value = max;
   else if(value < min)
     value = min;
+  
+  return value;
+}
+
+double
+CGICCNS FormEntry::getDoubleValue(double min, 
+				  double max,
+				  bool& bounded) 	const
+{
+  double value = atof(fValue.c_str());
+
+  bounded = false;
+
+  if(value > max) {
+    value = max;
+    bounded = true;
+  }
+  else if(value < min) {
+    value = min;
+    bounded = true;
+  }
   
   return value;
 }
