@@ -1,4 +1,4 @@
-<!-- $Id: license.dxx,v 1.3 1998/10/21 18:37:33 sbooth Exp $ -->
+<!-- $Id: license.dxx,v 1.4 1998/12/10 02:07:53 sbooth Exp $ -->
 
 /**@name Cgicc license and notes
 
@@ -9,13 +9,22 @@ Cgicc is written by <A HREF="http://www.lmi.net/~sbooth">Stephen F. Booth</A>
 </P>
 
 <P>
-Cgicc is 100% free, and as such it may be freely distributed with the 
-restriction that the complete source code and documentation be provided.
-</P>
+Cgicc is distributed under the terms of the GNU Library General Public License.
+The terms of the license follow:
+<PRE>
+Copyright (C) 1996, 1997, 1998 Stephen F. Booth
 
-<P><STRONG CLASS="red">
-Cgicc may not be used in for-profit situations without my consent.
-</STRONG></P>
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Library General Public
+License as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Library General Public License for more details.
+</PRE>
+</P>
 
 <P>
 If you have any questions or comments, or find bugs in Cgicc, <EM>please</EM> 
