@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.hh,v 1.2 1999/06/04 00:07:36 sbooth Exp $
+ *  $Id: CgiEnvironment.hh,v 1.3 1999/08/02 19:41:14 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -48,19 +48,12 @@ public:
   
   friend class Cgicc;
   
-  /**@name Constructors */
-  //@{
-  
   /** Read in the environment */
   CgiEnvironment();
   
   /** Destructor */
   ~CgiEnvironment();
-  //@}
-  
-  
-  /**@name Server information */
-  //@{
+
   
   /**
    * Get the name and version of the http server software.
@@ -106,11 +99,7 @@ public:
   inline unsigned long
   getServerPort() 				const
     { return fServerPort; }
-  //@}
-  
-  
-  /**@name Information on this CGI query */
-  //@{
+
   
   /**
    * Get the HTTP cookies associated with this query, if any.
@@ -196,10 +185,7 @@ public:
   inline STDNS string
   getPostData() 				const
     { return fPostData; }
-  //@}
-  
-  /**@name Server-specific */
-  //@{
+
   
   /**
    * Get the page which called this application.
@@ -209,10 +195,7 @@ public:
   inline STDNS string 
   getReferrer() 				const
     { return fReferrer; }
-  //@}
-  
-  /**@name Remote user information */
-  //@{
+
   
   /**
    * Get the hostname making this request.
@@ -278,10 +261,7 @@ public:
   inline STDNS string 
   getUserAgent() 				const
     { return fUserAgent; }
-  //@}
-  
-  /**@name ErrorDocument handling */
-  //@{
+
   
   /**
    * Get the redirect request.
@@ -313,7 +293,6 @@ public:
   inline STDNS string 
   getRedirectStatus() 				const
     { return fRedirectStatus; }
-  //@}
   
 protected:
   
