@@ -1,8 +1,6 @@
-## $Id: Makefile.am,v 1.1 2000/11/14 05:42:03 sbooth Exp $
+## $Id: Makefile.am,v 1.2 2000/11/14 05:44:07 sbooth Exp $
 
 CLEANFILES = *~
-
-AUTOMAKE_OPTIONS = check-news
 
 CGICC_LIBDIR=@CGICC_LIBDIR@
 CGICC_INCLUDEDIR=@CGICC_INCLUDEDIR@
