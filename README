@@ -14,11 +14,11 @@ Web. cgicc performs the following functions:
    for cookies.
  - Supports HTTP file upload. 
 
-Please send bug reports, suggestions, and comments to
-<bug-cgicc@gnu.org>
+Please send bug reports, suggestions, and comments to <bug-cgicc@gnu.org>
 
-To subscribe, send a message to <bug-cgicc-request@gnu.org> with the
-word "subscribe" in the subject field.
+The mailing list can be subscribed to, unsubscribed from, and configured via
+a web interface at http://mail.gnu.org/mailman/listinfo/bug-cgicc.
+Web archives are also available.
 
 This package should contain the following directories:
 
@@ -26,4 +26,5 @@ cgicc/     The source code to the GNU cgicc library
 info/      Complete documentation for cgicc in texinfo format
 demo/      Two demonstration applications using cgicc
 example/   A skeleton CGI application using cgicc
+support/   Installation/configuration support files
 

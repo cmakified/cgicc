@@ -1,11 +1,11 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.26 2000/11/02 14:05:18 sbooth Exp $
+dnl $Id: configure.in,v 1.27 2000/11/07 06:03:47 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION($Revision: 1.26 $)
+AC_REVISION($Revision: 1.27 $)
 AC_INIT(cgicc/Cgicc.cpp)
 AC_CONFIG_AUX_DIR(support)
-AM_INIT_AUTOMAKE(cgicc, 3.1.4)
+AM_INIT_AUTOMAKE(cgicc, 3.1.5)
 AM_CONFIG_HEADER(cgicc/config.h)
 AM_MAINTAINER_MODE
 

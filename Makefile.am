@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.22 2000/10/15 16:08:04 sbooth Exp $
+## $Id: Makefile.am,v 1.23 2000/11/07 06:03:47 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip dist-bzip2
 
@@ -8,7 +8,7 @@ else
 DEMO =
 endif
 
-SUBDIRS = cgicc info $(DEMO)
+SUBDIRS = cgicc info support $(DEMO)
 
 CLEANFILES = *~
 
@@ -19,15 +19,6 @@ dist-hook:
 	cp -p $(srcdir)/example/README $(distdir)/example
 	cp -p $(srcdir)/example/Makefile.in $(distdir)/example
 	cp -p $(srcdir)/example/yourSource.cpp $(distdir)/example
-	test -d $(distdir)/support || mkdir $(distdir)/support || exit 1
-	cp -p $(srcdir)/support/config.guess $(distdir)/support
-	cp -p $(srcdir)/support/config.sub $(distdir)/support
-	cp -p $(srcdir)/support/install-sh $(distdir)/support
-	cp -p $(srcdir)/support/ltconfig $(distdir)/support
-	cp -p $(srcdir)/support/ltmain.sh $(distdir)/support
-	cp -p $(srcdir)/support/mdate-sh $(distdir)/support
-	cp -p $(srcdir)/support/missing $(distdir)/support
-	cp -p $(srcdir)/support/mkinstalldirs $(distdir)/support
 	test -d $(distdir)/win || mkdir $(distdir)/win || exit 1
 	cp -p $(srcdir)/win/cgicc.dsw $(distdir)/win
 	cp -p $(srcdir)/win/cgicc.dsp $(distdir)/win

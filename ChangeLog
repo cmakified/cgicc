@@ -1,3 +1,16 @@
+2000-11-06  Stephen F. Booth  <sbooth@gnu.org>
+
+	* Makefile.am: Added support/ to SUBDIRS, removed dist-hook support/
+	stuff
+	* support/cgicc-config.in: Removed --cflags option
+	* info/fdl.texinfo: Added file
+	* info/cgicc.texinfo: Modified for FDL
+	* info/gpl.texinfo: Node links modified
+	* info/concept-index.texinfo: Node links modified
+	* info/reporting-bugs.texinfo: Modified for mailman
+	* info/support.texinfo: Added file
+	* README: Updated for mailman
+
 2000-11-02  Stephen F. Booth  <sbooth@gnu.org>
 
 	* support/cgicc-config.in: Added
