@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.9 2002/02/20 03:25:50 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.10 2002/03/02 06:21:14 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002 Stephen F. Booth
  *
@@ -36,13 +36,21 @@
 
 #include "cgicc/CgiEnvironment.h"
 
+// Static instance of CgiInput class
+CGICC_BEGIN_NAMESPACE
+static CgiInput *sCgiInput = new CgiInput();
+CGICC_END_NAMESPACE
+
 // ========== Constructor/Destructor
 
-CGICCNS CgiEnvironment::CgiEnvironment(reader_function_t stream_reader)
+CGICCNS CgiEnvironment::CgiEnvironment(CgiInput *input)
 {
   LOGLN("CgiEnvironment::CgiEnvironment")
   
-  readEnvironmentVariables();
+  if(input == NULL)
+    input = sCgiInput;
+
+  readEnvironmentVariables(input);
 
   // On Win32, use binary read to avoid CRLF conversion
 #ifdef WIN32
@@ -53,26 +61,17 @@ CGICCNS CgiEnvironment::CgiEnvironment(reader_function_t stream_reader)
 # endif
 #endif
   
-  if(stringsAreEqual( getRequestMethod(), "get")) {
+  if(stringsAreEqual(getRequestMethod(), "get")) {
     LOGLN("GET method recognized")
   }
-  else if(stringsAreEqual( getRequestMethod(), "post")) {
+  else if(stringsAreEqual(getRequestMethod(), "post")) {
     LOGLN("POST method recognized");
           
     STDNS auto_ptr<char> temp(new char[getContentLength()]);
 
-    // use the appropriate reader function
-    if(stream_reader == NULL) {
-      STDNS cin.read(temp.get(), getContentLength());
-      if((unsigned long)STDNS cin.gcount() != getContentLength())
-	throw STDNS runtime_error("I/O error");
-    }
-    else {
-      // user specified a reader function
-      if((*stream_reader)
-	 (temp.get(), getContentLength()) != getContentLength())
-	throw STDNS runtime_error("I/O error");
-    }
+    // use the CgiInput data source
+    if(input->read(temp.get(), getContentLength()) != getContentLength())
+      throw STDNS runtime_error("I/O error");
 
     fPostData = STDNS string(temp.get(), getContentLength());
   }
@@ -142,42 +141,42 @@ CGICCNS CgiEnvironment::parseCookie(const STDNS string& data)
 
 // Read in all the environment variables
 void
-CGICCNS CgiEnvironment::readEnvironmentVariables()
+CGICCNS CgiEnvironment::readEnvironmentVariables(CgiInput *input)
 {
-  fServerSoftware 	= safeGetenv("SERVER_SOFTWARE");
-  fServerName 		= safeGetenv("SERVER_NAME");
-  fGatewayInterface 	= safeGetenv("GATEWAY_INTERFACE");
-  fServerProtocol 	= safeGetenv("SERVER_PROTOCOL");
+  fServerSoftware 	= input->getenv("SERVER_SOFTWARE");
+  fServerName 		= input->getenv("SERVER_NAME");
+  fGatewayInterface 	= input->getenv("GATEWAY_INTERFACE");
+  fServerProtocol 	= input->getenv("SERVER_PROTOCOL");
 
-  STDNS string port 	= safeGetenv("SERVER_PORT");
+  STDNS string port 	= input->getenv("SERVER_PORT");
   fServerPort 		= atol(port.c_str());
 
-  fRequestMethod 	= safeGetenv("REQUEST_METHOD");
-  fPathInfo 		= safeGetenv("PATH_INFO");
-  fPathTranslated 	= safeGetenv("PATH_TRANSLATED");
-  fScriptName 		= safeGetenv("SCRIPT_NAME");
-  fQueryString 		= safeGetenv("QUERY_STRING");
-  fRemoteHost 		= safeGetenv("REMOTE_HOST");
-  fRemoteAddr 		= safeGetenv("REMOTE_ADDR");
-  fAuthType 		= safeGetenv("AUTH_TYPE");
-  fRemoteUser 		= safeGetenv("REMOTE_USER");
-  fRemoteIdent 		= safeGetenv("REMOTE_IDENT");
-  fContentType 		= safeGetenv("CONTENT_TYPE");
+  fRequestMethod 	= input->getenv("REQUEST_METHOD");
+  fPathInfo 		= input->getenv("PATH_INFO");
+  fPathTranslated 	= input->getenv("PATH_TRANSLATED");
+  fScriptName 		= input->getenv("SCRIPT_NAME");
+  fQueryString 		= input->getenv("QUERY_STRING");
+  fRemoteHost 		= input->getenv("REMOTE_HOST");
+  fRemoteAddr 		= input->getenv("REMOTE_ADDR");
+  fAuthType 		= input->getenv("AUTH_TYPE");
+  fRemoteUser 		= input->getenv("REMOTE_USER");
+  fRemoteIdent 		= input->getenv("REMOTE_IDENT");
+  fContentType 		= input->getenv("CONTENT_TYPE");
 
-  STDNS string length 	= safeGetenv("CONTENT_LENGTH");
+  STDNS string length 	= input->getenv("CONTENT_LENGTH");
   fContentLength 	= atol(length.c_str());
 
-  fAccept 		= safeGetenv("HTTP_ACCEPT");
-  fUserAgent 		= safeGetenv("HTTP_USER_AGENT");
-  fRedirectRequest 	= safeGetenv("REDIRECT_REQUEST");
-  fRedirectURL 		= safeGetenv("REDIRECT_URL");
-  fRedirectStatus 	= safeGetenv("REDIRECT_STATUS");
-  fReferrer 		= safeGetenv("HTTP_REFERER");
-  fCookie 		= safeGetenv("HTTP_COOKIE");
+  fAccept 		= input->getenv("HTTP_ACCEPT");
+  fUserAgent 		= input->getenv("HTTP_USER_AGENT");
+  fRedirectRequest 	= input->getenv("REDIRECT_REQUEST");
+  fRedirectURL 		= input->getenv("REDIRECT_URL");
+  fRedirectStatus 	= input->getenv("REDIRECT_STATUS");
+  fReferrer 		= input->getenv("HTTP_REFERER");
+  fCookie 		= input->getenv("HTTP_COOKIE");
 
 #ifdef WIN32
   // Win32 bug fix by Peter Goedtkindt
-  STDNS string https 	= safeGetenv("HTTPS");
+  STDNS string https 	= input->getenv("HTTPS");
   if(stringsAreEqual(https, "on"))
     fUsingHTTPS = true;
   else

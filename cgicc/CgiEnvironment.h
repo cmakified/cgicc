@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.9 2001/09/05 02:18:28 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.10 2002/03/02 06:21:15 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -41,12 +41,10 @@
 
 #include "cgicc/CgiDefs.h"
 #include "cgicc/CgiUtils.h"
+#include "cgicc/CgiInput.h"
 #include "cgicc/HTTPCookie.h"
 
 CGICC_BEGIN_NAMESPACE
-
-//! A stream-reader function, for FastCGI compatibility
-typedef size_t (* reader_function_t)(void *, size_t);
 
 #ifdef WIN32
   template class CGICC_API STDNS vector<HTTPCookie>;
@@ -94,7 +92,7 @@ public:
    * \param stream_reader \c 0 for \c cout, or a valid FastCGI reader function
    * \see Cgicc::getEnvironment
    */
-  CgiEnvironment(reader_function_t stream_reader);
+  CgiEnvironment(CgiInput *input);
   
   /*!
    * \brief Destructor 
@@ -485,7 +483,7 @@ private:
   
   // Read in all the environment variables
   void 
-  readEnvironmentVariables();
+  readEnvironmentVariables(CgiInput *input);
   
   unsigned long 		fServerPort;
   unsigned long 		fContentLength;
