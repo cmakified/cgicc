@@ -1,0 +1,60 @@
+/* $Id: HTMLLinks.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+
+#include "HTMLLinks.hh"
+
+// ============================================================
+// Statics
+// ============================================================
+bool a::sState = false;
+
+// ============================================================
+// Class a
+// ============================================================
+a::a(const char *text) 
+	: HTMLBooleanElement(text, NULL, NULL)
+{}
+
+a::a(const HTMLAttributeList& attributes)
+	: HTMLBooleanElement(NULL, &attributes, NULL)
+{}
+
+a::a(const HTMLSimpleElement& embed)
+	: HTMLBooleanElement(NULL, NULL, &embed)
+{}
+
+a::a(const char *text, const HTMLAttributeList& attributes) 
+	: HTMLBooleanElement(text, &attributes, NULL)
+{}
+
+a::a(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
+	: HTMLBooleanElement(NULL, &attributes, &embed)
+{}
+
+a::~a()
+{}
+
+// ============================================================
+// Class link_
+// ============================================================
+link_::link_() 
+{}
+
+link_::link_(const HTMLAttributeList& attributes)
+	: HTMLElement(&attributes)
+{}
+
+link_::~link_()
+{}
+
+// ============================================================
+// Class base
+// ============================================================
+base::base() 
+{}
+
+base::base(const HTMLAttributeList& attributes)
+	: HTMLElement(&attributes)
+{}
+
+base::~base()
+{}
