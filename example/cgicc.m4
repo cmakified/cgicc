@@ -1,5 +1,5 @@
 dnl
-dnl $Id: cgicc.m4,v 1.2 2001/09/02 19:58:34 sbooth Exp $
+dnl $Id: cgicc.m4,v 1.3 2001/09/03 22:11:55 sbooth Exp $
 dnl
 dnl Copyright (C) 2000, 2001 Stephen F. Booth
 dnl
@@ -53,7 +53,7 @@ AC_DEFUN(CGICC_CHECK_HEADERS, [
 
   cgicc_include_dir=ifelse([$1], ,$cgicc_includedir,$1)
 
-  list="CgiDefs.h CgiEnvironment.h CgiUtils.h Cgicc.h FormEntry.h FormFile.h HTMLAttributes.h HTMLClasses.h HTMLElements.h HTMLGeneric.h HTTPHeaders.h MStreamable.h CgiEnvironment.h"
+  list="CgiDefs.h CgiEnvironment.h CgiUtils.h Cgicc.h FormEntry.h FormFile.h HTMLAtomicElement.h HTMLAttribute.h HTMLAttributeList.h HTMLBooleanElement.h HTMLClasses.h HTMLDoctype.h HTMLElement.h HTMLElementList.h HTTPContentHeader.h HTTPCookie.h HTTPHTMLHeader.h HTTPHeader.h HTTPHeaders.h HTTPNPHeader.h HTTPPlainHeader.h HTTPRedirectHeader.h HTTPResponseHeader.h HTTPStatusHeader.h MStreamable.h"
   for file in $list; do
     if ! test -e "$cgicc_include_dir/cgicc/$file"; then
       cgicc_headers_found=no
@@ -72,11 +72,11 @@ dnl
 dnl CGICC_CHECK_VERSION([MINIMUM-VERSION])
 dnl
 dnl Verify that the installed version of cgicc is at least
-dnl  MINIMUM-VERSION, if specified, otherwise 3.1
+dnl  MINIMUM-VERSION, if specified, otherwise 3.2
 dnl
 AC_DEFUN(CGICC_CHECK_VERSION, [
   AC_REQUIRE([CGICC_CHECK_CONFIG])
-  cgicc_min_version=ifelse([$1], ,3.1,$1)
+  cgicc_min_version=ifelse([$1], ,3.2,$1)
   AC_MSG_CHECKING(for cgicc version >= $cgicc_min_version)
   cgicc_version=
   cgicc_major_version=

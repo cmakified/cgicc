@@ -1,3 +1,9 @@
+2001-09-03  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.in: Renamed to configure.ac
+	* configure.ac: Reworked for autoconf 2.52/automake 1.5
+	* cgicc.m4: Check for HTTPCookie.h
+
 2001-07-04  Stephen F. Booth  <sbooth@gnu.org>
 
 	* example.cpp: Removed licensing terms
