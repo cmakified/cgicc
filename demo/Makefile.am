@@ -1,8 +1,8 @@
-## $Id: Makefile.am,v 1.12 2004/06/28 06:40:09 sbooth Exp $
+## $Id: Makefile.am,v 1.13 2004/06/29 04:24:43 sbooth Exp $
 
 CLEANFILES = *~
 
-EXTRA_DIST = styles.h test.html cookie.html
+EXTRA_DIST = styles.h
 
 noinst_PROGRAMS = test.cgi dns.cgi upload.cgi cookie.cgi
 
