@@ -1,8 +1,8 @@
-<!-- $Id: cgicc.dxx.in,v 1.1 1998/03/12 09:53:05 sbooth Exp $ -->
+<!-- $Id: cgicc.dxx.in,v 1.2 1998/04/01 20:55:05 sbooth Exp $ -->
 
 /**@name Cgicc
 
-<P><H1>Cgi<SPAN class="red">cc</SPAN> v2.2</h1></P>
+<DIV CLASS="notice">
 
 <P>
 Cgicc is an ANSI C++ compliant class library that greatly simplifies the
@@ -10,30 +10,56 @@ creation of CGI applications for the World Wide Web.  Cgicc performs the
 following functions:
 </P>
 
-<P><UL>
-<LI>Parses both GET and POST form data transparently
-<LI>Provides string, integer, floating-point and single- and multiple-choice
-methods to retrieve form data
-<LI>Provides methods for saving and restoring CGI environments to aid in 
-application debugging
-<LI>Provides full on-the-fly HTML generation capabilities, with support for 
-cookies and file inclusion
-<LI>Supports HTTP file upload
-</UL></P></P>
+<P>
+<UL>
+	<LI>Parses both GET and POST form data transparently
+	<LI>Provides string, integer, floating-point and single- and 
+	multiple-choice retrieval methods for form data
+	<LI>Provides methods for saving and restoring CGI environments to 
+	aid in application debugging
+	<LI>Provides full on-the-fly HTML generation capabilities, with 
+	support for cookies and file inclusion
+	<LI>Supports HTTP file upload
+</UL>
+</P>
+</DIV>
 
- @memo		A C++ class library that facilitates the writing of CGI 
+<P class="red">
+To see Cgicc in action, please look at the <A HREF="testform.html">sample 
+application</A>
+</P>
+
+<DIV CLASS="urgent">
+
+<P><STRONG CLASS="red">
+Cgicc needs a new home!<BR>
+</STRONG></P>
+<P>
+I am graduating in May 1998, and will no longer have access to a web server.
+<BR>
+If you are interested in hosting Cgicc, please e-mail 
+<TT>
+<A HREF="mailto:sbooth@hmc.edu?Subject=Hosting Cgicc">sbooth@hmc.edu</A>
+</TT>.
+</P>
+
+</DIV>
+
+@memo		A C++ class library that facilitates the writing of CGI 
 		applications for the World Wide Web
- @version	2.2
- @author	Stephen F. Booth
+@version	2.2
+@author		Stephen F. Booth
 
 */
 
 //@{
-	/**@name HTML generation classes
-	* @memo Set of classes for generating HTML output.
-	*/
-	//@{
-	//@Include: ../include/HTML*.hh
-	//@}
-
+	//@Include: whatis.dxx
+	//@Include: requirements.dxx
+	//@Include: license.dxx
+	//@Include: obtaining.dxx
+	//@Include: building.dxx
+	//@Include: writing.dxx
+	//@Include: versions.dxx
+	//@Include: examples.dxx
+	//@Include: classmember.dxx
 //@}
