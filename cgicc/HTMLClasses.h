@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLClasses.h,v 1.3 1999/08/10 00:29:04 sbooth Exp $
+ *  $Id: HTMLClasses.h,v 1.4 1999/08/10 22:13:37 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -57,7 +57,11 @@ BOOLEAN_ELEMENT (title,      "TITLE");      // document title
 ATOMIC_ELEMENT  (meta,       "META");       // meta data
 BOOLEAN_ELEMENT (style,      "STYLE");      // style sheet
 BOOLEAN_ELEMENT (body,       "BODY");       // document body
+#if USE_NAMESPACES
 BOOLEAN_ELEMENT (div,        "DIV");        // block-level grouping
+#else
+BOOLEAN_ELEMENT (div_,       "DIV");        // block-level grouping
+#endif
 BOOLEAN_ELEMENT (span,       "SPAN");       // inline grouping
 BOOLEAN_ELEMENT (h1,         "H1");         // level 1 heading
 BOOLEAN_ELEMENT (h2,         "H2");         // level 2 heading
@@ -147,7 +151,11 @@ BOOLEAN_ELEMENT (iframe,     "IFRAME");     // inline frame
 BOOLEAN_ELEMENT (form,       "FORM");       // form element
 ATOMIC_ELEMENT  (input,      "INPUT");      // generic input
 BOOLEAN_ELEMENT (button,     "BUTTON");     // special button
+#if USE_NAMESPACES
 BOOLEAN_ELEMENT (select,     "SELECT");     // option menu
+#else
+BOOLEAN_ELEMENT (select_,    "SELECT");     // option menu
+#endif
 BOOLEAN_ELEMENT (optgroup,   "OPTGROUP");   // option group
 BOOLEAN_ELEMENT (option,     "OPTION");     // option item
 BOOLEAN_ELEMENT (textarea,   "TEXTAREA");   // multi-line text input
