@@ -1,4 +1,4 @@
-/* $Id: Cgicc.hh,v 1.6 1998/04/06 10:01:07 sbooth Exp $ */
+/* $Id: Cgicc.hh,v 1.7 1998/04/06 10:50:27 sbooth Exp $ */
 
 #ifndef __CGICC__
 #define __CGICC__ 1
@@ -94,7 +94,7 @@ public:
    * <P>The version number is a string of the form #.#.</P>
    * @return The version number
    */
-  inline const char* getCgiccVersion() const 	{ return "2.2b"; }
+  inline const char* getCgiccVersion() const 	{ return "2.2"; }
   //@}
 
   /**@name Form Element Access */
