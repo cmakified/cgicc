@@ -1,4 +1,4 @@
-/* $Id: CgiEnvironment.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: CgiEnvironment.cc,v 1.2 1998/04/01 20:52:34 sbooth Exp $ */
 
 #include "CgiEnvironment.hh"
 
@@ -11,11 +11,11 @@ CgiEnvironment::CgiEnvironment() throw(Exception)
   
   readEnvironmentVariables();
   
-  if( stringsAreEqual( getRequestMethod(), "get", true ) ) {
+  if( stringsAreEqual( getRequestMethod(), "get", true )) {
     logln("GET method recognized");
     fPostData = NULL;
   }
-  else if( stringsAreEqual( getRequestMethod(), "post", true ) ) {
+  else if( stringsAreEqual( getRequestMethod(), "post", true )) {
     logln("POST method recognized");
     if( getContentLength() == 0) {
       fPostData = NULL;
@@ -27,16 +27,64 @@ CgiEnvironment::CgiEnvironment() throw(Exception)
       
       cin.read( fPostData, getContentLength() );
       fPostData [getContentLength() ] = '\0';
-      if( cin.gcount() != getContentLength() )
+      if( cin.gcount() != (unsigned int) getContentLength() )
 	throw Exception("I/O error", ERRINFO);
     }
   }
+
+  fCookies = new LinkedList<HTTPCookie>;
+  //if( ! fCookies )
+  //throw Exception("new failed", ERRINFO);
+  parseCookies();
 }
 
 CgiEnvironment::~CgiEnvironment()
 {
   logln("CgiEnvironment::~CgiEnvironment");
   reclaimStorage();
+}
+
+void
+CgiEnvironment::parseCookies()
+{
+  const char *data = getCookies();
+  if(data != NULL) {
+    int dataLen = strlen(data);
+    const char *sep = "; ";
+    
+    int extractedLen = 0;
+    while(extractedLen <= dataLen) {
+      int newLen;
+      newLen = findBytes(data + extractedLen, 
+			 dataLen - extractedLen, 
+			 sep);
+      if(newLen == -1)
+	newLen = dataLen - extractedLen;
+      
+      parseCookie(data + extractedLen, newLen);      
+      extractedLen += (newLen + strlen(sep));
+    }
+  }
+}
+
+void
+CgiEnvironment::parseCookie(const char *data, int dataLen)
+{
+  // Find the divider
+  int sepPos = 0;
+  const char *sep = "=";
+  sepPos = findBytes(data, dataLen, sep);
+  
+  // Extract data, convert, and add
+  char *name;
+  char *value;
+  unescapeChars(data, sepPos, name);
+  unescapeChars(data + sepPos + 1, dataLen - sepPos - 1, value);
+  
+  fCookies->append(HTTPCookie(name, value));
+  
+  delete [] name;
+  delete [] value;
 }
 
 /* Read in all the environment variables */
@@ -109,6 +157,8 @@ CgiEnvironment::reclaimStorage()
   delete [] fCookie;
   if(fPostData != NULL)
     delete [] fPostData;
+
+  delete fCookies;
 }
 
 /* read a string */
@@ -217,6 +267,9 @@ CgiEnvironment::restore( const char *filename ) throw(Exception)
     fPostData = NULL;
 
   file.close();
+
+  fCookies = new LinkedList<HTTPCookie>;
+  parseCookies();
 }
 
 /* End of class CgiEnvironment */
