@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.11 1999/05/13 21:31:26 sbooth Exp $
+## $Id: Makefile.am,v 1.12 1999/05/14 21:33:54 sbooth Exp $
 
 if DEMOS
 DEMO = demo
@@ -30,7 +30,7 @@ CVS = cvs
 ## Tag before making distribution.  Also, don't make a distribution if
 ## checks fail.  Also, make sure the NEWS file is up-to-date.
 cvs-dist: distcheck
-	@if sed '1,2d;3q' $(srcdir)/NEWS | grep -e "$(VERSION)" > /dev/null; then :; else \
+	@if sed '1,9d;10q' $(srcdir)/NEWS | grep -e "$(VERSION)" > /dev/null; then :; else \
 	  echo "NEWS not updated; not releasing" 1>&2; \
 	  exit 1;				\
 	fi
