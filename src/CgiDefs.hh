@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiDefs.hh,v 1.5 1998/12/09 17:57:47 sbooth Exp $
+ *  $Id: CgiDefs.hh,v 1.6 1998/12/09 18:08:07 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -30,10 +30,6 @@
 #include <string.h>
 
 #include "Exception.hh"
-
-#ifndef ADMIN
-#define ADMIN "webmaster"
-#endif
 
 #if DEBUG
 
