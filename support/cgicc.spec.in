@@ -1,5 +1,5 @@
 ## -*-sh-*-
-## $Id: cgicc.spec.in,v 1.2 2000/04/11 01:27:29 sbooth Exp $
+## $Id: cgicc.spec.in,v 1.3 2000/07/03 03:21:09 sbooth Exp $
 
 ## Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 ## This file is free software; the Free Software Foundation
@@ -14,16 +14,25 @@
 ## Macros defined by autoconf
 %define name @PACKAGE@
 %define version @VERSION@
+%define release @RPM_RELEASE@
+$%define prefix /usr
 
-Summary: A C++ class library for developing CGI applications
+%define lt_release @LT_RELEASE@
+%define lt_version @LT_CURRENT@.@LT_REVISION@.@LT_AGE@
+
 Name: %{name}
 Version: %{version}
-Release: 1
+Release: %{release}
+
+BuildRoot: /tmp/%{name}-root
+#Prefix: %{prefix}
+
 Copyright: GPL
 Group: Development/Libraries
 Source: ftp://ftp.gnu.org:/gnu/software/cgicc/%{name}-%{version}.tar.gz
 URL: http://www.lmi.net/~sbooth/cgicc/
 Vendor: Stephen F. Booth
+Summary: A C++ class library for developing CGI applications
 
 %description
 GNU Cgicc is an ANSI C++ compliant class library that greatly
@@ -39,29 +48,49 @@ Web. Cgicc performs the following functions:
    for cookies.
  - Supports HTTP file upload. 
 
+%changelog
+
 %prep
 %setup
 
 %build
-%configure
+%GNUconfigure
 make
 
 %install
-make install
+if [ "$RPM_BUILD_ROOT" != "/tmp/%{name}-root" ]; then
+    echo "RPM_BUILD_ROOT didn't match expected; won't be cleaned"
+else
+    echo "Cleaning RPM_BUILD_ROOT: $RPM_BUILD_ROOT"
+    rm -rf "$RPM_BUILD_ROOT"
+fi
+make DESTDIR="$RPM_BUILD_ROOT" install
+
+%clean
+if [ "$RPM_BUILD_ROOT" != "/tmp/%{name}-root" ]; then
+    echo "RPM_BUILD_ROOT didn't match expected; won't be cleaned"
+else
+    echo "Cleaning RPM_BUILD_ROOT: $RPM_BUILD_ROOT"
+    rm -rf "$RPM_BUILD_ROOT"
+fi
 
 #%post
+#/sbin/ldconfig
+
+#%postun
 #/sbin/ldconfig
 
 %files
 
 ## Documenation
+%doc README AUTHORS COPYING NEWS ChangeLog THANKS
 #%{_prefix}/doc/%{name}-%{version}/INSTALL 
-%{_prefix}/doc/%{name}-%{version}/README 
-%{_prefix}/doc/%{name}-%{version}/AUTHORS
-%{_prefix}/doc/%{name}-%{version}/COPYING
-%{_prefix}/doc/%{name}-%{version}/NEWS
-%{_prefix}/doc/%{name}-%{version}/ChangeLog
-%{_prefix}/doc/%{name}-%{version}/THANKS
+#%{_prefix}/doc/%{name}-%{version}/README 
+#%{_prefix}/doc/%{name}-%{version}/AUTHORS
+#%{_prefix}/doc/%{name}-%{version}/COPYING
+#%{_prefix}/doc/%{name}-%{version}/NEWS
+#%{_prefix}/doc/%{name}-%{version}/ChangeLog
+#%{_prefix}/doc/%{name}-%{version}/THANKS
 
 ## Info files
 %{_prefix}/info/cgicc.info
