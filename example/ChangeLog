@@ -1,8 +1,16 @@
+2002-03-09  Stephen F. Booth  <sbooth@gnu.org>
+
+	* Makefile.am: Updated for automake-1.6
+
+2002-03-06  Stephen F. Booth  <sbooth@gnu.org>
+
+	* example.cpp: Fixed misspelling in #include
+
 2002-03-02  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc.m4: Don't check for HTTPHeaders.h
 	* cgicc.m4: Check for CgiInput.h
-	* example.cpp: Changed include to HTTPHTMLHeader
+	* example.cpp: Changed #include to HTTPHTMLHeader
 
 2001-09-03  Stephen F. Booth  <sbooth@gnu.org>
 

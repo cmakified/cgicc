@@ -5,6 +5,15 @@
         <bug-cgicc@gnu.org>
 ======================================================================
 
+        Major changes between versions 3.2 and 3.2.1
+        ----------------------------------------------
+
+* Bug that caused multiple cookies to be output incorrectly fixed
+
+* Better support added for Borland C++ Builder and HP aCC
+
+* Bona fide support for FastCGI added
+
         Major changes between versions 3.1.6 and 3.2
         ----------------------------------------------
 

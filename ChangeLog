@@ -1,9 +1,34 @@
+2002-03-09  Stephen F. Booth  <sbooth@gnu.org>
+
+	* Makefile.am: Removed DIST_SUBDIRS
+	* Makefile.am: Added win and contrib to EXTRA_DIST
+	* Makefile.am: Removed dist-hook section
+	* configure.ac: Updated for automake-1.6
+	* acconfig.h: Removed file
+	* Makefile.am: Removed acconfig.h from EXTRA_DIST
+	* configure.ac: Updated AC_DEFINE calls for autoconf-2.53
+	* configure.ac: Use /bin/echo if doxygen is not found
+	* doc/Makefile.am: Added html to EXTRA_DIST
+	* doc/Makefile.am: Removed dist-hook section
+	* support/Makefile.am: Removed mdate-sh from EXTRA_DIST
+	* Makefile.am: Added dist-hook to remove CVS directories
+	* doc/cgicc.css: Renamed to cgicc-doc.css
+	* doc/images: Directory removed
+	* doc/cgicc.png: New file
+	* doc/Doxyfile.in: Use cgicc-doc.css stylesheet
+	* doc/Doxyfile.in: Don't generate alphabetical index
+
+2002-03-06  Stephen F. Booth  <sbooth@gnu.org>
+
+	* support/Makefile.am: Distribute depcomp, don't distribute lt
+
 2002-03-05  Stephen F. Booth  <sbooth@gnu.org>
 
 	* Makefile.am: Removed html dir
 	* CgiEnvironment.{h,cpp}: Changed CgiInput back to CgiInput*
 	* Cgicc.{h,cpp}: Changed CgiInput back to CgiInput*
 	* THANKS: Thanks to Steve McAndrewsmith
+	* configure.ac: Removed html dir references
 
 2002-03-03  Stephen F. Booth  <sbooth@gnu.or>
 

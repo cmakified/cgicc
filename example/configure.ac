@@ -1,12 +1,12 @@
 dnl -*-m4-*-
-dnl $Id: configure.ac,v 1.1 2001/09/03 22:11:13 sbooth Exp $
+dnl $Id: configure.ac,v 1.2 2002/03/09 18:37:29 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(cgicc-example, 0.2, bug-cgicc@gnu.org)
 AC_CONFIG_SRCDIR(example.cpp)
-AC_REVISION($Revision: 1.1 $)
+AC_REVISION($Revision: 1.2 $)
 AC_PREFIX_DEFAULT(/usr)
-AM_INIT_AUTOMAKE(cgicc-example, 0.2)
+AM_INIT_AUTOMAKE
 
 AC_LANG_CPLUSPLUS
 

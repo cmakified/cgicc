@@ -1,5 +1,5 @@
 dnl
-dnl $Id: cgicc.m4,v 1.5 2002/03/02 06:25:25 sbooth Exp $
+dnl $Id: cgicc.m4,v 1.6 2002/03/09 18:37:29 sbooth Exp $
 dnl
 dnl Copyright (C) 2000 - 2002 Stephen F. Booth
 dnl
@@ -72,11 +72,11 @@ dnl
 dnl CGICC_CHECK_VERSION([MINIMUM-VERSION])
 dnl
 dnl Verify that the installed version of cgicc is at least
-dnl  MINIMUM-VERSION, if specified, otherwise 3.2
+dnl  MINIMUM-VERSION, if specified, otherwise 3.2.1
 dnl
 AC_DEFUN(CGICC_CHECK_VERSION, [
   AC_REQUIRE([CGICC_CHECK_CONFIG])
-  cgicc_min_version=ifelse([$1], ,3.2,$1)
+  cgicc_min_version=ifelse([$1], ,3.2.1,$1)
   AC_MSG_CHECKING(for cgicc version >= $cgicc_min_version)
   cgicc_version=
   cgicc_major_version=
