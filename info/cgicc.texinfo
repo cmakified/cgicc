@@ -6,6 +6,7 @@
 @comment %**end of header
 
 @setchapternewpage odd
+@finalout
 
 @dircategory Libraries
 @direntry

@@ -1,6 +1,6 @@
 @comment -*-texinfo-*-
 @node class Cgicc, class CgiEnvironment, HTML generation classes, Top
-@unnumbered class @code{Cgicc}
+@unnumbered class Cgicc
 
 @code{Cgicc} is the main class of the Cgicc library.  It is used to
 retrieve information on specific HTML form elements (such as checkboxes,

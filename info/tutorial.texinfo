@@ -14,10 +14,12 @@ Applications written using Cgicc, like all other applications, begin
 with a @code{main} function:
 
 @lisp
+@group
 int main(int argc, char **argv)
 @{
    // CGI processing goes here
 @}
+@end group
 @end lisp
 
 @unnumberedsec Initialization
@@ -57,6 +59,7 @@ Since errors are handled using exceptions, you may wish to wrap your CGI
 code in a @code{try} block to better handle unexpected conditions:
 
 @lisp
+@group
 try @{
    Cgicc cgi;
 @}
@@ -64,6 +67,7 @@ try @{
 catch(exception& e) @{
    // Caught a standard library exception
 @}
+@end group
 @end lisp
 
 @unnumberedsec Extracting Form Information
@@ -89,9 +93,11 @@ and should not be dereferenced using @code{operator*} or
 whether an iterator refers to a valid element:
 
 @lisp
+@group
 if(name != cgi.getElements().end()) @{
    // iterator refers to a valid element
 @}
+@end group
 @end lisp
 
 @unnumberedsec Output of Form Data
@@ -128,8 +134,8 @@ other things.  In a normal CGI response, the HTTP server will take care
 of sending many of these headers for you.  However, it is necessary for
 the CGI script to supply the type of content it is returning to the HTTP
 server and the client.  This is done by emitting a @samp{Content-Type}
-header@footnote{The full HTTP 1.1 specification may be found in @sc{rfc}
-2068 at @url{http://www.w3.org/Protocols/rfc2068/rfc2068}}.
+header@footnote{The full HTTP 1.1 specification may be found in RFC 2068
+at @*@url{http://www.w3.org/Protocols/rfc2068/rfc2068}}.
 
 Cgicc provides several classes for outputting HTTP headers, all of which
 begin with @code{HTTP}.  A standard HTML document need only output a
@@ -186,7 +192,7 @@ HTML @code{<IMG>} tag requires certain attributes specifying the source
 image file, the image width, height, and so on.  There are a bewildering
 number of possible attributes in HTML 4.0@footnote{For a definitive
 list, see the HTML 4.0 specification at
-@url{http://www.w3.org/TR/REC-html40/}}.  A typical @code{<IMG>} tag
+@*@url{http://www.w3.org/TR/REC-html40/}}.  A typical @code{<IMG>} tag
 might look like
 
 @example
@@ -206,9 +212,11 @@ represented using the class @code{HTMLAttributeList}.  To build an
 @code{HTMLAttributeList}.  To generate the @code{<IMG>} tag given above:
 
 @lisp
+@group
 cout << img(add("SRC", "file.jpg")
-           .add("WIDTH", "100")).add("HEIGHT", "100"))
+           .add("WIDTH", "100").add("HEIGHT", "100")
            .add("ALT", "description")) << endl;
+@end group
 @end lisp
 
 @unnumberedsec Notes on Output
@@ -216,7 +224,7 @@ cout << img(add("SRC", "file.jpg")
 All of Cgicc's output is written to the C++ standard output stream,
 @code{cout}.  It is not necessary to use Cgicc's HTML output classes;
 they are provided as a convenience. If you prefer, you may output the
-HTML code directly.
+HTML code directly to @code{cout}.
 
 @unnumberedsec The Complete Example
 
@@ -224,6 +232,7 @@ The code below is a complete CGI program that synthesizes all the sample
 code given in this chapter.
 
 @lisp
+@group
 #include <iostream>
 #include <vector>
 #include <string>
@@ -260,4 +269,5 @@ main(int argc,
       // handle any errors - omitted for brevity
    @}
 @}
+@end group
 @end lisp

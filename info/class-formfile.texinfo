@@ -1,6 +1,6 @@
 @comment -*-texinfo-*-
 @node class FormFile, classes for HTTP headers, class FormEntry, Top
-@unnumbered class @code{FormFile}
+@unnumbered class FormFile
 
 @code{FormFile} is an immutable class representing a file uploaded via
 the HTTP file upload mechanism.  If you are going to use file upload in
@@ -64,7 +64,7 @@ Get the MIME type of the file data.
 Get the file data.
 @end deftypemethod
 
-@deftypemethod FormFile {unsigned int} getDataLength () const
+@deftypemethod FormFile string::size_type getDataLength () const
 Get the length of the file data, in bytes.
 @end deftypemethod
 

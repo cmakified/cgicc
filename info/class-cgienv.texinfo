@@ -1,6 +1,6 @@
 @comment -*-texinfo-*-
 @node class CgiEnvironment, class FormEntry, class Cgicc, Top
-@unnumbered class @code{CgiEnvironment}
+@unnumbered class CgiEnvironment
 
 @code{CgiEnvironment} encapsulates the data passed from the HTTP server
 to the CGI application.  This includes all environment variables set by
@@ -130,7 +130,7 @@ server supports user authentication, and the user has authenticated.
 Get the remote user name retrieved from the server.  This is only
 applicable if the server supports RFC 931 (obsoleted by RFC 1431)
 identification @footnote{RFC 1431 may be found at
-@url{http://info.internet.isi.edu:80/in-notes/rfc/files/rfc1413.txt}}.
+@*@url{http://info.internet.isi.edu:80/in-notes/rfc/files/rfc1413.txt}}.
 This should @emph{only} be used for logging purposes.
 @end deftypemethod
 

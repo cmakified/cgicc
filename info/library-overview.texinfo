@@ -2,7 +2,7 @@
 @node Library overview, CGI classes, A tutorial example, Top
 @unnumbered Library overview
 
-The Cgicc library contains classes divided into two broad groups: 
+The GNU Cgicc library contains classes divided into two broad groups:
 
 @cindex CGI classes
 
@@ -37,7 +37,7 @@ the transmitted data.
 following any HTTP headers.  To be compliant with the HTML 4.0 standard,
 the response must consist of three parts@footnote{For a complete
 description see the HTML 4.0 specification at
-@url{http://www.w3.org/TR/REC-html40/}}: 
+@*@url{http://www.w3.org/TR/REC-html40/}}: 
 
 @enumerate
 @item A line containing the HTML version information.
