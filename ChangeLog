@@ -1,3 +1,9 @@
+1999-10-02  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/Cgicc.cpp(parseFormInput): Fixed handling of
+ 	"multipart/form-data" to correctly extract the final item
+	(bug reported by gabe@bignet.com)
+
 1999-10-01  Stephen F. Booth  <sbooth@gnu.org>
 
 	* README.WIN: Added a note about MS IIS 4.0

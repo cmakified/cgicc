@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.4 1999/09/30 17:38:19 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.5 1999/10/02 19:10:10 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -381,6 +381,7 @@ CGICCNS Cgicc::parseFormInput(const STDNS string& data)
     while(true) {
       pos = data.find(sep, oldPos);
 
+      // If sep wasn't found, the rest of the data is an item
       if(pos == STDNS string::npos)
 	break;
 
@@ -389,6 +390,13 @@ CGICCNS Cgicc::parseFormInput(const STDNS string& data)
 
       // update position
       oldPos = pos + sepLen;
+    }
+
+    // The data is terminated by sep2
+    pos = data.find(sep2, oldPos);
+    // parse the data, if found
+    if(pos != STDNS string::npos) {
+      parseMIME(data.substr(oldPos, pos - oldPos));
     }
   }
   else if(! data.empty()) {
