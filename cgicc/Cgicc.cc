@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cc,v 1.3 1999/06/23 20:40:08 sbooth Exp $
+ *  $Id: Cgicc.cc,v 1.4 1999/08/02 19:39:16 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -38,14 +38,6 @@
 
 
 CGICC_BEGIN_NAMESPACE
-
-// Handy function missing from STL
-template<class In, class Out, class Pred>
-Out 
-copy_if(In first, 
-	In last, 
-	Out res, 
-	Pred p);
 
 // ============================================================
 // Class FE_nameCompare
@@ -99,15 +91,14 @@ private:
   STDNS string fName;
 };
 
-CGICC_END_NAMESPACE
-
-
-// Handy function missing from STL
+// ============================================================
+// Function copy_if (handy, missing from STL)
+// ============================================================
 // This code taken directly from 
 // "The C++ Programming Language, Third Edition" by Bjarne Stroustrup
 template<class In, class Out, class Pred>
 Out 
-CGICCNS copy_if(In first, 
+copy_if(In first, 
 		In last, 
 		Out res, 
 		Pred p)
@@ -119,6 +110,8 @@ CGICCNS copy_if(In first,
   }
   return res;
 }
+
+CGICC_END_NAMESPACE
 
 // ============================================================
 // Class MultipartHeader
