@@ -1,8 +1,10 @@
-/* $Id: Cgicc.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: Cgicc.cc,v 1.2 1998/04/01 20:52:46 sbooth Exp $ */
 
 #ifndef __CGI_CC__
 #include "Cgicc.hh"
 #endif
+
+#include "HTMLClasses.hh"
 
 #if HAS_UNAME
 #include <sys/utsname.h>
@@ -20,60 +22,90 @@
 void
 die(int signal)
 {
-  /*
-  HTMLDocument	errorDoc(cout);
-  char	     	*errorText = "Allotted process time expired.";
-  time_t 	Now;
-  tm 		*Date;
-  char 		S[80];
+  char *errorText = "Allotted process time expired";
+
+  html::reset();	head::reset();		title::reset();
+  style::reset();	comment::reset();	body::reset();
+  h1::reset();		span::reset();		div_::reset();
+  table::reset();	colgroup::reset();	tr::reset();
+  td::reset();		p::reset();
+    
+  cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
+  cout << html(add("lang","EN").add("dir","LTR")) << endl;
+    
+  cout << head() << endl;
+  cout << title() << "Cgicc Error: " << errorText << title() << endl;
+  cout << meta(add("name", "author")
+	       .add("content", "Stephen F. Booth")) << endl;
+    
+  cout << style() << comment() << endl;
+
+  cout << "BODY { color: black; background-color: white; }" << endl;
+  cout << "TABLE.cgi { margin-left: auto; margin-right: auto; width: 90%; }" 
+       << endl;
+  cout << "DIV.smaller { font-size: small; }" << endl;
+  cout << "SPAN.red, COL.red, PRE.red { color: red }" << endl;
+  cout << "TR.title, TD.title, COL.title { color: white;"
+       << "background-color: black; font-weight: bold; text-align: center; }"
+       << endl;
+  cout << "TR.data, TD.data, COL.data {background-color: #CCCCCC; }" << endl;
+  cout << "HR.half { width: 60%; }" << endl;
   
-  Now = time(NULL);
-  Date = localtime(&Now);
-  strftime(S, 80, "%A, %B %d, %Y %I:%M:%S %p", Date);
+  cout << comment() << style() << endl;
   
-  errorDoc.printHeader().html().head().title().put("Cgicc Error: ");
-  errorDoc.put(errorText).title().head().body("#FFFFFF");
+  cout << head() << endl;
   
-  errorDoc.h1().put("Cgi<FONT COLOR=#FF0000>cc</FONT> v");
-  errorDoc.put(getCgiccVersion()).put(" encountered an error.").h1();
+  cout << body() << endl;
   
-  errorDoc.center().table("50%",0,2,2,"MIDDLE");
-  errorDoc.tr().td("CENTER", "#000000", "30%");
-  errorDoc.b("<FONT COLOR=#FFFFFF>Specification</FONT>").td();
-  errorDoc.td("LEFT", "#CCCCCC").put(errorText).td().tr();
-  errorDoc.tr().td("CENTER", "#000000", "30%");
-  errorDoc.b("<FONT COLOR=#FFFFFF>Time</FONT>").td();
-  errorDoc.td("LEFT", "#CCCCCC").put(S).td().tr();
-  errorDoc.table().center();
+  cout << h1() << "Cgi" << span("cc", add("class","red"))
+       << " v"<< getCgiccVersion() << " Encountered an Error" 
+       << h1() << endl;
   
-  errorDoc.br().p().p().lf();
-  errorDoc.put("Cgi<FONT COLOR=#FF0000>cc</FONT> encountered an error ");
-  errorDoc.put("while executing ");
-  errorDoc.put("the cgi code.  If the error is due to ");
-  errorDoc.put("low memory or an input/output difficulty, ");
-  errorDoc.put("please <A HREF=\"mailto:").put(ADMIN).put("\">");
-  errorDoc.put("contact the administrator</A> for assistance.").br().p();
+  cout << div_(add("align","center")) << endl;
   
-  errorDoc.foot().center().hr(50);
-  errorDoc.font('-', 1).put("Cgi<FONT COLOR=#FF0000>cc</FONT> v");
-  errorDoc.put(getCgiccVersion()).put(" by ");
-  errorDoc.link("http://www2.hmc.edu/~sbooth","Stephen F. Booth").br();
-  errorDoc.put("Compiled at ").put(getCompileTime());
-  errorDoc.put(" on ").put(getCompileDate());
+  cout << table(add("border","0").add("rules","none").add("frame","void")
+		.add("cellspacing","2").add("cellpadding","2")
+		.add("class","cgi")) << endl;
+  cout << colgroup(add("span","2")) << endl;
+  cout << col(add("align","center").add("class","title").add("span","1")) 
+       << endl;
+  cout << col(add("align","left").add("class","data").add("span","1")) 
+       << endl;
+  cout << colgroup() << endl;
   
+  cout << tr() << td("Specification", add("class","title")) 
+       << td(errorText, add("class","data")) << tr() << endl;
+  cout << table();
+  
+  cout << p() << "If the error persists, please contact <TT><A HREF=\"mailto:"
+       << ADMIN << "\">" << ADMIN << "</A></TT> for assistance." << p();
+  
+  cout << body() << endl;
+  
+  cout << hr(add("class","half")) << div_() << endl;
+    
+    cout << div_(add("align","center").add("class","smaller")) << endl;
+    cout << "Cgi" << span("cc",add("class","red")) << " v";
+    cout << getCgiccVersion();
+    cout << " by " << a("Stephen F. Booth", 
+			add("href", "http://www2.hmc.edu/~sbooth")) << br();
+    cout << "Compiled at " << getCompileTime();
+    cout << " on " << getCompileDate();
+    
+    // I don't know if everyone has uname...
 #if HAS_UNAME
-  struct utsname info;
-  if(uname(&info) != -1) {
-    errorDoc.put(". Running on ").put(info.sysname);
-    errorDoc.put(' ').put(info.release).put(" (");
-    errorDoc.put(info.nodename).put(')');
-  }
+    struct utsname info;
+    if(uname(&info) != -1) {
+      cout << ". Running on " << info.sysname;
+      cout << ' ' << info.release << " (";
+      cout << info.nodename << ')' << endl;
+    }
 #else
-  errorDoc.put('.');
+    cout << '.' << endl;
 #endif
-  
-  errorDoc.font().center().foot().html();
-  */
+    
+    cout << html();
+
   // Terminate with moderate prejudice
   exit(1);
 }
@@ -123,8 +155,8 @@ main(int argc,
     
     // Call the users function
     logln("calling cgiMain()");
-    //result = cgiMain(formData, *out);
-    result = cgiMain(formData, cout);
+    result = cgiMain(formData, *out);
+    //result = cgiMain(formData, cout);
     if(result != EXIT_SUCCESS)
       throw Exception("Error in cgiMain()", ERRINFO);
     
@@ -140,74 +172,96 @@ main(int argc,
   /* Catch any exceptions that were thrown */  
   catch(Exception err) {
     logln("Caught an exception");
-    
-    /*
-    HTMLDocument	errorDoc(cout);
-    time_t 		Now;
-    tm 			*Date;
-    char 		S[80];
-    
     log("Message : ");
     logln(err.getMessage());
     log("File    : ");
     logln(err.getFile());
     log("Line    : ");
     logln(err.getLine());
+
+    html::reset();	head::reset();		title::reset();
+    style::reset();	comment::reset();	body::reset();
+    h1::reset();	span::reset();		div_::reset();
+    table::reset();	colgroup::reset();	tr::reset();
+    td::reset();
     
-    Now = time(NULL);
-    Date = localtime(&Now);
-    strftime(S, 80, "%A, %B %d, %Y %I:%M:%S %p", Date);
+    cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
+    cout << html(add("lang","EN").add("dir","LTR")) << endl;
     
-    errorDoc.printHeader().html().head().title().put("Cgicc Error: ");
-    errorDoc.put(err.getMessage()).title().head().body("#FFFFFF");
-
-    errorDoc.h1().put("Cgi<FONT COLOR=#FF0000>cc</FONT> v");
-    errorDoc.put(getCgiccVersion()).put(" encountered an error.").h1();
-
-    errorDoc.center().table("50%",0,2,2,"MIDDLE");
-    errorDoc.tr().td("CENTER", "#000000", "30%");
-    errorDoc.b("<FONT COLOR=#FFFFFF>Specification</FONT>").td();
-    errorDoc.td("LEFT", "#CCCCCC").put(err.getMessage()).td().tr();
-    errorDoc.tr().td("CENTER", "#000000", "30%");
-    errorDoc.b("<FONT COLOR=#FFFFFF>Filename</FONT>").td();
-    errorDoc.td("LEFT", "#CCCCCC").put(err.getFile()).td().tr();
-    errorDoc.tr().td("CENTER", "#000000", "30%");
-    errorDoc.b("<FONT COLOR=#FFFFFF>Line Number</FONT>").td();
-    errorDoc.td("LEFT", "#CCCCCC").put(err.getLine()).td().tr();
-    errorDoc.tr().td("CENTER", "#000000", "30%");
-    errorDoc.b("<FONT COLOR=#FFFFFF>Time</FONT>").td();
-    errorDoc.td("LEFT", "#CCCCCC").put(S).td().tr();
-    errorDoc.table().center();
-
-    errorDoc.br().p().p().lf();
-    errorDoc.put("Cgi<FONT COLOR=#FF0000>cc</FONT> encountered an error ");
-    errorDoc.put("while executing ");
-    errorDoc.put("the cgi code.  If the error is due to ");
-    errorDoc.put("low memory or an input/output difficulty, ");
-    errorDoc.put("please try re-calling the program.  Otherwise, ");
-    errorDoc.put("please <A HREF=\"mailto:").put(ADMIN).put("\">");
-    errorDoc.put("contact the administrator</A> for assistance.").br().p();
-
-    errorDoc.foot().center().hr(50);
-    errorDoc.font('-', 1).put("Cgi<FONT COLOR=#FF0000>cc</FONT> v");
-    errorDoc.put(getCgiccVersion()).put(" by ");
-    errorDoc.link("http://www2.hmc.edu/~sbooth","Stephen F. Booth").br();
-    errorDoc.put("Compiled at ").put(getCompileTime());
-    errorDoc.put(" on ").put(getCompileDate());
+    cout << head() << endl;
+    cout << title() << "Cgicc Error: " << err.getMessage() << title() << endl;
+    cout << meta(add("name", "author")
+		 .add("content", "Stephen F. Booth")) << endl;
     
+    cout << style() << comment() << endl;
+
+    cout << "BODY { color: black; background-color: white; }" << endl;
+    cout << "TABLE.cgi { margin-left: auto; margin-right: auto; width: 90%; }" 
+	 << endl;
+    cout << "DIV.smaller { font-size: small; }" << endl;
+    cout << "SPAN.red, COL.red, PRE.red { color: red }" << endl;
+    cout << "TR.title, TD.title, COL.title { color: white;"
+	 << "background-color: black; font-weight: bold; text-align: center; }"
+	 << endl;
+    cout << "TR.data, TD.data, COL.data {background-color: #CCCCCC; }" << endl;
+    cout << "HR.half { width: 60%; }" << endl;
+
+    cout << comment() << style() << endl;
+
+    cout << head() << endl;
+    
+    cout << body() << endl;
+
+    cout << h1() << "Cgi" << span("cc", add("class","red"))
+	 << " v"<< getCgiccVersion() << " Encountered an Error" 
+	 << h1() << endl;
+
+    cout << div_(add("align","center")) << endl;
+
+    cout << table(add("border","0").add("rules","none").add("frame","void")
+		 .add("cellspacing","2").add("cellpadding","2")
+		 .add("class","cgi")) << endl;
+    cout << colgroup(add("span","2")) << endl;
+    cout << col(add("align","center").add("class","title").add("span","1")) 
+	 << endl;
+    cout << col(add("align","left").add("class","data").add("span","1")) 
+	 << endl;
+    cout << colgroup() << endl;
+    
+    cout << tr() << td("Message", add("class","title")) 
+	 << td(err.getMessage(), add("class","data")) << tr() << endl;
+    cout << tr() << td("File", add("class","title")) 
+	 << td(err.getFile(), add("class","data")) << tr() << endl;
+    cout << tr() << td("Line", add("class","title")) 
+	 << td(add("class","data")) << err.getLine() << td() << tr() << endl;
+    cout << table();
+
+    cout << body() << endl;
+    
+    cout << hr(add("class","half")) << div_() << endl;
+    
+    cout << div_(add("align","center").add("class","smaller")) << endl;
+    cout << "Cgi" << span("cc",add("class","red")) << " v";
+    cout << getCgiccVersion();
+    cout << " by " << a("Stephen F. Booth", 
+			add("href", "http://www2.hmc.edu/~sbooth")) << br();
+    cout << "Compiled at " << getCompileTime();
+    cout << " on " << getCompileDate();
+    
+    // I don't know if everyone has uname...
 #if HAS_UNAME
     struct utsname info;
     if(uname(&info) != -1) {
-      errorDoc.put(". Running on ").put(info.sysname);
-      errorDoc.put(' ').put(info.release).put(" (");
-      errorDoc.put(info.nodename).put(')');
+      cout << ". Running on " << info.sysname;
+      cout << ' ' << info.release << " (";
+      cout << info.nodename << ')' << endl;
     }
 #else
-    errorDoc.put('.');
+    cout << '.' << endl;
 #endif
-
-errorDoc.font().center().foot().html();
-    */    
+    
+    cout << html();
+    
     return EXIT_FAILURE;
   }
   
