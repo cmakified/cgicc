@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.7 1999/08/20 20:54:05 sbooth Exp $
+ *  $Id: dns.cpp,v 1.8 1999/09/20 17:23:07 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -63,7 +63,7 @@
 // DNS gateway cgi
 int
 main(int /*argc*/, 
-     char **/*argv*/)
+     char ** /*argv*/)
 {
 
   try {
