@@ -1,3 +1,12 @@
+2004-06-21  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.ac: Removed maintainer mode
+	* Makefile.am: New gpg targets
+	* doc/gnu-head-sm.jpg: New file
+	* doc/Makefile.am: Removed maintainer mode
+	* doc/index.tmpl: New header
+	* doc/cgicc-doc.css: New styles
+
 2004-06-19  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/Makefile.am: Updated libtool version info
