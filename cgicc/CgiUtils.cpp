@@ -1,7 +1,7 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.11 2003/07/13 05:36:07 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.12 2003/07/13 14:20:35 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2002 Stephen F. Booth
+ *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
