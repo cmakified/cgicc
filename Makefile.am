@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.24 2000/11/15 06:47:01 sbooth Exp $
+## $Id: Makefile.am,v 1.25 2001/03/09 22:37:11 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip #dist-bzip2
 
@@ -11,6 +11,8 @@ endif
 SUBDIRS = cgicc info support $(DEMO)
 
 CLEANFILES = *~
+
+MAINTAINERCLEANFILES = cgicc-*.tar.gz cgicc-*.diff
 
 EXTRA_DIST = acconfig.h README.WIN
 
