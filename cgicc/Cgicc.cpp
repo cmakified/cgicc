@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.6 2001/03/05 14:25:46 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.7 2001/03/05 14:30:55 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -478,7 +478,7 @@ CGICCNS Cgicc::parseMIME(const STDNS string& data)
   STDNS string value = data.substr(valueStart, data.length() - valueStart - 2);
 
   // Parse the header - pass trailing CR/LF x 2 to parseHeader
-  MultipartHeader head = parseHeader(data.substr(0, headLimit));
+  MultipartHeader head = parseHeader(data.substr(0, valueStart));
 
   if(head.getFilename().empty())
     fFormData.push_back(FormEntry(head.getName(), value));
