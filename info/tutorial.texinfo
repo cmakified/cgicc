@@ -148,9 +148,10 @@ cout << HTTPHTMLHeader() << endl;
 @unnumberedsec Simple HTML Output
 
 Cgicc provides one class for every HTML tag defined in the HTML 4.0
-standard.  These classes have the same name as the HTML tags.  For
-example, in HTML, to indicate the start of a document you write
-@var{<HTML>}; this can be accomplished using Cgicc by writing
+standard in the header file @code{"cgicc/HTMLClasses.h"}.  These classes
+have the same name as the HTML tags.  For example, in HTML, to indicate
+the start of a document you write @var{<HTML>}; this can be accomplished
+using Cgicc by writing 
 
 @lisp
 cout << html() << endl;
@@ -208,16 +209,30 @@ name/value pair.  Since any given @code{HTMLElement} may have any number
 of @code{HTMAttribute} objects inside it, the set of
 @code{HTMLAttribute} objects inside an @code{HTMLElement} object is
 represented using the class @code{HTMLAttributeList}.  To build an
-@code{HTMLElement}, use the @code{set} method on
-@code{HTMLAttributeList}.  To generate the @code{<IMG>} tag given above:
+@code{HTMLElement} containing @code{HTMLAttribute} objects, use the
+@code{set} method on @code{HTMLElement}.  To generate the @code{<IMG>}
+tag given above: 
 
 @lisp
 @group
-cout << img(set("SRC", "file.jpg")
-           .set("WIDTH", "100").set("HEIGHT", "100")
-           .set("ALT", "description")) << endl;
+cout << img().set("SRC", "file.jpg")
+             .set("WIDTH", "100").set("HEIGHT", "100")
+             .set("ALT", "description") << endl;
 @end group
 @end lisp
+
+@noindent
+In a similar way, multiple @code{HTMLElement} objects may be embedded at
+the same level inside another @code{HTMLElement}.  To build an
+@code{HTMLElement} containing multiple embedded @code{HTMLElement}
+objects, use the @code{add} method on @code{HTMLElement}:
+
+@lisp
+cout << tr().add(td("0")).add(td("1")).add(td("2")) << endl;
+@end lisp
+
+@noindent
+This produces as output @code{<TR><TD>0</TD><TD>1</TD><TD>2</TD></TR>}.
 
 @unnumberedsec Notes on Output
 

@@ -17,18 +17,54 @@ by the subclasses.
 
 @unnumberedsec HTMLElement
 
-@deftypemethod HTMLElement string getName () const
+@deftypemethod HTMLElement {const char*} getName () const
 Returns the name of the HTML element.  For example @samp{HTML} or
 @samp{BODY}.
 @end deftypemethod
 
-@deftypemethod HTMLElement HTMLAttributeList* getAttributes () const
+@deftypemethod HTMLElement {const HTMLAttributeList*} getAttributes () const
 Returns the @code{HTMLAttributeList} containing all the attributes
-associated with this element.
+associated with this HTML element.
 @end deftypemethod
 
-@deftypemethod HTMLElement void setAttributes (const HTMLAttributeList *@var{attributes})
-Set the attributes associated with this element.
+@deftypemethod HTMLElement void setAttributes (const HTMLAttributeList& @var{attributes})
+Set the attributes associated with this HTML element.
+@end deftypemethod
+
+@deftypemethod HTMLElement {const HTMLElementList*} getEmbedded () const
+Returns the @code{HTMLElementList} containing all the HTML elements
+embedded in this one.
+@end deftypemethod
+
+@deftypemethod HTMLElement void setEmbedded (const HTMLElementList& @var{embedded})
+Set the HTML elements embedded in this HTML element.
+@end deftypemethod
+
+
+@unnumberedsec Setting HTML Attributes
+
+For most real-world HTML, an @code{HTMLElement} will contain one or more
+embedded HTML attributes.  HTML attributes are added to
+@code{HTMLElement} objects via the @code{set} methods on
+@code{HTMLElement}.
+
+@deftypemethod HTMLElement HTMLElement& set(const string& @var{name})
+Set an @code{HTMLAttribute} with name @var{name} on this HTML element.
+@end deftypemethod
+
+@deftypemethod HTMLElement HTMLElement& set(const string& @var{name}, const string& @var{value})
+Set an @code{HTMLAttribute} with name @var{name} and value @var{value}
+on this HTML element.
+@end deftypemethod
+
+@unnumberedsec Embedding HTML Elements
+
+It is often desirable to embed multiple HTML elements in another at the
+same level.  HTML elements are embedded in an @code{HTMLElement} via the
+@code{add} method on @code{HTMLElement}.
+
+@deftypemethod HTMLElement HTMLElement& add(const HTMLElement&@var{element})
+Add @var{element} to the list of HTML elements embedded in this one.
 @end deftypemethod
 
 @unnumberedsec HTMLElement Construction
@@ -46,47 +82,7 @@ Default constructor.  Creates an empty HTML element.
 Creates a new HTML element containing the text @var{text}.
 @end deftypemethod
 
-@deftypemethod h1 void h1 (const HTMLAttributeList& @var{attributes})
-Creates a new HTML element possessing the HTML attributes contained in
-@var{attributes}.
-@end deftypemethod
-
-@deftypemethod h1 void h1 (const HTMLSimpleElement& @var{embed})
+@deftypemethod h1 void h1 (const HTMLElement& @var{embed})
 Creates a new HTML element containing the embedded HTML element
 @var{embed}.
-@end deftypemethod
-
-@deftypemethod h1 void h1 (const string& @var{text}, const HTMLAttributeList& @var{attributes})
-Creates a new HTML element containing the text @var{text}, and
-possessing the HTML attributes contained in @var{attributes}.
-@end deftypemethod
-
-@deftypemethod h1 void h1 (const HTMLAttributeList& @var{attributes}, const HTMLSimpleElement& @var{embed})
-Creates a new HTML element possessing the HTML attributes contained in
-@var{attributes}, with the embedded HTML element @var{embed}.
-@end deftypemethod
-
-@unnumberedsec HTMLAttributeList Construction
-
-For most real-world HTML, an @code{HTMLElement} will contain one or more
-embedded HTML attributes.  HTML attributes are added to
-@code{HTMLElement} objects via the @code{set} functions.
-
-@deftypefn {Library Function} HTMLAttributeList set (const string& @var{name})
-Creates an @code{HTMLAttributeList} containing an
-@code{HTMLAtomicAttribute} with name @var{name}.
-@end deftypefn
-
-@deftypefn {Library Function} HTMLAttributeList set (const string& @var{name}, const string& @var{value})
-Creates an @code{HTMLAttributeList} containing an @code{HTMLAttribute}
-with name @var{name} and value @var{value}.
-@end deftypefn
-
-@deftypemethod HTMLAttributeList HTMLAttributeList& set (const string& @var{name})
-Adds an @code{HTMLAtomicAttribute} with name @var{name} to the attribute list.
-@end deftypemethod
-
-@deftypemethod HTMLAttributeList HTMLAttributeList& set (const string& @var{name}, const string& @var{value})
-Adds an @code{HTMLAttribute} with name @var{name} and value @var{value}
-to the attribute list.
 @end deftypemethod
