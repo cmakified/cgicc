@@ -8,6 +8,7 @@
 	* README: 'Cgicc' -> 'cgicc'
 	* README.WIN: 'Cgicc' -> 'cgicc'
 	* AUTHORS: 'Cgicc' -> 'cgicc'
+	* Makefile.am: Removed reference to .spec file
 
 2000-10-07  Stephen F. Booth  <sbooth@gnu.org>
 
