@@ -1,3 +1,22 @@
+1999-08-09  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* configure.in: AC_INIT(Cgicc.cc) -> AC_INIT(Cgicc.cpp)
+	* cgicc/*.cc: Removed, renamed to *.cpp.  Changed #includes to 
+	reflect new names.
+	* cgicc/*.hh: Removed, renamed to *.h.  Changed #includes to
+	reflect new names.
+	* cgicc/Makefile.am: All .cc -> .cpp, .hh -> .h.  config.h is
+	no longer installed.
+	* demo/test.cc: Removed, renamed to test.cpp.  Changed #includes
+	to reflect new names.
+	* demo/dns.cc: Removed, renamed to dns.cpp.  Changed #includes
+	to reflect new names.
+	* demo/Makefile.am: All .cc -> .cpp.
+	* example/yourSource.cc: Removed, renamed to yourSource.cpp.  Changed
+	#includedes to reflect new names.
+	* example/Makefile.in: .cc -> .cpp.
+	* configure.in: Added AC_CONFIG_AUX_DIR(support)
+
 1999-08-06  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* cgicc/HTMLElements.{hh,cc}: Added add() method, to allow
