@@ -1,3 +1,10 @@
+2001-09-04  Stephen F. Booth  <sbooth@localhost.localdomain>
+
+	* cgicc/HTMLAttribute.h: Removed <vector> from #includes
+	* cgicc/HTMLElementList.h: Added <vector> to #includes
+	* cgicc/HTTPHeader.h: Added <vector> to #includes
+	* cgicc/HTTPResponseHeader.h: Added <vector> to #includes
+
 2001-09-03  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/HTTPHeaders.h: Added new class HTTPResponseHeader, and
@@ -21,9 +28,9 @@
 	HTMLElement.{h,cpp} and HTMLElementList.{h,cpp}
 	* cgicc/HTMLGeneric.h: Split into two new files,
 	HTMLAtomicElement.h and HTMLBooleanElement.h
-	* cgicc/HTTPHeaders.{h,cpp}: Split into 18 new files:
+	* cgicc/HTTPHeaders.{h,cpp}: Split into 16 new files:
 	HTMLDoctype.{h,cpp}, HTTPContentHeader.{h,cpp},
-	HTTPHTMLHeader.{h,cpp}, HTTPHeader.{h,cpp}, HTTPNPHeader.{h,cpp},
+	HTTPHTMLHeader.{h,cpp}, HTTPHeader.{h,cpp},
 	HTTPPlainHeader.{h,cpp}, HTTPRedirectHeader.{h,cpp},
 	HTTPReponseHeader.{h,cpp}, HTTPStatusHeader.{h,cpp}
 
