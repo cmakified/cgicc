@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.hh,v 1.16 1999/04/26 22:42:26 sbooth Exp $
+ *  $Id: Cgicc.hh,v 1.17 1999/05/05 18:32:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -22,18 +22,19 @@
 #define __CGICC__ 1
 
 /*
- * The GNU Cgicc library, by Stephen F. Booth <mailto:sbooth@saaba.lmi.net>. 
+ * The GNU Cgicc library, by Stephen F. Booth. 
  * The latest version can be found on ftp://ftp.gnu.org/gnu/cgicc/
  *
  * Please mail bug reports to <mailto:bug-cgicc@gnu.org>
  *
  * There is a Cgicc mailing list at <mailto:cgicc@gnu.org>
- * To subscribe, send a message to <mailto:cgicc@gnu.org> with the
- * word "subscribe" in the subject field.
+ * To subscribe, send a message to <mailto:cgicc-request@gnu.org> with
+ * the word "subscribe" in the subject field.
  *
- * Cgicc is intended to simplify and speed the development of C++ CGI(Common
- * Gateway Interface) applications by providing a simple, yet comprehensive  
- * set of classes that present full CGI functionality.
+ * Cgicc is intended to simplify and speed the development of C++
+ * CGI(Common Gateway Interface) applications by providing a simple,
+ * yet comprehensive set of classes that present full CGI
+ * functionality.  
  */
 
 #include <vector>
