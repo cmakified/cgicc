@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.10 1999/09/30 17:40:45 sbooth Exp $
+ *  $Id: dns.cpp,v 1.11 2000/09/21 15:21:58 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -194,8 +194,10 @@ main(int /*argc*/,
     cout << colgroup() << endl;
     
     cout << "<FORM METHOD=\"POST\" ACTION=\"http://"
-	 << cgi.getEnvironment().getServerName()
-	 << cgi.getEnvironment().getScriptName() << "\">" << endl;
+	 << cgi.getEnvironment().getServerName();
+    if(cgi.getEnvironment().getServerPort() != 80)
+      cout << ":" << cgi.getEnvironment().getServerPort();
+    cout << cgi.getEnvironment().getScriptName() << "\">" << endl;
     
     cout << tr() << endl;
     cout << td(strong("IP Address: ")) << endl;
@@ -207,8 +209,10 @@ main(int /*argc*/,
     cout << td() << tr() << "</FORM>" << endl;
     
     cout << "<FORM METHOD=\"POST\" ACTION=\"http://"
-	 << cgi.getEnvironment().getServerName()
-	 << cgi.getEnvironment().getScriptName() << "\">" << endl;
+	 << cgi.getEnvironment().getServerName();
+    if(cgi.getEnvironment().getServerPort() != 80)
+      cout << ":" << cgi.getEnvironment().getServerPort();
+    cout << cgi.getEnvironment().getScriptName() << "\">" << endl;
     
     cout << tr() << endl;
     cout << td(strong("Hostname: ")) << endl;
