@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.13 2004/06/12 15:24:31 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.14 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -214,10 +214,10 @@ cgicc::extractBetween(const std::string& data,
   unsigned int start, limit;
   
   start = data.find(separator1, 0);
-  if(start != std::string::npos) {
+  if(std::string::npos != start) {
     start += separator1.length();
     limit = data.find(separator2, start);
-    if(limit != std::string::npos)
+    if(std::string::npos != limit)
       result = data.substr(start, limit - start);
   }
   
@@ -251,7 +251,7 @@ cgicc::readString(std::istream& in)
   in.get(); // skip ' '
   
   // Avoid allocation of a zero-length vector
-  if(dataSize == 0) {
+  if(0 == dataSize) {
     return std::string("");
   }
 
@@ -277,4 +277,3 @@ cgicc::readLong(std::istream& in)
   in.get(); // skip ' '
   return l;
 }
-

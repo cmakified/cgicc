@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPCookie.cpp,v 1.5 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: HTTPCookie.cpp,v 1.6 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -87,15 +87,15 @@ void
 cgicc::HTTPCookie::render(std::ostream& out) 	const
 {
   out << "Set-Cookie:" << getName() << '=' << getValue();
-  if(fComment.empty() == false)
+  if(false == fComment.empty())
     out << "; Comment=" << fComment;
-  if(fDomain.empty() == false)
+  if(false == fDomain.empty())
     out << "; Domain=" << fDomain;
-  if(fMaxAge != 0)
+  if(0 != fMaxAge)
     out << "; Max-Age=" << fMaxAge;
-  if(fPath.empty() == false)
+  if(false == fPath.empty())
     out << "; Path=" << fPath;
-  if(fSecure == true)
+  if(true == fSecure)
     out << "; Secure";
   
   out << "; Version=1";

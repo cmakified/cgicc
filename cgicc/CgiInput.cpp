@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiInput.cpp,v 1.4 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: CgiInput.cpp,v 1.5 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -46,5 +46,5 @@ std::string
 cgicc::CgiInput::getenv(const char *varName)
 {
   char *var = std::getenv(varName);
-  return (var == 0) ? std::string("") : var;
+  return (0 == var) ? std::string("") : var;
 }

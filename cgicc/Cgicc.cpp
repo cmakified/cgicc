@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.19 2004/06/28 00:25:28 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.20 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -372,7 +372,7 @@ cgicc::Cgicc::parseFormInput(const std::string& data)
       pos = data.find(sep, oldPos);
 
       // If sep wasn't found, the rest of the data is an item
-      if(pos == std::string::npos)
+      if(std::string::npos == pos)
 	break;
 
       // parse the data
@@ -385,11 +385,11 @@ cgicc::Cgicc::parseFormInput(const std::string& data)
     // The data is terminated by sep2
     pos = data.find(sep2, oldPos);
     // parse the data, if found
-    if(pos != std::string::npos) {
+    if(std::string::npos != pos) {
       parseMIME(data.substr(oldPos, pos - oldPos));
     }
   }
-  else if(! data.empty()) {
+  else if(false ==  data.empty()) {
     std::string::size_type pos;
     std::string::size_type oldPos = 0;
 
@@ -398,7 +398,7 @@ cgicc::Cgicc::parseFormInput(const std::string& data)
       pos = data.find_first_of("&", oldPos);
 
       // if no '&' was found, the rest of the string is a pair
-      if(pos == std::string::npos) {
+      if(std::string::npos == pos) {
 	parsePair(data.substr(oldPos));
 	break;
       }
@@ -441,7 +441,7 @@ cgicc::Cgicc::parsePair(const std::string& data)
   std::string::size_type pos = data.find_first_of("=", 0);
 
   // if no '=' was found, return
-  if(pos == std::string::npos)
+  if(std::string::npos == pos)
     return;
   
   // unescape the data, and add to the form entry list
@@ -460,7 +460,7 @@ cgicc::Cgicc::parseMIME(const std::string& data)
   std::string::size_type headLimit = data.find(end, 0);
   
   // Detect error
-  if(headLimit == std::string::npos)
+  if(std::string::npos == headLimit)
     return;
 
   // Extract the value - there is still a trailing CR/LF to be subtracted off

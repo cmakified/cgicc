@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: FormEntry.h,v 1.10 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: FormEntry.h,v 1.11 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -307,7 +307,7 @@ namespace cgicc {
      */
     inline bool 
     isEmpty() 						const
-    { return (length() == 0); }
+    { return (0 == length()); }
     //@}
     
   private:  

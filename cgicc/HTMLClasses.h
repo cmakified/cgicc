@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLClasses.h,v 1.12 2003/07/17 05:16:03 sbooth Exp $
+ *  $Id: HTMLClasses.h,v 1.13 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -91,7 +91,7 @@ namespace cgicc {
   {
     virtual void render(std::ostream& out) 	const
     {
-      if(getData().empty() && dataSpecified() == false) {
+      if(getData().empty() && false == dataSpecified()) {
 	swapState();
 	out << (getState() ? "<!-- " : " -->");
       }

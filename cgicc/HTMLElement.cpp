@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLElement.cpp,v 1.4 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: HTMLElement.cpp,v 1.5 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -48,13 +48,13 @@ cgicc::HTMLElement::HTMLElement(const HTMLAttributeList *attributes,
     fType(type),
     fDataSpecified(false)
 {
-  if(attributes != 0)
+  if(0 != attributes)
     fAttributes = new HTMLAttributeList(*attributes);
 
-  if(embedded != 0)
+  if(0 != embedded)
     fEmbedded = new HTMLElementList(*embedded);
 
-  if(data != 0) {
+  if(0 != data) {
     fData = *data;
     fDataSpecified = true;
   }
@@ -88,10 +88,10 @@ cgicc::HTMLElement::operator= (const HTMLElement& element)
   fDataSpecified = element.fDataSpecified;
 
   // perform a deep copy
-  if(fAttributes != 0)
+  if(0 != fAttributes)
     fAttributes = new HTMLAttributeList(*fAttributes);
   
-  if(fEmbedded != 0)
+  if(0 != fEmbedded)
     fEmbedded = new HTMLElementList(*fEmbedded);
   
   return *this;
@@ -114,7 +114,7 @@ cgicc::HTMLElement::setEmbedded(const HTMLElementList& embedded)
 cgicc::HTMLElement&
 cgicc::HTMLElement::add(const HTMLElement& element)
 {
-  if(fEmbedded == 0)
+  if(0 == fEmbedded)
     fEmbedded = new HTMLElementList();
   fEmbedded->add(element);
   return *this;
@@ -123,7 +123,7 @@ cgicc::HTMLElement::add(const HTMLElement& element)
 cgicc::HTMLElement&
 cgicc::HTMLElement::add(HTMLElement *element)
 {
-  if(fEmbedded == 0)
+  if(0 == fEmbedded)
     fEmbedded = new HTMLElementList();
   fEmbedded->add(element);
   return *this;
@@ -132,7 +132,7 @@ cgicc::HTMLElement::add(HTMLElement *element)
 cgicc::HTMLElement&
 cgicc::HTMLElement::set(const std::string& name)
 {
-  if(fAttributes == 0)
+  if(0 == fAttributes)
     fAttributes = new HTMLAttributeList();
   fAttributes->set(name);
   return *this;
@@ -142,7 +142,7 @@ cgicc:: HTMLElement&
 cgicc::HTMLElement::set(const std::string& name,
 			 const std::string& value)
 {
-  if(fAttributes == 0)
+  if(0 == fAttributes)
     fAttributes = new HTMLAttributeList();
   fAttributes->set(name, value);
   return *this;
@@ -151,17 +151,17 @@ cgicc::HTMLElement::set(const std::string& name,
 void
 cgicc::HTMLElement::render(std::ostream& out) 	const
 {
-  if(getType() == eBoolean && dataSpecified() == false) {
+  if(eBoolean == getType() && false == dataSpecified()) {
     /* no embedded elements */
-    if(getEmbedded() == 0) {
+    if(0 == fEmbedded) {
       swapState();
       /* getState() == true ===> element is active */
-      if(getState() == true) {
+      if(true == getState()) {
 	out << '<' << getName();
 	/* render attributes, if present */
-	if(getAttributes() != 0) {
+	if(0 != fAttributes) {
 	  out << ' ';
-	  getAttributes()->render(out);
+	  fAttributes->render(out);
 	}
 	out << '>';
       }
@@ -172,35 +172,35 @@ cgicc::HTMLElement::render(std::ostream& out) 	const
     else {
       out << '<' << getName();
       /* render attributes, if present */
-      if(getAttributes() != 0) {
+      if(0 != fAttributes) {
 	out << ' ';
-	getAttributes()->render(out);
+	fAttributes->render(out);
       }
       out << '>';
-      getEmbedded()->render(out);
+      fEmbedded->render(out);
       out << "</" << getName() << '>';
     }
   }
   /* For non-boolean elements */
   else {
-    if(getType() == eAtomic) {
+    if(eAtomic == getType()) {
       out << '<' << getName();
-      if(getAttributes() != 0) {
+      if(0 != fAttributes) {
 	out << ' ';
-	getAttributes()->render(out);
+	fAttributes->render(out);
       }
       out << " />";
     }
     else {
       out << '<' << getName();
-      if(getAttributes() != 0) {
+      if(0 != fAttributes) {
 	out << ' ';
-	getAttributes()->render(out);
+	fAttributes->render(out);
       }
       out << '>';
       
-      if(getEmbedded() != 0)
-	getEmbedded()->render(out);
+      if(0 != fEmbedded)
+	fEmbedded->render(out);
       else
 	out << getData();
       out << "</" << getName() << '>';

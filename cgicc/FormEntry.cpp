@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.cpp,v 1.8 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: FormEntry.cpp,v 1.9 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -124,13 +124,13 @@ cgicc::FormEntry::makeString(std::string::size_type maxLen,
   while(src != lim && len < avail) {
 
     // handle newlines
-    if(*src == '\r' || *src == '\n') {
+    if('\r' == *src || '\n' == *src) {
       crCount = 0;
       lfCount = 0;
       
       // Count the number of each kind of line break ('\r' and '\n')
-      while( (*src == '\r' || *src == '\n') && (src != lim)) {
-	if(*src == '\r') 
+      while( ('\r' == *src || '\n' == *src) && (src != lim)) {
+	if('\r' == *src) 
 	  crCount++;
 	else 
 	  lfCount++;

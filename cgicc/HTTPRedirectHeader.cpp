@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPRedirectHeader.cpp,v 1.4 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: HTTPRedirectHeader.cpp,v 1.5 2004/06/28 02:57:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -39,7 +39,7 @@ cgicc::HTTPRedirectHeader::render(std::ostream& out) 	const
 {
   out << "Location: " << getData() << std::endl;
   
-  if(getCookies().empty() == false) {
+  if(false == getCookies().empty()) {
     std::vector<HTTPCookie>::const_iterator iter; 
     
     for(iter = getCookies().begin(); iter != getCookies().end(); ++iter)
