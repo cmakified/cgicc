@@ -1,11 +1,25 @@
-README for skeleton CGI using GNU Cgicc
-=======================================
+README for cgicc-example
+========================
 
-This directory contains skeleton code and a supporting Makefile for a
-CGI application using Cgicc, tailored to the installation environment.
+This directory contains skeleton code and supporting
+autoconf/automake/libtool infrastructure for a CGI application using
+cgicc.
 
-If you are using Solaris or an SVR4-style Unix, you'll need to uncomment
-line 59 in the Makefile, and comment out (using '#') line 56.  This is
-due to the different methods of embedding a runtime search path on
-different flavors of Unix.
+Assuming that you did a 
+ % ./configure
+ % make
+ % make install
+in the top-level cgicc directory and got a working library, you should
+be able to do the same here and get a working executable:
+ % ./configure
+ % make
+
+If you installed cgicc in a non-default place (by specifying the
+--prefix option), you'll need to tell configure where the library is
+using the --with-cgicc option, passing the same value:
+ % ./configure --with-cgicc=PREFIX
+ % make
+
+The 'make install' target is available, but isn't necessary since this
+example doesn't do anything.
 

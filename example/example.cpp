@@ -1,5 +1,5 @@
 /*
- *  $Id: yourSource.cpp,v 1.4 2000/10/15 15:52:27 sbooth Exp $
+ *  $Id: example.cpp,v 1.1 2000/11/14 05:42:03 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
  *

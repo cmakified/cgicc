@@ -1,0 +1,12 @@
+2000-11-13  Stephen F. Booth  <sbooth@gnu.org>
+
+	* AUTHORS: New file for cgicc-example package
+	* ChangeLog: New file for cgicc-example package
+	* Makefile.am: New file for cgicc-example package
+	* NEWS: New file for cgicc-example package
+	* README: Updated for cgicc-example package
+	* acinclude.m4: New file for cgicc-example package
+	* autogen: New file for cgicc-example package
+	* configure.in: New file for cgicc-example package
+	* example.cpp: New file for cgicc-example package
+
