@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cc,v 1.1 1999/04/26 22:59:09 sbooth Exp $
+ *  $Id: dns.cc,v 1.2 1999/04/26 23:27:17 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -222,9 +222,10 @@ main(int argc,
     cout << "GNU Cgi" << span("cc",add("class","red")) << " v"
 	 << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth", 
-			add("href", "http://www.lmi.net/~sbooth/")) << br();
+			add("href", "http://www.lmi.net/~sbooth/")) 
+	 << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime() 
-	 << " on " << cgi.getCompileDate() << br();
+	 << " on " << cgi.getCompileDate() << br() << endl;
     
     cout << "Configured for " << cgi.getHost();  
     // I don't know if everyone has uname...

@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cc,v 1.1 1999/04/26 22:59:09 sbooth Exp $
+ *  $Id: test.cc,v 1.2 1999/04/26 23:27:18 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -91,7 +91,7 @@ main(int argc,
     cout << "COL.title { color: white; background-color: black; ";
     cout << "font-weight: bold; text-align: center; }" << endl;
     cout << "COL.data { background-color: #DDD; text-align: left; }" << endl;
-    cout << "TD.data, TR.data {	background-color: #DDD;	text-align: left; }"
+    cout << "TD.data, TR.data { background-color: #DDD; text-align: left; }"
 	 << endl;
     cout << "TD.grayspecial { background-color: #DDD; text-align: left; }"
 	 << endl;
@@ -187,9 +187,10 @@ main(int argc,
     cout << "Cgi" << span("cc", add("class","red")) << " v";
     cout << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth", 
-			add("href", "http://www.lmi.net/~sbooth/")) << br();
+			add("href", "http://www.lmi.net/~sbooth/")) 
+	 << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime();
-    cout << " on " << cgi.getCompileDate() << br();
+    cout << " on " << cgi.getCompileDate() << br() << endl;
 
     cout << "Configured for " << cgi.getHost();  
 #if HAVE_UNAME
