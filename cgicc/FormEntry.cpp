@@ -1,5 +1,6 @@
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: FormEntry.cpp,v 1.10 2004/06/29 15:13:14 sbooth Exp $
+ *  $Id: FormEntry.cpp,v 1.11 2004/06/30 04:27:13 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -77,7 +78,7 @@ cgicc::FormEntry::getIntegerValue(long min,
 
 double
 cgicc::FormEntry::getDoubleValue(double min, 
-				  double max) 		const
+				 double max) 		const
 {
   double value = std::atof(fValue.c_str());
   if(value > max)

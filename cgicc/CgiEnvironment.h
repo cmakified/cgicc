@@ -1,6 +1,6 @@
-/* -*-c++-*- */
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.17 2004/06/29 15:13:11 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.18 2004/06/30 04:27:10 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org

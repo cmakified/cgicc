@@ -1,6 +1,6 @@
-/* -*-c++-*- */
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.h,v 1.16 2004/06/29 15:13:14 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.17 2004/06/30 04:27:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org

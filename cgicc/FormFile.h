@@ -1,6 +1,6 @@
-/* -*-c++-*- */
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: FormFile.h,v 1.9 2004/06/29 15:13:14 sbooth Exp $
+ *  $Id: FormFile.h,v 1.10 2004/06/30 04:27:16 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org

@@ -1,5 +1,6 @@
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiUtils.cpp,v 1.15 2004/06/29 15:13:12 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.16 2004/06/30 04:27:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -127,10 +128,10 @@ cgicc::hexToChar(char first,
    query         = *uric
    uric          = reserved | unreserved | escaped
    reserved      = ";" | "/" | "?" | ":" | "@" | "&" | "=" | "+" |
-                   "$" | ","
+   "$" | ","
    unreserved    = alphanum | mark
    mark          = "-" | "_" | "." | "!" | "~" | "*" | "'" |
-                   "(" | ")"
+   "(" | ")"
    escaped = "%" hex hex */
  
 std::string
@@ -184,17 +185,17 @@ cgicc::form_urldecode(const std::string& src)
       result.append(1, ' ');
       break;
     case '%':
-	// Don't assume well-formed input
-	if(std::distance(iter, src.end()) >= 2
-	   && std::isxdigit(*(iter + 1)) && std::isxdigit(*(iter + 2))) {
-	    c = *++iter;
-	    result.append(1, hexToChar(c, *++iter));
-	}
-	// Just pass the % through untouched
-	else {
-	    result.append(1, '%');
-	}
-	break;
+      // Don't assume well-formed input
+      if(std::distance(iter, src.end()) >= 2
+	 && std::isxdigit(*(iter + 1)) && std::isxdigit(*(iter + 2))) {
+	c = *++iter;
+	result.append(1, hexToChar(c, *++iter));
+      }
+      // Just pass the % through untouched
+      else {
+	result.append(1, '%');
+      }
+      break;
     
     default:
       result.append(1, *iter);
@@ -261,7 +262,7 @@ cgicc::readString(std::istream& in)
   std::vector<char> temp(dataSize);
 
   in.read(&temp[0], dataSize);
-  if((std::string::size_type)in.gcount() != dataSize) {
+  if(static_cast<std::string::size_type>(in.gcount()) != dataSize) {
     throw std::runtime_error("I/O error");
   }
 

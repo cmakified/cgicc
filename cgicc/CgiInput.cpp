@@ -1,5 +1,6 @@
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiInput.cpp,v 1.6 2004/06/29 15:13:12 sbooth Exp $
+ *  $Id: CgiInput.cpp,v 1.7 2004/06/30 04:27:12 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -37,7 +38,7 @@ cgicc::CgiInput::~CgiInput()
 
 size_t 
 cgicc::CgiInput::read(char *data, 
-		       size_t length)
+		      size_t length)
 {
   std::cin.read(data, length);
   return std::cin.gcount();

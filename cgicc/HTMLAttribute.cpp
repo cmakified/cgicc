@@ -1,5 +1,6 @@
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: HTMLAttribute.cpp,v 1.5 2004/06/29 15:13:14 sbooth Exp $
+ *  $Id: HTMLAttribute.cpp,v 1.6 2004/06/30 04:27:17 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -38,7 +39,7 @@ cgicc::HTMLAttribute::HTMLAttribute(const std::string& name)
 {}
 
 cgicc::HTMLAttribute::HTMLAttribute(const std::string& name, 
-				     const std::string& value)
+				    const std::string& value)
   : fName(name), 
     fValue(value)
 {}

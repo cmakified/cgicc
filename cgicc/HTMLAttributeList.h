@@ -1,6 +1,6 @@
-/* -*-c++-*- */
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: HTMLAttributeList.h,v 1.5 2004/06/29 15:13:14 sbooth Exp $
+ *  $Id: HTMLAttributeList.h,v 1.6 2004/06/30 04:27:18 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
