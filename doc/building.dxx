@@ -1,180 +1,110 @@
-<!-- $Id: building.dxx,v 1.10 1998/10/05 22:57:50 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.11 1998/12/10 02:09:13 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
 <P>
-Once your source distribution is unpacked, a few customizations are
-necessary in order to compile the library.  Using your text editor
-of choice, open the file <TT>Makefile.incl</TT> in the Cgicc directory.
-Scroll down through <TT>Makefile.incl</TT> until you see the following lines:
+<H3>Installation Overview</H3>
+To configure Cgicc for your system, first <TT>cd</TT> to the top-level
+directory containing Cgicc, then issue the following command, replacing
+<TT>/path</TT> with the absolute path of the directory in which
+to install Cgicc.
+<PRE CLASS="unix">
+% ./configure --prefix=/path
+</PRE>
+Next, compile Cgicc:
+<PRE CLASS="unix">
+% make
+</PRE>
+You should see a large amount of output, but no errors.  Assuming no compile
+errors occurred, install Cgicc:
+<PRE CLASS="unix">
+% make install
+</PRE>
+This will install both static and shared versions of the Cgicc library (if
+supported) in <TT>/path/lib</TT>, the headers needed for using Cgicc in 
+<TT>/path/include</TT>, and the test program in <TT>/path/bin</TT>.
 </P>
 
-<PRE CLASS="file">
-## The macro CGIDIR should contain the path to the directory where you
-##  would like the compiled executable to be saved.  This is also
-##  the directory where the shared library will be saved if you choose
-##  to compile Cgicc as a shared library. 
-##  This will usually be $(HOME)/public_html/cgi-bin.  
-##  If $(HOME) is not defined, be sure and supply the ABSOLUTE path.
-CGIDIR=         $(HOME)/cgi-bin
-
-## If you are using a compiler other than GNU's C++ compiler (g++)
-##  you'll probably want to change the following line
-CC=             /usr/local/bin/g++
-
-## If your system does not support uname, set the following to 0
-HASUNAME=       -DHAS_UNAME=1
-
-## If you want to enable debug logging, set the following to 1
-DEBUG=          -DDEBUG=0
-
-## If you are not using g++, change the following to the command 
-## for making a shared library.
-## On BSD, this should be -shared.  On Solaris, use -G.
-MAKE_SHARED=    $(CC) -shared
-
-## If you are not using g++, change the following to the command 
-## for generating a depend file
-MAKE_DEPEND=    $(CC) -E -M 
-</PRE>
-
 <P>
-It should be fairly straightforward to customize these options.
-
-<OL>
-
-<LI>
-<STRONG>CGIDIR</STRONG> contains the path to your cgi-bin directory.  
-Depending on the configuration of your system, this may or may not be correct.
-<BR>
-<STRONG>In order for the preset path to be correct, your HOME environment 
-variable must be set.
-</STRONG>
-</LI>
-
-<LI>
-<STRONG>CC</STRONG> is the name of your compiler executable.  If your
-compiler is not named g++, this must be changed to reflect the name of 
-your compiler.
-</LI>
-
-<LI>
-<STRONG>UNAME</STRONG> indicates if your system supports the <TT>uname</TT>
-command. If you system does not support <TT>uname</TT>, this should be changed
-to 0.  You can find out if your system supports <TT>uname</TT> by typing 
-<TT>uname -a</TT> at the UNIX prompt.  You should see a line of output
-containing the machine name, CPU type, and operating system type and revision.
-</LI>
-
-<LI>
-<STRONG>DEBUG</STRONG> indicates whether or not to enable debug logging.
-If you want to enable the debug log, change this to 1.<BR>
-<STRONG>To use the debug logging feature, you must define the global
-ofstream <TT>gLogFile</TT>.</STRONG>
-</LI>
-
-<LI>
-<STRONG>MAKE_SHARED</STRONG> contains the command for creating a shared
-library.  If you are using UNIX System V, such as Solaris, this should
-be <TT>$(CC) -G</TT>.  If you are using Mach UNIX, such as BSD, this should be
-<TT>$(CC) -shared</TT>.  If you don't want to compile Cgicc as a shared 
-library, ignore this line.
-</LI>
-
-<LI>
-<STRONG>MAKE_DEPEND</STRONG> contains the command for generating a dependency
-list from a source tree.  If you aren't using g++ or a compatible compiler,
-change this to suit your particular setup.
-</LI>
-</OL>
-
-<P>
-Once you are finished with the necessary customization, save 
-<TT>Makefile</TT> and exit your editor. Cgicc may be compiled either as
-a static library (<TT>libCgicc.a</TT>) or a dynamically-linked shared library 
-(<TT>libCgicc.so</TT>). If your system supports it, I recommend compiling 
-the shared version. In either case, it is necessary to generate the file
-dependency information.  At the UNIX prompt, type
+<H3>Installation Options</H3>
+You can pass many options to <TT>configure</TT> to control what parts of Cgicc
+are installed and where. The following table summarizes the most commonly
+used options.
 </P>
 
-<PRE CLASS="unix">
-% make depend
-</PRE>
-
-<P>to create the dependency file.  To compile the library type</P>
-
-<PRE CLASS="unix">
-% make shared test.cgi_shared
-</PRE>
-
-<P>for the shared version, or</P>
-
-<PRE CLASS="unix">
-% make static test.cgi_static
-</PRE>
-
-<P>for the static version.</P>
-<P>Please note that if you elect to compile the shared
-version, you need to supply the <STRONG>absolute</STRONG> path to your cgi-bin
-directory in <TT>Makefile.incl</TT>.</P>
-
 <P>
-You should see output similar to (will vary depending on your configuration):
+<TABLE BORDER="0" RULES="none" FRAME="void" CELLSPACING="2" CELLPADDING="2">
+
+<TR ALIGN="CENTER" BGCOLOR="#000000">
+<TH><FONT COLOR="#FFFFFF">Option</FONT></TH>
+<TH><FONT COLOR="#FFFFFF">Meaning</FONT></TH>
+</TR>
+
+<TR VALIGN="MIDDLE">
+<TD WIDTH="30%"><TT>--enable-shared<BR>--disable-shared</TT></TD>
+<TD>Enables or disables compilation of Cgicc as a shared library.</TD>
+</TR>
+
+<TR VALIGN="MIDDLE">
+<TD WIDTH="30%"><TT>--enable-static<BR>--disable-static</TT1></TD>
+<TD>Enables or disables compilation of Cgicc as a static library.</TD>
+</TR>
+
+<TR VALIGN="MIDDLE">
+<TD WIDTH="30%"><TT>--prefix=/path</TT></TD>
+<TD>Sets the parent directory for all installed files to <TT>/path</TT>.</TD>
+</TR>
+
+<TR VALIGN="MIDDLE">
+<TD WIDTH="30%"><TT>--bindir=/path</TT></TD>
+<TD>Sets the parent directory for the test application to <TT>/path</TT>.</TD>
+</TR>
+
+<TR VALIGN="MIDDLE">
+<TD WIDTH="30%"><TT>--libdir=/path</TT></TD>
+<TD>Sets the parent directory for installed libraries to <TT>/path</TT>.</TD>
+</TR>
+
+<TR VALIGN="MIDDLE">
+<TD WIDTH="30%"><TT>--includedir=/path</TT></TD>
+<TD>Sets the parent directory for all header files to <TT>/path</TT>.</TD>
+</TR>
+
+</TABLE>
 </P>
 
-<PRE class="unix">
-gmake[1]: Entering directory `/usr/home/sbooth/cgicc'
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/Exception.cc -o obj/Exception.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/MStreamable.cc -o obj/MStreamable.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTTPHeaders.cc -o obj/HTTPHeaders.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLAttributes.cc -o obj/HTMLAttributes.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLElements.cc -o obj/HTMLElements.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLDirLang.cc -o obj/HTMLDirLang.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLForms.cc -o obj/HTMLForms.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLFrames.cc -o obj/HTMLFrames.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLGlobal.cc -o obj/HTMLGlobal.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLGraphics.cc -o obj/HTMLGraphics.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLLinks.cc -o obj/HTMLLinks.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLLists.cc -o obj/HTMLLists.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLObjects.cc -o obj/HTMLObjects.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLScripts.cc -o obj/HTMLScripts.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLStyles.cc -o obj/HTMLStyles.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLTables.cc -o obj/HTMLTables.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/HTMLText.cc -o obj/HTMLText.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/CgiDefs.cc -o obj/CgiDefs.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/FormEntry.cc -o obj/FormEntry.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/FormFile.cc -o obj/FormFile.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/CgiEnvironment.cc -o obj/CgiEnvironment.o
-/usr/local/bin/g++ -Wall -c -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 src/Cgicc.cc -o obj/Cgicc.o
-/usr/local/bin/g++ -shared -o /usr/home/sbooth/cgi-bin/libCgicc.so ./obj/Exception.o ./obj/MStreamable.o ./obj/HTTPHeaders.o ./obj/HTMLAttributes.o ./obj/HTMLElements.o ./obj/HTMLDirLang.o ./obj/HTMLForms.o ./obj/HTMLFrames.o ./obj/HTMLGlobal.o ./obj/HTMLGraphics.o ./obj/HTMLLinks.o ./obj/HTMLLists.o ./obj/HTMLObjects.o ./obj/HTMLScripts.o ./obj/HTMLStyles.o ./obj/HTMLTables.o ./obj/HTMLText.o ./obj/CgiDefs.o ./obj/FormEntry.o ./obj/FormFile.o ./obj/CgiEnvironment.o ./obj/Cgicc.o
-gmake[1]: Leaving directory `/usr/home/sbooth/cgicc'
-gmake[1]: Entering directory `/usr/home/sbooth/cgicc'
-/usr/local/bin/g++ -shared -o /usr/home/sbooth/cgi-bin/libCgicc.so ./obj/Exception.o ./obj/MStreamable.o ./obj/HTTPHeaders.o ./obj/HTMLAttributes.o ./obj/HTMLElements.o ./obj/HTMLDirLang.o ./obj/HTMLForms.o ./obj/HTMLFrames.o ./obj/HTMLGlobal.o ./obj/HTMLGraphics.o ./obj/HTMLLinks.o ./obj/HTMLLists.o ./obj/HTMLObjects.o ./obj/HTMLScripts.o ./obj/HTMLStyles.o ./obj/HTMLTables.o ./obj/HTMLText.o ./obj/CgiDefs.o ./obj/FormEntry.o ./obj/FormFile.o ./obj/CgiEnvironment.o ./obj/Cgicc.o
-/usr/local/bin/g++ -Wall -O2 -I./include -DDEBUG=0 -DHAS_UNAME=1 /usr/home/sbooth/cgi-bin/libCgicc.so -o /usr/home/sbooth/cgi-bin/test.cgi test.cc -lstdc++ 
-gmake[1]: Leaving directory `/usr/home/sbooth/cgicc'
+<P>
+So, for example, to install Cgicc's libraries and headers in 
+<TT>/usr/local/Cgicc</TT>, but the test program in 
+<TT>/usr/local/apache/share/htdocs/cgi-bin</TT>:
+<PRE CLASS="unix">
+% ./configure --prefix=/usr/local/Cgicc \
+--bindir=/usr/local/apache/share/htdocs/cgi-bin
 </PRE>
+</P>
 
 <P>
-Assuming there were no compile errors, open the file <TT>testform.html</TT> in
-the <TT>Cgicc</TT> directory.  Scroll down until you see the following line:
+Once installation is complete, open the file <TT>testform.html</TT> in the
+<TT>Cgicc</TT> directory.  Scroll down until you see the following line:
 
 <PRE CLASS="html">
 &lt;FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/test.cgi"&gt;
 </PRE>
 
 <P>
-Change the path to match the <TT>$(CGIDIR)</TT> macro defined in 
-<TT>Makefile.</TT> This form will call the <TT>test.cgi</TT> program just 
-compiled, and will serve as a test of the compilation. To use 
-<TT>testform.html</TT>, move or copy the file to your <TT>public_html</TT> 
-directory or equivalent.  Load the form, and have some fun!
+Change the path to match <TT>bindir</TT> as supplied to <TT>configure</TT>
+(this is <TT>/prefix/bin</TT> if not explicitly specified).
+This form will call the <TT>test.cgi</TT> program just compiled, and will 
+serve as a test of the compilation. To use <TT>testform.html</TT>, 
+move or copy the file to the <TT>public_html</TT> directory or equivalent
+corresponding to <TT>bindir</TT>. Load the form, and have some fun!
 </P>
 
 <P>
 Incidentally, to see how transparently Cgicc handles 
 the difference between <TT>POST</TT> and <TT>GET</TT> type forms, try 
-changing the request method and see what happens.  You won't notice a 
-difference except in the call to the application.
+changing the request method in <TT>testform.html</TT> and see what happens.  
+You won't notice a difference except in the call to the application.
 </P>
 
 */
