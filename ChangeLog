@@ -1,3 +1,22 @@
+1999-08-06  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* cgicc/HTMLElements.{hh,cc}: Added add() method, to allow
+	embedded HTMLElements to be embedded after object construction.
+
+1999-08-06  Christof Danzl  <cdanzl@cosy.sbg.ac.at>
+
+	* cgicc/HTMLElements.{hh,cc}: Completely reworked for new
+	HTML generation strategy.
+	* cgicc/HTML*.{hh,cc}: Removed (see above).
+	* cgicc/HTMLClasses.hh: Completely reworked for new HTML
+	generation strategy.
+	* cgicc/HTMLGeneric.hh: New file, for new HTML generation
+	strategy.
+
+1999-08-05  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* configure.in: Added AC_CONFIG_AUX_DIR(support)
+
 1999-08-03  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* cgicc/HTMLAttributes.hh: Changed all add methods to set.
