@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiDefs.h.in,v 1.4 1999/08/17 17:16:07 sbooth Exp $
+ *  $Id: CgiDefs.h.in,v 1.5 1999/10/05 16:16:07 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -24,7 +24,7 @@
 
 // Include information from configure
 #if HAVE_CONFIG_H
-#  include "cgicc/config.h"
+#  include "config.h"
 #endif
 
 // Win32-specific setup
