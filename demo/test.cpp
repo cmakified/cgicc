@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.9 1999/09/27 17:35:44 sbooth Exp $
+ *  $Id: test.cpp,v 1.10 1999/09/30 17:40:45 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -384,7 +384,7 @@ dumpList(const Cgicc& formData)
        << td("Element Value") << tr() << endl;
   
   // Iterate through the vector, and print out each value
-  STDNS vector<FormEntry>::const_iterator iter;
+  const_form_iterator iter;
   for(iter = formData.getElements().begin(); 
       iter != formData.getElements().end(); 
       ++iter) {
@@ -405,14 +405,14 @@ showForm(const Cgicc& formData)
   cout << CGICCNS div().set("class","notice") << endl;
 
   //getElement
-  STDNS vector<FormEntry>::const_iterator name = formData.getElement("name");
+  const_form_iterator name = formData.getElement("name");
   if(name != (*formData).end() && ! name->isEmpty())
     cout << "Your name is " << **name << '.' << br() << endl;
   else
     cout << "You don't have a name." << br() << endl;
 
   // getElement and getDoubleValue
-  STDNS vector<FormEntry>::const_iterator salary = formData.getElement("bucks");
+  const_form_iterator salary = formData.getElement("bucks");
   if(salary != (*formData).end() && ! salary->isEmpty())
     cout << "You make " << (*salary).getDoubleValue(80, 120) 
 	 << " million dollars." << br() << endl;
@@ -420,7 +420,7 @@ showForm(const Cgicc& formData)
     cout << "You don't have a salary." << br() << endl;
 
   // getElement and getIntegerValue
-  STDNS vector<FormEntry>::const_iterator hours = formData.getElement("time");
+  const_form_iterator hours = formData.getElement("time");
   if(hours != (*formData).end() && ! (*hours).isEmpty())
     cout << "You've wasted " << (*hours).getIntegerValue() 
 	 << " hours on the web." << br() << endl;
@@ -428,7 +428,7 @@ showForm(const Cgicc& formData)
     cout << "You haven't wasted any time on the web." << br() << endl;
 
   // getElement and getStrippedValue
-  STDNS vector<FormEntry>::const_iterator sheep = formData.getElement("sheep");
+  const_form_iterator sheep = formData.getElement("sheep");
   if(sheep != (*formData).end() && ! (*sheep).isEmpty()) {
     STDNS string temp = (*sheep).getStrippedValue();
     cout << "Your thoughts about sheep cloning: " << temp << br() << endl;
@@ -460,13 +460,13 @@ showForm(const Cgicc& formData)
     cout << "You don't like ice cream!?" << br() << endl;
   
   // getElement
-  STDNS vector<FormEntry>::const_iterator hair = formData.getElement("hair");
+  const_form_iterator hair = formData.getElement("hair");
   if(hair != (*formData).end())
     cout << "Your hair is " << **hair << '.' << br() << endl;
   else
     cout << "You don't have any hair." << br() << endl;
   
-  STDNS vector<FormEntry>::const_iterator vote = formData.getElement("vote");
+  const_form_iterator vote = formData.getElement("vote");
   if(vote != (*formData).end())
     cout << "You voted for " << **vote << '.' << br() << endl;
   else
@@ -499,7 +499,7 @@ showFile(const Cgicc& formData)
 {
   cout << h2("File Uploaded via FormFile") << endl;
   
-  STDNS vector<FormFile>::const_iterator file;
+  const_file_iterator file;
   file = formData.getFile("userfile");
 				
   if(file != formData.getFiles().end()) {

@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.9 1999/09/22 22:38:35 sbooth Exp $
+ *  $Id: dns.cpp,v 1.10 1999/09/30 17:40:45 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -105,8 +105,8 @@ main(int /*argc*/,
     cout << h1() << "Cgi" << span("cc").set("class","red")
 	 << " DNS Gateway" << h1() << endl;
   
-    STDNS vector<FormEntry>::iterator ip = cgi.getElement("ip");
-    STDNS vector<FormEntry>::iterator name = cgi.getElement("hostname");
+    form_iterator ip = cgi.getElement("ip");
+    form_iterator name = cgi.getElement("hostname");
 
     if(ip != (*cgi).end()) {
       cout << h3() << "Query results for " << **ip << h3() << endl;
