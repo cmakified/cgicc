@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.5 1999/08/17 17:16:11 sbooth Exp $
+ *  $Id: test.cpp,v 1.6 1999/08/20 20:54:05 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -59,8 +59,8 @@ void showFile(const Cgicc& formData);
 
 // Main Street, USA
 int
-main(int argc, 
-     char **argv)
+main(int /*argc*/, 
+     char **/*argv*/)
 {
   try {
 #if HAVE_GETTIMEOFDAY
@@ -350,6 +350,9 @@ dumpEnvironment(const CgiEnvironment& env)
        << td(env.getServerProtocol()).set("class","data") << tr() << endl;
   cout << tr() << td("Server Port").set("class","title") 
        << td().set("class","data") << env.getServerPort() 
+       << td() << tr() << endl;
+  cout << tr() << td("HTTPS").set("class","title")
+       << td().set("class","data") << (env.usingHTTPS() ? "true" : "false")
        << td() << tr() << endl;
   cout << tr() << td("Redirect Request").set("class","title") 
        << td(env.getRedirectRequest()).set("class","data") << tr() << endl;
