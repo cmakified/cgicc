@@ -1,10 +1,10 @@
 dnl -*-m4-*-
-dnl $Id: configure.ac,v 1.3 2002/03/09 18:37:29 sbooth Exp $
+dnl $Id: configure.ac,v 1.4 2002/03/17 20:56:37 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(cgicc, 3.2.1, bug-cgicc@gnu.org)
 AC_CONFIG_SRCDIR(cgicc/Cgicc.cpp)
-AC_REVISION([$Revision: 1.3 $])
+AC_REVISION([$Revision: 1.4 $])
 AC_CONFIG_AUX_DIR(support)
 AC_PREFIX_DEFAULT(/usr)
 AM_INIT_AUTOMAKE
@@ -106,7 +106,7 @@ fi
 
 dnl enable/disable the demos, if specified
 AC_ARG_ENABLE(demos, 
-  [  --enable-demos          build demos [default=yes]],
+  [  --enable-demos          build demos default=yes],
   [case "${enableval}" in
     yes) cgicc_demos=yes ;;
     no)  cgicc_demos=no ;;
@@ -119,6 +119,25 @@ AM_CONDITIONAL(DEMOS, test "$cgicc_demos" = yes)
 if test "$cgicc_demos" = yes; then
   AC_CONFIG_FILES(demo/Makefile contrib/Makefile)
 fi
+
+dnl enable/disable the FastCgi demos, if specified
+AC_ARG_ENABLE(fcgi-demos, 
+  [  --enable-fcgi-demos     build FastCgi demos default=no],
+  [case "${enableval}" in
+    yes) cgicc_fcgi_demos=yes ;;
+    no)  cgicc_fcgi_demos=no ;;
+    *) AC_MSG_ERROR(bad value ${enableval} for --enable-fcgi-demos) ;;
+  esac], cgicc_fcgi_demos=no)
+AC_MSG_CHECKING(whether to build the cgicc fcgi demos)
+AC_MSG_RESULT($cgicc_fcgi_demos)
+dnl AM_CONDITIONAL(FCGI_DEMOS, test "$cgicc_fcgi_demos" = yes)
+
+if test "$cgicc_fcgi_demos" = yes; then
+  AC_CHECK_LIB(fcgi, FCGX_Accept, FCGI_LIBS="-lfcgi++ -lfcgi",
+	AC_MSG_ERROR([FastCGI libraries not found]))
+  AC_CONFIG_FILES(contrib/Makefile)
+fi
+AC_SUBST(FCGI_LIBS)
 
 dnl Always output certain files
 AC_CONFIG_FILES([Makefile cgicc/Makefile cgicc/CgiDefs.h 

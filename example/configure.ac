@@ -1,10 +1,10 @@
 dnl -*-m4-*-
-dnl $Id: configure.ac,v 1.2 2002/03/09 18:37:29 sbooth Exp $
+dnl $Id: configure.ac,v 1.3 2002/03/17 20:56:37 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(cgicc-example, 0.2, bug-cgicc@gnu.org)
 AC_CONFIG_SRCDIR(example.cpp)
-AC_REVISION($Revision: 1.2 $)
+AC_REVISION($Revision: 1.3 $)
 AC_PREFIX_DEFAULT(/usr)
 AM_INIT_AUTOMAKE
 
@@ -24,7 +24,7 @@ dnl Checks for library functions.
 
 dnl Info on installed cgicc
 AC_ARG_WITH(cgicc,
-  [  --with-cgicc=DIR        use cgicc installation in DIR],
+  [  --with-cgicc[=DIR]      use cgicc installation in DIR],
   [if ! test -d "${withval}"; then
     AC_MSG_ERROR(bad value '${withval}' for --with-cgicc: not a directory)
    fi

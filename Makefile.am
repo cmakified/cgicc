@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.32 2002/03/09 18:37:29 sbooth Exp $
+## $Id: Makefile.am,v 1.33 2002/03/17 20:56:37 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip dist-bzip2
 
@@ -12,14 +12,15 @@ SUBDIRS = cgicc doc support $(DEMO)
 
 CLEANFILES = *~
 
-MAINTAINERCLEANFILES = config.guess config.sub aclocal.m4	\
-	cgicc-*.tar.gz cgicc-*.diff
+MAINTAINERCLEANFILES = aclocal.m4 cgicc-*.tar.gz cgicc-*.diff
 
 EXTRA_DIST = README.WIN COPYING.DOC example win
 
 dist-hook:
-	rm -rf `find $(distdir)/example -name CVS`
-	rm -rf `find $(distdir)/win -name CVS`
+	cd $(distdir)/example && make distclean
+	rm -rf $(distdir)/example/CVS
+	rm -f $(distdir)/example/autogen
+	rm -rf $(distdir)/win/CVS
 
 if MAINTAINER_MODE
 ################################################################

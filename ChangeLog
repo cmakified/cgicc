@@ -1,3 +1,19 @@
+2002-03-17  Stephen F. Booth  <sbooth@gnu.org>
+
+	* Makefile.am: Make distclean in example for dist-hook
+	* contrib/fcgi-test.cpp: New file
+	* contrib/FCgioIO.{h,cpp}: New files
+	* configure.ac: Add checks for FastCgi
+
+2002-03-13  Stephen F. Booth  <sbooth@gnu.org>
+
+	* doc/tutorial.tmpl: Fixed bug in complete example code 
+	(bug fix submitted by sevcenko@vc.cvut.cz)
+
+2002-03-12  Stephen F. Booth  <sbooth@gnu.org>
+
+	* support/cgicc-config.in: Update copyright
+
 2002-03-09  Stephen F. Booth  <sbooth@gnu.org>
 
 	* Makefile.am: Removed DIST_SUBDIRS
@@ -17,10 +33,11 @@
 	* doc/cgicc.png: New file
 	* doc/Doxyfile.in: Use cgicc-doc.css stylesheet
 	* doc/Doxyfile.in: Don't generate alphabetical index
+	* Makefile.am: Remove autogen from example in dist-hook
 
 2002-03-06  Stephen F. Booth  <sbooth@gnu.org>
 
-	* support/Makefile.am: Distribute depcomp, don't distribute lt
+	* support/Makefile.am: Distribute depcomp, don't distribute it
 
 2002-03-05  Stephen F. Booth  <sbooth@gnu.org>
 

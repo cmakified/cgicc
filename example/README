@@ -1,9 +1,8 @@
 README for cgicc-example
 ========================
 
-This directory contains skeleton code and supporting
-autoconf/automake/libtool infrastructure for a CGI application using
-cgicc.
+This directory contains skeleton code and supporting autoconf/automake
+infrastructure for a CGI application using cgicc.
 
 Assuming that you did a 
  % ./configure

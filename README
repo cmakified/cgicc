@@ -21,10 +21,12 @@ To subscribe, send a message to <bug-cgicc-request@gnu.org> with the
 word 'subscribe' in the subject line.  A web interface to the list is
 available at http://mail.gnu.org/mailman/listinfo/bug-cgicc.
 
+Visit cgicc on the web at http://www.cgicc.org
+
 This package should contain the following directories:
 
 cgicc/     The source code to the GNU cgicc library
-contrib/   Two contributed non-parsed header examples
+contrib/   Contributed non-parsed header and FastCgi examples
 demo/      Four demonstration applications using cgicc
 doc/       Complete documentation for cgicc in html format
 example/   A skeleton CGI application using cgicc and autoconf

@@ -1,3 +1,8 @@
+2002-03-12  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc.m4: Use ' ' instead of ':' as path separator
+	* README: Removed reference to libtool
+
 2002-03-09  Stephen F. Booth  <sbooth@gnu.org>
 
 	* Makefile.am: Updated for automake-1.6

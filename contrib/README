@@ -8,3 +8,6 @@ This directory contains contributed and extra applications:
 
   'nph-login.cgi', an example of how to use cgicc to generate true
    HTTP headers 
+
+  'fcgi-test.cgi', an example of how to use cgicc with FastCgi
+
