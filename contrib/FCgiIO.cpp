@@ -1,5 +1,5 @@
 /*
- *  $Id: FCgiIO.cpp,v 1.3 2003/07/13 14:21:58 sbooth Exp $
+ *  $Id: FCgiIO.cpp,v 1.4 2003/07/17 03:37:50 sbooth Exp $
  *
  *  Copyright (C) 2002 Steve McAndrewSmith
  *  Copyright (C) 2002 - 2003 Stephen F. Booth
@@ -43,7 +43,7 @@ CGICCNS FCgiIO::FCgiIO(FCGX_Request& request)
   for(char **e = fRequest.envp; *e != NULL; ++e) {
     std::string s(*e);
     std::string::size_type i = s.find('=');
-    if(i != std::string::npos)
+    if(i == std::string::npos)
       throw std::runtime_error("Illegally formed environment");
     fEnv[s.substr(0, i)] = s.substr(i + 1);
   }
