@@ -13,6 +13,7 @@ Web. cgicc performs the following functions:
  - Provides full on-the-fly HTML 4.0 generation capabilities, with support
    for cookies.
  - Supports HTTP file upload. 
+ - Compatible with FastCGI
 
 Please send bug reports, suggestions, and comments to <bug-cgicc@gnu.org>
 
@@ -23,7 +24,7 @@ available at http://mail.gnu.org/mailman/listinfo/bug-cgicc.
 This package should contain the following directories:
 
 cgicc/     The source code to the GNU cgicc library
-info/      Complete documentation for cgicc in texinfo format
+doc/       Complete documentation for cgicc in html format
 demo/      Two demonstration applications using cgicc
 example/   A skeleton CGI application using cgicc
 support/   Installation/configuration support files
