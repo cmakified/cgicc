@@ -1,5 +1,5 @@
 /*
- *  $Id: FormFile.cpp,v 1.3 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: FormFile.cpp,v 1.4 2002/04/02 17:53:31 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -33,7 +33,7 @@ CGICCNS FormFile::FormFile(const STDNS string& name,
     fFilename(filename),
     fData(data)
 {
-  fDataType = dataType.empty() ? "text/plain" : dataType;
+  fDataType = dataType.empty() ? STDNS string("text/plain") : dataType;
 
   LOG("Got file ") LOG(getFilename()) LOG(" (") LOG(getDataType())
   LOG(" / ") LOG(getDataLength()) LOGLN(" bytes)")
