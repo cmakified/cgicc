@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.hh,v 1.9 1999/05/10 19:13:16 sbooth Exp $
+ *  $Id: CgiEnvironment.hh,v 1.10 1999/05/25 19:16:43 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __CGI_ENVIRONMENT__
 #define __CGI_ENVIRONMENT__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <vector>
 #include <string>

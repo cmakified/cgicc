@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLLists.cc,v 1.6 1999/04/26 22:42:30 sbooth Exp $
+ *  $Id: HTMLLists.cc,v 1.7 1999/05/25 19:16:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -17,6 +17,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+#ifdef __GNUG__
+#pragma implementation
+#endif
 
 #include "HTMLLists.hh"
 

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLScripts.hh,v 1.6 1999/04/26 22:42:31 sbooth Exp $
+ *  $Id: HTMLScripts.hh,v 1.7 1999/05/25 19:16:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __HTML_SCRIPTS__
 #define __HTML_SCRIPTS__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <string>
 

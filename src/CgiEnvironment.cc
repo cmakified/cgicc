@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cc,v 1.9 1999/05/11 17:03:47 sbooth Exp $
+ *  $Id: CgiEnvironment.cc,v 1.10 1999/05/25 19:16:43 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -17,6 +17,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+#ifdef __GNUG__
+#pragma implementation
+#endif
 
 #include <new>
 #include <memory>

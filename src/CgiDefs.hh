@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiDefs.hh,v 1.7 1999/04/26 22:42:23 sbooth Exp $
+ *  $Id: CgiDefs.hh,v 1.8 1999/05/25 19:16:43 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __CGI_DEFS__
 #define __CGI_DEFS__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #if HAVE_CONFIG_H
 #include "config.h"

@@ -1,5 +1,5 @@
 /*
- *  $Id: MStreamable.hh,v 1.5 1999/04/26 22:42:34 sbooth Exp $
+ *  $Id: MStreamable.hh,v 1.6 1999/05/25 19:16:50 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __MSTREAMABLE__
 #define __MSTREAMABLE__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <iostream>
 

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLGlobal.hh,v 1.6 1999/04/26 22:42:30 sbooth Exp $
+ *  $Id: HTMLGlobal.hh,v 1.7 1999/05/25 19:16:46 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __HTML_GLOBAL__
 #define __HTML_GLOBAL__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <string>
 

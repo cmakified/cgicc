@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLGraphics.hh,v 1.6 1999/04/26 22:42:30 sbooth Exp $
+ *  $Id: HTMLGraphics.hh,v 1.7 1999/05/25 19:16:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __HTML_GRAPHICS__
 #define __HTML_GRAPHICS__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <string>
 

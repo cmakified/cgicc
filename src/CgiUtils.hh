@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.hh,v 1.1 1999/04/26 23:05:16 sbooth Exp $
+ *  $Id: CgiUtils.hh,v 1.2 1999/05/25 19:16:44 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __CGI_UTILS__
 #define __CGI_UTILS__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <new>
 #include <string>

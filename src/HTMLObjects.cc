@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLObjects.cc,v 1.5 1999/04/26 22:42:31 sbooth Exp $
+ *  $Id: HTMLObjects.cc,v 1.6 1999/05/25 19:16:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -17,6 +17,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+#ifdef __GNUG__
+#pragma implementation
+#endif
 
 #include "HTMLObjects.hh"
 

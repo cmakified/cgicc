@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.hh,v 1.14 1999/05/14 17:57:48 sbooth Exp $
+ *  $Id: FormEntry.hh,v 1.15 1999/05/25 19:16:44 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <iostream>
 #include <string>

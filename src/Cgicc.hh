@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.hh,v 1.18 1999/05/10 19:13:17 sbooth Exp $
+ *  $Id: Cgicc.hh,v 1.19 1999/05/25 19:16:44 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __CGICC__
 #define __CGICC__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 /*
  * The GNU Cgicc library, by Stephen F. Booth. 

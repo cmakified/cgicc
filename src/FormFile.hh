@@ -1,5 +1,5 @@
 /*
- *  $Id: FormFile.hh,v 1.12 1999/05/14 17:57:48 sbooth Exp $
+ *  $Id: FormFile.hh,v 1.13 1999/05/25 19:16:45 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __FORM_FILE__
 #define __FORM_FILE__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <iostream>
 #include <string>

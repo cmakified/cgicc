@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.hh,v 1.7 1999/04/26 22:42:32 sbooth Exp $
+ *  $Id: HTTPHeaders.hh,v 1.8 1999/05/25 19:16:49 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,10 @@
 
 #ifndef __HTTP_HEADERS__
 #define __HTTP_HEADERS__ 1
+
+#ifdef __GNUG__
+#pragma interface
+#endif
 
 #include <string>
 
