@@ -1,4 +1,4 @@
-// $Id: cgicc.css,v 1.2 1998/04/08 20:22:58 sbooth Exp $
+// $Id: cgicc.css,v 1.3 1998/10/05 22:33:34 sbooth Exp $
 
 BODY {
 	color: black;
@@ -32,13 +32,6 @@ P.red {
 }
 
 P.center {
-	text-align: center;
-}
-
-DIV.urgent {
-	padding: 1em; 
-	border: ridge medium maroon; 
-	margin: 1em 0;
 	text-align: center;
 }
 
