@@ -1,21 +1,21 @@
 /* -*-c++-*- */
 /*
- *  $Id: FormEntry.h,v 1.3 1999/08/16 17:40:04 sbooth Exp $
+ *  $Id: FormEntry.h,v 1.4 2001/09/02 19:53:17 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This library is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -25,6 +25,16 @@
 #ifdef __GNUG__
 #  pragma interface
 #endif
+
+/*! \file FormEntry.h
+ * \brief Class representing a single HTML form entry.
+ *
+ * FormEntry is an immutable class representing a single user entry
+ * in an HTML form element such as a text field, radio button, or a 
+ * checkbox.  A FormEntry is essentially a name/value pair, where the
+ * name is the name of the form element as specified in the HTML form
+ * itself, and the value is the user-entered or user-selected value.
+ */
 
 #include <iostream>
 #include <string>
@@ -36,22 +46,49 @@
 
 CGICC_BEGIN_NAMESPACE
 
-/** Immutable class representing a single HTML form entry (name/value pair). */
+// ============================================================
+// Class FormEntry
+// ============================================================
+
+/*! \class FormEntry FormEntry.h cgicc/FormEntry.h
+ * \brief Class representing a single HTML form entry.
+ *
+ * FormEntry is an immutable class representing a single user entry
+ * in an HTML form element such as a text field, radio button, or a 
+ * checkbox.  A FormEntry is essentially a name/value pair, where the
+ * name is the name of the form element as specified in the HTML form
+ * itself, and the value is the user-entered or user-selected value.
+ *
+ * If a \c QUERY_STRING contained the fragment \c cgicc=yes the
+ * corresponding FormEntry would have a name of \c cgicc and a value
+ * of \c yes
+ *
+ * \sa FormFile
+ */
 class CGICC_API FormEntry
 {
 public:
   
-  /**
-   * Default constructor - shouldn't be used 
+  // ============================================================
+
+  /*! \name Constructors and Destructor */
+  //@{
+
+  /*! 
+   * \brief Default constructor
+   *
+   * Shouldn't be used.
    */
   inline
   FormEntry()
     {}
   
-  /**
-   * Create a new FormEntry
-   * @param name The name of the form element
-   * @param value The value of the form element
+  /*!
+   * \brief Create a new FormEntry
+   *
+   * This is usually not called directly, but by Cgicc.
+   * \param name The name of the form element
+   * \param value The value of the form element
    */
   inline
   FormEntry(const STDNS string& name, 
@@ -59,153 +96,189 @@ public:
     : fName(name), fValue(value)
     {}
   
-  /**
-   * Copy constructor.
-   * @param entry The FormEntry to copy.
+  /*!
+   * \brief Copy constructor.
+   *
+   * Sets the name and value of this FormEntry to those of \c entry.
+   * \param entry The FormEntry to copy.
    */
   inline
   FormEntry(const FormEntry& entry)
     { operator=(entry); }
   
-  /** Delete this FormEntry */
+  /*! 
+   * \brief Destructor.
+   *
+   * Delete this FormEntry object
+   */
   inline
   ~FormEntry()
     {}
+  //@}
 
-  
-  /**
-   * Compare two FormEntries for equality.
-   * FormEntries are equal if they have the same name and value.
-   * @param entry The FormEntry to compare to this one.
-   * @return true if the two FormEntries are equal, false otherwise.
+  // ============================================================
+
+  /*! \name Overloaded Operators */
+  //@{
+
+  /*!
+   * \brief Compare two FormEntrys for equality.
+   *
+   * FormEntrys are equal if they have the same name and value.
+   * \param entry The FormEntry to compare to this one.
+   * \return \c true if the two FormEntrys are equal, \c false otherwise.
    */
   inline bool 
   operator== (const FormEntry& entry) 			const
     { return stringsAreEqual(fName, entry.fName); }
   
-  /**
-   * Compare two FormEntries for inequality.
-   * FormEntries are equal if they have the same name and value.
-   * @param entry The FormEntry to compare to this one.
-   * @return false if the two FormEntries are equal, true otherwise.
+  /*!
+   * \brief Compare two FormEntrys for inequality.
+   *
+   * FormEntrys are equal if they have the same name and value.
+   * \param entry The FormEntry to compare to this one.
+   * \return \c false if the two FormEntrys are equal, \c true otherwise.
    */
   inline bool
   operator!= (const FormEntry& entry) 			const
     { return ! operator==(entry); }
 
 #ifdef WIN32
-  /** Dummy operator for MSVC++ */
+  /* Dummy operator for MSVC++ */
   inline bool
   operator< (const FormEntry& entry) 			const
   { return false; }
 #endif
 
-  /**
-   * Assign one FormEntry to another.
-   * @param entry The FormEntry to copy.
-   * @return A reference to this.
+  /*!
+   * \brief Assign one FormEntry to another.  
+   *
+   * Sets the name and value of this FormEntry to those of \c entry.
+   * \param entry The FormEntry to copy.
+   * \return A reference to this.
    */
   FormEntry& 
   operator= (const FormEntry& entry);
+  //@}
   
-  
-  /**
-   * Get the name of the form element.
-   * @return The name of the form element.
+  // ============================================================
+
+  /*! \name Accessor Methods 
+   * Information on the form element
+   */
+  //@{
+
+  /*!
+   * \brief Get the name of the form element.
+   *
+   * The name of the form element is specified in the HTML form that
+   * called the CGI application.
+   * \return The name of the form element.
    */
   inline STDNS string
   getName() 						const
     { return fName; }
   
-  /**
-   * Get the value of the form element.
-   * The value may contain line breaks.
-   * @return The value of the form element.
+  /*!
+   * \brief Get the value of the form element as a string
+   *
+   * The value returned may contain line breaks.
+   * \return The value of the form element.
    */
   inline STDNS string
   getValue() 						const
     { return fValue; }
   
-  /**
-   * Get the value of the form element.
-   * The value may contain line breaks.
-   * @return The value of the form element.
+  /*!
+   * \brief Get the value of the form element as a string
+   *
+   * The value returned may contain line breaks.
+   * \return The value of the form element.
    */
   inline STDNS string
   operator* () 						const
     { return getValue(); }
   
-  /**
-   * Get the value of the form element, truncated to a specific length.
-   * The value may contain line breaks.<BR>
-   * <STRONG CLASS="red">It is the caller's responsibility to delete 
-   * <TT>value</TT> when it is no longer needed.</STRONG>
-   * @param maxChars The maximum number of characters to return.
-   * @return The value of the form element, truncated to the specified  length.
+  /*!
+   * \brief Get the value of the form element as a string
+   *
+   * The value returned will be truncated to a specific length.
+   * The value may contain line breaks.
+   * \param maxChars The maximum number of characters to return.
+   * \return The value of the form element, truncated to the specified  length.
    */
   inline STDNS string
   getValue(STDNS string::size_type maxChars) 			const
     { return makeString(maxChars, true); }
   
-  /**
-   * Get the value of the form element, stripped of all line breaks.
-   * <BR><STRONG CLASS="red">It is the caller's responsibility to delete 
-   * <TT>value</TT> when it is no longer needed.</STRONG>
-   * @return The value of the form element, stripped of all line breaks.
+  /*!
+   * \brief Get the value of the form element as a string
+   *
+   * The value returned will be stripped of all line breaks.
+   * \return The value of the form element, stripped of all line breaks.
    */
   inline STDNS string
   getStrippedValue() 					const
     { return getStrippedValue(INT_MAX); }
   
-  /**
-   * Get the value of the form element, stripped of all line breaks
+  /*!
+   * \brief Get the value of the form element as a string
+   *
+   * The value returned will be stripped of all line breaks
    * and truncated to a specific length.
-   * <BR><STRONG CLASS="red">It is the caller's responsibility to delete 
-   * <TT>value</TT> when it is no longer needed.</STRONG>
-   * @param maxChars The maximum number of characters to return.
-   * @return The value of the form element, stripped of all line breaks and
+   * \param maxChars The maximum number of characters to return.
+   * \return The value of the form element, stripped of all line breaks and
    * truncated to the specified length.
    */
   inline STDNS string
   getStrippedValue(STDNS string::size_type maxChars) 		const
     { return makeString(maxChars, false); }
   
-  /**
-   * Get the value of the form element as an integer.
-   * @param min The minimum value to return (optional).
-   * @param max The maximum value to return (optional).
-   * @return The integer value of the form element.
+  /*!
+   * \brief Get the value of the form element as an integer
+   *
+   * No syntax checking is performed on the string value.
+   * \param min The minimum value to return (optional).
+   * \param max The maximum value to return (optional).
+   * \return The integer value of the form element.
    */
   long
   getIntegerValue(long min = LONG_MIN, 
 		  long max = LONG_MAX) 			const;
   
-  /**
-   * Get the value of the form element as a double.
-   * @param min The minimum value to return (optional).
-   * @param max The maximum value to return (optional).
-   * @return The double value of the form element.
+  /*!
+   * \brief Get the value of the form element as a double
+   *
+   * No syntax checking is performed on the string value.
+   * \param min The minimum value to return (optional).
+   * \param max The maximum value to return (optional).
+   * \return The double value of the form element.
    */
   double 
   getDoubleValue(double min = DBL_MIN, 
 		 double max = DBL_MAX) 			const;
   
-  /**
-   * Get the length of the value of the form element.
-   * @return The length of the value of the form element, in bytes.
+  /*!
+   * \brief Get the number of characters in the value of the form element.
+   *
+   * Note that a character may or may not equal one byte.
+   * \return The length of the value of the form element
    */
   inline STDNS string::size_type
   length() 						const
     { return fValue.length(); }
   
-  /**
-   * Determine if this form element is empty (length() == 0).
-   * @return True if this form element is empty, false otherwise.
+  /*!
+   * \brief Determine if this form element is empty
+   *
+   * In an empty form element, length() == 0.
+   * \return \c true if this form element is empty, \c false otherwise.
    */
   inline bool 
   isEmpty() 						const
     { return (length() == 0); }
-  
+  //@}
+
 private:  
   // utility function
   STDNS string

@@ -1,21 +1,21 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.6 2001/03/09 23:22:37 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.7 2001/09/02 19:53:17 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This library is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -26,20 +26,15 @@
 #  pragma interface
 #endif
 
+/*! \file Cgicc.h
+ * The main header file for the GNU cgicc library
+ */
+
 /*
- * The GNU Cgicc library, by Stephen F. Booth. 
+ * The GNU cgicc library, by Stephen F. Booth <sbooth@gnu.org>
  *
  * The latest version can be found on your closest GNU mirror site.
- *
- * Please mail bug reports to <mailto:bug-cgicc@gnu.org>
- *
- * To subscribe, send a message to <mailto:bug-cgicc-request@gnu.org>
- * with the word "subscribe" in the subject field.
- *
- * Cgicc is intended to simplify and speed the development of C++
- * CGI(Common Gateway Interface) applications by providing a simple,
- * yet comprehensive set of classes that present full CGI
- * functionality.  
+ * Please mail bug reports to <bug-cgicc@gnu.org>
  */
 
 #include <vector>
@@ -62,218 +57,297 @@ class MultipartHeader;
 // ============================================================
 // Iterator typedefs
 // ============================================================
+
+//! A vector of FormEntry objects
 typedef STDNS vector<FormEntry>::iterator 	form_iterator;
+//! A vector of \c const FormEntry objects
 typedef STDNS vector<FormEntry>::const_iterator const_form_iterator;
 
+//! A vector of FormFile objects
 typedef STDNS vector<FormFile>::iterator 	file_iterator;
+//! A vector of \c const FormFile objects
 typedef STDNS vector<FormFile>::const_iterator 	const_file_iterator;
 
 // ============================================================
 // Class Cgicc
 // ============================================================
-/**
- * Cgicc is the main class of the Cgicc library.
- * <P>Normally, you will instantiate an object of this type in 
- * <TT>main()</TT>:</P>
- * <PRE CLASS="code">
+
+/*! \class Cgicc Cgicc.h cgicc/Cgicc.h
+ * \brief The main class of the GNU %cgicc library
+ *
+ * Cgicc is used to retrieve information on specific HTML form elements 
+ * (such as checkboxes, radio buttons, and text fields), on uploaded files,
+ * and to save, restore, and retrieve information on the CGI
+ * environment.
+ *
+ * Normally, you will instantiate an object of this type in 
+ * \c main():
+ * \code
  * int
  * main(int argc, char **argv) {
  *   try {
- *     Cgicc cgi;
- *     <SPAN CLASS="green">\\ do something with cgi</SPAN>
+ *     cgicc::Cgicc cgi;
+ *     // do something with cgi
  *   }
  *
  *   catch(const exception& e) {
- *    <SPAN CLASS="green"> \\ handle the error</SPAN>
+ *    //handle the error
  *   }
  * }
- * </PRE>
+ * \endcode
  */
 class CGICC_API Cgicc {
 public:
-  
-  /** Constructor */
+
+  // ============================================================
+
+  /*! \name Constructor and Destructor */
+  //@{
+
+  /*! 
+   * \brief Constructor 
+   *
+   * If you are using %cgicc with FastCGI, you will need to pass 
+   * a \c reader_function_t that %cgicc will use to read input.  If
+   * \c stream_reader is omitted or \c NULL, standard input will be used.
+   * \param stream_reader A reader_function_t to use for reading input
+   */
   Cgicc(reader_function_t stream_reader = NULL);
   
-  /** Destructor */
+  /*! 
+   * \brief Destructor 
+   *
+   * Delete this Cgicc object
+   */
   ~Cgicc();
+  //@}
   
-  
-  /**
-   * Get the date on which this library was compiled.
-   * <P>This is a string of the form mmm dd yyyy.</P>
-   * @return The compile date
+  // ============================================================
+
+  /*! \name Library Information 
+   * Information on this installation of %cgicc
+   */
+  //@{
+
+  /*!
+   * \brief Get the date on which this library was compiled.
+   * 
+   * This is a string of the form <TT>mmm dd yyyy</TT>.
+   * \return The compile date
    */
   const char*
   getCompileDate() 					const;
   
-  /**
-   * Get the time at which this library was compiled.
-   * <P>This is a string of the form hh:mm:ss in 24-hour time.</P>
-   * @return The compile time
+  /*!
+   * \brief Get the time at which this library was compiled.
+   *
+   * This is a string of the form \c hh:mm:ss in 24-hour time.
+   * \return The compile time
    */
   const char*
   getCompileTime() 					const;
   
-  /**
-   * Get the version number of Cgicc.
-   * <P>The version number is a string of the form #.#.</P>
-   * @return The version number
+  /*!
+   * \brief Get the version number of cgicc.
+   *
+   * The version number is a string of the form \c #.#.
+   * \return The version number
    */
   const char*
   getVersion() 						const;
 
-  /** 
-   * Get the platform for which Cgicc was configured.
-   * <P>The host is a string of the form processor-manufacturer-os</P>
-   * @return The host triplet.
+  /*! 
+   * \brief Get the platform for which Cgicc was configured.
+   *
+   * The host is a string of the form \c processor-manufacturer-os
+   * return The host triplet.
    */
   const char*
   getHost() 						const;
-
+  //@}
   
-  /**
-   * Query whether a checkbox is checked.
-   * @param elementName The name of the element to query
-   * @return True if the desired checkbox was checked, false if not
+  // ============================================================
+
+  /*! \name Form Element Access 
+  * Information on submitted form elements
+  */
+  //@{
+
+  /*!
+   * \brief Query whether a checkbox is checked.
+   *
+   * \param elementName The name of the element to query
+   * \return \c true if the desired checkbox was checked, \c false if not
    */
   bool 
   queryCheckbox(const STDNS string& elementName) 	const;
   
-  /**
-   * Find a radio button in a radio group, or a selected list item.
-   * @param name The name of the radio button or list item to find.
-   * @return An iterator referring to the desired element, if found.
+  /*!
+   * \brief Find a radio button in a radio group, or a selected list item.
+   *
+   * \param name The name of the radio button or list item to find.
+   * \return An iterator referring to the desired element, if found.
    */
   inline form_iterator 
   operator[] (const STDNS string& name)
     { return getElement(name); }
 
-  /**
-   * Find a radio button in a radio group, or a selected list item.
-   * @param name The name of the radio button or list item to find.
-   * @return An iterator referring to the desired element, if found.
+  /*!
+   * \brief Find a radio button in a radio group, or a selected list item.
+   *
+   * \param name The name of the radio button or list item to find.
+   * \return An iterator referring to the desired element, if found.
    */
   inline const_form_iterator 
   operator[] (const STDNS string& name) 		const
     { return getElement(name); }
   
-  /**
-   * Find a radio button in a radio group, or a selected list item.
-   * @param name The name of the radio button or list item to find.
-   * @return An iterator referring to the desired element, if found.
+  /*!
+   * \brief Find a radio button in a radio group, or a selected list item.
+   *
+   * \param name The name of the radio button or list item to find.
+   * \return An iterator referring to the desired element, if found.
    */
   form_iterator 
   getElement(const STDNS string& name);
   
-  /**
-   * Find a radio button in a radio group, or a selected list item.
-   * @param name The name of the radio button or list item to find.
-   * @return A const_iterator referring to the desired element, if found.
+  /*!
+   * \brief Find a radio button in a radio group, or a selected list item.
+   *
+   * \param name The name of the radio button or list item to find.
+   * \return A const_iterator referring to the desired element, if found.
    */
   const_form_iterator 
   getElement(const STDNS string& name) 			const;
   
-  /**
-   * Find multiple checkboxes in a group or selected items in a list.
-   * @param name The name of the checkboxes or list to find.
-   * @param result A vector to hold the result.
-   * @return true if any elements were found, false if not.
+  /*!
+   * \brief Find multiple checkboxes in a group or selected items in a list.
+   *
+   * \param name The name of the checkboxes or list to find.
+   * \param result A vector to hold the result.
+   * \return \c true if any elements were found, \c false if not.
    */
   bool 
   getElement(const STDNS string& name,
 	     STDNS vector<FormEntry>& result) 		const;
 
-  /**
-   * Find a radio button in a radio group, or a selected list item.
-   * @param value The value of the radio button or list item to find.
-   * @return An iterator referring to the desired element, if found.
+  /*!
+   * \brief Find a radio button in a radio group, or a selected list item.
+   *
+   * \param value The value of the radio button or list item to find.
+   * \return An iterator referring to the desired element, if found.
    */
   form_iterator 
   getElementByValue(const STDNS string& value);
   
-  /**
-   * Find a radio button in a radio group, or a selected list item.
-   * @param value The value of the radio button or list item to find.
-   * @return A const_iterator referring to the desired element, if found.
+  /*!
+   * \brief Find a radio button in a radio group, or a selected list item.
+   *
+   * \param value The value of the radio button or list item to find.
+   * \return A const_iterator referring to the desired element, if found.
    */
   const_form_iterator 
   getElementByValue(const STDNS string& value) 		const;
   
-  /**
-   * Find multiple checkboxes in a group or selected items in a list.
-   * @param value The value of the checkboxes or list to find.
-   * @param result A vector to hold the result.
-   * @return true if any elements were found, false if not.
+  /*!
+   * \brief Find multiple checkboxes in a group or selected items in a list.
+   *
+   * \param value The value of the checkboxes or list to find.
+   * \param result A vector to hold the result.
+   * \return true if any elements were found, false if not.
    */
   bool 
   getElementByValue(const STDNS string& value,
 		    STDNS vector<FormEntry>& result) 	const;
 
-  /**
-   * Get all the submitted form entries, excluding files.
-   * @return A vector containing all the submitted elements.
+  /*!
+   * \brief Get all the submitted form entries, excluding files.
+   *
+   * \return A vector containing all the submitted elements.
    */
   inline const STDNS vector<FormEntry>& 
   operator* () 						const
     { return fFormData; }
   
-  /**
-   * Get all the submitted form elements, excluding files.
-   * @return A vector containing all the submitted elements.
+  /*!
+   * \brief Get all the submitted form elements, excluding files.
+   *
+   * \return A vector containing all the submitted elements.
    */
   inline const STDNS vector<FormEntry>&
   getElements() 					const
     { return fFormData; }
+  //@}
 
+  // ============================================================
 
-  /**
-   * Find an uploaded file.
-   * @param name The name of the file.
-   * @return An iterator referring to the desired file, if found.
+  /*! \name Uploaded File Access */
+  //@{
+
+  /*!
+   * \brief Find an uploaded file.
+   *
+   * \param name The name of the file.
+   * \return An iterator referring to the desired file, if found.
    */
   file_iterator 
   getFile(const STDNS string& name);
   
-  /**
-   * Find an uploaded file.
-   * @param name The name of the file.
-   * @return An iterator referring to the desired file, if found.
+  /*!
+   * \brief Find an uploaded file.
+   *
+   * \param name The name of the file.
+   * \return An iterator referring to the desired file, if found.
    */
   const_file_iterator 
   getFile(const STDNS string& name) 			const;
 
-  /** 
+  /*!
    * Get all uploaded files.
-   * @return A vector containing all the uploaded files.
+   * \return A vector containing all the uploaded files.
    */
   inline const STDNS vector<FormFile>&
   getFiles() 						const
     { return fFormFiles; }
-
+  //@}
   
-  /**
+  // ============================================================
+
+  /*! \name Environment Access */
+  //@{
+
+  /*!
    * Get the current runtime environment.
-   * @return The current CGI environment.
+   * \return The current CGI environment.
    */
   inline const CgiEnvironment&
   getEnvironment() 					const
     { return fEnvironment;}
-
+  //@}
   
-  /**
-   * Save the current CGI environment to a file.
-   * @param filename The name of the file to which to save.
+  // ============================================================
+
+  /*! \name Save and Restore */
+  //@{
+  
+  /*!
+   * \brief Save the current CGI environment to a file.
+   *
+   * This is useful for debugging CGI applications.
+   * \param filename The name of the file to which to save.
    */
   void 
   save(const STDNS string& filename) 			const;
   
-  /**
-   * Restore from a previously-saved CGI environment.
-   * @param filename The name of the file from which to restore.
+  /*!
+   * \brief Restore from a previously-saved CGI environment.
+   *
+   * This is useful for debugging CGI applications.
+   * \param filename The name of the file from which to restore.
    */
   void 
   restore(const STDNS string& filename);
+  //@}
   
 private:
   CgiEnvironment 		fEnvironment;

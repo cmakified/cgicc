@@ -1,21 +1,21 @@
 /* -*-c++-*- */
 /*
- *  $Id: FormFile.h,v 1.3 1999/08/16 17:40:04 sbooth Exp $
+ *  $Id: FormFile.h,v 1.4 2001/09/02 19:53:17 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This library is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -26,6 +26,15 @@
 #  pragma interface
 #endif
 
+/*! \file FormFile.h
+ * \brief Class representing a file submitted via an HTML form.
+ *
+ * FormFile is an immutable class reprenting a file uploaded via
+ * the HTTP file upload mechanism.  If you are going to use file upload
+ * in your CGI application, remember to set the ENCTYPE of the form to
+ * \c multipart/form-data.
+ */
+
 #include <iostream>
 #include <string>
 
@@ -33,133 +42,187 @@
 
 CGICC_BEGIN_NAMESPACE
 
-/** 
- * Immutable class representing a file uploaded via the HTTP file upload 
- * mechanism.
- * <P>If you are going to use file upload, remember to set the 
- * <TT>ENCTYPE</TT> of the form to <TT>multipart/form-data</TT>:
- * <PRE CLASS="html">
- * &lt;FORM METHOD="POST" ACTION="..." ENCTYPE="multipart/form-data"&gt;
- * </PRE>
- * </P>
+// ============================================================
+// Class FormFile
+// ============================================================
+
+/*! \class FormFile FormFile.h cgicc/FormFile.h
+ * \brief Class representing a file submitted via an HTML form.
+ *
+ * FormFile is an immutable class reprenting a file uploaded via
+ * the HTTP file upload mechanism.  If you are going to use file upload
+ * in your CGI application, remember to set the ENCTYPE of the form to
+ * \c multipart/form-data.
+ * \verbatim
+<FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/upload.cgi" 
+ ENCTYPE="multipart/form-data">
+\endverbatim
+ * \sa FormEntry
  */
 class CGICC_API FormFile
 {
 public:
   
-  /** Default constructor - shouldn't be used. */
+  // ============================================================
+
+  /*! \name Constructors and Destructor */
+  //@{
+  
+  /*!
+   * \brief Default constructor
+   *
+   * Shouldn't be used. 
+   */
   inline
   FormFile()
     {}
   
-  /**
-   * Create a new FormFile.
-   * @param name The <EM>name</EM> of the form element.
-   * @param filename The <EM>filename</EM> of the file on the remote machine.
-   * @param dataType The MIME content type of the data, if specified, or 0.
-   * @param data The file data.
+  /*!
+   * \brief Create a new FormFile.
+   *
+   * This is usually not called directly, but by Cgicc.
+   * \param name The \e name of the form element.
+   * \param filename The \e filename of the file on the remote machine.
+   * \param dataType The MIME content type of the data, if specified, or 0.
+   * \param data The file data.
    */
   FormFile(const STDNS string& name, 
 	   const STDNS string& filename, 
 	   const STDNS string& dataType, 
 	   const STDNS string& data);
   
-  /**
-   * Copy constructor.
+  /*!
+   * \brief Copy constructor.
+   *
+   * Sets the name, filename, datatype, and data to those of \c file
    * @param file The FormFile to copy.
    */
   inline
   FormFile(const FormFile& file)
     { operator=(file); }
   
-  /** Destructor */
+  /*! 
+   * \brief Destructor 
+   *
+   * Delete this FormFile object
+   */
   inline
   ~FormFile()
     {}
-
+  //@}
   
-  /**
-   * Compare two FormFiles for equality.
+  // ============================================================
+
+  /*! \name Overloaded Operators */
+  //@{
+
+  /*!
+   * \brief Compare two FormFiles for equality.
+   *
    * FormFiles are equal if they have the same filename.
    * @param file The FormFile to compare to this one.
-   * @return true if the two FormFiles are equal, false otherwise.
+   * @return \c true if the two FormFiles are equal, \c false otherwise.
    */
   bool 
   operator== (const FormFile& file) 			const;
   
-  /**
-   * Compare two FormFiles for inequality.
+  /*!
+   * \brief Compare two FormFiles for inequality.
+   *
    * FormFiles are equal if they have the same filename.
-   * @param file The FormFile to compare to this one.
-   * @return false if the two FormFiles are equal, true otherwise.
+   * \param file The FormFile to compare to this one.
+   * \return \c false if the two FormFiles are equal, \c true otherwise.
    */
   inline bool 
   operator!= (const FormFile& file) 			const
     { return ! operator==(file); }
   
 #ifdef WIN32
-  /** Dummy operator for MSVC++ */
+  /* Dummy operator for MSVC++ */
   inline bool
   operator< (const FormFile& file) 			const
   { return false; }
 #endif
 
-  /**
-   * Assign one FormFile to another.
-   * @param file The FormFile to copy.
-   * @return A reference to this.
+  /*!
+   * \brief Assign one FormFile to another.
+   *
+   * Sets the name, filename, datatype, and data to those of \c file
+   * \param file The FormFile to copy.
+   * \return A reference to this.
    */
   FormFile& 
   operator= (const FormFile& file);
+  //@}
   
-  
-  /**
-   * Write this file data to the specified stream.
-   * @param out The ostream to which to write.
+  // ============================================================
+
+  /*! \name Accessor Methods 
+   * Information on the uploaded file
+   */
+  //@{
+
+  /*!
+   * \brief Write this file data to the specified stream.
+   *
+   * This is useful for saving uploaded data to disk
+   * \param out The ostream to which to write.
    */
   void 
   writeToStream(STDNS ostream& out) 			const;
 
-  /**
-   * Get the name of the form element.
-   * @return The name of the form element.
+  /*!
+   * \brief Get the name of the form element.
+   *
+   * The name of the form element is specified in the HTML form that
+   * called the CGI application.
+   * \return The name of the form element.
    */
   inline STDNS string
   getName() 						const
     { return fName; }
   
-  /**
-   * Get the name of the file on the remote machine.
-   * @return The name of the file on the remote machine.
+  /*!
+   * \brief Get the basename of the file on the remote machine.
+   *
+   * The filename is stripped of all leading directory information
+   * \return The basename of the file on the remote machine.
    */
   inline STDNS string
   getFilename() 					const
     { return fFilename; }
 
-  /**
-   * Get the MIME type of the file data.
-   * @return The MIME type of the file data.  
+  /*!
+   * \brief Get the MIME type of the file data.
+   *
+   * This will be of the form \c text/plain or \c image/jpeg
+   * \return The MIME type of the file data.  
    */
   inline STDNS string 
   getDataType() 					const
     { return fDataType; }
     
-  /**
-   * Get the file data.  
-   * @return The file data.
+  /*!
+   * \brief Get the file data.  
+   *
+   * This returns the raw file data as a string
+   * \return The file data.
    */
   inline STDNS string 
   getData() 					const
     { return fData; }
   
-  /**
-   * Get the length of the file data, in bytes.
-   * @return The length of the file data, in bytes.
+  /*!
+   * \brief Get the length of the file data
+   *
+   * The length of the file data is usually measured in bytes.
+   * \return The length of the file data, in bytes.
    */
   inline STDNS string::size_type
   getDataLength() 				const
     { return fData.length(); }
-  
+  //@}
+
 private:
   STDNS string 	fName;
   STDNS string 	fFilename;

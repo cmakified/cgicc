@@ -1,26 +1,32 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLClasses.h,v 1.6 1999/09/22 22:30:11 sbooth Exp $
+ *  $Id: HTMLClasses.h,v 1.7 2001/09/02 19:53:17 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This library is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef _HTMLCLASSES_H_
 #define _HTMLCLASSES_H_ 1
+
+/*! \file HTMLClasses.h
+ * \brief The header file containing HTML output classes.
+ *
+ * One class is defined for each element in the HTML 4.0 standard.
+ */
 
 #include "cgicc/CgiDefs.h"
 #include "cgicc/HTMLGeneric.h"
@@ -30,13 +36,36 @@
 // Macros defining types of elements
 // ============================================================
 
+/*!
+ * \brief Create an HTML element rendering class
+ *
+ * \param name The name of the class to define
+ * \param tag The text to output when this tag is rendered
+ */
 #define TAG(name, tag) \
 class name##Tag   \
 { public: inline static const char* getName() { return tag; } }
 
+/*!
+ * \brief Create an atomic HTML element
+ *
+ * Atomic HTML elements maintain no internal on/off state.  For
+ * example, \c br and \c meta are atomic elements.
+ * \param name The name of the class to define
+ * \param tag The text to output when this tag is rendered
+ */
 #define ATOMIC_ELEMENT(name, tag) \
 TAG(name, tag); typedef GenericAtomicElement<name##Tag> name
 
+/*!
+ * \brief An HTML element maintaining an internal on/off state
+ *
+ * Boolean HTML elements maintain an internal state, and the output
+ * rendered depends on the current state. For example, \c h1 and \c
+ * title are boolean elements.
+ * \param name The name of the class to define
+ * \param tag The text to output when this tag is rendered
+ */
 #define BOOLEAN_ELEMENT(name, tag) \
 TAG(name, tag); typedef GenericBooleanElement<name##Tag> name
 
@@ -49,128 +78,126 @@ CGICC_BEGIN_NAMESPACE
 
 // 'comment' is defined in HTMLGeneric.hh
 
-// global structure
-
-BOOLEAN_ELEMENT (html,       "HTML");       // HTML document
-BOOLEAN_ELEMENT (head,       "HEAD");       // document head
-BOOLEAN_ELEMENT (title,      "TITLE");      // document title
-ATOMIC_ELEMENT  (meta,       "META");       // meta data
-BOOLEAN_ELEMENT (style,      "STYLE");      // style sheet
-BOOLEAN_ELEMENT (body,       "BODY");       // document body
+BOOLEAN_ELEMENT (html,       "html");       // HTML document
+BOOLEAN_ELEMENT (head,       "head");       // document head
+BOOLEAN_ELEMENT (title,      "title");      // document title
+ATOMIC_ELEMENT  (meta,       "meta");       // meta data
+BOOLEAN_ELEMENT (style,      "style");      // style sheet
+BOOLEAN_ELEMENT (body,       "body");       // document body
 #if CGICC_USE_NAMESPACES
-BOOLEAN_ELEMENT (div,        "DIV");        // block-level grouping
+BOOLEAN_ELEMENT (div,        "div");        // block-level grouping
 #else
-BOOLEAN_ELEMENT (div_,       "DIV");        // block-level grouping
+BOOLEAN_ELEMENT (div_,       "div");        // block-level grouping
 #endif
-BOOLEAN_ELEMENT (span,       "SPAN");       // inline grouping
-BOOLEAN_ELEMENT (h1,         "H1");         // level 1 heading
-BOOLEAN_ELEMENT (h2,         "H2");         // level 2 heading
-BOOLEAN_ELEMENT (h3,         "H3");         // level 3 heading
-BOOLEAN_ELEMENT (h4,         "H4");         // level 4 heading
-BOOLEAN_ELEMENT (h5,         "H5");         // level 5 heading
-BOOLEAN_ELEMENT (h6,         "H6");         // level 6 heading
-BOOLEAN_ELEMENT (address,    "ADDRESS");    // contact information
+BOOLEAN_ELEMENT (span,       "span");       // inline grouping
+BOOLEAN_ELEMENT (h1,         "h1");         // level 1 heading
+BOOLEAN_ELEMENT (h2,         "h2");         // level 2 heading
+BOOLEAN_ELEMENT (h3,         "h3");         // level 3 heading
+BOOLEAN_ELEMENT (h4,         "h4");         // level 4 heading
+BOOLEAN_ELEMENT (h5,         "h5");         // level 5 heading
+BOOLEAN_ELEMENT (h6,         "h6");         // level 6 heading
+BOOLEAN_ELEMENT (address,    "address");    // contact information
 
 // text markup
 
-BOOLEAN_ELEMENT (em,         "EM");         // emphasis
-BOOLEAN_ELEMENT (strong,     "STRONG");     // stronger emphasis
-BOOLEAN_ELEMENT (cite,       "CITE");       // citation/reference
-BOOLEAN_ELEMENT (dfn,        "DFN");        // defining instance
-BOOLEAN_ELEMENT (code,       "CODE");       // computer code
-BOOLEAN_ELEMENT (samp,       "SAMP");       // sample output
-BOOLEAN_ELEMENT (kbd,        "KBD");        // user input
-BOOLEAN_ELEMENT (var,        "VAR");        // variable/argument
-BOOLEAN_ELEMENT (abbr,       "ABBR");       // abbreviated form
-BOOLEAN_ELEMENT (acronym,    "ACRONYM");    // acronym
-BOOLEAN_ELEMENT (blockquote, "BLOCKQUOTE"); // block-level quotation
-BOOLEAN_ELEMENT (q,          "Q");          // inline quotation
-BOOLEAN_ELEMENT (sub,        "SUB");        // subscript
-BOOLEAN_ELEMENT (sup,        "SUP");        // superscript
-BOOLEAN_ELEMENT (p,          "P");          // paragraph
-ATOMIC_ELEMENT  (br,         "BR");         // line break
-BOOLEAN_ELEMENT (pre,        "PRE");        // preformatted text
-BOOLEAN_ELEMENT (ins,        "INS");        // inserted text
-BOOLEAN_ELEMENT (del,        "DEL");        // deleted text
-BOOLEAN_ELEMENT (bdo,        "BDO");        // overriding direction
+BOOLEAN_ELEMENT (em,         "em");         // emphasis
+BOOLEAN_ELEMENT (strong,     "strong");     // stronger emphasis
+BOOLEAN_ELEMENT (cite,       "cite");       // citation/reference
+BOOLEAN_ELEMENT (dfn,        "dfn");        // defining instance
+BOOLEAN_ELEMENT (code,       "code");       // computer code
+BOOLEAN_ELEMENT (samp,       "samp");       // sample output
+BOOLEAN_ELEMENT (kbd,        "kbd");        // user input
+BOOLEAN_ELEMENT (var,        "var");        // variable/argument
+BOOLEAN_ELEMENT (abbr,       "abbr");       // abbreviated form
+BOOLEAN_ELEMENT (acronym,    "acronym");    // acronym
+BOOLEAN_ELEMENT (blockquote, "blockquote"); // block-level quotation
+BOOLEAN_ELEMENT (q,          "q");          // inline quotation
+BOOLEAN_ELEMENT (sub,        "sub");        // subscript
+BOOLEAN_ELEMENT (sup,        "sup");        // superscript
+BOOLEAN_ELEMENT (p,          "p");          // paragraph
+ATOMIC_ELEMENT  (br,         "br");         // line break
+BOOLEAN_ELEMENT (pre,        "pre");        // preformatted text
+BOOLEAN_ELEMENT (ins,        "ins");        // inserted text
+BOOLEAN_ELEMENT (del,        "del");        // deleted text
+BOOLEAN_ELEMENT (bdo,        "bdo");        // overriding direction
 
 // lists
 
-BOOLEAN_ELEMENT (ul,         "UL");         // unordered list
-BOOLEAN_ELEMENT (ol,         "OL");         // ordered list
-BOOLEAN_ELEMENT (li,         "LI");         // list item 
-BOOLEAN_ELEMENT (dl,         "DL");         // definition list         
-BOOLEAN_ELEMENT (dt,         "DT");         // term to be defined
-BOOLEAN_ELEMENT (dd,         "DD");         // definition of term
+BOOLEAN_ELEMENT (ul,         "ul");         // unordered list
+BOOLEAN_ELEMENT (ol,         "ol");         // ordered list
+BOOLEAN_ELEMENT (li,         "li");         // list item 
+BOOLEAN_ELEMENT (dl,         "dl");         // definition list         
+BOOLEAN_ELEMENT (dt,         "dt");         // term to be defined
+BOOLEAN_ELEMENT (dd,         "dd");         // definition of term
 
 // tables
 
-BOOLEAN_ELEMENT (table,      "TABLE");      // table element
-BOOLEAN_ELEMENT (caption,    "CAPTION");    // table caption
-BOOLEAN_ELEMENT (thead,      "THEAD");      // table head section
-BOOLEAN_ELEMENT (tfoot,      "TFOOT");      // table foot section
-BOOLEAN_ELEMENT (tbody,      "TBODY");      // table body section
-BOOLEAN_ELEMENT (colgroup,   "COLGROUP");   // vertical section
-ATOMIC_ELEMENT  (col,        "COL");        // column attributes
-BOOLEAN_ELEMENT (tr,         "TR");         // table row
-BOOLEAN_ELEMENT (th,         "TH");         // table header cell
-BOOLEAN_ELEMENT (td,         "TD");         // table data cell
+BOOLEAN_ELEMENT (table,      "table");      // table element
+BOOLEAN_ELEMENT (caption,    "caption");    // table caption
+BOOLEAN_ELEMENT (thead,      "thead");      // table head section
+BOOLEAN_ELEMENT (tfoot,      "tfoot");      // table foot section
+BOOLEAN_ELEMENT (tbody,      "tbody");      // table body section
+BOOLEAN_ELEMENT (colgroup,   "colgroup");   // vertical section
+ATOMIC_ELEMENT  (col,        "col");        // column attributes
+BOOLEAN_ELEMENT (tr,         "tr");         // table row
+BOOLEAN_ELEMENT (th,         "th");         // table header cell
+BOOLEAN_ELEMENT (td,         "td");         // table data cell
 
 // links
 
-BOOLEAN_ELEMENT (a,          "A");          // anchor
+BOOLEAN_ELEMENT (a,          "a");          // anchor
 #if CGICC_USE_NAMESPACES
-ATOMIC_ELEMENT  (link,       "LINK");       // document link
+ATOMIC_ELEMENT  (link,       "link");       // document link
 #else
-ATOMIC_ELEMENT  (link_,      "LINK");       // document link
+ATOMIC_ELEMENT  (link_,      "link");       // document link
 #endif
-ATOMIC_ELEMENT  (base,       "BASE");       // path information
+ATOMIC_ELEMENT  (base,       "base");       // path information
 
 // objects
 
-ATOMIC_ELEMENT  (img,        "IMG");        // inline image
-BOOLEAN_ELEMENT (object,     "OBJECT");     // generic object
-ATOMIC_ELEMENT  (param,      "PARAM");      // object parameters
-BOOLEAN_ELEMENT (map,        "MAP");        // client image map
-ATOMIC_ELEMENT  (area,       "AREA");       // image map region
-ATOMIC_ELEMENT  (hr,         "HR");         // horizontal rule
+ATOMIC_ELEMENT  (img,        "img");        // inline image
+BOOLEAN_ELEMENT (object,     "object");     // generic object
+ATOMIC_ELEMENT  (param,      "param");      // object parameters
+BOOLEAN_ELEMENT (map,        "map");        // client image map
+ATOMIC_ELEMENT  (area,       "area");       // image map region
+ATOMIC_ELEMENT  (hr,         "hr");         // horizontal rule
 
 // fonts - preferably use stylesheets
 
-BOOLEAN_ELEMENT (tt,         "TT");         // monospaced text
-BOOLEAN_ELEMENT (i,          "I");          // italic text style
-BOOLEAN_ELEMENT (b,          "B");          // bold text style
-BOOLEAN_ELEMENT (big,        "BIG");        // large font
-BOOLEAN_ELEMENT (small,      "SMALL");      // small font
+BOOLEAN_ELEMENT (tt,         "tt");         // monospaced text
+BOOLEAN_ELEMENT (i,          "i");          // italic text style
+BOOLEAN_ELEMENT (b,          "b");          // bold text style
+BOOLEAN_ELEMENT (big,        "big");        // large font
+BOOLEAN_ELEMENT (small,      "small");      // small font
 
 // frames - not part of the strict DTD
 
-BOOLEAN_ELEMENT (frameset,   "FRAMESET");   // frame layout
-ATOMIC_ELEMENT  (frame,      "FRAME");      // frame contents
-BOOLEAN_ELEMENT (noframes,   "NOFRAMES");   // alternative text
-BOOLEAN_ELEMENT (iframe,     "IFRAME");     // inline frame
+BOOLEAN_ELEMENT (frameset,   "frameset");   // frame layout
+ATOMIC_ELEMENT  (frame,      "frame");      // frame contents
+BOOLEAN_ELEMENT (noframes,   "noframes");   // alternative text
+BOOLEAN_ELEMENT (iframe,     "iframe");     // inline frame
 
 // forms
 
-BOOLEAN_ELEMENT (form,       "FORM");       // form element
-ATOMIC_ELEMENT  (input,      "INPUT");      // generic input
-BOOLEAN_ELEMENT (button,     "BUTTON");     // special button
+BOOLEAN_ELEMENT (form,       "form");       // form element
+ATOMIC_ELEMENT  (input,      "input");      // generic input
+BOOLEAN_ELEMENT (button,     "button");     // special button
 #if CGICC_USE_NAMESPACES
-BOOLEAN_ELEMENT (select,     "SELECT");     // option menu
+BOOLEAN_ELEMENT (select,     "select");     // option menu
 #else
-BOOLEAN_ELEMENT (select_,    "SELECT");     // option menu
+BOOLEAN_ELEMENT (select_,    "select");     // option menu
 #endif
-BOOLEAN_ELEMENT (optgroup,   "OPTGROUP");   // option group
-BOOLEAN_ELEMENT (option,     "OPTION");     // option item
-BOOLEAN_ELEMENT (textarea,   "TEXTAREA");   // multi-line text input
-BOOLEAN_ELEMENT (label,      "LABEL");      // input label
-BOOLEAN_ELEMENT (fieldset,   "FIELDSET");   // grouping input fields
-BOOLEAN_ELEMENT (legend,     "LEGEND");     // caption for field set
+BOOLEAN_ELEMENT (optgroup,   "optgroup");   // option group
+BOOLEAN_ELEMENT (option,     "option");     // option item
+BOOLEAN_ELEMENT (textarea,   "textarea");   // multi-line text input
+BOOLEAN_ELEMENT (label,      "label");      // input label
+BOOLEAN_ELEMENT (fieldset,   "fieldset");   // grouping input fields
+BOOLEAN_ELEMENT (legend,     "legend");     // caption for field set
 
 // scripts
 
-BOOLEAN_ELEMENT (script,     "SCRIPT");     // script element
-BOOLEAN_ELEMENT (noscript,   "NOSCRIPT");   // alternative text
+BOOLEAN_ELEMENT (script,     "script");     // script element
+BOOLEAN_ELEMENT (noscript,   "noscript");   // alternative text
 
 CGICC_END_NAMESPACE
 

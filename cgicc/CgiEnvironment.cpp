@@ -1,20 +1,20 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.5 2001/03/09 23:22:37 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.6 2001/09/02 19:53:17 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This library is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -175,6 +175,17 @@ CGICCNS CgiEnvironment::readEnvironmentVariables()
   fRedirectStatus 	= safeGetenv("REDIRECT_STATUS");
   fReferrer 		= safeGetenv("HTTP_REFERER");
   fCookie 		= safeGetenv("HTTP_COOKIE");
+
+#ifdef WIN32
+  // Win32 bug fix by Peter Goedtkindt
+  STDNS string https 	= safeGetenv("HTTPS");
+  if(stringsAreEqual(https, "on"))
+    fUsingHTTPS = true;
+  else
+    fUsingHTTPS = false;
+#else
+  fUsingHTTPS = (getenv("HTTPS") != 0);
+#endif
 }
 
 void
@@ -188,6 +199,7 @@ CGICCNS CgiEnvironment::save(const STDNS string& filename) 	const
 
   writeLong(file, getContentLength());
   writeLong(file, getServerPort());
+  writeLong(file, (unsigned long) usingHTTPS());
 
   writeString(file, getServerSoftware());
   writeString(file, getServerName());
@@ -234,6 +246,7 @@ CGICCNS CgiEnvironment::restore(const STDNS string& filename)
 
   fContentLength 	= readLong(file);
   fServerPort 		= readLong(file);
+  fUsingHTTPS 		= (bool) readLong(file);
 
   fServerSoftware 	= readString(file);
   fServerName 		= readString(file);
