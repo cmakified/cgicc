@@ -1,4 +1,4 @@
-# $Id: Makefile.am,v 1.3 1998/12/11 01:43:19 sbooth Exp $
+# $Id: Makefile.am,v 1.4 1998/12/16 01:11:19 sbooth Exp $
 
 if TESTS
 TEST = test
@@ -6,7 +6,13 @@ else
 TEST =
 endif
 
-SUBDIRS = src $(TEST) doc
+if DOCS
+DOC = doc
+else
+DOC =
+endif
+
+SUBDIRS = src $(TEST) $(DOC)
 
 CLEANFILES = *~
 
