@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPHeaders.h,v 1.4 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: HTTPHeaders.h,v 1.5 2001/09/03 16:16:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -26,10 +26,18 @@
 #  pragma interface
 #endif
 
+/*! \file HTTPHeaders.h
+ * \brief Classes dealing with HTTP headers
+ * 
+ * These classes are used to tell the client what type of response it
+ * is receiving.
+ */
+
 #include <string>
 
 #include "cgicc/MStreamable.h"
 #include "cgicc/CgiDefs.h"
+#include "cgicc/HTTPCookie.h"
 
 CGICC_BEGIN_NAMESPACE
   
@@ -38,12 +46,12 @@ CGICC_BEGIN_NAMESPACE
 // ============================================================
 /** 
  * Specifies the DTD of the HTML 4 document.
- * <P>To use this class, simply write an object of this type to an ostream:
- * <BR><PRE CLASS="code">
+ * <p>To use this class, simply write an object of this type to an ostream:
+ * <br /><pre class="code">
  * . out << HTMLDoctype();
- * </PRE>
- * <P>For more information, see <TT>\URL{http://www.w3.org/MarkUp/}</TT> and 
- * <TT>\URL{http://www.w3.org/TR/REC-html40/}</TT></P>
+ * </pre>
+ * <p>For more information, see <tt>http://www.w3.org/MarkUp/</tt> and 
+ * <tt>http://www.w3.org/TR/REC-html40/</tt></p>
  */
 class CGICC_API HTMLDoctype : public MStreamable 
 {
@@ -77,219 +85,9 @@ private:
 };
   
 // ============================================================
-// Class HTTPCookie
-// ============================================================
-/**
- * An HTTP cookie. 
- * <P>Use this like any other \Ref{MStreamable} object. For example, to set 
- * an HTTP cookie:</P>
- * <PRE class="code">
- *  out << HTTPCookie("count","1");
- * </PRE>
- */
-class CGICC_API HTTPCookie : public MStreamable 
-{
-public:
-
-  /** Create a new, empty HTTPCookie. */
-  HTTPCookie();
-    
-  /**
-   * Create a new HTTPCookie.
-   * @param name The name of the cookie.
-   * @param value The value of the cookie.
-   */
-  HTTPCookie(const STDNS string& name, 
-	     const STDNS string& value);
-  
-  /**
-   * Create a new HTTPCookie.
-   * @param name The name of the cookie.
-   * @param value The value of the cookie.
-   * @param comment Any comment associated with the cookie.
-   * @param domain The domain for which this cookie is valid- an empty string
-   * will use the hostname of the server which generated the cookie response.
-   * If specified, the domain <EM>must</EM> start with a period('.'). 
-   * @param maxAge A number of seconds defining the lifetime of this cookie.
-   * A value of <TT>0</TT> indicates the cookie expires immediately.
-   * @param path The subset of URLS in a domain for which the cookie is 
-   * valid, for example "/".
-   * @param secure Specifies whether this is a secure cookie.
-   */
-  HTTPCookie(const STDNS string& name, 
-	     const STDNS string& value, 
-	     const STDNS string& comment, 
-	     const STDNS string& domain, 
-	     unsigned long maxAge, 
-	     const STDNS string& path,
-	     bool secure);
-    
-  /**
-   * Copy constructor.
-   * @param cookie The HTTPCookie to copy.
-   */
-  HTTPCookie(const HTTPCookie& cookie);
-    
-  /** Destructor */
-  virtual ~HTTPCookie();
-
-
-
-  /** 
-   * Compare two HTTPCookies for equality.
-   * @param cookie The HTTPCookie to compare to this one
-   * @return true if the two HTTPCookies are equal, false otherwise.
-   */
-  bool 
-  operator== (const HTTPCookie& cookie) 	const;
-
-  /** 
-   * Compare two HTTPCookies for inequality.
-   * @param cookie The HTTPCookie to compare to this one
-   * @return false if the two HTTPCookies are equal, true otherwise.
-   */
-  inline bool 
-  operator != (const HTTPCookie& cookie) 	const
-  { return ! operator==(cookie); }
-
-#ifdef WIN32
-  /** Dummy operator for MSVC++ */
-  inline bool 
-  operator< (const HTTPCookie& cookie) 		const
-  { return false; }
-#endif
-
-  /**
-   * Get the name of this cookie.
-   * @return The name of this cookie.
-   */
-  inline STDNS string 
-  getName() 					const
-    { return fName; }
-    
-  /**
-   * Get the value of this cookie.
-   * @return The value of this cookie.
-   */
-  inline STDNS string 
-  getValue() 					const
-    { return fValue; }
-
-  /**
-   * Get the comment of this cookie.
-   * @return The comment of this cookie.
-   */
-  inline STDNS string 
-  getComment() 					const
-    { return fComment; }
-  
-  /**
-   * Get the domain of this cookie.
-   * @return The domain of this cookie, or "" if none.
-   */
-  inline STDNS string 
-  getDomain() 					const
-    { return fDomain; }
-  
-  /**
-   * Get the lifetime of this cookie, in seconds.
-   * @return The lifetime of this cookie, or 0 if none.
-   */
-  inline unsigned long
-  getMaxAge() 					const
-    { return fMaxAge; }
-    
-  /**
-   * Get the path of this cookie.
-   * @return The path of this cookie, or "" if none.
-   */
-  inline STDNS string 
-  getPath() 					const
-    { return fPath; }
-    
-  /**
-   * Determine if this is a secure cookie.
-   * @return True if this cookie is secure, false if not.
-   */
-  inline bool 
-  isSecure() 					const
-    { return fSecure; }
-
-
-  /**
-   * Set the name of this cookie.
-   * @param name The name of this cookie.
-   */
-  inline void 
-  setName(const STDNS string& name)
-    { fName = name; }
-    
-  /**
-   * Set the value of this cookie.
-   * @param value The value of this cookie.
-   */
-  inline void 
-  setValue(const STDNS string& value)
-    { fValue = value; }
-    
-  /**
-   * Set the comment of this cookie.
-   * @param comment The comment of this cookie.
-   */
-  inline void 
-  setComment(const STDNS string& comment)
-    { fComment = comment; }
-        
-  /**
-   * Set the domain of this cookie.
-   * @param domain The domain of this cookie.
-   */
-  inline void 
-  setDomain(const STDNS string& domain)
-    { fDomain = domain; }
-
-  /**
-   * Set the lifetime of this cookie, in seconds.
-   * @param maxAge The lifetime of this cookie, in seconds. 
-   */
-  inline void 
-  setMaxAge(unsigned long maxAge)
-    { fMaxAge = maxAge; }
-    
-  /**
-   * Set the path of this cookie.
-   * @param path The path of this cookie.
-   */
-  inline void 
-  setPath(const STDNS string& path)
-    { fPath = path; }
-    
-  /**
-   * Mark this cookie as secure or unsecure.
-   * @param secure Whether this is a secure cookie.
-   */
-  inline void 
-  setSecure(bool secure)
-    { fSecure = secure; }
-    
-
-  virtual void 
-  render(STDNS ostream& out) 			const;
-    
-private:
-  STDNS string 		fName;
-  STDNS string 		fValue;
-  STDNS string 		fComment;
-  STDNS string 		fDomain;
-  unsigned long 	fMaxAge;
-  STDNS string 		fPath;
-  bool 			fSecure;
-};
-  
-// ============================================================
 // Class HTTPHeader
 // ============================================================
-/** Abstract base class for all HTTP headers. */
+/** Abstract base class for all HTTP response headers. */
 class CGICC_API HTTPHeader : public MStreamable 
 {
 public:
@@ -309,7 +107,15 @@ public:
   /** Destructor */
   virtual ~HTTPHeader();
 
-    
+
+  inline HTTPHeader&
+  setCookie(const HTTPCookie& cookie)
+  { fCookies.push_back(cookie); return *this; }
+
+  inline const STDNS vector<HTTPCookie>&
+  getCookies() 					const
+  { return fCookies; }
+
   /**
    * Get the data contained in this HTTP header.
    * @return The data contained in this header.
@@ -325,6 +131,7 @@ private:
   HTTPHeader();
 
   STDNS string fData;
+  STDNS vector<HTTPCookie> fCookies;
 };
   
 // ============================================================
@@ -372,7 +179,7 @@ public:
 private:
   HTTPRedirectHeader();
 };
-  
+
 // ============================================================
 // Class HTTPStatusHeader
 // ============================================================
@@ -407,24 +214,6 @@ private:
   HTTPStatusHeader();
   int fStatus;
 };
-  
-// ============================================================
-// Class HTTPNPHeader
-// ============================================================
-/** HTTP No-parse Header */
-class CGICC_API HTTPNPHeader : public HTTPHeader 
-{
-public:
-  /** Create a new No-parse header */
-  HTTPNPHeader();
-    
-  /** Destructor */
-  virtual ~HTTPNPHeader();
-    
-  virtual void 
-  render(STDNS ostream& out) 			const;
-};
-  
 // ============================================================
 // Class HTTPHTMLHeader
 // ============================================================
@@ -507,6 +296,216 @@ public:
     
   /** Destructor */
   virtual ~HTTPAudioHeader();
+};
+
+// Below here are "advanced" headers that most users won't need
+
+// ============================================================
+// Class HTTPResponseHeader
+// ============================================================
+/*! \class HTTPResponseHeader HTTPHeaders.h cgicc/HTTPHeaders.h
+ * \brief Generic HTTP response header
+ *
+ * This class represents an HTTP response header as defined in
+ * section 6 of RFC 2616 (see http://www.w3.org)
+ *
+ * All HTTP/1.1 reponses consist of an initial status line containing
+ * the HTTP version, a 3-digit status code, and a human-readable reason
+ * phrase explaining the status code.
+ *
+ * The first digit of the Status-Code defines the class of
+ * response. The last two digits do not have any categorization
+ * role. There are 5 values for the first digit:
+ * <ul>
+ * <li>1xx: Informational - Request received, continuing process</li>
+ * <li>2xx: Success - The action was successfully received,
+ understood, and accepted</li>
+ * <li>3xx: Redirection - Further action must be taken in order to
+ * complete the request</li>
+ * <li>4xx: Client Error - The request contains bad syntax or cannot
+ * be fulfilled</li>
+ * <li>5xx: Server Error - The server failed to fulfill an apparently
+ * valid request</li></ul>
+ */
+class CGICC_API HTTPResponseHeader : public MStreamable
+{
+public:
+
+  /*! \name Constructor and Destructor */
+  //@{
+
+  /*!
+   * \brief Constructor
+   *
+   * Create a new HTTP response header
+   * \param http_version The HTTP version string, usually \c HTTP/1.1
+   * \param status_code The 3-digit HTTP status code
+   * \param reason_phrase A short textual description of the status code
+   */
+  HTTPResponseHeader(const STDNS string& http_version,
+		     int status_code,
+		     const STDNS string& reason_phrase);
+  
+  /*!
+   * \brief Destructor 
+   *
+   * Delete this HTTPResponseHeader
+   */
+  virtual ~HTTPResponseHeader();
+  //@}
+
+  // ============================================================
+
+  /*! \name Additional Header Management */
+  //@{
+
+  /*!
+   * \brief Add a general, response, or entity header to this one
+   * 
+   * \param header The text of the header to add
+   * \return A reference to this
+   */
+  inline HTTPResponseHeader&
+  addHeader(const STDNS string& header)
+  { fHeaders.push_back(header); return *this; }
+
+  /*!
+   * \brief Get a list of all additional headers
+   *
+   * \return A list of all additional headers
+   */
+  inline const STDNS vector<STDNS string>&
+  getHeaders() 					const
+  { return fHeaders; }
+  //@}
+
+  // ============================================================
+
+  /*! \name Accessor methods 
+   * Retrieve information on the header
+   */
+  //@{
+
+  /*!
+   * \brief Get the HTTP version
+   *
+   * The HTTP version is a string of the form \c HTTP/1.1
+   * \return The HTTP version
+   */
+  inline const STDNS string&
+  getHTTPVersion() 				const
+  { return fHTTPVersion; }
+
+  /*!
+   * \brief Get the 3-digit status code
+   *
+   * The 3-digit status code indicates the disposition of the response.
+   * \return The 3-digit status code
+   */
+  inline int
+  getStatusCode() 				const
+  { return fStatusCode; }
+
+  /*!
+   * \brief Get the reason phrase associated with the stats code
+   *
+   * The reason phrase is a human-readable interpretation of the status code
+   * \return The reason phrase
+   */
+  inline const STDNS string&
+  getReasonPhrase() 				const
+  { return fReasonPhrase; }
+  //@}
+
+  // ============================================================
+
+  /*! \name Mutator methods 
+   * Set information on the header
+   */
+  //@{
+
+  /*!
+   * \brief Set the HTTP version
+   *
+   * The HTTP version is a string of the form \c HTTP/1.1
+   * \param http_version The HTTP version string, usually \c HTTP/1.1
+   * \return A reference to this
+   */
+  inline HTTPResponseHeader&
+  getHTTPVersion(const STDNS string& http_version)
+  { fHTTPVersion = http_version; return *this; }
+
+  /*!
+   * \brief Get the 3-digit status code
+   *
+   * The 3-digit status code indicates the disposition of the response.
+   * \param status_code The 3-digit HTTP status code
+   * \return A reference to this
+   */
+  inline HTTPResponseHeader&
+  getStatusCode(int status_code)
+  { fStatusCode = status_code; return *this; }
+
+  /*!
+   * \brief Get the reason phrase associated with the stats code
+   *
+   * The reason phrase is a human-readable interpretation of the status code
+   * \param reason_phrase A short textual description of the status code
+   * \return A reference to this
+   */
+  inline HTTPResponseHeader&
+  getReasonPhrase(const STDNS string& reason_phrase)
+  { fReasonPhrase = reason_phrase; return *this; }
+  //@}
+
+  // ============================================================
+
+  /*! \name Inherited Methods */
+  //@{
+  virtual void 
+  render(STDNS ostream& out) 			const;
+  //@}
+
+private:
+  HTTPResponseHeader();
+
+  STDNS string fHTTPVersion;
+  int fStatusCode;
+  STDNS string fReasonPhrase;
+
+  STDNS vector<STDNS string> fHeaders;
+};
+
+// ============================================================
+// Class HTTPNPHeader
+// ============================================================
+/*! \class HTTPNPHeader HTTPHeaders.h cgicc/HTTPHeaders.h
+ * \brief HTTP No-parse Header 
+ *
+ * The presence of this header indicates that the server will
+ * <strong>not</strong> process the data sent from the CGI in any way.
+ */
+class CGICC_API HTTPNPHeader : public HTTPResponseHeader 
+{
+public:
+
+  /*! \name Constructor and Destructor */
+  //@{
+
+  /*!
+   * \brief Constructor
+   *
+   * Create a new No-parse header 
+   */
+  HTTPNPHeader();
+    
+  /*! 
+   * \brief Destructor 
+   *
+   * Delete this HTTPNPHeader
+   */
+  virtual ~HTTPNPHeader();
+  //@}
 };
   
 CGICC_END_NAMESPACE

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.cpp,v 1.4 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: HTTPHeaders.cpp,v 1.5 2001/09/03 16:16:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -72,94 +72,23 @@ CGICCNS HTMLDoctype::render(STDNS ostream &out) 	const
 }
 
 // ============================================================
-// Class HTTPCookie
-// ============================================================
-CGICCNS HTTPCookie::HTTPCookie()
-  : fMaxAge(0), 
-    fSecure(false)
-{}
-
-CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name, 
-			       const STDNS string& value)
-  : fName(name), 
-    fValue(value),
-    fMaxAge(0),
-    fSecure(false)
-{}
-
-CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name, 
-			       const STDNS string& value, 
-			       const STDNS string& comment, 
-			       const STDNS string& domain, 
-			       unsigned long maxAge, 
-			       const STDNS string& path,
-			       bool secure)
-  : fName(name), 
-    fValue(value), 
-    fComment(comment), 
-    fDomain(domain), 
-    fMaxAge(maxAge),
-    fPath(path), 
-    fSecure(secure)
-{}
-
-CGICCNS HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
-  : MStreamable(),
-    fName(cookie.getName()), 
-    fValue(cookie.getValue()), 
-    fComment(cookie.getComment()),
-    fDomain(cookie.getDomain()), 
-    fMaxAge(cookie.getMaxAge()),
-    fPath(cookie.getPath()), 
-    fSecure(cookie.isSecure())
-{}
-
-CGICCNS HTTPCookie::~HTTPCookie()
-{}
-
-bool 
-CGICCNS HTTPCookie::operator== (const HTTPCookie& cookie) const
-{
-  return (stringsAreEqual(fName, cookie.fName)
-	  && stringsAreEqual(fValue, cookie.fValue)
-	  && stringsAreEqual(fComment, cookie.fComment)
-	  && stringsAreEqual(fDomain, cookie.fDomain)
-	  && fMaxAge == cookie.fMaxAge
-	  && stringsAreEqual(fPath, cookie.fPath)
-	  && fSecure == cookie.fSecure);
-}
-
-void 
-CGICCNS HTTPCookie::render(STDNS ostream& out) 	const
-{
-  out << "Set-Cookie:" << getName() << '=' << getValue();
-  if(fComment.empty() == false)
-    out << "; Comment=" << fComment;
-  if(fDomain.empty() == false)
-    out << "; Domain=" << fDomain;
-  if(fMaxAge != 0)
-    out << "; Max-Age=" << fMaxAge;
-  if(fPath.empty() == false)
-    out << "; Path=" << fPath;
-  if(fSecure == true)
-    out << "; Secure";
-  
-  out << "; Version=1" << STDNS endl;
-}
-
-// ============================================================
 // Class HTTPHeader
 // ============================================================
 CGICCNS HTTPHeader::HTTPHeader()
-{}
+{
+  fCookies.reserve(5);
+}
 
 CGICCNS HTTPHeader::HTTPHeader(const STDNS string& data)
   : fData(data)
-{}
+{
+  fCookies.reserve(5);
+}
 
 CGICCNS HTTPHeader::HTTPHeader(const HTTPHeader& header)
   : MStreamable(),
-    fData(header.getData())
+    fData(header.getData()),
+    fCookies(header.getCookies())
 {}
 
 CGICCNS HTTPHeader::~HTTPHeader()
@@ -178,7 +107,16 @@ CGICCNS HTTPContentHeader::~HTTPContentHeader()
 void 
 CGICCNS HTTPContentHeader::render(STDNS ostream& out)	const
 {
-  out << "Content-Type: " << getData() << STDNS endl << STDNS endl;
+  out << "Content-Type: " << getData() << STDNS endl;
+
+  if(getCookies().empty() == false) {
+    STDNS vector<HTTPCookie>::const_iterator iter; 
+    
+    for(iter = getCookies().begin(); iter != getCookies().end(); ++iter)
+      out << *iter << STDNS endl;
+  }
+
+  out << STDNS endl;
 }
 
 // ============================================================
@@ -194,7 +132,16 @@ CGICCNS HTTPRedirectHeader::~HTTPRedirectHeader()
 void 
 CGICCNS HTTPRedirectHeader::render(STDNS ostream& out) 	const
 {
-  out << "Location: " << getData() << STDNS endl << STDNS endl;
+  out << "Location: " << getData() << STDNS endl;
+
+  if(getCookies().empty() == false) {
+    STDNS vector<HTTPCookie>::const_iterator iter; 
+    
+    for(iter = getCookies().begin(); iter != getCookies().end(); ++iter)
+      out << *iter << STDNS endl;
+  }
+
+  out << STDNS endl;
 }
 
 // ============================================================
@@ -217,24 +164,16 @@ CGICCNS HTTPStatusHeader::~HTTPStatusHeader()
 void 
 CGICCNS HTTPStatusHeader::render(STDNS ostream& out) 	const
 {
-  out << "Status: " << getStatusCode() << ' ' << getData() 
-      << STDNS endl << STDNS endl;
-}
+  out << "Status: " << getStatusCode() << ' ' << getData() << STDNS endl;
 
-// ============================================================
-// Class HTTPNPHeader
-// ============================================================
-CGICCNS HTTPNPHeader::HTTPNPHeader()
-  : HTTPHeader("HTTP/1.1 204 No Response")
-{}
+  if(getCookies().empty() == false) {
+    STDNS vector<HTTPCookie>::const_iterator iter; 
+    
+    for(iter = getCookies().begin(); iter != getCookies().end(); ++iter)
+      out << *iter << STDNS endl;
+  }
 
-CGICCNS HTTPNPHeader::~HTTPNPHeader()
-{}
-
-void 
-CGICCNS HTTPNPHeader::render(STDNS ostream& out) 	const
-{
-  out << getData() << STDNS endl << STDNS endl;
+  out << STDNS endl;
 }
 
 // ============================================================
@@ -295,4 +234,45 @@ CGICCNS HTTPAudioHeader::HTTPAudioHeader()
 {}
 
 CGICCNS HTTPAudioHeader::~HTTPAudioHeader()
+{}
+
+// ============================================================
+// Class HTTPResponseHeader
+// ============================================================
+CGICCNS HTTPResponseHeader::HTTPResponseHeader(const STDNS string& version,
+					       int status_code,
+					       const STDNS string& reason)
+  : MStreamable(),
+    fHTTPVersion(version),
+    fStatusCode(status_code),
+    fReasonPhrase(reason)
+{
+  fHeaders.reserve(5);
+}
+
+CGICCNS HTTPResponseHeader::~HTTPResponseHeader()
+{}
+
+void 
+CGICCNS HTTPResponseHeader::render(STDNS ostream& out)	const
+{
+  STDNS vector<STDNS string>::const_iterator iter;
+  
+  out << fHTTPVersion << ' ' << fStatusCode << ' ' << fReasonPhrase 
+      << STDNS endl;
+
+  for(iter = fHeaders.begin(); iter != fHeaders.end(); ++iter) {
+    out << *iter << STDNS endl;
+  }
+  out << STDNS endl;
+}
+
+// ============================================================
+// Class HTTPNPHeader
+// ============================================================
+CGICCNS HTTPNPHeader::HTTPNPHeader()
+  : HTTPResponseHeader("HTTP/1.1", 204, "No Response")
+{}
+
+CGICCNS HTTPNPHeader::~HTTPNPHeader()
 {}
