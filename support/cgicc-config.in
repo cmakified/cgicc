@@ -1,9 +1,9 @@
 #! /bin/sh
 
 ##
-##  $Id: cgicc-config.in,v 1.6 2003/07/13 14:26:21 sbooth Exp $
+##  $Id: cgicc-config.in,v 1.7 2004/06/28 00:36:46 sbooth Exp $
 ##
-##  Copyright (C) 2000 - 2003 Stephen F. Booth
+##  Copyright (C) 2000 - 2004 Stephen F. Booth
 ##
 ##  This program is free software; you can redistribute it and/or modify
 ##  it under the terms of the GNU General Public License as published by
@@ -20,10 +20,11 @@
 ##  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-includedir=@includedir@
-libdir=@libdir@
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+includedir="@includedir@"
+libdir="@libdir@"
+cxxflags="@CXXFLAGS@"
 
 ## Usage info
 usage()
@@ -35,6 +36,7 @@ Options:
     --exec-prefix  Display architecture-dependent installation dir
     --includedir   Display header file installation dir
     --libdir       Display object-code installation dir
+    --cxxflags     Display C++ compiler flags
     --host         Display host information
     --version      Display version information
     --help         Display this message
@@ -66,6 +68,9 @@ while test $# -gt 0; do
 
 	## Header file dir
 	--includedir)  echo "$includedir" && exit 0 ;;
+
+	## C++ compiler flags
+	--cxxflags)  echo "$cxxflags" && exit 0 ;;
 
 	## Host information
 	--host)        echo "@host@" && exit 0 ;;	    
