@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.cc,v 1.3 1999/07/26 16:52:52 sbooth Exp $
+ *  $Id: HTTPHeaders.cc,v 1.4 1999/08/02 19:40:27 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -120,13 +120,13 @@ CGICCNS HTTPCookie::render(STDNS ostream& out) 	const
 {
   out << "Set-Cookie:" << getName() << '=' << getValue();
   if(fComment.empty() == false)
-    out << "; Comment=" << fComment << ';';
+    out << "; Comment=" << fComment;
   if(fDomain.empty() == false)
-    out << "; Domain=" << fDomain << ';';
+    out << "; Domain=" << fDomain;
   if(fMaxAge != 0)
-    out << "; Max-Age=" << fMaxAge << ';';
+    out << "; Max-Age=" << fMaxAge;
   if(fPath.empty() == false)
-    out << "; Path=" << fPath << ';';
+    out << "; Path=" << fPath;
   if(fSecure == true)
     out << "; Secure";
   
