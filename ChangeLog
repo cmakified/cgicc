@@ -1,3 +1,20 @@
+1999-08-16  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* win/cgicc.dsp: Modified to use "Multithreaded DLL" runtime library
+	* win/dns.dsp,test.dsp,example.dsp: Modified to use "Multithreaded"
+	runtime library
+	* cgicc/CgiDefs.h.in: Enable warning 4251 in WIN32 section
+	* cgicc/CgiEnvironment.h: Added declaration for templatized member
+	* cgicc/FormEntry.h: Added dummy operator< for MSVC++
+	* cgicc/FormFile.h:  Added dummy operator< for MSVC++
+	* cgicc/HTMLAttributes.h:  Added dummy operator< for MSVC++, and 
+	declaration for templatized member
+	* cgicc/HTMLElements.cpp: Added operator==
+	* cgicc/HTMLElements.h: Added operator==, operator!=, operator<, and
+	declaration for templatized member
+	* cgicc/HTTPHeaders.cpp: Added operator==
+	* cgicc/HTTPHeaders.h: Added operator==, operator!=, operator<
+
 1999-08-11  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* cgicc/CgiDefs.h.in: Disable warning 4251 in WIN32 section
