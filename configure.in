@@ -1,11 +1,11 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.22 1999/08/31 17:38:11 sbooth Exp $
+dnl $Id: configure.in,v 1.23 2000/04/08 04:43:54 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION($Revision: 1.22 $)
+AC_REVISION($Revision: 1.23 $)
 AC_INIT(cgicc/Cgicc.cpp)
 AC_CONFIG_AUX_DIR(support)
-AM_INIT_AUTOMAKE(cgicc, 3.1.1)
+AM_INIT_AUTOMAKE(cgicc, 3.1.2)
 AM_CONFIG_HEADER(cgicc/config.h)
 AM_MAINTAINER_MODE
 
@@ -87,5 +87,5 @@ AC_ARG_ENABLE(demos,
 AM_CONDITIONAL(DEMOS, test "$demos" = true)
 
 AC_OUTPUT([Makefile cgicc/Makefile cgicc/CgiDefs.h info/Makefile demo/Makefile 
-	example/Makefile])
+	example/Makefile support/cgicc.spec])
 
