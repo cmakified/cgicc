@@ -1,3 +1,16 @@
+2002-03-01  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiInput.{h,cpp}: New files for input data sources
+	* cgicc/Cgicc.{h,cpp}: Added support for CgiInput class
+	* cgicc/CgiEnvironment.{h,cpp}: Added support for CgiInput class
+	* cgicc/HTTPHeaders.h: Removed (unnecessary)
+	* demo/cookie.cpp: #include "HTTPHTMLHeader.h"
+	* demo/dns.cpp: #include "HTTPHTMLHeader.h"
+	* demo/test.cpp: #include "HTTPHTMLHeader.h"
+	* demo/upload.cpp: #include "HTTPHTMLHeader.h"
+	* contrib/nph-login.cpp: #include "HTTPResponseHeader.h"
+	* contrib/nph-hello.cpp: #include "HTTPResponseHeader.h"
+	
 2002-02-19  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/HTTPCookie.cpp: Don't output a trailing newline
