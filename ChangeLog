@@ -15,7 +15,8 @@
 	* example/yourSource.cc: Removed, renamed to yourSource.cpp.  Changed
 	#includedes to reflect new names.
 	* example/Makefile.in: .cc -> .cpp.
-	* configure.in: Added AC_CONFIG_AUX_DIR(support)
+	* configure.in: Added AC_CONFIG_AUX_DIR(support).
+	* configure.in: Added AC_REVISION
 	* Makefile.am: yourSource.cc -> yourSource.cpp.
 
 1999-08-06  Stephen F. Booth  <sbooth@saaba.lmi.net>
