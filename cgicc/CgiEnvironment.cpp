@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.19 2004/06/28 00:25:28 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.20 2004/06/28 02:57:03 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -46,7 +46,7 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
   // an empty inline constructor is negligible
   CgiInput local_input;
 
-  if(input == 0)
+  if(0 == input)
     readEnvironmentVariables(&local_input);
   else
     readEnvironmentVariables(input);
@@ -66,7 +66,7 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
     std::vector<char> data(getContentLength());
     
     // If input is 0, use the default implementation of CgiInput
-    if(input == 0) {
+    if(0 == input) {
       if(local_input.read(&data[0],getContentLength()) != getContentLength())
 	throw std::runtime_error("I/O error");
     }
@@ -163,7 +163,7 @@ cgicc::CgiEnvironment::parseCookies()
 {
   std::string data = getCookies();
 
-  if(! data.empty()) {
+  if(false == data.empty()) {
     std::string::size_type pos;
     std::string::size_type oldPos = 0;
 
@@ -172,7 +172,7 @@ cgicc::CgiEnvironment::parseCookies()
       pos = data.find(";", oldPos);
 
       // if no ';' was found, the rest of the string is a single cookie
-      if(pos == std::string::npos) {
+      if(std::string::npos == pos) {
 	parseCookie(data.substr(oldPos));
 	return;
       }
@@ -194,7 +194,7 @@ cgicc::CgiEnvironment::parseCookie(const std::string& data)
   std::string::size_type pos = data.find("=", 0);
 
   // if no '=' was found, return
-  if(pos == std::string::npos)
+  if(std::string::npos == pos)
     return;
 
   // skip leading whitespace - " \f\n\r\t\v"
@@ -202,7 +202,7 @@ cgicc::CgiEnvironment::parseCookie(const std::string& data)
   std::string::const_iterator data_iter;
   
   for(data_iter = data.begin(); data_iter != data.end(); ++data_iter,++wscount)
-    if(std::isspace(*data_iter) == 0)
+    if(0 == std::isspace(*data_iter))
       break;			
   
   // Per RFC 2091, do not unescape the data (thanks to afm@othello.ch)
@@ -255,7 +255,7 @@ cgicc::CgiEnvironment::readEnvironmentVariables(CgiInput *input)
   else
     fUsingHTTPS = false;
 #else
-  fUsingHTTPS = (getenv("HTTPS") != 0);
+  fUsingHTTPS = (0 != getenv("HTTPS"));
 #endif
 }
 
