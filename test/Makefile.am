@@ -1,6 +1,7 @@
-# $Id: Makefile.am,v 1.3 1998/12/11 21:53:21 sbooth Exp $
+# $Id: Makefile.am,v 1.4 1998/12/19 01:53:26 sbooth Exp $
 
 CLEANFILES = *~
+DISTCLEANFILES = .deps/*
 
 bin_PROGRAMS = test.cgi dns.cgi
 
