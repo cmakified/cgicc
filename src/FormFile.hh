@@ -1,4 +1,4 @@
-/* $Id: FormFile.hh,v 1.3 1998/04/02 11:16:25 sbooth Exp $ */
+/* $Id: FormFile.hh,v 1.4 1998/04/02 11:26:09 sbooth Exp $ */
 
 #ifndef __FORM_FILE__
 #define __FORM_FILE__ 1
@@ -67,7 +67,7 @@ public:
   /**
    * Get the MIME type of the file data.
    * @return The MIME type of the file data, or NULL if not specified.  
-   * If not specified, assume the data is of type "text/plain".
+   * If not specified, assume the data is of type <TT>text/plain</TT>.
    */
   const char* getDataType() const 	{ return fDataType; }
 
