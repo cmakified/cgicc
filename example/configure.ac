@@ -1,11 +1,12 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.4 2001/09/02 19:58:34 sbooth Exp $
+dnl $Id: configure.ac,v 1.1 2001/09/03 22:11:13 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION($Revision: 1.4 $)
-AC_INIT(example.cpp)
+AC_INIT(cgicc-example, 0.2, bug-cgicc@gnu.org)
+AC_CONFIG_SRCDIR(example.cpp)
+AC_REVISION($Revision: 1.1 $)
 AC_PREFIX_DEFAULT(/usr)
-AM_INIT_AUTOMAKE(cgicc-example, 0.1)
+AM_INIT_AUTOMAKE(cgicc-example, 0.2)
 
 AC_LANG_CPLUSPLUS
 
@@ -33,4 +34,5 @@ dnl Perform some sanity checks on the cgicc installation
 CGICC_CHECK_INSTALLATION($cgicc_prefix)
 
 dnl Output files
-AC_OUTPUT(Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
