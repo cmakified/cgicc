@@ -1,6 +1,14 @@
 1999-09-30  Stephen F. Booth  <sbooth@gnu.org>
 
 	* info/Makefile.am: Added rules to generate HTML (texinfo-4.0)
+	* cgicc/Cgicc.h: Added typedefs for iterators
+	([const_]form_iterator, [const_]file_iterator)
+	* cgicc/Cgicc.cpp: Use above typedefs
+	* demo/test.cpp: Use typedefs, as above
+	* demo/dns.cpp: Use typedefs, as above
+	* info/class-cgicc.texinfo: Added documentation for iterator typedefs.
+	* info/tutorial.texinfo: Updated example to use iterator typedefs.
+	* info/cgicc.texinfo: Use @ifnottex instead of @ifinfo
 
 1999-09-27  Stephen F. Booth  <sbooth@gnu.org>
 
