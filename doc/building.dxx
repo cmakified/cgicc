@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.9 1998/10/05 22:56:14 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.10 1998/10/05 22:57:50 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -115,8 +115,8 @@ dependency information.  At the UNIX prompt, type
 
 <P>for the static version.</P>
 <P>Please note that if you elect to compile the shared
-version, you need to supply <STRONG>absolute</STRONG> paths in 
-<TT>Makefile.incl</TT>.</P>
+version, you need to supply the <STRONG>absolute</STRONG> path to your cgi-bin
+directory in <TT>Makefile.incl</TT>.</P>
 
 <P>
 You should see output similar to (will vary depending on your configuration):
