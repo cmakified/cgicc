@@ -1,4 +1,4 @@
-/* $Id: cgicc-doc.css,v 1.4 2004/06/12 01:58:25 sbooth Exp $ */
+/* $Id: cgicc-doc.css,v 1.5 2004/06/22 01:34:56 sbooth Exp $ */
 
 body { 
 	color: black; 
@@ -18,6 +18,15 @@ div.unix {
 span.red 	{ color: red; }
 span.big	{ font-size: large; }
 span.white	{ color: white; }
+
+div.title {
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border-top: solid thin red;
+	border-bottom: solid thin red;
+}
 
 div.center {
 	text-align: center;
@@ -66,3 +75,12 @@ div.subsection {
 }
 
 div.nav > a:hover { background-color: #aaffaa; }
+
+img {
+	border: none;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
