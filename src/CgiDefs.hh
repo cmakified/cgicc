@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiDefs.hh,v 1.10 1999/05/28 19:37:11 sbooth Exp $
+ *  $Id: CgiDefs.hh,v 1.11 1999/06/03 23:05:35 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -21,9 +21,8 @@
 #ifndef _CGIDEFS_HH_
 #define _CGIDEFS_HH_ 1
 
-#if HAVE_CONFIG_H
-#include "config.h"
-#endif
+// Include information from configure
+#include "cgicc/config.h"
 
 // Handle namespaces
 #if USE_NAMESPACES

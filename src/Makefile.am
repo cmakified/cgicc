@@ -1,6 +1,8 @@
-## $Id: Makefile.am,v 1.9 1999/05/31 17:04:35 sbooth Exp $
+## $Id: Makefile.am,v 1.10 1999/06/03 23:05:36 sbooth Exp $
 
 CLEANFILES = *~
+
+INCLUDES = -I$(srcdir)/..
 
 lib_LTLIBRARIES = libcgicc.la
 libcgicc_la_SOURCES = CgiEnvironment.cc CgiUtils.cc Cgicc.cc		\
