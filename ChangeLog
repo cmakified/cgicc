@@ -9,6 +9,8 @@
 	* cgicc/HTMLElements.cpp: Same.
 	* cgicc/MStreamable.h: Added CGICC_API in front of friend 
 	declaration (for MSVC++ 5.0).
+	* info/classes-html.texinfo: Added documentation for new 
+	HTMLElemnt::add method.
 
 1999-08-16  Christof Danzl  <cdanzl@cosy.sbg.ac.at>
 
