@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.13 1999/06/02 22:08:36 sbooth Exp $
+## $Id: Makefile.am,v 1.14 1999/06/03 23:06:52 sbooth Exp $
 
 if DEMOS
 DEMO = demo
@@ -6,7 +6,7 @@ else
 DEMO =
 endif
 
-SUBDIRS = src info $(DEMO)
+SUBDIRS = cgicc info $(DEMO)
 
 CLEANFILES = *~
 
