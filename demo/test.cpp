@@ -1,7 +1,7 @@
 /*
- *  $Id: test.cpp,v 1.20 2003/07/13 14:22:57 sbooth Exp $
+ *  $Id: test.cpp,v 1.21 2004/06/12 14:48:41 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -454,28 +454,28 @@ showForm(const Cgicc& formData)
   else
     cout << "You don't have any hair." << br() << endl;
   
-  const_form_iterator vote = formData.getElement("vote");
-  if(vote != (*formData).end())
-    cout << "You voted for " << **vote << '.' << br() << endl;
+  const_form_iterator browser = formData.getElement("browser");
+  if(browser != (*formData).end())
+    cout << "You surf the web with " << **browser << '.' << br() << endl;
   else
     cout << "This should never happen. ERROR!" << br() << endl;
   
   // getElement
-  std::vector<FormEntry> friends;
-  formData.getElement("friends", friends);
-  if(! friends.empty()) {
-    cout << "You like ";
-    for(std::string::size_type i = 0; i < friends.size(); i++) {
-      cout << friends[i].getValue();
-      if(i < friends.size() - 2)
+  std::vector<FormEntry> authors;
+  formData.getElement("authors", authors);
+  if(! authors.empty()) {
+    cout << "You like to read books by ";
+    for(std::string::size_type i = 0; i < authors.size(); i++) {
+      cout << authors[i].getValue();
+      if(i < authors.size() - 2)
 	cout << ", ";
-      else if(i == friends.size() - 2)
+      else if(i == authors.size() - 2)
 	cout << " and ";
     }
-    cout << " on Friends." << br() << endl;
+    cout << "." << br() << endl;
   }
   else
-    cout << "You don't watch Friends!?" << br() << endl;
+    cout << "You don't like to read!?" << br() << endl;
   
   cout << cgicc::div() << endl;
 }
