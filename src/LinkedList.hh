@@ -1,4 +1,4 @@
-/* $Id: LinkedList.hh,v 1.3 1998/04/01 20:50:32 sbooth Exp $ */
+/* $Id: LinkedList.hh,v 1.4 1998/04/03 09:44:56 sbooth Exp $ */
 
 #ifndef __LINKED_LIST__
 #define __LINKED_LIST__ 1
@@ -22,6 +22,47 @@
 /**
  * A templatized linked list class supporting find, replace, insert, delete,
  * and erase operations.
+ *
+ * <P>LinkedLists manage their own storage, allocating and deallocating as
+ * needed.  Classes contained within a LinkedList <STRONG>MUST</STRONG> define
+ * a copy constructor.</P>
+ *
+ * <P>To create a new LinkedList of Exceptions, and add two items to it:
+ * <PRE CLASS="code">
+ * LinkedList&lt;Exception&gt; list;
+ * list.append(Exception("error one");
+ * list &lt;&lt; Exception("error two");
+ * </PRE>
+ * Note that the items added were created on the stack; LinkedList creates
+ * an internal copy, so you can safely add temporaries.
+ * </P>
+ *
+ * <P>To iterate through every item in a LinkedList:
+ * <PRE CLASS="code">
+ * LinkedList&lt;Exception&gt;::Iterator = list.begin();
+ * while(iter.isValid()) {
+ *  cout &lt;&lt; (*iter++).getMessage() &lt;&lt; endl;
+ * }
+ * </PRE>
+ * </P>
+ *
+ * <P>To iterate through every item in a LinkedList backwards:
+ * <PRE CLASS="code">
+ * LinkedList<Exception>::ReverseIterator = list.rEnd();
+ * while(iter.isValid()) {
+ *  cout &lt;&lt; (*iter++).getMessage() &lt;&lt; endl;
+ * }
+ * </PRE>
+ * </P>
+ *
+ * <P>LinkedLists also support insert/delete operations:
+ * <PRE CLASS="code">
+ * LinkedList&lt;char&gt; list;
+ * list &lt;&lt; 'C' &lt;&lt; 'g' &lt;&lt; 'i' &lt;&lt; 'c' &lt;&lt; 'c';
+ * list.insert(1, '!'); <SPAN CLASS="green">// list is now Cg!icc</SPAN>
+ * list.erase(3); <SPAN CLASS="green">// list is now Cg!cc</SPAN>
+ * </PRE>
+ * </P>
  */
 template <class T>
 class LinkedList : public MStreamable {
@@ -51,10 +92,10 @@ public:
    * LinkedList&lt;int&gt; list;
    * list &lt;&lt; 1 &lt;&lt; 2 &lt;&lt; 3 &lt;&lt; 4 &lt;&lt; 5 &lt;&lt; 6 &lt;&lt; 7;
    * LinkedList&lt;int&gt;::Iterator iter = list.begin();
-   * *iter = 0; <SPAN CLASS="green">Set the first element of list to 0</SPAN>
-   * iter += 2; <SPAN CLASS="green">Advance iter by 2</SPAN>
-   * iter -= 1; <SPAN CLASS="green">Decrement iter by 1</SPAN>
-   * --*iter = 1; <SPAN CLASS="green">Restore list to original state</SPAN>
+   * *iter = 0; <SPAN CLASS="green">|| List is now 0234567</SPAN>
+   * iter += 2; <SPAN CLASS="green">|| Advance iter by 2</SPAN>
+   * iter -= 1; <SPAN CLASS="green">|| Decrement iter by 1</SPAN>
+   * --*iter = 1; <SPAN CLASS="green">|| Restore list to original state</SPAN>
    * </PRE>
    */
   class Iterator : public MStreamable
@@ -64,8 +105,13 @@ public:
     friend class ConstIterator;
     
   public:
-    /**@name Copy Constructor */
+    /**@name Constructors */
     //@{
+    
+    /** Constructor */
+    Iterator()
+      : fNode(NULL), fValid(false) {}
+
     
     /**
      * Copy constructor.
@@ -74,8 +120,8 @@ public:
     Iterator(const Iterator& iter)
       : fNode(iter.fNode), fValid(iter.fValid) {}
     
-    virtual ~Iterator()
-    {}
+    /** Destructor */
+    virtual ~Iterator() {}
     //@}
     
     virtual void render(ostream& out) const
@@ -227,9 +273,6 @@ public:
     //@}
     
   protected:
-    Iterator()
-      : fNode(NULL), fValid(false) {}
-
     Iterator(const Node<T> *node)
       : fNode(NULL), fValid(true) 
     { if(node != NULL) fNode = (Node<T>*) node; else fValid = false; }
@@ -265,9 +308,13 @@ public:
     friend class Iterator;
     
   public:
-    /**@name Copy Constructor */
+    /**@name Constructors */
     //@{
-    
+
+    /** Constructor */
+    ConstIterator()
+      : fNode(NULL), fValid(false) {}
+
     /**
      * Copy constructor.
      * @param iter The ConstIterator to copy. 
@@ -275,8 +322,8 @@ public:
     ConstIterator(const ConstIterator& iter)
       : fNode(iter.fNode), fValid(iter.fValid) {}
     
-    virtual ~ConstIterator()
-    {}
+    /** Destructor */
+    virtual ~ConstIterator() {}
     //@}
     
     virtual void render(ostream& out) const
@@ -414,9 +461,6 @@ public:
     //@}
     
   protected:
-    ConstIterator()
-      : fNode(NULL), fValid(false) {}
-
     ConstIterator(const Node<T> *node)
       : fNode(NULL), fValid(true) 
     { if(node != NULL) fNode = (Node<T>*) node; else fValid = false; }
@@ -451,9 +495,13 @@ public:
     
   public:
     
-    /**@name Copy Constructor */
+    /**@name Constructors */
     //@{
-    
+
+    /** Constructor */
+    ReverseIterator()
+      : Iterator() {}
+
     /**
      * Copy constructor.
      * @param iter The ReverseIterator to copy. 
@@ -461,8 +509,8 @@ public:
     ReverseIterator(const Iterator& iter)
       : Iterator(iter) {}
     
-    virtual ~ReverseIterator()
-    {}
+    /** Destructor */
+    virtual ~ReverseIterator() {}
     //@}
     
     /**@name List Traversal */
@@ -535,10 +583,7 @@ public:
     { ReverseIterator temp = *this; temp -= n; return temp; }
     //@}
     
-  protected:
-    ReverseIterator()
-      : Iterator() {}
-    
+  protected:    
     ReverseIterator(const Node<T> *node)
       : Iterator(node) {}
   };
@@ -559,8 +604,12 @@ public:
     
   public:
     
-    /**@name Copy Constructor */
+    /**@name Constructors */
     //@{
+    
+    /** Constructor */
+    ConstReverseIterator()
+      : ConstIterator() {}
     
     /**
      * Copy constructor.
@@ -569,8 +618,8 @@ public:
     ConstReverseIterator(const ConstReverseIterator& iter)
       : ConstIterator(iter) {}
     
-    virtual ~ConstReverseIterator()
-    {}
+    /** Destructor */
+    virtual ~ConstReverseIterator() {}
     //@}
     
     /**@name List Traversal */
@@ -644,14 +693,11 @@ public:
     //@}
     
   protected:
-    ConstReverseIterator()
-      : ConstIterator() {}
-    
     ConstReverseIterator(const Node<T> *node)
       : ConstIterator(node) {}
   };
 
-  /**@name Constructor */
+  /**@name Constructors */
   //@{
   /** Create an empty list */
   LinkedList();
@@ -668,7 +714,8 @@ public:
    * @param l The list to copy.
    */
   LinkedList(const LinkedList<T>& l);
-  
+
+  /** Destructor */
   virtual ~LinkedList();
   //@}
 
@@ -1087,7 +1134,6 @@ public:
   LinkedList<T>& erase(int start, int limit) throw(Exception);
   //@}
 
-  LinkedList<T>& remove(const T& value);
 
   /**@name Searching */
   //@{
@@ -1657,12 +1703,6 @@ LinkedList<T>::erase(int first, int last) throw(Exception) {
   }
   fLength -= (last - first) + 1;
   
-  return *this;
-}
-
-template <class T>
-LinkedList<T>& 
-LinkedList<T>::remove(const T& value) {
   return *this;
 }
 
