@@ -1,4 +1,4 @@
-/* $Id: HTMLAttributes.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: HTMLAttributes.cc,v 1.2 1998/04/01 20:52:15 sbooth Exp $ */
 
 #include "HTMLAttributes.hh"
 
@@ -11,12 +11,21 @@ HTMLAttribute::HTMLAttribute()
 
 HTMLAttribute::HTMLAttribute(const char *name, 
 			     const char *value) throw(Exception)
-  : fName(NULL), fValue(NULL)
+			       : fName(NULL), fValue(NULL)
 {
   if(name != NULL)
     setName(name);
   if(value != NULL)
     setValue(value);
+}
+
+HTMLAttribute::HTMLAttribute(const HTMLAttribute& attribute)
+  : fName(NULL), fValue(NULL)
+{
+  if(attribute.getName() != NULL)
+    setName(attribute.getName());
+  if(attribute.getValue() != NULL)
+    setValue(attribute.getValue());
 }
 
 HTMLAttribute::~HTMLAttribute() {
@@ -57,6 +66,10 @@ HTMLAtomicAttribute::HTMLAtomicAttribute(const char *name) throw(Exception)
   : HTMLAttribute(name, NULL)
 {}
 
+HTMLAtomicAttribute::HTMLAtomicAttribute(const HTMLAtomicAttribute& attribute)
+  : HTMLAttribute(attribute)
+{}
+
 HTMLAtomicAttribute::~HTMLAtomicAttribute()
 {}
 
@@ -71,66 +84,33 @@ HTMLAtomicAttribute::render(ostream& out) const {
 HTMLAttributeList::HTMLAttributeList() 
 {}
 
+HTMLAttributeList::HTMLAttributeList(const HTMLAttribute& head) {
+  append(head);
+}
+
+HTMLAttributeList::HTMLAttributeList(const HTMLAttributeList& list)
+  : LinkedList(list)
+{}
+
 HTMLAttributeList::~HTMLAttributeList()
 {}
 
-HTMLAttributeList& 
+HTMLAttributeList&
 HTMLAttributeList::add(const char *name, const char *value) throw(Exception) { 
   if(name != NULL && value != NULL)
-    return add(new HTMLAttribute(name, value));
+    append(HTMLAttribute(name, value));
   else if(name != NULL && value == NULL)
-    return add(new HTMLAtomicAttribute(name));
-  else
-    return *this;
-}
-
-HTMLAttributeList& 
-HTMLAttributeList::add(const HTMLAttribute *attribute) { 
-  if(attribute != NULL)
-    LinkedList::add(attribute); 
-  return *this; 
-}
-
-void 
-HTMLAttributeList::render(ostream& out) const {
-  const HTMLAttribute *current = (const HTMLAttribute*) getHead();
-  
-  while(current != NULL) {
-    const HTMLAttribute *next = (const HTMLAttribute*) current->getNext();
-    current->render(out);
-    if(next != NULL)
-      out << ' ';
-    current = next;
-  }
+    append(HTMLAtomicAttribute(name));
+  return *this;
 }
 
 // ============================================================
 // List manipulators
 // ============================================================
-static LinkedList *sLists = NULL;
-
-HTMLAttributeList& 
+HTMLAttributeList
 add(const char *name, 
     const char *value) throw(Exception) 
 {
-  HTMLAttributeList *list = new HTMLAttributeList();
-  registerList(list);
-  list->add(name, value);
-  return *list;
+  return HTMLAttributeList(HTMLAttribute(name, value));
 }
 
-void 
-registerList(const LinkedList *list) {	
-  if(sLists == NULL) {
-    sLists = new LinkedList();
-    sLists->add(list);
-  }
-  else
-    sLists->add(list);
-}
-
-void 
-deleteAllLists() {
-  if(sLists != NULL)
-    delete sLists;
-}
