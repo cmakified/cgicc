@@ -1,7 +1,7 @@
 /*
- *  $Id: cookie.cpp,v 1.1 2001/09/03 16:14:26 sbooth Exp $
+ *  $Id: cookie.cpp,v 1.2 2002/03/02 06:22:30 sbooth Exp $
  *
- *  Copyright (C) 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 2000 - 2002 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 
 #include "cgicc/CgiDefs.h"
 #include "cgicc/Cgicc.h"
-#include "cgicc/HTTPHeaders.h"
+#include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 
 #if HAVE_UNAME

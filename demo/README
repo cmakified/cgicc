@@ -37,9 +37,9 @@ To run the tests, first copy the 'test.cgi', 'upload.cgi',
 'cookie.cgi' and 'dns.cgi' applications to the cgi-bin directory (See
 note on libtool if this doesn't seem to work).  Ensure that the file
 permissions are at least readable and executable by all (-rwxr-xr-w).
-Next, copy the files 'test.html', 'upload.html', and 'cookie.html' to
-your HTML directory.  Ensure that these files are readable by everyone
-(-rw-r--r--).
+Next, copy the files 'test.html', 'upload.html', 'cookie.html', and
+'cgicc.css' to your HTML directory.  Ensure that these files are
+readable by everyone (-rw-r--r--).
 
 To run the applications, point your browser at the 'dns.cgi'
 application, or at 'test.html', 'upload.html', or 'cookie.html'.
