@@ -1,4 +1,4 @@
-// $Id: cgicc.css,v 1.3 1998/10/05 22:33:34 sbooth Exp $
+// $Id: cgicc.css,v 1.4 1998/12/11 01:39:12 sbooth Exp $
 
 BODY {
 	color: black;
@@ -97,11 +97,11 @@ TD.grayspecial {
 	text-align: left;
 }
 
-TD.ltgray {
+TD.ltgray, TR.ltgray {
 	background-color: #DDD;
 }
 
-TD.dkgray {
+TD.dkgray, TR.dkgray {
 	background-color: #BBB;
 }
 
