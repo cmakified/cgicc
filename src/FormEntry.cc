@@ -1,4 +1,4 @@
-/* $Id: FormEntry.cc,v 1.4 1998/04/02 20:21:53 sbooth Exp $ */
+/* $Id: FormEntry.cc,v 1.5 1998/04/03 21:11:35 sbooth Exp $ */
 
 #include "FormEntry.hh"
 
@@ -19,6 +19,8 @@ FormEntry::FormEntry(const char	*name,
     strncpy(fValue, value, valueLen);
     fValue[valueLen] = '\0';
   }
+
+  fLength = strlen(fValue);
 }
 
 FormEntry::FormEntry(const FormEntry& entry) {
@@ -27,6 +29,8 @@ FormEntry::FormEntry(const FormEntry& entry) {
 
   fValue = new char[strlen(entry.getValue()) + 1];
   strcpy(fValue, entry.getValue());
+
+  fLength = entry.length();
 }
 
 /* Delete this FormEntry */
@@ -45,7 +49,7 @@ void
 FormEntry::getValue(int maxChars,
 		    char* &value) const throw(Exception) 
 {
-  value = new char[ strlen(getValue()) +1 ];
+  value = new char[ length() + 1 ];
   if( ! value )
     throw Exception("new failed", ERRINFO);
   int result = makeString(value, maxChars, true);
@@ -64,7 +68,7 @@ void
 FormEntry::getStrippedValue(int maxChars,
 			    char* &value) const throw(Exception) 
 {
-  value = new char[ strlen(getValue()) +1 ];
+  value = new char[ length() + 1 ];
   if( ! value )
     throw Exception("new failed", ERRINFO);
   int result = makeString(value, maxChars, false);
