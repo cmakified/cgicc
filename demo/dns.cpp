@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.12 2000/10/07 18:26:33 sbooth Exp $
+ *  $Id: dns.cpp,v 1.13 2000/10/15 15:59:20 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
  *
@@ -49,7 +49,7 @@
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
 #if DEBUG
-  STDNS ofstream gLogFile( "/change_this_path/Cgicc.log", STDNS ios::app );
+  STDNS ofstream gLogFile( "/change_this_path/cgicc.log", STDNS ios::app );
 #endif
 
 #if CGICC_USE_NAMESPACES
@@ -102,7 +102,7 @@ main(int /*argc*/,
 		  .set("content", "Stephen F. Booth") << endl;
     cout << head() << endl;
     
-    cout << h1() << "Cgi" << span("cc").set("class","red")
+    cout << h1() << "GNU cgi" << span("cc").set("class","red")
 	 << " DNS Gateway" << h1() << endl;
   
     form_iterator ip = cgi.getElement("ip");
@@ -227,7 +227,7 @@ main(int /*argc*/,
     // Now print cout a footer with some fun info
     cout << hr(set("class","half")) << endl;
     cout << CGICCNS div().set("align","center").set("class","smaller") << endl;
-    cout << "GNU Cgi" << span("cc").set("class","red") << " v"
+    cout << "GNU cgi" << span("cc").set("class","red") << " v"
 	 << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth")
 			.set("href", "http://home.earthlink.net/~sfbooth/") 
