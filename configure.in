@@ -1,8 +1,8 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.28 2000/11/15 06:31:40 sbooth Exp $
+dnl $Id: configure.in,v 1.29 2001/03/03 17:50:15 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION([$Revision: 1.28 $])
+AC_REVISION([$Revision: 1.29 $])
 AC_INIT(cgicc/Cgicc.cpp)
 AC_CONFIG_AUX_DIR(support)
 AM_INIT_AUTOMAKE(cgicc, 3.1.5)
@@ -84,7 +84,7 @@ AC_ARG_ENABLE(debug-logging,
     yes) debug=yes ;;
     no)  debug=no ;;
     *) AC_MSG_ERROR(bad value ${enableval} for --enable-debug-logging) ;;
-  esac], debug=yes)
+  esac], debug=no)
 AC_MSG_CHECKING(whether to enable debug logging)
 AC_MSG_RESULT($debug)
 if test "$debug" = yes; then
