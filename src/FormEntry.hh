@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.hh,v 1.13 1999/04/26 22:42:27 sbooth Exp $
+ *  $Id: FormEntry.hh,v 1.14 1999/05/14 17:57:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -131,7 +131,7 @@ public:
    * @return The value of the form element, truncated to the specified  length.
    */
   inline STDNS string
-  getValue(unsigned int maxChars) 			const
+  getValue(STDNS string::size_type maxChars) 			const
     { return makeString(maxChars, true); }
   
   /**
@@ -154,7 +154,7 @@ public:
    * truncated to the specified length.
    */
   inline STDNS string
-  getStrippedValue(unsigned int maxChars) 		const
+  getStrippedValue(STDNS string::size_type maxChars) 		const
     { return makeString(maxChars, false); }
   
   /**
@@ -181,7 +181,7 @@ public:
    * Get the length of the value of the form element.
    * @return The length of the value of the form element, in bytes.
    */
-  inline unsigned int 
+  inline STDNS string::size_type
   length() 						const
     { return fValue.length(); }
   
@@ -197,7 +197,7 @@ public:
 private:  
   // utility function
   STDNS string
-  makeString(unsigned int maxLen, 
+  makeString(STDNS string::size_type maxLen, 
 	     bool allowNewlines) 			const;
   
   STDNS string fName;		// the name of this form element

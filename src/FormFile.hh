@@ -1,5 +1,5 @@
 /*
- *  $Id: FormFile.hh,v 1.11 1999/04/26 22:42:28 sbooth Exp $
+ *  $Id: FormFile.hh,v 1.12 1999/05/14 17:57:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -150,7 +150,7 @@ public:
    * Get the length of the file data, in bytes.
    * @return The length of the file data, in bytes.
    */
-  inline unsigned int 
+  inline STDNS string::size_type
   getDataLength() 				const
     { return fData.length(); }
   

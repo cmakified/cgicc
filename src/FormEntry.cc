@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.cc,v 1.10 1999/04/26 22:42:27 sbooth Exp $
+ *  $Id: FormEntry.cc,v 1.11 1999/05/14 17:57:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -84,13 +84,13 @@ CGICCNS FormEntry::getDoubleValue(double min,
 }
 
 STDNS string
-CGICCNS FormEntry::makeString(unsigned int maxLen, 
+CGICCNS FormEntry::makeString(STDNS string::size_type maxLen, 
 			      bool allowNewlines)	const
 {
-  unsigned int 			len 		= 0;
-  unsigned int 			avail 		= maxLen;
-  unsigned int 			crCount 	= 0;
-  unsigned int 			lfCount 	= 0;	
+  STDNS string::size_type	len 		= 0;
+  STDNS string::size_type	avail 		= maxLen;
+  STDNS string::size_type	crCount 	= 0;
+  STDNS string::size_type	lfCount 	= 0;	
   STDNS string::const_iterator 	src 		= fValue.begin();
   STDNS string::const_iterator 	lim 		= fValue.end();
   STDNS string 			dst;
