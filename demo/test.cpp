@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.8 1999/09/22 22:38:35 sbooth Exp $
+ *  $Id: test.cpp,v 1.9 1999/09/27 17:35:44 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -327,7 +327,7 @@ dumpEnvironment(const CgiEnvironment& env)
        << tr() << endl;
   cout << tr() << td("Remote Host").set("class","title") 
        << td(env.getRemoteHost()).set("class","data") << tr() << endl;
-  cout << tr() << td("Remote Setress").set("class","title") 
+  cout << tr() << td("Remote Address").set("class","title") 
        << td(env.getRemoteAddr()).set("class","data") << tr() << endl;
   cout << tr() << td("Authorization Type").set("class","title") 
        << td(env.getAuthType()).set("class","data") << tr() << endl;
