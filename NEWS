@@ -5,6 +5,18 @@
         <bug-cgicc@gnu.org>
 ======================================================================
 
+        Major changes between versions 3.1.1 and 3.1.2
+        ----------------------------------------------
+
+* Fixed bug in multipart/form-data handling that caused the last form element
+  to be ignored
+
+* Fixed Win32 bug that caused indefinite hangs with MS IIS 4.0 (due to CR/LF
+  conversion on read)
+
+* Now distributed in bzip2 and rpm format, in addition to gzipped tar
+
+
         Major changes between versions 3.1 and 3.1.1
         --------------------------------------------
 
@@ -65,3 +77,4 @@
   of linking to an external stylesheet.
 
 * Released as part of the GNU project under the GPL.
+
