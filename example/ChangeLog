@@ -6,6 +6,7 @@
 	CGICC_{LIBDIR,INCLUDEDIR}
 	* Makefile.am:  Use cgicc_{libdir,includedir} instead of
 	CGICC_{LIBDIR,INCLUDEDIR}
+	* configure.in: Check validity of --with-cgicc
 
 2000-11-13  Stephen F. Booth  <sbooth@gnu.org>
 

@@ -1,8 +1,8 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.2 2000/11/15 06:40:07 sbooth Exp $
+dnl $Id: configure.in,v 1.3 2000/11/15 06:45:51 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION($Revision: 1.2 $)
+AC_REVISION($Revision: 1.3 $)
 AC_INIT(example.cpp)
 AM_INIT_AUTOMAKE(cgicc-example, 0.1)
 
@@ -26,7 +26,8 @@ AC_ARG_WITH(cgicc,
   [  --with-cgicc=DIR        use cgicc installation in DIR],
   [if ! test -d "${withval}"; then
     AC_MSG_ERROR(bad value '${withval}' for --with-cgicc: not a directory)
-   fi])
+   fi
+   cgicc_prefix=${withval}])
 
 dnl Perform some sanity checks on the cgicc installation
 CGICC_CHECK_INSTALLATION($cgicc_prefix)
