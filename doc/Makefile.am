@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.10 2002/01/09 15:55:48 sbooth Exp $
+## $Id: Makefile.am,v 1.11 2002/01/09 17:13:12 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -26,12 +26,19 @@ all: html
 
 install-data-local:
 	$(mkinstalldirs) $(docdir)
-	echo "srcdir=$(srcdir)"
-	@for file in html/*; do \
+	@for file in $(srcdir)/html/*; do \
 		bn="`basename $$file`"; \
 		echo " $(INSTALL_DATA) $$file $(docdir)/$$bn"; \
 	 	$(INSTALL_DATA) $$file $(docdir)/$$bn; \
 	done
+
+uninstall-local:
+	@for file in $(srcdir)/html/*; do \
+		bn="`basename $$file`"; \
+		echo " rm -f $(docdir)/$$bn"; \
+		rm -f $(docdir)/$$bn; \
+	done
+
 
 distclean-local:
 	rm -rf html
