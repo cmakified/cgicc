@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiDefs.hh,v 1.2 1999/06/22 21:00:42 sbooth Exp $
+ *  $Id: CgiDefs.hh,v 1.3 1999/08/07 00:15:54 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -22,7 +22,29 @@
 #define _CGIDEFS_HH_ 1
 
 // Include information from configure
-#include "cgicc/config.h"
+#if HAVE_CONFIG_H
+#  include "cgicc/config.h"
+#endif /* HAVE_CONFIG_H */
+
+// Win32-specific setup
+#ifdef WIN32
+
+#  define USE_NAMESPACES 1          // always use namespaces
+#  pragma warning (disable: 4786)   // "debug identifier truncated"
+
+// export library symbols
+#  ifdef CGICC_EXPORTS
+#    define CGICC_API __declspec(dllexport)
+#  else
+#    define CGICC_API __declspec(dllimport)
+#  endif
+
+#  define HOST "Win32"
+#  define VERSION "3.1"
+
+#else
+#  define CGICC_API
+#endif /* WIN32 */
 
 // Handle namespaces
 #if USE_NAMESPACES
@@ -35,6 +57,6 @@
 #  define CGICC_END_NAMESPACE 
 #  define CGICCNS 
 #  define STDNS 
-#endif
+#endif /* USE_NAMESPACES */
 
 #endif /* ! _CGIDEFS_HH_ */
