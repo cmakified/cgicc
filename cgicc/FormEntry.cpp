@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.cpp,v 1.1 1999/08/09 18:25:35 sbooth Exp $
+ *  $Id: FormEntry.cpp,v 1.2 1999/08/16 18:39:37 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -106,10 +106,8 @@ CGICCNS FormEntry::makeString(STDNS string::size_type maxLen,
     else {
       dst.append(1, *src);
       ++len;
+      ++src;
     }
-
-  // increment source position
-  ++src;
   }
   
   return dst;
