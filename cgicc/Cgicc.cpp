@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.20 2004/06/28 02:57:12 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.21 2004/06/29 04:26:11 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -184,10 +184,8 @@ cgicc::Cgicc::Cgicc(CgiInput *input)
   fFormData.reserve(20);
   fFormFiles.reserve(2);
 
-  if(stringsAreEqual(fEnvironment.getRequestMethod(), "post"))
-    parseFormInput(fEnvironment.getPostData());
-  else
-    parseFormInput(fEnvironment.getQueryString());
+  parseFormInput(fEnvironment.getPostData());
+  parseFormInput(fEnvironment.getQueryString());
 }
 
 cgicc::Cgicc::~Cgicc()
@@ -200,10 +198,9 @@ cgicc::Cgicc::operator= (const Cgicc& cgi)
 
   fFormData.clear();
   fFormFiles.clear();
-  if(stringsAreEqual(fEnvironment.getRequestMethod(), "post"))
-    parseFormInput(fEnvironment.getPostData());
-  else
-    parseFormInput(fEnvironment.getQueryString());
+
+  parseFormInput(fEnvironment.getPostData());
+  parseFormInput(fEnvironment.getQueryString());
   
   return *this;
 }
@@ -238,10 +235,9 @@ cgicc::Cgicc::restore(const std::string& filename)
   // clear the current data and re-parse the enviroment
   fFormData.clear();
   fFormFiles.clear();
-  if(stringsAreEqual(fEnvironment.getRequestMethod(), "post"))
-    parseFormInput(fEnvironment.getPostData());
-  else
-    parseFormInput(fEnvironment.getQueryString());
+
+  parseFormInput(fEnvironment.getPostData());
+  parseFormInput(fEnvironment.getQueryString());
 }
 
 bool 
@@ -347,6 +343,10 @@ cgicc::Cgicc::parseFormInput(const std::string& data)
 {
   std::string env 	= fEnvironment.getContentType();
   std::string cType 	= "multipart/form-data";
+
+  // Don't waste time on empty input
+  if(true == data.empty())
+    return;
 
   if(stringsAreEqual(cType, env, cType.length())) {
 
