@@ -1,5 +1,5 @@
 /*
- *  $Id: FormFile.hh,v 1.13 1999/05/25 19:16:45 sbooth Exp $
+ *  $Id: FormFile.hh,v 1.14 1999/05/28 19:37:12 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,8 +18,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __FORM_FILE__
-#define __FORM_FILE__ 1
+#ifndef _FORMFILE_HH_
+#define _FORMFILE_HH_ 1
 
 #ifdef __GNUG__
 #pragma interface
@@ -169,6 +169,4 @@ private:
 
 CGICC_END_NAMESPACE
 
-#endif
-
-//EOF
+#endif /* ! _FORMFILE_HH_ */

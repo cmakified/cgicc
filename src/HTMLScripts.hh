@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLScripts.hh,v 1.7 1999/05/25 19:16:48 sbooth Exp $
+ *  $Id: HTMLScripts.hh,v 1.8 1999/05/28 19:37:14 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,8 +18,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __HTML_SCRIPTS__
-#define __HTML_SCRIPTS__ 1
+#ifndef _HTMLSCRIPTS_HH_
+#define _HTMLSCRIPTS_HH_ 1
 
 #ifdef __GNUG__
 #pragma interface
@@ -155,4 +155,4 @@ private:
 
 CGICC_END_NAMESPACE
 
-#endif
+#endif /* ! _HTMLSCRIPTS_HH_ */

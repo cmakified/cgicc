@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.hh,v 1.19 1999/05/25 19:16:44 sbooth Exp $
+ *  $Id: Cgicc.hh,v 1.20 1999/05/28 19:37:12 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,8 +18,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __CGICC__
-#define __CGICC__ 1
+#ifndef _CGICC_HH_
+#define _CGICC_HH_ 1
 
 #ifdef __GNUG__
 #pragma interface
@@ -308,6 +308,4 @@ private:
 
 CGICC_END_NAMESPACE
 
-#endif
-
-//EOF
+#endif /* ! _CGICC_HH_ */

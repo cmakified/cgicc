@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cc,v 1.13 1999/05/25 19:16:44 sbooth Exp $
+ *  $Id: Cgicc.cc,v 1.14 1999/05/28 19:37:12 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -210,8 +210,8 @@ CGICCNS Cgicc::Cgicc()
   LOGLN(s)
 #else
   LOGLN("Cgicc debugging log started.")
-#endif
-#endif
+#endif /* HAVE_STRFTIME */
+#endif /* DEBUG */
   
   // this can be tweaked for performance
   fFormData.reserve(40);

@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.hh,v 1.2 1999/05/25 19:16:44 sbooth Exp $
+ *  $Id: CgiUtils.hh,v 1.3 1999/05/28 19:37:12 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,8 +18,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __CGI_UTILS__
-#define __CGI_UTILS__ 1
+#ifndef _CGIUTILS_HH_
+#define _CGIUTILS_HH_ 1
 
 #ifdef __GNUG__
 #pragma interface
@@ -203,4 +203,4 @@ readLong(STDNS istream& in);
 
 CGICC_END_NAMESPACE
 
-#endif
+#endif /* ! _CGIUTILS_HH_ */

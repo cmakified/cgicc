@@ -1,5 +1,5 @@
 /*
- *  $Id: MStreamable.hh,v 1.6 1999/05/25 19:16:50 sbooth Exp $
+ *  $Id: MStreamable.hh,v 1.7 1999/05/28 19:37:15 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,8 +18,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __MSTREAMABLE__
-#define __MSTREAMABLE__ 1
+#ifndef _MSTREAMABLE_HH_
+#define _MSTREAMABLE_HH_ 1
 
 #ifdef __GNUG__
 #pragma interface
@@ -55,6 +55,4 @@ public:
   
 CGICC_END_NAMESPACE
 
-#endif
-
-//EOF
+#endif /* ! _MSTREAMABLE_HH_ */
