@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.cc,v 1.2 1999/06/04 00:07:42 sbooth Exp $
+ *  $Id: HTTPHeaders.cc,v 1.3 1999/07/26 16:52:52 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -74,36 +74,41 @@ CGICCNS HTMLDoctype::render(STDNS ostream &out) 	const
 // Class HTTPCookie
 // ============================================================
 CGICCNS HTTPCookie::HTTPCookie()
-  : fSecure(false)
+  : fMaxAge(0), 
+    fSecure(false)
 {}
 
 CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name, 
 			       const STDNS string& value)
   : fName(name), 
     fValue(value),
+    fMaxAge(0),
     fSecure(false)
 {}
 
 CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name, 
 			       const STDNS string& value, 
-			       const STDNS string& expires, 
-			       const STDNS string& path,
+			       const STDNS string& comment, 
 			       const STDNS string& domain, 
+			       unsigned long maxAge, 
+			       const STDNS string& path,
 			       bool secure)
   : fName(name), 
     fValue(value), 
-    fExpires(expires), 
-    fPath(path), 
+    fComment(comment), 
     fDomain(domain), 
+    fMaxAge(maxAge),
+    fPath(path), 
     fSecure(secure)
 {}
 
 CGICCNS HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
   : fName(cookie.getName()), 
     fValue(cookie.getValue()), 
-    fExpires(cookie.getExpires()), 
-    fPath(cookie.getPath()), 
+    fComment(cookie.getComment()),
     fDomain(cookie.getDomain()), 
+    fMaxAge(cookie.getMaxAge()),
+    fPath(cookie.getPath()), 
     fSecure(cookie.isSecure())
 {}
 
@@ -113,17 +118,19 @@ CGICCNS HTTPCookie::~HTTPCookie()
 void 
 CGICCNS HTTPCookie::render(STDNS ostream& out) 	const
 {
-  out << "Set-Cookie: " << getName() << '=' << getValue() << ';';
-  if(! fExpires.empty())
-    out << " expires=" << fExpires << ';';
-  if(! fPath.empty())
-    out << " path=" << fPath << ';';
-  if(! fDomain.empty())
-    out << " domain=" << fDomain << ';';
+  out << "Set-Cookie:" << getName() << '=' << getValue();
+  if(fComment.empty() == false)
+    out << "; Comment=" << fComment << ';';
+  if(fDomain.empty() == false)
+    out << "; Domain=" << fDomain << ';';
+  if(fMaxAge != 0)
+    out << "; Max-Age=" << fMaxAge << ';';
+  if(fPath.empty() == false)
+    out << "; Path=" << fPath << ';';
   if(fSecure == true)
-    out << " secure";
+    out << "; Secure";
   
-  out << STDNS endl;
+  out << "; Version=1" << STDNS endl;
 }
 
 // ============================================================
