@@ -1,5 +1,5 @@
 /*
- *  $Id: upload.cpp,v 1.3 2001/09/03 16:14:26 sbooth Exp $
+ *  $Id: cookie.cpp,v 1.1 2001/09/03 16:14:26 sbooth Exp $
  *
  *  Copyright (C) 2000, 2001 Stephen F. Booth
  *
@@ -18,11 +18,10 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/*! \file upload.cpp
- * \brief File upload demo
+/*! \file cookie.cpp
+ * \brief HTTP cookie demo
  *
- * Tests and demonstrates how to handle uploaded files using the 
- * GNU %cgicc library.
+ * Tests and demonstrates how to use the HTTPCookie class
  */
 
 #include <new>
@@ -73,9 +72,22 @@ main(int /*argc*/,
 
     // Create a new Cgicc object containing all the CGI data
     Cgicc cgi;
+
+    // Get the name and value of the cookie to set
+    const_form_iterator name = cgi.getElement("name");
+    const_form_iterator value = cgi.getElement("value");
+
+    // Output the headers for an HTML document with the cookie only
+    // if the cookie is not empty
+    if(name != cgi.getElements().end() && value != cgi.getElements().end()
+       && value->getValue().empty() == false)
+      cout << HTTPHTMLHeader()
+	.setCookie(HTTPCookie(name->getValue(), value->getValue()));
+    else
+      cout << HTTPHTMLHeader();
     
-    // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
-    cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
+    // Output the HTML 4.0 DTD info
+    cout << HTMLDoctype(HTMLDoctype::eStrict) << endl;
     cout << html().set("lang", "en").set("dir", "ltr") << endl;
 
     // Set up the page's header and title.
@@ -111,7 +123,7 @@ main(int /*argc*/,
     cout << comment() << style() << endl;
 
     cout << title() << "GNU cgicc v" << cgi.getVersion() 
-	 << " File Upload Test Results" << title() << endl;
+	 << " HTTPCookie Results" << title() << endl;
     cout << meta().set("name", "author").set("content", "Stephen F. Booth") 
 	 << endl;
 
@@ -121,7 +133,7 @@ main(int /*argc*/,
     cout << body() << endl;
 
     cout << h1() << "GNU cgi" << span("cc").set("class","red")
-	 << " v"<< cgi.getVersion() << " File Upload Test Results" 
+	 << " v"<< cgi.getVersion() << " HTTPCookie Test Results" 
 	 << h1() << endl;
     
     // Get a pointer to the environment
@@ -134,57 +146,60 @@ main(int /*argc*/,
 	 << ", " << env.getRemoteHost() 
 	 << '(' << env.getRemoteAddr() << ")!" << h4() << endl;  
     
+    if(name != cgi.getElements().end() && value != cgi.getElements().end()
+       && value->getValue().empty() == false) {
+      cout << p() << "A cookie with the name " << em(name->getValue())
+	   << " and value " << em(value->getValue()) << " was set." << br();
+      cout << "In order for the cookie to show up here you must "
+	   << a("refresh").set("href",env.getScriptName()) << p();
+    }
 
-    // Show the uploaded file
-    cout << h2("File Uploaded via FormFile") << endl;
+    // Show the cookie info from the environment
+    cout << h2("Cookie Information from the Environment") << endl;
   
-    const_file_iterator file;
-    file = cgi.getFile("userfile");
-				
-    if(file != cgi.getFiles().end()) {
-      cout << CGICCNS div().set("align","center") << endl;
+    cout << CGICCNS div().set("align","center") << endl;
     
-      cout << table().set("border","0").set("rules","none").set("frame","void")
-	.set("cellspacing","2").set("cellpadding","2")
-	.set("class","cgi") << endl;
-      cout << colgroup().set("span","2") << endl;
-      cout << col().set("align","center").set("class","title").set("span","1") 
-	   << endl;
-      cout << col().set("align","left").set("class","data").set("span","1") 
-	   << endl;
-      cout << colgroup() << endl;
-      
-      cout << tr() << td("Name").set("class","title")
-	   << td((*file).getName()).set("class","data") << tr() << endl;
-      
-      cout << tr() << td("Data Type").set("class","title")
-	   << td((*file).getDataType()).set("class","data") << tr() << endl;
-      
-      cout << tr() << td("Filename").set("class","title") 
-	   << td((*file).getFilename()).set("class","data") << tr() << endl;
-      cout << tr() << td("Data Length").set("class","title") 
-	   << td().set("class","data") << (*file).getDataLength() 
-	   << td() << tr() << endl;
-      
-      cout << tr() << td("File Data").set("class","title")
-	   << td().set("class","data") << pre();
-      (*file).writeToStream(cout);
+    cout << table().set("border","0").set("rules","none").set("frame","void")
+      .set("cellspacing","2").set("cellpadding","2")
+      .set("class","cgi") << endl;
+    cout << colgroup().set("span","2") << endl;
+    cout << col().set("align","center").set("class","title").set("span","1") 
+	 << endl;
+    cout << col().set("align","left").set("class","data").set("span","1") 
+	 << endl;
+    cout << colgroup() << endl;
+    
+    cout << tr() << td("HTTPCookie").set("class","title")
+	 << td(env.getCookies()).set("class","data") << tr() << endl;
+    
+    cout << table() << CGICCNS div() << endl;
 
-      /*
-	To write the contents of the file to a file "foo" on disk:
 
-	ofstream foo("foo");
-	(*file).writeToStream(foo);
-       */
-      
-      cout << pre() << td() << tr() << endl;
-      
-      cout << table() << CGICCNS div() << endl;
+    // Show the cookie info from the cookie list
+    cout << h2("HTTP Cookies via vector") << endl;
+  
+    cout << CGICCNS div().set("align","center") << endl;
+  
+    cout << table().set("border","0").set("rules","none").set("frame","void")
+      .set("cellspacing","2").set("cellpadding","2")
+      .set("class","cgi") << endl;
+    cout << colgroup().set("span","2") << endl;
+    cout << col().set("align","center").set("span","2") << endl;
+    cout << colgroup() << endl;
+    
+    cout << tr().set("class","title") << td("Cookie Name") 
+	 << td("Cookie Value") << tr() << endl;
+    
+    // Iterate through the vector, and print out each value
+    const_cookie_iterator iter;
+    for(iter = env.getCookieList().begin(); 
+	iter != env.getCookieList().end(); 
+	++iter) {
+      cout << tr().set("class","data") << td(iter->getName()) 
+	   << td(iter->getValue()) << tr() << endl;
     }
-    else {
-      cout << p() << CGICCNS div().set("class", "notice") << endl;
-      cout << "No file was uploaded." << endl << CGICCNS div() << p() << endl;
-    }
+    cout << table() << CGICCNS div() << endl;
+    
 
     // Now print out a footer with some fun info
     cout << p() << CGICCNS div().set("align","center");

@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.15 2001/09/02 19:38:09 sbooth Exp $
+ *  $Id: test.cpp,v 1.16 2001/09/03 16:14:26 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -19,7 +19,9 @@
  */
 
 /*! \file test.cpp
- * cgicc test application
+ * \brief GNU %cgicc test application
+ *
+ * Tests and demonstrates access of form data using the GNU %cgicc library.
  */
 
 #include <new>
@@ -31,6 +33,7 @@
 
 #include "cgicc/CgiDefs.h"
 #include "cgicc/Cgicc.h"
+#include "cgicc/HTTPHeaders.h"
 #include "cgicc/HTMLClasses.h"
 
 #if HAVE_UNAME

@@ -1,7 +1,7 @@
 GNU cgicc Demo Programs
 =======================
 
-There are three demo applications in this directory:
+There are four demo applications in this directory:
 
   'test.cgi', a demo of how to access various kinds of submitted form
    information using cgicc.  Use the file 'test.html' to submit data
@@ -11,31 +11,38 @@ There are three demo applications in this directory:
    files.  Use the file 'upload.html' to submit data to this
    application.
 
+  'cookie.cgi', a demo of cgicc's cookie handling ability.  Use the
+   file 'cookie.html' to submit data to this application.
+
   'dns.cgi', a demo of a web dns gateway.  There is no html file
    associated with this application; it is run directly.
 
-To run the demo applications 'test.cgi' or 'upload.cgi', the associated
-html file ('test.html' or 'upload.html') must be configured for your
-particular web server.  Scroll down to line 56, which should look like
-  <FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/test.cgi">
-in 'test.html', or
-  <FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/upload.cgi">
-in 'upload.html'.
+To run the demo applications 'test.cgi', 'upload.cgi', or 'cookie.cgi'
+the associated html file ('test.html', 'upload.html', or
+'cookie.html') must be configured for your particular web server.
+Scroll down to line 18, which should look like 
+  <form method="post" action="http://change_this_path/cgi-bin/test.cgi">
+in 'test.html',
+  <form method="post" action="http://change_this_path/cgi-bin/upload.cgi"
+in 'upload.html', or
+  <form method="post" action="http://change_this_path/cgi-bin/cookie.cgi">
+in 'cookie.html'.
 
 Change the path to match your cgi-bin directory.  For example, if you
 were running the applications from the /cgi-bin directory on the
-server www.gnu.org, the line would contain
-ACTION="http://www.gnu.org/cgi-bin/test.cgi".
+server www.gnu.org, in 'test.html' the line would contain
+  <form method="post" action="http://www.gnu.org/cgi-bin/test.cgi">
 
-To run the tests, first copy the 'test.cgi', 'upload.cgi', and
-'dns.cgi' applications to the cgi-bin directory (See note on libtool
-if this doesn't seem to work).  Ensure that the file permissions are
-at least readable and executable by all (-rwxr-xr-w).  Next, copy the
-files 'test.html' and 'upload.html' to your HTML directory.  Ensure
-that these files are readable by everyone (-rw-r--r--).
+To run the tests, first copy the 'test.cgi', 'upload.cgi',
+'cookie.cgi' and 'dns.cgi' applications to the cgi-bin directory (See
+note on libtool if this doesn't seem to work).  Ensure that the file
+permissions are at least readable and executable by all (-rwxr-xr-w).
+Next, copy the files 'test.html', 'upload.html', and 'cookie.html' to
+your HTML directory.  Ensure that these files are readable by everyone
+(-rw-r--r--).
 
 To run the applications, point your browser at the 'dns.cgi'
-application, or at 'test.html' or 'upload.html'.
+application, or at 'test.html', 'upload.html', or 'cookie.html'.
 
 Incidentally, to see how transparently cgicc handles the difference
 between 'POST' and 'GET' type forms, try changing the request method

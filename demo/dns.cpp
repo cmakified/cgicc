@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.14 2001/09/02 19:30:26 sbooth Exp $
+ *  $Id: dns.cpp,v 1.15 2001/09/03 16:14:26 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -33,8 +33,9 @@
 #include <iostream>
 
 #include "cgicc/CgiDefs.h"
-#include "cgicc/HTMLClasses.h"
 #include "cgicc/Cgicc.h"
+#include "cgicc/HTTPHeaders.h"
+#include "cgicc/HTMLClasses.h"
 
 #if HAVE_UNAME
 #  include <sys/utsname.h>
