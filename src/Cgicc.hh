@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.hh,v 1.12 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: Cgicc.hh,v 1.13 1998/12/10 02:11:46 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -99,7 +99,7 @@ public:
    * <P>The version number is a string of the form #.#.</P>
    * @return The version number
    */
-  inline const char* getCgiccVersion() const 	{ return "2.2.1"; }
+  inline const char* getCgiccVersion() const 	{ return "@VERSION@"; }
   //@}
 
   /**@name Form Element Access */
