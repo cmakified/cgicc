@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.15 1999/08/07 00:25:44 sbooth Exp $
+## $Id: Makefile.am,v 1.16 1999/08/07 00:39:15 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip
 
@@ -19,6 +19,15 @@ dist-hook:
 	cp -p $(srcdir)/example/README $(distdir)/example
 	cp -p $(srcdir)/example/Makefile.in $(distdir)/example
 	cp -p $(srcdir)/example/yourSource.cc $(distdir)/example
+	test -d $(distdir)/support || mkdir $(distdir)/support || exit 1
+	cp -p $(srcdir)/support/config.guess $(distdir)/support
+	cp -p $(srcdir)/support/config.sub $(distdir)/support
+	cp -p $(srcdir)/support/install-sh $(distdir)/support
+	cp -p $(srcdir)/support/ltconfig $(distdir)/support
+	cp -p $(srcdir)/support/ltmain.sh $(distdir)/support
+	cp -p $(srcdir)/support/mdate-sh $(distdir)/support
+	cp -p $(srcdir)/support/missing $(distdir)/support
+	cp -p $(srcdir)/support/mkinstalldirs $(distdir)/support
 
 if MAINTAINER_MODE
 ################################################################
