@@ -1,3 +1,8 @@
+2000-07-02  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/HTMLElements.h: Fix operator< for HTMLElement
+	(reported by as@globalplastics.com)
+
 2000-04-15  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/CgiEnvironment.cpp: Fix typo, fctrl.h -> fcntl.h
