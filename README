@@ -16,9 +16,9 @@ Web. cgicc performs the following functions:
 
 Please send bug reports, suggestions, and comments to <bug-cgicc@gnu.org>
 
-The mailing list can be subscribed to, unsubscribed from, and configured via
-a web interface at http://mail.gnu.org/mailman/listinfo/bug-cgicc.
-Web archives are also available.
+To subscribe, send a message to <bug-cgicc-request@gnu.org> with the
+word 'subscribe' in the subject line.  A web interface to the list is
+available at http://mail.gnu.org/mailman/listinfo/bug-cgicc.
 
 This package should contain the following directories:
 
