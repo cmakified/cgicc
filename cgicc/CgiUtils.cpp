@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.7 2002/04/02 17:56:45 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.8 2002/11/23 20:45:23 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -24,6 +24,7 @@
 
 #include <stdexcept>
 #include <memory>
+#include <vector>
 #include <cctype> 	// for toupper
 
 #include "cgicc/CgiUtils.h"
@@ -151,15 +152,22 @@ CGICCNS readString(STDNS istream& in)
   
   in >> dataSize;
   in.get(); // skip ' '
+  
+  // Avoid allocation of a zero-length vector
+  if(dataSize == 0) {
+    return STDNS string("");
+  }
 
-  STDNS auto_ptr<char> temp(new char[dataSize]);
+  // Don't use auto_ptr, but vector instead
+  // Bug reported by bostjan@optonline.net / fix by alexoss@verizon.net
+  STDNS vector<char> temp(dataSize);
 
-  in.read(temp.get(), dataSize);
+  in.read(&temp[0], dataSize);
   if((STDNS string::size_type)in.gcount() != dataSize) {
     throw STDNS runtime_error("I/O error");
   }
 
-  return STDNS string(temp.get(), dataSize);
+  return STDNS string(&temp[0], dataSize);
 }
 
 // read a long
