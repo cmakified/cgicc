@@ -1,4 +1,4 @@
-/* $Id: Cgicc.hh,v 1.4 1998/04/02 20:09:32 sbooth Exp $ */
+/* $Id: Cgicc.hh,v 1.5 1998/04/03 09:47:04 sbooth Exp $ */
 
 #ifndef __CGICC__
 #define __CGICC__ 1
@@ -39,7 +39,7 @@ class MultipartHeader;
 // ============================================================
 // Class Cgicc
 // ============================================================
-/** 
+/**
  * Cgicc is the main class of the Cgicc library.
  * <P>Normally, you will instantiate an object of this type in 
  * <TT>main()</TT>:</P>
@@ -51,7 +51,7 @@ class MultipartHeader;
  *     <SPAN CLASS="green">\\ do something with cgi</SPAN>
  *   }
  *
- *   catch(\Ref{Exception} e) {
+ *   catch(Exception e) {
  *    <SPAN CLASS="green"> \\ handle the error</SPAN>
  *   }
  * }
@@ -59,7 +59,7 @@ class MultipartHeader;
  */
 class Cgicc {
 public:
-  /**@name Constructor */
+  /**@name Constructors */
   //@{
 
   /** 
@@ -131,6 +131,17 @@ public:
    */
   bool getElementMultiple(const char *elementName,
 			  LinkedList<FormEntry>& result) const;
+  //@}
+
+  /**@name Access to all form entries */
+  //@{
+
+  /**
+   * Get all the submitted form elements.
+   * @return A LinkedList containing all the submitted elements.
+   */
+  inline const LinkedList<FormEntry>* operator* () const 
+  { return fFormData; }
   
   /**
    * Get all the submitted form elements.
