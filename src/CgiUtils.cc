@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cc,v 1.2 1999/05/10 19:13:17 sbooth Exp $
+ *  $Id: CgiUtils.cc,v 1.3 1999/05/11 17:03:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -77,7 +77,7 @@ int
 CGICCNS saferSystem(const STDNS string& command)
 {
   STDNS string s = command;
-  int pos = 0;
+  STDNS string::size_type pos = 0;
 
   // escape out all semicolons, pipes, and redirects
   while(true) {
@@ -167,7 +167,7 @@ CGICCNS writeLong(STDNS ostream& out,
 STDNS string
 CGICCNS readString(STDNS istream& in)
 {
-  int dataSize = 0;
+  STDNS string::size_type dataSize = 0;
   STDNS string s;
   
   in >> dataSize;
@@ -195,3 +195,4 @@ CGICCNS readLong(STDNS istream& in)
   in.get(); // skip ' '
   return l;
 }
+

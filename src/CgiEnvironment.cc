@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cc,v 1.8 1999/05/10 19:13:16 sbooth Exp $
+ *  $Id: CgiEnvironment.cc,v 1.9 1999/05/11 17:03:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -66,8 +66,8 @@ CGICCNS CgiEnvironment::parseCookies()
   STDNS string data = getCookies();
 
   if(! data.empty()) {
-    unsigned int pos 	= 0;
-    unsigned int oldPos	= 0;
+    STDNS string::size_type pos 	= 0;
+    STDNS string::size_type oldPos	= 0;
 
     while(true) {
       // find the ';' terminating a name=value pair
@@ -93,7 +93,7 @@ void
 CGICCNS CgiEnvironment::parseCookie(const STDNS string &data)
 {
   // find the '=' separating the name and value
-  unsigned int pos = data.find("=", 0);
+  STDNS string::size_type pos = data.find("=", 0);
 
   // if no '=' was found, return
   if(pos == STDNS string::npos)

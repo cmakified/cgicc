@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cc,v 1.11 1999/04/26 22:42:26 sbooth Exp $
+ *  $Id: Cgicc.cc,v 1.12 1999/05/11 17:03:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -183,6 +183,8 @@ CGICCNS MultipartHeader::operator= (const MultipartHeader& head)
   fName 		= head.fName;
   fFilename 		= head.fFilename;
   fContentType 		= head.fContentType;
+
+  return *this;
 }
 
 // ============================================================
@@ -360,8 +362,8 @@ CGICCNS Cgicc::parseFormInput(const STDNS string& data)
     LOGLN("Multipart data detected.")
 
     // Find out what the separator is
-    STDNS string bType 	= "boundary=";
-    unsigned int pos 	= env.find(bType);
+    STDNS string 		bType 	= "boundary=";
+    STDNS string::size_type 	pos 	= env.find(bType);
 
     // generate the separators
     STDNS string sep = env.substr(pos + bType.length());
@@ -373,12 +375,11 @@ CGICCNS Cgicc::parseFormInput(const STDNS string& data)
     sep2.insert(0, "--");
 
     // Find the data between the separators
-    unsigned int start 		= data.find(sep);
-    unsigned int limit 		= data.find(sep2);
-    unsigned int sepLen 	= sep.length();
+    STDNS string::size_type start  = data.find(sep);
+    STDNS string::size_type sepLen = sep.length();
 
     pos = 0;
-    unsigned int oldPos = start + sepLen;
+    STDNS string::size_type oldPos = start + sepLen;
 
     while(true) {
       pos = data.find(sep, oldPos);
@@ -394,8 +395,8 @@ CGICCNS Cgicc::parseFormInput(const STDNS string& data)
     }
   }
   else if(! data.empty()) {
-    unsigned int pos 	= 0;
-    unsigned int oldPos	= 0;
+    STDNS string::size_type pos 	= 0;
+    STDNS string::size_type oldPos	= 0;
 
     while(true) {
       // find the '&' separating a name=value pairs
@@ -442,7 +443,7 @@ void
 CGICCNS Cgicc::parsePair(const STDNS string& data)
 {
   // find the '=' separating the name and value
-  unsigned int pos = data.find_first_of("=", 0);
+  STDNS string::size_type pos = data.find_first_of("=", 0);
 
   // if no '=' was found, return
   if(pos == STDNS string::npos)
@@ -461,7 +462,7 @@ CGICCNS Cgicc::parseMIME(const STDNS string& data)
 {
   // Find the header
   STDNS string end = "\r\n\r\n";
-  unsigned int headLimit = data.find(end, 0);
+  STDNS string::size_type headLimit = data.find(end, 0);
   
   // Detect error
   if(headLimit == STDNS string::npos)
@@ -471,7 +472,7 @@ CGICCNS Cgicc::parseMIME(const STDNS string& data)
   MultipartHeader head = parseHeader(data.substr(0, headLimit));
 
   // Extract the value - there is still a trailing CR/LF to be subtracted off
-  unsigned int valueStart = headLimit + end.length();
+  STDNS string::size_type valueStart = headLimit + end.length();
   STDNS string value = data.substr(valueStart, data.length() - valueStart - 2);
 
   if(head.getFilename().empty())
