@@ -1,3 +1,13 @@
+2000-11-02  Stephen F. Booth  <sbooth@gnu.org>
+
+	* support/cgicc-config.in: Added
+	* support/Makefile.am: Added
+	* configure.in: Modified for cgicc-config
+
+2000-10-26  Stephen F. Booth  <sbooth@gnu.org>
+
+	* example/README: 'Cgicc' -> 'cgicc'
+
 2000-10-16  Stephen F. Booth  <sbooth@gnu.org>
 
 	* demo/upload.html: New file upload demo
