@@ -11,6 +11,7 @@
 	declaration (for MSVC++ 5.0).
 	* info/classes-html.texinfo: Added documentation for new 
 	HTMLElemnt::add method.
+	* cgicc/Makefile.am: Add $(top_builddir) to includes
 
 1999-08-16  Christof Danzl  <cdanzl@cosy.sbg.ac.at>
 
