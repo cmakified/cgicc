@@ -1,0 +1,117 @@
+// $Id: cgicc.css,v 1.1 1998/04/08 20:22:42 sbooth Exp $
+
+BODY {
+	color: black;
+	background-color: white;
+}   
+
+HR.half {
+	width: 60%;
+	align: center;
+}
+    
+SPAN.red, STRONG.red {
+	color: red;
+} 
+
+SPAN.green {
+	color: green;
+}
+
+SPAN.blue {
+	color: blue;
+}
+
+P.legal {
+	font-size: small
+}
+
+P.red {
+	text-align: center;
+	color: red;
+}
+
+P.center {
+	text-align: center;
+}
+
+DIV.urgent {
+	padding: 1em; 
+	border: ridge medium maroon; 
+	margin: 1em 0;
+	text-align: center;
+}
+
+DIV.notice {
+	border: solid thin; 
+	margin: 1em 0;
+	background: #DDD;
+	text-align: center;
+}
+
+DIV.dns {
+	border: solid thin; 
+	margin: 1em 0;
+	background: #DDD;
+	text-align: center;
+}
+
+PRE.html {
+	margin-left: 1em;
+	color: green;
+}
+
+PRE.code {
+	margin-left: 1em;
+	color: maroon;
+}
+
+PRE.unix {
+	margin-left: 1em;
+	color: olive;
+}
+
+PRE.file {
+	margin-left: 1em;
+	color: #777777;
+}
+
+TABLE.form {
+	left-margin: auto;
+	right-margin: auto;
+	width: 90%;
+}
+
+COL.black, TD.black, TD.title, TR.title {
+	color: white;
+	background-color: black;
+	font-weight: bold;
+	text-align: center;
+}
+
+COL.gray, TD.gray {
+	background-color: #DDD;
+	text-align: center;
+}
+
+TD.data, TR.data {
+	background-color: #DDD;
+	text-align: left;
+}
+
+TD.grayspecial {
+	background-color: #DDD;
+	text-align: left;
+}
+
+TD.ltgray {
+	background-color: #DDD;
+}
+
+TD.dkgray {
+	background-color: #BBB;
+}
+
+DIV.smaller {
+	font-size: small;
+}
