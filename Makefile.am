@@ -1,4 +1,6 @@
-## $Id: Makefile.am,v 1.14 1999/06/03 23:06:52 sbooth Exp $
+## $Id: Makefile.am,v 1.15 1999/08/07 00:25:44 sbooth Exp $
+
+AUTOMAKE_OPTIONS = check-news dist-zip
 
 if DEMOS
 DEMO = demo
@@ -29,14 +31,8 @@ if MAINTAINER_MODE
 CVS = cvs
 
 ## Tag sources before making distribution, but don't make a
-## distribution if checks fail.  Also, make sure the NEWS file is
-## up-to-date.
+## distribution if checks fail.
 cvs-dist: distcheck
-	@if sed '1,9d;10q' $(srcdir)/NEWS | grep -e "$(VERSION)" > /dev/null; \
-	then :; else \
-	  echo "NEWS not updated; not releasing" 1>&2; \
-	  exit 1;				\
-	fi
 	cd $(srcdir) && \
 	 $(CVS) -q tag `echo "release-$(VERSION)" | sed 's/\./-/g'`
 	$(MAKE) dist
