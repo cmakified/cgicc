@@ -1,7 +1,7 @@
 /*
- *  $Id: acconfig.h,v 1.5 1999/08/09 23:38:12 sbooth Exp $
+ *  $Id: acconfig.h,v 1.6 2000/11/15 06:31:40 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,3 +28,6 @@
 
 /* System cgicc was configured for */
 #define HOST ""
+
+/* Whether to enable debug logging */
+#undef DEBUG
