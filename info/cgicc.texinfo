@@ -72,7 +72,7 @@ approved by the Free Software Foundation.
 @c @ifnottex
 @ifinfo
 @node Top, Overview of CGI, (dir), (dir)
-@top Cgicc
+@top GNU Cgicc
 
 @include version.texi
 
@@ -80,7 +80,7 @@ This document describes the GNU Cgicc library, a C++ class library that
 facilitates the development of Common Gateway Inteface (CGI)
 applications for the World Wide Web (WWW).
 
-This is Edition @value{EDITION} of the Cgicc documentation, @value{UPDATED}.
+This is edition @value{EDITION} of the Cgicc documentation, @value{UPDATED}.
 @c @end ifnottex
 @end ifinfo
 
@@ -102,6 +102,7 @@ This is Edition @value{EDITION} of the Cgicc documentation, @value{UPDATED}.
 * Concept Index::               Index of concepts introduced in the manual
 * Function Index::              Index of member functions
 * Data Type Index::             Index of classes
+
 
 
 
