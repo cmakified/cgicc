@@ -1,4 +1,4 @@
-# $Id: Makefile.am,v 1.3 1998/12/19 01:52:48 sbooth Exp $
+# $Id: Makefile.am,v 1.4 1999/01/05 21:46:27 sbooth Exp $
 
 CLEANFILES = *~
 DISTCLEANFILES = .deps/*
@@ -16,4 +16,4 @@ FormEntry.hh FormFile.hh HTMLAttributes.hh HTMLClasses.hh HTMLDirLang.hh \
 HTMLElements.hh HTMLForms.hh HTMLFrameClasses.hh HTMLFrames.hh HTMLGlobal.hh \
 HTMLGraphics.hh HTMLLinks.hh HTMLLists.hh HTMLObjects.hh HTMLScripts.hh \
 HTMLStyles.hh HTMLTables.hh HTMLText.hh HTTPHeaders.hh LinkedList.hh \
-MStreamable.hh Node.hh
+MStreamable.hh Node.hh config.h
