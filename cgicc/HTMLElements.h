@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLElements.h,v 1.4 1999/08/16 17:40:04 sbooth Exp $
+ *  $Id: HTMLElements.h,v 1.5 1999/08/17 17:29:31 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -166,6 +166,11 @@ public:
   HTMLElement&
   add(const HTMLElement& element);
 
+  /** Add an embedded HTMLElement in this one */
+  HTMLElement&
+  add(HTMLElement *element);
+
+
   /** Set an HTMLAttribute on this HTMLElement */
   HTMLElement&
   set(const STDNS string& name);
@@ -264,6 +269,14 @@ public:
    */
   HTMLElementList&
   add(const HTMLElement& element);
+
+  /** 
+   * Add an HTMLElement to the list.
+   * @param element The HTMLElement to add.
+   * @return A reference to the list.
+   */
+  HTMLElementList&
+  add(HTMLElement *element);
 
 
   /** Render this HTMLElementList */

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLElements.cpp,v 1.2 1999/08/16 17:40:04 sbooth Exp $
+ *  $Id: HTMLElements.cpp,v 1.3 1999/08/17 17:29:31 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -106,6 +106,15 @@ CGICCNS HTMLElement::setEmbedded(const HTMLElementList& embedded)
 
 CGICCNS HTMLElement&
 CGICCNS HTMLElement::add(const HTMLElement& element)
+{
+  if(fEmbedded == 0)
+    fEmbedded = new HTMLElementList();
+  fEmbedded->add(element);
+  return *this;
+}
+
+CGICCNS HTMLElement&
+CGICCNS HTMLElement::add(HTMLElement *element)
 {
   if(fEmbedded == 0)
     fEmbedded = new HTMLElementList();
@@ -227,6 +236,13 @@ CGICCNS HTMLElementList&
 CGICCNS HTMLElementList::add(const HTMLElement& element)
 { 
   fElements.push_back(element.clone());
+  return *this;
+}
+
+CGICCNS HTMLElementList&
+CGICCNS HTMLElementList::add(HTMLElement *element)
+{ 
+  fElements.push_back(element);
   return *this;
 }
 
