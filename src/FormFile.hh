@@ -1,4 +1,4 @@
-/* $Id: FormFile.hh,v 1.6 1998/04/04 04:38:52 sbooth Exp $ */
+/* $Id: FormFile.hh,v 1.7 1998/09/24 01:37:49 sbooth Exp $ */
 
 #ifndef __FORM_FILE__
 #define __FORM_FILE__ 1
@@ -39,18 +39,20 @@ public:
    * @param dataType The MIME content type of the data, if specified, or NULL.
    * @param data The file data, not necessarily null-terminated.
    * @param dataLen The length of the file data, in bytes.
+   * @exception Exception
    */
   FormFile(const char *name, 
 	   const char *filename, 
 	   const char *dataType, 
 	   const char *data, 
-	   int dataLen);
+	   int dataLen) throw (Exception);
   
   /**
    * Copy constructor.
    * @param file The FormFile to copy.
+   * @exception Exception
    */
-  FormFile(const FormFile& file);
+  FormFile(const FormFile& file) throw (Exception);
   
   /** Destructor */
   virtual ~FormFile();

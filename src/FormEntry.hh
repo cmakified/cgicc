@@ -1,4 +1,4 @@
-/* $Id: FormEntry.hh,v 1.7 1998/04/03 21:13:26 sbooth Exp $ */
+/* $Id: FormEntry.hh,v 1.8 1998/09/24 01:37:49 sbooth Exp $ */
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1
@@ -27,14 +27,17 @@ public:
    * @param name The name of the form element
    * @param value The value of the form element
    * @param valueLen The length, in bytes, of value if not NULL-terminated.
+   * @exception Exception
    */
-  FormEntry(const char *name, const char *value, int valueLen = -1);
+  FormEntry(const char *name, const char *value, 
+	    int valueLen = -1) throw (Exception);
   
   /**
    * Copy constructor.
    * @param entry The FormEntry to copy.
+   * @exception Exception
    */
-  FormEntry(const FormEntry& entry);
+  FormEntry(const FormEntry& entry) throw (Exception);
 
   /** Delete this FormEntry */
   virtual ~FormEntry();
