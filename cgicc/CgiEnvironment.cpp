@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.15 2002/12/04 17:04:06 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.16 2003/07/11 14:57:09 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -68,19 +68,21 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
   else if(stringsAreEqual(getRequestMethod(), "post")) {
     LOGLN("POST method recognized");
           
-    std::auto_ptr<char> data(new char[getContentLength()]);
-
+    // Don't use auto_ptr, but vector instead
+    // Bug reported by shinra@j10n.org
+    std::vector<char> data(getContentLength());
+    
     // If input is 0, use the default implementation of CgiInput
     if(input == 0) {
-      if(local_input.read(data.get(),getContentLength()) != getContentLength())
+      if(local_input.read(&data[0],getContentLength()) != getContentLength())
 	throw std::runtime_error("I/O error");
     }
     else {
-      if(input->read(data.get(), getContentLength()) != getContentLength())
+      if(input->read(&data[0], getContentLength()) != getContentLength())
 	throw std::runtime_error("I/O error");
     }
 
-    fPostData = std::string(data.get(), getContentLength());
+    fPostData = std::string(&data[0], getContentLength());
   }
   
   fCookies.reserve(10);
@@ -156,7 +158,7 @@ cgicc::CgiEnvironment::readEnvironmentVariables(CgiInput *input)
   fServerProtocol 	= input->getenv("SERVER_PROTOCOL");
 
   std::string port 	= input->getenv("SERVER_PORT");
-  fServerPort 		= atol(port.c_str());
+  fServerPort 		= std::atol(port.c_str());
 
   fRequestMethod 	= input->getenv("REQUEST_METHOD");
   fPathInfo 		= input->getenv("PATH_INFO");
@@ -171,7 +173,7 @@ cgicc::CgiEnvironment::readEnvironmentVariables(CgiInput *input)
   fContentType 		= input->getenv("CONTENT_TYPE");
 
   std::string length 	= input->getenv("CONTENT_LENGTH");
-  fContentLength 	= atol(length.c_str());
+  fContentLength 	= std::atol(length.c_str());
 
   fAccept 		= input->getenv("HTTP_ACCEPT");
   fUserAgent 		= input->getenv("HTTP_USER_AGENT");
