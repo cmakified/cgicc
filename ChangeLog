@@ -1,3 +1,17 @@
+2002-03-03  Stephen F. Booth  <sbooth@gnu.or>
+
+	* cgicc/CgiInput.h: Added copy construcor, operator=, 
+	operator==, operator!=
+	* CgiEnvironment.cpp: Got rid of static CgiInput*
+	* CgiEnvironment.{h,cpp}: Changed CgiInput* to CgiInput
+	* Cgicc.{h,cpp}: Changed CgiInput* to CgiInput
+	* demo/{cookie,dns,test,upload}.cpp: Got rid of my name
+	* demo/{cookie,dns,test,upload}.html: Got rid of my name
+
+2002-03-02  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/Cgicc.cpp: Removed unnecessary variable initialization
+
 2002-03-01  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/CgiInput.{h,cpp}: New files for input data sources
