@@ -1,30 +1,67 @@
-GNU Cgicc Demo Programs
+GNU cgicc Demo Programs
 =======================
 
-To run the demo application 'test.cgi', the file 'testform.html' must
-be configured for your particular web server.  Scroll down until you
-see the following line (line 47): 
+There are three demo applications in this directory:
 
-<FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/test.cgi">
+  'test.cgi', a demo of how to access various kinds of submitted form
+   information using cgicc.  Use the file 'test.html' to submit data
+   to this application.
 
-Change the path to match your cgi-bin directory.  To run the test,
-first copy the 'test.cgi' and 'dns.cgi' applications to the cgi-bin
-directory.  Finally, copy 'testform.html' to your HTML directory.
+  'upload.cgi', a demo of how to use cgicc to process uploaded
+   files.  Use the file 'upload.html' to submit data to this
+   application.
 
-This form will call the demo 'test.cgi', and will serve as a test of
-the installation.
+  'dns.cgi', a demo of a web dns gateway.  There is no html file
+   associated with this application; it is run directly.
 
-Incidentally, to see how transparently Cgicc handles the difference
+To run the demo applications 'test.cgi' or 'upload.cgi', the associted
+html file ('test.html' or 'upload.html') must be configured for your
+particular web server.  Scroll down to line 56, which should look like
+  <FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/test.cgi">
+in 'test.html', or
+  <FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/upload.cgi" 
+in 'upload.html'.
+
+Change the path to match your cgi-bin directory.  For example, if you
+were running the applications from the /cgi-bin directory on the
+server www.gnu.org, the line would contain
+ACTION="http://www.gnu.org/cgi-bin/test.cgi".
+
+To run the tests, first copy the 'test.cgi', 'upload.cgi', and
+'dns.cgi' applications to the cgi-bin directory (See note on libtool
+if this doesn't seem to work).  Ensure that the file permissions are
+at least readable and executable by all (-rwxr-xr-w).  Next, copy the
+files 'test.html' and 'upload.html' to your HTML directory.  Ensure
+that these files are readable by everyone (-rw-r--r--).
+
+To run the applications, point your browser at the 'dns.cgi'
+application, or at 'test.html' or 'upload.html'.
+
+Incidentally, to see how transparently cgicc handles the difference
 between 'POST' and 'GET' type forms, try changing the request method
-in 'testform.html' and see what happens.  You won't notice a
-difference except in the call to the application.
+in 'test.html' and see what happens.  You won't notice a difference
+except in the call to the application.
 
+A Note on libtool
+=================
+
+Since cgicc uses libtool to generate the libraries and link against
+them, depending on your configuration you may need to use libtool to
+copy the applications due to the way runtime search paths are
+embedded.  If you are unable to run the applications from the /cgi-bin
+directory, use libtool to re-copy them.  From the cgicc/demo
+directory, run
+  % sh ../libtool --mode=install cp *.cgi cgi-bin/
+replacing cgi-bin/ with your webservers cgi-bin directory.
 
 A Note about debug logging
 ==========================
 
-If you want to use Cgicc's debug logging feature in the demos, you'll
-need to change the declaration of 'gLogFile' to contain a path to the
-log file (in addition to defining the macro 'DEBUG' during library
-compilation). The log file must be writable by whichever user your web
-server runs cgi applications under.
+If you want to use cgicc's debug logging feature in the demos, you'll
+need to change the declaration of 'gLogFile' in the source files to
+contain a path to the log file. In addition, you need to define the
+macro 'DEBUG' during library compilation.  This is accomplished at
+configure time, by passing the --enable-debug-logging flag:
+  % ./configure --enable-debug-logging [args] 
+Finally, the log file must be writable by whichever user your
+webserver runs cgi applications under.
