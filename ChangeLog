@@ -9,6 +9,7 @@
 	* info/class-cgicc.texinfo: Added documentation for iterator typedefs.
 	* info/tutorial.texinfo: Updated example to use iterator typedefs.
 	* info/cgicc.texinfo: Use @ifnottex instead of @ifinfo
+	* NEWS: Added item on iterators
 
 1999-09-27  Stephen F. Booth  <sbooth@gnu.org>
 
