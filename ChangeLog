@@ -1,3 +1,9 @@
+1999-06-07  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* info/cgicc.texinfo: Changed Edition to edition, and
+	Cgicc to GNU Cgicc.
+	* configure.in: Updated version to 3.0.2
+
 1999-06-03  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* src/*: Removed directory, renamed to cgicc
