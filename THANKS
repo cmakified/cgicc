@@ -14,3 +14,4 @@ Christian Weisgerber, for his Makefile bug fix.
 Carsten P. Gehrke, for his getDoubleValue bug fix.
 Bostjan Lah, for his readString bug report.
 Gilbert Fine and Jim Hull, for their form_urldecode bug fix.
+Vyacheslav Ignatyuk, for his extractBetween bug fix.

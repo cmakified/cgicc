@@ -1,3 +1,9 @@
+2004-11-06  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiUtils.cpp: Fixed bug in extractBetween, now use
+	size_type (bug reported by slava@perlx.com)
+	* THANKS: added Vyacheslav Ignatyuk
+
 2004-06-29  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/Cgicc.cpp: Parse both GET and POST data if present

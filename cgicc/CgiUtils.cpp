@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiUtils.cpp,v 1.17 2004/06/30 04:54:57 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.18 2004/11/06 14:07:21 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -213,7 +213,7 @@ cgicc::extractBetween(const std::string& data,
 		      const std::string& separator2)
 {
   std::string result;
-  unsigned int start, limit;
+  std::string::size_type start, limit;
   
   start = data.find(separator1, 0);
   if(std::string::npos != start) {
