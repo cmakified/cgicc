@@ -1,14 +1,20 @@
-## $Id: Makefile.am,v 1.27 2001/09/03 22:16:18 sbooth Exp $
+## $Id: Makefile.am,v 1.28 2002/01/09 15:13:56 sbooth Exp $
 
-AUTOMAKE_OPTIONS = check-news dist-zip #dist-bzip2
+AUTOMAKE_OPTIONS = check-news dist-zip dist-bzip2
 
 if DEMOS
-DEMO = demo
+DEMO = demo contrib
 else
 DEMO =
 endif
 
-SUBDIRS = cgicc doc support $(DEMO) contrib
+if MAINTAINER_MODE
+HTML = html
+else
+HTML =
+endif
+
+SUBDIRS = cgicc doc support $(HTML) $(DEMO)
 
 CLEANFILES = *~
 
@@ -33,7 +39,7 @@ dist-hook:
 	cp -p $(srcdir)/example/config.guess $(distdir)/example
 	cp -p $(srcdir)/example/config.sub $(distdir)/example
 	cp -p $(srcdir)/example/configure $(distdir)/example
-	cp -p $(srcdir)/example/configure.in $(distdir)/example
+	cp -p $(srcdir)/example/configure.ac $(distdir)/example
 	cp -p $(srcdir)/example/example.cpp $(distdir)/example
 	cp -p $(srcdir)/example/install-sh $(distdir)/example
 	cp -p $(srcdir)/example/missing $(distdir)/example

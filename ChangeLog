@@ -1,4 +1,10 @@
-2001-09-04  Stephen F. Booth  <sbooth@localhost.localdomain>
+2002-01-09  Stephen F. Booth  <sbooth@gnu.org>
+
+	* README: Updated for 3.2
+	* NEWS: Updated for 3.2
+	* Makefile.am: Changed configure.in to configure.ac
+
+2001-09-04  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/HTMLAttribute.h: Removed <vector> from #includes
 	* cgicc/HTMLElementList.h: Added <vector> to #includes
