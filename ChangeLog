@@ -1,8 +1,15 @@
+2000-10-15  Stephen F. Booth  <sbooth@gnu.org>
+
+	* example/yourSource.cpp: Changed instances of 'Cgicc' to 'cgicc'
+
 2000-10-07  Stephen F. Booth  <sbooth@gnu.org>
 
 	* demo/dns.cpp: Updated URL
 	* demo/test.cpp: Updated URL
+	* demo/testform.html: Updated URL
+	* demo/dns.cpp: Changed various instances of 'Cgicc' to 'cgicc'
 	* demo/test.cpp: Changed various instances of 'Cgicc' to 'cgicc'
+	* demo/testform.html: Changed various instances of 'Cgicc' to 'cgicc'
 	* info/cgi-classes.texinfo: Changed various instances of 'Cgicc' to 
 	'cgicc'
 	* info/cgicc.texinfo: Changed various instances of 'Cgicc' to 'cgicc'
@@ -19,6 +26,7 @@
 	* support/cgicc.spec.in: Removed
 	* configure.in: Removed reference to cgicc.spec, version to 3.1.4
 	* cgicc/Makefile.am: Updated libtool version
+	* cgicc/HTMLAttributes.h: Updated copyright and mail info
 
 2000-09-21  Stephen F. Booth  <sbooth@gnu.org>
 
