@@ -1,4 +1,4 @@
-/* $Id: CgiEnvironment.cc,v 1.2 1998/04/01 20:52:34 sbooth Exp $ */
+/* $Id: CgiEnvironment.cc,v 1.3 1998/09/28 16:56:52 sbooth Exp $ */
 
 #include "CgiEnvironment.hh"
 
@@ -75,6 +75,11 @@ CgiEnvironment::parseCookie(const char *data, int dataLen)
   const char *sep = "=";
   sepPos = findBytes(data, dataLen, sep);
   
+  // fix for bug reported by Sergei Prognimak
+  // need to check if sepPos == -1
+  if(sepPos == -1)
+    return;
+
   // Extract data, convert, and add
   char *name;
   char *value;

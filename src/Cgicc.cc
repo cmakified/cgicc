@@ -1,4 +1,4 @@
-/* $Id: Cgicc.cc,v 1.6 1998/09/18 17:47:42 sbooth Exp $ */
+/* $Id: Cgicc.cc,v 1.7 1998/09/28 16:56:52 sbooth Exp $ */
 
 #ifndef __CGICC__
 #include "Cgicc.hh"
@@ -351,6 +351,11 @@ Cgicc::parsePair(const char *data, int dataLen)
   int sepPos = 0;
   const char *sep = "=";
   sepPos = findBytes(data, dataLen, sep);
+
+  // fix for bug reported by Sergei Prognimak
+  // need to check if sepPos == -1
+  if(sepPos == -1)
+    return;
   
   // Extract data, convert, and add
   char *name;
