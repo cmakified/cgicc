@@ -8,7 +8,9 @@
         Major changes between versions 3.1 and 3.1.1
         --------------------------------------------
 
-* Added new method, usingHTTPS, to CgiEnvironment
+* Added new method, usingHTTPS(), to CgiEnvironment
+
+* Added typedefs for standard template library iterators, to ease typing
 
 
         Major changes between versions 3.0.2 and 3.1
