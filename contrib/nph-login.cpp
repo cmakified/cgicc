@@ -1,7 +1,7 @@
 /*
- * $Id: nph-login.cpp,v 1.3 2002/01/09 17:12:03 sbooth Exp $
+ * $Id: nph-login.cpp,v 1.4 2002/03/02 06:25:55 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *  Copyright (C) 2001 Peter Goedtkindt
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -44,7 +44,7 @@
 #include <iostream>
 
 #include "cgicc/Cgicc.h"
-#include "cgicc/HTTPHeaders.h"
+#include "cgicc/HTTPResponseHeader.h"
 #include "cgicc/HTMLClasses.h"
 
 // To use the debug logging feature, the variable gLogFile MUST be
