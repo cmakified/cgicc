@@ -1,0 +1,92 @@
+@comment -*-texinfo-*-
+@node classes for HTML output, Copying, classes for HTTP headers, Top
+@unnumbered classes for HTML output
+
+For an introduction to Cgicc's HTML output, please see @xref{A tutorial
+example}, for more information.
+
+Cgicc provides one concrete class for each HTML element defined in the
+HTML 4.0 standard (@pxref{HTML generation classes}).  Every class
+defining an HTML element is a subclass of the abstract base class
+@code{HTMLElement}.  
+
+There are a number of methods defined on @code{HTMLElement} which are,
+by definition, defined for all subclasses.  In most instances, these
+functions will not be used directly, but rather are invoked implicitly
+by the subclasses.
+
+@unnumberedsec HTMLElement
+
+@deftypemethod HTMLElement string getName () const
+Returns the name of the HTML element.  For example @samp{HTML} or
+@samp{BODY}.
+@end deftypemethod
+
+@deftypemethod HTMLElement HTMLAttributeList* getAttributes () const
+Returns the @code{HTMLAttributeList} containing all the attributes
+associated with this element.
+@end deftypemethod
+
+@deftypemethod HTMLElement void setAttributes (const HTMLAttributeList *@var{attributes})
+Set the attributes associated with this element.
+@end deftypemethod
+
+@unnumberedsec @code{HTMLElement} Construction
+
+All subclasses of @code{HTMLElement} possess the same set of
+constructors.  They are presented here once for all subclasses; in the
+documentation below, the arbitrary element @samp{H1}, represented by the
+class @code{h1}, was chosen.
+
+@deftypemethod h1 void h1 ()
+Default constructor.  Creates an empty HTML element.
+@end deftypemethod
+
+@deftypemethod h1 void h1 (const string& @var{text})
+Creates a new HTML element containing the text @var{text}.
+@end deftypemethod
+
+@deftypemethod h1 void h1 (const HTMLAttributeList& @var{attributes})
+Creates a new HTML element possessing the HTML attributes contained in
+@var{attributes}.
+@end deftypemethod
+
+@deftypemethod h1 void h1 (const HTMLSimpleElement& @var{embed})
+Creates a new HTML element containing the embedded HTML element
+@var{embed}.
+@end deftypemethod
+
+@deftypemethod h1 void h1 (const string& @var{text}, const HTMLAttributeList& @var{attributes})
+Creates a new HTML element containing the text @var{text}, and
+possessing the HTML attributes contained in @var{attributes}.
+@end deftypemethod
+
+@deftypemethod h1 void h1 (const HTMLAttributeList& @var{attributes}, const HTMLSimpleElement& @var{embed})
+Creates a new HTML element possessing the HTML attributes contained in
+@var{attributes}, with the embedded HTML element @var{embed}.
+@end deftypemethod
+
+@unnumberedsec @code{HTMLAttributeList} Construction
+
+For most real-world HTML, an @code{HTMLElement} will contain one or more
+embedded HTML attributes.  HTML attributes are added to
+@code{HTMLElement} objects via the @code{add} functions.
+
+@deftypefn {Library Function} HTMLAttributeList& add (const string& @var{name})
+Creates an @code{HTMLAttributeList} containing an
+@code{HTMLAtomicAttribute} with name @var{name}.
+@end deftypefn
+
+@deftypefn {Library Function} HTMLAttributeList& add (const string& @var{name}, const string& @var{value})
+Creates an @code{HTMLAttributeList} containing an @code{HTMLAttribute}
+with name @var{name} and value @var{value}.
+@end deftypefn
+
+@deftypemethod HTMLAttributeList HTMLAttributeList& add (const string& @var{name})
+Adds an @code{HTMLAtomicAttribute} with name @var{name} to the attribute list.
+@end deftypemethod
+
+@deftypemethod HTMLAttributeList HTMLAttributeList& add (const string& @var{name}, const string& @var{value})
+Adds an @code{HTMLAttribute} with name @var{name} and value @var{value}
+to the attribute list.
+@end deftypemethod

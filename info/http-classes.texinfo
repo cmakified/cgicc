@@ -1,0 +1,72 @@
+@comment -*-texinfo-*-
+@node HTTP header classes, HTML generation classes, CGI classes, Top
+@unnumbered HTTP header classes
+
+HTTP headers are used to indicate to the client information on the data
+being returned as a result of the CGI request.  For example, standard
+HTTP headers indicate the type, size, and modification date of the
+transmitted data.
+
+@deftp Class HTTPCookie
+An @code{HTTPCookie} is a name/value pair used to store a piece of
+information about the caller using the caller's own machine.  Cookies
+are often used as a means to identify users.
+@end deftp
+
+@deftp Class HTTPHeader
+@code{HTTPHeader} is the base class for all HTTP headers.  It is rarely
+used directly; instead, use one of the provided subclasses.
+@end deftp
+
+@deftp Class HTTPContentHeader
+@code{HTTPContentHeader} is a subclass of @code{HTTPHeader} used to
+indicate the type of data returned to the client by the CGI application.
+@end deftp
+
+@deftp Class HTTPRedirectHeader
+@code{HTTPRedirectHeader} is a subclass of @code{HTTPHeader} used to
+redirect the client to a different URL.
+@end deftp
+
+@deftp Class HTTPStatusHeader
+@code{HTTPStatusHeader} is a subclass of @code{HTTPHeader} used to
+return a 3-digit HTTP status code and the associated message.
+@end deftp
+
+@deftp Class HTTPNPHeader
+@code{HTTPNPHeader} is a subclass of @code{HTTPHeader} used to indicate
+to the HTTP server that it should not parse the data returned by the CGI
+application.  Normally, the HTTP server parses the data returned by the
+CGI application and fills in certain headers, such as the data size.
+@end deftp
+
+@deftp Class HTTPHTMLHeader
+@code{HTTPHTMLHeader} is a subclass of @code{HTTPContentHeader} used for
+data of MIME type @samp{text/html}.
+@end deftp
+
+@deftp Class HTTPPlainHeader
+@code{HTTPPlainHeader} is a subclass of @code{HTTPContentHeader} used
+for data of MIME type @samp{text/plain}.
+@end deftp
+
+@deftp Class HTTPGIFHeader
+@code{HTTPGIFHeader} is a subclass of @code{HTTPContentHeader} used for
+data of MIME type @samp{image/gif}.
+@end deftp
+
+@deftp Class HTTPJPEGHeader
+@code{HTTPJPEGHeader} is a subclass of @code{HTTPContentHeader} used for
+data of MIME type @samp{image/jpeg}.
+@end deftp
+
+@deftp Class HTTPXBMHeader
+@code{HTTPXBMHeader} is a subclass of @code{HTTPContentHeader} used for
+data of MIME type @samp{image/x-xbitmap}.
+@end deftp
+
+@deftp Class HTTPAudioHeader
+@code{HTTPAudioHeader} is a subclass of @code{HTTPContentHeader} used
+for data of MIME type @samp{audio/basic}.
+@end deftp
+

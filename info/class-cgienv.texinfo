@@ -1,0 +1,168 @@
+@comment -*-texinfo-*-
+@node class CgiEnvironment, class FormEntry, class Cgicc, Top
+@unnumbered class @code{CgiEnvironment}
+
+@code{CgiEnvironment} encapsulates the data passed from the HTTP server
+to the CGI application.  This includes all environment variables set by
+the HTTP server specified in the CGI standard.
+
+@unnumberedsec Constructor
+
+@deftypemethod CgiEnvironment void CgiEnvironment ()
+Constructor - not usually called directly.  Instead, an object of type
+@code{CgiEnvironment} is retrieved by calling the
+@code{getEnvironment()} method on @code{Cgicc}.
+@end deftypemethod
+
+@unnumberedsec Server Information
+
+@deftypemethod CgiEnvironment string getServerSoftware () const
+Get the name and version of the HTTP server software, for example
+@samp{Apache/1.3.4}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getServerName () const
+Get the hostname, DNS name, or IP address of the HTTP server.  This is
+@emph{not} a URL; for example, @samp{www.gnu.org}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getGatewayInterface () const
+Get the name and version of the gateway interface.  This is usually
+@samp{CGI/1.1}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getServerProtocol () const
+Get the name and revision of the protocol used for this request. This is
+usually @samp{HTTP/1.0}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment {unsigned long} getServerPort () const
+Get the port number on the server to which this request was sent.  This
+will usually be 80.
+@end deftypemethod
+
+@unnumberedsec CGI Query Information
+
+@deftypemethod CgiEnvironment string getCookies () const
+Get the HTTP cookies associated with this query, if any.  The string
+returned by this method may contain multiple cookies; it is recommended
+to use the method @code{getCookieList()} instead, which returns a
+@code{vector<HTTPCookie>}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment {const vector<HTTPCookie>&} getCookies () const
+Get a @code{vector} containing the HTTP cookies associated with this
+query, if any.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getRequestMethod () const
+Get the request method used for this query.  It is usually one of
+@samp{GET} or @samp{POST}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getPathInfo () const
+Get the extra path information for this request, given by the client.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getPathTranslated () const
+Get the translated path information for this request (the virtual to
+physical mapping; for example, @samp{www.gnu.org} to
+@samp{/htdocs/index.html}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getScriptName () const
+Get the full path of this CGI application, for self-referential URIs.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getQueryString () const
+Get the string following the @samp{?} in the URI which called this CGI
+application.  The query string is only valid for applications called via
+the @samp{GET} method.  For example, in the URI
+@samp{foo.cgi?cgicc=yes}, the query string is @samp{cgicc=yes}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment {unsigned long} getContentLength () const
+Get the length of the data read from @code{stdin}, in chars.  This is
+only valid for applications called via the @samp{POST} method.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getContentType () const
+Get the content type of the submitted information.  For applications
+called via the @samp{GET} method, this information is irrelevant.  For
+applications called via the @samp{POST} method, this is usually
+@samp{application/x-www-form-urlencoded}.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getPostData () const
+Get the data passed via @code{stdin}.  This data is of MIME type
+@code{getContentType()}.
+@end deftypemethod
+
+@unnumberedsec Server Specific Information
+
+@deftypemethod CgiEnvironment string getReferrer () const
+Get the URI which called this CGI application.  Depending on the HTTP
+server software, this value may not be set.
+@end deftypemethod
+
+@unnumberedsec Remote User Information
+
+@deftypemethod CgiEnvironment string getRemoteHost () const
+Get the hostname of the remote machine making the request.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getRemoteAddr () const
+Get the IP address of the remote machine making the request.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getAuthType () const
+Get the protocol-specific user authentication method used.  This is only
+applicable if the server supports user authentication, and the user has
+authenticated.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getRemoteUser () const
+Get the authenticated remote user name.  This is only applicable if the
+server supports user authentication, and the user has authenticated.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getRemoteIdent () const
+Get the remote user name retrieved from the server.  This is only
+applicable if the server supports RFC 931 (obsoleted by RFC 1431)
+identification @footnote{RFC 1431 may be found at
+@url{http://info.internet.isi.edu:80/in-notes/rfc/files/rfc1413.txt}}.
+This should @emph{only} be used for logging purposes.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getAccept () const
+Get the MIME data types accepted by the client's browser.  This format
+of this string is a comma (@samp{,}) separated list.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getUserAgent () const
+Get the name of the browser used for this CGI request.  For example,
+@samp{Mozilla/4.1 [en] (WinNT; U)}.
+@end deftypemethod
+
+@unnumberedsec ErrorDocument Handling 
+
+(For a tutorial on ErrorDocument handling, see
+@url{http://hoohoo.ncsa.uiuc.edu/cgi/ErrorCGI.html})
+
+@deftypemethod CgiEnvironment string getRedirectRequest () const
+Get the redirect request.  This will only be valid if youare using this
+CGI application in place of the default server messages during
+ErrorDocument handling.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getRedirectURL () const
+Get the redirect URL.  This will only be valid if youare using this CGI
+application in place of the default server messages during ErrorDocument
+handling.
+@end deftypemethod
+
+@deftypemethod CgiEnvironment string getRedirectStatus () const
+Get the redirect status.  This will only be valid if youare using this
+CGI application in place of the default server messages during
+ErrorDocument handling.
+@end deftypemethod

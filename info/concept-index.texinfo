@@ -1,0 +1,5 @@
+@comment -*-texinfo-*-
+@node Concept Index, Function Index, Copying, Top
+@unnumbered Concept Index
+
+@printindex cp

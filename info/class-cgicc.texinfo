@@ -1,0 +1,141 @@
+@comment -*-texinfo-*-
+@node class Cgicc, class CgiEnvironment, HTML generation classes, Top
+@unnumbered class @code{Cgicc}
+
+@code{Cgicc} is the main class of the Cgicc library.  It is used to
+retrieve information on specific HTML form elements (such as checkboxes,
+radio buttons, and text fields), on uploaded files, and to save,
+restore, and retrieve information on the CGI environment.
+
+@unnumberedsec Constructors
+
+@deftypemethod Cgicc void Cgicc ()
+Constructor.  Upon creation, @code{Cgicc} performs all necessary CGI
+initialization.
+@end deftypemethod
+
+@unnumberedsec Library Information
+
+@deftypemethod Cgicc string getCompileDate () const
+Get the date at which the library was compiled.  The string returned is
+of the format @samp{mmm dd yyyy}.
+@end deftypemethod
+
+@deftypemethod Cgicc string getCompileTime () const
+Get the time at which the library was compiled.  The string returned is
+of the format @samp{hh:mm:ss} in 24-hour time.
+@end deftypemethod
+
+@deftypemethod Cgicc string getVersion () const
+Get the version number of Cgicc.  The string returned is of the format
+@samp{#.#}.
+@end deftypemethod
+
+@deftypemethod Cgicc string getHost () const
+Get the host for which Cgicc was configured.  The string returned is a
+canonical host triplet of the form @samp{processor-manufacturer-os}.
+@end deftypemethod
+
+@unnumberedsec Form Element Access
+
+@deftypemethod Cgicc bool queryCheckbox (const string& @var{elementName}) const
+Returns @code{true} if a checkbox with name @var{elementName} is
+checked, @code{false} otherwise.
+@end deftypemethod
+
+@deftypemethod Cgicc vector<FormEntry>::iterator operator[] (const string& @var{name})
+Find a radio button in a radio group, or a selected list item with
+element name @var{name}. If an element with name @var{name} is not
+found, the returned iterator will be set to the value returned by
+@code{getElements().end()}.
+@end deftypemethod
+
+@deftypemethod Cgicc vector<FormEntry>::const_iterator operator[] (const string& @var{name}) const
+Find a radio button in a radio group, or a selected list item with
+element name @var{name}. If an element with name @var{name} is not
+found, the returned iterator will be set to the value returned by
+@code{getElements().end()}.
+@end deftypemethod
+
+@deftypemethod Cgicc vector<FormEntry>::iterator getElement (const string& @var{name})
+Find a radio button in a radio group, or a selected list item with
+element name @var{name}. If an element with name @var{name} is not
+found, the returned iterator will be set to the value returned by
+@code{getElements().end()}.
+@end deftypemethod
+
+@deftypemethod Cgicc vector<FormEntry>::const_iterator getElement (const string& @var{name}) const
+Find a radio button in a radio group, or a selected list item with
+element name @var{name}. If an element with name @var{name} is not
+found, the returned iterator will be set to the value returned by
+@code{getElements().end()}.
+@end deftypemethod
+
+@deftypemethod Cgicc bool getElement (const string& @var{name}, vector<FormEntry>& result) const
+Find multiple checkboxes in a group, or selected items in a list with
+element name @var{name}.  Returns @code{true} if any items with name
+@var{name} were found, @code{false} otherwise.
+@end deftypemethod
+
+@deftypemethod Cgicc vector<FormEntry>::iterator getElementByValue (const string& @var{value})
+Find a radio button in a radio group, or a selected list item with
+element value @var{value}. If an element with value @var{value} is not
+found, the returned iterator will be set to the value returned by
+@code{getElements().end()}.
+@end deftypemethod
+
+@deftypemethod Cgicc vector<FormEntry>::const_iterator getElementByValue (const string& @var{name}) const
+Find a radio button in a radio group, or a selected list item with
+element value @var{value}. If an element with value @var{value} is not
+found, the returned iterator will be set to the value returned by
+@code{getElements().end()}.
+@end deftypemethod
+
+@deftypemethod Cgicc bool getElementByValue (const string& @var{name}, vector<FormEntry>& result) const
+Find multiple checkboxes in a group, or selected items in a list with
+element value @var{value}.  Returns @code{true} if any items with value
+@var{value} were found, @code{false} otherwise.
+@end deftypemethod
+
+@deftypemethod Cgicc {const vector<FormEntry>&} operator* () const
+Get all the submitted form elements, excluding files.
+@end deftypemethod
+
+@deftypemethod Cgicc {const vector<FormEntry>&} getElements () const
+Get all the submitted form elements, excluding files.
+@end deftypemethod
+
+@unnumberedsec Uploaded File Access
+
+@deftypemethod Cgicc vector<FormFile>::iterator getFile (const string& @var{name})
+Find an uploaded file with element name @var{name}.  If a file belonging
+to element name @var{name} is not found, the returned iterator will be
+set to the value returned by @code{getFiles().end()}.
+@end deftypemethod
+
+@deftypemethod Cgicc vector<FormFile>::const_iterator getFile (const string& @var{name}) const
+Find an uploaded file with element name @var{name}.  If a file belonging
+to element name @var{name} is not found, the returned iterator will be
+set to the value returned by @code{getFiles().end()}.
+@end deftypemethod
+
+@deftypemethod Cgicc {const vector<FormFile>&} getFiles () const
+Get all uploaded files.
+@end deftypemethod
+
+@unnumberedsec Environment Access
+
+@deftypemethod Cgicc {const CgiEnvironment&} getEnvironment () const
+Returns the current CGI environment.
+@end deftypemethod
+
+@unnumberedsec Save and Restore
+
+@deftypemethod Cgicc void save (const string& @var{filename}) const
+Save the current CGI environment to a file with name @var{filename}.
+@end deftypemethod
+
+@deftypemethod Cgicc void restore (const string& @var{filename})
+Restore the CGI environment from a previously-saved environment
+contained in file @var{filename}.
+@end deftypemethod

@@ -1,0 +1,347 @@
+@comment -*-texinfo-*-
+@node HTML generation classes, class Cgicc, HTTP header classes, Top
+@unnumbered HTML generation classes
+
+The Cgicc library provides one class for each HTML element defined in
+the HTML 4.0 specification.  In all cases, the name of the class
+corresponds to the name of the HTML element.
+
+@deftp Class HTMLDoctype
+This class is used to specify the HTML version information as required
+by the HTML 4.0 standard.
+@end deftp
+
+@deftp Class comment
+An HTML comment.
+@end deftp
+
+@deftp Class a
+The A element
+@end deftp
+
+@deftp Class abbr
+The ABBR element
+@end deftp
+
+@deftp Class acronym
+The ACRONYM element
+@end deftp
+
+@deftp Class address
+The ADDRESS element
+@end deftp
+
+@deftp Class area
+The AREA element
+@end deftp
+
+@deftp Class b
+The B element@footnote{It is preferable to use stylesheets instead of
+this element}
+@end deftp
+
+@deftp Class base
+The BASE element
+@end deftp
+
+@deftp Class bdo
+The BDO element
+@end deftp
+
+@deftp Class big
+The BIG element@footnote{It is preferable to use stylesheets instead of
+this element}
+@end deftp
+
+@deftp Class blockquote
+The BLOCKQUOTE element
+@end deftp
+
+@deftp Class body
+The BODY element
+@end deftp
+
+@deftp Class br
+The BR element
+@end deftp
+
+@deftp Class button
+The BUTTON element
+@end deftp
+
+@deftp Class caption
+The CAPTION element
+@end deftp
+
+@deftp Class cite
+The CITE element
+@end deftp
+
+@deftp Class code
+The CODE element
+@end deftp
+
+@deftp Class col
+The COL element
+@end deftp
+
+@deftp Class colgroup
+The COLGROUP element
+@end deftp
+
+@deftp Class dd
+The DD element
+@end deftp
+
+@deftp Class del
+The DEL element
+@end deftp
+
+@deftp Class dfn
+The DFN element
+@end deftp
+
+@deftp Class div
+The DIV element
+@end deftp
+
+@deftp Class dl
+The DL element
+@end deftp
+
+@deftp Class dt
+The DT element
+@end deftp
+
+@deftp Class em
+The EM element
+@end deftp
+
+@deftp Class fieldset
+The FIELDSET element
+@end deftp
+
+@deftp Class form
+The FORM element
+@end deftp
+
+@deftp Class frame
+The FRAME element@footnote{This element is not part of the strict DTD}
+@end deftp
+
+@deftp Class frameset
+The FRAMESET element@footnote{This element is not part of the strict DTD}
+@end deftp
+
+@deftp Class h1
+The H1 element
+@end deftp
+
+@deftp Class h2
+The H2 element
+@end deftp
+
+@deftp Class h3
+The H3 element
+@end deftp
+
+@deftp Class h4
+The H4 element
+@end deftp
+
+@deftp Class h5
+The H5 element
+@end deftp
+
+@deftp Class h6
+The H6 element
+@end deftp
+
+@deftp Class head
+The HEAD element
+@end deftp
+
+@deftp Class hr
+The HR element
+@end deftp
+
+@deftp Class html
+The HTML element
+@end deftp
+
+@deftp Class i
+The I element@footnote{It is preferable to use stylesheets instead of
+this element}
+@end deftp
+
+@deftp Class iframe
+The IFRAME element@footnote{This element is not part of the strict DTD}
+@end deftp
+
+@deftp Class img
+The IMG element
+@end deftp
+
+@deftp Class input
+The INPUT element
+@end deftp
+
+@deftp Class ins
+The INS element
+@end deftp
+
+@deftp Class kbd
+The KBD element
+@end deftp
+
+@deftp Class label
+The LABEL element
+@end deftp
+
+@deftp Class legend
+The LEGEND element
+@end deftp
+
+@deftp Class li
+The LI element
+@end deftp
+
+@deftp Class link
+The LINK element
+@end deftp
+
+@deftp Class map
+The MAP element
+@end deftp
+
+@deftp Class meta
+The META element
+@end deftp
+
+@deftp Class noframes
+The NOFRAMES element@footnote{This element is not part of the strict
+DTD}
+@end deftp
+
+@deftp Class noscript
+The NOSCRIPT element
+@end deftp
+
+@deftp Class object
+The OBJECT element
+@end deftp
+
+@deftp Class ol
+The OL element
+@end deftp
+
+@deftp Class optgroup
+The OPTGROUP element
+@end deftp
+
+@deftp Class option
+The OPTION element
+@end deftp
+
+@deftp Class p
+The P element
+@end deftp
+
+@deftp Class param
+The PARAM element
+@end deftp
+
+@deftp Class pre
+The PRE element
+@end deftp
+
+@deftp Class q
+The Q element
+@end deftp
+
+@deftp Class samp
+The SAMP element
+@end deftp
+
+@deftp Class script
+The SCRIPT element
+@end deftp
+
+@deftp Class select
+The SELECT element
+@end deftp
+
+@deftp Class small
+The SMALL element@footnote{It is preferable to use stylesheets instead
+of this element}
+@end deftp
+
+@deftp Class span
+The SPAN element
+@end deftp
+
+@deftp Class strong
+The STRONG element
+@end deftp
+
+@deftp Class style
+The STYLE element
+@end deftp
+
+@deftp Class sub
+The SUB element
+@end deftp
+
+@deftp Class sup
+The SUP element
+@end deftp
+
+@deftp Class table
+The TABLE element
+@end deftp
+
+@deftp Class tbody
+The TBODY element
+@end deftp
+
+@deftp Class td
+The TD element
+@end deftp
+
+@deftp Class textarea
+The TEXTAREA element
+@end deftp
+
+@deftp Class tfoot
+The TFOOT element
+@end deftp
+
+@deftp Class th
+The TH element
+@end deftp
+
+@deftp Class thead
+The THEAD element
+@end deftp
+
+@deftp Class title
+The TITLE element
+@end deftp
+
+@deftp Class tr
+The TR element
+@end deftp
+
+@deftp Class tt
+The TT element@footnote{It is preferable to use stylesheets instead of
+this element}
+@end deftp
+
+@deftp Class ul
+The UL element
+@end deftp
+
+@deftp Class var
+The VAR element
+@end deftp
+

@@ -1,0 +1,5 @@
+@comment -*-texinfo-*-
+@node Data Type Index, , Function Index, Top
+@unnumbered Data Type Index
+
+@printindex tp
