@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.37 2004/06/22 01:38:08 sbooth Exp $
+## $Id: Makefile.am,v 1.38 2004/06/22 01:42:30 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-bzip2
 
@@ -30,18 +30,17 @@ cvs-dist: distcheck
 	 $(CVS) -q tag `echo "release-$(VERSION)" | sed 's/\./-/g'`
 	$(MAKE) dist
 
-## Generate detached signature files
-GPG = gpg -ba
+## Generate detached signature files (binary and ascii-armored)
+GPG = gpg
 gpg-dist:
 	for file in $(DIST_ARCHIVES); do \
-		echo " $(GPG) $$file"; \
-		$(GPG) $$file; \
+		$(GPG) -b $$file; \
+		$(GPG) -ba $$file; \
 	done
 
 ## Generate md5 checksum files
 MD5 = md5sum
 md5-dist:
 	for file in $(DIST_ARCHIVES); do \
-		echo " $(MD5) $$file > $$file.md5"; \
 		$(MD5) $$file > $$file.md5; \
 	done

@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.17 2004/06/22 01:34:55 sbooth Exp $
+## $Id: Makefile.am,v 1.18 2004/06/22 01:42:30 sbooth Exp $
 
 CLEANFILES = *~ stamp
 
@@ -24,14 +24,12 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(docdir)
 	for file in $(srcdir)/html/*; do \
 		bn="`basename $$file`"; \
-		echo " $(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/$$bn"; \
 	 	$(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/$$bn; \
 	done
 
 uninstall-local:
 	for file in $(srcdir)/html/*; do \
 		bn="`basename $$file`"; \
-		echo " rm -f $(DESTDIR)$(docdir)/$$bn"; \
 		rm -f $(DESTDIR)$(docdir)/$$bn; \
 	done
 
