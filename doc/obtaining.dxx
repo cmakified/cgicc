@@ -1,0 +1,40 @@
+<!-- $Id: obtaining.dxx,v 1.1 1998/04/01 04:11:10 sbooth Exp $ -->
+
+/**@name Obtaining Cgicc
+
+<P>
+Cgicc is distributed via the web both as a tar file and as a gzipped tar 
+file.  Select one of the links below; your web browser should inquire 
+whether to save the file to disk. Save the file, then issue one of the 
+following commands to unpack it:
+</P>
+
+<PRE CLASS="unix">
+<EM>(for the tar file)</EM>
+tar -xf Cgicc.tar
+
+<EM>(for the gzipped tar file)</EM>
+gzip -N -d Cgicc.tar.gz
+tar -xf Cgicc.tar
+</PRE>
+
+<BR>
+
+<P>
+This should produce the subdirectory 'Cgicc', which will contain the
+complete Cgicc source distribution, including
+a <TT>doc/</TT> subdirectory containing a copy of this documentation.
+</P>
+
+<h4>
+<A HREF="http://www.cs.hmc.edu/cgi-bin/cgiwrap/sbooth/get.cgi?http://www.cs.hmc.edu/~sbooth/cgicc/Cgicc.tar">
+Download Cgicc as a unix tape archive (tar) file</a>
+</h4>
+
+<h4>
+<A HREF="http://www.cs.hmc.edu/cgi-bin/cgiwrap/sbooth/get.cgi?http://www.cs.hmc.edu/~sbooth/cgicc/Cgicc.tar.gz">
+Download Cgicc as a gzipped tar file</a>
+</h4>
+</P>
+
+*/
