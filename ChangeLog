@@ -1,3 +1,17 @@
+2003-07-13  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiUtils.{h,cpp}: Changed escapeString to form_urldecode
+	* cgicc/CgiUtils,{h,cpp}: Added charToHex and form_urlencode
+
+2003-07-11  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiUtils.h: Change STDNS to std::
+	* cgicc/FormEntry.cpp: Add std:: in front of atol and atof
+	* cgicc/CgiEnvironment.cpp: Add std:: in front of atol
+	* cgicc/CgiEnvironment.cpp: Use vector<char> instead of auto_ptr
+	* THANKS: Added Aida Shinra
+	* NEWS: Added blurb about namespace support
+
 2002-12-04  Stephen F. Booth  <sbooth@gnu.org>
 
 	* acinclude.m4: Generate error if namespaces not supported
