@@ -1,4 +1,4 @@
-/* $Id: LinkedList.hh,v 1.2 1998/03/31 09:12:17 sbooth Exp $ */
+/* $Id: LinkedList.hh,v 1.3 1998/04/01 20:50:32 sbooth Exp $ */
 
 #ifndef __LINKED_LIST__
 #define __LINKED_LIST__ 1
@@ -717,12 +717,11 @@ public:
    * @param start The start of the range to extract (inclusive).
    * @param limit The limit of the rance to extract (exclusive).
    * @param l The list which will receive the extracted elements.
-   * @return A reference to l.
    * @exception Exception
    */
-  LinkedList<T>& extract(int start, 
-			 int limit, 
-			 LinkedList<T>& l) const throw(Exception);
+  void extract(int start, 
+	       int limit, 
+	       LinkedList<T>& l) const throw(Exception);
   //@}
 
   /**@name Element Access */
@@ -1097,21 +1096,19 @@ public:
    * Find all the elements in the list equal to <TT>key</TT>.
    * @param key The comparison key.
    * @param l The list to receive the found elements.
-   * @return A reference to <TT>l</TT>.
    */
-  LinkedList<T>& findAll(const T& key, 
-			 LinkedList<T>& l) const;
+  void findAll(const T& key, 
+	       LinkedList<T>& l) const;
 
   /**
    * Find all the elements in the list satisfying a compare function.
    * @param comparator A pointer to the compare function.
    * @param data The data the pass the compare function.
    * @param l The list to receive the found elements.
-   * @return A reference to <TT>l</TT>.
    */
-  LinkedList<T>& findAll(bool (*comparator)(const T& element, void *data), 
-			 void *data, 
-			 LinkedList<T>& l) const;
+  void findAll(bool (*comparator)(const T& element, void *data), 
+	       void *data, 
+	       LinkedList<T>& l) const;
   
   /**
    * Find the first element in the list equal to <TT>key</TT>.
@@ -1319,7 +1316,7 @@ LinkedList<T>::operator[] (int n) const throw(Exception) {
 }
 
 template <class T>
-LinkedList<T>& 
+void
 LinkedList<T>::extract(int start, 
 		       int limit, 
 		       LinkedList<T>& l) const throw(Exception) {
@@ -1330,8 +1327,6 @@ LinkedList<T>::extract(int start,
   
   while(iter1 != iter2)
     l.append(*iter1++);
-  
-  return l;
 }
 
 template <class T>
@@ -1422,13 +1417,13 @@ template <class T>
 LinkedList<T>& 
 LinkedList<T>::prepend(const T& data) throw(Exception) {
   if(isEmpty()) {
-    fHead = fTail = new Node<T>(&data);
+    fHead = fTail = new Node<T>(data);
     if(fHead == NULL)
       throw Exception("new failed", ERRINFO);
   }
   else {
     Node<T> *oldHead = (Node<T>*) fHead;
-    oldHead->setPrevious(new Node<T>(&data));
+    oldHead->setPrevious(new Node<T>(data));
     if(oldHead->getPrevious() == NULL)
       throw Exception("new failed", ERRINFO);
     fHead = (Node<T>*) oldHead->getPrevious();
@@ -1463,18 +1458,19 @@ template <class T>
 LinkedList<T>& 
 LinkedList<T>::append(const T& data) throw(Exception) {
   if(isEmpty()) {
-    fHead = fTail = new Node<T>(&data);
+    fHead = fTail = new Node<T>(data);
     if(fHead == NULL)
       throw Exception("new failed", ERRINFO);
   }
   else {
     Node<T> *oldTail = (Node<T>*) fTail;
-    oldTail->setNext(new Node<T>(&data));
+    oldTail->setNext(new Node<T>(data));
     if(oldTail->getNext() == NULL)
       throw Exception("new failed", ERRINFO);
     fTail = (Node<T>*) oldTail->getNext();
     fTail->setPrevious(oldTail);
   }
+
   fLength++;
   return *this;
 }
@@ -1500,7 +1496,7 @@ LinkedList<T>::append(LinkedList<T> l, int start, int limit) throw(Exception) {
 template <class T>
 LinkedList<T>& 
 LinkedList<T>::insert(int pos, const T& data) throw(Exception) {
-  Node<T> *newNode = new Node<T>(&data);
+  Node<T> *newNode = new Node<T>(data);
   Node<T> *which = findStrictNode(pos);
   
   newNode->setPrevious(which);
@@ -1671,7 +1667,7 @@ LinkedList<T>::remove(const T& value) {
 }
 
 template <class T>
-LinkedList<T>& 
+void
 LinkedList<T>::findAll(const T& key, LinkedList<T>& l) const {
   ConstIterator iter1 = begin();
   ConstIterator iter2 = at(length());
@@ -1680,14 +1676,12 @@ LinkedList<T>::findAll(const T& key, LinkedList<T>& l) const {
     if(*iter1 == key)
       l.append(*iter1++);
     else
-      *iter1++;
+      iter1++;
   }
-  
-  return l;
 }
 
 template <class T>
-LinkedList<T>& 
+void
 LinkedList<T>::findAll(bool (*comparator)(const T& element, void *data), void *data, LinkedList<T>& l) const {
   ConstIterator iter1 = begin();
   ConstIterator iter2 = at(length());
@@ -1696,10 +1690,8 @@ LinkedList<T>::findAll(bool (*comparator)(const T& element, void *data), void *d
     if((*comparator)(*iter1, data))
       l.append(*iter1++);
     else
-      *iter1++;
+      iter1++;
   }
-  
-  return l;
 }
 
 template <class T>
@@ -1718,7 +1710,7 @@ LinkedList<T>::find(const T& key, Iterator start) {
     if(*iter1 == key)
       break;
     else
-      *iter1++;
+      iter1++;
   }
 
   return iter1;
@@ -1740,7 +1732,7 @@ LinkedList<T>::find(const T& key, ConstIterator start) const {
     if(*iter1 == key)
       break;
     else
-      *iter1++;
+      iter1++;
   }
 
   return iter1;
@@ -1748,13 +1740,16 @@ LinkedList<T>::find(const T& key, ConstIterator start) const {
 
 template <class T>
 LinkedList<T>::Iterator 
-LinkedList<T>::find(bool (*comparator)(const T& element, void *data), void *data) {
+LinkedList<T>::find(bool (*comparator)(const T& element, void *data), 
+		    void *data) {
   return find((*comparator), data, begin());
 }
 
 template <class T>
 LinkedList<T>::Iterator 
-LinkedList<T>::find(bool (*comparator)(const T& element, void *data), void *data, Iterator start) {
+LinkedList<T>::find(bool (*comparator)(const T& element, void *data), 
+		    void *data, 
+		    Iterator start) {
   Iterator iter1 = start;
   Iterator iter2 = at(length());
   
@@ -1762,7 +1757,7 @@ LinkedList<T>::find(bool (*comparator)(const T& element, void *data), void *data
     if((*comparator)(*iter1, data))
       break;
     else
-      *iter1++;
+      iter1++;
   }
 
   return iter1;
@@ -1770,13 +1765,16 @@ LinkedList<T>::find(bool (*comparator)(const T& element, void *data), void *data
 
 template <class T>
 LinkedList<T>::ConstIterator 
-LinkedList<T>::find(bool (*comparator)(const T& element, void *data), void *data) const {
+LinkedList<T>::find(bool (*comparator)(const T& element, void *data), 
+		    void *data) const {
   return find((*comparator), data, begin());
 }
 
 template <class T>
 LinkedList<T>::ConstIterator 
-LinkedList<T>::find(bool (*comparator)(const T& element, void *data), void *data, ConstIterator start) const {
+LinkedList<T>::find(bool (*comparator)(const T& element, void *data), 
+		    void *data, 
+		    ConstIterator start) const {
   ConstIterator iter1 = start;
   ConstIterator iter2 = at(length());
   
@@ -1784,7 +1782,7 @@ LinkedList<T>::find(bool (*comparator)(const T& element, void *data), void *data
     if((*comparator)(*iter1, data))
       break;
     else
-      *iter1++;
+      iter1++;
   }
 
   return iter1;
