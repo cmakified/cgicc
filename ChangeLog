@@ -5,6 +5,7 @@
 	* example/Makfile.in: Removed SOURCES macro, changed to use
 	OBJECTS.  Rewrote compilation rule to be make-independent 
 	(use old style suffix rule).
+	* acconfig.h: Changed "Cgicc" to "cgicc"
 
 1999-06-15  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
