@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.hh,v 1.3 1999/06/24 20:56:22 sbooth Exp $
+ *  $Id: HTMLAttributes.hh,v 1.4 1999/08/03 17:43:46 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -172,7 +172,6 @@ private:
  * An HTMLAttributeList represents any number of HTMLAttributes inside an 
  * HTMLElement.
  * @see HTMLAttribute
- * @see HTMLAtomicAttribute
  */
 class HTMLAttributeList 
 {
@@ -198,22 +197,21 @@ public:
 
   
   /** 
-   * Add an HTMLAtomicAttribute name to the list.
-   * @param name The name of the HTMLAttribute to add.
+   * Set an HTMLAtomicAttribute on an HTMLElement.
+   * @param name The name of the HTMLAttribute to set.
    * @return A reference to the list.
    */
   HTMLAttributeList& 
-  add(const STDNS string& name);
+  set(const STDNS string& name);
 
   /** 
-   * Add an HTMLAttribute name/value pair to the list.
-   * @param name The name of the HTMLAttribute to add.
-   * @param value The value of the HTMLAttribute to add.
-   * If NULL, an HTMLAtomicAttribute will be added.
+   * Set an HTMLAttribute name/value pair on an HTMLElement.
+   * @param name The name of the HTMLAttribute to set.
+   * @param value The value of the HTMLAttribute to set.
    * @return A reference to the list.
    */
   HTMLAttributeList& 
-  add(const STDNS string& name, 
+  set(const STDNS string& name, 
       const STDNS string& value);
   
   /* Render this attribute list */
@@ -228,33 +226,32 @@ private:
 // List manipulators
 // ============================================================
 /**
- * Create a new HTMLAttributeList, and add an HTMLAttribute to it.
+ * Create a new HTMLAttributeList, and set an HTMLAttribute.
  * <P>This function is usually called from within the constructor of an
  * \Ref{HTMLElement}:
  * <PRE class="code">
- * out << img(add("ISINDEX")) << endl;
+ * out << img(set("ISINDEX")) << endl;
  * </PRE></P>
- * @param name The name of the HTMLAttribute to add.
+ * @param name The name of the HTMLAttribute to set.
  * @return A reference to the list.
  */
 inline HTMLAttributeList 
-add(const STDNS string& name)
+set(const STDNS string& name)
 { return HTMLAttributeList(HTMLAttribute(name)); }
 
 /**
- * Create a new HTMLAttributeList, and add an HTMLAttribute to it.
+ * Create a new HTMLAttributeList, and set an HTMLAttribute.
  * <P>This function is usually called from within the constructor of an
  * \Ref{HTMLElement}:
  * <PRE class="code">
- * out << a("link text", add("HREF","http://www.foo.com")) << endl;
+ * out << a("link text", set("HREF","http://www.foo.com")) << endl;
  * </PRE></P>
- * @param name The name of the HTMLAttribute to add.
- * @param value The value of the HTMLAttribute to add.
- * If NULL, an HTMLAtomicAttribute will be added.
+ * @param name The name of the HTMLAttribute to set.
+ * @param value The value of the HTMLAttribute to set.
  * @return A reference to the list.
  */
 inline HTMLAttributeList 
-add(const STDNS string& name, 
+set(const STDNS string& name, 
     const STDNS string& value)
 { return HTMLAttributeList(HTMLAttribute(name, value)); }
 

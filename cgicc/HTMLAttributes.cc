@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.cc,v 1.3 1999/06/24 20:56:22 sbooth Exp $
+ *  $Id: HTMLAttributes.cc,v 1.4 1999/08/03 17:43:46 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -102,14 +102,14 @@ CGICCNS HTMLAttributeList::~HTMLAttributeList()
 {}
 
 CGICCNS HTMLAttributeList&
-CGICCNS HTMLAttributeList::add(const STDNS string& name)
+CGICCNS HTMLAttributeList::set(const STDNS string& name)
 { 
   fAttributes.push_back(HTMLAttribute(name));
   return *this;
 }
 
 CGICCNS HTMLAttributeList&
-CGICCNS HTMLAttributeList::add(const STDNS string& name, 
+CGICCNS HTMLAttributeList::set(const STDNS string& name, 
 			       const STDNS string& value)
 { 
   fAttributes.push_back(HTMLAttribute(name, value));
