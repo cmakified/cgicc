@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.4 1999/09/30 17:11:39 sbooth Exp $
+## $Id: Makefile.am,v 1.5 2000/11/07 06:00:05 sbooth Exp $
 
 CLEANFILES = $(HTMLS) *~
 MAINTAINERCLEANFILES = cgicc-doc-texi.tar.gz cgicc-doc-info.tar.gz	\
@@ -10,7 +10,8 @@ library-overview.texinfo cgi-classes.texinfo http-classes.texinfo	\
 html-classes.texinfo class-cgicc.texinfo class-cgienv.texinfo		\
 class-formentry.texinfo class-formfile.texinfo classes-http.texinfo	\
 classes-html.texinfo reporting-bugs.texinfo concept-index.texinfo	\
-function-index.texinfo datatype-index.texinfo
+function-index.texinfo datatype-index.texinfo fdl.texinfo 		\
+support.texinfo
 
 ##
 ## HTML documentation

@@ -1,5 +1,5 @@
 @comment -*-texinfo-*-
-@node Copying, Concept Index, Reporting Bugs, Top
+@node Copying, Documentation, Support, Top
 @appendix GNU General Public License
 
 @center Version 2, June 1991

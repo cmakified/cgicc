@@ -1,0 +1,27 @@
+@comment -*-texinfo-*-
+@node Support, Copying, Reporting Bugs, Top
+@unnumbered Support
+
+The cgicc library has three mailing lists: @email{help-cgicc@@gnu.org},
+@email{info-cgicc@@gnu.org}, and @email{bug-cgicc@@gnu.org}:
+
+@itemize @bullet
+@item
+@email{help-cgicc@@gnu.org} is the main discussion list and is used to
+discuss all aspects of cgicc, including development and porting.
+
+@item
+@email{info-cgicc@@gnu.org} is a read-only list where announcements
+about cgicc are made.
+
+@item
+@email{bug-cgicc@@gnu.org} is a special list used for reporting bugs.
+@xref{Reporting Bugs}, for details on submitting a bug report.
+@end itemize
+
+All of these lists are managed by mailman, and can be subscribed to,
+unsubscribed from, and configured via a web interface at
+@url{http://mail.gnu.org/mailman/listinfo/help-cgicc},
+@url{http://mail.gnu.org/mailman/listinfo/info-cgicc}, or
+@url{http://mail.gnu.org/mailman/listinfo/bug-cgicc}. Web archives are
+also available.

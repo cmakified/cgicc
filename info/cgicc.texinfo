@@ -15,13 +15,14 @@
 @end direntry
 
 @ifinfo
-GNU cgicc is a C++ library for developing CGI applications.
-
 Copyright @copyright{} 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
 
-Permission is granted to make and distribute verbatim copies of this
-manual provided the copyright notice and this permission notice are
-preserved on all copies.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts.  A copy of the license is included in the section entitled ``GNU
+Free Documentation License''.
      
 @ignore
 Permission is granted to process this file through TeX and print the
@@ -30,18 +31,6 @@ notice identical to this one except for the removal of this paragraph
 (this paragraph not being relevant to the printed manual).
      
 @end ignore
-Permission is granted to copy and distribute modified versions of this
-manual under the conditions for verbatim copying, provided also that the
-sections entitled ``Copying'' and ``GNU General Public License'' are
-included exactly as in the original, and provided that the entire
-resulting derived work is distributed under the terms of a permission
-notice identical to this one.
-     
-Permission is granted to copy and distribute translations of this manual
-into another language, under the above conditions for modified versions,
-except that this permission notice may be stated in a translation
-approved by the Free Software Foundation.
-
 @end ifinfo
 @titlepage
 @sp 10
@@ -50,23 +39,14 @@ approved by the Free Software Foundation.
 @author Stephen F. Booth
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} 1996, 1997, 1998, 1999 Stephen F. Booth
+Copyright @copyright{} 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
 
-Permission is granted to make and distribute verbatim copies of this
-manual provided the copyright notice and this permission notice are
-preserved on all copies.
-     
-Permission is granted to copy and distribute modified versions of this
-manual under the conditions for verbatim copying, provided also that the
-sections entitled ``Copying'' and ``GNU General Public License'' are
-included exactly as in the original, and provided that the entire
-resulting derived work is distributed under the terms of a permission
-notice identical to this one.
-     
-Permission is granted to copy and distribute translations of this manual
-into another language, under the above conditions for modified versions,
-except that this permission notice may be stated in a translation
-approved by the Free Software Foundation.
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts.  A copy of the license is included in the section entitled ``GNU
+Free Documentation License''.
 @end titlepage
 
 @ifnottex
@@ -96,7 +76,9 @@ This is edition @value{EDITION} of the cgicc documentation, @value{UPDATED}.
 * classes for HTTP headers::    Used for generating response information
 * classes for HTML output::     Used for generating a client response
 * Reporting Bugs::              How to report a bug in cgicc
+* Support::                     Where to get support for cgicc
 * Copying::                     Your rights to distribute cgicc
+* Documentation::               Your rights to distribute this manual
 * Concept Index::               Index of concepts introduced in the manual
 * Function Index::              Index of member functions
 * Data Type Index::             Index of classes
@@ -120,7 +102,9 @@ This is edition @value{EDITION} of the cgicc documentation, @value{UPDATED}.
 @include classes-http.texinfo
 @include classes-html.texinfo
 @include reporting-bugs.texinfo
+@include support.texinfo
 @include gpl.texinfo
+@include fdl.texinfo
 @include concept-index.texinfo
 @include function-index.texinfo
 @include datatype-index.texinfo
