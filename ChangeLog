@@ -1,3 +1,10 @@
+1999-08-10  Stephen F. Booth  <sbooth@ride.cupertino.ibm.com>
+
+	* info/tutorial.texinfo: Updated for new HTML generation
+	* info/classes-html.texinfo: Same
+	* demo/test.cpp: Changed code to use new HTML generation technique
+	* demo/dns.cpp: Changed code to use new HTML generation technique
+
 1999-08-09  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* configure.in: AC_INIT(Cgicc.cc) -> AC_INIT(Cgicc.cpp)
