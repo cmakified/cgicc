@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.12 1999/05/14 21:33:54 sbooth Exp $
+## $Id: Makefile.am,v 1.13 1999/06/02 22:08:36 sbooth Exp $
 
 if DEMOS
 DEMO = demo
@@ -18,6 +18,7 @@ dist-hook:
 	cp -p $(srcdir)/example/Makefile.in $(distdir)/example
 	cp -p $(srcdir)/example/yourSource.cc $(distdir)/example
 
+if MAINTAINER_MODE
 ################################################################
 ##
 ## Everything past here is useful to the maintainer, but probably not
@@ -27,10 +28,12 @@ dist-hook:
 ## set it to `:' to avoid CVS operations
 CVS = cvs
 
-## Tag before making distribution.  Also, don't make a distribution if
-## checks fail.  Also, make sure the NEWS file is up-to-date.
+## Tag sources before making distribution, but don't make a
+## distribution if checks fail.  Also, make sure the NEWS file is
+## up-to-date.
 cvs-dist: distcheck
-	@if sed '1,9d;10q' $(srcdir)/NEWS | grep -e "$(VERSION)" > /dev/null; then :; else \
+	@if sed '1,9d;10q' $(srcdir)/NEWS | grep -e "$(VERSION)" > /dev/null; \
+	then :; else \
 	  echo "NEWS not updated; not releasing" 1>&2; \
 	  exit 1;				\
 	fi
@@ -38,6 +41,8 @@ cvs-dist: distcheck
 	 $(CVS) -q tag `echo "release-$(VERSION)" | sed 's/\./-/g'`
 	$(MAKE) dist
 
+## Generate a context diff file containing the patch info for the
+## current version.
 cvs-diff:
 	thisver=`echo "release-$(VERSION)" | sed 's/\./-/g'`; \
 	if test -z "$$OLDVERSION"; then \
@@ -46,4 +51,4 @@ cvs-diff:
 	prevver=release-`echo $$prevno | sed 's/\./-/g'`; \
 	$(CVS) -f rdiff -c -r $$prevver -r $$thisver $(PACKAGE) \
 	    > $(PACKAGE)-$$prevno-$(VERSION).diff
-
+endif
