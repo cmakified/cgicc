@@ -1,0 +1,2 @@
+This directory contains skeleton code and a supporting Makefile for a CGI
+application using Cgicc, tailored to the installation environment.
