@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.cpp,v 1.6 2002/12/04 17:04:06 sbooth Exp $
+ *  $Id: FormEntry.cpp,v 1.7 2003/07/11 14:58:28 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -43,7 +43,7 @@ long
 cgicc::FormEntry::getIntegerValue(long min, 
 				  long max) 		const
 {
-  long value = atol(fValue.c_str());
+  long value = std::atol(fValue.c_str());
 
   if(value > max)
     value = max;
@@ -58,7 +58,7 @@ cgicc::FormEntry::getIntegerValue(long min,
 				  long max,
 				  bool& bounded) 	const
 {
-  long value = atol(fValue.c_str());
+  long value = std::atol(fValue.c_str());
 
   bounded = false;
 
@@ -78,7 +78,7 @@ double
 cgicc::FormEntry::getDoubleValue(double min, 
 				  double max) 		const
 {
-  double value = atof(fValue.c_str());
+  double value = std::atof(fValue.c_str());
   if(value > max)
     value = max;
   else if(value < min)
@@ -92,7 +92,7 @@ cgicc::FormEntry::getDoubleValue(double min,
 				 double max,
 				 bool& bounded) 	const
 {
-  double value = atof(fValue.c_str());
+  double value = std::atof(fValue.c_str());
 
   bounded = false;
 
