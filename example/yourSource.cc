@@ -1,5 +1,5 @@
 /*
- *  $Id: yourSource.cc,v 1.5 1999/05/14 17:57:17 sbooth Exp $
+ *  $Id: yourSource.cc,v 1.6 1999/06/04 17:11:13 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -21,9 +21,8 @@
 #include <exception>
 #include <iostream>
 
-#include "cgicc/CgiDefs.hh"
-#include "cgicc/HTMLClasses.hh"
 #include "cgicc/Cgicc.hh"
+#include "cgicc/HTMLClasses.hh"
 
 // To use the debug logging feature, the variable gLogFile MUST be
 // defined, and it _must_ be an ofstream
