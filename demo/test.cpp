@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.3 1999/08/10 18:51:51 sbooth Exp $
+ *  $Id: test.cpp,v 1.4 1999/08/10 22:13:50 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -46,6 +46,9 @@
 #if USE_NAMESPACES
   using namespace std;
   using namespace cgicc;
+#else
+#  define div div_
+#  define select select_
 #endif
 
 // Function prototypes
