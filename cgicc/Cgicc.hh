@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.hh,v 1.2 1999/06/04 00:07:36 sbooth Exp $
+ *  $Id: Cgicc.hh,v 1.3 1999/08/02 19:41:32 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -75,18 +75,13 @@ class MultipartHeader;
  */
 class Cgicc {
 public:
-  /**@name Constructors */
-  //@{
   
   /** Constructor */
   Cgicc();
   
   /** Destructor */
   ~Cgicc();
-  //@}
   
-  /**@name Cgicc Information */
-  //@{
   
   /**
    * Get the date on which this library was compiled.
@@ -119,10 +114,7 @@ public:
    */
   STDNS string
   getHost() 						const;
-  //@}
-  
-  /**@name Form Element Access */
-  //@{
+
   
   /**
    * Query whether a checkbox is checked.
@@ -217,10 +209,7 @@ public:
   inline const STDNS vector<FormEntry>&
   getElements() 					const
     { return fFormData; }
-  //@}  
 
-  /**@name Access to uploaded files */
-  //@{
 
   /**
    * Find an uploaded file.
@@ -245,10 +234,7 @@ public:
   inline const STDNS vector<FormFile>&
   getFiles() 						const
     { return fFormFiles; }
-  //@}
-  
-  /**@name Access to the current environment */
-  //@{
+
   
   /**
    * Get the current runtime environment.
@@ -257,10 +243,7 @@ public:
   inline const CgiEnvironment&
   getEnvironment() 					const
     { return fEnvironment;}
-  //@}
-  
-  /**@name Save and Restore */
-  //@{
+
   
   /**
    * Save the current CGI environment to a file.
@@ -275,7 +258,6 @@ public:
    */
   void 
   restore(const STDNS string& filename);
-  //@}
   
 private:
   CgiEnvironment 		fEnvironment;
