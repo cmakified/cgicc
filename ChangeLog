@@ -16,6 +16,9 @@
 	to 'cgicc'
 	* info/tutorial.texinfo: Changed various instances of 'Cgicc' to 
 	'cgicc'
+	* support/cgicc.spec.in: Removed
+	* configure.in: Removed reference to cgicc.spec, version to 3.1.4
+	* cgicc/Makefile.am: Updated libtool version
 
 2000-09-21  Stephen F. Booth  <sbooth@gnu.org>
 
