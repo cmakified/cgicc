@@ -1,4 +1,4 @@
-dnl $Id: configure.in,v 1.4 1998/12/11 01:46:42 sbooth Exp $
+dnl $Id: configure.in,v 1.5 1998/12/11 19:42:44 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/Cgicc.cc)
@@ -19,16 +19,7 @@ AC_CHECK_LIB(nsl, gethostbyaddr, LIB_NET="-lnsl")
 AC_SUBST(LIB_NET)
 
 dnl check whether to link against libstdc++
-AC_CACHE_CHECK(	[whether to link against libstdc++],
-		[cgicc_cv_link_libstdcpp],
-		[	AC_TRY_LINK([#include <iostream.h>],
-				cout << "foo" << endl;,
-				cgicc_cv_link_libstdcpp=no,
-				cgicc_cv_link_libstdcpp=yes)
-		])
-if (test "$cgicc_cv_link_libstdcpp" = yes); then 
-LIBS="$LIBS -lstdc++"
-fi
+CGICC_CHECK_LINK_STDCPP
 
 dnl Checks for header files.
 AC_CHECK_HEADERS(sys/time.h)
@@ -37,27 +28,10 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 AC_STRUCT_TM
 
 dnl verify exception handling works
-AC_CACHE_CHECK(	[for exception handling],
-		[cgicc_cv_cpp_exceptions],
-		[	AC_TRY_COMPILE(,
-				int i=0; try {++i;} catch(...) {--i;},
-				cgicc_cv_cpp_exceptions=yes,
-				cgicc_cv_cpp_exceptions=no)
-		])
-if (test "$cgicc_cv_cpp_exceptions" = no); then 
-AC_MSG_ERROR([exception handling required])
-fi
+CGICC_CHECK_CPP_EXCEPTIONS
 
 dnl verify templates work
-AC_CACHE_CHECK(	[for template support],
-		[cgicc_cv_cpp_templates],
-		[	AC_TRY_CPP([template <class T> int foo(T arg);],
-				cgicc_cv_cpp_templates=yes,
-				cgicc_cv_cpp_templates=no)
-		])
-if (test "$cgicc_cv_cpp_templates" = no); then 
-AC_MSG_ERROR([template support required])
-fi
+CGICC_CHECK_CPP_TEMPLATES
 
 dnl Checks for library functions.
 AC_HEADER_STDC
