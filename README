@@ -1,4 +1,11 @@
-README for Cgicc v3.0 by Stephen F. Booth / sbooth@saaba.lmi.net
+README for GNU Cgicc
+====================
+
+Please send bug reports to <bug-cgicc@gnu.org>
+
+There is a Cgicc mailing list at <cgicc@gnu.org>.  
+To subscribe, send a message to <cgicc-request@gnu.org> with the word
+"subscribe" in the subject field.
 
 This package should contain the following directories:
 

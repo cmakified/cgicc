@@ -1,8 +1,8 @@
-dnl $Id: configure.in,v 1.8 1999/04/26 22:41:55 sbooth Exp $
+dnl $Id: configure.in,v 1.9 1999/05/05 18:30:54 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/Cgicc.cc)
-AM_INIT_AUTOMAKE(Cgicc, 3.0b)
+AM_INIT_AUTOMAKE(cgicc, 3.0)
 AM_CONFIG_HEADER(src/config.h)
 
 AC_LANG_CPLUSPLUS
