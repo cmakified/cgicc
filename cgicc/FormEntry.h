@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: FormEntry.h,v 1.6 2002/11/23 20:26:22 sbooth Exp $
+ *  $Id: FormEntry.h,v 1.7 2002/11/23 20:56:30 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -252,8 +252,8 @@ public:
    * No syntax checking is performed on the string value.
    * \param min The minimum value to return (optional).
    * \param max The maximum value to return (optional).
-   * \param bounded Set to \t true if the value was originally outside the 
-   * limits, \t false otherwise
+   * \param bounded Set to \c true if the value was originally outside the 
+   * limits, \c false otherwise
    * \return The integer value of the form element.
    */
   long
@@ -279,8 +279,8 @@ public:
    * No syntax checking is performed on the string value.
    * \param min The minimum value to return (optional).
    * \param max The maximum value to return (optional).
-   * \param bounded Set to \t true if the value was originally outside the 
-   * limits, \t false otherwise
+   * \param bounded Set to \c true if the value was originally outside the 
+   * limits, \c false otherwise
    * \return The double value of the form element.
    */
   double 
