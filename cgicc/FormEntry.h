@@ -1,8 +1,9 @@
 /* -*-c++-*- */
 /*
- *  $Id: FormEntry.h,v 1.11 2004/06/28 02:57:12 sbooth Exp $
+ *  $Id: FormEntry.h,v 1.12 2004/06/29 15:13:14 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+ *  Part of the GNU cgicc library, http://www.cgicc.org
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public

@@ -1,7 +1,8 @@
 /*
- *  $Id: upload.cpp,v 1.10 2004/06/29 04:23:36 sbooth Exp $
+ *  $Id: upload.cpp,v 1.11 2004/06/29 15:13:15 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2004 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+ *  Part of the GNU cgicc library, http://www.cgicc.org
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

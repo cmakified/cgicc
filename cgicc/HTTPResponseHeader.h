@@ -1,8 +1,9 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPResponseHeader.h,v 1.6 2003/07/17 05:16:03 sbooth Exp $
+ *  $Id: HTTPResponseHeader.h,v 1.7 2004/06/29 15:13:14 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+ *  Part of the GNU cgicc library, http://www.cgicc.org
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public

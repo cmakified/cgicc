@@ -1,7 +1,8 @@
 /*
- *  $Id: HTTPHTMLHeader.cpp,v 1.4 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: HTTPHTMLHeader.cpp,v 1.5 2004/06/29 15:13:14 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+ *  Part of the GNU cgicc library, http://www.cgicc.org
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public

@@ -1,7 +1,8 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.14 2004/06/28 02:57:12 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.15 2004/06/29 15:13:12 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2004 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+ *  Part of the GNU cgicc library, http://www.cgicc.org
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public

@@ -1,8 +1,9 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.16 2004/06/27 03:16:34 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.17 2004/06/29 15:13:11 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+ *  Part of the GNU cgicc library, http://www.cgicc.org
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public

@@ -1,7 +1,8 @@
 /*
- *  $Id: Cgicc.cpp,v 1.21 2004/06/29 04:26:11 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.22 2004/06/29 15:13:12 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2004 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+ *  Part of the GNU cgicc library, http://www.cgicc.org
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -335,7 +336,7 @@ cgicc::Cgicc::findEntries(const std::string& param,
 	    std::back_inserter(result),
 	    FE_valueCompare(param));
 
-  return ! result.empty();
+  return (false == result.empty());
 }
 
 void
@@ -389,7 +390,8 @@ cgicc::Cgicc::parseFormInput(const std::string& data)
       parseMIME(data.substr(oldPos, pos - oldPos));
     }
   }
-  else if(false ==  data.empty()) {
+  // Standard GET/POST - application/x-www-form-urlencoded
+  else {
     std::string::size_type pos;
     std::string::size_type oldPos = 0;
 
