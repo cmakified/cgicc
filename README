@@ -17,9 +17,8 @@ Web. Cgicc performs the following functions:
 Please send bug reports, suggestions, and comments to
 <bug-cgicc@gnu.org>
 
-There is a Cgicc mailing list at <cgicc@gnu.org>.  
-To subscribe, send a message to <cgicc-request@gnu.org> with the word
-"subscribe" in the subject field.
+To subscribe, send a message to <bug-cgicc-request@gnu.org> with the
+word "subscribe" in the subject field.
 
 This package should contain the following directories:
 
