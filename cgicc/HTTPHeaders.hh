@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.hh,v 1.3 1999/07/26 16:56:51 sbooth Exp $
+ *  $Id: HTTPHeaders.hh,v 1.4 1999/08/02 19:40:08 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -254,9 +254,9 @@ private:
   STDNS string 		fName;
   STDNS string 		fValue;
   STDNS string 		fComment;
+  STDNS string 		fDomain;
   unsigned long 	fMaxAge;
   STDNS string 		fPath;
-  STDNS string 		fDomain;
   bool 			fSecure;
 };
   
