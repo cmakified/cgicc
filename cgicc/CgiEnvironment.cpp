@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.2 2000/04/08 04:43:19 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.3 2000/04/15 07:57:00 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -29,7 +29,7 @@
 
 #ifdef WIN32
 #include <io.h>
-#include <fctrl.h>
+#include <fcntl.h>
 #endif
 
 #include "cgicc/CgiEnvironment.h"
