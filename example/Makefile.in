@@ -1,5 +1,5 @@
 ##
-##  $Id: Makefile.in,v 1.8 1999/05/14 17:57:17 sbooth Exp $
+##  $Id: Makefile.in,v 1.9 1999/06/16 16:42:16 sbooth Exp $
 ##
 ##  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
 ##
@@ -24,15 +24,11 @@
 
 ##
 ## The name of the cgi target
-TARGET=		foo.cgi
-
-##
-## The name(s) of your source file(s)
-SOURCES=	yourSource.cc
+TARGET=		hello.cgi
 
 ##
 ## The name(s) of the object file(s)
-OBJECTS=	$(SOURCES:%.cc=%.o)
+OBJECTS=	yourSource.o
 
 ##
 ## Don't change anything below this point unless you know what you're doing
@@ -76,6 +72,8 @@ clean:
 
 ##
 ## Compilation rules
-%.o : %.cc
+.SUFFIXES:
+.SUFFIXES: .cc .o
+.cc.o:
 	$(COMPILE) -c $<
 
