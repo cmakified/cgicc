@@ -8,6 +8,7 @@
 	* win/test.dsp: Modified for version 3.2
 	* win/upload.dsp: Added
 	* THANKS: Thanks to Quintin Connell
+	* Makefile.am: Distribute cookie.dsp and upload.dsp
 
 2002-01-19  Stephen F. Booth  <sbooth@gnu.org>
 

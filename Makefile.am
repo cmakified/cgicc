@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.30 2002/01/09 17:16:41 sbooth Exp $
+## $Id: Makefile.am,v 1.31 2002/02/05 01:23:20 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip dist-bzip2
 
@@ -47,11 +47,13 @@ dist-hook:
 	cp -p $(srcdir)/example/missing $(distdir)/example
 	cp -p $(srcdir)/example/mkinstalldirs $(distdir)/example
 	test -d $(distdir)/win || mkdir $(distdir)/win || exit 1
-	cp -p $(srcdir)/win/cgicc.dsw $(distdir)/win
 	cp -p $(srcdir)/win/cgicc.dsp $(distdir)/win
-	cp -p $(srcdir)/win/test.dsp $(distdir)/win
+	cp -p $(srcdir)/win/cgicc.dsw $(distdir)/win
+	cp -p $(srcdir)/win/cookie.dsp $(distdir)/win
 	cp -p $(srcdir)/win/dns.dsp $(distdir)/win
 	cp -p $(srcdir)/win/example.dsp $(distdir)/win
+	cp -p $(srcdir)/win/test.dsp $(distdir)/win
+	cp -p $(srcdir)/win/upload.dsp $(distdir)/win
 
 if MAINTAINER_MODE
 ################################################################
