@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiDefs.h,v 1.2 1999/08/09 23:03:41 sbooth Exp $
+ *  $Id: CgiDefs.h.in,v 1.1 1999/08/09 23:38:01 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -40,9 +40,10 @@
 #  endif
 
 #  define HOST "Win32"
-#  define VERSION "3.1"
+#  define VERSION "@VERSION@"
 
 #else
+#  define USE_NAMESPACES @USE_NAMESPACES@
 #  define CGICC_API
 #endif /* WIN32 */
 
