@@ -1,7 +1,23 @@
 /*
- * $Id: nph-login.cpp,v 1.1 2001/09/03 22:19:00 sbooth Exp $
+ * $Id: nph-login.cpp,v 1.2 2001/09/05 02:26:56 sbooth Exp $
+ *
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 2001 Peter Goedtkindt
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * 
- * Written by Peter Goedtkindt <peter.goedtkindt@axstech.com>
  */
 
 /* 
@@ -74,9 +90,9 @@ main(int /*argc*/,
 	  to be broken on Macs 
 	*/
         cout << HTTPResponseHeader("HTTP/1.1", 401, "Unauthorized")
-	  .addHeader("WWW-Authenticate: NTLM")
-	  .addHeader("WWW-Authenticate: Basic realm=\"cgicc\"")
-	  .addHeader("Content-Type: text/html");
+	  .addHeader("WWW-Authenticate", "NTLM")
+	  .addHeader("WWW-Authenticate", "Basic realm=\"cgicc\"")
+	  .addHeader("Content-Type", "text/html");
 
 	/*
 	  There is a bug in all version of Microsoft Internet Explorer
@@ -90,8 +106,8 @@ main(int /*argc*/,
       else {
 	// we're not chatting fully MS: only support basic
         cout << HTTPResponseHeader("HTTP/1.1", 401, "Unauthorized")
-	  .addHeader("WWW-Authenticate: Basic realm=\"cgicc\"")
-	  .addHeader("Content-Type: text/html");
+	  .addHeader("WWW-Authenticate", "Basic realm=\"cgicc\"")
+	  .addHeader("Content-Type", "text/html");
       }
 
       cout << HTMLDoctype(HTMLDoctype::eStrict) << endl;
