@@ -1,10 +1,10 @@
 dnl -*-m4-*-
-dnl $Id: configure.ac,v 1.1 2001/09/03 22:09:25 sbooth Exp $
+dnl $Id: configure.ac,v 1.2 2002/02/05 23:44:07 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(cgicc, 3.2, bug-cgicc@gnu.org)
 AC_CONFIG_SRCDIR(cgicc/Cgicc.cpp)
-AC_REVISION([$Revision: 1.1 $])
+AC_REVISION([$Revision: 1.2 $])
 AC_CONFIG_AUX_DIR(support)
 AC_PREFIX_DEFAULT(/usr)
 AM_INIT_AUTOMAKE(cgicc, 3.2)
@@ -38,6 +38,14 @@ AC_STRUCT_TM
 dnl Determine host system type
 AC_CANONICAL_HOST
 AC_DEFINE_UNQUOTED(HOST, "$host")
+
+dnl Check whether we're using aCC
+CGICC_CHECK_ACC
+if test "$cgicc_cv_acc" = yes; then
+  CXXFLAGS="-AA $CXXFLAGS"
+  DEMO_LIBS="-lstd_v2 -lCsup_v2"
+fi
+AC_SUBST(DEMO_LIBS)
 
 dnl verify STL support
 CGICC_CHECK_CPP_STL
@@ -109,8 +117,18 @@ AC_MSG_CHECKING(whether to build the cgicc demos)
 AC_MSG_RESULT($cgicc_demos)
 AM_CONDITIONAL(DEMOS, test "$cgicc_demos" = yes)
 
-AC_CONFIG_FILES([Makefile cgicc/Makefile cgicc/CgiDefs.h demo/Makefile 
-  support/Makefile support/cgicc-config html/Makefile html/cgicc.html
-  doc/Makefile doc/Doxyfile contrib/Makefile])
+if test "$cgicc_demos" = yes; then
+  AC_CONFIG_FILES(demo/Makefile contrib/Makefile)
+fi
+
+dnl Only build HTML if maintainer mode is active
+if test "$USE_MAINTAINER_MODE" = yes; then
+  AC_CONFIG_FILES(html/Makefile html/cgicc.html)
+fi
+
+dnl Always output certain files
+AC_CONFIG_FILES([Makefile cgicc/Makefile cgicc/CgiDefs.h 
+  support/Makefile support/cgicc-config doc/Makefile doc/Doxyfile])
+
 AC_OUTPUT
 
