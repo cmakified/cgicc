@@ -1,3 +1,16 @@
+1999-06-03  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* src/*: Removed directory, renamed to cgicc
+	* cgicc/*: Added files from src/
+	* cgicc/CgiDefs.hh: Removed conditional guard from 
+	config.h #include.  Changed to #include "cgicc/config.h"
+	* configure.in: All instances of src/ changed to cgicc/
+	* Makefile.am: All instances of src/ changed to cgicc/
+	* demo/Makefile.am: All instances of src/ changed to cgicc/
+	* demo/test.cc: Cgicc includes changed for package prefix.
+	(ie, #include "Cgicc.hh" --> #include "cgicc/Cgicc.hh")
+	* demo/dns.cc: Cgicc includes changed for package prefix.
+
 1999-06-02  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* configure.in: Added AM_MAINTAINER_MODE, and switched order
