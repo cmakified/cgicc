@@ -1,3 +1,16 @@
+2002-04-02  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/FormFile.cpp: Explicitly return STDNS string from 
+	ternary ?: operator
+	* cgicc/CgiUtils.cpp(hexToChar): Do computations on an int, and 
+	return a static_cast to char (Thanks to alexoss@verizon.net)
+	* cgicc/CgiUtils.cpp(stringsAreEqual): Added STDNS qualifier 
+	to toupper() call (Thanks to alexoss@verizon.net)
+	* cgicc/CgiEnvironment.cpp(parseCookie): Added STDNS qualifier 
+	to isspace() call (Thanks to alexoss@verizon.net)
+	* CgiUtils.{h,cpp}: Removed safeGetEnv() and saferSystem() functions
+	and #include <cstdlib>
+
 2002-03-17  Stephen F. Booth  <sbooth@gnu.org>
 
 	* Makefile.am: Make distclean in example for dist-hook
