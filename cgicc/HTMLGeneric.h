@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLGeneric.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
+ *  $Id: HTMLGeneric.h,v 1.3 1999/08/10 00:29:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -56,12 +56,14 @@ public:
 
 
   /** Clone this element */
-  virtual inline HTMLElement* clone() 		const
+  virtual inline HTMLElement* 
+  clone() 					const
   { return new GenericAtomicElement<Tag>(*this); }
 
   
   /** Get the name of this element */
-  virtual inline STDNS string getName() 	const
+  virtual inline const char* 
+  getName() 					const
   { return Tag::getName(); }
 };
 
@@ -136,7 +138,7 @@ public:
 
 
   /** Get the name of this element */
-  virtual inline STDNS string 
+  virtual inline const char*
   getName() 					const
   { return Tag::getName(); }
 
@@ -167,7 +169,7 @@ bool CGICCNS GenericBooleanElement<Tag>::sState = false;
 // Class comment - needs special render function
 // ============================================================
 class nullTag
-{ public: static STDNS string getName() { return ""; } };
+{ public: inline static const char* getName() { return 0; } };
 
 class comment : public GenericBooleanElement<nullTag>
 {

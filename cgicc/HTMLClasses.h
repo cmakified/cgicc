@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLClasses.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
+ *  $Id: HTMLClasses.h,v 1.3 1999/08/10 00:29:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -32,7 +32,7 @@
 
 #define TAG(name, tag) \
 class name##Tag   \
-{ public: static STDNS string getName () { return tag; } }
+{ public: inline static const char* getName() { return tag; } }
 
 #define ATOMIC_ELEMENT(name, tag) \
 TAG(name, tag); typedef GenericAtomicElement<name##Tag> name

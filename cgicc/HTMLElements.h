@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLElements.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
+ *  $Id: HTMLElements.h,v 1.3 1999/08/10 00:29:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -73,7 +73,7 @@ public:
    * For example, HTML or BODY.
    * @return The name of this element.
    */
-  virtual STDNS string   
+  virtual const char*
   getName() 					const = 0;
 
   
