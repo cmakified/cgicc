@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.12 1998/12/11 01:39:22 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.13 1998/12/11 22:20:21 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -40,19 +40,24 @@ used options.
 <TD>Meaning</TD>
 </TR>
 
-<TR VALIGN="MIDDLE" CLASS="dkgray">
+<TR VALIGN="MIDDLE" CLASS="ltgray">
 <TD WIDTH="30%"><TT>--enable-shared<BR>--disable-shared</TT></TD>
 <TD>Enables or disables compilation of Cgicc as a shared library.</TD>
 </TR>
 
-<TR VALIGN="MIDDLE" CLASS="ltgray">
+<TR VALIGN="MIDDLE" CLASS="dkgray">
 <TD WIDTH="30%"><TT>--enable-static<BR>--disable-static</TT></TD>
 <TD>Enables or disables compilation of Cgicc as a static library.</TD>
 </TR>
 
-<TR VALIGN="MIDDLE" CLASS="dkgray">
+<TR VALIGN="MIDDLE" CLASS="ltgray">
 <TD WIDTH="30%"><TT>--enable-tests<BR>--disable-tests</TT></TD>
 <TD>Enables or disables compilation of the Cgicc test programs.</TD>
+</TR>
+
+<TR VALIGN="MIDDLE" CLASS="dkgray">
+<TD WIDTH="30%"><TT>--enable-doc<BR>--disable-doc</TT></TD>
+<TD>Enables or disables installation of the Cgicc html documentation.</TD>
 </TR>
 
 <TR VALIGN="MIDDLE" CLASS="ltgray">
