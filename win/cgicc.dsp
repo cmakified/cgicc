@@ -100,6 +100,10 @@ SOURCE=..\cgicc\CgiEnvironment.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\cgicc\CgiInput.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\cgicc\CgiUtils.cpp
 # End Source File
 # Begin Source File
@@ -181,6 +185,10 @@ SOURCE=..\cgicc\CgiDefs.h
 # Begin Source File
 
 SOURCE=..\cgicc\CgiEnvironment.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\CgiInput.h
 # End Source File
 # Begin Source File
 
