@@ -1,10 +1,27 @@
 /*
- * $Id: CgiDefs.cc,v 1.3 1998/10/05 22:25:05 sbooth Exp $
+ * $Id: CgiDefs.cc,v 1.4 1998/12/08 23:14:33 sbooth Exp $
  *
- * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #include "CgiDefs.hh"
+
+#include <ctype.h>
+#include <stdlib.h>
 
 /* Fetch an environment variable - will NEVER return 0, only "" or a value */
 void 	
@@ -52,14 +69,17 @@ saferSystem(const char *command) throw(Exception)
   return result;
 }
 
-char 
+inline char 
 firstNonspaceChar(const char *s) 
 {
-  int len = strspn( s, " \n\r\t" );
-  return s[ len ];
+  int i;
+  for(i = 0; i < strlen(s); ++i)
+    if( ! isspace(s[i]))
+      break;
+  return s[i];
 }
 
-char
+inline char
 hexToChar(char first, char second)
 {
   char digit;
@@ -83,9 +103,6 @@ unescapeChars(const char *src, int len, char* &result) throw(Exception)
     c = src[srcPos++];
     if(c == '+')
       result[dstPos++] = ' ';
-    // changed because of weird byte-order swaps on some systems
-    // shouldn't the following work (LTR eval order!?!)?
-    // result[dstPos++] = hexToChar(src[srcPos++], src[srcPos++]);
     else if(c == '%') {
       result[dstPos++] = hexToChar(src[srcPos], src[srcPos + 1]);
       srcPos += 2;
@@ -140,3 +157,4 @@ extractBetween(const char *data, int dataLen, const char *separator,
 { extractBetween(data, dataLen, separator, separator, start, end); }
 
 //EOF
+
