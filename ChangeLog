@@ -1,3 +1,12 @@
+2000-11-15  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.in: DEBUG should be off by default
+	* README: Modified for mailing list info
+	* support/cgicc-config.in: Quote shell variables in echo
+	* info/support.texinfo: Modified mailing list info
+	* info/reporting-bugs.texinfo: Modified mailing list info
+	* NEWS: Added blurb about FDL
+
 2000-11-14  Stephen F. Booth  <sbooth@gnu.org>
 
 	* accconfig.h: Add DEBUG macro
