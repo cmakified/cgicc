@@ -1,9 +1,9 @@
-README for GNU Cgicc
+README for GNU cgicc
 ====================
 
-GNU Cgicc is an ANSI C++ compliant class library that greatly
+GNU cgicc is an ANSI C++ compliant class library that greatly
 simplifies the creation of CGI applications for the World Wide
-Web. Cgicc performs the following functions:
+Web. cgicc performs the following functions:
 
  - Parses both GET and POST form data transparently. 
  - Provides string, integer, floating-point and single- and
@@ -22,8 +22,8 @@ word "subscribe" in the subject field.
 
 This package should contain the following directories:
 
-cgicc/     The source code to the GNU Cgicc library
-info/      Complete documentation for Cgicc in texinfo format
-demo/      Two demonstration applications using Cgicc
-example/   A skeleton CGI application using Cgicc
+cgicc/     The source code to the GNU cgicc library
+info/      Complete documentation for cgicc in texinfo format
+demo/      Two demonstration applications using cgicc
+example/   A skeleton CGI application using cgicc
 
