@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cc,v 1.8 1999/08/07 00:24:46 sbooth Exp $
+ *  $Id: test.cpp,v 1.1 1999/08/09 18:21:54 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -25,27 +25,27 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "cgicc/CgiDefs.hh"
-#include "cgicc/Cgicc.hh"
-#include "cgicc/HTMLClasses.hh"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/Cgicc.h"
+#include "cgicc/HTMLClasses.h"
 
 #if HAVE_UNAME
-#include <sys/utsname.h>
+#  include <sys/utsname.h>
 #endif
 
 #if HAVE_SYS_TIME_H
-#include <sys/time.h>
+#  include <sys/time.h>
 #endif
 
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
 #if DEBUG
-STDNS ofstream gLogFile( "/change_this_path/Cgicc.log", STDNS ios::app );
+  STDNS ofstream gLogFile( "/change_this_path/Cgicc.log", STDNS ios::app );
 #endif
 
 // use Cgicc's namespace
 #if USE_NAMESPACES
-using namespace cgicc;
+  using namespace cgicc;
 #endif
 
 // Function prototypes
