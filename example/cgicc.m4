@@ -1,7 +1,7 @@
 dnl
-dnl $Id: cgicc.m4,v 1.1 2000/11/15 06:33:16 sbooth Exp $
+dnl $Id: cgicc.m4,v 1.2 2001/09/02 19:58:34 sbooth Exp $
 dnl
-dnl Copyright (C) 2000 Stephen F. Booth
+dnl Copyright (C) 2000, 2001 Stephen F. Booth
 dnl
 dnl This program is free software; you can redistribute it and/or modify
 dnl it under the terms of the GNU General Public License as published by
@@ -27,9 +27,9 @@ dnl  the macros cgicc_libdir and cgicc_includedir to the values
 dnl  obtained from 'cgicc-config'.
 dnl
 AC_DEFUN(CGICC_CHECK_CONFIG, [
-  AC_PATH_PROG(CGICC_CONFIG, cgicc-config, no, [$PATH:$1/bin])
+  AC_PATH_PROG(CGICC_CONFIG, cgicc-config, no, [$1/bin:$PATH])
   if test "$CGICC_CONFIG" = no; then
-    AC_MSG_ERROR(cgicc-config not found in $PATH:$1/bin)
+    AC_MSG_ERROR(cgicc-config not found in $1/bin:$PATH)
   fi
 
   cgicc_libdir=`$CGICC_CONFIG --libdir`

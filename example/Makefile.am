@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.4 2000/11/15 21:54:17 sbooth Exp $
+## $Id: Makefile.am,v 1.5 2001/09/02 19:58:34 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -12,4 +12,4 @@ bin_PROGRAMS = example.cgi
 INCLUDES = -I$(cgicc_includedir)
 
 example_cgi_SOURCES = example.cpp
-example_cgi_LDADD = $(cgicc_libdir)/libcgicc.la
+example_cgi_LDADD = -L$(cgicc_libdir) -lcgicc

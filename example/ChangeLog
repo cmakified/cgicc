@@ -1,3 +1,12 @@
+2001-07-04  Stephen F. Booth  <sbooth@gnu.org>
+
+	* example.cpp: Removed licensing terms
+
+2001-07-01  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.in: Removed libtool
+	* Makefile.am: Removed libtool
+
 2000-11-15  Stephen F. Booth  <sbooth@gnu.org>
 
 	* Makefile.am: Added cgicc.m4 to EXTRA_DIST

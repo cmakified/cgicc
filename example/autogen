@@ -5,9 +5,6 @@
 echo "== Running aclocal =="
 aclocal
 
-echo "== Running libtoolize =="
-libtoolize
-
 echo "== Running automake =="
 automake --add-missing
 
