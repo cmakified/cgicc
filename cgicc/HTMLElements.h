@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLElements.h,v 1.5 1999/08/17 17:29:31 sbooth Exp $
+ *  $Id: HTMLElements.h,v 1.6 2000/07/03 02:54:03 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -83,7 +83,7 @@ public:
 #ifdef WIN32
   /** Dummy operator for MSVC++ */
   inline bool
-  operator< (const HTMLAttribute& att) 			const
+  operator< (const HTMLElement& element)		const
   { return false; }
 #endif
 
