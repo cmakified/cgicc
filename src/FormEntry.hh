@@ -1,4 +1,4 @@
-/* $Id: FormEntry.hh,v 1.2 1998/04/02 11:09:34 sbooth Exp $ */
+/* $Id: FormEntry.hh,v 1.3 1998/04/02 20:15:14 sbooth Exp $ */
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1
@@ -49,14 +49,21 @@ public:
    * Get the name of the form element.
    * @return The name of the form element.
    */
-  const char* getName() const	{ return fName; }
+  inline const char* getName() const	{ return fName; }
   
   /**
    * Get the value of the form element.
    * The value may contain line breaks.
    * @return The value of the form element.
    */
-  const char* getValue() const	{ return fValue; }
+  inline const char* getValue() const	{ return fValue; }
+
+  /**
+   * Get the value of the form element.
+   * The value may contain line breaks.
+   * @return The value of the form element.
+   */
+  inline const char* operator* () const { return getValue();}
 
   /**
    * Get the value of the form element, truncated to a specific length.
