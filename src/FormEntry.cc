@@ -1,4 +1,8 @@
-/* $Id: FormEntry.cc,v 1.6 1998/09/24 01:37:58 sbooth Exp $ */
+/*
+ * $Id: FormEntry.cc,v 1.7 1998/10/05 22:25:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #include "FormEntry.hh"
 

@@ -1,4 +1,8 @@
-/* $Id: HTMLElements.cc,v 1.2 1998/04/01 20:51:58 sbooth Exp $ */
+/*
+ * $Id: HTMLElements.cc,v 1.3 1998/10/05 22:25:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #include "HTMLElements.hh"
 

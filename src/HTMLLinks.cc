@@ -1,4 +1,8 @@
-/* $Id: HTMLLinks.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/*
+ * $Id: HTMLLinks.cc,v 1.2 1998/10/05 22:25:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #include "HTMLLinks.hh"
 

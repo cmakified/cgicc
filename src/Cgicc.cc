@@ -1,4 +1,8 @@
-/* $Id: Cgicc.cc,v 1.7 1998/09/28 16:56:52 sbooth Exp $ */
+/*
+ * $Id: Cgicc.cc,v 1.8 1998/10/05 22:25:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __CGICC__
 #include "Cgicc.hh"
