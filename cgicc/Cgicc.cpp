@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.9 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.10 2001/09/03 16:19:51 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -209,7 +209,7 @@ CGICCNS Cgicc::Cgicc(reader_function_t stream_reader)
   // this can be tweaked for performance
   fFormData.reserve(40);
   fFormFiles.reserve(5);
-  
+
   if(stringsAreEqual(getEnvironment().getRequestMethod(), "post"))
     parseFormInput(getEnvironment().getPostData());
   else

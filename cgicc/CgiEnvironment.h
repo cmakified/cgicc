@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.6 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.7 2001/09/03 16:19:51 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -41,7 +41,7 @@
 
 #include "cgicc/CgiDefs.h"
 #include "cgicc/CgiUtils.h"
-#include "cgicc/HTTPHeaders.h"
+#include "cgicc/HTTPCookie.h"
 
 CGICC_BEGIN_NAMESPACE
 
@@ -51,6 +51,15 @@ typedef size_t (* reader_function_t)(void *, size_t);
 #ifdef WIN32
   template class CGICC_API STDNS vector<HTTPCookie>;
 #endif
+
+// ============================================================
+// Iterator typedefs
+// ============================================================
+
+//! A vector of HTTPCookie objects
+typedef STDNS vector<HTTPCookie>::iterator 	cookie_iterator;
+//! A vector of \c const HTTPCookie objects
+typedef STDNS vector<HTTPCookie>::const_iterator const_cookie_iterator;
 
 // ============================================================
 // Class CgiEnvironment
