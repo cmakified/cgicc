@@ -1,0 +1,18 @@
+#! /usr/local/bin/bash
+
+## Simple script to automate common automake-related tasks
+
+echo "== Running aclocal =="
+/usr/local/bin/aclocal
+
+echo "== Running autoheader =="
+/usr/local/bin/autoheader
+
+echo "== Running libtoolize =="
+/usr/local/bin/libtoolize
+
+echo "== Running automake =="
+/usr/local/bin/automake --add-missing
+
+echo "== Running autoconf =="
+/usr/local/bin/autoconf
