@@ -1,9 +1,39 @@
+1999-08-03  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* cgicc/HTMLAttributes.hh: Changed all add methods to set.
+	* cgicc/HTMLAttributes.cc: Changed all add methods to set.
+
+1999-08-02  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* cgicc/Cgicc.cc(copy_if): Removed prototype, moved definition
+	inside of CGICC_NAMESPACE block.
+	* Makefile.am: Added check-news, dist-zip to AUTOMAKE_OPTIONS
+
+1999-07-30  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* cgicc/HTTPHeaders.hh(HTTPCookie): Reworked to use cookie spec
+	per RFC 2109 (use seconds for maximum age, added comment and
+	version fields).
+	* cgicc/HTTPHeaders.hh(HTTPCookie): Removed getExpires, replaced
+	by getMaxAge.  Added getComment.
+	* cgicc/HTTPHeaders.cc(HTTPCookie): Changed ctor and render.
+	* info/classes-http.texinfo: Changed documentation for HTTPCookie
+	to reflect new cookie spec.
+
 1999-06-24  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* cgicc/HTMLAttributes.hh: Removed class HTMLAtomicAttribute,
 	merged with class HTMLAttribute.
 	* cgicc/HTMLAttributes.cc: Removed class HTMLAtomicAttribute,
 	merged with class HTMLAttribute.
+	* cgicc/FormEntry.hh(FormEntry, ~FormEntry, operator=): Made
+	inline
+	* cgicc/FormEntry.cc(FormEntry, ~FormEntry, operator=): Removed
+	definitions (moved to FormEntry.hh)
+	* cgicc/FormFile.hh(FormFile, ~FormFile, operator=): Made
+	inline
+	* cgicc/FormFile.cc(FormFile, ~FormFile, operator=): Removed
+	definitions (moved to FormFile.hh)
 
 1999-06-22  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
