@@ -1,6 +1,26 @@
-/* $Id: CgiForm.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: CgiForm.cc,v 1.2 1998/04/01 20:52:38 sbooth Exp $ */
 
 #include "CgiForm.hh"
+
+bool
+nameCompare(const FormEntry& element, void *data) {
+  const char *name = (const char*) data;
+
+  if(stringsAreEqual(element.getName(), name, true))
+    return true;
+  else
+    return false;
+}
+
+bool
+valueCompare(const FormEntry& element, void *data) {
+  const char *value = (const char*) data;
+
+  if(stringsAreEqual(element.getValue(), value, true))
+    return true;
+  else
+    return false;
+}
 
 // ========== MultipartHeader
 
@@ -73,7 +93,7 @@ MultipartHeader::MultipartHeader(const char *data,
   else if(filenameLen != -1) {
     // This is hairy: Netscape encodes the filenames, and IE doesn't.
     // The RFC says they should be encoded, so I will assume they are.
-    fFilename = unescapeChars(data + filenameStart, filenameLen);
+    unescapeChars(data + filenameStart, filenameLen, fFilename);
     //fFilename = new char [filenameLen + 1];
     //strncpy(fFilename, data + filenameStart, filenameLen);
     //fFilename[filenameLen] = '\0';
@@ -112,14 +132,13 @@ CgiForm::~CgiForm()
 {
   logln("Entering CgiForm::~CgiForm");
   delete fEnvironment;
-  FormEntry::deleteAll();
 }
 
 void
 CgiForm::reset() throw(Exception)
 {
   logln("CgiForm::reset()");
-  FormEntry::deleteAll();
+  deleteAll();
   if( stringsAreEqual(getEnvironment()->getRequestMethod(), "post", true ))
     parseFormInput(getEnvironment()->getPostData()); 
   else
@@ -130,38 +149,41 @@ CgiForm::reset() throw(Exception)
 
 bool
 CgiForm::getAsString( 	const char 	*elementName, 
-			char*		&dest ) throw(Exception)
+			char*		&dest) const throw(Exception)
 { return getAsString(elementName, INT_MAX, dest); }
 
 bool
 CgiForm::getAsString( 	const char 	*elementName, 
 			int 		maxLen,
-			char*		&dest ) throw(Exception)
+			char*		&dest) const throw(Exception)
 { return getString(elementName, maxLen, dest, true); }
 
 bool
 CgiForm::getAsStringNoNewlines( const char 	*elementName, 
-				char*		&dest ) throw(Exception)
+				char*		&dest) const throw(Exception)
 { return getAsStringNoNewlines(elementName, INT_MAX, dest); }
 
 bool
 CgiForm::getAsStringNoNewlines( const char 	*elementName, 
 				int 		maxLen,
-				char*		&dest ) throw(Exception)
+				char*		&dest) const throw(Exception)
 { return getString(elementName, maxLen, dest, false); }
 
 
 // ========== Access to form data as integers
 
 bool 
-CgiForm::getAsInteger(const char *elementName, int &value ) throw(Exception)
+CgiForm::getAsInteger(const char 	*elementName, 
+		      int 		&value) const  throw(Exception)
 { return getAsBoundedInteger(elementName, INT_MIN, INT_MAX, value); }
 
 bool 
-CgiForm::getAsBoundedInteger(const char *elementName, int min, int max, 
-			     int &value ) throw(Exception)
+CgiForm::getAsBoundedInteger(const char *elementName, 
+			     int min, 
+			     int max, 
+			     int &value) const throw(Exception)
 {
-  const FormEntry *entry = FormEntry::findEntryByName(elementName);
+  const FormEntry *entry = findEntryByName(elementName);
   bool found = (entry != NULL);
   char c;
   
@@ -187,14 +209,17 @@ CgiForm::getAsBoundedInteger(const char *elementName, int min, int max,
 // ========== Access to form data as doubles
 
 bool 
-CgiForm::getAsDouble(const char *elementName, double &value ) throw(Exception)
+CgiForm::getAsDouble(const char *elementName, 
+		     double &value) const throw(Exception)
 { return getAsBoundedDouble(elementName, DBL_MIN, DBL_MAX, value); }
 
 bool 
-CgiForm::getAsBoundedDouble(const char *elementName, double min, double max, 
-			    double &value ) throw(Exception)
+CgiForm::getAsBoundedDouble(const char *elementName, 
+			    double min, 
+			    double max, 
+			    double &value) const throw(Exception)
 {
-  const FormEntry *entry = FormEntry::findEntryByName(elementName);
+  const FormEntry *entry = findEntryByName(elementName);
   bool found = (entry != NULL);
   char c;
   
@@ -220,46 +245,58 @@ CgiForm::getAsBoundedDouble(const char *elementName, double min, double max,
 // ========== Access to checkboxes
 
 bool 
-CgiForm::queryCheckbox(const char *elementName) throw(Exception)
+CgiForm::queryCheckbox(const char *elementName) const throw(Exception)
 {
-  char *temp;
-  bool found = getAsStringNoNewlines(elementName, temp);
-  
-  if(found) {
-    if(! stringsAreEqual(temp, "on", true))
-      found = false;
-    
-    delete [] temp;
-  }
-  
-  return found;
+  const FormEntry *found = findEntryByName(elementName);
+  return ((found != NULL) && stringsAreEqual(found->getValue(), "on", true));
 }
 
 bool
 CgiForm::getCheckboxMultiple(	const char *elementName, 
-				char** &value, int &numFound) throw(Exception)
+				char** &value, 
+				int &numFound) const throw(Exception)
 { return getMultiple(elementName, value, numFound); }
 
 
 // ========== Access to radio buttons
 
 bool 
-CgiForm::getRadio(const char *elementName, char* &value) throw(Exception)
+CgiForm::getRadio(const char *elementName, 
+		  char* &value) const throw(Exception)
 { return getAsStringNoNewlines(elementName, value); }
 
 
 // ========== Access to list items
 
 bool 
-CgiForm::getSelectSingle(const char *elementName, char* &value) 
-  throw(Exception)
+CgiForm::getSelectSingle(const char *elementName, 
+			 char* &value) const throw(Exception)
 { return getAsStringNoNewlines(elementName, value); }
 
 bool 
-CgiForm::getSelectMultiple(	const char *elementName, 
-				char** &value, int &numFound) throw(Exception)
+CgiForm::getSelectMultiple(const char *elementName, 
+			   char** &value, 
+			   int &numFound) const throw(Exception)
 { return getMultiple(elementName, value, numFound); }
 
+const FormEntry* 
+CgiForm::findEntryByName(const char *name) const
+{ return findEntry(name, true); }
+
+const FormEntry* 
+CgiForm::findEntryByValue(const char *value) const
+{ return findEntry(value, false); }
+
+const FormEntry*
+CgiForm::findEntry(const char *param, 
+		   bool byName) const
+{
+  LinkedList<FormEntry>::ConstIterator found = 
+    (byName 	? find(nameCompare, (void*) param)
+     		: find(valueCompare, (void*) param));
+  
+  return (found.isValid() ? &(*found) : NULL);
+}
 
 // ========== Utility functions
 
@@ -269,7 +306,7 @@ CgiForm::parseFormInput(const char *data) throw(Exception)
   const char *cType = "multipart/form-data;";
   
   if(stringsAreEqual(cType, getEnvironment()->getContentType(), 
-		     strlen(cType),true)) {
+		     strlen(cType), true)) {
     logln("Multipart data detected.");
     // Find out what the separator is
     char *sep;
@@ -311,53 +348,20 @@ CgiForm::parseFormInput(const char *data) throw(Exception)
     }
   }
   else {
+    int dataLen = strlen(data);
+    const char *sep = "&";
     
-    int length = strlen(data);
-    
-    /* Scan for pairs, unescaping and storing them as they are found. */
-    int pos = 0;
-    
-    while( pos < length ) {
-      bool foundEquals 	= false;
-      bool foundAmpersand = false;
-      int start = pos, len = 0;
-      char *name, *value;
+    int extractedLen = 0;
+    while(extractedLen <= dataLen) {
+      int newLen;
+      newLen = findBytes(data + extractedLen, 
+			 dataLen - extractedLen, 
+			 sep);
+      if(newLen == -1)
+	newLen = dataLen - extractedLen;
       
-      while(pos != length) {
-	if(data[pos++] == '=') {
-	  foundEquals = true;
-	  break;
-	}
-	len++;
-      }
-      
-      if( ! foundEquals ) 
-	break;
-      
-      name = unescapeChars( data + start, len );
-      
-      start 	= pos;
-      len 	= 0;
-      while(pos != length) {
-	if(data[pos++] == '&') {
-	  foundAmpersand = true;
-	  break;
-	}
-	len++;
-      }
-      
-      /* The last pair probably won't be followed by a &, but
-	 that's fine, so check for that after accepting it */
-      value = unescapeChars( data + start, len );
-      
-      /* OK, we have a new pair, add it to the list. */
-      new FormEntry(name, value);
-      
-      delete [] name;
-      delete [] value;
-      
-      if( ! foundAmpersand ) 
-	break;
+      parsePair(data + extractedLen, newLen);      
+      extractedLen += (newLen + strlen(sep));
     }
   }
 }
@@ -396,6 +400,27 @@ CgiForm::parseHeader(const char *data, int headLen)
 }
 
 void
+CgiForm::parsePair(const char *data, int dataLen)
+{
+  // Find the divider
+  int sepPos = 0;
+  const char *sep = "=";
+  sepPos = findBytes(data, dataLen, sep);
+  
+  // Extract data, convert, and add
+  char *name;
+  char *value;
+  unescapeChars(data, sepPos, name);
+  unescapeChars(data + sepPos + 1, dataLen - sepPos - 1, value);
+  
+  log("Got ("); log(name); log(", "); log(value); logln(")");
+  append(FormEntry(name, value));
+  
+  delete [] name;
+  delete [] value;
+}
+
+void
 CgiForm::parseMIME(const char *data, int dataLen)
 {
   // Find the header
@@ -409,11 +434,12 @@ CgiForm::parseMIME(const char *data, int dataLen)
   if(head->isEmpty() == false) {
     // Extract data
     if(head->getFilename() == NULL)
-      new FormEntry(head->getName(), data + headLen, dataLen - headLen);
+      append(FormEntry(head->getName(), 
+		       data + headLen, dataLen - headLen));
     else
-      new FormFile(head->getName(), head->getFilename(), 
-		   head->getContentType(), 
-		   data + headLen, dataLen - headLen);
+      append(FormFile(head->getName(), head->getFilename(), 
+		      head->getContentType(), 
+		      data + headLen, dataLen - headLen));
   }
   delete head;
 }
@@ -422,7 +448,7 @@ int
 CgiForm::makeString(const char	*src, 
 		    char*	&result, 
 		    int 	maxLen, 
-		    int 	allowNewlines) 
+		    int 	allowNewlines) const
 {
   char *dest, *s;
   int truncated = 0;
@@ -495,10 +521,12 @@ CgiForm::makeString(const char	*src,
 }
 
 bool 
-CgiForm::getString(	const char *elementName, int maxLen, 
-			char* &dest, bool allowNewlines) throw(Exception)
+CgiForm::getString(const char *elementName, 
+		   int maxLen, 
+		   char* &dest, 
+		   bool allowNewlines) const throw(Exception)
 {
-  const FormEntry *entry = FormEntry::findEntryByName(elementName);
+  const FormEntry *entry = findEntryByName(elementName);
   bool found = (entry != NULL);
   
   if( found ) {
@@ -518,50 +546,30 @@ CgiForm::getString(	const char *elementName, int maxLen,
   return found;
 }
 
-/* Extract the first non-whitespace character from a string */
-char 
-CgiForm::firstNonspaceChar(const char *s) 
-{
-  int len = strspn( s, " \n\r\t" );
-  return s[ len ];
-}
-
 /* Extract multiple items with the same name */
 bool 
-CgiForm::getMultiple(	const char *elementName, 
-			char** &value, int &numFound) throw(Exception)
+CgiForm::getMultiple(const char *elementName, 
+		     char** &value, 
+		     int &numFound) const throw(Exception)
 {
-  FormEntry *entry = (FormEntry*) FormEntry::findEntryByName(elementName);
-  bool found = (entry != NULL);
-  
-  if( found ) {
-    // Do two sweeps over the list- first, count how many elements
-    // we have, then allocate the storage and copy them in
-    FormEntry *e = entry;
-    numFound = 0;
-    while(e != NULL) {
-      numFound++;
-      e = (FormEntry*) FormEntry::findEntryByName(elementName, 
-						  e->getNextEntry());
-    }
+  LinkedList<FormEntry> found;
+  findAll(nameCompare, (void*) elementName, found);
+
+  if(! found.isEmpty()) {
+    numFound = found.length();
+    value = new char* [ numFound ];
+    if( ! value )
+      throw Exception("new failed", ERRINFO);
     
-    if(numFound > 0) {
-      value = new char* [ numFound ];
-      if( ! value )
+    LinkedList<FormEntry>::Iterator iter = found.begin();
+    
+    int index = 0;
+    while(iter.isValid()) {
+      value[ index ] = new char [ strlen((*iter).getValue()) + 1];
+      if( ! value[ index ] )
 	throw Exception("new failed", ERRINFO);
       
-      FormEntry *e = entry;
-      int index = 0;
-      while(e != NULL) {
-	value[ index ] = new char [ strlen(e->getValue()) + 1];
-	if( ! value[ index ] )
-	  throw Exception("new failed", ERRINFO);
-	
-	strcpy(value[index++], e->getValue());
-	
-	e = (FormEntry*) FormEntry::findEntryByName(elementName, 
-						    e->getNextEntry());
-      }
+      strcpy(value[index++], (*iter++).getValue());
     }
   }
   else {
@@ -569,7 +577,7 @@ CgiForm::getMultiple(	const char *elementName,
     numFound = 0;
   }
   
-  return found;
+  return (! found.isEmpty());
 }
 
 
