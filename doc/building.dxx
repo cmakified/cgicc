@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.7 1998/10/05 22:33:14 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.8 1998/10/05 22:55:15 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -93,8 +93,15 @@ Once you are finished with the necessary customization, save
 <TT>Makefile</TT> and exit your editor. Cgicc may be compiled either as
 a static library (<TT>libCgicc.a</TT>) or a dynamically-linked shared library 
 (<TT>libCgicc.so</TT>). If your system supports it, I recommend compiling 
-the shared version. At the UNIX prompt, type
+the shared version. In either case, it is necessary to generate the file
+dependency information.  At the UNIX prompt, type
 </P>
+
+<PRE CLASS="unix">
+% make depend
+</PRE>
+
+<P>to create the dependency file.  To compile the library type</P>
 
 <PRE CLASS="unix">
 % make shared test.cgi_shared
