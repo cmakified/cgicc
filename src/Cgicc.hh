@@ -1,4 +1,4 @@
-/* $Id: Cgicc.hh,v 1.2 1998/04/02 04:54:44 sbooth Exp $ */
+/* $Id: Cgicc.hh,v 1.3 1998/04/02 11:09:25 sbooth Exp $ */
 
 #ifndef __CGICC__
 #define __CGICC__ 1
@@ -21,16 +21,26 @@
 #include "CgiDefs.hh"
 #endif
 
-#ifndef __CGI_FORM__
-#include "CgiForm.hh"
+#ifndef __FORM_ENTRY__
+#include "FormEntry.hh"
 #endif
 
+#ifndef __FORM_FILE__
+#include "FormFile.hh"
+#endif
+
+#ifndef __CGI_ENVIRONMENT__
+#include "CgiEnvironment.hh"
+#endif
+
+
+class MultipartHeader;
 
 // ============================================================
 // Class Cgicc
 // ============================================================
 /** 
- * Cgicc is a wrapper class for \Ref{CgiForm}.
+ * Cgicc is the main class of the Cgicc library.
  * <P>Normally, you will instantiate an object of this type in 
  * <TT>main()</TT>:</P>
  * <PRE CLASS="code">
@@ -58,7 +68,7 @@ public:
    */
   Cgicc() throw(Exception);
 
-  /* Destructor */
+  /** Destructor */
   ~Cgicc();
   //@}
 
@@ -87,36 +97,125 @@ public:
   inline const char* getCgiccVersion() const 	{ return "2.2b"; }
   //@}
 
-  /**@name Acess to CGI data */
+  /**@name Form Element Access */
+  //@{
+
+  /**
+   * Query whether a checkbox is checked.
+   * @param elementName The name of the element to query
+   * @return True if the desired checkbox was checked, false if not
+   */
+  bool queryCheckbox(const char *elementName) const;
+
+  /**
+   * Find a radio button in a radio group, or a selected list item.
+   * @param name The name of the radio button or list item to find.
+   * @return An Iterator referring to the desired element.  If the element
+   * is not found, the Iterator will not be valid.
+   */
+  LinkedList<FormEntry>::Iterator getElement(const char *name);
+
+  /**
+   * Find a radio button in a radio group, or a selected list item.
+   * @param name The name of the radio button or list item to find.
+   * @return A ConstIterator referring to the desired element.  If the element
+   * is not found, the ConstIterator will not be valid.
+   */
+  LinkedList<FormEntry>::ConstIterator getElement(const char *name) const;
+
+  /**
+   * Find multiple checkboxes in a group or selected items in a list.
+   * @param name The name of the checkboxes or list to find.
+   * @param result A LinkedList to hold the result.
+   * @return True if any elements were found, false if not.
+   */
+  bool getElementMultiple(const char *elementName,
+			  LinkedList<FormEntry>& result) const;
+  //@}  
+
+  /**@name Searching for form entries */
   //@{
   
   /**
-   * Get the form data.
-   * @return The form data.
+   * Find an element in the linked list of entries by name.
+   * @param name The <EM>name</EM> of the list element to search for
+   * @return The desired list element, or NULL if not found
    */
-  CgiForm* 		operator* () 		{ return getFormData(); }
-
-  /**
-   * Get the form data.
-   * @return The form data.
-   */
-  const CgiForm* 	operator* () const 	{ return getFormData(); }
+  const FormEntry* findEntryByName(const char *name) const;
   
   /**
-   * Get the form data.
-   * @return The form data.
+   * Find an element in the linked list of entries by value.
+   * @param value The <EM>value</EM> of the list element to search for
+   * @return The desired list element, or NULL if not found
    */
-  inline CgiForm* 	getFormData() 		{ return fFormData; }
+  const FormEntry* findEntryByValue(const char *value) const;
 
   /**
-   * Get the form data.
-   * @return The form data.
+   * Find elements in the linked list of entries by name.
+   * @param name The <EM>name</EM> of the list elements to search for.
+   * @param result Where to store the found elements, if any.
+   * @return True if any items were found, false if not.
    */
-  inline const CgiForm* getFormData() const 	{ return fFormData; }
+  bool findEntriesByName(const char 		*name,
+			 LinkedList<FormEntry>& result) const;
+
+  /**
+   * Find elements in the linked list of entries by value.
+   * @param value The <EM>name</EM> of the list elements to search for.
+   * @param result Where to store the found elements, if any.
+   * @return True if any items were found, false if not.
+   */
+  bool findEntriesByValue(const char 			*value,
+			  LinkedList<FormEntry>& 	result) const;
+    
+  /* Find an element in the linked list of entries */
+  const FormEntry* findEntry(const char *param, 
+			     bool 	byName) const;
+
+  /* Find elements in the linked list of entries */
+  bool findEntries(const char 			*param, 
+		   bool 			byName,
+		   LinkedList<FormEntry>& 	result) const;
+  //@}
+  
+  /**@name Access to the current environment */
+  //@{
+  
+  /**
+   * Get a pointer to the current runtime environment.
+   * @return A pointer to the environment
+   */
+  inline const CgiEnvironment* getEnvironment() const { return fEnvironment; }
+  //@}
+
+  /**@name Save and Restore */
+  //@{
+
+  /**
+   * Save the current CGI environment to a file.
+   * @param filename The name of the file to which to save.
+   * @exception Exception
+   */
+  void save(const char *filename) const throw(Exception);
+
+  /**
+   * Restore from a previously-saved CGI environment.
+   * @param filename The name of the file from which to restore.
+   * @exception Exception
+   */
+  void restore(const char *filename) throw(Exception);
   //@}
 
 private:
-  CgiForm *fFormData;
+  CgiEnvironment 	*fEnvironment;
+  LinkedList<FormEntry> *fFormData;
+
+  /* Convert query string into a linked list of FormEntriess */
+  void parseFormInput(const char *data) throw(Exception);
+  
+  MultipartHeader* parseHeader(const char *data, int headLen);
+  void parsePair(const char *data, int dataLen);
+  void parseMIME(const char *data, int dataLen);
 };
 
 #endif
