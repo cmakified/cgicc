@@ -237,7 +237,7 @@ code given in this chapter.
 #include <vector>
 #include <string>
 
-#include "Cgicc.hh"
+#include "cgicc/Cgicc.hh"
 
 using namespace std;
 using namespace cgicc;
