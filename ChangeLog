@@ -1,3 +1,21 @@
+1999-06-01  Stephen F. Booth  <sbooth@saaba..lmi.net>
+
+	* src/CgiUtils.cc(readString): Added STDNS macro in front of
+	instantiated string object.
+	* src/Cgicc.cc(findEntries): Added block for MS C++ compilers
+	on Win32 that don't support the std::copy_if function.
+	* src/HTTPHeaders.cc(render): Added STDNS macro in front of
+	endl (all render methods).
+	* src/CgiEnvironment.cc(CgiEnvironment): Added STDNS macro in
+	front of cin.
+	* src/CgiEnvironment.cc(save,restore): Added STDNS macro in front
+	of ios::in and ios::skipws.
+
+1999-05-31  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* src/CgiUtils.cc(unescapeString): Added temporary to ensure
+	evaluation order of iterator increment in call to hexToChar.
+
 1999-05-14  Stephen Booth       <sbooth@saaba.lmi.net>
 
 	* Removed classes LinkedList and Iterator
