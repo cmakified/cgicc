@@ -50,7 +50,7 @@ to use the method @code{getCookieList()} instead, which returns a
 @code{vector<HTTPCookie>}.
 @end deftypemethod
 
-@deftypemethod CgiEnvironment {const vector<HTTPCookie>&} getCookies () const
+@deftypemethod CgiEnvironment {const vector<HTTPCookie>&} getCookieList () const
 Get a @code{vector} containing the HTTP cookies associated with this
 query, if any.
 @end deftypemethod
