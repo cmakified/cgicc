@@ -1,5 +1,5 @@
 /*
- *  $Id: acconfig.h,v 1.2 1999/04/26 22:41:54 sbooth Exp $
+ *  $Id: acconfig.h,v 1.3 1999/05/26 17:09:55 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -17,6 +17,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+@TOP@
 
 /* Name of package. */
 #undef PACKAGE
