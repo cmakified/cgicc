@@ -1,21 +1,28 @@
-/* $Id: FormEntry.cc,v 1.5 1998/04/03 21:11:35 sbooth Exp $ */
+/* $Id: FormEntry.cc,v 1.6 1998/09/24 01:37:58 sbooth Exp $ */
 
 #include "FormEntry.hh"
 
 /* Create a new FormEntry */
 FormEntry::FormEntry(const char	*name,
 		     const char	*value,
-		     int valueLen)
+		     int valueLen) throw (Exception)
+  : fName(NULL), fValue(NULL)
 {
   fName = new char[strlen(name) + 1];
+  if(fName == NULL)
+    throw Exception("new failed", ERRINFO);
   strcpy(fName, name);
   
   if(valueLen == -1) {
     fValue = new char[strlen(value) + 1];
+    if(fValue == NULL)
+      throw Exception("new failed", ERRINFO);
     strcpy(fValue, value);  
   }
   else {
     fValue = new char[valueLen + 1];
+    if(fValue == NULL)
+      throw Exception("new failed", ERRINFO);
     strncpy(fValue, value, valueLen);
     fValue[valueLen] = '\0';
   }
@@ -23,11 +30,17 @@ FormEntry::FormEntry(const char	*name,
   fLength = strlen(fValue);
 }
 
-FormEntry::FormEntry(const FormEntry& entry) {
+FormEntry::FormEntry(const FormEntry& entry) throw (Exception)
+  : fName(NULL), fValue(NULL)
+{
   fName = new char[strlen(entry.getName()) + 1];
+  if(fName == NULL)
+    throw Exception("new failed", ERRINFO);
   strcpy(fName, entry.getName());
 
   fValue = new char[strlen(entry.getValue()) + 1];
+  if(fValue == NULL)
+    throw Exception("new failed", ERRINFO);
   strcpy(fValue, entry.getValue());
 
   fLength = entry.length();
