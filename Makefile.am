@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.21 2000/04/11 01:39:07 sbooth Exp $
+## $Id: Makefile.am,v 1.22 2000/10/15 16:08:04 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip dist-bzip2
 
@@ -28,7 +28,6 @@ dist-hook:
 	cp -p $(srcdir)/support/mdate-sh $(distdir)/support
 	cp -p $(srcdir)/support/missing $(distdir)/support
 	cp -p $(srcdir)/support/mkinstalldirs $(distdir)/support
-	cp -p $(srcdir)/support/cgicc.spec.in $(distdir)/support
 	test -d $(distdir)/win || mkdir $(distdir)/win || exit 1
 	cp -p $(srcdir)/win/cgicc.dsw $(distdir)/win
 	cp -p $(srcdir)/win/cgicc.dsp $(distdir)/win
