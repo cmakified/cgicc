@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLClasses.h,v 1.5 1999/08/17 17:16:07 sbooth Exp $
+ *  $Id: HTMLClasses.h,v 1.6 1999/09/22 22:30:11 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -119,7 +119,11 @@ BOOLEAN_ELEMENT (td,         "TD");         // table data cell
 // links
 
 BOOLEAN_ELEMENT (a,          "A");          // anchor
+#if CGICC_USE_NAMESPACES
 ATOMIC_ELEMENT  (link,       "LINK");       // document link
+#else
+ATOMIC_ELEMENT  (link_,      "LINK");       // document link
+#endif
 ATOMIC_ELEMENT  (base,       "BASE");       // path information
 
 // objects
