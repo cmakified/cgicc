@@ -1,6 +1,6 @@
-## $Id: Makefile.am,v 1.35 2004/06/11 22:02:35 sbooth Exp $
+## $Id: Makefile.am,v 1.36 2004/06/19 04:25:52 sbooth Exp $
 
-AUTOMAKE_OPTIONS = check-news dist-zip dist-bzip2
+AUTOMAKE_OPTIONS = check-news dist-bzip2
 
 if DEMOS
 DEMO = demo contrib
