@@ -1,7 +1,7 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.12 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.13 2004/06/12 15:24:31 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,8 @@
 #include <stdexcept>
 #include <memory>
 #include <vector>
-#include <cctype> 	// for toupper
+#include <iterator> 	// for distance
+#include <cctype> 	// for toupper, isxdigit
 
 #include "cgicc/CgiUtils.h"
 
@@ -182,10 +183,18 @@ cgicc::form_urldecode(const std::string& src)
       result.append(1, ' ');
       break;
     case '%':
-      // assume well-formed input
-      c = *++iter;
-      result.append(1, hexToChar(c, *++iter));
-      break;
+	// Don't assume well-formed input
+	if(std::distance(iter, src.end()) >= 2
+	   && std::isxdigit(*(iter + 1)) && std::isxdigit(*(iter + 2))) {
+	    c = *++iter;
+	    result.append(1, hexToChar(c, *++iter));
+	}
+	// Just pass the % through untouched
+	else {
+	    result.append(1, '%');
+	}
+	break;
+    
     default:
       result.append(1, *iter);
       break;

@@ -3,6 +3,12 @@
 	* support/Makefile.am: Removed mkinstalldirs from EXTRA_DIST
 	* configure.ac: Removed extra AC_CANONICAL_HOST
 	* configure.ac: Removed CGICC_CHECK_LINK_STDCPP
+	* demo/test.html: Changed votes to browsers, friends to authors
+	* demo/test.cpp: Changes votes to browsers, friends to authors
+	* cgicc/CgiUtils.cpp: Fixed bug for malformed input in
+	form_urldecode (bug submitted by hitheat@hotmail.com and
+	imaginos@imaginos.net)
+	* THANKS: Added Gilbert Fine and Jim Hull
 
 2004-06-11  Stephen F. Booth  <sbooth@gnu.org>
 
