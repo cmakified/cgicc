@@ -4,6 +4,11 @@
 	* info/classes-html.texinfo: Same
 	* demo/test.cpp: Changed code to use new HTML generation technique
 	* demo/dns.cpp: Changed code to use new HTML generation technique
+	* cgicc/HTMLClasses.h: Define div as div_ and select as select_
+	if USE_NAMESPACES is 0
+	* demo/{test.cpp,dns.cpp}: #define div div_, #define select select_ 
+	if USE_NAMESPACES is 0
+	* example/Makefile.in: Removed @DEFS@
 
 1999-08-09  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
