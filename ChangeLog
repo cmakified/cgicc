@@ -1,3 +1,15 @@
+1999-06-02  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* configure.in: Added AM_MAINTAINER_MODE, and switched order
+	of the AC_ENABLE for demos and namespaces (to reflect relative
+	importance).
+	* Makefile.am: Added maintainer mode conditional around
+	cvs-dist and cvs-diff targets.
+	* info/Makefile.am: Added maintainer mode targets doc-gz,
+	doc-texi-gz, doc-info-gz, doc-dvi-gz (for generating
+	.tar.gz files for web documentation)
+	* Upgraded to libtool-1.3.2
+
 1999-06-01  Stephen F. Booth  <sbooth@saaba..lmi.net>
 
 	* src/CgiUtils.cc(readString): Added STDNS macro in front of
@@ -10,13 +22,15 @@
 	front of cin.
 	* src/CgiEnvironment.cc(save,restore): Added STDNS macro in front
 	of ios::in and ios::skipws.
+	* info/reporting-bugs.texinfo: Added file
+	* info/cgicc.texinfo: Now includes section on reporting bugs
 
 1999-05-31  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* src/CgiUtils.cc(unescapeString): Added temporary to ensure
 	evaluation order of iterator increment in call to hexToChar.
 
-1999-05-14  Stephen Booth       <sbooth@saaba.lmi.net>
+1999-05-14  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* Removed classes LinkedList and Iterator
 	* Reworked to use the STL classes vector, iterator, and string
@@ -26,13 +40,13 @@
 	* Added methods on Cgicc for querying the system type
 	* Released as part of the GNU project under the GPL
 
-1999-01-05  Stephen Booth       <sbooth@saaba.lmi.net>
+1999-01-05  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* Fixed problem in src/Makefile.am that caused config.h to 
 	not be installed
 	* Added example/ directory containing a skeleton CGI and Makefile
 	
-1998-12-11  Stephen Booth	<sbooth@saaba.lmi.net>
+1998-12-11  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* Reworked to use autoconf/automake/libtool
 	* Re-released under the GNU Library General Public License
