@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.10 1999/05/13 17:00:52 sbooth Exp $
+## $Id: Makefile.am,v 1.11 1999/05/13 21:31:26 sbooth Exp $
 
 if DEMOS
 DEMO = demo
@@ -21,7 +21,7 @@ dist-hook:
 ################################################################
 ##
 ## Everything past here is useful to the maintainer, but probably not
-## to anybody else (borrowed from libtool/Makefile.am).
+## to anybody else (taken from libtool/Makefile.am).
 ##
 
 ## set it to `:' to avoid CVS operations
