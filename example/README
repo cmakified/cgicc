@@ -1,7 +1,10 @@
-This directory contains skeleton code and a supporting Makefile for a CGI
-application using Cgicc, tailored to the installation environment.
+README for skeleton CGI using GNU Cgicc
+=======================================
 
-If you are using Linux or a BSD-style Unix, you'll need to uncomment line
-60 in the Makefile, and comment out (using '#') line 57.  This is due to the
-different methods of embedding a runtime search path on different flavors
-of Unix.
+This directory contains skeleton code and a supporting Makefile for a
+CGI application using Cgicc, tailored to the installation environment.
+
+If you are using Linux or a BSD-style Unix, you'll need to uncomment
+line 60 in the Makefile, and comment out (using '#') line 57.  This is
+due to the different methods of embedding a runtime search path on
+different flavors of Unix.

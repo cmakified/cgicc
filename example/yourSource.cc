@@ -1,5 +1,5 @@
 /*
- *  $Id: yourSource.cc,v 1.2 1999/04/26 22:42:09 sbooth Exp $
+ *  $Id: yourSource.cc,v 1.3 1999/05/05 18:31:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,15 +18,13 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <cstdlib>
-
 #include "CgiDefs.hh"
 #include "HTMLClasses.hh"
 #include "Cgicc.hh"
 #include "CgiException.hh"
 
-// To use logging, the variable gLogFile MUST be defined, and it _must_
-// be an ofstream
+// To use the debug logging feature, the variable gLogFile MUST be
+// defined, and it _must_ be an ofstream
 #if DEBUG
 ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
@@ -42,11 +40,28 @@ main(int argc,
   try {
     Cgicc cgi;
     
+    // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
+    cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
+    cout << html(add("lang", "EN").add("dir", "LTR")) << endl;
+
+    // Set up the page's header and title.
+    cout << head() << endl;
+    cout << title() << "GNU Cgicc v" << cgi.getVersion() << title() << endl;
+    cout << head() << endl;
+    
+    // Start the HTML body
+    cout << body() << endl;
+
+    // Print out a message
+    cout << h1("Hello, world from GNU Cgicc") << endl;
+
+    // Close the document
+    cout << body() << html();
   }
   
   catch(const CgiException& e) {
-    
+    // handle error condition
   }
   
-  return EXIT_SUCCESS;
+  return 0;
 }
