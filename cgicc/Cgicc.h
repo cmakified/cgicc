@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.10 2002/03/06 02:46:21 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.11 2002/03/09 18:34:18 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,7 +27,7 @@
 #endif
 
 /*! \file Cgicc.h
- * The main header file for the GNU cgicc library
+ * \brief The main header file for the GNU %cgicc library
  */
 
 /*

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPCookie.h,v 1.2 2002/03/06 02:49:55 sbooth Exp $
+ *  $Id: HTTPCookie.h,v 1.3 2002/03/09 18:34:18 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -27,7 +27,7 @@
 #endif
 
 /*! \file HTTPCookie.h
- * \brief 
+ * \brief An HTTP Cookie
  */
 
 #include <string>
