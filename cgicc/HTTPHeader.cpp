@@ -1,6 +1,5 @@
-/* -*-c++-*- */
 /*
- *  $Id: HTTPHeaders.h,v 1.6 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: HTTPHeader.cpp,v 1.1 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -19,21 +18,31 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTTPHEADERS_H_
-#define _HTTPHEADERS_H_ 1
-
 #ifdef __GNUG__
-#  pragma interface
+#  pragma implementation
 #endif
 
 #include "cgicc/HTTPHeader.h"
-#include "cgicc/HTTPContentHeader.h"
-#include "cgicc/HTTPHTMLHeader.h"
-#include "cgicc/HTTPPlainHeader.h"
-#include "cgicc/HTTPRedirectHeader.h"
-#include "cgicc/HTTPStatusHeader.h"
 
-#include "cgicc/HTTPResponseHeader.h"
-#include "cgicc/HTTPNPHeader.h"
+// ============================================================
+// Class HTTPHeader
+// ============================================================
+CGICCNS HTTPHeader::HTTPHeader()
+{
+  fCookies.reserve(5);
+}
 
-#endif /* ! _HTTPHEADERS_H_ */
+CGICCNS HTTPHeader::HTTPHeader(const STDNS string& data)
+  : fData(data)
+{
+  fCookies.reserve(5);
+}
+
+CGICCNS HTTPHeader::HTTPHeader(const HTTPHeader& header)
+  : MStreamable(),
+    fData(header.getData()),
+    fCookies(header.getCookies())
+{}
+
+CGICCNS HTTPHeader::~HTTPHeader()
+{}

@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.2 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.3 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -23,6 +23,7 @@
 #endif
 
 #include <stdexcept>
+#include <memory>
 #include <cstdlib> 	// for getenv, system
 #include <cctype> 	// for toupper
 
@@ -176,21 +177,20 @@ STDNS string
 CGICCNS readString(STDNS istream& in)
 {
   STDNS string::size_type dataSize = 0;
-  STDNS string s;
   
   in >> dataSize;
   in.get(); // skip ' '
-  // should work, but not in egcs-1.1.2 or gcc-2.95
-  //auto_ptr<char> temp = new char[dataSize];
-  char *temp = new char[dataSize];
-  in.read(temp, dataSize);
-  if(in.gcount() != dataSize) {
-    delete [] temp;
+
+  // Why doesn't this work? Should convert char* -> auto_ptr_ref -> auto_ptr
+  // STDNS auto_ptr<char> temp = new char[dataSize];
+  STDNS auto_ptr<char> temp(new char[dataSize]);
+
+  in.read(temp.get(), dataSize);
+  if((STDNS string::size_type)in.gcount() != dataSize) {
     throw STDNS runtime_error("I/O error");
   }
-  s = STDNS string(temp, dataSize);
-  delete [] temp;
-  return s;
+
+  return STDNS string(temp.get(), dataSize);
 }
 
 // read a long

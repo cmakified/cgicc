@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLElements.h,v 1.8 2001/09/03 16:18:46 sbooth Exp $
+ *  $Id: HTMLElement.h,v 1.1 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -19,15 +19,15 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTMLELEMENTS_H_
-#define _HTMLELEMENTS_H_ 1
+#ifndef _HTMLELEMENT_H_
+#define _HTMLELEMENT_H_ 1
 
 #ifdef __GNUG__
 #  pragma interface
 #endif
 
-/*! \file HTMLElements.h
- * \brief Classes dealing with HTML elements
+/*! \file HTMLElement.h
+ * \brief Class dealing with HTML elements
  * 
  * For example, \c a, \c img, \c html, and \c body, are all HTML elements.
  */
@@ -36,7 +36,7 @@
 
 #include "cgicc/CgiDefs.h"
 #include "cgicc/MStreamable.h"
-#include "cgicc/HTMLAttributes.h"
+#include "cgicc/HTMLAttributeList.h"
 
 CGICC_BEGIN_NAMESPACE
 
@@ -50,7 +50,10 @@ class HTMLElementList;
  * \brief Class representing an HTML element.
  *
  * An HTML element is any entity enclosed in angle brackets (\< and \>)
- * interpreted as HTML, for example \c A, \c IMG, \c HTML, and \c BODY.
+ * interpreted as HTML, for example \c a, \c img, \c html, and \c body.
+ *
+ * This class is an abstract base class that defines the interface
+ * for all HTMLElement subclasses.
  */
 class CGICC_API HTMLElement : public MStreamable 
 {
@@ -60,13 +63,13 @@ public:
    * \brief Possible types of HTMLElements 
    *
    * An HTMLElement is either atomic, meaning it has no corresponding
-   * closing tag (elements such as \c HR and \c BR are atomic) or
-   * boolean (elements such as \c A and \c OL are boolean)
+   * closing tag (elements such as \c hr and \c br are atomic) or
+   * boolean (elements such as \c a and \c ol are boolean)
    */
   enum EElementType {
-    /*! Atomic element, such as \c HR */
+    /*! Atomic element, such as \c hr */
     eAtomic,
-    /*! Boolean element, such as \c STRONG */
+    /*! Boolean element, such as \c strong */
     eBoolean
   };
   
@@ -145,7 +148,7 @@ public:
   /*!
    * \brief Get the name of this element.
    *
-   * For example, \c HTML or \c BODY.
+   * For example, \c html or \c body.
    * \return The name of this element.
    */
   virtual const char*
@@ -372,119 +375,6 @@ private:
   bool              fDataSpecified;
 };
 
-
-// ============================================================
-// Class HTMLElementList
-// ============================================================
-
-#ifdef WIN32
-  template class CGICC_API STDNS vector<HTMLElement*>;
-#endif
-
-/*! \class HTMLElementList HTMLElements.h cgicc/HTMLElements.h
- * \brief An expandable list of HTMLElements
- *
- * An HTMLElementList represents any number of
- * HTMLElements.  To add HTMLElements to the list, use the add() methods:
- * \code
- * HTMLElementList list;
- * list.add(br());
- * \endcode
- * \see HTMLElement
- */
-class CGICC_API HTMLElementList
-{
-public:
-  
-  // ============================================================
-
-  /*! \name Constructors and Destructor */
-  //@{
-
-  /*!
-   * \brief Create an empty HTMLElementList. 
-   *
-   * HTMLElementLists are most often created with the add() functions
-   */
-  HTMLElementList();
-
-  /*!
-   * \brief Create a new HTMLElementList, specifying the first element.
-   *
-   * The first element in the list is set to \c head
-   * \param head The first element of the list
-   */
-  HTMLElementList(const HTMLElement& head);
-
-  /*!
-   * \brief Copy constructor.
-   *
-   * Sets the elements in this list to those of \c list
-   * \param list The HTMLElementList to copy.
-   */
-  HTMLElementList(const HTMLElementList& list);
-
-  /*!
-   * \brief Destructor 
-   *
-   * Deletes this HTMLElementList object
-   */
-  ~HTMLElementList();
-  //@}
-
-  // ============================================================
-
-  /*! \name Overloaded Operators */
-  //@{
-
-  /*!
-   * \brief Assignment operator 
-   *
-   * Sets the elements in this list to those of \c list
-   * \param list The HTMLElementList to copy
-   * \return A reference to \c this
-   */
-  HTMLElementList&
-  operator= (const HTMLElementList& list);
-  //@}
-
-  // ============================================================
-
-  /*! \name List Management 
-   * Manage the elements in the list
-   */
-  //@{
-
-  /*!
-   * \brief Add an HTMLElement to the list.
-   *
-   * \param element The HTMLElement to add.
-   * \return A reference to \c this
-   */
-  HTMLElementList&
-  add(const HTMLElement& element);
-
-  /*!
-   * Add an HTMLElement to the list.
-   * \param element The HTMLElement to add.
-   * \return A reference to the \c this
-   */
-  HTMLElementList&
-  add(HTMLElement *element);
-  //@}
-
-  /*!
-   * Render this HTMLElementList 
-   * \param out The ostream to which to write
-   */
-  void 
-  render(STDNS ostream& out) 				const;
-
-private:
-  STDNS vector<HTMLElement*> fElements;
-  // elements must be stored as pointers, otherwise polymorphism does not work
-};
-
 CGICC_END_NAMESPACE
 
-#endif /* ! _HTMLELEMENTS_H_ */
+#endif /* ! _HTMLELEMENT_H_ */

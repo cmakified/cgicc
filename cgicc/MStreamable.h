@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: MStreamable.h,v 1.5 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: MStreamable.h,v 1.6 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -71,7 +71,6 @@ public:
   /*! 
    * \brief Empty constructor 
    *
-   * Doesn't do anything
    */
   inline MStreamable() 
   {}
@@ -79,7 +78,6 @@ public:
   /*! 
    * \brief Empty destructor 
    *
-   * Delete this MStreamable object
    */
   inline virtual ~MStreamable() 
   {}

@@ -1,6 +1,5 @@
-/* -*-c++-*- */
 /*
- *  $Id: HTTPHeaders.h,v 1.6 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: HTTPContentHeader.cpp,v 1.1 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -19,21 +18,30 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTTPHEADERS_H_
-#define _HTTPHEADERS_H_ 1
-
 #ifdef __GNUG__
-#  pragma interface
+#  pragma implementation
 #endif
 
-#include "cgicc/HTTPHeader.h"
 #include "cgicc/HTTPContentHeader.h"
-#include "cgicc/HTTPHTMLHeader.h"
-#include "cgicc/HTTPPlainHeader.h"
-#include "cgicc/HTTPRedirectHeader.h"
-#include "cgicc/HTTPStatusHeader.h"
 
-#include "cgicc/HTTPResponseHeader.h"
-#include "cgicc/HTTPNPHeader.h"
+// ============================================================
+// Class HTTPContentHeader
+// ============================================================
+CGICCNS HTTPContentHeader::HTTPContentHeader(const STDNS string& mimeType) 
+  : HTTPHeader(mimeType)
+{}
 
-#endif /* ! _HTTPHEADERS_H_ */
+CGICCNS HTTPContentHeader::~HTTPContentHeader()
+{}
+
+void 
+CGICCNS HTTPContentHeader::render(STDNS ostream& out)	const
+{
+  out << "Content-Type: " << getData() << STDNS endl;
+
+  STDNS vector<HTTPCookie>::const_iterator iter; 
+  for(iter = getCookies().begin(); iter != getCookies().end(); ++iter)
+    out << *iter << STDNS endl;
+  
+  out << STDNS endl;
+}

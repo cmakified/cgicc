@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPHeaders.h,v 1.6 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: HTTPHTMLHeader.h,v 1.1 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -19,21 +19,52 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTTPHEADERS_H_
-#define _HTTPHEADERS_H_ 1
+#ifndef _HTTPHTMLHEADER_H_
+#define _HTTPHTMLHEADER_H_ 1
 
 #ifdef __GNUG__
 #  pragma interface
 #endif
 
-#include "cgicc/HTTPHeader.h"
+/*! \file HTTPHTMLHeader.h
+ * \brief Shortcut to HTTPContentHeader for \c text/html
+ * 
+ */
+
+#include <string>
+
 #include "cgicc/HTTPContentHeader.h"
-#include "cgicc/HTTPHTMLHeader.h"
-#include "cgicc/HTTPPlainHeader.h"
-#include "cgicc/HTTPRedirectHeader.h"
-#include "cgicc/HTTPStatusHeader.h"
 
-#include "cgicc/HTTPResponseHeader.h"
-#include "cgicc/HTTPNPHeader.h"
+CGICC_BEGIN_NAMESPACE
 
-#endif /* ! _HTTPHEADERS_H_ */
+// ============================================================
+// Class HTTPHTMLHeader
+// ============================================================
+/*! \class HTTPHTMLHeader HTTPHTMLHeader.h cgicc/HTTPHTMLHeader.h
+ * \brief Shortcut to HTTPContentHeader for \c text/html
+ *
+ */
+class CGICC_API HTTPHTMLHeader : public HTTPContentHeader 
+{
+public:
+
+  /*! \name Constructor and Destructor */
+  //@{
+
+  /*!
+   * \brief Create a new \c text/html header 
+   *
+   */
+  HTTPHTMLHeader();
+
+  /*!
+   * \brief Destructor 
+   *
+   */
+  virtual ~HTTPHTMLHeader();
+  //@}
+};
+  
+CGICC_END_NAMESPACE
+
+#endif /* ! _HTTPHTMLHEADER_H_ */

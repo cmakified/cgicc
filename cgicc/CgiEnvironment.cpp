@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.6 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.7 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -52,30 +52,26 @@ CGICCNS CgiEnvironment::CgiEnvironment(reader_function_t stream_reader)
     LOGLN("GET method recognized")
   }
   else if(stringsAreEqual( getRequestMethod(), "post")) {
-    LOGLN("POST method recognized")
+    LOGLN("POST method recognized");
           
-    // should work, but not in egcs-1.1.2 or gcc-2.95
-    //auto_ptr<char> temp = new char[getContentLength()];
-    char *temp = new char[getContentLength()];
+    // Why doesn't this work? Should convert char* -> auto_ptr_ref -> auto_ptr
+    // STDNS auto_ptr<char> temp = new char[getContentLength()];
+    STDNS auto_ptr<char> temp(new char[getContentLength()]);
 
     // use the appropriate reader function
     if(stream_reader == NULL) {
-      STDNS cin.read(temp, getContentLength());
-      if(STDNS cin.gcount() != getContentLength()) {
-	delete [] temp;
+      STDNS cin.read(temp.get(), getContentLength());
+      if((unsigned long)STDNS cin.gcount() != getContentLength())
 	throw STDNS runtime_error("I/O error");
-      }
     }
     else {
       // user specified a reader function
-      if((*stream_reader)(temp, getContentLength()) != getContentLength()) {
-	delete [] temp;
+      if((*stream_reader)
+	 (temp.get(), getContentLength()) != getContentLength())
 	throw STDNS runtime_error("I/O error");
-      }
     }
 
-    fPostData = STDNS string(temp, getContentLength());
-    delete [] temp;
+    fPostData = STDNS string(temp.get(), getContentLength());
   }
   
   fCookies.reserve(10);

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: FormFile.h,v 1.4 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: FormFile.h,v 1.5 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -54,8 +54,8 @@ CGICC_BEGIN_NAMESPACE
  * in your CGI application, remember to set the ENCTYPE of the form to
  * \c multipart/form-data.
  * \verbatim
-<FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/upload.cgi" 
- ENCTYPE="multipart/form-data">
+<form method="post" action="http://change_this_path/cgi-bin/upload.cgi" 
+ enctype="multipart/form-data">
 \endverbatim
  * \sa FormEntry
  */

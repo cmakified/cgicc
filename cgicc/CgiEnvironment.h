@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.7 2001/09/03 16:19:51 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.8 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -266,7 +266,7 @@ public:
    * This is usually only valid for scripts called with the POST method.
    * \return The data length
    */
-  inline unsigned long 
+  inline unsigned long
   getContentLength() 				const
     { return fContentLength; }
   

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLClasses.h,v 1.7 2001/09/02 19:53:17 sbooth Exp $
+ *  $Id: HTMLClasses.h,v 1.8 2001/09/03 22:06:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -29,8 +29,9 @@
  */
 
 #include "cgicc/CgiDefs.h"
-#include "cgicc/HTMLGeneric.h"
-
+#include "cgicc/HTMLAtomicElement.h"
+#include "cgicc/HTMLBooleanElement.h"
+#include "cgicc/HTMLDoctype.h"
 
 // ============================================================
 // Macros defining types of elements
@@ -55,7 +56,7 @@ class name##Tag   \
  * \param tag The text to output when this tag is rendered
  */
 #define ATOMIC_ELEMENT(name, tag) \
-TAG(name, tag); typedef GenericAtomicElement<name##Tag> name
+TAG(name, tag); typedef HTMLAtomicElement<name##Tag> name
 
 /*!
  * \brief An HTML element maintaining an internal on/off state
@@ -67,16 +68,37 @@ TAG(name, tag); typedef GenericAtomicElement<name##Tag> name
  * \param tag The text to output when this tag is rendered
  */
 #define BOOLEAN_ELEMENT(name, tag) \
-TAG(name, tag); typedef GenericBooleanElement<name##Tag> name
+TAG(name, tag); typedef HTMLBooleanElement<name##Tag> name
 
 
 // ============================================================
-// HTML 4.0 elements - for details see http://www.w3c.org/
+// HTML 4.0 elements - for details see http://www.w3.org/
 // ============================================================
 
 CGICC_BEGIN_NAMESPACE
 
-// 'comment' is defined in HTMLGeneric.hh
+// ============================================================
+// Class comment - needs special render function
+// ============================================================
+
+class nullTag
+{ public: inline static const char* getName() { return 0; } };
+
+/*! \class comment HTMLGeneric.h cgicc/HTMLGeneric.h
+ * \brief An HTML comment
+ */
+class comment : public HTMLBooleanElement<nullTag>
+{
+  virtual void render(STDNS ostream& out) 	const
+  {
+    if(getData().empty() && dataSpecified() == false) {
+      swapState();
+      out << (getState() ? "<!-- " : " -->");
+    }
+    else
+      out << "<!-- " << getData() << " -->";
+  }
+};
 
 BOOLEAN_ELEMENT (html,       "html");       // HTML document
 BOOLEAN_ELEMENT (head,       "head");       // document head
