@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.3 1998/04/06 11:02:33 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.4 1998/04/06 11:03:41 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -81,73 +81,73 @@ You should see output similar to (will vary depending on your configuration):
 
 <PRE class="unix">
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/Exception.cc -o obj/Exception.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/MStreamable.cc -o obj/MStreamable.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTTPHeaders.cc -o obj/HTTPHeaders.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLAttributes.cc -o obj/HTMLAttributes.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLElements.cc -o obj/HTMLElements.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLDirLang.cc -o obj/HTMLDirLang.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLForms.cc -o obj/HTMLForms.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLFrames.cc -o obj/HTMLFrames.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLGlobal.cc -o obj/HTMLGlobal.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLGraphics.cc -o obj/HTMLGraphics.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLLinks.cc -o obj/HTMLLinks.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLLists.cc -o obj/HTMLLists.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLObjects.cc -o obj/HTMLObjects.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLScripts.cc -o obj/HTMLScripts.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLStyles.cc -o obj/HTMLStyles.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLTables.cc -o obj/HTMLTables.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/HTMLText.cc -o obj/HTMLText.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/CgiDefs.cc -o obj/CgiDefs.o
 src/CgiDefs.cc: In function `int findBytes(const char *, int, const char *)':
 src/CgiDefs.cc:106: warning: value computed is not used
 src/CgiDefs.cc:110: warning: value computed is not used
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/FormEntry.cc -o obj/FormEntry.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/FormFile.cc -o obj/FormFile.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/CgiEnvironment.cc -o obj/CgiEnvironment.o
 gcc-2.8.1 -Wall -c -I./include \
--DDEBUG=1 -DADMIN=\"cgicc@foo.com\" -DHAS_UNAME=1 \
+-DDEBUG=1 -DHAS_UNAME=1 \
 src/Cgicc.cc -o obj/Cgicc.o
 ar rcv ./lib/libCgicc.a ./obj/Exception.o  ./obj/MStreamable.o  ./obj/HTTPHeaders.o  ./obj/HTMLAttributes.o  ./obj/HTMLElements.o  ./obj/HTMLDirLang.o  ./obj/HTMLForms.o  ./obj/HTMLFrames.o  ./obj/HTMLGlobal.o  ./obj/HTMLGraphics.o  ./obj/HTMLLinks.o  ./obj/HTMLLists.o  ./obj/HTMLObjects.o  ./obj/HTMLScripts.o  ./obj/HTMLStyles.o  ./obj/HTMLTables.o  ./obj/HTMLText.o  ./obj/CgiDefs.o  ./obj/FormEntry.o  ./obj/FormFile.o  ./obj/CgiEnvironment.o  ./obj/Cgicc.o
 a - ./obj/Exception.o
