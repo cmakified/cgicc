@@ -1,4 +1,4 @@
-/* $Id: FormFile.hh,v 1.4 1998/04/02 11:26:09 sbooth Exp $ */
+/* $Id: FormFile.hh,v 1.5 1998/04/03 09:03:37 sbooth Exp $ */
 
 #ifndef __FORM_FILE__
 #define __FORM_FILE__ 1
@@ -23,9 +23,7 @@ class FormFile : public FormEntry
 {
 public:
   
-  // ========== Constructor/Destructor
-  
-  /**@name Constructor */
+  /**@name Constructors */
   //@{
   
   /**
@@ -48,12 +46,9 @@ public:
    */
   FormFile(const FormFile& file);
   
-  /* Destructor - remove this from the list */
+  /** Destructor */
   virtual ~FormFile();
   //@}
-  
-  
-  // ========== Accessor methods
   
   /**@name Accessor methods */
   //@{

@@ -1,4 +1,4 @@
-/* $Id: FormEntry.hh,v 1.4 1998/04/02 20:20:41 sbooth Exp $ */
+/* $Id: FormEntry.hh,v 1.5 1998/04/03 09:03:37 sbooth Exp $ */
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1
@@ -19,7 +19,7 @@
 class FormEntry : public MStreamable
 {
 public:
-  /**@name Constructor */
+  /**@name Constructors */
   //@{
   
   /**
