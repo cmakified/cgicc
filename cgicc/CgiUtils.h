@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiUtils.h,v 1.7 2002/12/04 17:04:06 sbooth Exp $
+ *  $Id: CgiUtils.h,v 1.8 2003/07/11 14:57:36 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -42,7 +42,7 @@
 #if DEBUG
 
 extern std::ofstream gLogFile;
-#define LOGLN(s) 	gLogFile << s << STDNS endl;
+#define LOGLN(s) 	gLogFile << s << std::endl;
 #define LOG(s) 		gLogFile << s;
 
 #else
