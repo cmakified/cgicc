@@ -1,4 +1,4 @@
-/* $Id: Cgicc.hh,v 1.7 1998/04/06 10:50:27 sbooth Exp $ */
+/* $Id: Cgicc.hh,v 1.8 1998/04/10 22:27:29 sbooth Exp $ */
 
 #ifndef __CGICC__
 #define __CGICC__ 1
@@ -106,6 +106,15 @@ public:
    * @return True if the desired checkbox was checked, false if not
    */
   bool queryCheckbox(const char *elementName) const;
+
+  /**
+   * Find a radio button in a radio group, or a selected list item.
+   * @param name The name of the radio button or list item to find.
+   * @return An Iterator referring to the desired element.  If the element
+   * is not found, the Iterator will not be valid.
+   */
+  LinkedList<FormEntry>::Iterator operator[] (const char *name)
+  { return getElement(name); }
 
   /**
    * Find a radio button in a radio group, or a selected list item.
