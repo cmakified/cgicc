@@ -63,14 +63,14 @@ It is often desirable to embed multiple HTML elements in another at the
 same level.  HTML elements are embedded in an @code{HTMLElement} via the
 @code{add} methods on @code{HTMLElement}.
 
-@deftypemethod HTMLElement HTMLElement& add(const HTMLElement&@var{element})
+@deftypemethod HTMLElement HTMLElement& add(const HTMLElement& @var{element})
 Add @var{element} to the list of HTML elements embedded in this one.
 @end deftypemethod
 
 @deftypemethod HTMLElement HTMLElement& add(HTMLElement *@var{element})
 Add @var{element} to the list of HTML elements embedded in this one.
 The @code{HTMLElement} takes ownership of @var{element}, which should
-not be deleted.
+not subsequently be deleted.
 @end deftypemethod
 
 @unnumberedsec HTMLElement Construction
