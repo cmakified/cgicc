@@ -1,3 +1,7 @@
+1999-06-15  Stephen F. Booth  <sbooth@saaba.lmi.net>
+
+	* demo/testform.html: Brought in line with HTML 4.0 transitional DTD.
+
 1999-06-14  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* cgicc/Makefile.am: Updated -version-info to 0:2:0.
