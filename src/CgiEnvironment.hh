@@ -1,4 +1,4 @@
-/* $Id: CgiEnvironment.hh,v 1.1 1998/04/01 20:50:44 sbooth Exp $ */
+/* $Id: CgiEnvironment.hh,v 1.2 1998/04/02 11:09:19 sbooth Exp $ */
 
 #ifndef __CGI_ENVIRONMENT__
 #define __CGI_ENVIRONMENT__ 1
@@ -23,15 +23,14 @@
 /**
  * Encapsulates all the data passed from the server to the application.
  * <P>To read in the environment, simply instantiate an object of this type.
- * Using the provided save() and restore() methods it is possible to save
- * and restore CGI environments for debugging purposes.</P>
- * <P>The getXXX() methods in this class, with the exception of
+ * <BR><P>The getXXX() methods in this class, with the exception of
  * getPostData(), will <EM>never</EM> return NULL.</P>
  */
 class CgiEnvironment
 {
 public:
 
+  friend class Cgicc;
 
 // ========== Constructor/Destructor
 
@@ -44,7 +43,7 @@ public:
    */
   CgiEnvironment()	throw(Exception);
   
-  /* Destructor */
+  /** Destructor */
   ~CgiEnvironment();
   //@}
   
@@ -257,24 +256,10 @@ public:
    */
   inline const char* getRedirectStatus() const 	{ return fRedirectStatus; }
   //@}
+
+protected:
   
-  // ========== Save/Restore functionality
-  
-  /**@name Save/Restore functionality */
-  //@{
-  
-  /**
-   * Save the current environment to a file.
-   * @param filename The filename of the snapshot
-   * @exception Exception
-   */
   void save(const char *filename) const 	throw(Exception);
-  
-  /**
-   * Restore a previously-saved environment.
-   * @param filename The name of the file containing the snapshot
-   * @exception Exception
-   */
   void restore(const char *filename)		throw(Exception);
   //@}  
   
