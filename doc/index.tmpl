@@ -1,0 +1,204 @@
+/* -*-html-*- */
+/*
+ *  $Id: index.tmpl,v 1.1 2001/09/02 20:02:58 sbooth Exp $
+ *
+ *  Copyright (C) 2001 Stephen F. Booth
+ *
+ *  Permission is granted to copy, distribute and/or modify this document
+ *  under the terms of the GNU Free Documentation License, Version 1.1
+ *  or any later version published by the Free Software Foundation;
+ *  with no Invariant Sections, with no Front-Cover Texts, and with 
+ *  no Back-Cover Texts.
+ *  A copy of the license is included in the section entitled "GNU
+ *  Free Documentation License".
+ */
+
+/*! \page index
+
+<img src="cgicc-logo.jpg" alt="[ GNU cgicc ]" height="163" width="436" />
+<br />
+GNU %cgicc - A C++ class library for writing CGI applications<br />
+Copyright &copy; 1996, 1997, 1998, 1999, 2000, 2001 
+<a href="mailto:sbooth@gnu.org">Stephen F. Booth</a>
+<hr />
+\ref index_intro | \ref index_req | \ref index_download | \ref index_doc | 
+\ref index_demos | \ref index_license | \ref index_cvs | \ref index_lists | 
+\ref index_bugs | \ref index_savannah
+<hr />
+
+\htmlonly
+<table border="0" cellspacing="1" cellpadding="2">
+  <tr>
+    <th colspan="4" align="center" bgcolor="#aaaaff">Current Version</th>
+  </tr>
+  <tr>
+    <td align="left" bgcolor="#ccccee">&nbsp;&nbsp;<a href="ftp://ftp.gnu.org/gnu/cgicc/cgicc-$(VERSION).tar.gz">GNU cgicc <strong>$(VERSION)</strong></a>&nbsp;&nbsp;</td>
+    <td align="left" bgcolor="#ccccee">&nbsp;&nbsp;$(DATE)&nbsp;&nbsp;</td>
+    <td align="left" bgcolor="#ccccee">&nbsp;&nbsp;<a href="http://subversions.gnu.org/cgi-bin/cvsweb/cgicc/NEWS?rev=1.21&content-type=text/x-cvsweb-markup">NEWS</a>&nbsp;&nbsp;</td>
+    <td align="left" bgcolor="#ccccee">&nbsp;&nbsp;<a href="http://subversions.gnu.org/cgi-bin/cvsweb/cgicc/ChangeLog?rev=1.65&content-type=text/x-cvsweb-markup">ChangeLog</a>&nbsp;&nbsp;</td>
+  </tr>
+</table>
+\endhtmlonly
+
+\subsection index_intro Introduction
+
+GNU %cgicc is an ANSI C++ compliant class library that greatly
+simplifies the creation of CGI applications for the World Wide
+Web. %cgicc performs the following functions:
+
+<ul>
+  <li>Parses both GET and POST form data transparently.</li>
+  <li>Provides string, integer, floating-point and single- and
+  multiple-choice retrieval methods for form data.</li> 
+  <li>Provides methods for saving and restoring CGI environments to aid
+  in application debugging.</li>
+  <li>Provides full on-the-fly HTML generation capabilities, with
+  support for cookies.</li>
+  <li>Supports HTTP file upload.</li>
+  <li>Compatible with <a href="http://www.fastcgi.com">FastCGI</a>.</li>
+</ul>
+
+\subsection index_req Requirements
+
+GNU %cgicc requires an ANSI-compliant C++ compiler supporting the C++
+standard template library.  %cgicc has been tested using <a
+href="http://gcc.gnu.org">gcc</a> versions 2.8.1 through 3.0, and
+MSVC++ 6.0.
+
+\subsection index_download Download
+
+GNU %cgicc is distributed as a compressed tar file(<em>.tar.gz</em>).
+You can download the latest version from
+<tt>ftp://ftp.gnu.org/gnu/cgicc/</tt> or from any <a
+href="/prep/ftp.html">GNU mirror</a> site.  For other ways to obtain
+%cgicc, please read <a
+href="/software/software.html#HowToGetSoftware">How to get GNU
+Software</a>.
+
+Once you have the \c cgicc-$(VERSION).tar.gz file, unpack it using
+the following command:
+\verbatim
+% gzip -dc cgicc-$(VERSION).tar.gz | tar x
+\endverbatim
+or, if you have GNU tar,
+\verbatim
+% tar zxf cgicc-$(VERSION).tar.gz
+\endverbatim
+This will create the directory \c cgicc-$(VERSION)/.  Installation
+intructions are in the file \c INSTALL located in the
+\c cgicc/ directory.
+
+If you  are upgrading between minor versions of %cgicc and already
+have an older \c cgicc-XX.tar.gz file, you can patch that file
+instead of downloading the complete new version.  Download the patch
+file \c cgicc-XX-$(VERSION).diff, and run the following command
+from the \c cgicc-XX/ directory:
+\verbatim
+% patch -p1 < cgicc-XX-$(VERSION).diff
+\endverbatim
+
+\subsection index_doc Library Documentation
+
+GNU %cgicc is documented using <a
+href="http://www.doxygen.org">doxygen</a>, to allow the documentation
+for the library to be embedded in the library code itself.  If you are
+looking for documentation on a specific class, method or function, you
+might want to look at the <a href="hierarchy.html">Class Hierarchy</a>
+or the <a href="functions.html">Compound Members list</a>.
+
+If you are new to CGI programming in general, you might want to read
+the section \ref cgi_overview.
+
+If you are familiar with CGI programming, but new to GNU %cgicc, you
+might want to read the section \ref cgicc_tutorial.
+
+If you want an overview of the library architecture, with a quick list
+of classes you should go to \ref lib_overview.
+
+\subsection index_demos Demos
+
+The demos are currently offline, however the source code to several
+demos is available:
+<ul>
+<li>test.cpp - %cgicc test application</li>
+<li>dns.cpp - Web DNS gateway</li>
+<li>upload.cpp - File upload demo</li>
+</ul>
+
+\subsection index_license Software License
+
+The GNU %cgicc library is free software.  The library itself is
+distributed under \ref license_lgpl, while this documentation is
+released under the \ref license_fdl.  The examples included with the
+library are released under the \ref license_gpl.
+
+\subsection index_cvs CVS
+
+The CVS repository used for %cgicc is on \c subversions.gnu.org.
+You can extract the latest version of %cgicc via read-only anonymous
+CVS.  Here's how:
+\verbatim
+% cvs -z3 -d :pserver:anoncvs@subversions.gnu.org:/home/cvs login
+Password: [hit enter]
+% cvs -z3 -d :pserver:anoncvs@subversions.gnu.org:/home/cvs co cgicc
+\endverbatim
+Once you have it checked out, you can update it with 
+\verbatim
+% cvs update
+\endverbatim
+
+If you prefer, you can extract the tree using <a
+href="http://rsync.samba.org">rsync</a>.
+
+Finally, if you want to browse the source tree using <a
+href="http://stud.fh-heilbronn.de/~zeller/cgi/cvsweb.cgi/">cvsweb</a>,
+go to
+<tt>http://subversions.gnu.org/cgi-bin/cvsweb/cgicc/</tt>.
+
+\subsection index_lists Mailing Lists
+
+GNU %cgicc has three mailing lists: <tt>\<help-cgicc@gnu.org\></tt>,
+<tt>\<info-cgicc@gnu.org\></tt>, and <tt>\<bug-cgicc@gnu.org\></tt>.
+
+<ul>
+
+<li><strong><a href="http://mail.gnu.org/mailman/listinfo/help-cgicc">
+help-%cgicc</a></strong> is the main discussion list and is used to discuss 
+all aspects of %cgicc, including development and porting.</li>
+
+<li><strong><a href="http://mail.gnu.org/mailman/listinfo/info-cgicc">
+info-%cgicc</a></strong> is where announcements about %cgicc are made.</li>
+
+<li><strong><a href="http://mail.gnu.org/mailman/listinfo/bug-cgicc">
+bug-%cgicc</a></strong> is a special list used for reporting bugs.  For 
+details on submitting a bug report, please see the subsection 
+\ref index_bugs Reporting Bugs below.</li>
+
+</ul>
+
+All of these lists are managed by <a
+href="/software/mailman/mailman.html">mailman</a>, and can be
+subscribed to, unsubscribed to, and configured via a web interface by
+following the links above.  Web archives are also available.
+
+\subsection index_bugs Reporting Bugs
+
+If you think you have found a bug in %cgicc, then you should send as
+complete a report as possible to
+<tt>\<bug-cgicc@gnu.org\></tt>. Ideally, you should include the text
+you get by running \c config.guess, the text you see when you
+run \c configure, and if you can, a patch made with <tt>diff
+-u5</tt> which fixes the problem.
+
+\subsection index_savannah Savannah
+
+<a href="http://savannah.gnu.org">Savannah</a> is the GNU
+SourceForge clone. %cgicc's savannah page is <tt><a
+href="http://savannah.gnu.org/projects/cgicc/">http://savannah.gnu.org/projects/cgicc/</a></tt>,
+and has information on support, CVS access, tasks, and patches.
+
+<hr />
+\ref index_intro | \ref index_req | \ref index_download | \ref index_doc | 
+\ref index_demos | \ref index_license | \ref index_cvs | \ref index_lists | 
+\ref index_bugs | \ref index_savannah
+*/
