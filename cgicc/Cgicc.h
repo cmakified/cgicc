@@ -1,8 +1,8 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.8 2002/03/02 06:21:15 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.9 2002/03/03 17:40:38 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -111,11 +111,11 @@ public:
    *
    * If you are using %cgicc with FastCGI, you will need to pass 
    * a \c CgiInput subclass that %cgicc will use to read input.  If
-   * \c input is omitted or \c NULL, standard input and environment
-   * variabled will be used.
+   * \c input is omitted, standard input and environment
+   * variables will be used.
    * \param input A CgiInput object to use for reading input
    */
-  Cgicc(CgiInput *input = NULL);
+  Cgicc(CgiInput input = CgiInput());
   
   /*! 
    * \brief Destructor 

@@ -1,8 +1,8 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.10 2002/03/02 06:21:15 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.11 2002/03/03 17:40:38 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -89,10 +89,14 @@ public:
    * This function is not usually called directly; instead, an object of type
    * CgiEnvironment is retrieved by calling the \c getEnvironment() method
    * on Cgicc.
-   * \param stream_reader \c 0 for \c cout, or a valid FastCGI reader function
+   * If you are using %cgicc with FastCGI, you will need to pass 
+   * a \c CgiInput subclass that %cgicc will use to read input.  If
+   * \c input is omitted, standard input and environment
+   * variables will be used.
+   * \param input A CgiInput object to use for reading input
    * \see Cgicc::getEnvironment
    */
-  CgiEnvironment(CgiInput *input);
+  CgiEnvironment(CgiInput input);
   
   /*!
    * \brief Destructor 
@@ -483,7 +487,7 @@ private:
   
   // Read in all the environment variables
   void 
-  readEnvironmentVariables(CgiInput *input);
+  readEnvironmentVariables(CgiInput& input);
   
   unsigned long 		fServerPort;
   unsigned long 		fContentLength;
