@@ -1,6 +1,12 @@
-# $Id: Makefile.am,v 1.1 1998/12/10 03:06:42 sbooth Exp $
+# $Id: Makefile.am,v 1.2 1998/12/11 01:41:29 sbooth Exp $
 
-SUBDIRS = src test doc
+if TESTS
+	TEST = test
+else
+	TEST =
+endif
+
+SUBDIRS = src $(TEST) doc
 
 CLEANFILES = *~
 
