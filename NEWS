@@ -5,6 +5,18 @@
         <bug-cgicc@gnu.org>
 ======================================================================
 
+        Major changes between versions 3.2.1 and 3.2.2
+        ----------------------------------------------
+
+* Memory leak during restoration of CGI environments fixed
+
+* New getDoubleValue and getIntegerValue methods added to allow caller to 
+  determine if value was bounded
+
+* Bug in getDoubleValue fixed
+
+* Bug in parsing of cookie names fixed
+
         Major changes between versions 3.2 and 3.2.1
         ----------------------------------------------
 
