@@ -1,4 +1,4 @@
-<!-- $Id: obtaining.dxx,v 1.1 1998/04/01 04:11:10 sbooth Exp $ -->
+<!-- $Id: obtaining.dxx,v 1.2 1998/04/01 04:12:12 sbooth Exp $ -->
 
 /**@name Obtaining Cgicc
 
@@ -21,7 +21,7 @@ tar -xf Cgicc.tar
 <BR>
 
 <P>
-This should produce the subdirectory 'Cgicc', which will contain the
+This should produce the subdirectory <TT>Cgicc</TT>, which will contain the
 complete Cgicc source distribution, including
 a <TT>doc/</TT> subdirectory containing a copy of this documentation.
 </P>
