@@ -1,13 +1,12 @@
                        NEWS about GNU Cgicc
 
 ======================================================================
-
         Please send bug reports, suggestions, and comments to
         <bug-cgicc@gnu.org>
-
 ======================================================================
 
         Major changes between versions 3.0.2 and 3.1
+        --------------------------------------------
 
 * HTML generation classes reworked, thanks to Christof Danzl.
 
@@ -20,18 +19,24 @@
 * Visual C++ 6.0 project files added, in win/ subdirectory.
 
 * All .cc files renamed to .cpp, and .hh files to .h (for Win32 support).
+
 
         Major changes between versions 3.0.1 and 3.0.2
+        ----------------------------------------------
 
 * Renamed the src/ directory to cgicc/.
+
 
         Major changes between versions 3.0 and 3.0.1
+        --------------------------------------------
 
 * Various fixes for namespace support, submitted by Bob Kline.
 
 * Updated documentation regarding Cgicc mailing lists.
+
 
         Major changes between versions 2.2.3 and 3.0
+        --------------------------------------------
 
 * Reworked to use the C++ standard template library. 
   In most places, the STL class string is used where bare char* was
