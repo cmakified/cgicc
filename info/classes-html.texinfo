@@ -70,23 +70,23 @@ Creates a new HTML element possessing the HTML attributes contained in
 
 For most real-world HTML, an @code{HTMLElement} will contain one or more
 embedded HTML attributes.  HTML attributes are added to
-@code{HTMLElement} objects via the @code{add} functions.
+@code{HTMLElement} objects via the @code{set} functions.
 
-@deftypefn {Library Function} HTMLAttributeList add (const string& @var{name})
+@deftypefn {Library Function} HTMLAttributeList set (const string& @var{name})
 Creates an @code{HTMLAttributeList} containing an
 @code{HTMLAtomicAttribute} with name @var{name}.
 @end deftypefn
 
-@deftypefn {Library Function} HTMLAttributeList add (const string& @var{name}, const string& @var{value})
+@deftypefn {Library Function} HTMLAttributeList set (const string& @var{name}, const string& @var{value})
 Creates an @code{HTMLAttributeList} containing an @code{HTMLAttribute}
 with name @var{name} and value @var{value}.
 @end deftypefn
 
-@deftypemethod HTMLAttributeList HTMLAttributeList& add (const string& @var{name})
+@deftypemethod HTMLAttributeList HTMLAttributeList& set (const string& @var{name})
 Adds an @code{HTMLAtomicAttribute} with name @var{name} to the attribute list.
 @end deftypemethod
 
-@deftypemethod HTMLAttributeList HTMLAttributeList& add (const string& @var{name}, const string& @var{value})
+@deftypemethod HTMLAttributeList HTMLAttributeList& set (const string& @var{name}, const string& @var{value})
 Adds an @code{HTMLAttribute} with name @var{name} and value @var{value}
 to the attribute list.
 @end deftypemethod

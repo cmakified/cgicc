@@ -208,14 +208,14 @@ name/value pair.  Since any given @code{HTMLElement} may have any number
 of @code{HTMAttribute} objects inside it, the set of
 @code{HTMLAttribute} objects inside an @code{HTMLElement} object is
 represented using the class @code{HTMLAttributeList}.  To build an
-@code{HTMLElement}, use the @code{add} method on
+@code{HTMLElement}, use the @code{set} method on
 @code{HTMLAttributeList}.  To generate the @code{<IMG>} tag given above:
 
 @lisp
 @group
-cout << img(add("SRC", "file.jpg")
-           .add("WIDTH", "100").add("HEIGHT", "100")
-           .add("ALT", "description")) << endl;
+cout << img(set("SRC", "file.jpg")
+           .set("WIDTH", "100").set("HEIGHT", "100")
+           .set("ALT", "description")) << endl;
 @end group
 @end lisp
 
