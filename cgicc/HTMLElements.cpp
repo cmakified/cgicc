@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLElements.cpp,v 1.1 1999/08/09 18:25:40 sbooth Exp $
+ *  $Id: HTMLElements.cpp,v 1.2 1999/08/16 17:40:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -61,6 +61,14 @@ CGICCNS HTMLElement::~HTMLElement()
 {
   delete fAttributes;
   delete fEmbedded;
+}
+
+bool
+CGICCNS HTMLElement::operator== (const HTMLElement& element) const
+{
+  // this is really lame, but only necessary for template instantiation
+  return (strcmp(getName(), element.getName()) == 0
+	  && fDataSpecified == element.fDataSpecified);
 }
 
 CGICCNS HTMLElement&

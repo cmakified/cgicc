@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.cpp,v 1.1 1999/08/09 18:25:42 sbooth Exp $
+ *  $Id: HTTPHeaders.cpp,v 1.2 1999/08/16 17:40:05 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -23,6 +23,7 @@
 #endif
 
 #include "cgicc/HTTPHeaders.h"
+#include "cgicc/CgiUtils.h"
 
 // ============================================================
 // Class HTMLDoctype
@@ -114,6 +115,18 @@ CGICCNS HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
 
 CGICCNS HTTPCookie::~HTTPCookie()
 {}
+
+bool 
+CGICCNS HTTPCookie::operator== (const HTTPCookie& cookie) const
+{
+  return (stringsAreEqual(fName, cookie.fName)
+	  && stringsAreEqual(fValue, cookie.fValue)
+	  && stringsAreEqual(fComment, cookie.fComment)
+	  && stringsAreEqual(fDomain, cookie.fDomain)
+	  && fMaxAge == cookie.fMaxAge
+	  && stringsAreEqual(fPath, cookie.fPath)
+	  && fSecure == cookie.fSecure);
+}
 
 void 
 CGICCNS HTTPCookie::render(STDNS ostream& out) 	const

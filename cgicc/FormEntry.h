@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: FormEntry.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
+ *  $Id: FormEntry.h,v 1.3 1999/08/16 17:40:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -92,7 +92,14 @@ public:
   inline bool
   operator!= (const FormEntry& entry) 			const
     { return ! operator==(entry); }
-  
+
+#ifdef WIN32
+  /** Dummy operator for MSVC++ */
+  inline bool
+  operator< (const FormEntry& entry) 			const
+  { return false; }
+#endif
+
   /**
    * Assign one FormEntry to another.
    * @param entry The FormEntry to copy.

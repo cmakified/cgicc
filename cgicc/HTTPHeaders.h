@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPHeaders.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
+ *  $Id: HTTPHeaders.h,v 1.3 1999/08/16 17:40:05 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -133,6 +133,31 @@ public:
   /** Destructor */
   virtual ~HTTPCookie();
 
+
+
+  /** 
+   * Compare two HTTPCookies for equality.
+   * @param cookie The HTTPCookie to compare to this one
+   * @return true if the two HTTPCookies are equal, false otherwise.
+   */
+  bool 
+  operator== (const HTTPCookie& cookie) 	const;
+
+  /** 
+   * Compare two HTTPCookies for inequality.
+   * @param cookie The HTTPCookie to compare to this one
+   * @return false if the two HTTPCookies are equal, true otherwise.
+   */
+  inline bool 
+  operator != (const HTTPCookie& cookie) 	const
+  { return ! operator==(cookie); }
+
+#ifdef WIN32
+  /** Dummy operator for MSVC++ */
+  inline bool 
+  operator< (const HTTPCookie& cookie) 		const
+  { return false; }
+#endif
 
   /**
    * Get the name of this cookie.

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.2 1999/08/09 23:03:41 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.3 1999/08/16 17:40:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -34,6 +34,10 @@
 #include "cgicc/HTTPHeaders.h"
 
 CGICC_BEGIN_NAMESPACE
+
+#ifdef WIN32
+  template class CGICC_API STDNS vector<HTTPCookie>;
+#endif
 
 // ============================================================
 // Class CgiEnvironment

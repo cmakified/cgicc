@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: FormFile.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
+ *  $Id: FormFile.h,v 1.3 1999/08/16 17:40:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -97,6 +97,13 @@ public:
   operator!= (const FormFile& file) 			const
     { return ! operator==(file); }
   
+#ifdef WIN32
+  /** Dummy operator for MSVC++ */
+  inline bool
+  operator< (const FormFile& file) 			const
+  { return false; }
+#endif
+
   /**
    * Assign one FormFile to another.
    * @param file The FormFile to copy.

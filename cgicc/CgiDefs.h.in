@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiDefs.h.in,v 1.2 1999/08/11 19:19:41 sbooth Exp $
+ *  $Id: CgiDefs.h.in,v 1.3 1999/08/16 17:40:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -32,9 +32,6 @@
 
 // always use namespaces
 #  define USE_NAMESPACES 1
-
-// don't spew "dll-interface" warnings
-#  pragma warning(disable: 4251)
 
 // export library symbols
 #  ifdef CGICC_EXPORTS

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLAttributes.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
+ *  $Id: HTMLAttributes.h,v 1.3 1999/08/16 17:40:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -97,6 +97,13 @@ public:
   operator!= (const HTMLAttribute& att) 		const
     { return ! operator==(att); }
 
+#ifdef WIN32
+  /** Dummy operator for MSVC++ */
+  inline bool
+  operator< (const HTMLAttribute& att) const
+  { return false; }
+#endif
+
   /**
    * Assign one HTMLAttribute to another.
    * @param att The HTMLAttribute to copy.
@@ -166,9 +173,15 @@ private:
   bool fAtomic;
 };
 
+
 // ============================================================
 // Class HTMLAttributeList
 // ============================================================
+
+#ifdef WIN32
+  template class CGICC_API STDNS vector<HTMLAttribute>;
+#endif
+
 /**
  * An HTMLAttributeList represents any number of HTMLAttributes inside an 
  * HTMLElement.

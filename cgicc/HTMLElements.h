@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLElements.h,v 1.3 1999/08/10 00:29:04 sbooth Exp $
+ *  $Id: HTMLElements.h,v 1.4 1999/08/16 17:40:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -62,7 +62,31 @@ public:
   /** Destructor */
   virtual ~HTMLElement();
 
-  
+
+  /**
+   * Compare two HTMLElements for equality.
+   * @param element The HTMLElement to compare to this one.
+   * @return true if the two HTMLElements are equal, false otherwise.
+   */
+  bool 
+  operator== (const HTMLElement& element) 		const;
+
+  /**
+   * Compare two HTMLElements for inequality.
+   * @param element The HTMLElement to compare to this one.
+   * @return false if the two HTMLElements are equal, true otherwise.
+   */
+  inline bool 
+  operator!= (const HTMLElement& element) 		const
+    { return ! operator==(element); }
+
+#ifdef WIN32
+  /** Dummy operator for MSVC++ */
+  inline bool
+  operator< (const HTMLAttribute& att) 			const
+  { return false; }
+#endif
+
   /** Assignment operator */
   HTMLElement&
   operator= (const HTMLElement& element);
@@ -196,6 +220,10 @@ private:
 // ============================================================
 // Class HTMLElementList
 // ============================================================
+
+#ifdef WIN32
+  template class CGICC_API STDNS vector<HTMLElement*>;
+#endif
 
 /**
  * An HTMLElementList represents any number of
