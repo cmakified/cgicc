@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cc,v 1.4 1999/05/11 17:03:43 sbooth Exp $
+ *  $Id: test.cc,v 1.5 1999/05/28 22:32:30 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -185,7 +185,7 @@ main(int argc,
     
     // Information on Cgicc
     cout << CGICCNS div(add("align","center").add("class","smaller")) << endl;
-    cout << "Cgi" << span("cc", add("class","red")) << " v";
+    cout << "GNU Cgi" << span("cc", add("class","red")) << " v";
     cout << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth", 
 			add("href", "http://www.lmi.net/~sbooth/")) 
