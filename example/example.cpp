@@ -1,5 +1,5 @@
 /*
- * $Id: example.cpp,v 1.3 2001/09/03 22:11:55 sbooth Exp $ 
+ * $Id: example.cpp,v 1.4 2002/03/02 06:25:25 sbooth Exp $ 
  *
  * Skeleton of a CGI application written using the GNU cgicc library
  */
@@ -8,7 +8,7 @@
 #include <iostream>
 
 #include "cgicc/Cgicc.h"
-#include "cgicc/HTTPHeaders.h"
+#include "cgicc/HTTPHTMlHeader.h"
 #include "cgicc/HTMLClasses.h"
 
 // To use the debug logging feature, the variable gLogFile MUST be
