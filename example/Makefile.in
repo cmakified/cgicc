@@ -1,5 +1,5 @@
 ##
-##  $Id: Makefile.in,v 1.7 1999/05/05 18:31:27 sbooth Exp $
+##  $Id: Makefile.in,v 1.8 1999/05/14 17:57:17 sbooth Exp $
 ##
 ##  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
 ##
@@ -43,7 +43,7 @@ OBJECTS=	$(SOURCES:%.cc=%.o)
 prefix= 	@prefix@
 exec_prefix= 	@exec_prefix@
 libdir= 	@libdir@
-pkgincludedir= 	@includedir@/@PACKAGE@
+includedir= 	@includedir@
 
 ##
 ## Compiler setup
@@ -51,7 +51,7 @@ CXX=		@CXX@
 LIBS= 		@LIBS@ -L$(libdir) -lcgicc
 DEFS=		@DEFS@
 
-INCLUDES= 	-I$(pkgincludedir)
+INCLUDES= 	-I$(includedir)
 
 ## On Solaris (probably SVR4 systems), use -R
 LD_FLAGS=	@LDFLAGS@ -R$(libdir)
