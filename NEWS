@@ -15,7 +15,7 @@
 
 * All add() methods relating to HTMLAttribute renamed to set().
 
-* New method add() added to HTMLElement, to allow multiple embedded elements.
+* New methods add() added to HTMLElement, to allow multiple embedded elements.
 
 * Visual C++ 6.0 project files added, in win/ subdirectory.
 
