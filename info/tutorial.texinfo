@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 
 @unnumberedsec Initialization
 
-The three main classes of Cgicc you will use to process the submited
+The three main classes of Cgicc you will use to process the submitted
 data are @code{Cgicc}, @code{CgiEnvironment}, and @code{FormEntry}.
 These classes will be explained in detail later; for now, it is
 sufficient to know that:
@@ -53,7 +53,7 @@ Cgicc cgi;
 Upon instantiation, the class @code{Cgicc} parses all data passed to the
 CGI script by the HTTP server.
 
-Since errors are handled using exceptions, you may with to wrap your CGI
+Since errors are handled using exceptions, you may wish to wrap your CGI
 code in a @code{try} block to better handle unexpected conditions:
 
 @lisp
@@ -70,13 +70,13 @@ catch(exception& e) @{
 
 Each element of data entered by the user is parsed into a
 @code{FormEntry}.  A @code{FormEntry} contains methods for accessing
-data as strings, integers, and doubles.  In the hypothetical form given
-above, a user would enter their name, age, and sex.  Regardless of the
-type of value, the data is accessed via @code{FormEntry}@footnote{This
-is not entirely true.  For uploaded files, the data is accessed via the
-class @code{FormFile}.}.  You obtain @code{FormEntry} objects via
-@code{Cgicc}'s @code{getElement} methods, all of which return
-standard-library iterators:
+data as strings, integers, and doubles.  In the hypothetical form
+mentioned above, a user would enter their name, age, and sex.
+Regardless of the type of value, the data is accessed via
+@code{FormEntry}@footnote{This is not entirely true.  For uploaded
+files, the data is accessed via the class @code{FormFile}.}.  You obtain
+@code{FormEntry} objects via @code{Cgicc}'s @code{getElement} methods,
+all of which return standard-library iterators:
 
 @lisp
 vector<FormEntry>::iterator name = cgi.getElement("name");

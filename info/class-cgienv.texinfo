@@ -150,19 +150,19 @@ Get the name of the browser used for this CGI request.  For example,
 @url{http://hoohoo.ncsa.uiuc.edu/cgi/ErrorCGI.html})
 
 @deftypemethod CgiEnvironment string getRedirectRequest () const
-Get the redirect request.  This will only be valid if youare using this
+Get the redirect request.  This will only be valid if you are using this
 CGI application in place of the default server messages during
 ErrorDocument handling.
 @end deftypemethod
 
 @deftypemethod CgiEnvironment string getRedirectURL () const
-Get the redirect URL.  This will only be valid if youare using this CGI
+Get the redirect URL.  This will only be valid if you are using this CGI
 application in place of the default server messages during ErrorDocument
 handling.
 @end deftypemethod
 
 @deftypemethod CgiEnvironment string getRedirectStatus () const
-Get the redirect status.  This will only be valid if youare using this
+Get the redirect status.  This will only be valid if you are using this
 CGI application in place of the default server messages during
 ErrorDocument handling.
 @end deftypemethod

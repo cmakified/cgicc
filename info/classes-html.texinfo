@@ -72,12 +72,12 @@ For most real-world HTML, an @code{HTMLElement} will contain one or more
 embedded HTML attributes.  HTML attributes are added to
 @code{HTMLElement} objects via the @code{add} functions.
 
-@deftypefn {Library Function} HTMLAttributeList& add (const string& @var{name})
+@deftypefn {Library Function} HTMLAttributeList add (const string& @var{name})
 Creates an @code{HTMLAttributeList} containing an
 @code{HTMLAtomicAttribute} with name @var{name}.
 @end deftypefn
 
-@deftypefn {Library Function} HTMLAttributeList& add (const string& @var{name}, const string& @var{value})
+@deftypefn {Library Function} HTMLAttributeList add (const string& @var{name}, const string& @var{value})
 Creates an @code{HTMLAttributeList} containing an @code{HTMLAttribute}
 with name @var{name} and value @var{value}.
 @end deftypefn
