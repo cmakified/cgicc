@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cc,v 1.1 1998/12/09 03:01:06 sbooth Exp $
+ *  $Id: dns.cc,v 1.2 1998/12/11 01:39:40 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -42,8 +42,14 @@
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
 #if DEBUG
-ofstream gLogFile( "/usr/home/sbooth/public_html/Cgicc.log", ios::app );
+ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
+
+// define the location of the Cgicc documentation (for linking)
+// this should be a partial URI.  so, if the URI to the documentation
+// is http://www.lmi.net/~sbooth/cgicc/, this should be /~sbooth/cgicc
+// (note there is no trailing /)
+#define CGICC_DOCDIR "/change_this_path"
 
 // DNS gateway cgi
 int
@@ -68,7 +74,7 @@ main(int argc, char **argv)
     cout << meta(add("name", "author")
 		 .add("content", "Stephen F. Booth")) << endl;
     
-    cout << link_(add("href","/~sbooth/cgicc.css")
+    cout << link_(add("href", CGICC_DOCDIR "/cgicc.css")
 		  .add("rel","stylesheet")) << endl;
     cout << head() << endl;
     
@@ -195,15 +201,15 @@ main(int argc, char **argv)
     // Now print cout a footer with some fun info
     cout << div_(add("align","center"));
     cout << p() << "You may view the ";
-    cout << a("source code", add("href","/~sbooth/dns.cc"));
+    cout << a("source code", add("href", CGICC_DOCDIR "/dns.cc"));
     cout << " of this application." << p() << endl;
 
-    cout << a("Cgicc Documentation", add("href","/~sbooth/index.html"))
+    cout << a("Cgicc Documentation", add("href", CGICC_DOCDIR "/index.html"))
 	 << " | " 
 	 << a("Alphabetic Index of Classes", 
-	      add("href","/~sbooth/aindex.html"))
+	      add("href", CGICC_DOCDIR "/aindex.html"))
 	 << " | " 
-	 << a("Class Hierarchy",add("href","/~sbooth/HIER.html")) 
+	 << a("Class Hierarchy",add("href", CGICC_DOCDIR "/HIER.html")) 
 	 << endl;
     cout << div_() << br() << hr(add("class","half")) << endl;
 
