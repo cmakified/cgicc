@@ -1,25 +1,19 @@
-# $Id: Makefile.am,v 1.8 1999/01/07 18:23:52 sbooth Exp $
+## $Id: Makefile.am,v 1.9 1999/04/26 22:41:54 sbooth Exp $
 
-if TESTS
-TEST = test
+if DEMOS
+DEMO = demo
 else
-TEST =
+DEMO =
 endif
 
-if DOCS
-DOC = doc
-else
-DOC =
-endif
-
-SUBDIRS = src $(TEST) $(DOC)
+SUBDIRS = src info $(DEMO)
 
 CLEANFILES = *~
 
+EXTRA_DIST = acconfig.h
+
 dist-hook:
-	cp -p test/test.cc $(top_distdir)/doc
-	cp -p test/dns.cc $(top_distdir)/doc
 	test -d $(distdir)/example || mkdir $(distdir)/example || exit 1
-	cp -p example/README $(top_distdir)/example
-	cp -p example/Makefile.in $(top_distdir)/example
-	cp -p example/yourSource.cc $(top_distdir)/example
+	cp -p $(srcdir)/example/README $(distdir)/example
+	cp -p $(srcdir)/example/Makefile.in $(distdir)/example
+	cp -p $(srcdir)/example/yourSource.cc $(distdir)/example
