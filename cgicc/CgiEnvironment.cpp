@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.12 2002/03/06 02:46:21 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.13 2002/04/02 17:53:03 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -136,7 +136,7 @@ CGICCNS CgiEnvironment::parseCookie(const STDNS string& data)
   STDNS string::const_iterator data_iter;
   
   for(data_iter = data.begin(); data_iter != data.end(); ++data_iter,++wscount)
-    if(isspace(*data_iter) == 0)
+    if(STDNS isspace(*data_iter) == 0)
       break;			
   
   // unescape the data, and add to the cookie list
