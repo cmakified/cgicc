@@ -1,3 +1,9 @@
+2004-06-12  Stephen F. Booth  <sbooth@gnu.org>
+
+	* support/Makefile.am: Removed mkinstalldirs from EXTRA_DIST
+	* configure.ac: Removed extra AC_CANONICAL_HOST
+	* configure.ac: Removed CGICC_CHECK_LINK_STDCPP
+
 2004-06-11  Stephen F. Booth  <sbooth@gnu.org>
 
 	* BUGS: Created file
