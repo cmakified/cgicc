@@ -1,5 +1,5 @@
 /*
- *  $Id: Exception.hh,v 1.4 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: Exception.hh,v 1.5 1998/12/09 17:57:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -39,16 +39,16 @@
  * <TT>__LINE__</TT>), try passing in the macro <TT>\Ref{ERRINFO}</TT>:</P>
  * 
  * <PRE CLASS="code">
- * try {
- *   ... // do something here
- *   if( ! success )
- *      throw Exception("Oh no!  An error!", ERRINFO);
- * }
- * catch(Exception e) {
- *    cerr << "Message : " << e.getMessage() << endl;
- *    cerr << "File    : " << e.getFile() << endl;
- *    cerr << "Line    : " << e.getLine() << endl;    
- * } 
+ * . try {
+ * .   ... // do something here
+ * .   if( ! success )
+ * .      throw Exception("Oh no!  An error!", ERRINFO);
+ * . }
+ * . catch(Exception e) {
+ * .    cerr << "Message : " << e.getMessage() << endl;
+ * .    cerr << "File    : " << e.getFile() << endl;
+ * .    cerr << "Line    : " << e.getLine() << endl;    
+ * . } 
  * </PRE>
  * @see ERRINFO
  */

@@ -1,5 +1,5 @@
 /*
- *  $Id: LinkedList.hh,v 1.7 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: LinkedList.hh,v 1.8 1998/12/09 17:57:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -39,9 +39,9 @@
  *
  * <P>To create a new LinkedList of Exceptions, and add two items to it:
  * <PRE CLASS="code">
- * LinkedList&lt;Exception&gt; list;
- * list.append(Exception("error one");
- * list &lt;&lt; Exception("error two");
+ * . LinkedList&lt;Exception&gt; list;
+ * . list.append(Exception("error one");
+ * . list &lt;&lt; Exception("error two");
  * </PRE>
  * Note that the items added were created on the stack; LinkedList creates
  * an internal copy, so you can safely add temporaries.
@@ -49,28 +49,28 @@
  *
  * <P>To iterate through every item in a LinkedList:
  * <PRE CLASS="code">
- * LinkedList&lt;Exception&gt;::Iterator = list.begin();
- * while(iter.isValid()) {
- *  cout &lt;&lt; (*iter++).getMessage() &lt;&lt; endl;
- * }
+ * . LinkedList&lt;Exception&gt;::Iterator = list.begin();
+ * . while(iter.isValid()) {
+ * .  cout &lt;&lt; (*iter++).getMessage() &lt;&lt; endl;
+ * . }
  * </PRE>
  * </P>
  *
  * <P>To iterate through every item in a LinkedList backwards:
  * <PRE CLASS="code">
- * LinkedList<Exception>::ReverseIterator = list.rEnd();
- * while(iter.isValid()) {
- *  cout &lt;&lt; (*iter++).getMessage() &lt;&lt; endl;
- * }
+ * . LinkedList<Exception>::ReverseIterator = list.rEnd();
+ * . while(iter.isValid()) {
+ * .  cout &lt;&lt; (*iter++).getMessage() &lt;&lt; endl;
+ * . }
  * </PRE>
  * </P>
  *
  * <P>LinkedLists also support insert/delete operations:
  * <PRE CLASS="code">
- * LinkedList&lt;char&gt; list;
- * list &lt;&lt; 'C' &lt;&lt; 'g' &lt;&lt; 'i' &lt;&lt; 'c' &lt;&lt; 'c';
- * list.insert(1, '!'); <SPAN CLASS="green">// list is now Cg!icc</SPAN>
- * list.erase(3); <SPAN CLASS="green">// list is now Cg!cc</SPAN>
+ * . LinkedList&lt;char&gt; list;
+ * . list &lt;&lt; 'C' &lt;&lt; 'g' &lt;&lt; 'i' &lt;&lt; 'c' &lt;&lt; 'c';
+ * . list.insert(1, '!'); <SPAN CLASS="green">// list is now Cg!icc</SPAN>
+ * . list.erase(3); <SPAN CLASS="green">// list is now Cg!cc</SPAN>
  * </PRE>
  * </P>
  */
@@ -88,24 +88,24 @@ public:
    * Iterators are not created directly, but rather are obtained through
    * LinkedLists:</P>
    * <PRE CLASS="code">
-   * LinkedList&lt;char&gt; list;
-   * list.append('a').append('b').append('c');
-   * LinkedList&lt;char&gt;::Iterator iter1 = list.begin();
-   * LinkedList&lt;char&gt;::Iterator iter2 = list.at(1);
-   * LinkedList&lt;char&gt;::Iterator iter3 = list[2];
+   * . LinkedList&lt;char&gt; list;
+   * . list.append('a').append('b').append('c');
+   * . LinkedList&lt;char&gt;::Iterator iter1 = list.begin();
+   * . LinkedList&lt;char&gt;::Iterator iter2 = list.at(1);
+   * . LinkedList&lt;char&gt;::Iterator iter3 = list[2];
    * </PRE>
    * <P>After executing the above code, <TT>iter1</TT> refers to <TT>a</TT>,
    * <TT>iter2</TT> refers to <TT>b</TT>, and <TT>iter3</TT> refers to 
    * <TT>c</TT>.
    * <P>Iterators may be added to, subtracted from, and assigned to:</P>
    * <PRE CLASS="code">
-   * LinkedList&lt;int&gt; list;
-   * list &lt;&lt; 1 &lt;&lt; 2 &lt;&lt; 3 &lt;&lt; 4 &lt;&lt; 5 &lt;&lt; 6 &lt;&lt; 7;
-   * LinkedList&lt;int&gt;::Iterator iter = list.begin();
-   * *iter = 0; <SPAN CLASS="green">|| List is now 0234567</SPAN>
-   * iter += 2; <SPAN CLASS="green">|| Advance iter by 2</SPAN>
-   * iter -= 1; <SPAN CLASS="green">|| Decrement iter by 1</SPAN>
-   * --*iter = 1; <SPAN CLASS="green">|| Restore list to original state</SPAN>
+   * . LinkedList&lt;int&gt; list;
+   * . list &lt;&lt; 1 &lt;&lt; 2 &lt;&lt; 3 &lt;&lt; 4 &lt;&lt; 5 &lt;&lt; 6 &lt;&lt; 7;
+   * . LinkedList&lt;int&gt;::Iterator iter = list.begin();
+   * . *iter = 0; <SPAN CLASS="green">|| List is now 0234567</SPAN>
+   * . iter += 2; <SPAN CLASS="green">|| Advance iter by 2</SPAN>
+   * . iter -= 1; <SPAN CLASS="green">|| Decrement iter by 1</SPAN>
+   * . --*iter = 1; <SPAN CLASS="green">|| Restore list to original state</SPAN>
    * </PRE>
    */
   class Iterator : public MStreamable

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.hh,v 1.5 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: HTTPHeaders.hh,v 1.6 1998/12/09 17:57:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -31,7 +31,7 @@
  * Specifies the DTD of the HTML 4 document.
  * <P>To use this class, simply write an object of this type to an ostream:<BR>
  * <PRE CLASS="code">
- *  out << HTMLDoctype();
+ * . out << HTMLDoctype();
  * </PRE>
  * <P>For more information, see <TT>\URL{http://www.w3.org/MarkUp/}</TT> and 
  * <TT>\URL{http://www.w3.org/TR/REC-html40/}</TT></P>

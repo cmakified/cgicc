@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiDefs.hh,v 1.4 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: CgiDefs.hh,v 1.5 1998/12/09 17:57:47 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -140,7 +140,7 @@ char firstNonspaceChar(const char *s);
  * Convert a hex-encoded character to its ASCII equivalent.
  * <P>For example, after the call
  * <PRE class="code">
- * char c = hexToChar('2', '1');
+ * . char c = hexToChar('2', '1');
  * </PRE>
  * <TT>c</TT> will have a value of  '!'.</P>
  * <P>Normally, this is called internally to decode encoded characters in
@@ -177,8 +177,8 @@ bytesAreEqual(const char *s1,
  * Find the first occurence of a sequence of bytes.
  * <P>For example, after the call
  * <PRE CLASS="code">
- * const char *data = "this is a test";
- * int loc = findBytes(data, strlen(data), "test");
+ * . const char *data = "this is a test";
+ * . int loc = findBytes(data, strlen(data), "test");
  * </PRE>
  * <TT>loc</TT> will be 10.</P>
  * @param data The array of bytes to search.
@@ -223,11 +223,11 @@ extractBetween(const char *data,
  * Locate an array of bytes contained within two separators.
  * <P>For example, after the call
  * <PRE class="code">
- * int start = 0;
- * int end = 0;
- * const char *data = "11foo11";
- *
- * extractBetween(data, strlen(data), "11", start, end);
+ * . int        start = 0;
+ * . int        end   = 0;
+ * . const char *data = "11foo11";
+ * .
+ * . extractBetween(data, strlen(data), "11", start, end);
  * </PRE>
  * <TT>start</TT> will be 2, and <TT>end</TT> will be 5.</P>
  * @param data The data to search.
