@@ -1,3 +1,7 @@
+1999-10-05  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiDefs.h.in: Include "config.h", not "cgicc/config.h"
+
 1999-10-02  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/Cgicc.cpp(parseFormInput): Fixed handling of
