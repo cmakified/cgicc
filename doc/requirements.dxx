@@ -1,10 +1,11 @@
-<!-- $Id: requirements.dxx,v 1.1 1998/04/01 20:55:54 sbooth Exp $ -->
+<!-- $Id: requirements.dxx,v 1.2 1998/04/03 09:51:21 sbooth Exp $ -->
 
 /**@name Requirements to use Cgicc
 
 <P>
 <STRONG CLASS="red">
 Cgicc requires an ANSI-compliant C++ compiler supporting exception handling
+and templates
 </STRONG>
 </P>
 
