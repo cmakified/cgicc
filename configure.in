@@ -1,9 +1,10 @@
-dnl $Id: configure.in,v 1.12 1999/05/25 19:18:33 sbooth Exp $
+dnl $Id: configure.in,v 1.13 1999/06/02 22:08:14 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/Cgicc.cc)
 AM_INIT_AUTOMAKE(cgicc, 3.0.1)
 AM_CONFIG_HEADER(src/config.h)
+AM_MAINTAINER_MODE
 
 AC_LANG_CPLUSPLUS
 
@@ -42,17 +43,6 @@ AC_HEADER_STDC
 AC_HEADER_TIME
 AC_CHECK_FUNCS(strftime gettimeofday uname)
 
-dnl enable/disable the demos, if specified
-AC_ARG_ENABLE(demos, 
-	[  --enable-demos          build demos [default=yes]],
-	[case "${enableval}" in
-		yes) demos=true ;;
-		no)  demos=false ;;
-		*) AC_MSG_ERROR(bad value ${enableval} for --enable-demos) ;;
-		esac], 
-	demos=true)
-AM_CONDITIONAL(DEMOS, test "$demos" = true)
-
 dnl enable/disable namespaces, if specified
 AC_ARG_ENABLE(namespaces,
 	[  --enable-namespaces     enable namespace support [default=yes]],
@@ -67,6 +57,18 @@ if (test "$namespaces" = true && test "$cgicc_cv_cpp_namespaces" = yes); then
 else
 	AC_DEFINE(USE_NAMESPACES, 0)
 fi
+
+
+dnl enable/disable the demos, if specified
+AC_ARG_ENABLE(demos, 
+	[  --enable-demos          build demos [default=yes]],
+	[case "${enableval}" in
+		yes) demos=true ;;
+		no)  demos=false ;;
+		*) AC_MSG_ERROR(bad value ${enableval} for --enable-demos) ;;
+		esac], 
+	demos=true)
+AM_CONDITIONAL(DEMOS, test "$demos" = true)
 
 AC_OUTPUT([Makefile src/Makefile info/Makefile demo/Makefile example/Makefile])
 
