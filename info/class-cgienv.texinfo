@@ -41,6 +41,11 @@ Get the port number on the server to which this request was sent.  This
 will usually be 80.
 @end deftypemethod
 
+@deftypemethod CgiEnvironment bool usingHTTPS () const
+Returns @code{true} if this is a secure request using the HTTPS
+protocol, @code{false} otherwise.
+@end deftypemethod
+
 @unnumberedsec CGI Query Information
 
 @deftypemethod CgiEnvironment string getCookies () const
