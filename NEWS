@@ -5,6 +5,15 @@
         <bug-cgicc@gnu.org>
 ======================================================================
 
+        Major changes between versions 3.2.2 and 3.2.3
+        ----------------------------------------------
+
+* Bug in FastCGI demo fixed
+
+* Documentation formatting problems fixed
+
+* Demonstration applications updated
+
         Major changes between versions 3.2.1 and 3.2.2
         ----------------------------------------------
 

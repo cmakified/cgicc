@@ -2,7 +2,7 @@ Special thanks to:
 ==================
 
 Christof Danzl, for his HTML generation classes and feedback.
-Gilbert Fine, for his multipart/form-data bug fix and FastCGI integration.
+Gilbert Fine, for his multipart/form-data bug fix, FastCGI integration.
 Francois Degros, for his assignment operator fix.
 Peter Goedtkindt, for his XHTML suggestions and HTTPS bug fix.
 Quintin Connell, for his Windows project and workspace files.
@@ -12,4 +12,5 @@ Steve McAndrewsmith, for his FastCGI integration help.
 Andreas Mueller, for his cookie parsing bug fix.
 Christian Weisgerber, for his Makefile bug fix.
 Carsten P. Gehrke, for his getDoubleValue bug fix.
-Bostjan Lah, for his readString but report.
+Bostjan Lah, for his readString bug report.
+Gilbert Fine and Jim Hull, for their form_urldecode bug fix.

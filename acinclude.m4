@@ -1,10 +1,10 @@
-dnl $Id: acinclude.m4,v 1.7 2002/12/04 17:04:06 sbooth Exp $
+dnl $Id: acinclude.m4,v 1.8 2004/06/12 15:26:56 sbooth Exp $
 
 dnl @TOP@
 
 dnl CGICC_CHECK_LINK_STDCPP
-AC_DEFUN(CGICC_CHECK_LINK_STDCPP, [
-	AC_REQUIRE([AC_PROG_CXX])
+AC_DEFUN([CGICC_CHECK_LINK_STDCPP], [
+	AC_REQUIRE([AC_PROG_CXX])dnl
 	AC_CACHE_CHECK(	
 		[whether to link against libstdc++],
 		[cgicc_cv_link_libstdcpp],
@@ -22,8 +22,8 @@ AC_DEFUN(CGICC_CHECK_LINK_STDCPP, [
 ])
 
 dnl CGICC_CHECK_CPP_STL
-AC_DEFUN(CGICC_CHECK_CPP_STL, [
-	AC_REQUIRE([AC_PROG_CXX])
+AC_DEFUN([CGICC_CHECK_CPP_STL], [
+	AC_REQUIRE([AC_PROG_CXX])dnl
 	AC_CACHE_CHECK(	
 		[whether the C++ compiler ($CXX) supports STL],
 		[cgicc_cv_cpp_stl],
@@ -41,8 +41,8 @@ std::vector<int> gInts;],
 ])
 
 dnl CGICC_CHECK_CPP_NAMESPACES
-AC_DEFUN(CGICC_CHECK_CPP_NAMESPACES, [
-	AC_REQUIRE([AC_PROG_CXX])
+AC_DEFUN([CGICC_CHECK_CPP_NAMESPACES], [
+	AC_REQUIRE([AC_PROG_CXX])dnl
 	AC_CACHE_CHECK(	
 		[whether the C++ compiler ($CXX) supports namespaces],
 		[cgicc_cv_cpp_namespaces],
@@ -60,7 +60,7 @@ AC_DEFUN(CGICC_CHECK_CPP_NAMESPACES, [
 ])
 
 dnl CGICC_CHECK_ACC
-AC_DEFUN(CGICC_CHECK_ACC, [
+AC_DEFUN([CGICC_CHECK_ACC], [
 	AC_CACHE_CHECK(
 		[whether the C++ compiler ($CXX) is aCC],
 		[cgicc_cv_acc],
