@@ -1,4 +1,4 @@
-/* $Id: FormEntry.hh,v 1.6 1998/04/03 21:11:39 sbooth Exp $ */
+/* $Id: FormEntry.hh,v 1.7 1998/04/03 21:13:26 sbooth Exp $ */
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1
@@ -59,18 +59,6 @@ public:
   inline const char* getValue() const	{ return fValue; }
 
   /**
-   * Get the length of the value of the form element.
-   * @return The length of the value of the form element, in bytes.
-   */
-  inline int length() const 		{ return fLength; }
-
-  /**
-   * Determine if this form element is empty (length() == 0).
-   * @return True if this form element is empty, false otherwise.
-   */
-  inline bool isEmpty() const 		{ return (length() == 0); }
-
-  /**
    * Get the value of the form element.
    * The value may contain line breaks.
    * @return The value of the form element.
@@ -127,6 +115,18 @@ public:
    */
   double getDoubleValue(double min = DBL_MIN, 
 			double max = DBL_MAX) const;
+
+  /**
+   * Get the length of the value of the form element.
+   * @return The length of the value of the form element, in bytes.
+   */
+  inline int length() const 		{ return fLength; }
+
+  /**
+   * Determine if this form element is empty (length() == 0).
+   * @return True if this form element is empty, false otherwise.
+   */
+  inline bool isEmpty() const 		{ return (length() == 0); }
   //@}
   
 protected:
