@@ -1,3 +1,12 @@
+2000-11-14  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc.m4: New file
+	* acinclude.m4: Moved cgicc macros to cgicc.m4, include(cgicc.m4)
+	* cgicc.m4: Use cgicc_{libdir,includedir} instead of
+	CGICC_{LIBDIR,INCLUDEDIR}
+	* Makefile.am:  Use cgicc_{libdir,includedir} instead of
+	CGICC_{LIBDIR,INCLUDEDIR}
+
 2000-11-13  Stephen F. Booth  <sbooth@gnu.org>
 
 	* AUTHORS: New file for cgicc-example package
