@@ -11,15 +11,6 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name dns
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name test
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name example
-    End Project Dependency
 }}}
 
 ###############################################################################
@@ -32,6 +23,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name cgicc
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -44,6 +38,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name cgicc
+    End Project Dependency
 }}}
 
 ###############################################################################
@@ -56,6 +53,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name cgicc
+    End Project Dependency
 }}}
 
 ###############################################################################
