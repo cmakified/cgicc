@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.10 2003/07/13 05:28:39 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.11 2003/07/13 05:36:07 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -158,8 +158,9 @@ cgicc::form_urlencode(const std::string& src)
     case '(': case ')':
       result.append(1, *iter);
       break;
-      //escape
+      // escape
     default:
+      result.append(1, '%');
       result.append(charToHex(*iter));
       break;
     }
