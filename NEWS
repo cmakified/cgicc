@@ -5,6 +5,13 @@
         <bug-cgicc@gnu.org>
 ======================================================================
 
+        Major changes between versions 3.2.3 and 3.2.4
+        ----------------------------------------------
+
+* Bug in extractBetween for 64-bit OS fixed
+
+* Parsing speed improved
+
         Major changes between versions 3.2.2 and 3.2.3
         ----------------------------------------------
 
