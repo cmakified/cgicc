@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.cc,v 1.3 1999/08/02 19:43:06 sbooth Exp $
+ *  $Id: FormEntry.cc,v 1.4 1999/08/07 00:14:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -114,5 +114,3 @@ CGICCNS FormEntry::makeString(STDNS string::size_type maxLen,
   
   return dst;
 }
-
-//EOF

@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cc,v 1.3 1999/06/16 16:19:16 sbooth Exp $
+ *  $Id: CgiUtils.cc,v 1.4 1999/08/07 00:14:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -179,7 +179,7 @@ CGICCNS readString(STDNS istream& in)
   
   in >> dataSize;
   in.get(); // skip ' '
-  // should work, but not in egcs-1.1.2
+  // should work, but not in egcs-1.1.2 or gcc-2.95
   //auto_ptr<char> temp = new char[dataSize];
   char *temp = new char[dataSize];
   in.read(temp, dataSize);

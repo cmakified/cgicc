@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cc,v 1.4 1999/08/02 19:39:16 sbooth Exp $
+ *  $Id: Cgicc.cc,v 1.5 1999/08/07 00:14:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -500,13 +500,3 @@ CGICCNS Cgicc::parseMIME(const STDNS string& data)
 				  head.getContentType(), 
 				  value));
 }
-
-//EOF
-
-
-
-
-
-
-
-

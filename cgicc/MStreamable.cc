@@ -1,5 +1,5 @@
 /*
- *  $Id: MStreamable.cc,v 1.2 1999/06/04 00:07:42 sbooth Exp $
+ *  $Id: MStreamable.cc,v 1.3 1999/08/07 00:14:48 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -34,5 +34,3 @@ CGICCNS operator<<(STDNS ostream& out,
   obj.render(out);
   return out; 
 }
-
-//EOF

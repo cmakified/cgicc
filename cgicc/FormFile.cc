@@ -1,5 +1,5 @@
 /*
- *  $Id: FormFile.cc,v 1.3 1999/08/02 19:43:05 sbooth Exp $
+ *  $Id: FormFile.cc,v 1.4 1999/08/07 00:14:49 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -63,5 +63,3 @@ CGICCNS FormFile::writeToStream(STDNS ostream& out) 		const
 {
   out.write(getData().data(), getDataLength());
 }
-
-//EOF
