@@ -1,5 +1,5 @@
 /*
- *  $Id: yourSource.cc,v 1.7 1999/08/07 00:25:13 sbooth Exp $
+ *  $Id: yourSource.cpp,v 1.1 1999/08/09 18:22:56 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -21,18 +21,18 @@
 #include <exception>
 #include <iostream>
 
-#include "cgicc/Cgicc.hh"
-#include "cgicc/HTMLClasses.hh"
+#include "cgicc/Cgicc.h"
+#include "cgicc/HTMLClasses.h"
 
 // To use the debug logging feature, the variable gLogFile MUST be
 // defined, and it _must_ be an ofstream
 #if DEBUG
-ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
+  ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
 
 #if USE_NAMESPACES
-using namespace std;
-using namespace cgicc;
+  using namespace std;
+  using namespace cgicc;
 #endif
 
 int

@@ -1,5 +1,5 @@
 ##
-##  $Id: Makefile.in,v 1.9 1999/06/16 16:42:16 sbooth Exp $
+##  $Id: Makefile.in,v 1.10 1999/08/09 18:22:55 sbooth Exp $
 ##
 ##  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
 ##
@@ -73,7 +73,7 @@ clean:
 ##
 ## Compilation rules
 .SUFFIXES:
-.SUFFIXES: .cc .o
-.cc.o:
+.SUFFIXES: .cpp .o
+.cpp.o:
 	$(COMPILE) -c $<
 
