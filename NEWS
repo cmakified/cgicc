@@ -8,6 +8,8 @@
         Major changes between versions 3.2.2 and 3.2.3
         ----------------------------------------------
 
+* Longstanding bug in form_urldecode fixed
+
 * Bug in FastCGI demo fixed
 
 * Documentation formatting problems fixed
