@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.cpp,v 1.1 1999/08/09 18:25:38 sbooth Exp $
+ *  $Id: HTMLAttributes.cpp,v 1.2 1999/08/20 20:51:31 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -45,7 +45,8 @@ CGICCNS HTMLAttribute::HTMLAttribute(const STDNS string& name,
 {}
 
 CGICCNS HTMLAttribute::HTMLAttribute(const HTMLAttribute& attribute)
-  : fName(attribute.fName), 
+  : MStreamable(),
+    fName(attribute.fName), 
     fValue(attribute.fValue),
     fAtomic(attribute.fAtomic)
 {}

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: MStreamable.h,v 1.3 1999/08/17 17:34:19 sbooth Exp $
+ *  $Id: MStreamable.h,v 1.4 1999/08/20 20:51:32 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -53,6 +53,15 @@ class CGICC_API MStreamable
   operator<<(STDNS ostream& out, const MStreamable& obj);
   
 public:
+  /** Contructor.  Empty */
+  inline MStreamable() 
+  {}
+
+  /** Destructor.  Empty */
+  inline virtual ~MStreamable() 
+  {}
+
+
   /**
    * Write this object to a stream.  Subclasses must implement this function.
    * @param out The ostream to which to write.

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLElements.cpp,v 1.3 1999/08/17 17:29:31 sbooth Exp $
+ *  $Id: HTMLElements.cpp,v 1.4 1999/08/20 20:51:31 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -30,6 +30,7 @@
 // Class HTMLElement
 // ============================================================
 CGICCNS HTMLElement::HTMLElement(const HTMLElement& element)
+  : MStreamable()
 {
   this->operator= (element);
 }

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.cpp,v 1.2 1999/08/16 17:40:05 sbooth Exp $
+ *  $Id: HTTPHeaders.cpp,v 1.3 1999/08/20 20:51:31 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -104,7 +104,8 @@ CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name,
 {}
 
 CGICCNS HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
-  : fName(cookie.getName()), 
+  : MStreamable(),
+    fName(cookie.getName()), 
     fValue(cookie.getValue()), 
     fComment(cookie.getComment()),
     fDomain(cookie.getDomain()), 
@@ -157,7 +158,8 @@ CGICCNS HTTPHeader::HTTPHeader(const STDNS string& data)
 {}
 
 CGICCNS HTTPHeader::HTTPHeader(const HTTPHeader& header)
-  : fData(header.getData())
+  : MStreamable(),
+    fData(header.getData())
 {}
 
 CGICCNS HTTPHeader::~HTTPHeader()
