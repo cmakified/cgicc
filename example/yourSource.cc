@@ -1,5 +1,5 @@
 /*
- *  $Id: yourSource.cc,v 1.6 1999/06/04 17:11:13 sbooth Exp $
+ *  $Id: yourSource.cc,v 1.7 1999/08/07 00:25:13 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -44,7 +44,7 @@ main(int argc,
     
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
     cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
-    cout << html(add("lang", "EN").add("dir", "LTR")) << endl;
+    cout << html(set("lang", "EN").set("dir", "LTR")) << endl;
 
     // Set up the page's header and title.
     cout << head() << endl;
