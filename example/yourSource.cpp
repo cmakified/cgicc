@@ -1,5 +1,5 @@
 /*
- *  $Id: yourSource.cpp,v 1.2 1999/08/10 18:52:47 sbooth Exp $
+ *  $Id: yourSource.cpp,v 1.3 1999/08/17 17:16:15 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -30,9 +30,12 @@
   ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
 
-#if USE_NAMESPACES
+#if CGICC_USE_NAMESPACES
   using namespace std;
   using namespace cgicc;
+#else
+#  define div div_
+#  define select select_
 #endif
 
 int
