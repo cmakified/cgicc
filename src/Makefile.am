@@ -1,6 +1,7 @@
-# $Id: Makefile.am,v 1.2 1998/12/10 02:05:10 sbooth Exp $
+# $Id: Makefile.am,v 1.3 1998/12/19 01:52:48 sbooth Exp $
 
 CLEANFILES = *~
+DISTCLEANFILES = .deps/*
 
 lib_LTLIBRARIES = libCgicc.la
 libCgicc_la_SOURCES = CgiDefs.cc CgiEnvironment.cc Cgicc.cc Exception.cc \
