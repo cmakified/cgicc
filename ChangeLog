@@ -1,3 +1,27 @@
+2001-09-03  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/HTTPHeaders.h: Added new class HTTPResponseHeader, and
+	restructured HTTPNPHeader to be a subclass of HTTPResponseHeader
+	* cgicc/HTTPHeaders.cpp: Same as above
+	* cgicc/CgiUtils.h: Fixed debug logging for namespaces
+	* cgicc/HTTPCookie.{h,cpp}: New files (code split from HTTPHeaders)
+	* cgicc/HTTPHeaders.{h,cpp}: Removed HTTPCookie code
+	* cgicc/CgiEnvironment.cpp: Fixed includes for HTTPCookie.h
+	* cgicc/HTTPHeaders.h(HTTPHeader): Added setCookie method
+	* cgicc/HTTPHeaders.cpp: Added logic to render() for HTTPCookies
+	* cgicc/CgiEnvironment.h: Added cookie_iterator, 
+	const_cookie_iterator typedefs
+	* demo/Makefile.am: Added target cookie.cgi
+	* demo/cookie.{cpp,html}: New files
+	* demo/README: Updated for new XHTML files and cookie.cgi
+
+2001-09-02  Stephen F. Booth  <sbooth@gnu.org>
+
+	* THANKS: Fixed punctuation
+	* doc/Makefile.am: Install HTML documentation into $(prefix)/doc
+	* demo/test.cpp: Added documentation
+	* demo/upload.cpp: Added documentation
+
 2001-09-01  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/CgiUtils.cpp(writeString): Fixed bug assuming string.getData()

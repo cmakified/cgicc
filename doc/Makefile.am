@@ -1,8 +1,10 @@
-## $Id: Makefile.am,v 1.7 2001/09/02 20:02:58 sbooth Exp $
+## $Id: Makefile.am,v 1.8 2001/09/03 16:22:12 sbooth Exp $
 
 CLEANFILES = *~
 
 DOXYFILE = Doxyfile
+
+docdir = $(prefix)/doc/$(PACKAGE)-$(VERSION)
 
 TEMPLATES = index.tmpl cgi-overview.tmpl tutorial.tmpl lib-overview.tmpl \
 	COPYING COPYING.LIB COPYING.DOC
@@ -12,6 +14,8 @@ EXTRA_DIST = header.html footer.html $(TEMPLATES)
 IMAGES = images/cgicc-logo.jpg
 SEDCMD1 = s!<title></title>!<title>GNU cgicc $(VERSION)</title>!g 
 SEDCMD2 = s/$$(VERSION)/$(VERSION)/g
+
+doc_DATA = html
 
 dist-hook:
 	test -d $(distdir)/html || mkdir $(distdir)/html || exit 1
