@@ -1,4 +1,4 @@
-<!-- $Id: response.dxx,v 1.1 1998/04/04 04:32:40 sbooth Exp $ -->
+<!-- $Id: response.dxx,v 1.2 1998/12/10 02:09:07 sbooth Exp $ -->
 
 /**@name Response Generation
 
@@ -140,13 +140,13 @@ For more information on HTML 4.0 and cascading stylesheets, see
 
 	/**@name HTTP response classes */
 	//@{
-		//@Include: ../include/HTTPHeaders.hh
+		//@Include: ../src/HTTPHeaders.hh
 	//@}
 
 
 	/**@name HTML generation classes */
 	//@{
-		//@Include: ../include/HTML*.hh
+		//@Include: ../src/HTML*.hh
 	//@}
 
 //@}
