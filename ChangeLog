@@ -1,3 +1,8 @@
+1999-09-22  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/HTMLClasses.h: Added definition of link_, to be used
+	when namespaces are not in use (reported by poletti@writeme.com)
+
 1999-08-31  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* configure.in: Automatically enable warnings for gcc
