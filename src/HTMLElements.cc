@@ -1,4 +1,4 @@
-/* $Id: HTMLElements.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: HTMLElements.cc,v 1.2 1998/04/01 20:51:58 sbooth Exp $ */
 
 #include "HTMLElements.hh"
 
@@ -8,6 +8,13 @@
 HTMLElement::HTMLElement()
   : fAttributes(NULL)
 {}
+
+HTMLElement::HTMLElement(const HTMLElement& element) throw(Exception)
+  : fAttributes(NULL)
+{
+  if(element.getAttributes() != NULL)
+    setAttributes(element.getAttributes());
+}
 
 HTMLElement::HTMLElement(const HTMLAttributeList *attributes) {
   setAttributes(attributes);
@@ -33,11 +40,22 @@ HTMLSimpleElement::HTMLSimpleElement()
   : fData(NULL)
 {}
 
+HTMLSimpleElement::HTMLSimpleElement(const HTMLSimpleElement& element)
+  throw(Exception)
+  : HTMLElement(element), fEmbedded(NULL), fData(NULL)
+{
+  if(element.getEmbedded() != NULL)
+    setEmbedded(element.getEmbedded());
+
+  if(element.getData() != NULL)
+    setData(element.getData());
+}
+
 HTMLSimpleElement::HTMLSimpleElement(const char *data, 
 				     const HTMLAttributeList *attributes,
 				     const HTMLSimpleElement *embedded) 
   throw(Exception)
-    : fData(NULL), HTMLElement(attributes), fEmbedded(embedded)
+    : HTMLElement(attributes), fEmbedded(embedded), fData(NULL)
 {
   if(data != NULL)
     setData(data);
@@ -79,6 +97,11 @@ HTMLSimpleElement::render(ostream& out) const {
 // Class HTMLBooleanElement
 // ============================================================
 HTMLBooleanElement::HTMLBooleanElement()
+{}
+
+HTMLBooleanElement::HTMLBooleanElement(const HTMLBooleanElement& element)
+  throw(Exception)
+  : HTMLSimpleElement(element)
 {}
 
 HTMLBooleanElement::HTMLBooleanElement(const char *data, 
