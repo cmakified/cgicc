@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.2 1999/08/09 23:38:31 sbooth Exp $
+ *  $Id: dns.cpp,v 1.3 1999/08/10 17:56:16 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -36,11 +36,15 @@
 #  include <sys/time.h>
 #endif
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
+#ifdef WIN32
+#  include <winsock2.h>
+#else
+#  include <sys/types.h>
+#  include <sys/socket.h>
+#  include <netinet/in.h>
+#  include <arpa/inet.h>
+#  include <netdb.h>
+#endif /* WIN32 */
 
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
@@ -260,5 +264,6 @@ main(int argc,
   }
 
   catch(const STDNS exception& e) {
+    return EXIT_FAILURE;
   }
 }
