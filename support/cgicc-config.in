@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ##
-##  $Id: cgicc-config.in,v 1.1 2000/11/02 14:05:18 sbooth Exp $
+##  $Id: cgicc-config.in,v 1.2 2000/11/07 06:01:21 sbooth Exp $
 ##
 ##  Copyright (C) 2000 Stephen F. Booth
 ##
@@ -27,11 +27,10 @@ exec_prefix=@exec_prefix@
 usage()
 {
     cat <<EOF
-Usage: @PACKAGE@-config [OPTIONS] [LIBRARIES]
+Usage: cgicc-config [OPTIONS] [LIBRARIES]
 Options:
     --prefix       Display architecture-independent installation dir
     --exec-prefix  Display architecture-dependent installation dir
-    --cflags       Display C compiler flags
     --cxxflags     Display C++ compiler flags
     --ldflags      Display linker flags
     --libs         Display linking information
@@ -39,7 +38,7 @@ Options:
     --version      Display version information
     --help         Display this message
 Libraries:
-	@PACKAGE@
+    cgicc
 EOF
     exit $1
 }
@@ -50,7 +49,7 @@ if test $# -eq 0; then
 fi
 
 ## Automatically link to cgicc
-lib_@PACKAGE@=yes
+lib_cgicc=yes
 
 ## Parse command line
 while test $# -gt 0; do
@@ -71,14 +70,6 @@ while test $# -gt 0; do
 	--exec_prefix)
 	    echo $exec_prefix
 	    exit 0
-	    ;;
-
-	## C compiler flags
-	--cflags)
-	    if test "${prefix}/include" != /usr/include ; then
-		includes="-I${prefix}/include"
-	    fi
-	    echo_cflags=yes
 	    ;;
 
 	## C++ compiler flags
@@ -113,8 +104,8 @@ while test $# -gt 0; do
 	    ;;
 
         ## cgicc lib
-	@PACKAGE@)
-	    lib_@PACKAGE@=yes
+	cgicc)
+	    lib_cgicc=yes
 	    ;;
 
 	## Everything else
@@ -125,12 +116,6 @@ while test $# -gt 0; do
     shift
 done
 
-## C compiler flags
-if test "$echo_cflags" = "yes"; then
-    cflags="@CFLAGS@"
-    echo $includes $cflags
-fi
-
 ## C++ compiler flags
 if test "$echo_cxxflags" = "yes"; then
     cxxflags="@CXXFLAGS@"
@@ -140,8 +125,9 @@ fi
 ## Linking info
 if test "$echo_libs" = "yes"; then
     libs="@LIBS@"
-    if test "$lib_@PACKAGE@" = "yes"; then
-	libs="$libs -l@PACKAGE@"
+    if test "$lib_cgicc" = "yes"; then
+	libs="$libs -lcgicc"
     fi
     echo "-L${exec_prefix}/lib $libs"
 fi
+
