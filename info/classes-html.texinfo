@@ -24,7 +24,7 @@ Returns the name of the HTML element.  For example @samp{HTML} or
 
 @deftypemethod HTMLElement {const HTMLAttributeList*} getAttributes () const
 Returns the @code{HTMLAttributeList} containing all the attributes
-associated with this HTML element.
+associated with this HTML element, if any.
 @end deftypemethod
 
 @deftypemethod HTMLElement void setAttributes (const HTMLAttributeList& @var{attributes})
@@ -33,7 +33,7 @@ Set the attributes associated with this HTML element.
 
 @deftypemethod HTMLElement {const HTMLElementList*} getEmbedded () const
 Returns the @code{HTMLElementList} containing all the HTML elements
-embedded in this one.
+embedded in this one, if any.
 @end deftypemethod
 
 @deftypemethod HTMLElement void setEmbedded (const HTMLElementList& @var{embedded})
