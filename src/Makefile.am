@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.8 1999/05/10 19:13:17 sbooth Exp $
+## $Id: Makefile.am,v 1.9 1999/05/31 17:04:35 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -9,7 +9,7 @@ HTMLElements.cc HTMLForms.cc HTMLFrames.cc HTMLGlobal.cc		\
 HTMLGraphics.cc HTMLLinks.cc HTMLLists.cc HTMLObjects.cc		\
 HTMLScripts.cc HTMLStyles.cc HTMLTables.cc HTMLText.cc HTTPHeaders.cc	\
 MStreamable.cc
-libcgicc_la_LDFLAGS = -version-info 0:0:0
+libcgicc_la_LDFLAGS = -version-info 0:1:0
 
 pkginclude_HEADERS = Cgicc.hh CgiDefs.hh CgiEnvironment.hh CgiUtils.hh	\
 FormEntry.hh FormFile.hh HTMLAttributes.hh HTMLClasses.hh		\
