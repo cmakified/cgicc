@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.cc,v 1.4 1999/08/02 19:40:27 sbooth Exp $
+ *  $Id: HTTPHeaders.cc,v 1.5 1999/08/07 00:15:33 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -281,5 +281,3 @@ CGICCNS HTTPAudioHeader::HTTPAudioHeader()
 
 CGICCNS HTTPAudioHeader::~HTTPAudioHeader()
 {}
-
-//EOF
