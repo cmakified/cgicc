@@ -1,4 +1,4 @@
-<!-- $Id: obtaining.dxx,v 1.7 1998/12/10 02:08:59 sbooth Exp $ -->
+<!-- $Id: obtaining.dxx,v 1.8 1998/12/12 01:12:22 sbooth Exp $ -->
 
 /**@name Obtaining Cgicc
 
@@ -23,7 +23,7 @@ subdirectory containing a copy of this documentation.
 
 <h4>
 <A HREF="ftp://ftp.lmi.net/pub/Cgicc/Cgicc.tar.gz">
-Download Cgicc as a gzipped tar file</a> (approx. 140k)
+Download Cgicc as a gzipped tar file</a> (approx. 220k)
 </h4>
 </P>
 
