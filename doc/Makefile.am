@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.14 2002/03/17 21:24:57 sbooth Exp $
+## $Id: Makefile.am,v 1.15 2002/11/23 20:34:59 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -19,18 +19,18 @@ SEDCMD2 = s/$$(VERSION)/$(VERSION)/g
 all: html
 
 install-data-local:
-	$(mkinstalldirs) $(docdir)
+	$(mkinstalldirs) $(DESTDIR)$(docdir)
 	@for file in $(srcdir)/html/*; do \
 		bn="`basename $$file`"; \
-		echo " $(INSTALL_DATA) $$file $(docdir)/$$bn"; \
-	 	$(INSTALL_DATA) $$file $(docdir)/$$bn; \
+		echo " $(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/$$bn"; \
+	 	$(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/$$bn; \
 	done
 
 uninstall-local:
 	@for file in $(srcdir)/html/*; do \
 		bn="`basename $$file`"; \
-		echo " rm -f $(docdir)/$$bn"; \
-		rm -f $(docdir)/$$bn; \
+		echo " rm -f $(DESTDIR)$(docdir)/$$bn"; \
+		rm -f $(DESTDIR)$(docdir)/$$bn; \
 	done
 
 if MAINTAINER_MODE
