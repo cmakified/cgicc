@@ -1,5 +1,5 @@
 /*
- * $Id: nph-login.cpp,v 1.2 2001/09/05 02:26:56 sbooth Exp $
+ * $Id: nph-login.cpp,v 1.3 2002/01/09 17:12:03 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *  Copyright (C) 2001 Peter Goedtkindt
@@ -67,34 +67,27 @@ main(int /*argc*/,
 {
   try {
     Cgicc cgi;
-    // Get a pointer to the environment
     const CgiEnvironment& env = cgi.getEnvironment();
     string remoteuser = env.getRemoteUser();
     string serversw = env.getServerSoftware();
     string clientsw = env.getUserAgent();
-
     string authtype = env.getAuthType();
-    
-    if(! authtype.empty()) {
-      cout <<"authtype = " << authtype << endl;
-      return 0;
-    }
 
     if(remoteuser.empty()) {
       if (serversw.find("Microsoft") != string::npos 
 	  && clientsw.find("Win") != string::npos) {
 	/*
 	  Server and client are running on Microsoft OS, so we
-	  probably can request NTLM authentication the last test was
-	  needed to prevent IE on Mac's to use NTLM, because it seems
-	  to be broken on Macs 
+	  probably can request NTLM authentication; the last test was
+	  needed to prevent IE on Mac's from using NTLM, because it
+	  seems to be broken on Macs 
 	*/
-        cout << HTTPResponseHeader("HTTP/1.1", 401, "Unauthorized")
-	  .addHeader("WWW-Authenticate", "NTLM")
-	  .addHeader("WWW-Authenticate", "Basic realm=\"cgicc\"")
-	  .addHeader("Content-Type", "text/html");
 
-	/*
+     cout << HTTPResponseHeader("HTTP/1.1", 401, "Unauthorized")
+	  .addHeader("WWW-Authenticate", "NTLM")
+	  .addHeader("WWW-Authenticate",  "Basic realm=\"cgicc\"");
+  
+        /*
 	  There is a bug in all version of Microsoft Internet Explorer
 	  at least up to 5.5 by which the NTLM authentication scheme
 	  MUST be declared first or it won't be selected. This goes
@@ -106,10 +99,12 @@ main(int /*argc*/,
       else {
 	// we're not chatting fully MS: only support basic
         cout << HTTPResponseHeader("HTTP/1.1", 401, "Unauthorized")
-	  .addHeader("WWW-Authenticate", "Basic realm=\"cgicc\"")
-	  .addHeader("Content-Type", "text/html");
+	  .addHeader("WWW-Authenticate", "Basic realm=\"cgicc\"");
       }
-
+      // do not add html data: browsers should not display this anyway
+      //  they should request user/password from the user and re-emit
+      //  the same request, only with the authentification info added
+      //  to the request 
       cout << HTMLDoctype(HTMLDoctype::eStrict) << endl;
       cout << html().set("lang", "EN").set("dir", "LTR") << endl;
     
@@ -131,14 +126,14 @@ main(int /*argc*/,
 
       return 0;
     }
-    
-    
+  
     // Output the HTTP headers 200 OK header for an HTML document, and
     // the HTML 4.0 DTD info
-    cout << HTTPResponseHeader(env.getServerProtocol(), 200 ,"OK");
-    cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
+    cout << HTTPResponseHeader(env.getServerProtocol(), 200 ,"OK")
+      .addHeader("Content-Type", "text/html");
+    cout << HTMLDoctype(HTMLDoctype::eStrict) << endl;
     cout << html().set("lang", "EN").set("dir", "LTR") << endl;
-    
+
     // Set up the page's header and title.
     cout << head() << endl;
     cout << title() << "GNU cgicc v" << cgi.getVersion() << title() << endl;
@@ -156,6 +151,8 @@ main(int /*argc*/,
     cout << "Your browser software is :" << clientsw << br() << endl;
     // Close the document
     cout << body() << html();
+
+
   }
   
   catch(const exception& e) {

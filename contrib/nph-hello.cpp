@@ -1,5 +1,5 @@
 /*
- * $Id: nph-hello.cpp,v 1.1 2001/09/05 02:25:47 sbooth Exp $ 
+ * $Id: nph-hello.cpp,v 1.2 2002/01/09 17:12:03 sbooth Exp $ 
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -75,32 +75,21 @@ main(int /*argc*/,
     cout << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"DTD/xhtml1-strict.dtd\">" << endl;
     cout << "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">" << endl;
 
-    cout << "<head>";
+    cout << "<head>" << endl;
 
     // Output the style sheet portion of the header
-    cout << "<style>" << "<!-- " << endl;
-    cout << "body { color: black; background-color: white; }" << endl;
-    cout << "hr.half { width: 60%; align: center; }" << endl;
-    cout << "span.red, strong.red { color: red; }" << endl;
-    cout << "div.smaller { font-size: small; }" << endl;
-    cout << "div.notice { border: solid thin; padding: 1em; margin: 1em 0; "
-	 << "background: #ddd; }" << endl;
-    cout << "span.blue { color: blue; }" << endl;
-
-    cout << "-->" << "</style>" << endl;
-
+    cout << "<style><!-- " << endl;
+    cout << "   body { color: black; background-color: white; }" << endl;
+    cout << "   span.red { color: red; }" << endl;
+    cout << " --></style>" << endl;
 
     cout << "<title>GNU cgicc v" << cgi.getVersion() << "</title>" << endl;
     cout << "</head>" << endl;
 
     cout << "<body>" << endl;
-
-
     cout << "<h1>Hello, world from GNU cgi<span class=\"red\">cc</span> v";
-    cout << cgi.getVersion() << endl;
-
-    cout << "</body>" << endl;
-    cout << "</html>" << endl;
+    cout << cgi.getVersion() << "</h1>" << endl;
+    cout << "</body></html>" << endl;
   }
   
   catch(const exception& e) {
