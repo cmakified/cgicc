@@ -1,0 +1,53 @@
+dnl $Id: configure.in,v 1.1 1998/12/10 03:00:07 sbooth Exp $
+
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(src/Cgicc.cc)
+AM_INIT_AUTOMAKE(Cgicc, 2.2.2)
+AM_CONFIG_HEADER(src/config.h)
+
+AC_LANG_CPLUSPLUS
+
+dnl Checks for programs.
+AC_PROG_CXX
+AC_PROG_INSTALL
+AM_PROG_LIBTOOL
+
+dnl Checks for libraries.
+AC_CHECK_LIB(nsl, gethostbyaddr, LIB_NET="-lnsl")
+
+dnl check whether to link against libstdc++
+AC_MSG_CHECKING("whether to link against libstdc++")
+AC_TRY_LINK([#include <iostream.h>], cout << "foo" << endl;, NEED_STDCPP=no, NEED_STDCPP=yes)
+AC_MSG_RESULT($NEED_STDCPP)
+if (test "$NEED_STDCPP" = yes); then LIBS="$LIBS -lstdc++"
+fi
+
+dnl Checks for header files.
+AC_CHECK_HEADERS(sys/time.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_STRUCT_TM
+
+dnl verify exception handling works
+AC_MSG_CHECKING("for exception handling")
+AC_TRY_COMPILE(, int i=0; try {++i;} catch(...) {--i;}, EXCEPTIONS=yes, EXCEPTIONS=no)
+AC_MSG_RESULT($EXCEPTIONS)
+if (test "$EXCEPTIONS" = no); then AC_MSG_ERROR("exception handling required")
+fi
+
+dnl verify templates work
+AC_MSG_CHECKING("for template support")
+AC_TRY_CPP(template <class T> int foo(T arg);, TEMPLATES=yes, TEMPLATES=no)
+AC_MSG_RESULT($TEMPLATES)
+if (test "$TEMPLATES" = no); then AC_MSG_ERROR("template support required") fi
+
+dnl Checks for library functions.
+AC_HEADER_STDC
+AC_HEADER_TIME
+AC_CHECK_FUNCS(strftime gettimeofday uname)
+
+dnl setup for networking functions
+AC_SUBST(LIB_NET)
+
+
+AC_OUTPUT([Makefile src/Makefile test/Makefile doc/Makefile src/Cgicc.hh])
