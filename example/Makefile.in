@@ -1,5 +1,5 @@
 ##
-##  $Id: Makefile.in,v 1.1 1999/01/05 23:21:11 sbooth Exp $
+##  $Id: Makefile.in,v 1.2 1999/01/05 23:23:16 sbooth Exp $
 ##
 ##  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
 ##
@@ -18,24 +18,28 @@
 ##  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+##
 ## Sample Makefile for a cgi script written using Cgicc
+##
 
 ##
 ## The name of the cgi target
 TARGET=		foo.cgi
 
 ##
-## The name of your source file(s)
+## The name(s) of your source file(s)
 SOURCES=	yourSource.cc
 
 ##
-## The name of the object file(s)
+## The name(s) of the object file(s)
 OBJECTS=	$(SOURCES:%.cc=%.o)
 
 ##
-## Don't change anything below this point
+## Don't change anything below this point unless you know what you're doing
 ##
 
+##
+## Directory info
 prefix= 	@prefix@
 exec_prefix= 	@exec_prefix@
 libdir= 	@libdir@
