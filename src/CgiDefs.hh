@@ -1,4 +1,8 @@
-/* $Id: CgiDefs.hh,v 1.1 1998/04/01 20:50:22 sbooth Exp $ */
+/*
+ * $Id: CgiDefs.hh,v 1.2 1998/10/05 22:21:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __CGI_DEFS__
 #define __CGI_DEFS__ 1

@@ -1,4 +1,8 @@
-/* $Id: Node.hh,v 1.2 1998/04/01 20:48:23 sbooth Exp $ */
+/*
+ * $Id: Node.hh,v 1.3 1998/10/05 22:21:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __NODE__
 #define __NODE__ 1

@@ -1,4 +1,8 @@
-/* $Id: CgiEnvironment.hh,v 1.4 1998/04/04 04:34:55 sbooth Exp $ */
+/*
+ * $Id: CgiEnvironment.hh,v 1.5 1998/10/05 22:21:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __CGI_ENVIRONMENT__
 #define __CGI_ENVIRONMENT__ 1

@@ -1,4 +1,8 @@
-/* $Id: LinkedList.hh,v 1.4 1998/04/03 09:44:56 sbooth Exp $ */
+/*
+ * $Id: LinkedList.hh,v 1.5 1998/10/05 22:21:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __LINKED_LIST__
 #define __LINKED_LIST__ 1

@@ -1,11 +1,16 @@
-/* $Id: Cgicc.hh,v 1.9 1998/09/23 19:28:43 sbooth Exp $ */
+/*
+ * $Id: Cgicc.hh,v 1.10 1998/10/05 22:21:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __CGICC__
 #define __CGICC__ 1
 
 /*
-  The Cgicc library, by Stephen Booth <mailto:sbooth@hmc.edu>. 
-  The latest version can be found on http://www.cs.hmc.edu/~sbooth/cgicc/
+  The Cgicc library, by Stephen F. Booth <mailto:sbooth@lmi.net>. 
+  The latest version can be found on http://www.lmi.net/~sbooth/ or
+  on ftp://ftp.lmi.net/pub/Cgicc/ 
 
   Cgicc is intended to simplify and speed the development of C++ CGI(Common
   Gateway Interface) applications by providing a simple, yet comprehensive  

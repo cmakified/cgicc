@@ -1,4 +1,8 @@
-/* $Id: FormEntry.hh,v 1.9 1998/10/02 19:01:59 sbooth Exp $ */
+/*
+ * $Id: FormEntry.hh,v 1.10 1998/10/05 22:21:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1

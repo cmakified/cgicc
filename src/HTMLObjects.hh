@@ -1,4 +1,8 @@
-/* $Id: HTMLObjects.hh,v 1.2 1998/04/03 09:09:52 sbooth Exp $ */
+/*
+ * $Id: HTMLObjects.hh,v 1.3 1998/10/05 22:21:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __HTML_OBJECTS__
 #define __HTML_OBJECTS__ 1

@@ -1,4 +1,8 @@
-/* $Id: HTTPHeaders.hh,v 1.2 1998/04/03 09:10:25 sbooth Exp $ */
+/*
+ * $Id: HTTPHeaders.hh,v 1.3 1998/10/05 22:21:05 sbooth Exp $
+ *
+ * (C) Copyright Stephen F. Booth, 1996, 1997, 1998.  All Rights Reserved.
+ */
 
 #ifndef __HTTP_HEADERS__
 #define __HTTP_HEADERS__ 1
