@@ -1,4 +1,4 @@
-<!-- $Id: obtaining.dxx,v 1.6 1998/10/05 22:48:46 sbooth Exp $ -->
+<!-- $Id: obtaining.dxx,v 1.7 1998/12/10 02:08:59 sbooth Exp $ -->
 
 /**@name Obtaining Cgicc
 
@@ -8,18 +8,17 @@ To decompress this file, you will need <TT>tar</TT> and <TT>gzip</TT>.
 <TT>tar</TT> should be standard on all UNIX systems; <TT>gzip</TT> may be
 obtained from the <A HREF="ftp://prep.ai.mit.edu/pub/gnu">gnu archives</a>
 at MIT.  Select the link below, save the file, then issue the following 
-command to unpack it:
+command to unpack it (<TT>x</TT> refers to the version number of Cgicc):
 </P>
 
 <PRE CLASS="unix">
-gzip -N -d Cgicc.tar.gz
-tar -xf Cgicc.tar
+% gzip -d < Cgicc-x.tar.gz | tar xvf -
 </PRE>
 
 <P>
-This should produce the subdirectory <TT>Cgicc</TT>, which will contain the
-complete Cgicc source distribution, including
-a <TT>doc/</TT> subdirectory containing a copy of this documentation.
+This should produce the directory <TT>Cgicc-x</TT>; this directory will 
+contain the complete Cgicc source distribution, including a <TT>doc/</TT> 
+subdirectory containing a copy of this documentation.
 </P>
 
 <h4>
