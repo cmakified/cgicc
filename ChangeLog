@@ -14,6 +14,18 @@
 	* demo/Makefile.am: Added target cookie.cgi
 	* demo/cookie.{cpp,html}: New files
 	* demo/README: Updated for new XHTML files and cookie.cgi
+	* configure.in: Renamed to configure.ac for autoconf 2.52
+	* cgicc/HTMLAttributes.{h,cpp}: Split into four new files,
+	HTMLAttribute.{h,cpp} and HTMLAttributeList.{h,cpp}
+	* cgicc/HTMLElements.{h,cpp}: Split into four new files,
+	HTMLElement.{h,cpp} and HTMLElementList.{h,cpp}
+	* cgicc/HTMLGeneric.h: Split into two new files,
+	HTMLAtomicElement.h and HTMLBooleanElement.h
+	* cgicc/HTTPHeaders.{h,cpp}: Split into 18 new files:
+	HTMLDoctype.{h,cpp}, HTTPContentHeader.{h,cpp},
+	HTTPHTMLHeader.{h,cpp}, HTTPHeader.{h,cpp}, HTTPNPHeader.{h,cpp},
+	HTTPPlainHeader.{h,cpp}, HTTPRedirectHeader.{h,cpp},
+	HTTPReponseHeader.{h,cpp}, HTTPStatusHeader.{h,cpp}
 
 2001-09-02  Stephen F. Booth  <sbooth@gnu.org>
 

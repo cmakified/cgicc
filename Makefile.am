@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.26 2001/09/02 20:08:28 sbooth Exp $
+## $Id: Makefile.am,v 1.27 2001/09/03 22:16:18 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip #dist-bzip2
 
@@ -8,7 +8,7 @@ else
 DEMO =
 endif
 
-SUBDIRS = cgicc doc support $(DEMO)
+SUBDIRS = cgicc doc support $(DEMO) contrib
 
 CLEANFILES = *~
 
