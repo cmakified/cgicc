@@ -1,4 +1,4 @@
-/* $Id: FormEntry.cc,v 1.3 1998/04/02 11:10:15 sbooth Exp $ */
+/* $Id: FormEntry.cc,v 1.4 1998/04/02 20:21:53 sbooth Exp $ */
 
 #include "FormEntry.hh"
 
@@ -56,12 +56,12 @@ FormEntry::getValue(int maxChars,
 }
 
 void 
-FormEntry::getValueStripped(char* &value) const throw(Exception) {
-  getValueStripped(INT_MAX, value);
+FormEntry::getStrippedValue(char* &value) const throw(Exception) {
+  getStrippedValue(INT_MAX, value);
 }
 
 void 
-FormEntry::getValueStripped(int maxChars,
+FormEntry::getStrippedValue(int maxChars,
 			    char* &value) const throw(Exception) 
 {
   value = new char[ strlen(getValue()) +1 ];
