@@ -1,16 +1,6 @@
+NEWS - list of user-visible changes between releases of GNU Cgicc
 
-                       NEWS about GNU Cgicc
-
-======================================================================
-
-        Please send bug reports, suggestions, and comments to
-        <bug-cgicc@gnu.org>
-
-======================================================================
-
-
-        Major changes between "cgicc" versions 2.2.3 and 3.0
-
+New in 3.0 (1999-05-12):
 * Reworked to use the C++ standard template library. 
   In most places, the STL class string is used where bare char* was
   used before. The obsolete classes implementing linked lists are
@@ -29,4 +19,4 @@
 * The demo programs now contain internal stylesheet information, instead 
   of linking to an external stylesheet.
 
-* Released as part of the GNU project.
+* Released as part of the GNU project under the GPL.
