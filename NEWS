@@ -7,6 +7,10 @@
 
 ======================================================================
 
+        Major changes between versions 3.0.1 and 3.0.2
+
+* Renamed the src/ directory to cgicc/.
+
         Major changes between versions 3.0 and 3.0.1
 
 * Various fixes for namespace support, submitted by Bob Kline.
