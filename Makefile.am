@@ -1,9 +1,9 @@
-# $Id: Makefile.am,v 1.2 1998/12/11 01:41:29 sbooth Exp $
+# $Id: Makefile.am,v 1.3 1998/12/11 01:43:19 sbooth Exp $
 
 if TESTS
-	TEST = test
+TEST = test
 else
-	TEST =
+TEST =
 endif
 
 SUBDIRS = src $(TEST) doc
