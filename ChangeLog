@@ -1,3 +1,7 @@
+2004-06-19  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/Makefile.am: Updated libtool version info
+
 2004-06-12  Stephen F. Booth  <sbooth@gnu.org>
 
 	* support/Makefile.am: Removed mkinstalldirs from EXTRA_DIST
