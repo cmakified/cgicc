@@ -19,6 +19,7 @@
 	getAttributes methods.
 	* cgicc/Cgicc.h: Added declaration for templatized member
 	* cgicc/Cgicc.cpp: Removed #ifdef WIN32 copy_if section
+	* README.WIN: Added section on C4251 warnings
 
 1999-08-11  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
