@@ -3,6 +3,7 @@
 	* cgicc/Cgicc.cpp: Parse both GET and POST data if present
 	* demo/*.cpp: Demos made into stand-alone applications
 	* cgicc/Cgicc.cpp: Improved form data parsing efficiency
+	* cgicc/Cgicc.cpp: Removed parsePair
 
 2004-06-27  Stephen F. Booth  <sbooth@gnu.org>
 

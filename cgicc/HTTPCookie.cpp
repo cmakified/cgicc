@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: HTTPCookie.cpp,v 1.8 2004/06/30 04:27:27 sbooth Exp $
+ *  $Id: HTTPCookie.cpp,v 1.9 2004/06/30 04:54:58 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -61,13 +61,13 @@ cgicc::HTTPCookie::HTTPCookie(const std::string& name,
 
 cgicc::HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
   : MStreamable(),
-    fName(cookie.getName()), 
-    fValue(cookie.getValue()), 
-    fComment(cookie.getComment()),
-    fDomain(cookie.getDomain()), 
-    fMaxAge(cookie.getMaxAge()),
-    fPath(cookie.getPath()), 
-    fSecure(cookie.isSecure())
+    fName(cookie.fName), 
+    fValue(cookie.fValue), 
+    fComment(cookie.fComment),
+    fDomain(cookie.fDomain), 
+    fMaxAge(cookie.fMaxAge),
+    fPath(cookie.fPath), 
+    fSecure(cookie.fSecure)
 {}
 
 cgicc::HTTPCookie::~HTTPCookie()
@@ -88,7 +88,7 @@ cgicc::HTTPCookie::operator== (const HTTPCookie& cookie) const
 void 
 cgicc::HTTPCookie::render(std::ostream& out) 	const
 {
-  out << "Set-Cookie:" << getName() << '=' << getValue();
+  out << "Set-Cookie:" << fName << '=' << fValue;
   if(false == fComment.empty())
     out << "; Comment=" << fComment;
   if(false == fDomain.empty())

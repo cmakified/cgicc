@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiUtils.cpp,v 1.16 2004/06/30 04:27:12 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.17 2004/06/30 04:54:57 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -254,7 +254,7 @@ cgicc::readString(std::istream& in)
   
   // Avoid allocation of a zero-length vector
   if(0 == dataSize) {
-    return std::string("");
+    return std::string();
   }
 
   // Don't use auto_ptr, but vector instead

@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: FormEntry.cpp,v 1.11 2004/06/30 04:27:13 sbooth Exp $
+ *  $Id: FormEntry.cpp,v 1.12 2004/06/30 04:54:58 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -35,8 +35,8 @@
 cgicc::FormEntry& 
 cgicc::FormEntry::operator= (const FormEntry& entry)
 {
-  fName  = entry.getName();
-  fValue = entry.getValue();
+  fName  = entry.fName;
+  fValue = entry.fValue;
 
   return *this;
 }

@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiEnvironment.cpp,v 1.22 2004/06/30 04:27:09 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.23 2004/06/30 04:54:57 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -62,22 +62,22 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
 #  endif
 #endif
      
-  if(stringsAreEqual(getRequestMethod(), "post")) {
+  if(stringsAreEqual(fRequestMethod, "post")) {
     // Don't use auto_ptr, but vector instead
     // Bug reported by shinra@j10n.org
-    std::vector<char> data(getContentLength());
+    std::vector<char> data(fContentLength);
     
     // If input is 0, use the default implementation of CgiInput
     if(0 == input) {
-      if(local_input.read(&data[0],getContentLength()) != getContentLength())
+      if(local_input.read(&data[0],fContentLength) != fContentLength)
 	throw std::runtime_error("I/O error");
     }
     else {
-      if(input->read(&data[0], getContentLength()) != getContentLength())
+      if(input->read(&data[0], fContentLength) != fContentLength)
 	throw std::runtime_error("I/O error");
     }
 
-    fPostData = std::string(&data[0], getContentLength());
+    fPostData = std::string(&data[0], fContentLength);
   }
   
   fCookies.reserve(10);
@@ -163,7 +163,7 @@ cgicc::CgiEnvironment::operator= (const CgiEnvironment& env)
 void
 cgicc::CgiEnvironment::parseCookies()
 {
-  std::string data = getCookies();
+  std::string data = fCookie;
 
   if(false == data.empty()) {
     std::string::size_type pos;
@@ -269,35 +269,35 @@ cgicc::CgiEnvironment::save(const std::string& filename) 	const
   if( ! file )
     throw std::runtime_error("I/O error");
 
-  writeLong(file, getContentLength());
-  writeLong(file, getServerPort());
+  writeLong(file, fContentLength);
+  writeLong(file, fServerPort);
   writeLong(file, (unsigned long) usingHTTPS());
 
-  writeString(file, getServerSoftware());
-  writeString(file, getServerName());
-  writeString(file, getGatewayInterface());
-  writeString(file, getServerProtocol());
-  writeString(file, getRequestMethod());
-  writeString(file, getPathInfo());
-  writeString(file, getPathTranslated());
-  writeString(file, getScriptName());
-  writeString(file, getQueryString());
-  writeString(file, getRemoteHost());
-  writeString(file, getRemoteAddr());
-  writeString(file, getAuthType());
-  writeString(file, getRemoteUser());
-  writeString(file, getRemoteIdent());
-  writeString(file, getContentType());
-  writeString(file, getAccept());
-  writeString(file, getUserAgent());
-  writeString(file, getRedirectRequest());
-  writeString(file, getRedirectURL());
-  writeString(file, getRedirectStatus());
-  writeString(file, getReferrer());
-  writeString(file, getCookies());
+  writeString(file, fServerSoftware);
+  writeString(file, fServerName);
+  writeString(file, fGatewayInterface);
+  writeString(file, fServerProtocol);
+  writeString(file, fRequestMethod);
+  writeString(file, fPathInfo);
+  writeString(file, fPathTranslated);
+  writeString(file, fScriptName);
+  writeString(file, fQueryString);
+  writeString(file, fRemoteHost);
+  writeString(file, fRemoteAddr);
+  writeString(file, fAuthType);
+  writeString(file, fRemoteUser);
+  writeString(file, fRemoteIdent);
+  writeString(file, fContentType);
+  writeString(file, fAccept);
+  writeString(file, fUserAgent);
+  writeString(file, fRedirectRequest);
+  writeString(file, fRedirectURL);
+  writeString(file, fRedirectStatus);
+  writeString(file, fReferrer);
+  writeString(file, fCookie);
   
-  if(stringsAreEqual(getRequestMethod(), "post"))
-    writeString(file, getPostData());
+  if(stringsAreEqual(fRequestMethod, "post"))
+    writeString(file, fPostData);
 
   if(file.bad() || file.fail())
     throw std::runtime_error("I/O error");
@@ -342,7 +342,7 @@ cgicc::CgiEnvironment::restore(const std::string& filename)
   fReferrer 		= readString(file);
   fCookie 		= readString(file);
   
-  if(stringsAreEqual(getRequestMethod(), "post"))
+  if(stringsAreEqual(fRequestMethod, "post"))
     fPostData = readString(file);
 
   file.close();

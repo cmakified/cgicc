@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.cpp,v 1.23 2004/06/30 04:27:12 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.24 2004/06/30 04:54:57 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
@@ -247,8 +247,7 @@ bool
 cgicc::Cgicc::queryCheckbox(const std::string& elementName) 	const
 {
   const_form_iterator iter = getElement(elementName);
-  return ((iter != fFormData.end()) && 
-	  stringsAreEqual( (*iter).getValue(), "on"));
+  return (iter != fFormData.end() && stringsAreEqual(iter->getValue(), "on"));
 }
 
 std::string
@@ -264,15 +263,13 @@ cgicc::Cgicc::operator() (const std::string& name) 		const
 cgicc::form_iterator 
 cgicc::Cgicc::getElement(const std::string& name)
 {
-  return std::find_if(fFormData.begin(), fFormData.end(), 
-		      FE_nameCompare(name));
+  return std::find_if(fFormData.begin(), fFormData.end(),FE_nameCompare(name));
 }
 
 cgicc::const_form_iterator 
 cgicc::Cgicc::getElement(const std::string& name) 		const
 {
-  return std::find_if(fFormData.begin(), fFormData.end(), 
-		      FE_nameCompare(name));
+  return std::find_if(fFormData.begin(), fFormData.end(),FE_nameCompare(name));
 }
 
 bool 
@@ -285,7 +282,7 @@ cgicc::Cgicc::getElement(const std::string& name,
 cgicc::form_iterator 
 cgicc::Cgicc::getElementByValue(const std::string& value)
 {
-  return std::find_if(fFormData.begin(), fFormData.end(), 
+  return std::find_if(fFormData.begin(), fFormData.end(),
 		      FE_valueCompare(value));
 }
 
@@ -306,15 +303,13 @@ cgicc::Cgicc::getElementByValue(const std::string& value,
 cgicc::file_iterator 
 cgicc::Cgicc::getFile(const std::string& name)
 {
-  return std::find_if(fFormFiles.begin(), fFormFiles.end(), 
-		      FF_compare(name));
+  return std::find_if(fFormFiles.begin(), fFormFiles.end(), FF_compare(name));
 }
 
 cgicc::const_file_iterator 
 cgicc::Cgicc::getFile(const std::string& name) 			const
 {
-  return std::find_if(fFormFiles.begin(), fFormFiles.end(), 
-		      FF_compare(name));
+  return std::find_if(fFormFiles.begin(), fFormFiles.end(), FF_compare(name));
 }
 
 
@@ -327,18 +322,16 @@ cgicc::Cgicc::findEntries(const std::string& param,
   // empty the target vector
   result.clear();
 
-  if(byName)
-    copy_if(fFormData.begin(), 
-	    fFormData.end(), 
-	    std::back_inserter(result),
-	    FE_nameCompare(param));
-  else
-    copy_if(fFormData.begin(), 
-	    fFormData.end(), 
-	    std::back_inserter(result),
-	    FE_valueCompare(param));
+  if(byName) {
+    copy_if(fFormData.begin(), fFormData.end(), 
+	    std::back_inserter(result),FE_nameCompare(param));
+  }
+  else {
+    copy_if(fFormData.begin(), fFormData.end(), 
+	    std::back_inserter(result), FE_valueCompare(param));
+  }
 
-  return (false == result.empty());
+  return false == result.empty();
 }
 
 void
@@ -358,38 +351,38 @@ cgicc::Cgicc::parseFormInput(const std::string& data)
     std::string::size_type pos;
     std::string::size_type oldPos = 0;
 
-    // parse in one fell swoop for efficiency
+    // Parse the data in one fell swoop for efficiency
     while(true) {
-      // find the '=' separating the name from its value
+      // Find the '=' separating the name from its value
       pos = data.find_first_of('=', oldPos);
       
-      // if no '=', we're finished
+      // If no '=', we're finished
       if(std::string::npos == pos)
 	break;
       
-      // decode the name
+      // Decode the name
       name = form_urldecode(data.substr(oldPos, pos - oldPos));
       oldPos = ++pos;
       
-      // find the '&' separating subsequent name/value pairs
+      // Find the '&' separating subsequent name/value pairs
       pos = data.find_first_of('&', oldPos);
       
-      // even if an '&' wasn't found the rest of the string is a value
+      // Even if an '&' wasn't found the rest of the string is a value
       value = form_urldecode(data.substr(oldPos, pos - oldPos));
 
-      // store the pair
+      // Store the pair
       fFormData.push_back(FormEntry(name, value));
       
       if(std::string::npos == pos)
 	break;
 
-      // update parse position
+      // Update parse position
       oldPos = ++pos;
     }
   }
   // File upload type = multipart/form-data
-  else if(stringsAreEqual(multipart_type, content_type, 
-			  multipart_type.length())) {
+  else if(stringsAreEqual(multipart_type, content_type,
+			  multipart_type.length())){
 
     // Find out what the separator is
     std::string 		bType 	= "boundary=";
@@ -452,23 +445,6 @@ cgicc::Cgicc::parseHeader(const std::string& data)
   filename = form_urldecode(filename);
 
   return MultipartHeader(disposition, name, filename, cType);
-}
-
-void
-cgicc::Cgicc::parsePair(const std::string& data)
-{
-  // find the '=' separating the name and value
-  std::string::size_type pos = data.find_first_of('=', 0);
-
-  // if no '=' was found, return
-  if(std::string::npos == pos)
-    return;
-  
-  // unescape the data, and add to the form entry list
-  std::string name 	= form_urldecode(data.substr(0, pos));
-  std::string value 	= form_urldecode(data.substr(++pos));
-  
-  fFormData.push_back(FormEntry(name, value));
 }
 
 void
