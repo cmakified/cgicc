@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.1 1999/08/09 18:25:30 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.2 2000/04/08 04:43:19 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -27,6 +27,11 @@
 #include <stdexcept>
 #include <cstdlib>
 
+#ifdef WIN32
+#include <io.h>
+#include <fctrl.h>
+#endif
+
 #include "cgicc/CgiEnvironment.h"
 
 // ========== Constructor/Destructor
@@ -36,6 +41,11 @@ CGICCNS CgiEnvironment::CgiEnvironment()
   LOGLN("CgiEnvironment::CgiEnvironment")
   
   readEnvironmentVariables();
+
+  // On Win32, use binary read to avoid CRLF conversion
+#ifdef WIN32
+  _setmode(_fileno(stdin), _O_BINARY);
+#endif
   
   if(stringsAreEqual( getRequestMethod(), "get")) {
     LOGLN("GET method recognized")
