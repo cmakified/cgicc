@@ -6,4 +6,5 @@ Gilbert Fine, for his multipart/form-data bug fix and FastCGI integration.
 Francois Degros, for his assignment operator fix.
 Peter Goedtkindt, for his XHTML suggestions and HTTPS bug fix.
 Quintin Connell, for his Windows project and workspace files.
-
+Nathan Barnett, for his multiple cookies bug fix
+Alexander J. Oss and Edward Diener, for their Borland Win32 fixes

@@ -1,3 +1,14 @@
+2002-02-19  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/HTTPCookie.cpp: Don't output a trailing newline
+	(bug fix submitted by natebiz@msn.com)
+	* cgicc/CgiEnvironment.cpp: #include <stdio.h> on Win32
+	* cgicc/CgiEnvironment.cpp: Use setmode instead of _setmode for
+	Borland C++ Builder
+	(bug fixes submitted by alexoss@bellatlantic.net 
+	and eddielee@tropicsoft.com)
+	* THANKS: Thanks to Nathan Barnett, Edward Diener, Alexander J. Oss
+
 2002-02-05  Stephen F. Booth  <sbooth@gnu.org>
 
 	* acinclude.m4(CGICC_CHECK_LINK_STDCPP): Use std:: namespace
