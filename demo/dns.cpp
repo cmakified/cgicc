@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.16 2002/03/02 06:22:30 sbooth Exp $
+ *  $Id: dns.cpp,v 1.17 2002/03/03 17:41:44 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -107,8 +107,6 @@ main(int /*argc*/,
     cout << comment() << style() << endl;
 
     cout << title("DNS Gateway") << endl;
-    cout << meta().set("name", "author")
-		  .set("content", "Stephen F. Booth") << endl;
     cout << head() << endl;
     
     cout << h1() << "GNU cgi" << span("cc").set("class","red")
@@ -237,9 +235,7 @@ main(int /*argc*/,
     cout << hr(set("class","half")) << endl;
     cout << CGICCNS div().set("align","center").set("class","smaller") << endl;
     cout << "GNU cgi" << span("cc").set("class","red") << " v"
-	 << cgi.getVersion();
-    cout << " by " << a("Stephen F. Booth")
-      .set("href", "mailto:sbooth@gnu.org") << br() << endl;
+	 << cgi.getVersion() << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime() 
 	 << " on " << cgi.getCompileDate() << br() << endl;
     

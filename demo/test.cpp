@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.17 2002/03/02 06:22:30 sbooth Exp $
+ *  $Id: test.cpp,v 1.18 2002/03/03 17:41:44 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -120,8 +120,6 @@ main(int /*argc*/,
 
     cout << title() << "GNU cgicc v" << cgi.getVersion() << " Test Results" 
 	 << title() << endl;
-    cout << meta().set("name", "author").set("content", "Stephen F. Booth") 
-	 << endl;
 
     cout << head() << endl;
     
@@ -191,9 +189,7 @@ main(int /*argc*/,
     // Information on cgicc
     cout << CGICCNS div().set("align","center").set("class","smaller") << endl;
     cout << "GNU cgi" << span("cc").set("class","red") << " v";
-    cout << cgi.getVersion();
-    cout << " by " << a("Stephen F. Booth")
-      .set("href", "mailto:sbooth@gnu.org") << br() << endl;
+    cout << cgi.getVersion() << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime();
     cout << " on " << cgi.getCompileDate() << br() << endl;
 
@@ -261,8 +257,6 @@ main(int /*argc*/,
     cout << comment() << style() << endl;
 
     cout << title("GNU cgicc exception") << endl;
-    cout << meta().set("name", "author")
-		  .set("content", "Stephen F. Booth") << endl;
     cout << head() << endl;
     
     cout << body() << endl;
