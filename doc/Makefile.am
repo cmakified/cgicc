@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.13 2002/03/17 21:23:09 sbooth Exp $
+## $Id: Makefile.am,v 1.14 2002/03/17 21:24:57 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -32,10 +32,6 @@ uninstall-local:
 		echo " rm -f $(docdir)/$$bn"; \
 		rm -f $(docdir)/$$bn; \
 	done
-
-
-distclean-local:
-	rm -rf html
 
 if MAINTAINER_MODE
 ################################################################
