@@ -1,46 +1,54 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<HTML lang="EN" dir="LTR">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+   "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<HTML LANG="en" DIR="LTR">
 
 <HEAD>
-<!-- $Id: testform.html,v 1.2 1999/05/05 18:31:06 sbooth Exp $ -->
-<STYLE>
-<!--
+  <!-- $Id: testform.html,v 1.3 1999/06/15 21:22:04 sbooth Exp $ -->
 
-BODY { color: black; background-color: white; }   
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <TITLE>GNU Cgicc Test Form</TITLE>
+  <LINK REV="made" HREF="mailto:sbooth@saaba.lmi.net">
+  <STYLE TYPE="text/css"><!--
 
-HR.half { width: 60%; align: center; }
+    BODY { color: black; background: white; }
+
+    A:link { color: #1F00FF }
+    A:visited { color: #9900DD }
+    A:active { color: #FF0000 }
+
+    HR.half { width: 60%; align: center; }
     
-SPAN.red, STRONG.red { color: red; } 
-SPAN.green { color: green; }
-SPAN.blue { color: blue; }
+    SPAN.red, STRONG.red { color: red; } 
+    SPAN.green { color: green; }
+    SPAN.blue { color: blue; }
 
-P.legal { font-size: small }
-P.red { text-align: center; color: red; }
-P.center { text-align: center; }
+    P.legal { font-size: small }
+    P.red { text-align: center; color: red; }
+    P.center { text-align: center; }
 
-DIV.notice { border: solid thin; padding: 1em; margin: 1em 0;background: #DDD;}
+    DIV.notice { border: solid thin; padding: 1em; 
+      margin: 1em 0; background: #DDD;}
 
-TABLE.form { left-margin: auto; right-margin: auto; width: 90%; }
+    TABLE.form { left-margin: auto; right-margin: auto; width: 90%; }
 
-COL.black, TD.black, TD.title, TR.title {
-color: white; background-color: black; font-weight: bold; text-align: center; }
+    COL.black, TD.black, TD.title, TR.title { color: white;
+      background: black; font-weight: bold; text-align: center; }
 
-COL.gray, TD.gray { background-color: #DDD; text-align: center; }
+    COL.gray, TD.gray { background: #DDD; text-align: center; }
 
-TD.data, TR.data { background-color: #DDD; text-align: left; }
-TD.grayspecial { background-color: #DDD; text-align: left; }
-TD.ltgray, TR.ltgray { background-color: #DDD; }
-TD.dkgray, TR.dkgray { background-color: #BBB; }
+    TD.data, TR.data { background: #DDD; text-align: left; }
+    TD.grayspecial { background: #DDD; text-align: left; }
+    TD.ltgray, TR.ltgray { background: #DDD; }
+    TD.dkgray, TR.dkgray { background: #BBB; }
 
-DIV.smaller { font-size: small; }
+    DIV.smaller { font-size: small; }
 
--->
-</STYLE>
-<TITLE>GNU Cgicc Test Form</TITLE>
-<META NAME="author" CONTENT="Stephen F. Booth">
+  --></STYLE>
 </HEAD>
 
 <BODY>
+
 <H1>GNU Cgi<SPAN CLASS="red">cc</SPAN> Test Form</H1>
 
 <!-- Change this to match your web site's address -->
@@ -57,93 +65,96 @@ DIV.smaller { font-size: small; }
 	CLASS="form">
 
 <COLGROUP SPAN="2">
-<COL ALIGN="center" SPAN="2">
+  <COL ALIGN="center" SPAN="2">
 </COLGROUP>
 
 <TR>
-<TD CLASS="black">Your Name</TD>
-<TD CLASS="gray"><INPUT TYPE="text" NAME="name"></TD>
+  <TD CLASS="black">Your Name</TD>
+  <TD CLASS="gray"><INPUT TYPE="text" NAME="name"></TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Your salary in millions<BR>(80-120)</TD>
-<TD CLASS="gray"><INPUT TYPE="text" NAME="bucks" VALUE="93"></TD>
+  <TD CLASS="black">Your salary in millions<BR>(80-120)</TD>
+  <TD CLASS="gray"><INPUT TYPE="text" NAME="bucks" VALUE="93"></TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Hours you've wasted on the web</TD>
-<TD CLASS="gray"><INPUT TYPE="text" NAME="time" VALUE="100"></TD>
+  <TD CLASS="black">Hours you've wasted on the web</TD>
+  <TD CLASS="gray"><INPUT TYPE="text" NAME="time" VALUE="100"></TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Your thoughts on cloned sheep</TD>
-<TD CLASS="gray">
-<TEXTAREA NAME="sheep" ROWS="4" COLS="40">
-They're	so cute!</TEXTAREA>
-</TD>
+  <TD CLASS="black">Your thoughts on cloned sheep</TD>
+  <TD CLASS="gray">
+  <TEXTAREA NAME="sheep" ROWS="4" COLS="40">They're so cute!</TEXTAREA>
+  </TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Are you hungry?</TD>
-<TD CLASS="gray"><INPUT TYPE="checkbox" NAME="hungry" CHECKED>Yes</TD>
+  <TD CLASS="black">Are you hungry?</TD>
+  <TD CLASS="gray"><INPUT TYPE="checkbox" NAME="hungry" CHECKED>Yes</TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Your favorite ice cream flavors</TD>
-<TD CLASS="gray"><SELECT NAME="flavors" MULTIPLE>
-<OPTION VALUE="cookie dough">Cookie Dough
-<OPTION VALUE="rocky road">Rocky Road
-<OPTION VALUE="strawberry">Strawberry
-<OPTION VALUE="chocolate">Chocolate
-<OPTION VALUE="vanilla">Vanilla</SELECT></TD>
+  <TD CLASS="black">Your favorite ice cream flavors</TD>
+  <TD CLASS="gray"><SELECT NAME="flavors" MULTIPLE>
+    <OPTION VALUE="cookie dough">Cookie Dough
+    <OPTION VALUE="rocky road">Rocky Road
+    <OPTION VALUE="strawberry">Strawberry
+    <OPTION VALUE="chocolate">Chocolate
+    <OPTION VALUE="vanilla">Vanilla</SELECT>
+  </TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Your hair color</TD>
-<TD CLASS="gray"><SELECT NAME="hair">
-<OPTION VALUE="blond">Blond
-<OPTION VALUE="brown">Brown
-<OPTION VALUE="red">Red
-<OPTION VALUE="black">Black
-<OPTION VALUE="white">White
-<OPTION VALUE="green">Green
-<OPTION VALUE="multicolored">Multicolored</SELECT></TD>
+  <TD CLASS="black">Your hair color</TD>
+  <TD CLASS="gray"><SELECT NAME="hair">
+    <OPTION VALUE="blond">Blond
+    <OPTION VALUE="brown">Brown
+    <OPTION VALUE="red">Red
+    <OPTION VALUE="black">Black
+    <OPTION VALUE="white">White
+    <OPTION VALUE="green">Green
+    <OPTION VALUE="multicolored">Multicolored</SELECT>
+  </TD>
 </TR>
 
 <TR>
-<TD CLASS="black">You voted for</TD>
-<TD CLASS="gray">
-<INPUT TYPE="radio" NAME="vote" VALUE="Clinton" checked>Clinton
-<INPUT TYPE="radio" NAME="vote" VALUE="Dole">Dole
-<INPUT TYPE="radio" NAME="vote" VALUE="the Libertarian">the Libertarian
-<INPUT TYPE="radio" NAME="vote" VALUE="nobody">No one</TD>
+  <TD CLASS="black">You voted for</TD>
+  <TD CLASS="gray">
+    <INPUT TYPE="radio" NAME="vote" VALUE="Clinton" checked>Clinton
+    <INPUT TYPE="radio" NAME="vote" VALUE="Dole">Dole
+    <INPUT TYPE="radio" NAME="vote" VALUE="the Libertarian">the Libertarian
+    <INPUT TYPE="radio" NAME="vote" VALUE="nobody">No one
+  </TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Your favorite character(s) on Friends</TD>
-<TD CLASS="gray">
-<INPUT TYPE="checkbox" NAME="friends" VALUE="Joey">Joey
-<INPUT TYPE="checkbox" NAME="friends" VALUE="Chandler">Chandler
-<INPUT TYPE="checkbox" NAME="friends" VALUE="Ross">Ross<BR>
-<INPUT TYPE="checkbox" NAME="friends" VALUE="Phoebe">Phoebe
-<INPUT TYPE="checkbox" NAME="friends" VALUE="Rachel">Rachel
-<INPUT TYPE="checkbox" NAME="friends" VALUE="Monica">Monica</TD>
+  <TD CLASS="black">Your favorite character(s) on Friends</TD>
+  <TD CLASS="gray">
+    <INPUT TYPE="checkbox" NAME="friends" VALUE="Joey">Joey
+    <INPUT TYPE="checkbox" NAME="friends" VALUE="Chandler">Chandler
+    <INPUT TYPE="checkbox" NAME="friends" VALUE="Ross">Ross<BR>
+    <INPUT TYPE="checkbox" NAME="friends" VALUE="Phoebe">Phoebe
+    <INPUT TYPE="checkbox" NAME="friends" VALUE="Rachel">Rachel
+    <INPUT TYPE="checkbox" NAME="friends" VALUE="Monica">Monica
+  </TD>
 </TR>
 
 <!-- Uncomment the lines below to test file upload -->
 <!-- 
 <TR>
-<TD CLASS="black">Send a file</TD>
-<TD CLASS="gray"><INPUT TYPE="file" NAME="userfile" ACCEPT="text/plain"></TD>
+  <TD CLASS="black">Send a file</TD>
+  <TD CLASS="gray"><INPUT TYPE="file" NAME="userfile" ACCEPT="text/plain"></TD>
 </TR>
 -->
 
 <TR>
-<TD CLASS="black">In the output, show</TD>
-<TD CLASS="grayspecial">
-<INPUT TYPE="checkbox" NAME="showEnv" CHECKED>Data from CgiEnvironment<BR>
-<INPUT TYPE="checkbox" NAME="showFE" CHECKED>All FormEntries from vector<BR>
-<INPUT TYPE="checkbox" NAME="showForm" CHECKED>Data from Cgicc
+  <TD CLASS="black">In the output, show</TD>
+  <TD CLASS="grayspecial">
+  <INPUT TYPE="checkbox" NAME="showEnv" CHECKED>Data from CgiEnvironment<BR>
+  <INPUT TYPE="checkbox" NAME="showFE" CHECKED>All FormEntries from vector<BR>
+  <INPUT TYPE="checkbox" NAME="showForm" CHECKED>Data from Cgicc
 
 <!-- Uncomment the lines below to test file upload -->
 <!--
@@ -151,34 +162,34 @@ They're	so cute!</TEXTAREA>
 <INPUT TYPE="checkbox" NAME="showFile" CHECKED>Data from FormFile
 -->
 
-</TD>
+  </TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Exception Handling</TD>
-<TD CLASS="grayspecial">
-<INPUT TYPE="checkbox" NAME="throw">Throw an exception to test error 
-handling</TD>
+  <TD CLASS="black">Exception Handling</TD>
+  <TD CLASS="grayspecial">
+  <INPUT TYPE="checkbox" NAME="throw">Throw an exception to test error 
+  handling</TD>
 </TR>
 
 <TR>
-<TD CLASS="black">Save and Restore</TD>
-<TD CLASS="grayspecial">
-<INPUT TYPE="checkbox" NAME="save">Save submission to a file<BR>
-<INPUT TYPE="checkbox" NAME="restore">Restore data from the last saved 
-submission</TD>
+  <TD CLASS="black">Save and Restore</TD>
+  <TD CLASS="grayspecial">
+  <INPUT TYPE="checkbox" NAME="save">Save submission to a file<BR>
+  <INPUT TYPE="checkbox" NAME="restore">Restore data from the last saved 
+  submission</TD>
 </TR>
 
 </TABLE>
-</P>
+<!-- </P> -->
 
 <P>
-<INPUT TYPE="submit" NAME="submit" VALUE="Submit My Preferences">
-<INPUT TYPE="reset" VALUE="Nuke 'em">
+  <INPUT TYPE="submit" NAME="submit" VALUE="Submit My Preferences">
+  <INPUT TYPE="reset" VALUE="Nuke 'em">
 </P>
 
-</FORM>
 </DIV>
+</FORM>
 
 </BODY>
 </HTML>
