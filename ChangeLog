@@ -4,6 +4,7 @@
 	* cgicc/CgiEnvironment.h: Added usingHTTPS() method
 	* demo/test.cpp(dumpEnvironment): Added display for usingHTTPS()
 	* info/class-cgienv.texinfo: Added doc for usingHTTPS
+	* cgicc/Makefile.am: Up libtool version to 2:0:1
 
 1999-08-20  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
