@@ -1,10 +1,10 @@
-## $Id: Makefile.am,v 1.1 1999/04/26 22:59:08 sbooth Exp $
+## $Id: Makefile.am,v 1.2 1999/05/05 18:31:05 sbooth Exp $
 
 CLEANFILES = *~
 
 EXTRA_DIST = testform.html
 
-bin_PROGRAMS = test.cgi dns.cgi
+noinst_PROGRAMS = test.cgi dns.cgi
 
 INCLUDES = -I$(top_srcdir)/src
 
