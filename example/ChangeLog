@@ -1,3 +1,7 @@
+2000-11-15  Stephen F. Booth  <sbooth@gnu.org>
+
+	* Makefile.am: Added cgicc.m4 to EXTRA_DIST
+
 2000-11-14  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc.m4: New file

@@ -1,6 +1,8 @@
-## $Id: Makefile.am,v 1.3 2000/11/15 06:34:12 sbooth Exp $
+## $Id: Makefile.am,v 1.4 2000/11/15 21:54:17 sbooth Exp $
 
 CLEANFILES = *~
+
+EXTRA_DIST = cgicc.m4
 
 cgicc_libdir=@cgicc_libdir@
 cgicc_includedir=@cgicc_includedir@
