@@ -1,21 +1,21 @@
-#! /usr/local/bin/bash
+#! /bin/sh
 
 ## Simple script to automate common automake-related tasks
 
 echo "== Creating support dir =="
-test -d support || /usr/bin/mkdir support
+test -d support || mkdir support
  
 echo "== Running aclocal =="
-/usr/local/bin/aclocal
+aclocal
 
 echo "== Running autoheader =="
-/usr/local/bin/autoheader
+autoheader
 
 echo "== Running libtoolize =="
-/usr/local/bin/libtoolize
+libtoolize
 
 echo "== Running automake =="
-/usr/local/bin/automake --add-missing
+automake --add-missing
 
 echo "== Running autoconf =="
-/usr/local/bin/autoconf
+autoconf
