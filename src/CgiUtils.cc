@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cc,v 1.1 1999/04/26 23:05:16 sbooth Exp $
+ *  $Id: CgiUtils.cc,v 1.2 1999/05/10 19:13:17 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,11 +18,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <stdexcept>
 #include <cstdlib> 	// for getenv, system
 #include <cctype> 	// for toupper
 
 #include "CgiUtils.hh"
-#include "CgiException.hh"
 
 // Fetch an environment variable
 STDNS string
@@ -172,11 +172,13 @@ CGICCNS readString(STDNS istream& in)
   
   in >> dataSize;
   in.get(); // skip ' '
+  // should work, but not in egcs-1.1.2
+  //auto_ptr<char> temp = new char[dataSize];
   char *temp = new char[dataSize];
   in.read(temp, dataSize);
   if(in.gcount() != dataSize) {
     delete [] temp;
-    throw CgiException("I/O error", ERRINFO);
+    throw STDNS runtime_error("I/O error");
   }
   s = string(temp, dataSize);
   delete [] temp;

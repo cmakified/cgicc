@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.hh,v 1.8 1999/04/26 22:42:24 sbooth Exp $
+ *  $Id: CgiEnvironment.hh,v 1.9 1999/05/10 19:13:16 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -25,7 +25,6 @@
 #include <string>
 
 #include "CgiDefs.hh"
-#include "CgiException.hh"
 #include "CgiUtils.hh"
 #include "HTTPHeaders.hh"
 

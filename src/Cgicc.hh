@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.hh,v 1.17 1999/05/05 18:32:04 sbooth Exp $
+ *  $Id: Cgicc.hh,v 1.18 1999/05/10 19:13:17 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -23,7 +23,7 @@
 
 /*
  * The GNU Cgicc library, by Stephen F. Booth. 
- * The latest version can be found on ftp://ftp.gnu.org/gnu/cgicc/
+ * The latest version can be found at your closest GNU mirror.
  *
  * Please mail bug reports to <mailto:bug-cgicc@gnu.org>
  *
@@ -64,7 +64,7 @@ class MultipartHeader;
  *     <SPAN CLASS="green">\\ do something with cgi</SPAN>
  *   }
  *
- *   catch(const CgiException& e) {
+ *   catch(const exception& e) {
  *    <SPAN CLASS="green"> \\ handle the error</SPAN>
  *   }
  * }

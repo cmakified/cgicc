@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cc,v 1.7 1999/04/26 22:42:24 sbooth Exp $
+ *  $Id: CgiEnvironment.cc,v 1.8 1999/05/10 19:13:16 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -20,6 +20,7 @@
 
 #include <new>
 #include <memory>
+#include <stdexcept>
 #include <cstdlib>
 
 #include "CgiEnvironment.hh"
@@ -38,10 +39,14 @@ CGICCNS CgiEnvironment::CgiEnvironment()
   else if(stringsAreEqual( getRequestMethod(), "post")) {
     LOGLN("POST method recognized")
     
+    // should work, but not in egcs-1.1.2
+    //auto_ptr<char> temp = new char[getContentLength()];
     char *temp = new char[getContentLength()];
     cin.read(temp, getContentLength());
-    if(cin.gcount() != getContentLength())
-      throw CgiException("I/O error", ERRINFO);
+    if(cin.gcount() != getContentLength()) {
+      delete [] temp;
+      throw STDNS runtime_error("I/O error");
+    }
     fPostData = STDNS string(temp, getContentLength());
     delete [] temp;
   }
@@ -144,7 +149,7 @@ CGICCNS CgiEnvironment::save(const STDNS string& filename) 	const
   STDNS ofstream file( filename.c_str(), ios::out );
 
   if( ! file )
-    throw CgiException("I/O error", ERRINFO);
+    throw STDNS runtime_error("I/O error");
 
   writeLong(file, getContentLength());
   writeLong(file, getServerPort());
@@ -176,7 +181,7 @@ CGICCNS CgiEnvironment::save(const STDNS string& filename) 	const
     writeString(file, getPostData());
 
   if(file.bad() || file.fail())
-    throw CgiException("I/O error", ERRINFO);
+    throw STDNS runtime_error("I/O error");
 
   file.close();
 }
@@ -188,7 +193,7 @@ CGICCNS CgiEnvironment::restore(const STDNS string& filename)
   STDNS ifstream file( filename.c_str(), ios::in );
 
   if( ! file )
-    throw CgiException("I/O error", ERRINFO);
+    throw STDNS runtime_error("I/O error");
 
   file.flags(file.flags() & ios::skipws);
 
