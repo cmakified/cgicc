@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.cc,v 1.5 1999/08/07 00:15:33 sbooth Exp $
+ *  $Id: HTTPHeaders.cpp,v 1.1 1999/08/09 18:25:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -19,10 +19,10 @@
  */
 
 #ifdef __GNUG__
-#pragma implementation
+#  pragma implementation
 #endif
 
-#include "cgicc/HTTPHeaders.hh"
+#include "cgicc/HTTPHeaders.h"
 
 // ============================================================
 // Class HTMLDoctype

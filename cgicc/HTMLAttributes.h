@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.hh,v 1.5 1999/08/07 00:15:15 sbooth Exp $
+ *  $Id: HTMLAttributes.h,v 1.1 1999/08/09 18:25:38 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,19 +18,19 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTMLATTRIBUTES_HH_
-#define _HTMLATTRIBUTES_HH_ 1
+#ifndef _HTMLATTRIBUTES_H_
+#define _HTMLATTRIBUTES_H_ 1
 
 #ifdef __GNUG__
-#pragma interface
+#  pragma interface
 #endif
 
 #include <string>
 #include <iostream>
 #include <vector>
 
-#include "cgicc/CgiDefs.hh"
-#include "cgicc/MStreamable.hh"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/MStreamable.h"
 
 CGICC_BEGIN_NAMESPACE
 
@@ -263,4 +263,4 @@ set(const STDNS string& name,
 
 CGICC_END_NAMESPACE
 
-#endif /* ! _HTMLATTRIBUTES_HH_ */
+#endif /* ! _HTMLATTRIBUTES_H_ */

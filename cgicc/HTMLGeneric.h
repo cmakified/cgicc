@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLGeneric.hh,v 1.1 1999/08/07 00:16:48 sbooth Exp $
+ *  $Id: HTMLGeneric.h,v 1.1 1999/08/09 18:25:41 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,12 +18,12 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTMLGENERIC_HH_
-#define _HTMLGENERIC_HH_ 1
+#ifndef _HTMLGENERIC_H_
+#define _HTMLGENERIC_H_ 1
 
 #include <new>
 
-#include "cgicc/HTMLElements.hh"
+#include "cgicc/HTMLElements.h"
 
 CGICC_BEGIN_NAMESPACE
 
@@ -183,4 +183,4 @@ class comment : public GenericBooleanElement<nullTag>
 
 CGICC_END_NAMESPACE
 
-#endif /* ! _HTMLGENERIC_HH_ */
+#endif /* ! _HTMLGENERIC_H_ */

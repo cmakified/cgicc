@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cc,v 1.5 1999/08/07 00:14:48 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.1 1999/08/09 18:25:33 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -19,7 +19,7 @@
  */
 
 #ifdef __GNUG__
-#pragma implementation
+#  pragma implementation
 #endif
 
 #include <new>
@@ -33,8 +33,8 @@
 #include <time.h>
 #endif
 
-#include "cgicc/CgiUtils.hh"
-#include "cgicc/Cgicc.hh"
+#include "cgicc/CgiUtils.h"
+#include "cgicc/Cgicc.h"
 
 
 CGICC_BEGIN_NAMESPACE

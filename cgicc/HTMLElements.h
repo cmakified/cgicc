@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLElements.hh,v 1.3 1999/08/07 00:17:22 sbooth Exp $
+ *  $Id: HTMLElements.h,v 1.1 1999/08/09 18:25:40 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,18 +18,18 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTMLELEMENTS_HH_
-#define _HTMLELEMENTS_HH_ 1
+#ifndef _HTMLELEMENTS_H_
+#define _HTMLELEMENTS_H_ 1
 
 #ifdef __GNUG__
-#pragma interface
+#  pragma interface
 #endif
 
 #include <string>
 
-#include "cgicc/CgiDefs.hh"
-#include "cgicc/MStreamable.hh"
-#include "cgicc/HTMLAttributes.hh"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/MStreamable.h"
+#include "cgicc/HTMLAttributes.h"
 
 CGICC_BEGIN_NAMESPACE
 
@@ -248,4 +248,4 @@ private:
 
 CGICC_END_NAMESPACE
 
-#endif /* ! _HTMLELEMENTS_HH_ */
+#endif /* ! _HTMLELEMENTS_H_ */

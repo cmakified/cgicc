@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLClasses.hh,v 1.3 1999/08/07 00:17:15 sbooth Exp $
+ *  $Id: HTMLClasses.h,v 1.1 1999/08/09 18:25:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,11 +18,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTMLCLASSES_HH_
-#define _HTMLCLASSES_HH_ 1
+#ifndef _HTMLCLASSES_H_
+#define _HTMLCLASSES_H_ 1
 
-#include "cgicc/CgiDefs.hh"
-#include "cgicc/HTMLGeneric.hh"
+#include "cgicc/CgiDefs.h"
+#include "cgicc/HTMLGeneric.h"
 
 
 // ============================================================
@@ -161,4 +161,4 @@ BOOLEAN_ELEMENT (noscript,   "NOSCRIPT");   // alternative text
 
 CGICC_END_NAMESPACE
 
-#endif /* ! _HTMLCLASSES_HH_ */
+#endif /* ! _HTMLCLASSES_H_ */

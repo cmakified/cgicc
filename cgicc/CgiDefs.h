@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiDefs.hh,v 1.3 1999/08/07 00:15:54 sbooth Exp $
+ *  $Id: CgiDefs.h,v 1.1 1999/08/09 18:25:29 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,13 +18,13 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _CGIDEFS_HH_
-#define _CGIDEFS_HH_ 1
+#ifndef _CGIDEFS_H_
+#define _CGIDEFS_H_ 1
 
 // Include information from configure
 #if HAVE_CONFIG_H
 #  include "cgicc/config.h"
-#endif /* HAVE_CONFIG_H */
+#endif
 
 // Win32-specific setup
 #ifdef WIN32
@@ -59,4 +59,4 @@
 #  define STDNS 
 #endif /* USE_NAMESPACES */
 
-#endif /* ! _CGIDEFS_HH_ */
+#endif /* ! _CGIDEFS_H_ */

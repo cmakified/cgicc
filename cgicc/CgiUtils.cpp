@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cc,v 1.4 1999/08/07 00:14:48 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.1 1999/08/09 18:25:31 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -19,14 +19,14 @@
  */
 
 #ifdef __GNUG__
-#pragma implementation
+#  pragma implementation
 #endif
 
 #include <stdexcept>
 #include <cstdlib> 	// for getenv, system
 #include <cctype> 	// for toupper
 
-#include "cgicc/CgiUtils.hh"
+#include "cgicc/CgiUtils.h"
 
 // Fetch an environment variable
 STDNS string

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.hh,v 1.4 1999/08/02 19:40:08 sbooth Exp $
+ *  $Id: HTTPHeaders.h,v 1.1 1999/08/09 18:25:43 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,17 +18,17 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _HTTPHEADERS_HH_
-#define _HTTPHEADERS_HH_ 1
+#ifndef _HTTPHEADERS_H_
+#define _HTTPHEADERS_H_ 1
 
 #ifdef __GNUG__
-#pragma interface
+#  pragma interface
 #endif
 
 #include <string>
 
-#include "cgicc/MStreamable.hh"
-#include "cgicc/CgiDefs.hh"
+#include "cgicc/MStreamable.h"
+#include "cgicc/CgiDefs.h"
 
 CGICC_BEGIN_NAMESPACE
   
@@ -485,4 +485,4 @@ public:
   
 CGICC_END_NAMESPACE
 
-#endif /* ! _HTTPHEADERS_HH_ */
+#endif /* ! _HTTPHEADERS_H_ */

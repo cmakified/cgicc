@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLElements.cc,v 1.3 1999/08/07 00:17:23 sbooth Exp $
+ *  $Id: HTMLElements.cpp,v 1.1 1999/08/09 18:25:40 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -19,12 +19,12 @@
  */
 
 #ifdef __GNUG__
-#pragma implementation
+#  pragma implementation
 #endif
 
 #include <new>
 
-#include "cgicc/HTMLElements.hh"
+#include "cgicc/HTMLElements.h"
 
 // ============================================================
 // Class HTMLElement
