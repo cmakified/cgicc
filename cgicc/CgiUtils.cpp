@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.6 2002/04/02 17:54:06 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.7 2002/04/02 17:56:45 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -24,7 +24,6 @@
 
 #include <stdexcept>
 #include <memory>
-#include <cstdlib> 	// for getenv
 #include <cctype> 	// for toupper
 
 #include "cgicc/CgiUtils.h"
