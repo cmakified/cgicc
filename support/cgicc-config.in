@@ -1,7 +1,7 @@
 #! /bin/sh
 
 ##
-##  $Id: cgicc-config.in,v 1.3 2000/11/15 06:31:10 sbooth Exp $
+##  $Id: cgicc-config.in,v 1.4 2000/11/15 17:11:14 sbooth Exp $
 ##
 ##  Copyright (C) 2000 Stephen F. Booth
 ##
@@ -56,22 +56,22 @@ while test $# -gt 0; do
 
     case $1 in
 	## Architecture-independent dir
-        --prefix)      echo $prefix && exit 0 ;;
+        --prefix)      echo "$prefix" && exit 0 ;;
 
 	## Architecture-dependent dir
-	--exec-prefix) echo $exec_prefix && exit 0 ;;
+	--exec-prefix) echo "$exec_prefix" && exit 0 ;;
 
 	## Object code dir
-	--libdir)      echo $libdir && exit 0 ;;
+	--libdir)      echo "$libdir" && exit 0 ;;
 
 	## Header file dir
-	--includedir)  echo $includedir && exit 0 ;;
+	--includedir)  echo "$includedir" && exit 0 ;;
 
 	## Host information
-	--host)        echo @host@ && exit 0 ;;	    
+	--host)        echo "@host@" && exit 0 ;;	    
 
 	## Version information
-	--version)     echo @VERSION@ && exit 0 ;;
+	--version)     echo "@VERSION@" && exit 0 ;;
 
 	## Everything else
 	*)             usage 1 1>&2 ;;
