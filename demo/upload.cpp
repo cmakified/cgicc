@@ -1,5 +1,6 @@
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: upload.cpp,v 1.11 2004/06/29 15:13:15 sbooth Exp $
+ *  $Id: upload.cpp,v 1.12 2004/06/30 04:27:30 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org

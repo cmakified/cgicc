@@ -1,5 +1,6 @@
+/* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: test.cpp,v 1.24 2004/06/29 15:13:15 sbooth Exp $
+ *  $Id: test.cpp,v 1.25 2004/06/30 04:27:29 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *  Part of the GNU cgicc library, http://www.cgicc.org
