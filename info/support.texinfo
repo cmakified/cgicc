@@ -23,5 +23,10 @@ All of these lists are managed by mailman, and can be subscribed to,
 unsubscribed from, and configured via a web interface at
 @url{http://mail.gnu.org/mailman/listinfo/help-cgicc},
 @url{http://mail.gnu.org/mailman/listinfo/info-cgicc}, or
-@url{http://mail.gnu.org/mailman/listinfo/bug-cgicc}. Web archives are
-also available.
+@url{http://mail.gnu.org/mailman/listinfo/bug-cgicc}.  
+
+Alternatively, you can send a message to the appropriate
+@email{-request} list with the word @kbd{subscribe} in the subject line.
+For example, to subscribe to @email{info-cgicc@@gnu.org}, send a message
+to @email{info-cgicc-request@@gnu.org} with a subject of
+@kbd{subscribe}.
