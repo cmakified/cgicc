@@ -1,5 +1,5 @@
 /*
- *  $Id: FormFile.hh,v 1.2 1999/06/04 00:07:37 sbooth Exp $
+ *  $Id: FormFile.hh,v 1.3 1999/08/02 19:43:05 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -46,10 +46,8 @@ class FormFile
 {
 public:
   
-  /**@name Constructors */
-  //@{
-  
   /** Default constructor - shouldn't be used. */
+  inline
   FormFile()
     {}
   
@@ -69,15 +67,15 @@ public:
    * Copy constructor.
    * @param file The FormFile to copy.
    */
-  FormFile(const FormFile& file);
+  inline
+  FormFile(const FormFile& file)
+    { operator=(file); }
   
   /** Destructor */
-  ~FormFile();
-  //@}
-  
-  
-  /**@name Overloaded Operators */
-  //@{
+  inline
+  ~FormFile()
+    {}
+
   
   /**
    * Compare two FormFiles for equality.
@@ -106,10 +104,6 @@ public:
   FormFile& 
   operator= (const FormFile& file);
   
-  //@}
-  
-  /**@name Accessor methods */
-  //@{
   
   /**
    * Write this file data to the specified stream.
@@ -157,8 +151,6 @@ public:
   inline STDNS string::size_type
   getDataLength() 				const
     { return fData.length(); }
-  
-  //@}
   
 private:
   STDNS string 	fName;

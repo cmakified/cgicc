@@ -1,5 +1,5 @@
 /*
- *  $Id: FormFile.cc,v 1.2 1999/06/04 00:07:37 sbooth Exp $
+ *  $Id: FormFile.cc,v 1.3 1999/08/02 19:43:05 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -37,15 +37,6 @@ CGICCNS FormFile::FormFile(const STDNS string& name,
 
   LOG("Got file ") LOG(getFilename()) LOG(" (") LOG(getDataType())
   LOG(" / ") LOG(getDataLength()) LOGLN(" bytes)")
-}
-
-CGICCNS FormFile::~FormFile()
-{}
-
-CGICCNS FormFile::FormFile(const FormFile& file)
-{
-  // call operator=
-  *this = file;
 }
 
 bool

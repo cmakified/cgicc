@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.hh,v 1.2 1999/06/04 00:07:37 sbooth Exp $
+ *  $Id: FormEntry.hh,v 1.3 1999/08/02 19:43:06 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -31,6 +31,7 @@
 #include <cfloat>
 
 #include "cgicc/CgiDefs.hh"
+#include "cgicc/CgiUtils.hh"
 
 CGICC_BEGIN_NAMESPACE
 
@@ -38,12 +39,11 @@ CGICC_BEGIN_NAMESPACE
 class FormEntry
 {
 public:
-  /**@name Constructors */
-  //@{
   
   /**
    * Default constructor - shouldn't be used 
    */
+  inline
   FormEntry()
     {}
   
@@ -52,21 +52,25 @@ public:
    * @param name The name of the form element
    * @param value The value of the form element
    */
+  inline
   FormEntry(const STDNS string& name, 
-	    const STDNS string& value);
+	    const STDNS string& value)
+    : fName(name), fValue(value)
+    {}
   
   /**
    * Copy constructor.
    * @param entry The FormEntry to copy.
    */
-  FormEntry(const FormEntry& entry);
+  inline
+  FormEntry(const FormEntry& entry)
+    { operator=(entry); }
   
   /** Delete this FormEntry */
-  ~FormEntry();
-  //@}
-  
-  /**@name Overloaded Operators */
-  //@{
+  inline
+  ~FormEntry()
+    {}
+
   
   /**
    * Compare two FormEntries for equality.
@@ -74,8 +78,9 @@ public:
    * @param entry The FormEntry to compare to this one.
    * @return true if the two FormEntries are equal, false otherwise.
    */
-  bool 
-  operator== (const FormEntry& entry) 			const;
+  inline bool 
+  operator== (const FormEntry& entry) 			const
+    { return stringsAreEqual(fName, entry.fName); }
   
   /**
    * Compare two FormEntries for inequality.
@@ -95,10 +100,6 @@ public:
   FormEntry& 
   operator= (const FormEntry& entry);
   
-  //@}
-  
-  /**@name Accessor methods */
-  //@{
   
   /**
    * Get the name of the form element.
@@ -196,7 +197,6 @@ public:
   inline bool 
   isEmpty() 						const
     { return (length() == 0); }
-  //@}
   
 private:  
   // utility function

@@ -1,5 +1,5 @@
 /*
- *  $Id: FormEntry.cc,v 1.2 1999/06/04 00:07:37 sbooth Exp $
+ *  $Id: FormEntry.cc,v 1.3 1999/08/02 19:43:06 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -26,31 +26,9 @@
 #include <cstdlib>
 
 #include "cgicc/FormEntry.hh"
-#include "cgicc/CgiUtils.hh"
 
 // local macro for integer maximum
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
-
-CGICCNS FormEntry::FormEntry(const STDNS string& name,
-			     const STDNS string& value)
-  : fName(name),
-    fValue(value)
-{}
-
-CGICCNS FormEntry::FormEntry(const FormEntry& entry)
-{
-  // call operator=
-  *this = entry;
-}
-
-CGICCNS FormEntry::~FormEntry()
-{}
-
-bool
-CGICCNS FormEntry::operator== (const FormEntry& entry) 	const
-{
-  return stringsAreEqual(fName, entry.fName);
-}
 
 CGICCNS FormEntry& 
 CGICCNS FormEntry::operator= (const FormEntry& entry)
