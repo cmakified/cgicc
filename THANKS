@@ -12,3 +12,4 @@ Steve McAndrewsmith, for his FastCGI integration help.
 Andreas Mueller, for his cookie parsing bug fix.
 Christian Weisgerber, for his Makefile bug fix.
 Carsten P. Gehrke, for his getDoubleValue bug fix.
+Bostjan Lah, for his readString but report.
