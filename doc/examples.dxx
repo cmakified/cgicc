@@ -1,4 +1,4 @@
-<!-- $Id: examples.dxx,v 1.2 1998/10/05 22:33:14 sbooth Exp $ -->
+<!-- $Id: examples.dxx,v 1.3 1998/10/21 18:37:33 sbooth Exp $ -->
 
 /**@name Cgicc examples
 
@@ -10,6 +10,6 @@ or the IP address for a hostname.<BR>
 <A HREF="dns.cc">Source code</A> for dns.cgi.</DL>
 If you have written something using Cgicc and would like it to be included 
 here, please 
-<A HREF="mailto:sbooth@lmi.net?Subject=Cgicc Example">e-mail me</A>.</P>
+<A HREF="mailto:sbooth@saaba.lmi.net?Subject=Cgicc Example">e-mail me</A>.</P>
 
 */
