@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.13 2000/10/15 15:59:53 sbooth Exp $
+ *  $Id: test.cpp,v 1.14 2000/10/17 00:22:54 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
  *
@@ -56,7 +56,6 @@
 void dumpEnvironment(const CgiEnvironment& env);
 void dumpList(const Cgicc& formData);
 void showForm(const Cgicc& formData);
-void showFile(const Cgicc& formData);
 
 // Main Street, USA
 int
@@ -176,12 +175,6 @@ main(int /*argc*/,
     if(cgi.queryCheckbox("showForm"))
       showForm(cgi);
 
-    // If the user requested information on the uploaded file,
-    // create a simple table showing the information
-    // Disabled for demo
-    if(cgi.queryCheckbox("showFile"))
-      showFile(cgi);
-
     // Now print out a footer with some fun info
     cout << p() << CGICCNS div().set("align","center");
     cout << a("Back to form").set("href", cgi.getEnvironment().getReferrer()) 
@@ -268,7 +261,7 @@ main(int /*argc*/,
     
     cout << body() << endl;
     
-    cout << h1() << "GNU Cgi" << span("cc", set("class","red"))
+    cout << h1() << "GNU cgi" << span("cc", set("class","red"))
 	 << " caught an exception" << h1() << endl; 
   
     cout << CGICCNS div().set("align","center").set("class","notice") << endl;
@@ -490,52 +483,4 @@ showForm(const Cgicc& formData)
     cout << "You don't watch Friends!?" << br() << endl;
   
   cout << CGICCNS div() << endl;
-}
-
-// Show the uploaded file
-// This will work if you uncomment the appropriate lines in testform.html
-void
-showFile(const Cgicc& formData) 
-{
-  cout << h2("File Uploaded via FormFile") << endl;
-  
-  const_file_iterator file;
-  file = formData.getFile("userfile");
-				
-  if(file != formData.getFiles().end()) {
-    cout << CGICCNS div().set("align","center") << endl;
-    
-    cout << table().set("border","0").set("rules","none").set("frame","void")
-		   .set("cellspacing","2").set("cellpadding","2")
-		   .set("class","cgi") << endl;
-    cout << colgroup().set("span","2") << endl;
-    cout << col().set("align","center").set("class","title").set("span","1") 
-	 << endl;
-    cout << col().set("align","left").set("class","data").set("span","1") 
-	 << endl;
-    cout << colgroup() << endl;
-    
-    cout << tr() << td("Name").set("class","title")
-	 << td((*file).getName()).set("class","data") << tr() << endl;
-
-    cout << tr() << td("Data Type").set("class","title")
-	 << td((*file).getDataType()).set("class","data") << tr() << endl;
-    
-    cout << tr() << td("Filename").set("class","title") 
-	 << td((*file).getFilename()).set("class","data") << tr() << endl;
-    cout << tr() << td("Data Length").set("class","title") 
-	 << td().set("class","data") << (*file).getDataLength() 
-	 << td() << tr() << endl;
-    
-    cout << tr() << td("File Data").set("class","title")
-	 << td().set("class","data") << pre();
-    (*file).writeToStream(cout);
-    cout << pre() << td() << tr() << endl;
-    
-    cout << table() << CGICCNS div() << endl;
-  }
-  else {
-    cout << p() << CGICCNS div().set("class", "notice") << endl;
-    cout << "No file was uploaded." << endl << CGICCNS div() << p() << endl;
-  }
 }
