@@ -1,3 +1,13 @@
+2000-04-07  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiEnvironment.cpp(CgiEnvironment): Use binary read mode on 
+	Win32 to prevent CR/LF conversion
+	* NEWS: Added items on multipart/form-data and Win32 CR/LF bugs
+	* configure.in: Updated version to 3.1.2
+	* cgicc/Makefile.am: Up libtool version to 2:1:1
+	* README.WIN: Removed note about MS IIS 4.0 (unnecessary)
+	* support/cgicc.spec.in: New file
+
 1999-10-05  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/CgiDefs.h.in: Include "config.h", not "cgicc/config.h"
