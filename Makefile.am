@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.18 1999/08/10 00:09:23 sbooth Exp $
+## $Id: Makefile.am,v 1.19 1999/08/10 00:12:53 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip
 
@@ -12,7 +12,7 @@ SUBDIRS = cgicc info $(DEMO)
 
 CLEANFILES = *~
 
-EXTRA_DIST = acconfig.h
+EXTRA_DIST = acconfig.h README.WIN
 
 dist-hook:
 	test -d $(distdir)/example || mkdir $(distdir)/example || exit 1
