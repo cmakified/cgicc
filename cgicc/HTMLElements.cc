@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLElements.cc,v 1.2 1999/06/04 00:07:38 sbooth Exp $
+ *  $Id: HTMLElements.cc,v 1.3 1999/08/07 00:17:23 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -22,107 +22,119 @@
 #pragma implementation
 #endif
 
+#include <new>
+
 #include "cgicc/HTMLElements.hh"
 
 // ============================================================
 // Class HTMLElement
 // ============================================================
-CGICCNS HTMLElement::HTMLElement()
-  : fAttributes(0)
-{}
-
 CGICCNS HTMLElement::HTMLElement(const HTMLElement& element)
-  : fAttributes(element.fAttributes)
-{}
+{
+  this->operator= (element);
+}
 
-CGICCNS HTMLElement::HTMLElement(const HTMLAttributeList *attributes)
-  : fAttributes(attributes)
-{}
+CGICCNS HTMLElement::HTMLElement(const HTMLAttributeList *attributes,
+				 const HTMLElement *embedded,
+				 const STDNS string *data,
+				 EElementType type)
+  : fAttributes(0),
+    fEmbedded(0),
+    fData(),
+    fType(type),
+    fDataSpecified(false)
+{
+  if(attributes != 0) {
+    fAttributes = new HTMLAttributeList(*attributes);
+  }
+
+  if(embedded != 0)
+    fEmbedded = new HTMLElementList(*embedded);
+
+  if(data != 0) {
+    fData = *data;
+    fDataSpecified = true;
+  }
+}
 
 CGICCNS HTMLElement::~HTMLElement()
-{}
+{
+  delete fAttributes;
+  delete fEmbedded;
+}
+
+CGICCNS HTMLElement&
+CGICCNS HTMLElement::operator= (const HTMLElement& element)
+{
+  fAttributes    = element.fAttributes;
+  fEmbedded      = element.fEmbedded;
+  fData          = element.fData;
+  fType          = element.fType;
+  fDataSpecified = element.fDataSpecified;
+
+  // perform a deep copy
+  if(fAttributes != 0)
+    fAttributes = new HTMLAttributeList(*fAttributes);
+
+  if(fEmbedded != 0)
+    fEmbedded = new HTMLElementList(*fEmbedded);
+
+  return *this;
+}
+
+void 
+CGICCNS HTMLElement::setAttributes(const HTMLAttributeList& attributes)
+{ 
+  delete fAttributes;
+  fAttributes = new HTMLAttributeList(attributes);
+}
+
+void
+CGICCNS HTMLElement::setEmbedded(const HTMLElementList& embedded)
+{
+  delete fEmbedded;
+  fEmbedded = new HTMLElementList(embedded);
+}
+
+CGICCNS HTMLElement&
+CGICCNS HTMLElement::add(const HTMLElement& element)
+{
+  if(fEmbedded == 0)
+    fEmbedded = new HTMLElementList();
+  fEmbedded->add(element);
+  return *this;
+}
+
+CGICCNS HTMLElement&
+CGICCNS HTMLElement::set(const STDNS string& name)
+{
+  if(fAttributes == 0)
+    fAttributes = new HTMLAttributeList();
+  fAttributes->set(name);
+  return *this;
+}
+
+CGICCNS  HTMLElement&
+CGICCNS HTMLElement::set(const STDNS string& name,
+			 const STDNS string& value)
+{
+  if(fAttributes == 0)
+    fAttributes = new HTMLAttributeList();
+  fAttributes->set(name, value);
+  return *this;
+}
 
 void
 CGICCNS HTMLElement::render(STDNS ostream& out) 	const
 {
-  out << '<' << getName();
-  if(getAttributes() != 0) {
-    out << ' ';
-    getAttributes()->render(out);
-  }
-  out << '>';
-}
-
-// ============================================================
-// Class HTMLSimpleElement
-// ============================================================
-CGICCNS HTMLSimpleElement::HTMLSimpleElement()
-{}
-
-CGICCNS HTMLSimpleElement::HTMLSimpleElement(const HTMLSimpleElement& element)
-  : HTMLElement(element), 
-    fEmbedded(element.fEmbedded),
-    fData(element.fData)
-{}
-
-CGICCNS HTMLSimpleElement::HTMLSimpleElement(const STDNS string& data, 
-					     const HTMLAttributeList *attributes,
-					     const HTMLSimpleElement *embedded)
-  : HTMLElement(attributes), 
-    fEmbedded(embedded), 
-    fData(data)
-{}
-
-CGICCNS HTMLSimpleElement::~HTMLSimpleElement()
-{}
-
-void
-CGICCNS HTMLSimpleElement::render(STDNS ostream& out)  	const
-{
-  out << '<';
-  out << getName();
-  if(getAttributes() != 0) {
-    out << ' ';
-    getAttributes()->render(out);
-  }
-  out << '>';
-  if(getEmbedded() == 0)
-    out << getData();
-  else
-    getEmbedded()->render(out);
-  out << "</" << getName() << '>';
-}
-
-// ============================================================
-// Class HTMLBooleanElement
-// ============================================================
-CGICCNS HTMLBooleanElement::HTMLBooleanElement()
-{}
-
-CGICCNS HTMLBooleanElement::HTMLBooleanElement(const HTMLBooleanElement& element)
-  : HTMLSimpleElement(element)
-{}
-
-CGICCNS HTMLBooleanElement::HTMLBooleanElement(const STDNS string& data, 
-					       const HTMLAttributeList *attributes,
-					       const HTMLSimpleElement *embedded,
-					       bool dataSpecified)
-    : HTMLSimpleElement(data, attributes, embedded),
-      fDataSpecified(dataSpecified)
-{}
-
-CGICCNS HTMLBooleanElement::~HTMLBooleanElement()
-{}
-
-void
-CGICCNS HTMLBooleanElement::render(STDNS ostream& out) 	const
-{
-  if(getData().empty() && ! dataSpecified()) {
+  if(getType() == eBoolean && dataSpecified() == false) {
+    /* no embedded elements */
     if(getEmbedded() == 0) {
       swapState();
-      out << '<';
-      if(getState()) {
-	out << getName();
+      /* getState() == true ===> element is active */
+      if(getState() == true) {
+	out << '<' << getName();
+	/* render attributes, if present */
 	if(getAttributes() != 0) {
 	  out << ' ';
 	  getAttributes()->render(out);
@@ -130,21 +142,91 @@ CGICCNS HTMLBooleanElement::render(STDNS ostream& out) 	const
 	out << '>';
       }
       else
-	out << '/' << getName() << '>';
+	out << "</" << getName() << '>';
     }
+    /* embedded elements present */
     else {
       out << '<' << getName();
+      /* render attributes, if present */
       if(getAttributes() != 0) {
 	out << ' ';
 	getAttributes()->render(out);
       }
       out << '>';
       getEmbedded()->render(out);
-      out << "</" << getName() << '>';		
+      out << "</" << getName() << '>';
     }
   }
-  else
-    HTMLSimpleElement::render(out);
+  else {
+    out << '<' << getName();
+    if(getAttributes() != 0) {
+      out << ' ';
+      getAttributes()->render(out);
+    }
+    out << '>';
+    
+    if(getType() == eAtomic)
+      return; 
+    
+    if(getEmbedded() != 0)
+      getEmbedded()->render(out);
+    else
+      out << getData();
+    out << "</" << getName() << '>';
+  }
 }
 
-//EOF
+
+// ============================================================
+// Class HTMLElementList
+// ============================================================
+CGICCNS HTMLElementList::HTMLElementList()
+{
+  fElements.reserve(5);
+}
+
+CGICCNS HTMLElementList::HTMLElementList(const HTMLElement& head) 
+{
+  fElements.reserve(5);
+  fElements.push_back(head.clone());
+}
+
+CGICCNS HTMLElementList::HTMLElementList(const HTMLElementList& list)
+{
+  this->operator=(list);
+}
+
+CGICCNS HTMLElementList::~HTMLElementList()
+{
+  STDNS vector<HTMLElement*>::const_iterator iter;
+  for(iter = fElements.begin(); iter != fElements.end(); ++iter)
+    delete *iter;
+}
+
+CGICCNS HTMLElementList&
+CGICCNS HTMLElementList::operator= (const HTMLElementList& list)
+{
+  fElements = list.fElements;
+  
+  STDNS vector<HTMLElement*>::iterator iter;
+  for(iter = fElements.begin(); iter != fElements.end(); iter++)
+    *iter = (*iter)->clone();
+
+  return *this;
+}
+
+CGICCNS HTMLElementList&
+CGICCNS HTMLElementList::add(const HTMLElement& element)
+{ 
+  fElements.push_back(element.clone());
+  return *this;
+}
+
+void 
+CGICCNS HTMLElementList::render(STDNS ostream& out) 	const
+{
+  STDNS vector<HTMLElement*>::const_iterator iter;
+  for(iter = fElements.begin(); iter != fElements.end(); ++iter) {
+    (*iter)->render(out);
+  }
+}
