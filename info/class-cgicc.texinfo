@@ -16,22 +16,22 @@ initialization.
 
 @unnumberedsec Library Information
 
-@deftypemethod Cgicc string getCompileDate () const
+@deftypemethod Cgicc {const char*} getCompileDate () const
 Get the date at which the library was compiled.  The string returned is
 of the format @samp{mmm dd yyyy}.
 @end deftypemethod
 
-@deftypemethod Cgicc string getCompileTime () const
+@deftypemethod Cgicc {const char*} getCompileTime () const
 Get the time at which the library was compiled.  The string returned is
 of the format @samp{hh:mm:ss} in 24-hour time.
 @end deftypemethod
 
-@deftypemethod Cgicc string getVersion () const
+@deftypemethod Cgicc {const char*} getVersion () const
 Get the version number of Cgicc.  The string returned is of the format
 @samp{#.#}.
 @end deftypemethod
 
-@deftypemethod Cgicc string getHost () const
+@deftypemethod Cgicc {const char*} getHost () const
 Get the host for which Cgicc was configured.  The string returned is a
 canonical host triplet of the form @samp{processor-manufacturer-os}.
 @end deftypemethod
