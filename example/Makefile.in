@@ -1,5 +1,5 @@
 ##
-##  $Id: Makefile.in,v 1.4 1999/01/05 23:35:41 sbooth Exp $
+##  $Id: Makefile.in,v 1.5 1999/04/26 22:42:09 sbooth Exp $
 ##
 ##  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
 ##
@@ -19,7 +19,7 @@
 ##
 
 ##
-## Sample Makefile for a cgi script written using Cgicc
+## Sample Makefile for a cgi application written using GNU Cgicc
 ##
 
 ##
@@ -48,12 +48,16 @@ includedir= 	@includedir@
 ##
 ## Compiler setup
 CXX=		@CXX@
-LIBS= 		@LIBS@ -L$(libdir) -lCgicc
+LIBS= 		@LIBS@ -L$(libdir) -lcgicc
 DEFS=		@DEFS@
 
 INCLUDES= 	-I$(includedir)
 
+## On Solaris (probably SVR4 systems), use -R
 LD_FLAGS=	@LDFLAGS@ -R$(libdir)
+
+## On Linux (probably BSD systems), use -rpath
+#LD_FLAGS=	@LDFLAGS@ -rpath$(libdir)
 
 CXXFLAGS= 	@CXXFLAGS@
 CPPFLAGS=	@CPPFLAGS@

@@ -1,26 +1,29 @@
 /*
- *  $Id: yourSource.cc,v 1.1 1999/01/05 22:48:05 sbooth Exp $
+ *  $Id: yourSource.cc,v 1.2 1999/04/26 22:42:09 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <cstdlib>
+
+#include "CgiDefs.hh"
 #include "HTMLClasses.hh"
 #include "Cgicc.hh"
-#include "Exception.hh"
+#include "CgiException.hh"
 
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
@@ -28,17 +31,20 @@
 ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
 
-#include <stdlib.h>
+#if USE_NAMESPACES
+using namespace cgicc;
+#endif
 
 int
-main(int argc, char **argv)
+main(int argc, 
+     char **argv)
 {
   try {
     Cgicc cgi;
     
   }
   
-  catch(const Exception& e) {
+  catch(const CgiException& e) {
     
   }
   
