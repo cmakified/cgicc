@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cc,v 1.2 1998/12/09 03:01:02 sbooth Exp $
+ *  $Id: test.cc,v 1.3 1998/12/11 01:39:54 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -35,8 +35,14 @@
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
 #if DEBUG
-ofstream gLogFile( "/usr/home/sbooth/public_html/Cgicc.log", ios::app );
+ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
+
+// define the location of the Cgicc documentation (for linking)
+// this should be a partial URI.  so, if the URI to the documentation
+// is http://www.lmi.net/~sbooth/cgicc/, this should be /~sbooth/cgicc
+// (note there is no trailing /)
+#define CGICC_DOCDIR "/change_this_path"
 
 // Function prototypes
 void dumpEnvironment(const CgiEnvironment *env);
@@ -72,7 +78,7 @@ main(int argc, char **argv)
 	 << title() << endl;
     cout << meta(add("name", "author")
 		 .add("content", "Stephen F. Booth")) << endl;
-    cout << link_(add("href","/~sbooth/cgicc.css")
+    cout << link_(add("href", CGICC_DOCDIR "/cgicc.css")
 		  .add("rel","stylesheet").add("type","text/css")) << endl;
     cout << head() << endl;
     
@@ -141,18 +147,18 @@ main(int argc, char **argv)
     // Now print out a footer with some fun info
     cout << div_(add("align","center"));
     cout << p() << "You may view the ";
-    cout << a("source code", add("href","/~sbooth/test.cc"));
+    cout << a("source code", add("href", CGICC_DOCDIR "/test.cc"));
     cout << " of this application." << p() << endl;
     
     // Toolbar
-    cout << a("Back to form", add("href","/~sbooth/testform.html")) 
+    cout << a("Back to form", add("href", CGICC_DOCDIR "/testform.html")) 
 	 << " | "
-	 << a("Cgicc Documentation", add("href","/~sbooth/index.html"))
+	 << a("Cgicc Documentation", add("href", CGICC_DOCDIR "/index.html"))
 	 << " | " 
 	 << a("Alphabetic Index of Classes", 
-	      add("href","/~sbooth/aindex.html"))
+	      add("href",CGICC_DOCDIR "/aindex.html"))
 	 << " | " 
-	 << a("Class Hierarchy",add("href","/~sbooth/HIER.html")) 
+	 << a("Class Hierarchy",add("href", CGICC_DOCDIR "/HIER.html")) 
 	 << endl;
     cout << div_() << br() << hr(add("class","half")) << endl;
     
@@ -219,7 +225,7 @@ main(int argc, char **argv)
     cout << title("Cgicc Exception") << endl;
     cout << meta(add("name", "author")
 		 .add("content", "Stephen F. Booth")) << endl;
-    cout << link_(add("href","/~sbooth/cgicc.css")
+    cout << link_(add("href", CGICC_DOCDIR "/cgicc.css")
 		  .add("rel","stylesheet").add("type","text/css")) << endl;
     cout << head() << endl;
     
@@ -227,7 +233,7 @@ main(int argc, char **argv)
     
     cout << h1() << "Cgi" << span("cc", add("class","red"))
 	 << " caught an " 
-	 << a("Exception", add("HREF", "/~sbooth/Exception.html"))
+	 << a("Exception", add("HREF", CGICC_DOCDIR "/Exception.html"))
 	 << h1() << endl;
   
     cout << div_(add("align","center")) << endl;
@@ -254,18 +260,18 @@ main(int argc, char **argv)
     // Now print out a footer with some fun info
     cout << div_(add("align","center"));
     cout << p() << "You may view the ";
-    cout << a("source code", add("href","/~sbooth/test.cc"));
+    cout << a("source code", add("href", CGICC_DOCDIR "/test.cc"));
     cout << " of this application." << p() << endl;
     
     // Toolbar
-    cout << a("Back to form", add("href","/~sbooth/testform.html")) 
+    cout << a("Back to form", add("href", CGICC_DOCDIR "/testform.html")) 
 	 << " | "
-	 << a("Cgicc Documentation", add("href","/~sbooth/index.html"))
+	 << a("Cgicc Documentation", add("href", CGICC_DOCDIR "/index.html"))
 	 << " | " 
 	 << a("Alphabetic Index of Classes", 
-	      add("href","/~sbooth/aindex.html"))
+	      add("href", CGICC_DOCDIR "/aindex.html"))
 	 << " | " 
-	 << a("Class Hierarchy",add("href","/~sbooth/HIER.html")) 
+	 << a("Class Hierarchy",add("href", CGICC_DOCDIR "/HIER.html")) 
 	 << endl;
     
     // End of document
@@ -283,7 +289,7 @@ dumpEnvironment(const CgiEnvironment *env) {
   // This is just a brain-dead dump of information.
   // Almost all of this code is for HTML formatting
   cout << h2() << "Environment information from "
-       << a("CgiEnvironment", add("href","/~sbooth/CgiEnvironment.html"))
+       << a("CgiEnvironment", add("href", CGICC_DOCDIR "/CgiEnvironment.html"))
        << h2() << endl;
   
   cout << div_(add("align","center")) << endl;
@@ -360,7 +366,7 @@ dumpEnvironment(const CgiEnvironment *env) {
 void
 dumpList(const Cgicc *formData) {
   cout << h2() << "Form Data via "
-       << a("LinkedList", add("href","/~sbooth/LinkedList.html"))
+       << a("LinkedList", add("href", CGICC_DOCDIR "/LinkedList.html"))
        << h2() << endl;
   
   cout << div_(add("align","center")) << endl;
@@ -391,7 +397,7 @@ showForm(const Cgicc *formData) {
 
   // I am using an if statement to check if each element is found
   cout << h2() << "Form Data via "
-       << a("Cgicc" ,add("href","/~sbooth/Cgic.html"))
+       << a("Cgicc" ,add("href", CGICC_DOCDIR "/Cgic.html"))
        << h2() << endl;
   
   cout << div_(add("class","notice")) << endl;
@@ -491,7 +497,7 @@ showForm(const Cgicc *formData) {
 void
 showFile(const Cgicc *formData) {
   cout << h2() << "File Uploaded via "
-       << a("FormFile",add("href","/~sbooth/FormFile.html"))
+       << a("FormFile",add("href", CGICC_DOCDIR "/FormFile.html"))
        << h2() << endl;
   const FormFile *file = (FormFile*) formData->findEntryByName("userfile");
   if(file != NULL) {
@@ -527,7 +533,7 @@ showFile(const Cgicc *formData) {
     if(isImage) {
       ofstream temp("/usr/home/sbooth/public_html/temp");
       cout << tr() << td("File Data", add("class","title"))
-	   << td(add("class","data2")) << "<IMG SRC=\"/~sbooth/temp\">";
+	   << td(add("class","data2")) << "<IMG SRC=\""CGICC_DOCDIR "/temp\">";
       file->writeToStream(temp);
       cout << td() << tr() << endl;
     }
