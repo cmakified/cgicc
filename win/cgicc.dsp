@@ -53,7 +53,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386
+# ADD LINK32 /nologo /dll /machine:I386
 
 !ELSEIF  "$(CFG)" == "cgicc - Win32 Debug"
 
@@ -73,13 +73,13 @@ LINK32=link.exe
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
-# ADD RSC /l 0x409 /d "_DEBUG"
+# ADD RSC /l 0x409 /d "DEBUG"
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
+# ADD LINK32 /nologo /dll /debug /machine:I386 /pdbtype:sept
 
 !ENDIF 
 
@@ -112,15 +112,55 @@ SOURCE=..\cgicc\FormFile.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\cgicc\HTMLAttributes.cpp
+SOURCE=..\cgicc\HTMLAttribute.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\cgicc\HTMLElements.cpp
+SOURCE=..\cgicc\HTMLAttributeList.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\cgicc\HTTPHeaders.cpp
+SOURCE=..\cgicc\HTMLDoctype.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTMLElement.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTMLElementList.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPContentHeader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPCookie.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPHeader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPHTMLHeader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPPlainHeader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPRedirectHeader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPResponseHeader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPStatusHeader.cpp
 # End Source File
 # Begin Source File
 
@@ -156,15 +196,67 @@ SOURCE=..\cgicc\FormFile.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\cgicc\HTMLAttributes.h
+SOURCE=..\cgicc\HTMLAtomicElement.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\cgicc\HTMLElements.h
+SOURCE=..\cgicc\HTMLAttribute.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\cgicc\HTTPHeaders.h
+SOURCE=..\cgicc\HTMLAttributeList.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTMLBooleanElement.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTMLClasses.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTMLDoctype.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTMLElement.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTMLElementList.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPContentHeader.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPCookie.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPHeader.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPHTMLHeader.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPPlainHeader.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPRedirectHeader.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPResponseHeader.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\cgicc\HTTPStatusHeader.h
 # End Source File
 # Begin Source File
 
