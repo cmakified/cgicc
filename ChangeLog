@@ -4,6 +4,7 @@
 	* NEWS: Updated for 3.2
 	* Makefile.am: Changed configure.in to configure.ac
 	* doc/Makefile.am: Added install-data-local target
+	* Makefile.am: Added DIST_SUBDIRS
 
 2001-09-04  Stephen F. Booth  <sbooth@gnu.org>
 
