@@ -18,6 +18,12 @@
 	* configure.in: Added AC_CONFIG_AUX_DIR(support).
 	* configure.in: Added AC_REVISION
 	* Makefile.am: yourSource.cc -> yourSource.cpp.
+	* cgicc/CgiDefs.h: Removed, added CgiDefs.h.in.
+	* cgicc/CgiDefs.h.in: Added USE_NAMESPACES
+	* cgicc/config.h.in: Removed USE_NAMESPACES
+	* cgicc/Makefile.am: config.h no longer installed.
+	* acconfig.h: Removed USE_NAMESPACES
+	* configure.in: No longer AC_DEFINE USE_NAMESPACES; AC_SUBST instead
 
 1999-08-06  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
