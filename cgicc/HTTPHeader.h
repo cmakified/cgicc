@@ -1,8 +1,8 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPHeader.h,v 1.3 2002/01/09 15:04:28 sbooth Exp $
+ *  $Id: HTTPHeader.h,v 1.4 2002/03/06 02:49:55 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public

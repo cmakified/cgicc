@@ -1,8 +1,8 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiUtils.h,v 1.4 2001/09/03 16:19:51 sbooth Exp $
+ *  $Id: CgiUtils.h,v 1.5 2002/03/06 02:49:55 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
