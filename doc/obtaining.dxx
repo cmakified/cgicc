@@ -1,4 +1,4 @@
-<!-- $Id: obtaining.dxx,v 1.3 1998/04/06 20:53:13 sbooth Exp $ -->
+<!-- $Id: obtaining.dxx,v 1.4 1998/04/06 20:58:13 sbooth Exp $ -->
 
 /**@name Obtaining Cgicc
 
@@ -7,8 +7,8 @@ Cgicc is distributed via the web as as a gzipped tar file.
 To decompress this file, you will need <TT>tar</TT> and <TT>gzip</TT>.
 <TT>tar</TT> should be standard on all UN*X systems; <TT>gzip</TT> may be
 obtained from the <A HREF="ftp://prep.ai.mit.edu/pub/gnu">gnu archives</a>
-at MIT.  Select the link below, save the file, then issue one the 
-following command to unpack it:
+at MIT.  Select the link below, save the file, then issue the following 
+command to unpack it:
 </P>
 
 <PRE CLASS="unix">
