@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cc,v 1.3 1999/05/10 19:12:57 sbooth Exp $
+ *  $Id: test.cc,v 1.4 1999/05/11 17:03:43 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -439,7 +439,7 @@ showForm(const Cgicc& formData)
   formData.getElement("flavors", flavors);
   if(! flavors.empty()) {
     cout << "You like ";
-    for(int i = 0; i < flavors.size(); i++) {
+    for(STDNS string::size_type i = 0; i < flavors.size(); i++) {
       cout << flavors[i].getValue();
       if(i < flavors.size() - 2)
 	cout << ", ";
@@ -469,7 +469,7 @@ showForm(const Cgicc& formData)
   formData.getElement("friends", friends);
   if(! friends.empty()) {
     cout << "You like ";
-    for(int i = 0; i < friends.size(); i++) {
+    for(STDNS string::size_type i = 0; i < friends.size(); i++) {
       cout << friends[i].getValue();
       if(i < friends.size() - 2)
 	cout << ", ";

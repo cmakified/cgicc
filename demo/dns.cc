@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cc,v 1.3 1999/05/10 19:12:56 sbooth Exp $
+ *  $Id: dns.cc,v 1.4 1999/05/11 17:03:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -123,7 +123,7 @@ main(int argc,
 	else {
 	  for(p = hp->h_addr_list; *p != 0; p++) {
 	    struct in_addr in;
-	    char **q;
+	    //char **q;
 	    
 	    (void) memcpy(&in.s_addr, *p, sizeof(in.s_addr));
 	    
@@ -142,7 +142,6 @@ main(int argc,
     if(name != (*cgi).end()) {
       cout << h3() << "Query results for " << **name << h3() << endl;
       
-      u_long addr;
       struct hostent *hp;
       char **p;
       
@@ -156,7 +155,7 @@ main(int argc,
       else {
 	for(p = hp->h_addr_list; *p != 0; p++) {
 	  struct in_addr in;
-	  char **q;
+	  //char **q;
 	  
 	  (void) memcpy(&in.s_addr, *p, sizeof(in.s_addr));
 	  
