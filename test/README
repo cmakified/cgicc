@@ -1,0 +1,26 @@
+Demo Programs
+-------------
+
+If you want to use Cgicc's debug logging feature in the demos, you'll
+need to change the declaration of 'gLogFile' to contain a path to the
+log file (in addition to defining the macro 'DEBUG' during library
+compilation). The log file must be writable by whichever user your web
+server runs cgi applications under.
+
+To run the demo application 'test.cgi', the file 'testform.html' must
+be configured for your particular web server.  Scroll down until you
+see the following line: 
+
+<FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/test.cgi">
+
+Change the path to match 'bindir' as supplied to the 'configure'
+script (this is prefix/bin if not explicitly specified). This form
+will call the demo 'test.cgi', and will serve as a test of the
+installation. Again, note that to use the tests from the web,
+'test.cgi' should be in a directory accessible from your web server,
+with cgi-bin privileges.
+
+Incidentally, to see how transparently Cgicc handles the difference
+between 'POST' and 'GET' type forms, try changing the request method
+in 'testform.html' and see what happens.  You won't notice a
+difference except in the call to the application.

@@ -1,26 +1,32 @@
 /*
- *  $Id: test.cc,v 1.3 1998/12/11 01:39:54 sbooth Exp $
+ *  $Id: test.cc,v 1.4 1999/04/26 22:49:38 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "HTMLClasses.hh"
+#include <new>
+#include <string>
+#include <vector>
+#include <cstdlib>
+
+#include "CgiDefs.hh"
+#include "CgiException.hh"
 #include "Cgicc.hh"
-#include "Exception.hh"
+#include "HTMLClasses.hh"
 
 #if HAVE_UNAME
 #include <sys/utsname.h>
@@ -30,29 +36,27 @@
 #include <sys/time.h>
 #endif
 
-#include <stdlib.h>
-
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
 #if DEBUG
 ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
 
-// define the location of the Cgicc documentation (for linking)
-// this should be a partial URI.  so, if the URI to the documentation
-// is http://www.lmi.net/~sbooth/cgicc/, this should be /~sbooth/cgicc
-// (note there is no trailing /)
-#define CGICC_DOCDIR "/change_this_path"
+// use Cgicc's namespace
+#if USE_NAMESPACES
+using namespace cgicc;
+#endif
 
 // Function prototypes
-void dumpEnvironment(const CgiEnvironment *env);
-void dumpList(const Cgicc *formData);
-void showForm(const Cgicc *formData);
-void showFile(const Cgicc *formData);
+void dumpEnvironment(const CgiEnvironment& env);
+void dumpList(const Cgicc& formData);
+void showForm(const Cgicc& formData);
+void showFile(const Cgicc& formData);
 
 // Main Street, USA
 int
-main(int argc, char **argv)
+main(int argc, 
+     char **argv)
 {
   try {
 #if HAVE_GETTIMEOFDAY
@@ -65,56 +69,84 @@ main(int argc, char **argv)
     
     // If the user wants to throw an Exception, go ahead and do it
     if(cgi.queryCheckbox("throw") && ! cgi.queryCheckbox("restore"))
-      throw Exception("User-requested Exception thrown in main()", ERRINFO);
+      throw CgiException("User-requested Exception thrown in main()", ERRINFO);
     
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
     cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
-    cout << html(add("lang","EN").add("dir","LTR")) << endl;
+    cout << html(add("lang", "EN").add("dir", "LTR")) << endl;
 
     // Set up the page's header and title.
     // I will put in lfs to ease reading of the produced HTML. 
     cout << head() << endl;
-    cout << title() << "Cgicc v" << cgi.getCgiccVersion() << " Test Results" 
+
+    // Output the style sheet portion of the header
+    cout << style() << comment() << endl;
+    cout << "BODY { color: black; background-color: white; }" << endl;
+    cout << "HR.half { width: 60%; align: center; }" << endl;
+    cout << "SPAN.red, STRONG.red { color: red; }" << endl;
+    cout << "DIV.smaller { font-size: small; }" << endl;
+    cout << "DIV.notice { border: solid thin; padding: 1em; margin: 1em 0; "
+	 << "background: #DDD; }" << endl;
+    cout << "SPAN.blue { color: blue; }" << endl;
+    cout << "COL.title { color: white; background-color: black; ";
+    cout << "font-weight: bold; text-align: center; }" << endl;
+    cout << "COL.data { background-color: #DDD; text-align: left; }" << endl;
+    cout << "TD.data, TR.data {	background-color: #DDD;	text-align: left; }"
+	 << endl;
+    cout << "TD.grayspecial { background-color: #DDD; text-align: left; }"
+	 << endl;
+    cout << "TD.ltgray, TR.ltgray { background-color: #DDD; }" << endl;
+    cout << "TD.dkgray, TR.dkgray { background-color: #BBB; }" << endl;
+    cout << "COL.black, TD.black, TD.title, TR.title { color: white; " 
+	 << "background-color: black; font-weight: bold; text-align: center; }"
+	 << endl;
+    cout << "COL.gray, TD.gray { background-color: #DDD; text-align: center; }"
+	 << endl;
+    cout << "TABLE.cgi { left-margin: auto; right-margin: auto; width: 90%; }"
+	 << endl;
+
+    cout << comment() << style() << endl;
+
+    cout << title() << "GNU Cgicc v" << cgi.getVersion() << " Test Results" 
 	 << title() << endl;
-    cout << meta(add("name", "author")
-		 .add("content", "Stephen F. Booth")) << endl;
-    cout << link_(add("href", CGICC_DOCDIR "/cgicc.css")
-		  .add("rel","stylesheet").add("type","text/css")) << endl;
+    cout << meta(add("name", "author").add("content", "Stephen F. Booth")) 
+	 << endl;
+
     cout << head() << endl;
     
     // Start the HTML body
     cout << body() << endl;
-    
-    cout << h1() << "Cgi" << span("cc", add("class","red"))
-	 << " v"<< cgi.getCgiccVersion() << " Test Results" << h1() << endl;
+
+    cout << h1() << "GNU Cgi" << span("cc", add("class","red"))
+	 << " v"<< cgi.getVersion() << " Test Results" << h1() << endl;
     
     // Get a pointer to the environment
-    const CgiEnvironment *env = cgi.getEnvironment();
+    const CgiEnvironment& env = cgi.getEnvironment();
     
     // Generic thank you message
     cout << comment() << "This page generated by Cgicc for "
-	 << env->getRemoteHost() << comment() << endl;
+	 << env.getRemoteHost() << comment() << endl;
     cout << h4() << "Thanks for using Cgi" << span("cc", add("class", "red")) 
-	 << ", " << env->getRemoteHost() << '!' << h4() << endl;  
+	 << ", " << env.getRemoteHost() << '!' << h4() << endl;  
     
     // If the user wants to save the submission, do it
     if(cgi.queryCheckbox("save")) {
       cgi.save("save");
       cout << p(h2("Data Saved")) << endl;
       
-      cout << div_(add("class", "notice")) << endl;
+      cout << CGICCNS div(add("class", "notice")) << endl;
       cout << "Your data has been saved, and may be restored (by anyone) "
-	   << "via the same form." << endl << div_() << p() << endl;
+	   << "via the same form." << endl << CGICCNS div() << p() << endl;
     }
-    
+
     // If the user wants to restore from the last submission, do it
     if(cgi.queryCheckbox("restore")) {
       cgi.restore("save");
       cout << p(h2("Data Restored")) << endl;
       
-      cout << div_(add("class", "notice")) << endl;
+      cout << CGICCNS div(add("class", "notice")) << endl;
       cout << "The data displayed has been restored from a file on disk."
-	   << endl << div_() << p() << endl;
+	   << endl << CGICCNS div() << p() << endl;
     }
     
     // If the user requested a dump of the environment,
@@ -124,53 +156,42 @@ main(int argc, char **argv)
       dumpEnvironment(env);
     
     // If the user requested, print out the raw form data from 
-    // the LinkedList of FormEntries.  This will contain every 
+    // the vector of FormEntries.  This will contain every 
     // element in the list.
     // This is one of two ways to get at form data, the other
     // being the use of Cgicc's getElement() methods.  
     if(cgi.queryCheckbox("showFE"))
-      dumpList(&cgi);
+      dumpList(cgi);
     
     // If the user requested data via Cgicc's getElement() methods, do it.
     // This is different than the use of the list of FormEntries 
     // because it requires prior knowledge of the name of form elements.
     // Usually they will be known, but you never know.
     if(cgi.queryCheckbox("showForm"))
-      showForm(&cgi);
+      showForm(cgi);
 
     // If the user requested information on the uploaded file,
     // create a simple table showing the information
     // Disabled for demo
     if(cgi.queryCheckbox("showFile"))
-      showFile(&cgi);
+      showFile(cgi);
 
     // Now print out a footer with some fun info
-    cout << div_(add("align","center"));
-    cout << p() << "You may view the ";
-    cout << a("source code", add("href", CGICC_DOCDIR "/test.cc"));
-    cout << " of this application." << p() << endl;
-    
-    // Toolbar
-    cout << a("Back to form", add("href", CGICC_DOCDIR "/testform.html")) 
-	 << " | "
-	 << a("Cgicc Documentation", add("href", CGICC_DOCDIR "/index.html"))
-	 << " | " 
-	 << a("Alphabetic Index of Classes", 
-	      add("href",CGICC_DOCDIR "/aindex.html"))
-	 << " | " 
-	 << a("Class Hierarchy",add("href", CGICC_DOCDIR "/HIER.html")) 
+    cout << p() << CGICCNS div(add("align","center"));
+    cout << a("Back to form", add("href", cgi.getEnvironment().getReferrer())) 
 	 << endl;
-    cout << div_() << br() << hr(add("class","half")) << endl;
+    cout << CGICCNS div() << br() << hr(add("class","half")) << endl;
     
     // Information on Cgicc
-    cout << div_(add("align","center").add("class","smaller")) << endl;
+    cout << CGICCNS div(add("align","center").add("class","smaller")) << endl;
     cout << "Cgi" << span("cc", add("class","red")) << " v";
-    cout << cgi.getCgiccVersion();
+    cout << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth", 
 			add("href", "http://www.lmi.net/~sbooth/")) << br();
     cout << "Compiled at " << cgi.getCompileTime();
-    cout << " on " << cgi.getCompileDate();
+    cout << " on " << cgi.getCompileDate() << br();
 
+    cout << "Configured for " << cgi.getHost();  
 #if HAVE_UNAME
     struct utsname info;
     if(uname(&info) != -1) {
@@ -194,7 +215,7 @@ main(int argc, char **argv)
 #endif
 
     // End of document
-    cout << div_() << endl;
+    cout << CGICCNS div() << endl;
     cout << body() << html() << endl;
 
     // No chance for failure in this example
@@ -202,7 +223,7 @@ main(int argc, char **argv)
   }
 
   // Did any errors occur?
-  catch(const Exception& e) {
+  catch(const CgiException& e) {
 
     // This is a dummy exception handler, as it doesn't really do
     // anything except print out information.
@@ -212,7 +233,7 @@ main(int argc, char **argv)
     html::reset(); 	head::reset(); 		body::reset();
     title::reset(); 	h1::reset(); 		h4::reset();
     comment::reset(); 	td::reset(); 		tr::reset(); 
-    table::reset();	div_::reset(); 		p::reset(); 
+    table::reset();	CGICCNS div::reset(); 	p::reset(); 
     a::reset();		h2::reset(); 		colgroup::reset();
 
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
@@ -222,21 +243,46 @@ main(int argc, char **argv)
     // Set up the page's header and title.
     // I will put in lfs to ease reading of the produced HTML. 
     cout << head() << endl;
-    cout << title("Cgicc Exception") << endl;
+
+    // Output the style sheet portion of the header
+    cout << style() << comment() << endl;
+    cout << "BODY { color: black; background-color: white; }" << endl;
+    cout << "HR.half { width: 60%; align: center; }" << endl;
+    cout << "SPAN.red, STRONG.red { color: red; }" << endl;
+    cout << "DIV.smaller { font-size: small; }" << endl;
+    cout << "DIV.notice { border: solid thin; padding: 1em; margin: 1em 0; "
+	 << "background: #DDD; }" << endl;
+    cout << "SPAN.blue { color: blue; }" << endl;
+    cout << "COL.title { color: white; background-color: black; ";
+    cout << "font-weight: bold; text-align: center; }" << endl;
+    cout << "COL.data { background-color: #DDD; text-align: left; }" << endl;
+    cout << "TD.data, TR.data {	background-color: #DDD;	text-align: left; }"
+	 << endl;
+    cout << "TD.grayspecial { background-color: #DDD; text-align: left; }"
+	 << endl;
+    cout << "TD.ltgray, TR.ltgray { background-color: #DDD; }" << endl;
+    cout << "TD.dkgray, TR.dkgray { background-color: #BBB; }" << endl;
+    cout << "COL.black, TD.black, TD.title, TR.title { color: white; " 
+	 << "background-color: black; font-weight: bold; text-align: center; }"
+	 << endl;
+    cout << "COL.gray, TD.gray { background-color: #DDD; text-align: center; }"
+	 << endl;
+    cout << "TABLE.cgi { left-margin: auto; right-margin: auto; width: 90%; }"
+	 << endl;
+
+    cout << comment() << style() << endl;
+
+    cout << title("GNU Cgicc CgiException") << endl;
     cout << meta(add("name", "author")
 		 .add("content", "Stephen F. Booth")) << endl;
-    cout << link_(add("href", CGICC_DOCDIR "/cgicc.css")
-		  .add("rel","stylesheet").add("type","text/css")) << endl;
     cout << head() << endl;
     
     cout << body() << endl;
     
-    cout << h1() << "Cgi" << span("cc", add("class","red"))
-	 << " caught an " 
-	 << a("Exception", add("HREF", CGICC_DOCDIR "/Exception.html"))
-	 << h1() << endl;
+    cout << h1() << "GNU Cgi" << span("cc", add("class","red"))
+	 << " caught a CgiException" << h1() << endl; 
   
-    cout << div_(add("align","center")) << endl;
+    cout << CGICCNS div(add("align","center")) << endl;
   
     cout << table(add("border","0").add("rules","none").add("frame","void")
 		  .add("cellspacing","2").add("cellpadding","2")
@@ -255,27 +301,10 @@ main(int argc, char **argv)
     cout << tr() << td("Line", add("class","title")) 
 	 << td(add("class","data")) << e.getLine() << td() << tr() << endl;
 
-    cout << table() << div_() << endl;
-    
-    // Now print out a footer with some fun info
-    cout << div_(add("align","center"));
-    cout << p() << "You may view the ";
-    cout << a("source code", add("href", CGICC_DOCDIR "/test.cc"));
-    cout << " of this application." << p() << endl;
-    
-    // Toolbar
-    cout << a("Back to form", add("href", CGICC_DOCDIR "/testform.html")) 
-	 << " | "
-	 << a("Cgicc Documentation", add("href", CGICC_DOCDIR "/index.html"))
-	 << " | " 
-	 << a("Alphabetic Index of Classes", 
-	      add("href", CGICC_DOCDIR "/aindex.html"))
-	 << " | " 
-	 << a("Class Hierarchy",add("href", CGICC_DOCDIR "/HIER.html")) 
-	 << endl;
+    cout << table() << CGICCNS div() << endl;
     
     // End of document
-    cout << div_() << endl;
+    cout << CGICCNS div() << endl;
     cout << body() << html() << endl;
     
     return EXIT_SUCCESS;
@@ -284,15 +313,13 @@ main(int argc, char **argv)
 
 // Print out a table of the CgiEnvironment
 void
-dumpEnvironment(const CgiEnvironment *env) {
-
+dumpEnvironment(const CgiEnvironment& env) 
+{
   // This is just a brain-dead dump of information.
   // Almost all of this code is for HTML formatting
-  cout << h2() << "Environment information from "
-       << a("CgiEnvironment", add("href", CGICC_DOCDIR "/CgiEnvironment.html"))
-       << h2() << endl;
+  cout << h2("Environment information from CgiEnvironment") << endl;
   
-  cout << div_(add("align","center")) << endl;
+  cout << CGICCNS div(add("align","center")) << endl;
   
   cout << table(add("border","0").add("rules","none").add("frame","void")
 		.add("cellspacing","2").add("cellpadding","2")
@@ -305,71 +332,70 @@ dumpEnvironment(const CgiEnvironment *env) {
   cout << colgroup() << endl;
   
   cout << tr() << td("Request Method", add("class","title")) 
-       << td(env->getRequestMethod(), add("class","data")) << tr() << endl;
+       << td(env.getRequestMethod(), add("class","data")) << tr() << endl;
   cout << tr() << td("Path Info", add("class","title")) 
-       << td(env->getPathInfo(), add("class","data")) << tr() << endl;
+       << td(env.getPathInfo(), add("class","data")) << tr() << endl;
   cout << tr() << td("Path Translated", add("class","title")) 
-       << td(env->getPathTranslated(), add("class","data")) << tr() << endl;
+       << td(env.getPathTranslated(), add("class","data")) << tr() << endl;
   cout << tr() << td("Script Name", add("class","title")) 
-       << td(env->getScriptName(), add("class","data")) << tr() << endl;
+       << td(env.getScriptName(), add("class","data")) << tr() << endl;
   cout << tr() << td("HTTP Referrer", add("class","title")) 
-       << td(env->getReferrer(), add("class","data")) << tr() << endl;
+       << td(env.getReferrer(), add("class","data")) << tr() << endl;
   cout << tr() << td("HTTP Cookie", add("class","title")) 
-       << td(env->getCookies(), add("class","data")) << tr() << endl;
+       << td(env.getCookies(), add("class","data")) << tr() << endl;
   cout << tr() << td("Query String", add("class","title")) 
-       << td(env->getQueryString(), add("class","data")) << tr() << endl;
+       << td(env.getQueryString(), add("class","data")) << tr() << endl;
   cout << tr() << td("Content Length", add("class","title")) 
-       << td(add("class","data")) << env->getContentLength() 
+       << td(add("class","data")) << env.getContentLength() 
        << td() << tr() << endl;
-  cout << tr() << td("Post Data", add("class","title")) 
-       << td(add("class","data")) 
-       << pre(env->getPostData(), add("class","data")) << td() 
+  cout << tr() << td("Post Data", add("class","title"))
+       << td(add("class","data"))
+       << pre(env.getPostData(), add("class","data")) << td() 
        << tr() << endl;
   cout << tr() << td("Remote Host", add("class","title")) 
-       << td(env->getRemoteHost(), add("class","data")) << tr() << endl;
+       << td(env.getRemoteHost(), add("class","data")) << tr() << endl;
   cout << tr() << td("Remote Address", add("class","title")) 
-       << td(env->getRemoteAddr(), add("class","data")) << tr() << endl;
+       << td(env.getRemoteAddr(), add("class","data")) << tr() << endl;
   cout << tr() << td("Authorization Type", add("class","title")) 
-       << td(env->getAuthType(), add("class","data")) << tr() << endl;
+       << td(env.getAuthType(), add("class","data")) << tr() << endl;
   cout << tr() << td("Remote User", add("class","title")) 
-       << td(env->getRemoteUser(), add("class","data")) << tr() << endl;
+       << td(env.getRemoteUser(), add("class","data")) << tr() << endl;
   cout << tr() << td("Remote Identification", add("class","title")) 
-       << td(env->getRemoteIdent(), add("class","data")) << tr() << endl;
+       << td(env.getRemoteIdent(), add("class","data")) << tr() << endl;
   cout << tr() << td("Content Type", add("class","title")) 
-       << td(env->getContentType(), add("class","data")) << tr() << endl;
+       << td(env.getContentType(), add("class","data")) << tr() << endl;
   cout << tr() << td("HTTP Accept", add("class","title")) 
-       << td(env->getAccept(), add("class","data")) << tr() << endl;
+       << td(env.getAccept(), add("class","data")) << tr() << endl;
   cout << tr() << td("User Agent", add("class","title")) 
-       << td(env->getUserAgent(), add("class","data")) << tr() << endl;
+       << td(env.getUserAgent(), add("class","data")) << tr() << endl;
   cout << tr() << td("Server Software", add("class","title")) 
-       << td(env->getServerSoftware(), add("class","data")) << tr() << endl;
+       << td(env.getServerSoftware(), add("class","data")) << tr() << endl;
   cout << tr() << td("Server Name", add("class","title")) 
-       << td(env->getServerName(), add("class","data")) << tr() << endl;
+       << td(env.getServerName(), add("class","data")) << tr() << endl;
   cout << tr() << td("Gateway Interface", add("class","title")) 
-       << td(env->getGatewayInterface(), add("class","data")) << tr() << endl;
+       << td(env.getGatewayInterface(), add("class","data")) << tr() << endl;
   cout << tr() << td("Server Protocol", add("class","title")) 
-       << td(env->getServerProtocol(), add("class","data")) << tr() << endl;
+       << td(env.getServerProtocol(), add("class","data")) << tr() << endl;
   cout << tr() << td("Server Port", add("class","title")) 
-       << td(add("class","data")) << env->getServerPort() 
+       << td(add("class","data")) << env.getServerPort() 
        << td() << tr() << endl;
   cout << tr() << td("Redirect Request", add("class","title")) 
-       << td(env->getRedirectRequest(),add("class","data")) << tr() << endl;
+       << td(env.getRedirectRequest(),add("class","data")) << tr() << endl;
   cout << tr() << td("Redirect URL", add("class","title")) 
-       << td(env->getRedirectURL(), add("class","data")) << tr() << endl;
+       << td(env.getRedirectURL(), add("class","data")) << tr() << endl;
   cout << tr() << td("Redirect Status", add("class","title")) 
-       << td(env->getRedirectStatus(), add("class","data")) << tr() << endl;
+       << td(env.getRedirectStatus(), add("class","data")) << tr() << endl;
   
-  cout << table() << div_() << endl;
+  cout << table() << CGICCNS div() << endl;
 }
 
 // Print out the value of every form element
 void
-dumpList(const Cgicc *formData) {
-  cout << h2() << "Form Data via "
-       << a("LinkedList", add("href", CGICC_DOCDIR "/LinkedList.html"))
-       << h2() << endl;
+dumpList(const Cgicc& formData) 
+{
+  cout << h2("Form Data via vector") << endl;
   
-  cout << div_(add("align","center")) << endl;
+  cout << CGICCNS div(add("align","center")) << endl;
   
   cout << table(add("border","0").add("rules","none").add("frame","void")
 		.add("cellspacing","2").add("cellpadding","2")
@@ -381,77 +407,75 @@ dumpList(const Cgicc *formData) {
   cout << tr(add("class","title")) << td("Element Name") 
        << td("Element Value") << tr() << endl;
   
-  // Iterate through the linked list, and print out each value
-  LinkedList<FormEntry>::ConstIterator iter = (**formData).begin();
-  while(iter.isValid()) {
-    cout << tr(add("class","data")) << td((*iter).getName()) 
-	 << td((*iter).getValue()) << tr() << endl;
-    *iter++;
+  // Iterate through the vector, and print out each value
+  std::vector<FormEntry>::const_iterator iter;
+  for(iter = formData.getElements().begin(); 
+      iter != formData.getElements().end(); 
+      ++iter) {
+    cout << tr(add("class","data")) << td(iter->getName()) 
+	 << td(iter->getValue()) << tr() << endl;
   }
-  cout << table() << div_() << endl;
+  cout << table() << CGICCNS div() << endl;
 }
 
 // Print out information customized for each element
 void
-showForm(const Cgicc *formData) {
+showForm(const Cgicc& formData) 
+{
 
   // I am using an if statement to check if each element is found
-  cout << h2() << "Form Data via "
-       << a("Cgicc" ,add("href", CGICC_DOCDIR "/Cgic.html"))
-       << h2() << endl;
+  cout << h2("Form Data via Cgicc") << endl;
   
-  cout << div_(add("class","notice")) << endl;
+  cout << CGICCNS div(add("class","notice")) << endl;
 
   //getElement
-  LinkedList<FormEntry>::ConstIterator name = formData->getElement("name");
-  if(name.isValid() && ! (*name).isEmpty())
+  std::vector<FormEntry>::const_iterator name = formData.getElement("name");
+  if(name != (*formData).end() && ! name->isEmpty())
     cout << "Your name is " << **name << '.' << br() << endl;
   else
     cout << "You don't have a name." << br() << endl;
 
   // getElement and getDoubleValue
-  LinkedList<FormEntry>::ConstIterator salary = formData->getElement("bucks");
-  if(salary.isValid() && ! (*salary).isEmpty())
+  std::vector<FormEntry>::const_iterator salary = formData.getElement("bucks");
+  if(salary != (*formData).end() && ! salary->isEmpty())
     cout << "You make " << (*salary).getDoubleValue(80, 120) 
 	 << " million dollars." << br() << endl;
   else
     cout << "You don't have a salary." << br() << endl;
 
   // getElement and getIntegerValue
-  LinkedList<FormEntry>::ConstIterator hours = formData->getElement("time");
-  if(hours.isValid() && ! (*hours).isEmpty())
+  std::vector<FormEntry>::const_iterator hours = formData.getElement("time");
+  if(hours != (*formData).end() && ! (*hours).isEmpty())
     cout << "You've wasted " << (*hours).getIntegerValue() 
 	 << " hours on the web." << br() << endl;
   else
     cout << "You haven't wasted any time on the web." << br() << endl;
 
   // getElement and getStrippedValue
-  LinkedList<FormEntry>::ConstIterator sheep = formData->getElement("sheep");
-  if(sheep.isValid() && ! (*sheep).isEmpty()) {
-    char *temp;
-    (*sheep).getStrippedValue(temp);
+  std::vector<FormEntry>::const_iterator sheep = formData.getElement("sheep");
+  if(sheep != (*formData).end() && ! (*sheep).isEmpty()) {
+    STDNS string temp = (*sheep).getStrippedValue();
     cout << "Your thoughts about sheep cloning: " << temp << br() << endl;
-    delete [] temp;
   }
   else
     cout << "You don't have any thoughts about sheep!?" << br() << endl;
   
   // queryCheckbox
-  if(formData->queryCheckbox("hungry"))
+  if(formData.queryCheckbox("hungry"))
     cout << "You are hungry." << br() << endl;
   else
     cout << "You are not hungry." << br() << endl;
 
-  // getElementMultiple
-  LinkedList<FormEntry> flavors;
-  formData->getElementMultiple("flavors", flavors);
-  if(! flavors.isEmpty()) {
+  // getElement
+  std::vector<FormEntry> flavors;
+  formData.getElement("flavors", flavors);
+  if(! flavors.empty()) {
     cout << "You like ";
-    for(int i = 0; i < flavors.length(); i++) {
-      cout << (*(flavors[i])).getValue();
-      if(i < flavors.length() - 2)
+    for(int i = 0; i < flavors.size(); i++) {
+      cout << flavors[i].getValue();
+      if(i < flavors.size() - 2)
 	cout << ", ";
-      else if(i == flavors.length() - 2)
+      else if(i == flavors.size() - 2)
 	cout << " and ";
     }
     cout << " ice cream." << br() << endl;
@@ -460,28 +484,28 @@ showForm(const Cgicc *formData) {
     cout << "You don't like ice cream!?" << br() << endl;
   
   // getElement
-  LinkedList<FormEntry>::ConstIterator hair = formData->getElement("hair");
-  if(hair.isValid())
+  std::vector<FormEntry>::const_iterator hair = formData.getElement("hair");
+  if(hair != (*formData).end())
     cout << "Your hair is " << **hair << '.' << br() << endl;
   else
     cout << "You don't have any hair." << br() << endl;
   
-  LinkedList<FormEntry>::ConstIterator vote = formData->getElement("vote");
-  if(vote.isValid())
+  std::vector<FormEntry>::const_iterator vote = formData.getElement("vote");
+  if(vote != (*formData).end())
     cout << "You voted for " << **vote << '.' << br() << endl;
   else
     cout << "This should never happen. ERROR!" << br() << endl;
   
-  // getElementMultiple
-  LinkedList<FormEntry> friends;
-  formData->getElementMultiple("friends", friends);
-  if(! friends.isEmpty()) {
+  // getElement
+  std::vector<FormEntry> friends;
+  formData.getElement("friends", friends);
+  if(! friends.empty()) {
     cout << "You like ";
-    for(int i = 0; i < friends.length(); i++) {
-      cout << (*(friends[i])).getValue();
-      if(i < friends.length() - 2)
+    for(int i = 0; i < friends.size(); i++) {
+      cout << friends[i].getValue();
+      if(i < friends.size() - 2)
 	cout << ", ";
-      else if(i == friends.length() - 2)
+      else if(i == friends.size() - 2)
 	cout << " and ";
     }
     cout << " on Friends." << br() << endl;
@@ -489,19 +513,21 @@ showForm(const Cgicc *formData) {
   else
     cout << "You don't watch Friends!?" << br() << endl;
   
-  cout << div_() << endl;
+  cout << CGICCNS div() << endl;
 }
 
 // Show the uploaded file
 // This will work if you uncomment the appropriate lines in testform.html
 void
-showFile(const Cgicc *formData) {
-  cout << h2() << "File Uploaded via "
-       << a("FormFile",add("href", CGICC_DOCDIR "/FormFile.html"))
-       << h2() << endl;
-  const FormFile *file = (FormFile*) formData->findEntryByName("userfile");
-  if(file != NULL) {
-    cout << div_(add("align","center")) << endl;
+showFile(const Cgicc& formData) 
+{
+  cout << h2("File Uploaded via FormFile") << endl;
+  
+  STDNS vector<FormFile>::const_iterator file;
+  file = formData.getFile("userfile");
+				
+  if(file != formData.getFiles().end()) {
+    cout << CGICCNS div(add("align","center")) << endl;
     
     cout << table(add("border","0").add("rules","none").add("frame","void")
 		  .add("cellspacing","2").add("cellpadding","2")
@@ -514,40 +540,26 @@ showFile(const Cgicc *formData) {
     cout << colgroup() << endl;
     
     cout << tr() << td("Name", add("class","title"))
-	 << td(file->getName(), add("class","data3")) << tr() << endl;
-    cout << tr() << td("Data Type", add("class","title"));
-    bool isImage = false;
-    if(file->getDataType() != NULL) {
-      if(stringsAreEqual("image",file->getDataType(),strlen("image"),true))
-	isImage = true;
-      cout << td(file->getDataType(), add("class","data3")) << tr() << endl;
-    }
-    else
-      cout << td("[unknown]", add("class","data3")) << tr() << endl;
+	 << td((*file).getName(), add("class","data")) << tr() << endl;
+
+    cout << tr() << td("Data Type", add("class","title"))
+	 << td((*file).getDataType(), add("class","data")) << tr() << endl;
+    
     cout << tr() << td("Filename", add("class","title")) 
-	 << td(file->getFilename(), add("class","data3")) << tr() << endl;
+	 << td((*file).getFilename(), add("class","data")) << tr() << endl;
     cout << tr() << td("Data Length", add("class","title")) 
-	 << td(add("class","data3")) << file->getDataLength() 
+	 << td(add("class","data")) << (*file).getDataLength() 
 	 << td() << tr() << endl;
     
-    if(isImage) {
-      ofstream temp("/usr/home/sbooth/public_html/temp");
-      cout << tr() << td("File Data", add("class","title"))
-	   << td(add("class","data2")) << "<IMG SRC=\""CGICC_DOCDIR "/temp\">";
-      file->writeToStream(temp);
-      cout << td() << tr() << endl;
-    }
-    else {
-      cout << tr() << td("File Data", add("class","title"))
-	   << td(add("class","data2")) << pre();
-      file->writeToStream(cout);
-      cout << pre() << td() << tr() << endl;
-    }
+    cout << tr() << td("File Data", add("class","title"))
+	 << td(add("class","data")) << pre();
+    (*file).writeToStream(cout);
+    cout << pre() << td() << tr() << endl;
     
-    cout << table() << div_() << endl;
+    cout << table() << CGICCNS div() << endl;
   }
   else {
-    cout << p() << div_(add("class", "notice")) << endl;
-    cout << "No file was uploaded." << endl << div_() << p() << endl;
+    cout << p() << CGICCNS div(add("class", "notice")) << endl;
+    cout << "No file was uploaded." << endl << CGICCNS div() << p() << endl;
   }
 }

@@ -1,27 +1,31 @@
 /*
- *  $Id: dns.cc,v 1.2 1998/12/11 01:39:40 sbooth Exp $
+ *  $Id: dns.cc,v 1.3 1999/04/26 22:49:38 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <cstdlib>
+#include <new>
+#include <vector>
+
+#include "CgiDefs.hh"
+#include "CgiException.hh"
 #include "HTMLClasses.hh"
 #include "Cgicc.hh"
-
-#include "Exception.hh"
 
 #if HAVE_UNAME
 #include <sys/utsname.h>
@@ -37,24 +41,22 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#include <stdlib.h>
-
 // To use logging, the variable gLogFile MUST be defined, and it _must_
 // be an ofstream
 #if DEBUG
 ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
 
-// define the location of the Cgicc documentation (for linking)
-// this should be a partial URI.  so, if the URI to the documentation
-// is http://www.lmi.net/~sbooth/cgicc/, this should be /~sbooth/cgicc
-// (note there is no trailing /)
-#define CGICC_DOCDIR "/change_this_path"
-
 // DNS gateway cgi
 int
-main(int argc, char **argv)
+main(int argc, 
+     char **argv)
 {
+#if USE_NAMESPACES
+  // use Cgicc namespace
+  using namespace cgicc;
+#endif
+
   try {
 #if HAVE_GETTIMEOFDAY
     timeval start;
@@ -70,40 +72,52 @@ main(int argc, char **argv)
     // produced HTML. These are optional, and except in <PRE>
     // tags have no effect on HTML appearance.
     cout << head() << endl;
+
+    // Output the style sheet portion of the header
+    cout << style() << comment() << endl;
+    cout << "BODY { color: black; background-color: white; }" << endl;
+    cout << "HR.half { width: 60%; align: center; }" << endl;
+    cout << "SPAN.red, STRONG.red { color: red; }" << endl;
+    cout << "DIV.smaller { font-size: small; }" << endl;
+    cout << "DIV.dns { border: solid thin; margin: 1em 0; "
+	 << "background: #DDD; text-align: center; }" << endl;
+    cout << "SPAN.blue { color: blue; }" << endl;
+    cout << "COL.title { color: white; background-color: black; ";
+    cout << "font-weight: bold; text-align: center; }" << endl;
+    cout << "COL.data { background-color: #DDD; text-align: left; }" << endl;
+    cout << comment() << style() << endl;
+
     cout << title("DNS Gateway") << endl;
     cout << meta(add("name", "author")
 		 .add("content", "Stephen F. Booth")) << endl;
-    
-    cout << link_(add("href", CGICC_DOCDIR "/cgicc.css")
-		  .add("rel","stylesheet")) << endl;
     cout << head() << endl;
     
     cout << h1() << "Cgi" << span("cc", add("class","red"))
 	 << " DNS Gateway" << h1() << endl;
   
-    LinkedList <FormEntry>::Iterator ip = cgi.getElement("ip");
-    LinkedList <FormEntry>::Iterator name = cgi.getElement("hostname");
+    STDNS vector<FormEntry>::iterator ip = cgi.getElement("ip");
+    STDNS vector<FormEntry>::iterator name = cgi.getElement("hostname");
 
-    if(ip.isValid()) {
+    if(ip != (*cgi).end()) {
       cout << h3() << "Query results for " << **ip << h3() << endl;
       
       u_long addr;
       struct hostent *hp;
       char **p;
       
-      if((int)(addr = inet_addr(**ip)) == -1) {
-	cout << div_(add("class", "dns")) << endl
+      if((int)(addr = inet_addr((**ip).c_str())) == -1) {
+	cout << CGICCNS div(add("class", "dns")) << endl
 	     << strong(span("ERROR", add("class","red")))
 	     << " - IP address must be of the form x.x.x.x"
-	     << endl << div_() << endl;
+	     << endl << CGICCNS div() << endl;
       }
       else {
 	hp = gethostbyaddr((char*)&addr, sizeof (addr), AF_INET);
 	if(hp == NULL) {
-	  cout << div_(add("class", "dns")) << endl
+	  cout << CGICCNS div(add("class", "dns")) << endl
 	       << strong(span("ERROR", add("class","red"))) 
-	       << " - Host information for " << em(**ip) << " not found."
-	       << endl << div_() << endl;
+	       << " - Host information for " << em((**ip)) << " not found."
+	       << endl << CGICCNS div() << endl;
 	}
 	else {
 	  for(p = hp->h_addr_list; *p != 0; p++) {
@@ -112,31 +126,31 @@ main(int argc, char **argv)
 	    
 	    (void) memcpy(&in.s_addr, *p, sizeof(in.s_addr));
 	    
-	    cout << div_(add("class", "dns")) << endl
+	    cout << CGICCNS div(add("class", "dns")) << endl
 		 << span(inet_ntoa(in), add("class","blue")) 
 		 << " - " << ' ' << hp->h_name;
 	    //for(q = hp->h_aliases; *q != 0; q++)
 	    //	    cout << *q << ' ';
-	    cout << endl << div_() << endl;
+	    cout << endl << CGICCNS div() << endl;
 	  }
 	}
       }
     }
     
 
-    if(name.isValid()) {
+    if(name != (*cgi).end()) {
       cout << h3() << "Query results for " << **name << h3() << endl;
       
       u_long addr;
       struct hostent *hp;
       char **p;
       
-      hp = gethostbyname(**name);
+      hp = gethostbyname((**name).c_str());
       if(hp == NULL) {
-	cout << div_(add("class", "dns")) << endl
+	cout << CGICCNS div(add("class", "dns")) << endl
 	     << strong(span("ERROR", add("class","red")))
 	     << " - Host information for " << em(**name) << " not found."
-	     << endl << div_() << endl;
+	     << endl << CGICCNS div() << endl;
       }
       else {
 	for(p = hp->h_addr_list; *p != 0; p++) {
@@ -145,12 +159,12 @@ main(int argc, char **argv)
 	  
 	  (void) memcpy(&in.s_addr, *p, sizeof(in.s_addr));
 	  
-	  cout << div_(add("class", "dns")) << endl
+	  cout << CGICCNS div(add("class", "dns")) << endl
 	       << inet_ntoa(in) << " - " << ' ' 
 	       << span(hp->h_name, add("class","blue"));
 	  //	for(q = hp->h_aliases; *q != 0; q++)
 	  //	  cout << *q << ' ';
-	  cout << endl << div_() << endl;
+	  cout << endl << CGICCNS div() << endl;
 	}
       }
     }
@@ -160,8 +174,7 @@ main(int argc, char **argv)
     cout << table(add("border","0")
 		  .add("rules","none")
 		  .add("frame","void")
-		  .add("cellspacing","2").add("cellpadding","2")
-		  .add("class","cgi")) << endl;
+		  .add("cellspacing","2").add("cellpadding","2")) << endl;
     cout << colgroup(add("span","2")) << endl;
     cout << col(add("align","center")
 		.add("class","title")
@@ -172,26 +185,26 @@ main(int argc, char **argv)
     cout << colgroup() << endl;
     
     cout << "<FORM METHOD=\"POST\" ACTION=\"http://"
-	 << cgi.getEnvironment()->getServerName()
-	 << cgi.getEnvironment()->getScriptName() << "\">" << endl;
+	 << cgi.getEnvironment().getServerName()
+	 << cgi.getEnvironment().getScriptName() << "\">" << endl;
     
     cout << tr() << endl;
     cout << td(strong("IP Address: ")) << endl;
     cout << td() << "<INPUT TYPE=\"TEXT\" NAME=\"ip\"";
-    if(ip.isValid())
+    if(ip != (*cgi).end())
       cout << " VALUE=\"" << **ip << "\">";
     else
       cout << ">";
     cout << td() << tr() << "</FORM>" << endl;
     
     cout << "<FORM METHOD=\"POST\" ACTION=\"http://"
-	 << cgi.getEnvironment()->getServerName()
-	 << cgi.getEnvironment()->getScriptName() << "\">" << endl;
+	 << cgi.getEnvironment().getServerName()
+	 << cgi.getEnvironment().getScriptName() << "\">" << endl;
     
     cout << tr() << endl;
     cout << td(strong("Hostname: ")) << endl;
     cout << td() << "<INPUT TYPE=\"TEXT\" NAME=\"hostname\"";
-    if(name.isValid())
+    if(name != (*cgi).end())
       cout << " VALUE=\"" << **name << "\">";
     else
       cout << ">";
@@ -199,28 +212,21 @@ main(int argc, char **argv)
     cout << "</FORM>" << table() << p() << endl;
     
     // Now print cout a footer with some fun info
-    cout << div_(add("align","center"));
+    cout << CGICCNS div(add("align","center"));
     cout << p() << "You may view the ";
-    cout << a("source code", add("href", CGICC_DOCDIR "/dns.cc"));
+    cout << a("source code", add("href", "dns.cc"));
     cout << " of this application." << p() << endl;
+    cout << CGICCNS div() << br() << hr(add("class","half")) << endl;
 
-    cout << a("Cgicc Documentation", add("href", CGICC_DOCDIR "/index.html"))
-	 << " | " 
-	 << a("Alphabetic Index of Classes", 
-	      add("href", CGICC_DOCDIR "/aindex.html"))
-	 << " | " 
-	 << a("Class Hierarchy",add("href", CGICC_DOCDIR "/HIER.html")) 
-	 << endl;
-    cout << div_() << br() << hr(add("class","half")) << endl;
-
-    cout << div_(add("align","center").add("class","smaller")) << endl;
-    cout << "Cgi" << span("cc",add("class","red")) << " v";
-    cout << cgi.getCgiccVersion();
+    cout << CGICCNS div(add("align","center").add("class","smaller")) << endl;
+    cout << "GNU Cgi" << span("cc",add("class","red")) << " v"
+	 << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth", 
 			add("href", "http://www.lmi.net/~sbooth/")) << br();
-    cout << "Compiled at " << cgi.getCompileTime();
-    cout << " on " << cgi.getCompileDate();
+    cout << "Compiled at " << cgi.getCompileTime() 
+	 << " on " << cgi.getCompileDate() << br();
     
+    cout << "Configured for " << cgi.getHost();  
     // I don't know if everyone has uname...
 #if HAVE_UNAME
     struct utsname info;
@@ -245,12 +251,12 @@ main(int argc, char **argv)
 #endif
     
     // End of document
-    cout << div_() << endl;
+    cout << CGICCNS div() << endl;
     cout << body() << html() << endl;
 
     return EXIT_SUCCESS;
   }
 
-  catch(const Exception& e) {
+  catch(const CgiException& e) {
   }
 }
