@@ -1,3 +1,19 @@
+2002-02-04  Stephen F. Booth  <sbooth@gnu.org>
+
+	* win/cgicc.dsp: Modified for version 3.2
+	* win/cgicc.dsw: Modified for version 3.2
+	* win/cookie.dsp: Added
+	* win/dns.dsp: Modified for version 3.2
+	* win/example.dsp: Modified for version 3.2
+	* win/test.dsp: Modified for version 3.2
+	* win/upload.dsp: Added
+	* THANKS: Thanks to Quintin Connell
+
+2002-01-19  Stephen F. Booth  <sbooth@gnu.org>
+
+	* demo/Makefile.am: Distribute cookie.html, cgicc.css
+	* demo/cgicc.css: Added
+
 2002-01-09  Stephen F. Booth  <sbooth@gnu.org>
 
 	* README: Updated for 3.2
