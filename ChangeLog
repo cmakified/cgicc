@@ -1,3 +1,12 @@
+2001-03-05  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/Cgicc.cpp: Parse content type correctly for uploaded 
+	files (bug fix submitted by fine@netease.com)
+
+2001-03-03  Stephen F. Booth  <sbooth@gnu.org>
+
+	* demo/README: Fixed a spelling error
+
 2000-11-15  Stephen F. Booth  <sbooth@gnu.org>
 
 	* configure.in: DEBUG should be off by default
@@ -6,6 +15,7 @@
 	* info/support.texinfo: Modified mailing list info
 	* info/reporting-bugs.texinfo: Modified mailing list info
 	* NEWS: Added blurb about FDL
+	* demo/Makefile.am: Distribute test.html
 
 2000-11-14  Stephen F. Booth  <sbooth@gnu.org>
 
