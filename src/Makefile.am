@@ -1,3 +1,5 @@
+# $Id: Makefile.am,v 1.2 1998/12/10 02:05:10 sbooth Exp $
+
 CLEANFILES = *~
 
 lib_LTLIBRARIES = libCgicc.la
@@ -6,6 +8,7 @@ FormEntry.cc FormFile.cc HTMLAttributes.cc HTMLDirLang.cc HTMLElements.cc \
 HTMLForms.cc HTMLFrames.cc HTMLGlobal.cc HTMLGraphics.cc HTMLLinks.cc \
 HTMLLists.cc HTMLObjects.cc HTMLScripts.cc HTMLStyles.cc HTMLTables.cc \
 HTMLText.cc HTTPHeaders.cc MStreamable.cc
+libCgicc_la_LDFLAGS = -version-info 0:0:0
 
 include_HEADERS = CgiDefs.hh CgiEnvironment.hh Cgicc.hh Exception.hh \
 FormEntry.hh FormFile.hh HTMLAttributes.hh HTMLClasses.hh HTMLDirLang.hh \
