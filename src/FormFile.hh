@@ -1,4 +1,4 @@
-/* $Id: FormFile.hh,v 1.1 1998/04/01 20:46:37 sbooth Exp $ */
+/* $Id: FormFile.hh,v 1.2 1998/04/02 11:09:34 sbooth Exp $ */
 
 #ifndef __FORM_FILE__
 #define __FORM_FILE__ 1
@@ -18,8 +18,6 @@
 /** 
  * Immutable class representing a file uploaded via the HTTP file upload 
  * mechanism.
- * @see FormEntry
- * @see CgiForm
  */
 class FormFile : public FormEntry
 {

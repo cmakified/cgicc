@@ -1,4 +1,4 @@
-/* $Id: FormEntry.hh,v 1.1 1998/04/01 20:45:46 sbooth Exp $ */
+/* $Id: FormEntry.hh,v 1.2 1998/04/02 11:09:34 sbooth Exp $ */
 
 #ifndef __FORM_ENTRY__
 #define __FORM_ENTRY__ 1
@@ -15,11 +15,7 @@
 #include "CgiDefs.hh"
 #endif
 
-/** 
- * Immutable class representing a single HTML form entry (name/value pair).
- * @see FormFile
- * @see CgiForm
- */
+/** Immutable class representing a single HTML form entry (name/value pair). */
 class FormEntry : public MStreamable
 {
 public:
@@ -50,16 +46,68 @@ public:
   //@{
   
   /**
-   * Get the name of the form element
-   * @return The name of the form element
+   * Get the name of the form element.
+   * @return The name of the form element.
    */
   const char* getName() const	{ return fName; }
   
   /**
-   * Get the value of the form element
-   * @return The value of the form element
+   * Get the value of the form element.
+   * The value may contain line breaks.
+   * @return The value of the form element.
    */
   const char* getValue() const	{ return fValue; }
+
+  /**
+   * Get the value of the form element, truncated to a specific length.
+   * The value may contain line breaks.<BR>
+   * <STRONG CLASS="red">It is the caller's responsibility to delete 
+   * <TT>value</TT> when it is no longer needed.</STRONG>
+   * @param maxChars The maximum number of characters to return.
+   * @param value The location to store the result.
+   * @exception Exception
+   */
+  void getValue(int 	maxChars,
+		char* 	&value) const throw(Exception);
+
+  /**
+   * Get the value of the form element, stripped of all line breaks.
+   * <BR><STRONG CLASS="red">It is the caller's responsibility to delete 
+   * <TT>value</TT> when it is no longer needed.</STRONG>
+   * @param value The location to store the result.
+   * @exception Exception
+   */
+  void getValueStripped(char* &value) const throw(Exception);
+
+  /**
+   * Get the value of the form element, stripped of all line breaks
+   * and truncated to a specific length.
+   * <BR><STRONG CLASS="red">It is the caller's responsibility to delete 
+   * <TT>value</TT> when it is no longer needed.</STRONG>
+   * @param maxChars The maximum number of characters to return.
+   * @param value The location to store the result.
+   * @exception Exception
+   */
+  void getValueStripped(int 	maxChars,
+			char* 	&value) const throw(Exception);
+
+  /**
+   * Get the value of the form element as an integer.
+   * @param min The minimum value to return (optional).
+   * @param max The maximum value to return (optional).
+   * @return The integer value of the form element.
+   */
+  int getIntegerValue(int min = INT_MIN, 
+		      int max = INT_MAX) const;
+
+  /**
+   * Get the value of the form element as a double.
+   * @param min The minimum value to return (optional).
+   * @param max The maximum value to return (optional).
+   * @return The double value of the form element.
+   */
+  double getDoubleValue(double min = DBL_MIN, 
+			double max = DBL_MAX) const;
   //@}
   
 protected:
@@ -67,6 +115,12 @@ protected:
   FormEntry() : fName(NULL), fValue(NULL) {}
 
 private:  
+  /* Utility function to optionally truncate and/or strip newlines
+     Returns: -1 = truncated, 0 = source string empty, 1 = OK */
+  int makeString(char*	&result, 
+		 int 	maxLen, 
+		 int 	allowNewlines) const;
+
   char		*fName;		/* the name of this form element */
   char		*fValue;	/* the value of this form element */
 };
