@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.3 1999/08/10 17:56:16 sbooth Exp $
+ *  $Id: dns.cpp,v 1.4 1999/08/10 18:51:50 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -72,7 +72,7 @@ main(int argc,
     Cgicc cgi;
     
     cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
-    cout << html(set("lang","EN").set("dir","LTR")) << endl;
+    cout << html().set("lang","EN").set("dir","LTR") << endl;
     
     // Set up the page; I will put in lfs to ease reading of the
     // produced HTML. These are optional, and except in <PRE>
@@ -94,11 +94,11 @@ main(int argc,
     cout << comment() << style() << endl;
 
     cout << title("DNS Gateway") << endl;
-    cout << meta(set("name", "author")
-		 .set("content", "Stephen F. Booth")) << endl;
+    cout << meta().set("name", "author")
+		  .set("content", "Stephen F. Booth") << endl;
     cout << head() << endl;
     
-    cout << h1() << "Cgi" << span("cc", set("class","red"))
+    cout << h1() << "Cgi" << span("cc").set("class","red")
 	 << " DNS Gateway" << h1() << endl;
   
     STDNS vector<FormEntry>::iterator ip = cgi.getElement("ip");
@@ -112,16 +112,16 @@ main(int argc,
       char **p;
       
       if((int)(addr = inet_addr((**ip).c_str())) == -1) {
-	cout << CGICCNS div(set("class", "dns")) << endl
-	     << strong(span("ERROR", set("class","red")))
+	cout << CGICCNS div().set("class", "dns") << endl
+	     << strong(span("ERROR").set("class","red"))
 	     << " - IP address must be of the form x.x.x.x"
 	     << endl << CGICCNS div() << endl;
       }
       else {
 	hp = gethostbyaddr((char*)&addr, sizeof (addr), AF_INET);
 	if(hp == NULL) {
-	  cout << CGICCNS div(set("class", "dns")) << endl
-	       << strong(span("ERROR", set("class","red"))) 
+	  cout << CGICCNS div().set("class", "dns") << endl
+	       << strong(span("ERROR").set("class","red")) 
 	       << " - Host information for " << em((**ip)) << " not found."
 	       << endl << CGICCNS div() << endl;
 	}
@@ -132,8 +132,8 @@ main(int argc,
 	    
 	    (void) memcpy(&in.s_addr, *p, sizeof(in.s_addr));
 	    
-	    cout << CGICCNS div(set("class", "dns")) << endl
-		 << span(inet_ntoa(in), set("class","blue")) 
+	    cout << CGICCNS div().set("class", "dns") << endl
+		 << span(inet_ntoa(in)).set("class","blue") 
 		 << " - " << ' ' << hp->h_name;
 	    //for(q = hp->h_aliases; *q != 0; q++)
 	    //	    cout << *q << ' ';
@@ -152,8 +152,8 @@ main(int argc,
       
       hp = gethostbyname((**name).c_str());
       if(hp == NULL) {
-	cout << CGICCNS div(set("class", "dns")) << endl
-	     << strong(span("ERROR", set("class","red")))
+	cout << CGICCNS div().set("class", "dns") << endl
+	     << strong(span("ERROR").set("class","red"))
 	     << " - Host information for " << em(**name) << " not found."
 	     << endl << CGICCNS div() << endl;
       }
@@ -164,9 +164,9 @@ main(int argc,
 	  
 	  (void) memcpy(&in.s_addr, *p, sizeof(in.s_addr));
 	  
-	  cout << CGICCNS div(set("class", "dns")) << endl
+	  cout << CGICCNS div().set("class", "dns") << endl
 	       << inet_ntoa(in) << " - " << ' ' 
-	       << span(hp->h_name, set("class","blue"));
+	       << span(hp->h_name).set("class","blue");
 	  //	for(q = hp->h_aliases; *q != 0; q++)
 	  //	  cout << *q << ' ';
 	  cout << endl << CGICCNS div() << endl;
@@ -176,17 +176,17 @@ main(int argc,
     
     cout << p("Please enter an IP address or a hostname.") << endl;
     
-    cout << table(set("border","0")
-		  .set("rules","none")
-		  .set("frame","void")
-		  .set("cellspacing","2").set("cellpadding","2")) << endl;
-    cout << colgroup(set("span","2")) << endl;
-    cout << col(set("align","center")
-		.set("class","title")
-		.set("span","1")) << endl;
-    cout << col(set("align","left")
-		.set("class","data")
-		.set("span","1")) << endl;
+    cout << table().set("border","0")
+		   .set("rules","none")
+		   .set("frame","void")
+		   .set("cellspacing","2").set("cellpadding","2") << endl;
+    cout << colgroup().set("span","2") << endl;
+    cout << col().set("align","center")
+		 .set("class","title")
+		 .set("span","1") << endl;
+    cout << col().set("align","left")
+		 .set("class","data")
+		 .set("span","1") << endl;
     cout << colgroup() << endl;
     
     cout << "<FORM METHOD=\"POST\" ACTION=\"http://"
@@ -217,17 +217,12 @@ main(int argc,
     cout << "</FORM>" << table() << p() << endl;
     
     // Now print cout a footer with some fun info
-    cout << CGICCNS div(set("align","center"));
-    cout << p() << "You may view the ";
-    cout << a("source code", set("href", "dns.cc"));
-    cout << " of this application." << p() << endl;
-    cout << CGICCNS div() << br() << hr(set("class","half")) << endl;
-
-    cout << CGICCNS div(set("align","center").set("class","smaller")) << endl;
-    cout << "GNU Cgi" << span("cc",set("class","red")) << " v"
+    cout << hr(set("class","half")) << endl;
+    cout << CGICCNS div().set("align","center").set("class","smaller") << endl;
+    cout << "GNU Cgi" << span("cc").set("class","red") << " v"
 	 << cgi.getVersion();
-    cout << " by " << a("Stephen F. Booth", 
-			set("href", "http://www.lmi.net/~sbooth/")) 
+    cout << " by " << a("Stephen F. Booth")
+			.set("href", "http://www.lmi.net/~sbooth/") 
 	 << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime() 
 	 << " on " << cgi.getCompileDate() << br() << endl;
