@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.16 1999/08/07 00:39:15 sbooth Exp $
+## $Id: Makefile.am,v 1.17 1999/08/09 18:36:43 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip
 
@@ -18,7 +18,7 @@ dist-hook:
 	test -d $(distdir)/example || mkdir $(distdir)/example || exit 1
 	cp -p $(srcdir)/example/README $(distdir)/example
 	cp -p $(srcdir)/example/Makefile.in $(distdir)/example
-	cp -p $(srcdir)/example/yourSource.cc $(distdir)/example
+	cp -p $(srcdir)/example/yourSource.cpp $(distdir)/example
 	test -d $(distdir)/support || mkdir $(distdir)/support || exit 1
 	cp -p $(srcdir)/support/config.guess $(distdir)/support
 	cp -p $(srcdir)/support/config.sub $(distdir)/support
