@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.cc,v 1.4 1999/08/03 17:43:46 sbooth Exp $
+ *  $Id: HTMLAttributes.cc,v 1.5 1999/08/07 00:15:15 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -95,11 +95,19 @@ CGICCNS HTMLAttributeList::HTMLAttributeList(const HTMLAttribute& head)
 }
 
 CGICCNS HTMLAttributeList::HTMLAttributeList(const HTMLAttributeList& list)
-  : fAttributes(list.fAttributes)
-{}
+{
+  this->operator=(list);
+}
 
 CGICCNS HTMLAttributeList::~HTMLAttributeList()
 {}
+
+CGICCNS HTMLAttributeList&
+CGICCNS HTMLAttributeList::operator= (const HTMLAttributeList& list)
+{
+  fAttributes = list.fAttributes;
+  return *this;
+}
 
 CGICCNS HTMLAttributeList&
 CGICCNS HTMLAttributeList::set(const STDNS string& name)

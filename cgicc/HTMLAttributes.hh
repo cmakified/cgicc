@@ -1,5 +1,5 @@
 /*
- *  $Id: HTMLAttributes.hh,v 1.4 1999/08/03 17:43:46 sbooth Exp $
+ *  $Id: HTMLAttributes.hh,v 1.5 1999/08/07 00:15:15 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -193,8 +193,14 @@ public:
   HTMLAttributeList(const HTMLAttributeList& list);
 
   /** Destructor */
-  virtual ~HTMLAttributeList();
+  ~HTMLAttributeList();
 
+
+  /**
+   * Assign one HTMLAttributeList to another.
+   */
+  HTMLAttributeList&
+  operator= (const HTMLAttributeList &list);
   
   /** 
    * Set an HTMLAtomicAttribute on an HTMLElement.
@@ -214,7 +220,7 @@ public:
   set(const STDNS string& name, 
       const STDNS string& value);
   
-  /* Render this attribute list */
+  /** Render this HTMLAttributeList */
   void 
   render(STDNS ostream& out) 				const;
 
