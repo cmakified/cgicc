@@ -1,4 +1,6 @@
-# $Id: Makefile.am,v 1.1 1998/12/10 02:06:46 sbooth Exp $
+# $Id: Makefile.am,v 1.2 1998/12/10 02:07:30 sbooth Exp $
+
+CLEANFILES = *~
 
 EXTRA_DIST = cgicc.css testform.html lmi-logo.gif
 
