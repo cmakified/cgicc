@@ -1,7 +1,21 @@
+2001-03-06  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.in: Increment version to 3.1.6
+	* cgicc/Makefile.am: Increment libtool version
+	* Makefile.am: Added MAINTAINERCLEANFILES
+	* THANKS: Thanks to Gilbert Fine
+	* demo/test.html: Updated for the times :P
+
 2001-03-05  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/Cgicc.cpp: Parse content type correctly for uploaded 
 	files (bug fix submitted by fine@netease.com)
+	* cgicc/Cgicc.h: Added support for external reader functions
+	* cgicc/Cgicc.cpp: Added support for external reader functions
+	* cgicc/CgiEnvironment.h: Added support for external reader functions
+	* cgicc/CgiEnvironment.cpp: Added support for external reader functions
+	* info/class-cgicc.texinfo: Documentation for external readers
+	* info/class-cgienv.texinfo: Documentation for external readers
 
 2001-03-03  Stephen F. Booth  <sbooth@gnu.org>
 
