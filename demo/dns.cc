@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cc,v 1.2 1999/04/26 23:27:17 sbooth Exp $
+ *  $Id: dns.cc,v 1.3 1999/05/10 19:12:56 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -21,9 +21,10 @@
 #include <cstdlib>
 #include <new>
 #include <vector>
+#include <stdexcept>
+#include <iostream>
 
 #include "CgiDefs.hh"
-#include "CgiException.hh"
 #include "HTMLClasses.hh"
 #include "Cgicc.hh"
 
@@ -258,6 +259,6 @@ main(int argc,
     return EXIT_SUCCESS;
   }
 
-  catch(const CgiException& e) {
+  catch(const STDNS exception& e) {
   }
 }

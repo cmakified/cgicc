@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cc,v 1.2 1999/04/26 23:27:18 sbooth Exp $
+ *  $Id: test.cc,v 1.3 1999/05/10 19:12:57 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -21,10 +21,11 @@
 #include <new>
 #include <string>
 #include <vector>
+#include <stdexcept>
+#include <iostream>
 #include <cstdlib>
 
 #include "CgiDefs.hh"
-#include "CgiException.hh"
 #include "Cgicc.hh"
 #include "HTMLClasses.hh"
 
@@ -67,9 +68,9 @@ main(int argc,
     // Create a new Cgicc object containing all the CGI data
     Cgicc cgi;
     
-    // If the user wants to throw an Exception, go ahead and do it
+    // If the user wants to throw an exception, go ahead and do it
     if(cgi.queryCheckbox("throw") && ! cgi.queryCheckbox("restore"))
-      throw CgiException("User-requested Exception thrown in main()", ERRINFO);
+      throw STDNS runtime_error("User-requested Exception thrown in main()");
     
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
     cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
@@ -224,7 +225,7 @@ main(int argc,
   }
 
   // Did any errors occur?
-  catch(const CgiException& e) {
+  catch(const STDNS exception& e) {
 
     // This is a dummy exception handler, as it doesn't really do
     // anything except print out information.
@@ -250,30 +251,12 @@ main(int argc,
     cout << "BODY { color: black; background-color: white; }" << endl;
     cout << "HR.half { width: 60%; align: center; }" << endl;
     cout << "SPAN.red, STRONG.red { color: red; }" << endl;
-    cout << "DIV.smaller { font-size: small; }" << endl;
     cout << "DIV.notice { border: solid thin; padding: 1em; margin: 1em 0; "
 	 << "background: #DDD; }" << endl;
-    cout << "SPAN.blue { color: blue; }" << endl;
-    cout << "COL.title { color: white; background-color: black; ";
-    cout << "font-weight: bold; text-align: center; }" << endl;
-    cout << "COL.data { background-color: #DDD; text-align: left; }" << endl;
-    cout << "TD.data, TR.data {	background-color: #DDD;	text-align: left; }"
-	 << endl;
-    cout << "TD.grayspecial { background-color: #DDD; text-align: left; }"
-	 << endl;
-    cout << "TD.ltgray, TR.ltgray { background-color: #DDD; }" << endl;
-    cout << "TD.dkgray, TR.dkgray { background-color: #BBB; }" << endl;
-    cout << "COL.black, TD.black, TD.title, TR.title { color: white; " 
-	 << "background-color: black; font-weight: bold; text-align: center; }"
-	 << endl;
-    cout << "COL.gray, TD.gray { background-color: #DDD; text-align: center; }"
-	 << endl;
-    cout << "TABLE.cgi { left-margin: auto; right-margin: auto; width: 90%; }"
-	 << endl;
 
     cout << comment() << style() << endl;
 
-    cout << title("GNU Cgicc CgiException") << endl;
+    cout << title("GNU Cgicc exception") << endl;
     cout << meta(add("name", "author")
 		 .add("content", "Stephen F. Booth")) << endl;
     cout << head() << endl;
@@ -281,31 +264,15 @@ main(int argc,
     cout << body() << endl;
     
     cout << h1() << "GNU Cgi" << span("cc", add("class","red"))
-	 << " caught a CgiException" << h1() << endl; 
+	 << " caught an exception" << h1() << endl; 
   
-    cout << CGICCNS div(add("align","center")) << endl;
-  
-    cout << table(add("border","0").add("rules","none").add("frame","void")
-		  .add("cellspacing","2").add("cellpadding","2")
-		  .add("class","cgi")) << endl;
-    cout << colgroup(add("span","2")) << endl;
-    cout << col(add("align","center").add("class","title").add("span","1")) 
-	 << endl;
-    cout << col(add("align","left").add("class","data").add("span","1")) 
-	 << endl;
-    cout << colgroup() << endl;
-    
-    cout << tr() << td("Message", add("class","title")) 
-	 << td(e.getMessage(), add("class","data")) << tr() << endl;
-    cout << tr() << td("File", add("class","title")) 
-	 << td(e.getFile(), add("class","data")) << tr() << endl;
-    cout << tr() << td("Line", add("class","title")) 
-	 << td(add("class","data")) << e.getLine() << td() << tr() << endl;
+    cout << CGICCNS div(add("align","center").add("class","notice")) << endl;
 
-    cout << table() << CGICCNS div() << endl;
-    
+    cout << h2(e.what()) << endl;
+
     // End of document
     cout << CGICCNS div() << endl;
+    cout << hr(add("class","half")) << endl;
     cout << body() << html() << endl;
     
     return EXIT_SUCCESS;
