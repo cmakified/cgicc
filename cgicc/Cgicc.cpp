@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.2 1999/08/10 00:40:03 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.3 1999/08/16 18:02:39 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -335,26 +335,6 @@ CGICCNS Cgicc::findEntries(const STDNS string& param,
   // empty the target vector
   result.clear();
 
-#ifdef _MSC_VER
-  // Workaround for Microsoft C++ compiler bug, which is unable to instantiate
-  // the copy_if() template functions.
-  if(byName) {
-    STDNS vector<FormEntry>::const_iterator i = fFormData.begin();
-    while(i != fFormData.end()) {
-      if(stringsAreEqual((*i).getName(), param))
-        result.push_back(*i);
-      ++i;
-    }
-  }
-  else {
-    STDNS vector<FormEntry>::const_iterator i = fFormData.begin();
-    while(i != fFormData.end()) {
-      if(stringsAreEqual((*i).getValue(), param))
-        result.push_back(*i);
-      ++i;
-    }
-  }
-#else
   if(byName)
     copy_if(fFormData.begin(), 
 	    fFormData.end(), 
@@ -365,7 +345,7 @@ CGICCNS Cgicc::findEntries(const STDNS string& param,
 	    fFormData.end(), 
 	    STDNS back_inserter(result),
 	    FE_valueCompare(param));
-#endif 
+
   return ! result.empty();
 }
 

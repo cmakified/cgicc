@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.3 1999/08/10 00:40:04 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.4 1999/08/16 18:02:40 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -51,6 +51,11 @@
 #include "cgicc/CgiEnvironment.h"
 
 CGICC_BEGIN_NAMESPACE
+
+#ifdef WIN32
+  template class CGICC_API STDNS vector<FormEntry>;
+  template class CGICC_API STDNS vector<FormFile>;
+#endif
   
 class MultipartHeader;
 
