@@ -1,4 +1,4 @@
-/* $Id: HTTPHeaders.cc,v 1.2 1998/02/23 09:30:36 sbooth Exp $ */
+/* $Id: HTTPHeaders.cc,v 1.3 1998/04/01 20:52:04 sbooth Exp $ */
 
 #include "HTTPHeaders.hh"
 
@@ -17,6 +17,9 @@ HTMLDoctype::render(ostream &out) const {
   out << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0";
   
   switch(fType) {
+  case eStrict:
+    break;
+
   case eTransitional:
     out << " Transitional";
     break;
@@ -64,6 +67,20 @@ HTTPCookie::HTTPCookie(const char *name,
     setPath(path);
   if(domain != NULL)
     setDomain(domain);
+}
+
+HTTPCookie::HTTPCookie(const HTTPCookie& cookie) 
+  : fName(NULL), fValue(NULL), fExpires(NULL), fPath(NULL), 
+    fDomain(NULL), fSecure(cookie.isSecure())
+{
+  setName(cookie.getName());
+  setValue(cookie.getValue());
+  if(cookie.getExpires() != NULL)
+    setExpires(cookie.getExpires());
+  if(cookie.getPath() != NULL)
+    setPath(cookie.getPath());
+  if(cookie.getDomain() != NULL)
+    setDomain(getDomain());
 }
 
 HTTPCookie::~HTTPCookie() {
@@ -116,7 +133,7 @@ HTTPCookie::render(ostream& out) const {
     out << " path=" << getPath() << ';';
   if(getDomain() != NULL)
     out << " domain=" << getDomain() << ';';
-  if(getSecure() == true)
+  if(isSecure())
     out << " secure";
   
   out << endl;
@@ -130,6 +147,11 @@ HTTPHeader::HTTPHeader(const char *data) throw(Exception)
 {
   if(data != NULL)
     setData(data);
+}
+
+HTTPHeader::HTTPHeader(const HTTPHeader& header) {
+  if(header.getData() != NULL)
+    setData(header.getData());
 }
 
 HTTPHeader::~HTTPHeader() {
@@ -185,7 +207,7 @@ HTTPStatusHeader::HTTPStatusHeader() throw(Exception)
 
 HTTPStatusHeader::HTTPStatusHeader(int status, const char *message) 
   throw(Exception)
-    : fStatus(status), HTTPHeader(message)
+    : HTTPHeader(message), fStatus(status)
 {}
 
 HTTPStatusHeader::~HTTPStatusHeader()
