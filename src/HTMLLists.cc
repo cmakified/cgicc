@@ -1,4 +1,4 @@
-/* $Id: HTMLLists.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: HTMLLists.cc,v 1.2 1998/04/01 20:51:51 sbooth Exp $ */
 
 #include "HTMLLists.hh"
 
@@ -8,7 +8,7 @@
 bool ul::sState = false;
 bool ol::sState = false;
 bool li::sState = false;
-bool dl::sState = false;
+bool dl_::sState = false;
 bool dt::sState = false;
 bool dd::sState = false;
 
@@ -91,29 +91,29 @@ li::~li()
 {}
 
 // ============================================================
-// Class dl
+// Class dl_
 // ============================================================
-dl::dl(const char *text) 
+dl_::dl_(const char *text) 
 	: HTMLBooleanElement(text, NULL, NULL)
 {}
 
-dl::dl(const HTMLAttributeList& attributes)
+dl_::dl_(const HTMLAttributeList& attributes)
 	: HTMLBooleanElement(NULL, &attributes, NULL)
 {}
 
-dl::dl(const HTMLSimpleElement& embed)
+dl_::dl_(const HTMLSimpleElement& embed)
 	: HTMLBooleanElement(NULL, NULL, &embed)
 {}
 
-dl::dl(const char *text, const HTMLAttributeList& attributes) 
+dl_::dl_(const char *text, const HTMLAttributeList& attributes) 
 	: HTMLBooleanElement(text, &attributes, NULL)
 {}
 
-dl::dl(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
+dl_::dl_(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
 	: HTMLBooleanElement(NULL, &attributes, &embed)
 {}
 
-dl::~dl()
+dl_::~dl_()
 {}
 
 // ============================================================
