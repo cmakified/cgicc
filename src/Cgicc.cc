@@ -1,4 +1,4 @@
-/* $Id: Cgicc.cc,v 1.4 1998/04/02 11:10:08 sbooth Exp $ */
+/* $Id: Cgicc.cc,v 1.5 1998/04/06 11:13:33 sbooth Exp $ */
 
 #ifndef __CGICC__
 #include "Cgicc.hh"
@@ -358,7 +358,6 @@ Cgicc::parsePair(const char *data, int dataLen)
   unescapeChars(data, sepPos, name);
   unescapeChars(data + sepPos + 1, dataLen - sepPos - 1, value);
   
-  log("Got ("); log(name); log(", "); log(value); logln(")");
   fFormData->append(FormEntry(name, value));
   
   delete [] name;
