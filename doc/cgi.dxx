@@ -1,9 +1,0 @@
-<!-- $Id: cgi.dxx,v 1.2 1998/12/10 02:08:11 sbooth Exp $ -->
-
-/**@name CGI data and manipulation classes */
-//@{
-	//@Include: ../src/FormEntry.hh
-	//@Include: ../src/FormFile.hh
-	//@Include: ../src/CgiEnvironment.hh
-	//@Include: ../src/Cgicc.hh
-//@}
