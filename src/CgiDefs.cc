@@ -1,4 +1,4 @@
-/* $Id: CgiDefs.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: CgiDefs.cc,v 1.2 1998/04/01 20:52:31 sbooth Exp $ */
 
 #include "CgiDefs.hh"
 
@@ -48,38 +48,48 @@ saferSystem(const char *command) throw(Exception)
   return result;
 }
 
+char 
+firstNonspaceChar(const char *s) 
+{
+  int len = strspn( s, " \n\r\t" );
+  return s[ len ];
+}
 
 char
 hexToChar(char first, char second)
 {
   char digit;
-  digit = (first >= 'A' ? ((first & 0xdf) - 'A')+10 : (first - '0'));
+  digit = (first >= 'A' ? ((first & 0xDF) - 'A') + 10 : (first - '0'));
   digit *= 16;
-  digit += (second >= 'A' ? ((second & 0xdf) - 'A')+10 : (second - '0'));
+  digit += (second >= 'A' ? ((second & 0xDF) - 'A') + 10 : (second - '0'));
   return digit;
 }
 
-char* 
-unescapeChars(const char *src, int len) throw(Exception)
+void
+unescapeChars(const char *src, int len, char* &result) throw(Exception)
 {
   int srcPos = 0, dstPos = 0;
   char c = 0x00;
-  char *s = new char[ len + 1 ];
+  result = new char[ len + 1 ];
 
-  if( ! s ) 
+  if( ! result ) 
     throw Exception("new failed", ERRINFO);
 
   while( srcPos < len ) {
     c = src[srcPos++];
     if(c == '+')
-      s[dstPos++] = ' ';
-    else if(c == '%')
-      s[dstPos++] = hexToChar(src[srcPos++], src[srcPos++]);
+      result[dstPos++] = ' ';
+    // changed because of weird byte-order swaps on some systems
+    // shouldn't the following work (LTR eval order!?!)?
+    // result[dstPos++] = hexToChar(src[srcPos++], src[srcPos++]);
+    else if(c == '%') {
+      result[dstPos++] = hexToChar(src[srcPos], src[srcPos + 1]);
+      srcPos += 2;
+    }
     else
-      s[dstPos++] = c;
+      result[dstPos++] = c;
   }
-  s[dstPos] = '\0';
-  return s;
+  result[dstPos] = '\0';
 }
 
 /* find first occurence of search in data, and return index of first char */
