@@ -1,7 +1,7 @@
 /*
- *  $Id: yourSource.cpp,v 1.3 1999/08/17 17:16:15 sbooth Exp $
+ *  $Id: yourSource.cpp,v 1.4 2000/10/15 15:52:27 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 // To use the debug logging feature, the variable gLogFile MUST be
 // defined, and it _must_ be an ofstream
 #if DEBUG
-  ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
+  ofstream gLogFile( "/change_this_path/cgicc.log", ios::app );
 #endif
 
 #if CGICC_USE_NAMESPACES
@@ -51,14 +51,14 @@ main(int argc,
 
     // Set up the page's header and title.
     cout << head() << endl;
-    cout << title() << "GNU Cgicc v" << cgi.getVersion() << title() << endl;
+    cout << title() << "GNU cgicc v" << cgi.getVersion() << title() << endl;
     cout << head() << endl;
     
     // Start the HTML body
     cout << body() << endl;
 
     // Print out a message
-    cout << h1("Hello, world from GNU Cgicc") << endl;
+    cout << h1("Hello, world from GNU cgicc") << endl;
 
     // Close the document
     cout << body() << html();
