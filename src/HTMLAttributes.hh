@@ -1,4 +1,4 @@
-/* $Id: HTMLAttributes.hh,v 1.1 1998/04/01 20:49:02 sbooth Exp $ */
+/* $Id: HTMLAttributes.hh,v 1.2 1998/04/03 09:09:52 sbooth Exp $ */
 
 #ifndef __HTML_ATTRIBUTES__
 #define __HTML_ATTRIBUTES__ 1
@@ -50,7 +50,7 @@ public:
    */
   HTMLAttribute(const HTMLAttribute& attribute);
   
-  /* Destructor */
+  /** Destructor */
   virtual ~HTMLAttribute();
   //@}
 
@@ -130,7 +130,7 @@ public:
    */
   HTMLAtomicAttribute(const HTMLAtomicAttribute& attribute);
 
-  /* Destructor */
+  /** Destructor */
   virtual ~HTMLAtomicAttribute();
   //@}
   
@@ -150,7 +150,7 @@ public:
 class HTMLAttributeList : public LinkedList<HTMLAttribute> {
 public:
 
-  /**@name Constructor */
+  /**@name Constructors */
   //@{
 
   /**
@@ -170,7 +170,7 @@ public:
    */
   HTMLAttributeList(const HTMLAttributeList& list);
 
-  /* Destructor */
+  /** Destructor */
   virtual ~HTMLAttributeList();
   //@}
 

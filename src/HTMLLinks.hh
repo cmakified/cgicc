@@ -1,4 +1,4 @@
-/* $Id: HTMLLinks.hh,v 1.1 1998/04/01 20:49:02 sbooth Exp $ */
+/* $Id: HTMLLinks.hh,v 1.2 1998/04/03 09:09:52 sbooth Exp $ */
 
 #ifndef __HTML_LINKS__
 #define __HTML_LINKS__ 1
@@ -50,6 +50,7 @@ public:
    */
   a(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~a();
   //@}
   
@@ -57,7 +58,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -81,6 +88,7 @@ public:
    */
   link_(const HTMLAttributeList& attributes);
   
+  /** Destructor */
   virtual ~link_();
   //@}
   
@@ -105,6 +113,7 @@ public:
    */
   base(const HTMLAttributeList& attributes);
   
+  /** Destructor */
   virtual ~base();
   //@}
   

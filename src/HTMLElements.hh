@@ -1,4 +1,4 @@
-/* $Id: HTMLElements.hh,v 1.1 1998/04/01 20:49:02 sbooth Exp $ */
+/* $Id: HTMLElements.hh,v 1.2 1998/04/03 09:09:52 sbooth Exp $ */
 
 #ifndef __HTML_ELEMENTS__
 #define __HTML_ELEMENTS__ 1
@@ -21,10 +21,23 @@
 /** An abstract class representing an HTML tag.*/
 class HTMLElement : public MStreamable {
 public:
-  HTMLElement();
-  HTMLElement(const HTMLElement& element) throw(Exception);
-  virtual ~HTMLElement();
+  /**@name Constructors */
+  //@{
   
+  /** Constructor */
+  HTMLElement();
+
+  /**
+   * Copy constructor.
+   * @param element The HTMLElement to copy.
+   * @exception Exception
+   */
+  HTMLElement(const HTMLElement& element) throw(Exception);
+
+  /** Destructor */
+  virtual ~HTMLElement();
+  //@}
+
   /**@name Accessor Functions */
   //@{	
   
@@ -73,10 +86,23 @@ private:
  */
 class HTMLSimpleElement : public HTMLElement {
 public:
+  /**@name Constructors */
+  //@{
+
+  /** Constructor */
   HTMLSimpleElement();
+
+  /**
+   * Copy constructor.
+   * @param element The HTMLSimpleElement to copy.
+   * @exception Exception
+   */
   HTMLSimpleElement(const HTMLSimpleElement& element) throw(Exception);
+
+  /** Destructor */
   virtual ~HTMLSimpleElement();
-  
+  //@}
+
   /**@name Accessor Functions */
   //@{
   
@@ -135,9 +161,22 @@ private:
  */
 class HTMLBooleanElement : public HTMLSimpleElement {
 public:
+  /**@name Constructors */
+  //@{
+
+  /** Default constructor. */
   HTMLBooleanElement();
+
+  /**
+   * Copy constructor.
+   * @param element The HTMLBooleanElement to copy.
+   * @exception Exception
+   */
   HTMLBooleanElement(const HTMLBooleanElement& element) throw(Exception);
+
+  /** Destructor */
   virtual ~HTMLBooleanElement();
+  //@}
   
   /**@name State Functions */
   //@{

@@ -1,4 +1,4 @@
-/* $Id: HTMLTables.hh,v 1.1 1998/04/01 20:49:02 sbooth Exp $ */
+/* $Id: HTMLTables.hh,v 1.2 1998/04/03 09:09:52 sbooth Exp $ */
 
 #ifndef __HTML_TABLES__
 #define __HTML_TABLES__ 1
@@ -51,6 +51,7 @@ public:
   table(const HTMLAttributeList& attributes, 
 	const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~table();
   //@}
   
@@ -58,8 +59,14 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
-  
+  //@}
+
 private:
   static bool sState;
 };
@@ -108,6 +115,7 @@ public:
   caption(const HTMLAttributeList& attributes, 
 	  const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~caption();
   //@}
   
@@ -115,7 +123,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -165,6 +179,7 @@ public:
   thead(const HTMLAttributeList& attributes, 
 	const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~thead();
   //@}
   
@@ -172,7 +187,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -222,6 +243,7 @@ public:
   tfoot(const HTMLAttributeList& attributes, 
 	const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~tfoot();
   //@}
   
@@ -229,7 +251,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -279,6 +307,7 @@ public:
   tbody(const HTMLAttributeList& attributes, 
 	const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~tbody();
   //@}
   
@@ -286,7 +315,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -336,6 +371,7 @@ public:
   colgroup(const HTMLAttributeList& attributes, 
 	   const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~colgroup();
   //@}
   
@@ -343,7 +379,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -367,6 +409,7 @@ public:
    */
   col(const HTMLAttributeList& attributes);
   
+  /** Destructor */
   virtual ~col();
   //@}
   
@@ -417,6 +460,7 @@ public:
   tr(const HTMLAttributeList& attributes, 
      const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~tr();
   //@}
   
@@ -424,7 +468,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -474,6 +524,7 @@ public:
   th(const HTMLAttributeList& attributes, 
      const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~th();
   //@}
   
@@ -481,7 +532,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -531,6 +588,7 @@ public:
   td(const HTMLAttributeList& attributes, 
      const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~td();
   //@}
   
@@ -538,7 +596,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;

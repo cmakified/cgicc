@@ -1,4 +1,4 @@
-/* $Id: HTMLFrames.hh,v 1.1 1998/04/01 20:49:02 sbooth Exp $ */
+/* $Id: HTMLFrames.hh,v 1.2 1998/04/03 09:09:52 sbooth Exp $ */
 
 #ifndef __HTML_FRAMES__
 #define __HTML_FRAMES__ 1
@@ -53,6 +53,7 @@ public:
   frameset(const HTMLAttributeList& attributes, 
 	   const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~frameset();
   //@}
   
@@ -60,7 +61,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -84,6 +91,7 @@ public:
    */
   frame(const HTMLAttributeList& attributes);
   
+  /** Destructor */
   virtual ~frame();
   //@}
   
@@ -134,6 +142,7 @@ public:
   noframes(const HTMLAttributeList& attributes, 
 	   const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~noframes();
   //@}
   
@@ -141,7 +150,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
@@ -191,6 +206,7 @@ public:
   iframe(const HTMLAttributeList& attributes, 
 	 const HTMLSimpleElement& embed);
   
+  /** Destructor */
   virtual ~iframe();
   //@}
   
@@ -198,7 +214,13 @@ public:
   
   virtual void swapState() const	{ sState = ! sState; }
   virtual bool getState() const 	{ return sState; }
+
+  /**@name State functions */
+  //@{
+
+  /** Reset the element to the initial (off) state */
   static void reset() 			{ sState = false; }
+  //@}
   
 private:
   static bool sState;
