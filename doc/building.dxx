@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.8 1998/10/05 22:55:15 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.9 1998/10/05 22:56:14 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -113,8 +113,8 @@ dependency information.  At the UNIX prompt, type
 % make static test.cgi_static
 </PRE>
 
-<P>for the static version.<BR>
-Please note that if you elect to compile the shared
+<P>for the static version.</P>
+<P>Please note that if you elect to compile the shared
 version, you need to supply <STRONG>absolute</STRONG> paths in 
 <TT>Makefile.incl</TT>.</P>
 
