@@ -1,8 +1,8 @@
 /* -*-html-*- */
 /*
- *  $Id: lib-overview.tmpl,v 1.7 2004/06/12 01:58:25 sbooth Exp $
+ *  $Id: lib-overview.tmpl,v 1.8 2004/06/26 18:27:43 sbooth Exp $
  *
- *  Copyright (C) 2001 - 2002 Stephen F. Booth
+ *  Copyright (C) 2001 - 2004 Stephen F. Booth
  *
  *  Permission is granted to copy, distribute and/or modify this document
  *  under the terms of the GNU Free Documentation License, Version 1.1
@@ -27,16 +27,16 @@ CGI classes are used to query and manipulate CGI data, including
 information on the HTTP server, the current request, and the submitted
 form data.
  
-\c cgicc::Cgicc is the main class of the %cgicc library.  It is used to
+cgicc::Cgicc is the main class of the %cgicc library.  It is used to
 retrieve information on specific HTML form elements (such as checkboxes,
 radio buttons, and text fields), on uploaded files, and to save,
 restore, and retrieve information on the CGI environment.
 
-\c cgicc::CgiEnvironment encapsulates the data passed from the HTTP server
+cgicc::CgiEnvironment encapsulates the data passed from the HTTP server
 to the CGI application.  This includes all environment variables set by
 the HTTP server specified in the CGI standard.
 
-\c cgicc::FormEntry is an immutable class representing a single user entry
+cgicc::FormEntry is an immutable class representing a single user entry
 in an HTML form element such as a text field, a radio button, or a
 checkbox.  A FormEntry is essentially a name/value pair, where
 the name is the name of the form element as specified in the HTML form
@@ -44,7 +44,7 @@ itself, and the value is user-entered or user-selected
 value. FormEntry provides methods allowing access to the value as
 a string, integer, or double.
 
-\c cgicc::FormFile is an immutable class representing a file uploaded via
+cgicc::FormFile is an immutable class representing a file uploaded via
 the HTTP file upload mechanism.  A FormFile is very similar to a
 FormEntry, but does not provide the numerous methods for
 accessing the value as different types.
@@ -71,30 +71,30 @@ the data being returned as a result of the CGI request.  For example,
 standard HTTP headers indicate the type, size, and modification date of
 the transmitted data.<br>
 
-An \c cgicc::HTTPCookie is a name/value pair used to store a piece of
+An cgicc::HTTPCookie is a name/value pair used to store a piece of
 information about the caller using the caller's own machine.  Cookies
 are often used as a means to identify users.  Any of %cgicc's header
 classes may contain an arbitrary number of cookies.
 
-\c cgicc::HTTPHeader is the base class for all simple HTTP headers.  It
+cgicc::HTTPHeader is the base class for all simple HTTP headers.  It
 is rarely used directly; instead, use one of the provided subclasses.
 
-\c cgicc::HTTPContentHeader is a subclass of \c cgicc::HTTPHeader used to
+cgicc::HTTPContentHeader is a subclass of cgicc::HTTPHeader used to
 indicate the type of data returned to the client by the CGI application.
 
-\c cgicc::HTTPRedirectHeader is a subclass of \c cgicc::HTTPHeader used to
+cgicc::HTTPRedirectHeader is a subclass of cgicc::HTTPHeader used to
 redirect the client to a different URL.
 
-\c cgicc::HTTPStatusHeader is a subclass of \c cgicc::HTTPHeader used to
+cgicc::HTTPStatusHeader is a subclass of cgicc::HTTPHeader used to
 return a 3-digit HTTP status code and the associated message.
 
-\c cgicc::HTTPHTMLHeader is a subclass of \c cgicc::HTTPContentHeader used for
+cgicc::HTTPHTMLHeader is a subclass of cgicc::HTTPContentHeader used for
 data of MIME type \c text/html.
 
-\c cgicc::HTTPPlainHeader is a subclass of \c cgicc::HTTPContentHeader used
+cgicc::HTTPPlainHeader is a subclass of cgicc::HTTPContentHeader used
 for data of MIME type \c text/plain.
 
-\c cgicc::HTTPResponseHeader is a more powerful, generic HTTP header
+cgicc::HTTPResponseHeader is a more powerful, generic HTTP header
 class used to construct a full HTTP response.
 </li>
 
@@ -118,10 +118,10 @@ as \c br as rendered as \c \<br>.
 
 There are two special HTML classes defined by %cgicc:
 
-\c cgicc::HTMLDoctype is used to specify the HTML version information as
+cgicc::HTMLDoctype is used to specify the HTML version information as
 required by the HTML 4.0 standard
 
-\c cgicc::comment is used to indicate an HTML comment
+cgicc::comment is used to indicate an HTML comment
 </ul></li></ol>
 \htmlonly
 </div>
