@@ -1,3 +1,13 @@
+1999-05-14  Stephen Booth       <sbooth@saaba.lmi.net>
+
+	* Removed classes LinkedList and Iterator
+	* Reworked to use the STL classes vector, iterator, and string
+	* Changed include directory from $(includedir) to $(pkgincludedir)
+	* Reverted to installing config.h
+	* Upgraded to libtool-1.3
+	* Added methods on Cgicc for querying the system type
+	* Released as part of the GNU project under the GPL
+
 1999-01-05  Stephen Booth       <sbooth@saaba.lmi.net>
 
 	* Fixed problem in src/Makefile.am that caused config.h to 
