@@ -5,6 +5,9 @@
 	* demo/dns.cpp: 'Cgicc' -> 'cgicc'
 	* demo/testform.html: Updated e-mail address
 	* info/version.texi: Updated for 3.1.4
+	* README: 'Cgicc' -> 'cgicc'
+	* README.WIN: 'Cgicc' -> 'cgicc'
+	* AUTHORS: 'Cgicc' -> 'cgicc'
 
 2000-10-07  Stephen F. Booth  <sbooth@gnu.org>
 
