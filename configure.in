@@ -1,8 +1,8 @@
-dnl $Id: configure.in,v 1.9 1999/05/05 18:30:54 sbooth Exp $
+dnl $Id: configure.in,v 1.10 1999/05/10 19:12:43 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/Cgicc.cc)
-AM_INIT_AUTOMAKE(cgicc, 3.0)
+AM_INIT_AUTOMAKE(cgicc, 3.0b)
 AM_CONFIG_HEADER(src/config.h)
 
 AC_LANG_CPLUSPLUS
@@ -30,12 +30,6 @@ AC_STRUCT_TM
 dnl Determine host system type
 AC_CANONICAL_HOST
 AC_DEFINE_UNQUOTED(HOST, "$host")
-
-dnl verify exception handling works
-CGICC_CHECK_CPP_EXCEPTIONS
-
-dnl verify templates work
-CGICC_CHECK_CPP_TEMPLATES
 
 dnl verify STL support
 CGICC_CHECK_CPP_STL

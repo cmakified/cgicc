@@ -1,0 +1,32 @@
+
+                        NEWS about Cgicc
+
+======================================================================
+
+        Please send bug reports, suggestions, and comments to
+        <bug-cgicc@gnu.org>
+
+======================================================================
+
+
+        Major changes between "cgicc" versions 2.2.3 and 3.0
+
+* Reworked to use the C++ standard template library. 
+  In most places, the STL class string is used where bare char* was
+  used before. The obsolete classes implementing linked lists are
+  gone, replaced by the STL classes vector and iterator. 
+
+* Include files are now installed in the package include directory 
+  cgicc/ under the include/ directory, instead of in the
+  include/ directory itself.
+
+* Documentation changed to info format, and expanded.
+
+* The test/ directory was renamed to demo/.
+
+* The demo programs are no longer installed.
+
+* The demo programs now contain internal stylesheet information, instead 
+  of linking to an external stylesheet.
+
+* Released as part of the GNU project.
