@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.4 1999/08/10 22:13:50 sbooth Exp $
+ *  $Id: test.cpp,v 1.5 1999/08/17 17:16:11 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -43,7 +43,7 @@
   STDNS ofstream gLogFile( "/change_this_path/Cgicc.log", STDNS ios::app );
 #endif
 
-#if USE_NAMESPACES
+#if CGICC_USE_NAMESPACES
   using namespace std;
   using namespace cgicc;
 #else
