@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiDefs.hh,v 1.1 1999/06/03 23:14:44 sbooth Exp $
+ *  $Id: CgiDefs.hh,v 1.2 1999/06/22 21:00:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -26,15 +26,15 @@
 
 // Handle namespaces
 #if USE_NAMESPACES
-#define CGICC_BEGIN_NAMESPACE namespace cgicc {
-#define CGICC_END_NAMESPACE }
-#define CGICCNS cgicc::
-#define STDNS std::
+#  define CGICC_BEGIN_NAMESPACE namespace cgicc {
+#  define CGICC_END_NAMESPACE }
+#  define CGICCNS cgicc::
+#  define STDNS std::
 #else
-#define CGICC_BEGIN_NAMESPACE 
-#define CGICC_END_NAMESPACE 
-#define CGICCNS 
-#define STDNS 
+#  define CGICC_BEGIN_NAMESPACE 
+#  define CGICC_END_NAMESPACE 
+#  define CGICCNS 
+#  define STDNS 
 #endif
 
 #endif /* ! _CGIDEFS_HH_ */
