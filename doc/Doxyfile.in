@@ -1,5 +1,5 @@
 ## -*-sh-*-
-## $Id: Doxyfile.in,v 1.2 2002/01/09 17:13:12 sbooth Exp $
+## $Id: Doxyfile.in,v 1.3 2002/03/09 18:30:37 sbooth Exp $
 
 # Doxyfile 1.2.6
 
@@ -384,7 +384,7 @@ FILTER_SOURCE_FILES    = NO
 # of all compounds will be generated. Enable this if the project 
 # contains a lot of classes, structs, unions or interfaces. 
 
-ALPHABETICAL_INDEX     = YES
+ALPHABETICAL_INDEX     = NO
 
 # If the alphabetical index is enabled (see ALPHABETICAL_INDEX) then 
 # the COLS_IN_ALPHA_INDEX tag can be used to specify the number of columns 
@@ -431,7 +431,7 @@ HTML_FOOTER            = footer.html
 # fine-tune the look of the HTML output. If the tag is left blank doxygen 
 # will generate a default style sheet 
 
-HTML_STYLESHEET        = 
+HTML_STYLESHEET        = cgicc-doc.css
 
 # If the HTML_ALIGN_MEMBERS tag is set to YES, the members of classes, 
 # files or namespaces will be aligned in HTML using tables. If set to 
