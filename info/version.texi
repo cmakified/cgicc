@@ -1,3 +1,3 @@
 @set UPDATED 27 April 1999
-@set EDITION 3.0
-@set VERSION 3.0
+@set EDITION 3.0b
+@set VERSION 3.0b

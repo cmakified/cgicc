@@ -62,7 +62,7 @@ try @{
 @}
 
 catch(exception& e) @{
-   // Caught a standard library exception or a subclass
+   // Caught a standard library exception
 @}
 @end lisp
 
@@ -197,10 +197,10 @@ might look like
 This tag has four attributes: @samp{SRC}, @samp{WIDTH}, @samp{HEIGHT},
 and @samp{ALT}, with the values @samp{file.jpg}, @samp{100}, @samp{100},
 and @samp{description}, respectively.  Attributes in HTML tags are
-represented by the Cgicc class @code{HTMLAttribute}, which essentially
-is a name/value pair.  Since any given @code{HTMLElement} may have any
-number of @code{HTMAttribute} objects inside it, the set of
-@code{HTMLAttribute} objects inside an @code{HTMLElement} object are
+represented by the class @code{HTMLAttribute}, which essentially is a
+name/value pair.  Since any given @code{HTMLElement} may have any number
+of @code{HTMAttribute} objects inside it, the set of
+@code{HTMLAttribute} objects inside an @code{HTMLElement} object is
 represented using the class @code{HTMLAttributeList}.  To build an
 @code{HTMLElement}, use the @code{add} method on
 @code{HTMLAttributeList}.  To generate the @code{<IMG>} tag given above:
