@@ -1,5 +1,5 @@
 ##
-##  $Id: Makefile.in,v 1.12 1999/10/05 16:28:31 sbooth Exp $
+##  $Id: Makefile.in,v 1.13 2000/04/11 01:37:34 sbooth Exp $
 ##
 ##  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
 ##
@@ -51,11 +51,11 @@ DEFS=
 
 INCLUDES= 	-I$(includedir)
 
-## On Solaris (probably SVR4 systems), use -R
-LD_FLAGS=	@LDFLAGS@ -R$(libdir)
-
 ## On Linux use -rpath
-#LD_FLAGS=	@LDFLAGS@ -Wl,-rpath=$(libdir)
+LD_FLAGS=	@LDFLAGS@ -Wl,-rpath=$(libdir)
+
+## On Solaris (probably SVR4 systems), use -R
+#LD_FLAGS=	@LDFLAGS@ -R$(libdir)
 
 CXXFLAGS= 	@CXXFLAGS@
 CPPFLAGS=	@CPPFLAGS@

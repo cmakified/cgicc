@@ -4,7 +4,8 @@ README for skeleton CGI using GNU Cgicc
 This directory contains skeleton code and a supporting Makefile for a
 CGI application using Cgicc, tailored to the installation environment.
 
-If you are using Linux or a BSD-style Unix, you'll need to uncomment
-line 60 in the Makefile, and comment out (using '#') line 57.  This is
+If you are using Solaris or an SVR4-style Unix, you'll need to uncomment
+line 59 in the Makefile, and comment out (using '#') line 56.  This is
 due to the different methods of embedding a runtime search path on
 different flavors of Unix.
+
