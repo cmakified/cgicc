@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cc,v 1.5 1999/05/31 17:01:42 sbooth Exp $
+ *  $Id: CgiUtils.cc,v 1.6 1999/06/01 17:10:18 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -187,7 +187,7 @@ CGICCNS readString(STDNS istream& in)
     delete [] temp;
     throw STDNS runtime_error("I/O error");
   }
-  s = string(temp, dataSize);
+  s = STDNS string(temp, dataSize);
   delete [] temp;
   return s;
 }

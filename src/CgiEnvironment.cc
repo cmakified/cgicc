@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cc,v 1.10 1999/05/25 19:16:43 sbooth Exp $
+ *  $Id: CgiEnvironment.cc,v 1.11 1999/06/01 17:10:18 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -46,8 +46,8 @@ CGICCNS CgiEnvironment::CgiEnvironment()
     // should work, but not in egcs-1.1.2
     //auto_ptr<char> temp = new char[getContentLength()];
     char *temp = new char[getContentLength()];
-    cin.read(temp, getContentLength());
-    if(cin.gcount() != getContentLength()) {
+    STDNS cin.read(temp, getContentLength());
+    if(STDNS cin.gcount() != getContentLength()) {
       delete [] temp;
       throw STDNS runtime_error("I/O error");
     }
@@ -150,7 +150,7 @@ void
 CGICCNS CgiEnvironment::save(const STDNS string& filename) 	const
 {
   LOGLN("CgiEnvironment::save")
-  STDNS ofstream file( filename.c_str(), ios::out );
+  STDNS ofstream file( filename.c_str(), STDNS ios::out );
 
   if( ! file )
     throw STDNS runtime_error("I/O error");
@@ -194,12 +194,12 @@ void
 CGICCNS CgiEnvironment::restore(const STDNS string& filename)
 {
   LOGLN("CgiEnvironment::restore()")
-  STDNS ifstream file( filename.c_str(), ios::in );
+  STDNS ifstream file( filename.c_str(), STDNS ios::in );
 
   if( ! file )
     throw STDNS runtime_error("I/O error");
 
-  file.flags(file.flags() & ios::skipws);
+  file.flags(file.flags() & STDNS ios::skipws);
 
   fContentLength 	= readLong(file);
   fServerPort 		= readLong(file);

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPHeaders.cc,v 1.8 1999/05/25 19:16:49 sbooth Exp $
+ *  $Id: HTTPHeaders.cc,v 1.9 1999/06/01 17:10:19 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -123,7 +123,7 @@ CGICCNS HTTPCookie::render(STDNS ostream& out) 	const
   if(fSecure == true)
     out << " secure";
   
-  out << endl;
+  out << STDNS endl;
 }
 
 // ============================================================
@@ -156,7 +156,7 @@ CGICCNS HTTPContentHeader::~HTTPContentHeader()
 void 
 CGICCNS HTTPContentHeader::render(STDNS ostream& out)	const
 {
-  out << "Content-Type: " << getData() << endl << endl;
+  out << "Content-Type: " << getData() << STDNS endl << STDNS endl;
 }
 
 // ============================================================
@@ -172,7 +172,7 @@ CGICCNS HTTPRedirectHeader::~HTTPRedirectHeader()
 void 
 CGICCNS HTTPRedirectHeader::render(STDNS ostream& out) 	const
 {
-  out << "Location: " << getData() << endl << endl;
+  out << "Location: " << getData() << STDNS endl << STDNS endl;
 }
 
 // ============================================================
@@ -195,7 +195,8 @@ CGICCNS HTTPStatusHeader::~HTTPStatusHeader()
 void 
 CGICCNS HTTPStatusHeader::render(STDNS ostream& out) 	const
 {
-  out << "Status: " << getStatusCode() << ' ' << getData() << endl << endl;
+  out << "Status: " << getStatusCode() << ' ' << getData() 
+      << STDNS endl << STDNS endl;
 }
 
 // ============================================================
@@ -211,7 +212,7 @@ CGICCNS HTTPNPHeader::~HTTPNPHeader()
 void 
 CGICCNS HTTPNPHeader::render(STDNS ostream& out) 	const
 {
-  out << getData() << endl << endl;
+  out << getData() << STDNS endl << STDNS endl;
 }
 
 // ============================================================
