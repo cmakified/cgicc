@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.5 1998/04/06 11:04:21 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.6 1998/04/06 11:05:35 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -45,8 +45,7 @@ variable must be set.
 <STRONG>CC</STRONG> is the name of your compiler executable.  If your
 compiler is not named g++, this must be changed to reflect the name of 
 your compiler.
-</LI
-
+</LI>
 
 <LI>
 <STRONG>UNAME</STRONG> indicates if your system supports the <TT>uname</TT>
