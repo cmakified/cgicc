@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cc,v 1.6 1999/06/01 19:34:56 sbooth Exp $
+ *  $Id: test.cc,v 1.7 1999/06/03 23:07:02 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -25,9 +25,9 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "CgiDefs.hh"
-#include "Cgicc.hh"
-#include "HTMLClasses.hh"
+#include "cgicc/CgiDefs.hh"
+#include "cgicc/Cgicc.hh"
+#include "cgicc/HTMLClasses.hh"
 
 #if HAVE_UNAME
 #include <sys/utsname.h>

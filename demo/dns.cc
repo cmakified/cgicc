@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cc,v 1.4 1999/05/11 17:03:42 sbooth Exp $
+ *  $Id: dns.cc,v 1.5 1999/06/03 23:07:02 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -24,9 +24,9 @@
 #include <stdexcept>
 #include <iostream>
 
-#include "CgiDefs.hh"
-#include "HTMLClasses.hh"
-#include "Cgicc.hh"
+#include "cgicc/CgiDefs.hh"
+#include "cgicc/HTMLClasses.hh"
+#include "cgicc/Cgicc.hh"
 
 #if HAVE_UNAME
 #include <sys/utsname.h>
