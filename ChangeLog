@@ -1,3 +1,7 @@
+1999-06-14  Stephen F. Booth  <sbooth@ride.cupertino.ibm.com>
+
+	* cgicc/Makefile.am: Updated -version-info to 0:2:0.
+
 1999-06-07  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* info/cgicc.texinfo: Changed Edition to edition, and
