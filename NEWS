@@ -5,6 +5,15 @@
         <bug-cgicc@gnu.org>
 ======================================================================
 
+        Major changes between versions 3.1.5 and 3.1.6
+        ----------------------------------------------
+
+* Longstanding bug in multipart form handling that caused content type
+  of uploaded file to be incorrectly reported fixed
+
+* Support for external reader functions (for FastCGI support) added
+
+
         Major changes between versions 3.1.4 and 3.1.5
         ----------------------------------------------
 
