@@ -3,6 +3,7 @@
 	* Makefile.am: Removed html dir
 	* CgiEnvironment.{h,cpp}: Changed CgiInput back to CgiInput*
 	* Cgicc.{h,cpp}: Changed CgiInput back to CgiInput*
+	* THANKS: Thanks to Steve McAndrewsmith
 
 2002-03-03  Stephen F. Booth  <sbooth@gnu.or>
 
