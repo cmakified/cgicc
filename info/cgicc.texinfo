@@ -69,8 +69,7 @@ except that this permission notice may be stated in a translation
 approved by the Free Software Foundation.
 @end titlepage
 
-@c @ifnottex
-@ifinfo
+@ifnottex
 @node Top, Overview of CGI, (dir), (dir)
 @top GNU Cgicc
 
@@ -81,8 +80,7 @@ facilitates the development of Common Gateway Inteface (CGI)
 applications for the World Wide Web (WWW).
 
 This is edition @value{EDITION} of the Cgicc documentation, @value{UPDATED}.
-@c @end ifnottex
-@end ifinfo
+@end ifnottex
 
 @menu
 * Overview of CGI::             An overview of the Common Gateway Interface
