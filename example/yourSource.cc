@@ -1,5 +1,5 @@
 /*
- *  $Id: yourSource.cc,v 1.3 1999/05/05 18:31:28 sbooth Exp $
+ *  $Id: yourSource.cc,v 1.4 1999/05/10 19:13:04 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -18,10 +18,12 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <exception>
+#include <iostream>
+
 #include "CgiDefs.hh"
 #include "HTMLClasses.hh"
 #include "Cgicc.hh"
-#include "CgiException.hh"
 
 // To use the debug logging feature, the variable gLogFile MUST be
 // defined, and it _must_ be an ofstream
@@ -30,6 +32,7 @@ ofstream gLogFile( "/change_this_path/Cgicc.log", ios::app );
 #endif
 
 #if USE_NAMESPACES
+using namespace std;
 using namespace cgicc;
 #endif
 
@@ -59,7 +62,7 @@ main(int argc,
     cout << body() << html();
   }
   
-  catch(const CgiException& e) {
+  catch(const exception& e) {
     // handle error condition
   }
   
