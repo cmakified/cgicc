@@ -7,6 +7,12 @@
 
 ======================================================================
 
+        Major changes between versions 2.2.3 and 3.0.1
+
+* Various fixes for namespace support, submitted by Bob Kline.
+
+* Updated documentation regarding Cgicc mailing lists.
+
         Major changes between versions 2.2.3 and 3.0
 
 * Reworked to use the C++ standard template library. 
