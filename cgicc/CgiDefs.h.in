@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiDefs.h.in,v 1.3 1999/08/16 17:40:04 sbooth Exp $
+ *  $Id: CgiDefs.h.in,v 1.4 1999/08/17 17:16:07 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -31,7 +31,7 @@
 #ifdef WIN32
 
 // always use namespaces
-#  define USE_NAMESPACES 1
+#  define CGICC_USE_NAMESPACES 1
 
 // export library symbols
 #  ifdef CGICC_EXPORTS
@@ -44,12 +44,12 @@
 #  define VERSION "@VERSION@"
 
 #else
-#  define USE_NAMESPACES @USE_NAMESPACES@
+#  define CGICC_USE_NAMESPACES @CGICC_USE_NAMESPACES@
 #  define CGICC_API
 #endif /* WIN32 */
 
 // Handle namespaces
-#if USE_NAMESPACES
+#if CGICC_USE_NAMESPACES
 #  define CGICC_BEGIN_NAMESPACE namespace cgicc {
 #  define CGICC_END_NAMESPACE }
 #  define CGICCNS cgicc::
@@ -59,6 +59,6 @@
 #  define CGICC_END_NAMESPACE 
 #  define CGICCNS 
 #  define STDNS 
-#endif /* USE_NAMESPACES */
+#endif /* CGICC_USE_NAMESPACES */
 
 #endif /* ! _CGIDEFS_H_ */
