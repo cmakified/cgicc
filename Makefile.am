@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.25 2001/03/09 22:37:11 sbooth Exp $
+## $Id: Makefile.am,v 1.26 2001/09/02 20:08:28 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip #dist-bzip2
 
@@ -8,11 +8,12 @@ else
 DEMO =
 endif
 
-SUBDIRS = cgicc info support $(DEMO)
+SUBDIRS = cgicc doc support $(DEMO)
 
 CLEANFILES = *~
 
-MAINTAINERCLEANFILES = cgicc-*.tar.gz cgicc-*.diff
+MAINTAINERCLEANFILES = config.guess config.sub ltmain.sh aclocal.m4 \
+	cgicc-*.tar.gz cgicc-*.diff
 
 EXTRA_DIST = acconfig.h README.WIN
 
@@ -35,8 +36,6 @@ dist-hook:
 	cp -p $(srcdir)/example/configure.in $(distdir)/example
 	cp -p $(srcdir)/example/example.cpp $(distdir)/example
 	cp -p $(srcdir)/example/install-sh $(distdir)/example
-	cp -p $(srcdir)/example/ltconfig $(distdir)/example
-	cp -p $(srcdir)/example/ltmain.sh $(distdir)/example
 	cp -p $(srcdir)/example/missing $(distdir)/example
 	cp -p $(srcdir)/example/mkinstalldirs $(distdir)/example
 	test -d $(distdir)/win || mkdir $(distdir)/win || exit 1

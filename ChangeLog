@@ -1,3 +1,47 @@
+2001-09-01  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiUtils.cpp(writeString): Fixed bug assuming string.getData()
+	was null-terminated (bug fix submitted by fine@netease.com)
+	* demo/test.cpp: Changed HTML footer
+	* demo/dns.cpp: Changed HTML footer
+	* demo/upload.cpp: Changed HTML footer
+
+2001-08-30  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiEnvironment.h: Added fUsingHTTPS data member
+	* cgicc/CgiEnvironment.cpp(readEnvironmentVariables): Added WIN32 
+	specific section to determing is connection is secure
+	(bug fix submitted by peter.goedtkindt@axstech.com)
+	* cgicc/CgiEnvironment.cpp(save, restore): Whether connection is
+	secure is now saved/restored
+	* THANKS: Thanks to Peter Goedtkindt
+	* Makefile.am: Removed references to example/ltmain.sh and 
+	example/ltconfig
+
+2001-07-04  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/*.h: Changed license to LGPL
+	* cgicc/*.cpp: Changed license to LGPL
+	* acconfig.h: Changed license to LGPL
+	* COPYING.LIB: Added
+
+2001-07-01  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/HTMLElements.h: Fix memory leak in HTMLElement assignment 
+	operator (bug fix submitted by fdegros@soreh.fr)
+	* cgicc/HTMLClasses.h: Changed tags to lowercase
+	* cgicc/HTMLAttributes.h: Removed idea of 'atomic' attributes
+	* cgicc/HTMLAttributes.cpp: Removed 'atomic' attribute
+	* cgicc/HTMLElements.cpp(render): Atomic elements now rendered
+	with a trailing / (for SGML/XML compliance)
+	* demo/test.cpp: Changed all HTML to lowercase
+	* demo/dns.cpp: Changed all HTML to lowercase
+	* demo/upload.cpp: Changed all HTML to lowercase
+
+2001-03-12  Stephen F. Booth  <sbooth@gnu.org>
+
+	* autogen: Run autogen in example/
+
 2001-03-06  Stephen F. Booth  <sbooth@gnu.org>
 
 	* configure.in: Increment version to 3.1.6

@@ -1,11 +1,12 @@
 dnl -*-m4-*-
-dnl $Id: configure.in,v 1.30 2001/03/09 22:37:04 sbooth Exp $
+dnl $Id: configure.in,v 1.31 2001/09/02 20:08:28 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_REVISION([$Revision: 1.30 $])
+AC_REVISION([$Revision: 1.31 $])
 AC_INIT(cgicc/Cgicc.cpp)
 AC_CONFIG_AUX_DIR(support)
-AM_INIT_AUTOMAKE(cgicc, 3.1.6)
+AC_PREFIX_DEFAULT(/usr)
+AM_INIT_AUTOMAKE(cgicc, 3.2)
 AM_CONFIG_HEADER(cgicc/config.h)
 AM_MAINTAINER_MODE
 
@@ -14,7 +15,9 @@ AC_LANG_CPLUSPLUS
 dnl Checks for programs.
 AC_PROG_CXX
 AC_PROG_INSTALL
+AC_PROG_LIBTOOL
 AM_PROG_LIBTOOL
+AC_CHECK_PROG(DOXYGEN, doxygen, doxygen)
 
 dnl Checks for libraries.
 
@@ -105,6 +108,7 @@ AC_MSG_CHECKING(whether to build the cgicc demos)
 AC_MSG_RESULT("$demos")
 AM_CONDITIONAL(DEMOS, test "$demos" = yes)
 
-AC_OUTPUT([Makefile cgicc/Makefile cgicc/CgiDefs.h info/Makefile demo/Makefile 
-  support/Makefile support/cgicc-config])
+AC_OUTPUT([Makefile cgicc/Makefile cgicc/CgiDefs.h demo/Makefile 
+  support/Makefile support/cgicc-config html/Makefile html/cgicc.html
+  doc/Makefile doc/Doxyfile])
 
