@@ -11,4 +11,4 @@ Alexander J. Oss and Edward Diener, for their Borland Win32 fixes.
 Steve McAndrewsmith, for his FastCGI integration help.
 Andreas Mueller, for his cookie parsing bug fix.
 Christian Weisgerber, for his Makefile bug fix.
-Carsten P. Gehrke, for his getIntegerValue and getDoubleValue bug fix.
+Carsten P. Gehrke, for his getDoubleValue bug fix.
