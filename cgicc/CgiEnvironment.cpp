@@ -1,7 +1,7 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.17 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.18 2004/06/27 03:16:34 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -29,9 +29,9 @@
 #include <cctype>
 
 #ifdef WIN32
-# include <io.h>
-# include <fcntl.h>
-# include <stdio.h>
+#  include <io.h>
+#  include <fcntl.h>
+#  include <stdio.h>
 #endif
 
 #include "cgicc/CgiEnvironment.h"
@@ -55,11 +55,11 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
 
   // On Win32, use binary read to avoid CRLF conversion
 #ifdef WIN32
-# ifdef __BORLANDC__
-    setmode(_fileno(stdin), O_BINARY);
-# else
-    _setmode(_fileno(stdin), _O_BINARY);
-# endif
+#  ifdef __BORLANDC__
+     setmode(_fileno(stdin), O_BINARY);
+#  else
+     _setmode(_fileno(stdin), _O_BINARY);
+#  endif
 #endif
   
   if(stringsAreEqual(getRequestMethod(), "get")) {
@@ -92,6 +92,79 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
 cgicc::CgiEnvironment::~CgiEnvironment()
 {
   LOGLN("CgiEnvironment::~CgiEnvironment")
+}
+
+// Overloaded operators
+bool 
+cgicc::CgiEnvironment::operator== (const CgiEnvironment& env) 		const
+{
+  bool result;
+  
+  result =  this->fServerPort 		== env.fServerPort;
+  result &= this->fContentLength 	== env.fContentLength;
+  result &= this->fUsingHTTPS 		== env.fUsingHTTPS;
+  result &= this->fServerSoftware 	== env.fServerSoftware;
+  result &= this->fServerName 		== env.fServerName;
+  result &= this->fGatewayInterface 	== env.fGatewayInterface;
+  result &= this->fServerProtocol 	== env.fServerProtocol;
+  result &= this->fRequestMethod 	== env.fRequestMethod;
+  result &= this->fPathInfo 		== env.fPathInfo;
+  result &= this->fPathTranslated 	== env.fPathTranslated;
+  result &= this->fScriptName 		== env.fScriptName;
+  result &= this->fQueryString 		== env.fQueryString;
+  result &= this->fRemoteHost 		== env.fRemoteHost;
+  result &= this->fRemoteAddr 		== env.fRemoteAddr;
+  result &= this->fAuthType 		== env.fAuthType;
+  result &= this->fRemoteUser 		== env.fRemoteUser;
+  result &= this->fRemoteIdent 		== env.fRemoteIdent;
+  result &= this->fContentType 		== env.fContentType;
+  result &= this->fAccept 		== env.fAccept;
+  result &= this->fUserAgent 		== env.fUserAgent;
+  result &= this->fPostData 		== env.fPostData;
+  result &= this->fRedirectRequest 	== env.fRedirectRequest;
+  result &= this->fRedirectURL 		== env.fRedirectURL;
+  result &= this->fRedirectStatus 	== env.fRedirectStatus;
+  result &= this->fReferrer 		== env.fReferrer;
+  result &= this->fCookie 		== env.fCookie;
+
+  return result;
+}
+
+cgicc::CgiEnvironment& 
+cgicc::CgiEnvironment::operator= (const CgiEnvironment& env)
+{
+  this->fServerPort 		= env.fServerPort;
+  this->fContentLength 		= env.fContentLength;
+  this->fUsingHTTPS 		= env.fUsingHTTPS;
+  this->fServerSoftware 	= env.fServerSoftware;
+  this->fServerName 		= env.fServerName;
+  this->fGatewayInterface 	= env.fGatewayInterface;
+  this->fServerProtocol 	= env.fServerProtocol;
+  this->fRequestMethod 		= env.fRequestMethod;
+  this->fPathInfo 		= env.fPathInfo;
+  this->fPathTranslated 	= env.fPathTranslated;
+  this->fScriptName 		= env.fScriptName;
+  this->fQueryString 		= env.fQueryString;
+  this->fRemoteHost 		= env.fRemoteHost;
+  this->fRemoteAddr 		= env.fRemoteAddr;
+  this->fAuthType 		= env.fAuthType;
+  this->fRemoteUser 		= env.fRemoteUser;
+  this->fRemoteIdent 		= env.fRemoteIdent;
+  this->fContentType 		= env.fContentType;
+  this->fAccept 		= env.fAccept;
+  this->fUserAgent 		= env.fUserAgent;
+  this->fPostData 		= env.fPostData;
+  this->fRedirectRequest 	= env.fRedirectRequest;
+  this->fRedirectURL 		= env.fRedirectURL;
+  this->fRedirectStatus 	= env.fRedirectStatus;
+  this->fReferrer 		= env.fReferrer;
+  this->fCookie 		= env.fCookie;
+
+  fCookies.clear();
+  fCookies.reserve(env.fCookies.size());
+  parseCookies();
+
+  return *this;
 }
 
 void

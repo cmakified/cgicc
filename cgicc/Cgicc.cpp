@@ -1,7 +1,7 @@
 /*
- *  $Id: Cgicc.cpp,v 1.17 2004/06/26 18:04:10 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.18 2004/06/27 03:16:34 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -28,9 +28,9 @@
 #include <iterator>
 
 #if (HAVE_SYS_TIME_H && TM_IN_SYS_TIME)
-#include <sys/time.h>
+#  include <sys/time.h>
 #else
-#include <time.h>
+#  include <time.h>
 #endif
 
 #include "cgicc/CgiUtils.h"
@@ -207,8 +207,8 @@ cgicc::Cgicc::Cgicc(CgiInput *input)
 #endif /* DEBUG */
   
   // this can be tweaked for performance
-  fFormData.reserve(40);
-  fFormFiles.reserve(5);
+  fFormData.reserve(20);
+  fFormFiles.reserve(2);
 
   if(stringsAreEqual(getEnvironment().getRequestMethod(), "post"))
     parseFormInput(getEnvironment().getPostData());
@@ -220,6 +220,21 @@ cgicc::Cgicc::~Cgicc()
 {
   LOGLN("Cleaning up...")
   LOGLN("Cgicc debugging log closed.")
+}
+
+cgicc::Cgicc& 
+cgicc::Cgicc::operator= (const Cgicc& cgi)
+{
+  this->fEnvironment = cgi.fEnvironment;
+
+  fFormData.clear();
+  fFormFiles.clear();
+  if(stringsAreEqual(getEnvironment().getRequestMethod(), "post"))
+    parseFormInput(getEnvironment().getPostData());
+  else
+    parseFormInput(getEnvironment().getQueryString());
+  
+  return *this;
 }
 
 const char*
@@ -274,7 +289,8 @@ cgicc::Cgicc::operator() (const std::string& name) 		const
 {
     std::string result;
     const_form_iterator iter = getElement(name);
-    result = iter == fFormData.end() ? "" : iter->getValue();
+    if(iter != fFormData.end() && false == iter->isEmpty())
+      result = iter->getValue();
     return result;
 }
 

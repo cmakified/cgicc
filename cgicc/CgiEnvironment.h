@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.15 2003/07/17 05:16:03 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.16 2004/06/27 03:16:34 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -79,7 +79,7 @@ namespace cgicc {
     
     // ============================================================
     
-    /*! \name Constructor and Destructor */
+    /*! \name Constructors and Destructor */
     //@{
     
     /*! 
@@ -99,6 +99,16 @@ namespace cgicc {
     CgiEnvironment(CgiInput *input);
     
     /*!
+     * \brief Copy constructor.
+     *
+     * Sets the values of this CgiEnvironment to those of \c env.
+     * \param env The CgiEnvironment to copy.
+     */
+    inline
+    CgiEnvironment(const CgiEnvironment& env)
+    { operator=(env); }
+
+    /*!
      * \brief Destructor 
      *
      * Delete this CgiEnvironment object
@@ -106,6 +116,50 @@ namespace cgicc {
     ~CgiEnvironment();
     //@}
     
+    // ============================================================
+    
+    /*! \name Overloaded Operators */
+    //@{
+    
+    /*!
+     * \brief Compare two CgiEnvironments for equality.
+     *
+     * CgiEnvironments are equal if they have the same environment variables.
+     * \param env The CgiEnvironment to compare to this one.
+     * \return \c true if the two CgiEnvironments are equal, \c false otherwise.
+     */
+    bool 
+    operator== (const CgiEnvironment& env) 		const;
+    
+    /*!
+     * \brief Compare two CgiEnvironments for inequality.
+     *
+     * CgiEnvironments are equal if they have the same environment variables.
+     * \param env The CgiEnvironment to compare to this one.
+     * \return \c false if the two CgiEnvironments are equal, \c true otherwise.
+     */
+    inline bool
+    operator!= (const CgiEnvironment& env) 		const
+    { return ! operator==(env); }
+    
+#ifdef WIN32
+    /* Dummy operator for MSVC++ */
+    inline bool
+    operator< (const CgiEnvironment& env) 		const
+    { return false; }
+#endif
+    
+    /*!
+     * \brief Assign one CgiEnvironment to another.  
+     *
+     * Sets the environment variables in this CgiEnvironment to those of \c env.
+     * \param env The CgiEnvironment to copy.
+     * \return A reference to this.
+     */
+    CgiEnvironment& 
+    operator= (const CgiEnvironment& env);
+    //@}
+
     // ============================================================
     
     /*! \name Server Information

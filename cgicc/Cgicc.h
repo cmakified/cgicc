@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.14 2004/06/26 18:04:10 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.15 2004/06/27 03:16:34 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -103,7 +103,7 @@ namespace cgicc {
     
     // ============================================================
     
-    /*! \name Constructor and Destructor */
+    /*! \name Constructors and Destructor */
     //@{
     
     /*! 
@@ -117,6 +117,17 @@ namespace cgicc {
      */
     Cgicc(CgiInput *input = 0);
     
+    /*!
+     * \brief Copy constructor.
+     *
+     * Sets the values of this Cgicc to those of \c cgi.
+     * \param env The Cgicc to copy.
+     */
+    inline
+    Cgicc(const Cgicc& cgi)
+      : fEnvironment(cgi.fEnvironment)
+    { operator=(cgi); }
+
     /*! 
      * \brief Destructor 
      *
@@ -125,6 +136,51 @@ namespace cgicc {
     ~Cgicc();
     //@}
     
+    // ============================================================
+    
+    /*! \name Overloaded Operators */
+    //@{
+    
+    /*!
+     * \brief Compare two Cgiccs for equality.
+     *
+     * Cgiccs are equal if they represent the same environment.
+     * \param cgi The Cgicc to compare to this one.
+     * \return \c true if the two Cgiccs are equal, \c false otherwise.
+     */
+    inline bool 
+    operator== (const Cgicc& cgi) 		const
+    { return this->fEnvironment == cgi.fEnvironment; }
+    
+    /*!
+     * \brief Compare two Cgiccs for inequality.
+     *
+     * Cgiccs are equal if they represent the same environment.
+     * \param cgi The Cgicc to compare to this one.
+     * \return \c false if the two Cgiccs are equal, \c true otherwise.
+     */
+    inline bool
+    operator!= (const Cgicc& cgi) 		const
+    { return ! operator==(cgi); }
+    
+#ifdef WIN32
+    /* Dummy operator for MSVC++ */
+    inline bool
+    operator< (const Cgicc& cgi) 		const
+    { return false; }
+#endif
+    
+    /*!
+     * \brief Assign one Cgicc to another.  
+     *
+     * Sets the environment in this Cgicc to that of \c cgi.
+     * \param cgi The Cgicc to copy.
+     * \return A reference to this.
+     */
+    Cgicc& 
+    operator= (const Cgicc& cgi);
+    //@}
+
     // ============================================================
     
     /*! \name Library Information 
