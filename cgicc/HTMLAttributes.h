@@ -1,8 +1,8 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLAttributes.h,v 1.3 1999/08/16 17:40:04 sbooth Exp $
+ *  $Id: HTMLAttributes.h,v 1.4 2000/10/07 18:41:18 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,8 +43,8 @@ CGICC_BEGIN_NAMESPACE
  * pair inside an HTML tag.
  * For example, in the HTML code:
  * <PRE class="html">
- * &lt;A HREF="mailto:sbooth@saaba.lmi.net">Send mail&lt;/A></PRE>
- * The name/value pair <TT>(HREF, mailto:sbooth@saaba.lmi.net)</TT>
+ * &lt;A HREF="mailto:sbooth@gnu.org">Send mail&lt;/A></PRE>
+ * The name/value pair <TT>(HREF, mailto:sbooth@gnu.org)</TT>
  * is an HTMLAttribute.
  */
 class CGICC_API HTMLAttribute : public MStreamable 
