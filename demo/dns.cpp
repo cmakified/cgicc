@@ -1,7 +1,7 @@
 /*
- *  $Id: dns.cpp,v 1.11 2000/09/21 15:21:58 sbooth Exp $
+ *  $Id: dns.cpp,v 1.12 2000/10/07 18:26:33 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -230,7 +230,7 @@ main(int /*argc*/,
     cout << "GNU Cgi" << span("cc").set("class","red") << " v"
 	 << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth")
-			.set("href", "http://www.lmi.net/~sbooth/") 
+			.set("href", "http://home.earthlink.net/~sfbooth/") 
 	 << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime() 
 	 << " on " << cgi.getCompileDate() << br() << endl;

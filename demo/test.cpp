@@ -1,7 +1,7 @@
 /*
- *  $Id: test.cpp,v 1.10 1999/09/30 17:40:45 sbooth Exp $
+ *  $Id: test.cpp,v 1.11 2000/10/07 18:26:33 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -193,7 +193,7 @@ main(int /*argc*/,
     cout << "GNU Cgi" << span("cc").set("class","red") << " v";
     cout << cgi.getVersion();
     cout << " by " << a("Stephen F. Booth")
-                       .set("href", "http://www.lmi.net/~sbooth/") 
+                       .set("href", "http://home.earthlink.net/~sfbooth/") 
 	 << br() << endl;
     cout << "Compiled at " << cgi.getCompileTime();
     cout << " on " << cgi.getCompileDate() << br() << endl;
