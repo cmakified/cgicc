@@ -1,7 +1,7 @@
 /*
- * $Id: nph-login.cpp,v 1.6 2003/07/13 14:21:58 sbooth Exp $
+ * $Id: nph-login.cpp,v 1.7 2004/06/28 00:25:30 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *  Copyright (C) 2001 Peter Goedtkindt
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -46,12 +46,6 @@
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPResponseHeader.h"
 #include "cgicc/HTMLClasses.h"
-
-// To use the debug logging feature, the variable gLogFile MUST be
-// defined, and it _must_ be an ofstream
-#if DEBUG
-std::ofstream gLogFile( "/tmp/cgicc.log", std::ios::app );
-#endif
 
 using namespace std;
 using namespace cgicc;

@@ -1,5 +1,5 @@
 /*
- *  $Id: FormFile.cpp,v 1.6 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: FormFile.cpp,v 1.7 2004/06/28 00:25:29 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -34,9 +34,6 @@ cgicc::FormFile::FormFile(const std::string& name,
     fData(data)
 {
   fDataType = dataType.empty() ? std::string("text/plain") : dataType;
-
-  LOG("Got file ") LOG(getFilename()) LOG(" (") LOG(getDataType())
-  LOG(" / ") LOG(getDataLength()) LOGLN(" bytes)")
 }
 
 bool

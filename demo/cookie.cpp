@@ -1,5 +1,5 @@
 /*
- *  $Id: cookie.cpp,v 1.5 2003/07/13 14:22:57 sbooth Exp $
+ *  $Id: cookie.cpp,v 1.6 2004/06/28 00:25:30 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -36,18 +36,12 @@
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 
-#if HAVE_UNAME
+#if HAVE_SYS_UTSNAME_H
 #  include <sys/utsname.h>
 #endif
 
 #if HAVE_SYS_TIME_H
 #  include <sys/time.h>
-#endif
-
-// To use logging, the variable gLogFile MUST be defined, and it _must_
-// be an ofstream
-#if DEBUG
-  std::ofstream gLogFile( "/change_this_path/cgicc.log", std::ios::app );
 #endif
 
 using namespace std;
@@ -226,7 +220,7 @@ main(int /*argc*/,
       + (end.tv_usec - start.tv_usec);
 
     cout << br() << "Total time for request = " << us << " us";
-    cout << " (" << (double) (us/1000000.0) << " s)";
+    cout << " (" << static_cast<double>(us/1000000.0) << " s)";
 #endif
 
     // End of document

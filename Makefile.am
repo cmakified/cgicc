@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.38 2004/06/22 01:42:30 sbooth Exp $
+## $Id: Makefile.am,v 1.39 2004/06/28 00:25:28 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-bzip2
 
@@ -31,11 +31,14 @@ cvs-dist: distcheck
 	$(MAKE) dist
 
 ## Generate detached signature files (binary and ascii-armored)
+## as well as directive files for GNU server ftp upload
 GPG = gpg
 gpg-dist:
 	for file in $(DIST_ARCHIVES); do \
 		$(GPG) -b $$file; \
 		$(GPG) -ba $$file; \
+		echo "directory: cgicc" > $$file.directive; \
+		$(GPG) --clearsign $$file.directive
 	done
 
 ## Generate md5 checksum files
@@ -43,4 +46,12 @@ MD5 = md5sum
 md5-dist:
 	for file in $(DIST_ARCHIVES); do \
 		$(MD5) $$file > $$file.md5; \
+	done
+
+## Upload triplet files to GNU ftp server
+FTP = ftp
+FTP_URL = ftp://ftp-upload.gnu.org/incoming/ftp
+ftp-release: gpg-dist
+	for file in $(DIST_ARCHIVES); do \
+		$(FTP) -a -u $(FTP_URL) $$file $$file.sig $$file.directive.asc
 	done

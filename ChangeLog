@@ -1,7 +1,15 @@
+2004-06-27  Stephen F. Booth  <sbooth@gnu.org>
+
+	* demo/upload.{html,cpp}:Added content redirection for uploads
+
 2004-06-26  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/Cgicc.{h,cpp}: Added operator() (const std::string&) for
 	easier form element access
+	* cgicc/Cgicc.{h,cpp}: Added copy constructor and overloaded
+	comparison and assignment operators
+	* cgicc/CgiEnvironment.{h,cpp}: Added copy constructor and
+	overloaded comparison and assignment operators
 
 2004-06-21  Stephen F. Booth  <sbooth@gnu.org>
 

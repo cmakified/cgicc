@@ -1,5 +1,5 @@
 /*
- *  $Id: dns.cpp,v 1.19 2003/07/13 14:22:57 sbooth Exp $
+ *  $Id: dns.cpp,v 1.20 2004/06/28 00:25:30 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -37,7 +37,7 @@
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 
-#if HAVE_UNAME
+#if HAVE_SYS_UTSNAME_H
 #  include <sys/utsname.h>
 #endif
 
@@ -54,12 +54,6 @@
 #  include <arpa/inet.h>
 #  include <netdb.h>
 #endif /* WIN32 */
-
-// To use logging, the variable gLogFile MUST be defined, and it _must_
-// be an ofstream
-#if DEBUG
-  std::ofstream gLogFile( "/change_this_path/cgicc.log", std::ios::app );
-#endif
 
 using namespace std;
 using namespace cgicc;
@@ -254,7 +248,7 @@ main(int /*argc*/,
       + (end.tv_usec - start.tv_usec);
 
     cout << br() << "Total time for request = " << us << " us";
-    cout << " (" << (double) (us/1000000.0) << " s)";
+    cout << " (" << static_cast<double>(us/1000000.0) << " s)";
 #endif
     
     // End of document

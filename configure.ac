@@ -1,10 +1,10 @@
 dnl -*-m4-*-
-dnl $Id: configure.ac,v 1.8 2004/06/22 01:38:08 sbooth Exp $
+dnl $Id: configure.ac,v 1.9 2004/06/28 00:25:28 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(cgicc, 3.2.3, bug-cgicc@gnu.org)
 AC_CONFIG_SRCDIR(cgicc/Cgicc.cpp)
-AC_REVISION([$Revision: 1.8 $])
+AC_REVISION([$Revision: 1.9 $])
 AC_CONFIG_AUX_DIR(support)
 AC_PREFIX_DEFAULT(/usr)
 AM_INIT_AUTOMAKE
@@ -27,14 +27,10 @@ AC_SUBST(LIB_NET)
 dnl check whether to link against libstdc++
 dnl CGICC_CHECK_LINK_STDCPP
 
-dnl Checks for header files.
-AC_CHECK_HEADERS(sys/time.h)
-
-dnl Checks for typedefs, structures, and compiler characteristics.
-AC_STRUCT_TM
+dnl Checks for header files
+AC_CHECK_HEADERS([sys/time.h sys/utsname.h])
 
 dnl Determine host system type
-dnl AC_CANONICAL_HOST
 AC_DEFINE_UNQUOTED(HOST, "$host", [The host system cgicc was configured for])
 
 dnl Check whether we're using aCC
@@ -45,46 +41,23 @@ if test "$cgicc_cv_acc" = yes; then
 fi
 AC_SUBST(DEMO_LIBS)
 
-dnl verify STL support
-CGICC_CHECK_CPP_STL
-
 dnl verify namespace support
-CGICC_CHECK_CPP_NAMESPACES
+AC_CXX_NAMESPACES
+
+dnl verify STL support
+AC_CXX_HAVE_STL
+
+dnl Enable maximum compiler warnings for g++
+AC_MSG_CHECKING(maximum C++ compiler warning level)
+if test "$GXX" = yes; then
+  CXXFLAGS_WARN="-Wall -W -pedantic"
+  CXXFLAGS="$CXXFLAGS_WARN $CXXFLAGS"
+fi
+AC_MSG_RESULT($CXXFLAGS_WARN)
+unset CXXFLAGS_WARN
 
 dnl Checks for library functions.
-AC_HEADER_STDC
-AC_HEADER_TIME
-AC_CHECK_FUNCS(strftime gettimeofday uname)
-
-dnl enable/disable compiler warnings (using gcc), if specified
-AC_ARG_ENABLE(warnings,
-  [  --disable-warnings      disable gcc warnings [default=no]],
-  [case "${enableval}" in
-    yes) cgicc_warnings=yes ;; 
-    no)  cgicc_warnings=no ;;
-    *) AC_MSG_ERROR(bad value ${enableval} for --enable-warnings) ;;
-  esac], cgicc_warnings=yes)
-AC_MSG_CHECKING(whether to use gcc verbose warnings)
-AC_MSG_RESULT($cgicc_warnings)
-if (test "$cgicc_warnings" = yes && test "$GCC" = yes); then
-  CXXFLAGS="-Wall -W -pedantic $CXXFLAGS"
-fi
-
-dnl enable/disable debug logging, if specified
-AC_ARG_ENABLE(debug-logging,
-  [  --enable-debug-logging  enable debug logging [default=no]],
-  [case "${enableval}" in
-    yes) cgicc_debug=yes ;;
-    no)  cgicc_debug=no ;;
-    *) AC_MSG_ERROR(bad value ${enableval} for --enable-debug-logging) ;;
-  esac], cgicc_debug=no)
-AC_MSG_CHECKING(whether to enable debug logging)
-AC_MSG_RESULT($cgicc_debug)
-if test "$cgicc_debug" = yes; then
-  AC_DEFINE(DEBUG, 1, [Define if debug logging is enabled])
-else
-  AC_DEFINE(DEBUG, 0, [Define if debug logging is enabled])
-fi
+AC_CHECK_FUNCS(gettimeofday uname)
 
 dnl enable/disable the demos, if specified
 AC_ARG_ENABLE(demos, 
@@ -130,4 +103,3 @@ AC_CONFIG_FILES([Makefile cgicc/Makefile cgicc/CgiDefs.h
   support/Makefile support/cgicc-config doc/Makefile doc/Doxyfile])
 
 AC_OUTPUT
-

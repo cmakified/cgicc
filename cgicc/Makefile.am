@@ -1,8 +1,11 @@
-## $Id: Makefile.am,v 1.19 2004/06/19 04:33:38 sbooth Exp $
+## $Id: Makefile.am,v 1.20 2004/06/28 00:25:29 sbooth Exp $
 
 CLEANFILES = *~
 
 INCLUDES = -I$(top_srcdir) -I$(top_builddir)
+
+#pkgconfigdatadir = $(prefix)/lib/pkgconfig
+#pkgconfigdata_DATA = gimpprint.pc = @LIBRARY_PKGCONFIG@
 
 lib_LTLIBRARIES = libcgicc.la
 libcgicc_la_SOURCES = CgiEnvironment.cpp CgiInput.cpp CgiUtils.cpp	\

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiUtils.h,v 1.10 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: CgiUtils.h,v 1.11 2004/06/28 00:25:28 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -38,32 +38,6 @@
 #include <fstream>
 
 #include "cgicc/CgiDefs.h"
-
-#if DEBUG
-
-extern std::ofstream gLogFile;
-#define LOGLN(s) 	gLogFile << s << std::endl;
-#define LOG(s) 		gLogFile << s;
-
-#else
-
-/*!
- * \brief Output a string to the debugging log, followed by a newline.
- *
- * The debugging log is a user-specified \c ostream.
- * \param s The string to log
- */
-#define LOGLN(s)
-
-/*!
- * \brief Output a string to the debugging log
- *
- * The debugging log is a user-specified \c ostream.
- * \param s The string to log
- */
-#define LOG(s)
-
-#endif
 
 
 namespace cgicc {

@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.21 2004/06/12 14:48:41 sbooth Exp $
+ *  $Id: test.cpp,v 1.22 2004/06/28 00:25:31 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -36,18 +36,12 @@
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 
-#if HAVE_UNAME
+#if HAVE_SYS_UTSNAME_H
 #  include <sys/utsname.h>
 #endif
 
 #if HAVE_SYS_TIME_H
 #  include <sys/time.h>
-#endif
-
-// To use logging, the variable gLogFile MUST be defined, and it _must_
-// be an ofstream
-#if DEBUG
-  std::ofstream gLogFile( "/change_this_path/cgicc.log", std::ios::app );
 #endif
 
 using namespace std;
@@ -208,7 +202,7 @@ main(int /*argc*/,
       + (end.tv_usec - start.tv_usec);
 
     cout << br() << "Total time for request = " << us << " us";
-    cout << " (" << (double) (us/1000000.0) << " s)";
+    cout << " (" << static_cast<double>(us/1000000.0) << " s)";
 #endif
 
     // End of document
@@ -454,18 +448,15 @@ showForm(const Cgicc& formData)
   else
     cout << "You don't have any hair." << br() << endl;
   
-  const_form_iterator browser = formData.getElement("browser");
-  if(browser != (*formData).end())
-    cout << "You surf the web with " << **browser << '.' << br() << endl;
-  else
-    cout << "This should never happen. ERROR!" << br() << endl;
+  cout << "You surf the web with " << formData("browser") << '.' 
+       << br() << endl;
   
   // getElement
   std::vector<FormEntry> authors;
   formData.getElement("authors", authors);
   if(! authors.empty()) {
     cout << "You like to read books by ";
-    for(std::string::size_type i = 0; i < authors.size(); i++) {
+    for(std::string::size_type i = 0; i < authors.size(); ++i) {
       cout << authors[i].getValue();
       if(i < authors.size() - 2)
 	cout << ", ";

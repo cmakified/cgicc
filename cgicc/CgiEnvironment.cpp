@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.18 2004/06/27 03:16:34 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.19 2004/06/28 00:25:28 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -40,8 +40,6 @@
 
 cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
 {
-  LOGLN("CgiEnvironment::CgiEnvironment")
-  
   // Create a local CgiInput object for us to use
   // In the vast majority of cases, this will be used
   // For FastCGI applications it won't but the performance hit of
@@ -56,18 +54,13 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
   // On Win32, use binary read to avoid CRLF conversion
 #ifdef WIN32
 #  ifdef __BORLANDC__
-     setmode(_fileno(stdin), O_BINARY);
+  setmode(_fileno(stdin), O_BINARY);
 #  else
-     _setmode(_fileno(stdin), _O_BINARY);
+  _setmode(_fileno(stdin), _O_BINARY);
 #  endif
 #endif
-  
-  if(stringsAreEqual(getRequestMethod(), "get")) {
-    LOGLN("GET method recognized")
-  }
-  else if(stringsAreEqual(getRequestMethod(), "post")) {
-    LOGLN("POST method recognized");
-          
+     
+  if(stringsAreEqual(getRequestMethod(), "post")) {
     // Don't use auto_ptr, but vector instead
     // Bug reported by shinra@j10n.org
     std::vector<char> data(getContentLength());
@@ -90,9 +83,7 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
 }
 
 cgicc::CgiEnvironment::~CgiEnvironment()
-{
-  LOGLN("CgiEnvironment::~CgiEnvironment")
-}
+{}
 
 // Overloaded operators
 bool 
@@ -100,32 +91,32 @@ cgicc::CgiEnvironment::operator== (const CgiEnvironment& env) 		const
 {
   bool result;
   
-  result =  this->fServerPort 		== env.fServerPort;
-  result &= this->fContentLength 	== env.fContentLength;
-  result &= this->fUsingHTTPS 		== env.fUsingHTTPS;
-  result &= this->fServerSoftware 	== env.fServerSoftware;
-  result &= this->fServerName 		== env.fServerName;
-  result &= this->fGatewayInterface 	== env.fGatewayInterface;
-  result &= this->fServerProtocol 	== env.fServerProtocol;
-  result &= this->fRequestMethod 	== env.fRequestMethod;
-  result &= this->fPathInfo 		== env.fPathInfo;
-  result &= this->fPathTranslated 	== env.fPathTranslated;
-  result &= this->fScriptName 		== env.fScriptName;
-  result &= this->fQueryString 		== env.fQueryString;
-  result &= this->fRemoteHost 		== env.fRemoteHost;
-  result &= this->fRemoteAddr 		== env.fRemoteAddr;
-  result &= this->fAuthType 		== env.fAuthType;
-  result &= this->fRemoteUser 		== env.fRemoteUser;
-  result &= this->fRemoteIdent 		== env.fRemoteIdent;
-  result &= this->fContentType 		== env.fContentType;
-  result &= this->fAccept 		== env.fAccept;
-  result &= this->fUserAgent 		== env.fUserAgent;
-  result &= this->fPostData 		== env.fPostData;
-  result &= this->fRedirectRequest 	== env.fRedirectRequest;
-  result &= this->fRedirectURL 		== env.fRedirectURL;
-  result &= this->fRedirectStatus 	== env.fRedirectStatus;
-  result &= this->fReferrer 		== env.fReferrer;
-  result &= this->fCookie 		== env.fCookie;
+  result =  fServerPort 	== env.fServerPort;
+  result &= fContentLength 	== env.fContentLength;
+  result &= fUsingHTTPS 	== env.fUsingHTTPS;
+  result &= fServerSoftware 	== env.fServerSoftware;
+  result &= fServerName 	== env.fServerName;
+  result &= fGatewayInterface 	== env.fGatewayInterface;
+  result &= fServerProtocol 	== env.fServerProtocol;
+  result &= fRequestMethod 	== env.fRequestMethod;
+  result &= fPathInfo 		== env.fPathInfo;
+  result &= fPathTranslated 	== env.fPathTranslated;
+  result &= fScriptName 	== env.fScriptName;
+  result &= fQueryString 	== env.fQueryString;
+  result &= fRemoteHost 	== env.fRemoteHost;
+  result &= fRemoteAddr 	== env.fRemoteAddr;
+  result &= fAuthType 		== env.fAuthType;
+  result &= fRemoteUser 	== env.fRemoteUser;
+  result &= fRemoteIdent 	== env.fRemoteIdent;
+  result &= fContentType 	== env.fContentType;
+  result &= fAccept 		== env.fAccept;
+  result &= fUserAgent 		== env.fUserAgent;
+  result &= fPostData 		== env.fPostData;
+  result &= fRedirectRequest 	== env.fRedirectRequest;
+  result &= fRedirectURL 	== env.fRedirectURL;
+  result &= fRedirectStatus 	== env.fRedirectStatus;
+  result &= fReferrer 		== env.fReferrer;
+  result &= fCookie 		== env.fCookie;
 
   return result;
 }
@@ -133,32 +124,32 @@ cgicc::CgiEnvironment::operator== (const CgiEnvironment& env) 		const
 cgicc::CgiEnvironment& 
 cgicc::CgiEnvironment::operator= (const CgiEnvironment& env)
 {
-  this->fServerPort 		= env.fServerPort;
-  this->fContentLength 		= env.fContentLength;
-  this->fUsingHTTPS 		= env.fUsingHTTPS;
-  this->fServerSoftware 	= env.fServerSoftware;
-  this->fServerName 		= env.fServerName;
-  this->fGatewayInterface 	= env.fGatewayInterface;
-  this->fServerProtocol 	= env.fServerProtocol;
-  this->fRequestMethod 		= env.fRequestMethod;
-  this->fPathInfo 		= env.fPathInfo;
-  this->fPathTranslated 	= env.fPathTranslated;
-  this->fScriptName 		= env.fScriptName;
-  this->fQueryString 		= env.fQueryString;
-  this->fRemoteHost 		= env.fRemoteHost;
-  this->fRemoteAddr 		= env.fRemoteAddr;
-  this->fAuthType 		= env.fAuthType;
-  this->fRemoteUser 		= env.fRemoteUser;
-  this->fRemoteIdent 		= env.fRemoteIdent;
-  this->fContentType 		= env.fContentType;
-  this->fAccept 		= env.fAccept;
-  this->fUserAgent 		= env.fUserAgent;
-  this->fPostData 		= env.fPostData;
-  this->fRedirectRequest 	= env.fRedirectRequest;
-  this->fRedirectURL 		= env.fRedirectURL;
-  this->fRedirectStatus 	= env.fRedirectStatus;
-  this->fReferrer 		= env.fReferrer;
-  this->fCookie 		= env.fCookie;
+  fServerPort 		= env.fServerPort;
+  fContentLength 	= env.fContentLength;
+  fUsingHTTPS 		= env.fUsingHTTPS;
+  fServerSoftware 	= env.fServerSoftware;
+  fServerName 		= env.fServerName;
+  fGatewayInterface 	= env.fGatewayInterface;
+  fServerProtocol 	= env.fServerProtocol;
+  fRequestMethod 	= env.fRequestMethod;
+  fPathInfo 		= env.fPathInfo;
+  fPathTranslated 	= env.fPathTranslated;
+  fScriptName 		= env.fScriptName;
+  fQueryString 		= env.fQueryString;
+  fRemoteHost 		= env.fRemoteHost;
+  fRemoteAddr 		= env.fRemoteAddr;
+  fAuthType 		= env.fAuthType;
+  fRemoteUser 		= env.fRemoteUser;
+  fRemoteIdent 		= env.fRemoteIdent;
+  fContentType 		= env.fContentType;
+  fAccept 		= env.fAccept;
+  fUserAgent 		= env.fUserAgent;
+  fPostData 		= env.fPostData;
+  fRedirectRequest 	= env.fRedirectRequest;
+  fRedirectURL 		= env.fRedirectURL;
+  fRedirectStatus 	= env.fRedirectStatus;
+  fReferrer 		= env.fReferrer;
+  fCookie 		= env.fCookie;
 
   fCookies.clear();
   fCookies.reserve(env.fCookies.size());
@@ -271,7 +262,6 @@ cgicc::CgiEnvironment::readEnvironmentVariables(CgiInput *input)
 void
 cgicc::CgiEnvironment::save(const std::string& filename) 	const
 {
-  LOGLN("CgiEnvironment::save")
   std::ofstream file( filename.c_str(), std::ios::out );
 
   if( ! file )
@@ -316,7 +306,6 @@ cgicc::CgiEnvironment::save(const std::string& filename) 	const
 void
 cgicc::CgiEnvironment::restore(const std::string& filename)
 {
-  LOGLN("CgiEnvironment::restore()")
   std::ifstream file( filename.c_str(), std::ios::in );
 
   if( ! file )

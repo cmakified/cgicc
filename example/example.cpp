@@ -1,5 +1,5 @@
 /*
- * $Id: example.cpp,v 1.6 2002/12/04 17:04:07 sbooth Exp $ 
+ * $Id: example.cpp,v 1.7 2004/06/28 00:25:33 sbooth Exp $ 
  *
  * Skeleton of a CGI application written using the GNU cgicc library
  */
@@ -10,12 +10,6 @@
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
-
-// To use the debug logging feature, the variable gLogFile MUST be
-// defined, and it _must_ be an ofstream
-#if DEBUG
-  ofstream gLogFile( "/change_this_path/cgicc.log", ios::app );
-#endif
 
 using namespace std;
 using namespace cgicc;

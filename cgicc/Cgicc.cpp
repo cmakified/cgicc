@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.18 2004/06/27 03:16:34 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.19 2004/06/28 00:25:28 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -26,12 +26,6 @@
 #include <algorithm>
 #include <functional>
 #include <iterator>
-
-#if (HAVE_SYS_TIME_H && TM_IN_SYS_TIME)
-#  include <sys/time.h>
-#else
-#  include <time.h>
-#endif
 
 #include "cgicc/CgiUtils.h"
 #include "cgicc/Cgicc.h"
@@ -125,7 +119,9 @@ public:
 		  const std::string& filename,
 		  const std::string& cType);
   
-  MultipartHeader(const MultipartHeader& head);
+  inline
+  MultipartHeader(const MultipartHeader& head)
+  { operator=(head); }
   ~MultipartHeader();
 
   MultipartHeader&
@@ -164,12 +160,6 @@ cgicc::MultipartHeader::MultipartHeader(const std::string& disposition,
     fContentType(cType)
 {}
 
-cgicc::MultipartHeader::MultipartHeader(const MultipartHeader& head)
-{ 
-  // call operator=
-  *this = head;
-}
-
 cgicc::MultipartHeader::~MultipartHeader()
 {}
 
@@ -189,38 +179,19 @@ cgicc::MultipartHeader::operator= (const MultipartHeader& head)
 // ============================================================
 cgicc::Cgicc::Cgicc(CgiInput *input)
   : fEnvironment(input)
-{
-#if DEBUG
-#if HAVE_STRFTIME
-  time_t 	now;
-  tm 		*date;
-  char 		s[80];
-  
-  now = time(0);
-  date = localtime(&now);
-  strftime(s, 80, "%A, %B %d, %Y %I:%M:%S %p", date);
-  LOG("Cgicc debugging log started on ")
-  LOGLN(s)
-#else
-  LOGLN("Cgicc debugging log started.")
-#endif /* HAVE_STRFTIME */
-#endif /* DEBUG */
-  
+{ 
   // this can be tweaked for performance
   fFormData.reserve(20);
   fFormFiles.reserve(2);
 
-  if(stringsAreEqual(getEnvironment().getRequestMethod(), "post"))
-    parseFormInput(getEnvironment().getPostData());
+  if(stringsAreEqual(fEnvironment.getRequestMethod(), "post"))
+    parseFormInput(fEnvironment.getPostData());
   else
-    parseFormInput(getEnvironment().getQueryString());
+    parseFormInput(fEnvironment.getQueryString());
 }
 
 cgicc::Cgicc::~Cgicc()
-{
-  LOGLN("Cleaning up...")
-  LOGLN("Cgicc debugging log closed.")
-}
+{}
 
 cgicc::Cgicc& 
 cgicc::Cgicc::operator= (const Cgicc& cgi)
@@ -229,10 +200,10 @@ cgicc::Cgicc::operator= (const Cgicc& cgi)
 
   fFormData.clear();
   fFormFiles.clear();
-  if(stringsAreEqual(getEnvironment().getRequestMethod(), "post"))
-    parseFormInput(getEnvironment().getPostData());
+  if(stringsAreEqual(fEnvironment.getRequestMethod(), "post"))
+    parseFormInput(fEnvironment.getPostData());
   else
-    parseFormInput(getEnvironment().getQueryString());
+    parseFormInput(fEnvironment.getQueryString());
   
   return *this;
 }
@@ -256,24 +227,21 @@ cgicc::Cgicc::getHost() 					const
 void
 cgicc::Cgicc::save(const std::string& filename) 		const
 {
-  LOGLN("Cgicc::save")
-  getEnvironment().save(filename);
+  fEnvironment.save(filename);
 }
 
 void
 cgicc::Cgicc::restore(const std::string& filename)
 {
-  LOGLN("Cgicc::restore")
-  
-  ((CgiEnvironment&)getEnvironment()).restore(filename);
+  fEnvironment.restore(filename);
 
   // clear the current data and re-parse the enviroment
   fFormData.clear();
   fFormFiles.clear();
-  if(stringsAreEqual(getEnvironment().getRequestMethod(), "post"))
-    parseFormInput(getEnvironment().getPostData());
+  if(stringsAreEqual(fEnvironment.getRequestMethod(), "post"))
+    parseFormInput(fEnvironment.getPostData());
   else
-    parseFormInput(getEnvironment().getQueryString());
+    parseFormInput(fEnvironment.getQueryString());
 }
 
 bool 
@@ -377,11 +345,10 @@ cgicc::Cgicc::findEntries(const std::string& param,
 void
 cgicc::Cgicc::parseFormInput(const std::string& data)
 {
-  std::string env 	= getEnvironment().getContentType();
+  std::string env 	= fEnvironment.getContentType();
   std::string cType 	= "multipart/form-data";
-  LOGLN(data)
+
   if(stringsAreEqual(cType, env, cType.length())) {
-    LOGLN("Multipart data detected.")
 
     // Find out what the separator is
     std::string 		bType 	= "boundary=";

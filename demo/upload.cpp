@@ -1,7 +1,7 @@
 /*
- *  $Id: upload.cpp,v 1.7 2003/07/13 14:22:57 sbooth Exp $
+ *  $Id: upload.cpp,v 1.8 2004/06/28 00:25:32 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,18 +37,12 @@
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 
-#if HAVE_UNAME
+#if HAVE_SYS_UTSNAME_H
 #  include <sys/utsname.h>
 #endif
 
 #if HAVE_SYS_TIME_H
 #  include <sys/time.h>
-#endif
-
-// To use logging, the variable gLogFile MUST be defined, and it _must_
-// be an ofstream
-#if DEBUG
-  std::ofstream gLogFile( "/change_this_path/cgicc.log", std::ios::app );
 #endif
 
 using namespace std;
@@ -67,6 +61,19 @@ main(int /*argc*/,
 
     // Create a new Cgicc object containing all the CGI data
     Cgicc cgi;
+
+    // Redirect output, if desired
+    if(cgi.queryCheckbox("redirect")) {
+      const_file_iterator file = cgi.getFile("userfile");
+
+      // Only redirect a valid file
+      if(file != cgi.getFiles().end()) {
+	cout << HTTPContentHeader(file->getDataType());
+	file->writeToStream(cout);
+
+	return EXIT_SUCCESS;
+      }
+    }
     
     // Output the HTTP headers for an HTML document, and the HTML 4.0 DTD info
     cout << HTTPHTMLHeader() << HTMLDoctype(HTMLDoctype::eStrict) << endl;
@@ -115,7 +122,7 @@ main(int /*argc*/,
     cout << h1() << "GNU cgi" << span("cc").set("class","red")
 	 << " v"<< cgi.getVersion() << " File Upload Test Results" 
 	 << h1() << endl;
-    
+
     // Get a pointer to the environment
     const CgiEnvironment& env = cgi.getEnvironment();
     
@@ -146,26 +153,26 @@ main(int /*argc*/,
       cout << colgroup() << endl;
       
       cout << tr() << td("Name").set("class","title")
-	   << td((*file).getName()).set("class","data") << tr() << endl;
+	   << td(file->getName()).set("class","data") << tr() << endl;
       
       cout << tr() << td("Data Type").set("class","title")
-	   << td((*file).getDataType()).set("class","data") << tr() << endl;
+	   << td(file->getDataType()).set("class","data") << tr() << endl;
       
       cout << tr() << td("Filename").set("class","title") 
-	   << td((*file).getFilename()).set("class","data") << tr() << endl;
+	   << td(file->getFilename()).set("class","data") << tr() << endl;
       cout << tr() << td("Data Length").set("class","title") 
-	   << td().set("class","data") << (*file).getDataLength() 
+	   << td().set("class","data") << file->getDataLength() 
 	   << td() << tr() << endl;
       
       cout << tr() << td("File Data").set("class","title")
 	   << td().set("class","data") << pre();
-      (*file).writeToStream(cout);
+      file->writeToStream(cout);
 
       /*
 	To write the contents of the file to a file "foo" on disk:
 
 	ofstream foo("foo");
-	(*file).writeToStream(foo);
+	file->writeToStream(foo);
        */
       
       cout << pre() << td() << tr() << endl;
@@ -210,7 +217,7 @@ main(int /*argc*/,
       + (end.tv_usec - start.tv_usec);
 
     cout << br() << "Total time for request = " << us << " us";
-    cout << " (" << (double) (us/1000000.0) << " s)";
+    cout << " (" << static_cast<double>(us/1000000.0) << " s)";
 #endif
 
     // End of document

@@ -1,7 +1,7 @@
 /*
- * $Id: nph-hello.cpp,v 1.5 2003/07/13 14:21:58 sbooth Exp $ 
+ * $Id: nph-hello.cpp,v 1.6 2004/06/28 00:25:30 sbooth Exp $ 
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,16 +31,8 @@
 #  include <sys/time.h>
 #endif
 
-// To use the debug logging feature, the variable gLogFile MUST be
-// defined, and it _must_ be an ofstream
-#if DEBUG
-  std::ofstream gLogFile( "/change_this_path/cgicc.log", std::ios::app );
-#endif
-
 using namespace std;
 using namespace cgicc;
-
-extern char **environ;
 
 int
 main(int /*argc*/, 
