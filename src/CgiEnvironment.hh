@@ -1,4 +1,4 @@
-/* $Id: CgiEnvironment.hh,v 1.3 1998/04/03 09:10:20 sbooth Exp $ */
+/* $Id: CgiEnvironment.hh,v 1.4 1998/04/04 04:34:55 sbooth Exp $ */
 
 #ifndef __CGI_ENVIRONMENT__
 #define __CGI_ENVIRONMENT__ 1
@@ -26,8 +26,8 @@
 /**
  * Encapsulates all the data passed from the server to the application.
  * <P>To read in the environment, simply instantiate an object of this type.
- * <BR><P>The getXXX() methods in this class, with the exception of
- * getPostData(), will <EM>never</EM> return NULL.</P>
+ * </P><P>The <TT>getXXX()</TT> methods in this class, with the exception of
+ * <TT>getPostData()</TT>, will <EM>never</EM> return NULL.</P>
  */
 class CgiEnvironment
 {
