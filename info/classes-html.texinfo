@@ -2,10 +2,10 @@
 @node classes for HTML output, Reporting Bugs, classes for HTTP headers, Top
 @unnumbered classes for HTML output
 
-For an introduction to Cgicc's HTML output, please see @xref{A tutorial
+For an introduction to cgicc's HTML output, please see @xref{A tutorial
 example}, for more information.
 
-Cgicc provides one concrete class for each HTML element defined in the
+cgicc provides one concrete class for each HTML element defined in the
 HTML 4.0 standard (@pxref{HTML generation classes}).  Every class
 defining an HTML element is a subclass of the abstract base class
 @code{HTMLElement}.  

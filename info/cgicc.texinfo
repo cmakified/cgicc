@@ -2,7 +2,7 @@
 @comment -*-texinfo-*-
 @comment %**start of header
 @setfilename cgicc.info
-@settitle GNU Cgicc - A C++ library for CGI programming
+@settitle GNU cgicc - A C++ library for CGI programming
 @comment %**end of header
 
 @setchapternewpage odd
@@ -10,14 +10,14 @@
 
 @dircategory Libraries
 @direntry
-* Cgicc: (cgicc).                 A C++ library for writing CGI
+* cgicc: (cgicc).                 A C++ library for writing CGI
                                   applications.
 @end direntry
 
 @ifinfo
-GNU Cgicc is a C++ library for developing CGI applications.
+GNU cgicc is a C++ library for developing CGI applications.
 
-Copyright @copyright{} 1996, 1997, 1998, 1999 Stephen F. Booth
+Copyright @copyright{} 1996, 1997, 1998, 1999, 2000 Stephen F. Booth
 
 Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -45,7 +45,7 @@ approved by the Free Software Foundation.
 @end ifinfo
 @titlepage
 @sp 10
-@center @titlefont{GNU Cgicc}
+@center @titlefont{GNU cgicc}
 @subtitle A C++ class library for developing CGI applications
 @author Stephen F. Booth
 @page
@@ -71,21 +71,21 @@ approved by the Free Software Foundation.
 
 @ifnottex
 @node Top, Overview of CGI, (dir), (dir)
-@top GNU Cgicc
+@top GNU cgicc
 
 @include version.texi
 
-This document describes the GNU Cgicc library, a C++ class library that
+This document describes the GNU cgicc library, a C++ class library that
 facilitates the development of Common Gateway Inteface (CGI)
 applications for the World Wide Web (WWW).
 
-This is edition @value{EDITION} of the Cgicc documentation, @value{UPDATED}.
+This is edition @value{EDITION} of the cgicc documentation, @value{UPDATED}.
 @end ifnottex
 
 @menu
 * Overview of CGI::             An overview of the Common Gateway Interface
-* A tutorial example::          An introductory example to using Cgicc
-* Library overview::            An overview of Cgicc's layout
+* A tutorial example::          An introductory example to using cgicc
+* Library overview::            An overview of cgicc's layout
 * CGI classes::                 Classes used to query and manipulate CGI data
 * HTTP header classes::         Classes used for returning response information
 * HTML generation classes::     Classes used to return a response to the client
@@ -95,8 +95,8 @@ This is edition @value{EDITION} of the Cgicc documentation, @value{UPDATED}.
 * class FormFile::              Represents a file uploaded via HTTP
 * classes for HTTP headers::    Used for generating response information
 * classes for HTML output::     Used for generating a client response
-* Reporting Bugs::              How to report a bug in Cgicc
-* Copying::                     Your rights to distribute Cgicc
+* Reporting Bugs::              How to report a bug in cgicc
+* Copying::                     Your rights to distribute cgicc
 * Concept Index::               Index of concepts introduced in the manual
 * Function Index::              Index of member functions
 * Data Type Index::             Index of classes

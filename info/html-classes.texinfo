@@ -2,7 +2,7 @@
 @node HTML generation classes, class Cgicc, HTTP header classes, Top
 @unnumbered HTML generation classes
 
-The Cgicc library provides one class for each HTML element defined in
+The cgicc library provides one class for each HTML element defined in
 the HTML 4.0 specification.  In all cases, the name of the class
 corresponds to the name of the HTML element.
 

@@ -4,13 +4,13 @@
 
 @unnumberedsec Introduction
 
-It is easiest to understand how Cgicc might be used by first looking at
+It is easiest to understand how cgicc might be used by first looking at
 an example.  Suppose you have an HTML form on your web site asking a
 user to enter their name, age, and sex, perhaps as part of a
-user-registration procedure.  You wish to write a CGI script using Cgicc
+user-registration procedure.  You wish to write a CGI script using cgicc
 to process the form in some meaningful way.
 
-Applications written using Cgicc, like all other applications, begin
+Applications written using cgicc, like all other applications, begin
 with a @code{main} function:
 
 @lisp
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 
 @unnumberedsec Initialization
 
-The three main classes of Cgicc you will use to process the submitted
+The three main classes of cgicc you will use to process the submitted
 data are @code{Cgicc}, @code{CgiEnvironment}, and @code{FormEntry}.
 These classes will be explained in detail later; for now, it is
 sufficient to know that:
@@ -43,7 +43,7 @@ The class @code{FormEntry} is used to extract various types of data from
 the submitted form elements.
 @end itemize
 
-All of Cgicc's functionality is accessed through class @code{Cgicc}.
+All of cgicc's functionality is accessed through class @code{Cgicc}.
 Thus, the first step in CGI processing is to instantiate an object of
 type @code{Cgicc}:
 
@@ -137,7 +137,7 @@ server and the client.  This is done by emitting a @samp{Content-Type}
 header@footnote{The full HTTP 1.1 specification may be found in RFC 2068
 at @*@url{http://www.w3.org/Protocols/rfc2068/rfc2068}}.
 
-Cgicc provides several classes for outputting HTTP headers, all of which
+cgicc provides several classes for outputting HTTP headers, all of which
 begin with @code{HTTP}.  A standard HTML document need only output a
 single header:
 
@@ -147,11 +147,11 @@ cout << HTTPHTMLHeader() << endl;
 
 @unnumberedsec Simple HTML Output
 
-Cgicc provides one class for every HTML tag defined in the HTML 4.0
+cgicc provides one class for every HTML tag defined in the HTML 4.0
 standard in the header file @code{"cgicc/HTMLClasses.h"}.  These classes
 have the same name as the HTML tags.  For example, in HTML, to indicate
 the start of a document you write @var{<HTML>}; this can be accomplished
-using Cgicc by writing 
+using cgicc by writing 
 
 @lisp
 cout << html() << endl;
@@ -168,7 +168,7 @@ cout << html() << "html text!" << html() << endl;
 @noindent
 will produce as output @code{<HTML>html text!</HTML>}.
 
-All of Cgicc's HTML output classes are subclasses of the abstract class
+All of cgicc's HTML output classes are subclasses of the abstract class
 @code{HTMLElement}.  You can embed the text for the element directly in
 the constructor:
 
@@ -232,8 +232,8 @@ This produces as output @code{<TR><TD>0</TD><TD>1</TD><TD>2</TD></TR>}.
 
 @unnumberedsec Notes on Output
 
-All of Cgicc's output is written to the C++ standard output stream,
-@code{cout}.  It is not necessary to use Cgicc's HTML output classes;
+All of cgicc's output is written to the C++ standard output stream,
+@code{cout}.  It is not necessary to use cgicc's HTML output classes;
 they are provided as a convenience. If you prefer, you may output the
 HTML code directly to @code{cout}.
 

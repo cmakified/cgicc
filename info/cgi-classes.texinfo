@@ -6,7 +6,7 @@ CGI classes are used to query and manipulate CGI data passed from the
 HTTP server.
 
 @deftp Class Cgicc
-@code{Cgicc} is the main class of the Cgicc library.  It is used to
+@code{Cgicc} is the main class of the cgicc library.  It is used to
 retrieve information on specific HTML form elements (such as checkboxes,
 radio buttons, and text fields), on uploaded files, and to save,
 restore, and retrieve information on the CGI environment.

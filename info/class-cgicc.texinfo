@@ -2,7 +2,7 @@
 @node class Cgicc, class CgiEnvironment, HTML generation classes, Top
 @unnumbered class Cgicc
 
-@code{Cgicc} is the main class of the Cgicc library.  It is used to
+@code{Cgicc} is the main class of the cgicc library.  It is used to
 retrieve information on specific HTML form elements (such as checkboxes,
 radio buttons, and text fields), on uploaded files, and to save,
 restore, and retrieve information on the CGI environment.
@@ -27,13 +27,14 @@ of the format @samp{hh:mm:ss} in 24-hour time.
 @end deftypemethod
 
 @deftypemethod Cgicc {const char*} getVersion () const
-Get the version number of Cgicc.  The string returned is of the format
-@samp{#.#}.
+Get the version number of the cgicc library.  The string returned is of
+the format @samp{#.#}.
 @end deftypemethod
 
 @deftypemethod Cgicc {const char*} getHost () const
-Get the host for which Cgicc was configured.  The string returned is a
-canonical host triplet of the form @samp{processor-manufacturer-os}.
+Get the host for which the cgicc library was configured.  The string
+returned is a canonical host triplet of the form
+@samp{processor-manufacturer-os}.
 @end deftypemethod
 
 @unnumberedsec Form Element Access

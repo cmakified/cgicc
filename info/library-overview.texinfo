@@ -2,7 +2,7 @@
 @node Library overview, CGI classes, A tutorial example, Top
 @unnumbered Library overview
 
-The GNU Cgicc library contains classes divided into two broad groups:
+The GNU cgicc library contains classes divided into two broad groups:
 
 @cindex CGI classes
 
