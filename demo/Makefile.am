@@ -1,8 +1,8 @@
-## $Id: Makefile.am,v 1.7 2000/10/17 00:22:35 sbooth Exp $
+## $Id: Makefile.am,v 1.8 2001/03/03 17:47:43 sbooth Exp $
 
 CLEANFILES = *~
 
-EXTRA_DIST = testform.html upload.html
+EXTRA_DIST = test.html upload.html
 
 noinst_PROGRAMS = test.cgi dns.cgi upload.cgi
 
