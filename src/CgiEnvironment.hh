@@ -1,4 +1,4 @@
-/* $Id: CgiEnvironment.hh,v 1.2 1998/04/02 11:09:19 sbooth Exp $ */
+/* $Id: CgiEnvironment.hh,v 1.3 1998/04/03 09:10:20 sbooth Exp $ */
 
 #ifndef __CGI_ENVIRONMENT__
 #define __CGI_ENVIRONMENT__ 1
@@ -20,6 +20,9 @@
 #endif
 
 
+// ============================================================
+// Class CgiEnvironment
+// ============================================================
 /**
  * Encapsulates all the data passed from the server to the application.
  * <P>To read in the environment, simply instantiate an object of this type.
@@ -32,9 +35,7 @@ public:
 
   friend class Cgicc;
 
-// ========== Constructor/Destructor
-
-  /**@name Constructor */
+  /**@name Constructors */
   //@{
   
   /** 
@@ -47,8 +48,6 @@ public:
   ~CgiEnvironment();
   //@}
   
-  
-  // ========== Access to environment variables
   
   /**@name Server information */
   //@{
@@ -261,7 +260,6 @@ protected:
   
   void save(const char *filename) const 	throw(Exception);
   void restore(const char *filename)		throw(Exception);
-  //@}  
   
 private:
 
