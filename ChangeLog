@@ -1,3 +1,8 @@
+1999-08-16  Christof Danzl  <cdanzl@cosy.sbg.ac.at>
+
+	* cgicc/FormEntry.cpp(makeString): Only increment src once
+	when a CR or LF is encountered.
+	
 1999-08-16  Stephen F. Booth  <sbooth@saaba.lmi.net>
 
 	* win/cgicc.dsp: Modified to use "Multithreaded DLL" runtime library
