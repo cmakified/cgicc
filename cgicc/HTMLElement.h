@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLElement.h,v 1.4 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: HTMLElement.h,v 1.5 2003/07/17 05:16:03 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -46,7 +46,7 @@ namespace cgicc {
   // Class HTMLElement
   // ============================================================
   
-  /*! \class HTMLElement HTMLElements.h cgicc/HTMLElements.h
+  /*! \class HTMLElement HTMLElement.h cgicc/HTMLElement.h
    * \brief Class representing an HTML element.
    *
    * An HTML element is any entity enclosed in angle brackets (\< and \>)
@@ -104,7 +104,7 @@ namespace cgicc {
      *
      * HTMLElements are equal if they have the same name
      * \param element The HTMLElement to compare to this one.
-     * \return \c true if the two HTMLElements are equal, \cfalse otherwise.
+     * \return \c true if the two HTMLElements are equal, \c false otherwise.
      */
     bool 
     operator== (const HTMLElement& element) 		const;
@@ -225,7 +225,7 @@ namespace cgicc {
      * \brief Set the HTMLElementList associated with this element.
      *
      * This is usually called by subclass constructors
-     * \param elements The HTMLElementList containing the HTMLElements
+     * \param embedded The HTMLElementList containing the HTMLElements
      * embedded in this element.
      */
     void 
@@ -235,7 +235,7 @@ namespace cgicc {
      * \brief Add an embedded HTMLElement in this one 
      *
      * 
-     * \param A reference to an HTMLElement to embed in this one
+     * \param element A reference to an HTMLElement to embed in this one
      * \return A reference to \c this
      */
     HTMLElement&
@@ -245,7 +245,7 @@ namespace cgicc {
      * \brief Add an embedded HTMLElement in this one 
      *
      * This element takes ownership of \c element, which should not be deleted.
-     * \param A pointer to an HTMLElement to embed.
+     * \param element A pointer to an HTMLElement to embed.
      * \return A reference to \c this
      */
     HTMLElement&
@@ -359,7 +359,7 @@ namespace cgicc {
      * \brief For subclasses only
      *
      * Returns \c true if data was specified in the constructor.
-     * \return \c true if data was specified in the constructor, \false otherwise
+     * \return \c true if data was specified in the constructor, \c false otherwise
      */
     inline bool
     dataSpecified() 				const

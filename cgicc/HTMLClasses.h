@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLClasses.h,v 1.11 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: HTMLClasses.h,v 1.12 2003/07/17 05:16:03 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -84,7 +84,7 @@ namespace cgicc {
   class nullTag
   { public: inline static const char* getName() { return 0; } };
   
-  /*! \class comment HTMLGeneric.h cgicc/HTMLGeneric.h
+  /*! \class comment HTMLClasses.h cgicc/HTMLClasses.h
    * \brief An HTML comment
    */
   class comment : public HTMLBooleanElement<nullTag>

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPResponseHeader.h,v 1.5 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: HTTPResponseHeader.h,v 1.6 2003/07/17 05:16:03 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -109,7 +109,8 @@ namespace cgicc {
     /*!
      * \brief Add a general, response, or entity header to this one
      * 
-     * \param header The text of the header to add
+     * \param name The name of the header element to add
+     * \param value The value of the header element
      * \return A reference to this
      */
     HTTPResponseHeader&

@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLBooleanElement.h,v 1.4 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: HTMLBooleanElement.h,v 1.5 2003/07/17 05:16:03 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -92,7 +92,7 @@ namespace cgicc {
     
     /*!
      * \brief Create a new element, specifying an embedded HTMLElement.
-     * \param embed The HTMLElement embedded inside the element.
+     * \param embedded The HTMLElement embedded inside the element.
      */
     HTMLBooleanElement(const HTMLElement& embedded)
       : HTMLElement(0, &embedded, 0, eBoolean)
