@@ -80,10 +80,10 @@ Regardless of the type of value, the data is accessed via
 @code{FormEntry}@footnote{This is not entirely true.  For uploaded
 files, the data is accessed via the class @code{FormFile}.}.  You obtain
 @code{FormEntry} objects via @code{Cgicc}'s @code{getElement} methods,
-all of which return standard-library iterators:
+all of which return typedefs of standard-library iterators:
 
 @lisp
-vector<FormEntry>::iterator name = cgi.getElement("name");
+form_iterator name = cgi.getElement("name");
 @end lisp
 
 @noindent
@@ -268,7 +268,7 @@ main(int argc,
       cout << body() << endl;
 
       // Print out the submitted element
-      vector<FormEntry>::iterator name = cgi.getElement("name");
+      form_iterator name = cgi.getElement("name");
       if(name != cgi.getElements().end()) @{
          cout << "Your name: " << **name << endl;
       @}

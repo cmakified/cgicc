@@ -38,33 +38,49 @@ canonical host triplet of the form @samp{processor-manufacturer-os}.
 
 @unnumberedsec Form Element Access
 
+@deftp {Data Type} form_iterator vector<FormEntry>::iterator
+A standard template library iterator referring to a FormEntry object.
+@end deftp
+
+@deftp {Data Type} const_form_iterator vector<FormEntry>::const_iterator
+A standard template library iterator referring to a constant FormEntry object.
+@end deftp
+
+@deftp {Data Type} file_iterator vector<FormFile>::iterator
+A standard template library iterator referring to a FormFile object.
+@end deftp
+
+@deftp {Data Type} const_file_iterator vector<FormFile>::const_iterator
+A standard template library iterator referring to a constant FormFile object.
+@end deftp
+
 @deftypemethod Cgicc bool queryCheckbox (const string& @var{elementName}) const
 Returns @code{true} if a checkbox with name @var{elementName} is
 checked, @code{false} otherwise.
 @end deftypemethod
 
-@deftypemethod Cgicc vector<FormEntry>::iterator operator[] (const string& @var{name})
+@deftypemethod Cgicc form_iterator operator[] (const string& @var{name})
 Find a radio button in a radio group, or a selected list item with
 element name @var{name}. If an element with name @var{name} is not
 found, the returned iterator will be set to the value returned by
 @code{getElements().end()}.
 @end deftypemethod
 
-@deftypemethod Cgicc vector<FormEntry>::const_iterator operator[] (const string& @var{name}) const
+@deftypemethod Cgicc const_form_iterator operator[] (const string& @var{name}) const
 Find a radio button in a radio group, or a selected list item with
 element name @var{name}. If an element with name @var{name} is not
 found, the returned iterator will be set to the value returned by
 @code{getElements().end()}.
 @end deftypemethod
 
-@deftypemethod Cgicc vector<FormEntry>::iterator getElement (const string& @var{name})
+@deftypemethod Cgicc form_iterator getElement (const string& @var{name})
 Find a radio button in a radio group, or a selected list item with
 element name @var{name}. If an element with name @var{name} is not
 found, the returned iterator will be set to the value returned by
 @code{getElements().end()}.
 @end deftypemethod
 
-@deftypemethod Cgicc vector<FormEntry>::const_iterator getElement (const string& @var{name}) const
+@deftypemethod Cgicc const_form_iterator getElement (const string& @var{name}) const
 Find a radio button in a radio group, or a selected list item with
 element name @var{name}. If an element with name @var{name} is not
 found, the returned iterator will be set to the value returned by
@@ -77,14 +93,14 @@ element name @var{name}.  Returns @code{true} if any items with name
 @var{name} were found, @code{false} otherwise.
 @end deftypemethod
 
-@deftypemethod Cgicc vector<FormEntry>::iterator getElementByValue (const string& @var{value})
+@deftypemethod Cgicc form_iterator getElementByValue (const string& @var{value})
 Find a radio button in a radio group, or a selected list item with
 element value @var{value}. If an element with value @var{value} is not
 found, the returned iterator will be set to the value returned by
 @code{getElements().end()}.
 @end deftypemethod
 
-@deftypemethod Cgicc vector<FormEntry>::const_iterator getElementByValue (const string& @var{name}) const
+@deftypemethod Cgicc const_form_iterator getElementByValue (const string& @var{name}) const
 Find a radio button in a radio group, or a selected list item with
 element value @var{value}. If an element with value @var{value} is not
 found, the returned iterator will be set to the value returned by
@@ -107,13 +123,13 @@ Get all the submitted form elements, excluding files.
 
 @unnumberedsec Uploaded File Access
 
-@deftypemethod Cgicc vector<FormFile>::iterator getFile (const string& @var{name})
+@deftypemethod Cgicc file_iterator getFile (const string& @var{name})
 Find an uploaded file with element name @var{name}.  If a file belonging
 to element name @var{name} is not found, the returned iterator will be
 set to the value returned by @code{getFiles().end()}.
 @end deftypemethod
 
-@deftypemethod Cgicc vector<FormFile>::const_iterator getFile (const string& @var{name}) const
+@deftypemethod Cgicc const_file_iterator getFile (const string& @var{name}) const
 Find an uploaded file with element name @var{name}.  If a file belonging
 to element name @var{name} is not found, the returned iterator will be
 set to the value returned by @code{getFiles().end()}.
