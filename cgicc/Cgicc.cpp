@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.3 1999/08/16 18:02:39 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.4 1999/09/30 17:38:19 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -264,19 +264,19 @@ CGICCNS Cgicc::restore(const STDNS string& filename)
 bool 
 CGICCNS Cgicc::queryCheckbox(const STDNS string& elementName) 	const
 {
-  STDNS vector<FormEntry>::const_iterator iter = getElement(elementName);
+  const_form_iterator iter = getElement(elementName);
   return ((iter != fFormData.end()) && 
 	  stringsAreEqual( (*iter).getValue(), "on"));
 }
 
-STDNS vector<CGICCNS FormEntry>::iterator 
+CGICCNS form_iterator 
 CGICCNS Cgicc::getElement(const STDNS string& name)
 {
   return STDNS find_if(fFormData.begin(), fFormData.end(), 
 		       FE_nameCompare(name));
 }
 
-STDNS vector<CGICCNS FormEntry>::const_iterator 
+CGICCNS const_form_iterator 
 CGICCNS Cgicc::getElement(const STDNS string& name) 		const
 {
   return STDNS find_if(fFormData.begin(), fFormData.end(), 
@@ -290,14 +290,14 @@ CGICCNS Cgicc::getElement(const STDNS string& name,
   return findEntries(name, true, result); 
 }
 
-STDNS vector<CGICCNS FormEntry>::iterator 
+CGICCNS form_iterator 
 CGICCNS Cgicc::getElementByValue(const STDNS string& value)
 {
   return STDNS find_if(fFormData.begin(), fFormData.end(), 
 		       FE_valueCompare(value));
 }
 
-STDNS vector<CGICCNS FormEntry>::const_iterator 
+CGICCNS const_form_iterator 
 CGICCNS Cgicc::getElementByValue(const STDNS string& value) 	const
 {
   return STDNS find_if(fFormData.begin(), fFormData.end(), 
@@ -311,14 +311,14 @@ CGICCNS Cgicc::getElementByValue(const STDNS string& value,
   return findEntries(value, false, result); 
 }
 
-STDNS vector<CGICCNS FormFile>::iterator 
+CGICCNS file_iterator 
 CGICCNS Cgicc::getFile(const STDNS string& name)
 {
   return STDNS find_if(fFormFiles.begin(), fFormFiles.end(), 
 		       FF_compare(name));
 }
 
-STDNS vector<CGICCNS FormFile>::const_iterator 
+CGICCNS const_file_iterator 
 CGICCNS Cgicc::getFile(const STDNS string& name) 		const
 {
   return STDNS find_if(fFormFiles.begin(), fFormFiles.end(), 
