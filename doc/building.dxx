@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.14 1998/12/11 22:25:07 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.15 1998/12/11 23:03:12 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -22,7 +22,8 @@ errors occurred, install Cgicc:
 </PRE>
 This will install both static and shared versions of the Cgicc library (if
 supported) in <TT>/path/lib</TT>, the headers needed for using Cgicc in 
-<TT>/path/include/Cgicc</TT>, and the test programs in <TT>/path/bin</TT>.
+<TT>/path/include</TT>, the test programs in <TT>/path/bin</TT>,
+and the documentation in <TT>/path/doc</TT>.
 </P>
 
 <P>
