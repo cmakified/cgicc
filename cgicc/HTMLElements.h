@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: HTMLElements.h,v 1.1 1999/08/09 18:25:40 sbooth Exp $
+ *  $Id: HTMLElements.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -39,7 +40,7 @@ class HTMLElementList;
 // Class HTMLElement
 // ============================================================
 /** Class representing an HTML element. */
-class HTMLElement : public MStreamable 
+class CGICC_API HTMLElement : public MStreamable 
 {
 public:
 
@@ -201,7 +202,7 @@ private:
  * HTMLSimpleElements embedded in an HTMLSimpleElement.
  * @see HTMLSimpleElement
  */
-class HTMLElementList
+class CGICC_API HTMLElementList
 {
 public:
 

@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.1 1999/08/09 18:25:33 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -27,7 +28,8 @@
 
 /*
  * The GNU Cgicc library, by Stephen F. Booth. 
- * The latest version can be found at your closest GNU mirror.
+ *
+ * The latest version can be found on your closest GNU mirror site.
  *
  * Please mail bug reports to <mailto:bug-cgicc@gnu.org>
  *
@@ -73,7 +75,7 @@ class MultipartHeader;
  * }
  * </PRE>
  */
-class Cgicc {
+class CGICC_API Cgicc {
 public:
   
   /** Constructor */

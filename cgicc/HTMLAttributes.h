@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: HTMLAttributes.h,v 1.1 1999/08/09 18:25:38 sbooth Exp $
+ *  $Id: HTMLAttributes.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -46,7 +47,7 @@ CGICC_BEGIN_NAMESPACE
  * The name/value pair <TT>(HREF, mailto:sbooth@saaba.lmi.net)</TT>
  * is an HTMLAttribute.
  */
-class HTMLAttribute : public MStreamable 
+class CGICC_API HTMLAttribute : public MStreamable 
 {
 public:
   
@@ -173,7 +174,7 @@ private:
  * HTMLElement.
  * @see HTMLAttribute
  */
-class HTMLAttributeList 
+class CGICC_API HTMLAttributeList 
 {
 public:
 

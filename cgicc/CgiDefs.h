@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: CgiDefs.h,v 1.1 1999/08/09 18:25:29 sbooth Exp $
+ *  $Id: CgiDefs.h,v 1.2 1999/08/09 23:03:41 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -30,7 +31,6 @@
 #ifdef WIN32
 
 #  define USE_NAMESPACES 1          // always use namespaces
-#  pragma warning (disable: 4786)   // "debug identifier truncated"
 
 // export library symbols
 #  ifdef CGICC_EXPORTS

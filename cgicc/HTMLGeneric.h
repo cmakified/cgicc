@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: HTMLGeneric.h,v 1.1 1999/08/09 18:25:41 sbooth Exp $
+ *  $Id: HTMLGeneric.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -31,7 +32,7 @@ CGICC_BEGIN_NAMESPACE
 // Template for concrete atomic HTML element classes
 // ============================================================
 template<class Tag>
-class CGICC_API GenericAtomicElement : public HTMLElement 
+class GenericAtomicElement : public HTMLElement 
 {
 public:
   
@@ -69,7 +70,7 @@ public:
 // Template for concrete boolean HTML element classes
 // ============================================================
 template<class Tag>
-class CGICC_API GenericBooleanElement : public HTMLElement 
+class GenericBooleanElement : public HTMLElement 
 {
 public:
   

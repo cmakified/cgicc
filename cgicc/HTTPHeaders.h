@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: HTTPHeaders.h,v 1.1 1999/08/09 18:25:43 sbooth Exp $
+ *  $Id: HTTPHeaders.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -44,7 +45,7 @@ CGICC_BEGIN_NAMESPACE
  * <P>For more information, see <TT>\URL{http://www.w3.org/MarkUp/}</TT> and 
  * <TT>\URL{http://www.w3.org/TR/REC-html40/}</TT></P>
  */
-class HTMLDoctype : public MStreamable 
+class CGICC_API HTMLDoctype : public MStreamable 
 {
 public:
     
@@ -86,7 +87,7 @@ private:
  *  out << HTTPCookie("count","1");
  * </PRE>
  */
-class HTTPCookie : public MStreamable 
+class CGICC_API HTTPCookie : public MStreamable 
 {
 public:
 
@@ -264,7 +265,7 @@ private:
 // Class HTTPHeader
 // ============================================================
 /** Abstract base class for all HTTP headers. */
-class HTTPHeader : public MStreamable 
+class CGICC_API HTTPHeader : public MStreamable 
 {
 public:
     
@@ -305,7 +306,7 @@ private:
 // Class HTTPContentHeader
 // ============================================================
 /** HTTP header for data of a specified MIME type. */
-class HTTPContentHeader : public HTTPHeader 
+class CGICC_API HTTPContentHeader : public HTTPHeader 
 {
 public:
   /**
@@ -328,7 +329,7 @@ private:
 // Class HTTPRedirectHeader
 // ============================================================
 /** HTTP Redirection Header */
-class HTTPRedirectHeader : public HTTPHeader 
+class CGICC_API HTTPRedirectHeader : public HTTPHeader 
 {
 public:
   /**
@@ -351,7 +352,7 @@ private:
 // Class HTTPStatusHeader
 // ============================================================
 /** HTTP Status Header */
-class HTTPStatusHeader : public HTTPHeader 
+class CGICC_API HTTPStatusHeader : public HTTPHeader 
 {
 public:
   /**
@@ -386,7 +387,7 @@ private:
 // Class HTTPNPHeader
 // ============================================================
 /** HTTP No-parse Header */
-class HTTPNPHeader : public HTTPHeader 
+class CGICC_API HTTPNPHeader : public HTTPHeader 
 {
 public:
   /** Create a new No-parse header */
@@ -403,7 +404,7 @@ public:
 // Class HTTPHTMLHeader
 // ============================================================
 /** Shortcut to HTTPContentHeader for "text/html" */
-class HTTPHTMLHeader : public HTTPContentHeader 
+class CGICC_API HTTPHTMLHeader : public HTTPContentHeader 
 {
 public:
   /** Create a new "text/html" header */
@@ -417,7 +418,7 @@ public:
 // Class HTTPPlainHeader
 // ============================================================
 /** Shortcut to HTTPContentHeader for "text/plain" */
-class HTTPPlainHeader : public HTTPContentHeader 
+class CGICC_API HTTPPlainHeader : public HTTPContentHeader 
 {
 public:
   /** Create a new "text/plain" header */
@@ -431,7 +432,7 @@ public:
 // Class HTTPGIFHeader
 // ============================================================
 /** Shortcut to HTTPContentHeader for "image/gif" */
-class HTTPGIFHeader : public HTTPContentHeader 
+class CGICC_API HTTPGIFHeader : public HTTPContentHeader 
 {
 public:
   /** Create a new "image/gif" header */
@@ -445,7 +446,7 @@ public:
 // Class HTTPJPEGHeader
 // ============================================================
 /** Shortcut to HTTPContentHeader for "image/jpeg" */
-class HTTPJPEGHeader : public HTTPContentHeader 
+class CGICC_API HTTPJPEGHeader : public HTTPContentHeader 
 {
 public:
   /** Create a new "image/jpeg" header */
@@ -459,7 +460,7 @@ public:
 // Class HTTPXBMHeader
 // ============================================================
 /** Shortcut to HTTPContentHeader for "image/x-xbitmap" */
-class HTTPXBMHeader : public HTTPContentHeader 
+class CGICC_API HTTPXBMHeader : public HTTPContentHeader 
 {
 public:
   /** Create a new "image/x-xbitmap" header */
@@ -473,7 +474,7 @@ public:
 // Class HTTPAudioHeader
 // ============================================================
 /** Shortcut to HTTPContentHeader for "audio/basic" */
-class HTTPAudioHeader : public HTTPContentHeader 
+class CGICC_API HTTPAudioHeader : public HTTPContentHeader 
 {
 public:
   /** Create a new "audio/basic" header */

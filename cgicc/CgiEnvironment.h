@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.1 1999/08/09 18:25:30 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.2 1999/08/09 23:03:41 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -42,7 +43,7 @@ CGICC_BEGIN_NAMESPACE
  * <P>To read in the environment, simply instantiate an object of this type.
  * </P>
  */
-class CgiEnvironment
+class CGICC_API CgiEnvironment
 {
 public:
   

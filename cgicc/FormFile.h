@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: FormFile.h,v 1.1 1999/08/09 18:25:36 sbooth Exp $
+ *  $Id: FormFile.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -42,7 +43,7 @@ CGICC_BEGIN_NAMESPACE
  * </PRE>
  * </P>
  */
-class FormFile
+class CGICC_API FormFile
 {
 public:
   

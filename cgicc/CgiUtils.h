@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: CgiUtils.h,v 1.1 1999/08/09 18:25:32 sbooth Exp $
+ *  $Id: CgiUtils.h,v 1.2 1999/08/09 23:03:41 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -65,7 +66,7 @@ CGICC_BEGIN_NAMESPACE
  * @return The value of the requested environment variable, or an empty
  * string if not found.
  */
-STDNS string
+CGICC_API STDNS string
 safeGetenv(const char *varName);
 
 /*
@@ -75,7 +76,7 @@ safeGetenv(const char *varName);
  * @param s2 The second string to compare
  * @return True if the strings are equal, false if they are not
  */
-bool 
+CGICC_API bool
 stringsAreEqual(const STDNS string& s1, 
 		const STDNS string& s2);
 
@@ -87,7 +88,7 @@ stringsAreEqual(const STDNS string& s1,
  * @param n The number of characters to compare.
  * @return True if the strings are equal, false if they are not
  */
-bool 
+CGICC_API bool
 stringsAreEqual(const STDNS string& s1, 
 		const STDNS string& s2,
 		size_t n);
@@ -99,7 +100,7 @@ stringsAreEqual(const STDNS string& s1,
  * @param command The command to be sanitized and run
  * @return The result of running the sanitized version of <EM>command</EM>
  */
-int 
+CGICC_API int
 saferSystem(const STDNS string& command);
 
 /**
@@ -110,7 +111,7 @@ saferSystem(const STDNS string& command);
  * @param src The src string containing the encoded characters
  * @return The converted string
  */
-STDNS string
+CGICC_API STDNS string
 unescapeString(const STDNS string& src);
 
 /**
@@ -126,7 +127,7 @@ unescapeString(const STDNS string& src);
  * @param second the second character of the hex value
  * @return The ASCII character
  */
-char 
+CGICC_API char
 hexToChar(char first, 
 	  char second);
 

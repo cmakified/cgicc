@@ -1,5 +1,6 @@
+/* -*-c++-*- */
 /*
- *  $Id: FormEntry.h,v 1.1 1999/08/09 18:25:35 sbooth Exp $
+ *  $Id: FormEntry.h,v 1.2 1999/08/09 23:03:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -36,7 +37,7 @@
 CGICC_BEGIN_NAMESPACE
 
 /** Immutable class representing a single HTML form entry (name/value pair). */
-class FormEntry
+class CGICC_API FormEntry
 {
 public:
   
