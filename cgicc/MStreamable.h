@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: MStreamable.h,v 1.2 1999/08/09 23:03:43 sbooth Exp $
+ *  $Id: MStreamable.h,v 1.3 1999/08/17 17:34:19 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -49,7 +49,8 @@ operator<<(STDNS ostream& out, const MStreamable& obj);
 class CGICC_API MStreamable 
 {
   
-  friend STDNS ostream& operator<<(STDNS ostream& out, const MStreamable& obj);
+  friend CGICC_API STDNS ostream& 
+  operator<<(STDNS ostream& out, const MStreamable& obj);
   
 public:
   /**
