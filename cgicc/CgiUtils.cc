@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cc,v 1.2 1999/06/04 00:07:36 sbooth Exp $
+ *  $Id: CgiUtils.cc,v 1.3 1999/06/16 16:19:16 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -108,7 +108,7 @@ CGICCNS hexToChar(char first,
 }
 
 STDNS string
-CGICCNS unescapeString(const string& src)
+CGICCNS unescapeString(const STDNS string& src)
 {
   STDNS string result;
   STDNS string::const_iterator iter;
