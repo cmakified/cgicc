@@ -1,0 +1,15 @@
+<!-- $Id: examples.dxx,v 1.1 1998/04/01 21:10:58 sbooth Exp $ -->
+
+/**@name Cgicc examples
+
+<P><DL>
+<DT><A HREF="http://www.cs.hmc.edu/cgi-bin/cgiwrap/sbooth/dns.cgi">
+DNS Gateway</A>
+<DD>A simple cgi that looks up the hostname for an IP address,
+or the IP address for a hostname.<BR>
+<A HREF="dns.cc">Source code</A> for dns.cgi.</DL>
+If you have written something using Cgicc and would like it to be included 
+here, please 
+<A HREF="mailto:sbooth@hmc.edu?Subject=Cgicc Example">e-mail me</A>.</P>
+
+*/
