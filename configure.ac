@@ -1,10 +1,10 @@
 dnl -*-m4-*-
-dnl $Id: configure.ac,v 1.4 2002/03/17 20:56:37 sbooth Exp $
+dnl $Id: configure.ac,v 1.5 2002/03/17 21:39:46 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(cgicc, 3.2.1, bug-cgicc@gnu.org)
 AC_CONFIG_SRCDIR(cgicc/Cgicc.cpp)
-AC_REVISION([$Revision: 1.4 $])
+AC_REVISION([$Revision: 1.5 $])
 AC_CONFIG_AUX_DIR(support)
 AC_PREFIX_DEFAULT(/usr)
 AM_INIT_AUTOMAKE
@@ -130,7 +130,7 @@ AC_ARG_ENABLE(fcgi-demos,
   esac], cgicc_fcgi_demos=no)
 AC_MSG_CHECKING(whether to build the cgicc fcgi demos)
 AC_MSG_RESULT($cgicc_fcgi_demos)
-dnl AM_CONDITIONAL(FCGI_DEMOS, test "$cgicc_fcgi_demos" = yes)
+AM_CONDITIONAL(FCGI_DEMOS, test "$cgicc_fcgi_demos" = yes)
 
 if test "$cgicc_fcgi_demos" = yes; then
   AC_CHECK_LIB(fcgi, FCGX_Accept, FCGI_LIBS="-lfcgi++ -lfcgi",

@@ -4,6 +4,7 @@
 	* contrib/fcgi-test.cpp: New file
 	* contrib/FCgioIO.{h,cpp}: New files
 	* configure.ac: Add checks for FastCgi
+	* contrib/Makefile.am: Added conditional support for FastCgi demo
 
 2002-03-13  Stephen F. Booth  <sbooth@gnu.org>
 
