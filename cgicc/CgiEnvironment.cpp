@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.7 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.8 2001/09/05 02:18:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -54,8 +54,6 @@ CGICCNS CgiEnvironment::CgiEnvironment(reader_function_t stream_reader)
   else if(stringsAreEqual( getRequestMethod(), "post")) {
     LOGLN("POST method recognized");
           
-    // Why doesn't this work? Should convert char* -> auto_ptr_ref -> auto_ptr
-    // STDNS auto_ptr<char> temp = new char[getContentLength()];
     STDNS auto_ptr<char> temp(new char[getContentLength()]);
 
     // use the appropriate reader function

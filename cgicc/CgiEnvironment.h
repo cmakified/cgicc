@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiEnvironment.h,v 1.8 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: CgiEnvironment.h,v 1.9 2001/09/05 02:18:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -35,8 +35,8 @@
  * set by the HTTP server specified in the CGI specification.
  */
 
-#include <vector>
 #include <string>
+#include <vector>
 #include <cstdlib>
 
 #include "cgicc/CgiDefs.h"

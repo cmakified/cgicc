@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTMLDoctype.h,v 1.1 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: HTMLDoctype.h,v 1.2 2001/09/05 02:18:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -72,7 +72,10 @@ public:
    */
   HTMLDoctype(EDocumentType type = eStrict);
     
-  /*! \brief Destructor */
+  /*!
+   * \brief Destructor 
+   *
+   */
   virtual ~HTMLDoctype();
     
   virtual void 

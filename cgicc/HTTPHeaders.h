@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: HTTPHeaders.h,v 1.6 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: HTTPHeaders.h,v 1.7 2001/09/05 02:18:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -34,6 +34,5 @@
 #include "cgicc/HTTPStatusHeader.h"
 
 #include "cgicc/HTTPResponseHeader.h"
-#include "cgicc/HTTPNPHeader.h"
 
 #endif /* ! _HTTPHEADERS_H_ */

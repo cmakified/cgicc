@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cpp,v 1.3 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: CgiUtils.cpp,v 1.4 2001/09/05 02:18:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -181,8 +181,6 @@ CGICCNS readString(STDNS istream& in)
   in >> dataSize;
   in.get(); // skip ' '
 
-  // Why doesn't this work? Should convert char* -> auto_ptr_ref -> auto_ptr
-  // STDNS auto_ptr<char> temp = new char[dataSize];
   STDNS auto_ptr<char> temp(new char[dataSize]);
 
   in.read(temp.get(), dataSize);

@@ -1,5 +1,5 @@
 /*
- *  $Id: HTTPResponseHeader.cpp,v 1.1 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: HTTPResponseHeader.cpp,v 1.2 2001/09/05 02:18:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
@@ -40,6 +40,28 @@ CGICCNS HTTPResponseHeader::HTTPResponseHeader(const STDNS string& version,
 
 CGICCNS HTTPResponseHeader::~HTTPResponseHeader()
 {}
+
+CGICCNS HTTPResponseHeader&
+CGICCNS HTTPResponseHeader::addHeader(const STDNS string& header)
+{
+  fHeaders.push_back(header); 
+  return *this; 
+}
+
+CGICCNS HTTPResponseHeader&
+CGICCNS HTTPResponseHeader::addHeader(const STDNS string& name,
+				      const STDNS string& value)
+{ 
+  fHeaders.push_back(name + ": " + value); 
+  return *this; 
+}
+
+CGICCNS HTTPResponseHeader&
+CGICCNS HTTPResponseHeader::setCookie(const HTTPCookie& cookie)
+{ 
+  fCookies.push_back(cookie); 
+  return *this; 
+}
 
 void 
 CGICCNS HTTPResponseHeader::render(STDNS ostream& out)	const

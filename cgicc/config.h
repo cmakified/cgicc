@@ -1,7 +1,7 @@
 /* cgicc/config.h.  Generated automatically by configure.  */
 /* cgicc/config.h.in.  Generated automatically from configure.ac by autoheader.  */
 /*
- *  $Id: config.h,v 1.1 2001/09/03 22:06:39 sbooth Exp $
+ *  $Id: config.h,v 1.2 2001/09/05 02:18:28 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
  *
