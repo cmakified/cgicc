@@ -19,3 +19,20 @@ exported, since Cgicc does not import the .DEF file.
 These warnings may be safely ignored.
 
 
+A note about Microsoft Internet Information Server 4.0
+======================================================
+
+Apparently, Microsoft IIS 4.0 does something weird.  According to a
+Knowledge Base entry, IIS 4 no longer writes a trailing CRLF to POST
+data.  I'm not sure why this matters, since the server still sets the
+CONTENT_LENGTH environment variable.  But, for some strange reason, if
+you attempt to read CONTENT_LENGTH bytes from stdin without setting
+the file mode to binary, the CGI will hang, waiting for stdin to get
+more bytes.  I won't try to explain it, and I haven't even seen it
+firsthand.  But, if this happens to you, download and use Apache
+(http://www.apache.org).  Seriously, you can fix the problem by adding
+a line
+  _setmode(_fileno(stdin), _O_BINARY);
+to the CgiEnvironment constructor in CgiEnvironment.cpp, and including
+<io.h> and <fctrl.h>.
+

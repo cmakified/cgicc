@@ -1,3 +1,7 @@
+1999-10-01  Stephen F. Booth  <sbooth@gnu.org>
+
+	* README.WIN: Added a note about MS IIS 4.0
+
 1999-09-30  Stephen F. Booth  <sbooth@gnu.org>
 
 	* info/Makefile.am: Added rules to generate HTML (texinfo-4.0)
