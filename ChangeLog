@@ -1,3 +1,19 @@
+2000-11-14  Stephen F. Booth  <sbooth@gnu.org>
+
+	* accconfig.h: Add DEBUG macro
+	* configure.in: Add --enable-debug-logging flag
+	* example/: Directory completely reworked (see example/ChangeLog)
+	* support/cgicc-config.in: Added --includedir, --libdir options, 
+	removed --ldflags, --cxxflags, --libs options
+	* demo/testform.html: Renamed to test.html
+	* demo/test.html: New name
+	* demo/README: Completely rewritten
+
+2000-11-13  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.in: Don't generate example/Makefile
+	* Makefile.am: Distribute new files in example/
+
 2000-11-06  Stephen F. Booth  <sbooth@gnu.org>
 
 	* Makefile.am: Added support/ to SUBDIRS, removed dist-hook support/
