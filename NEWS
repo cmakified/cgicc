@@ -13,6 +13,8 @@
 * Better support added for Borland C++ Builder and HP aCC
 
 * Bona fide support for FastCGI added
+
+* Documentation fixes
 
         Major changes between versions 3.1.6 and 3.2
         ----------------------------------------------
