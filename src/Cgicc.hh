@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.hh,v 1.13 1998/12/10 02:11:46 sbooth Exp $
+ *  $Id: Cgicc.hh,v 1.14 1998/12/17 01:07:07 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
  *
@@ -22,14 +22,14 @@
 #define __CGICC__ 1
 
 /*
-  The Cgicc library, by Stephen F. Booth <mailto:sbooth@lmi.net>. 
-  The latest version can be found on http://www.lmi.net/~sbooth/ or
-  on ftp://ftp.lmi.net/pub/Cgicc/ 
-
-  Cgicc is intended to simplify and speed the development of C++ CGI(Common
-  Gateway Interface) applications by providing a simple, yet comprehensive  
-  set of classes that present full CGI functionality.
-  */
+ * The Cgicc library, by Stephen F. Booth <mailto:sbooth@saaba.lmi.net>. 
+ * The latest version can be found on http://www.lmi.net/~sbooth/cgicc/ or
+ * on ftp://ftp.lmi.net/pub/Cgicc/ 
+ *
+ * Cgicc is intended to simplify and speed the development of C++ CGI(Common
+ * Gateway Interface) applications by providing a simple, yet comprehensive  
+ * set of classes that present full CGI functionality.
+ */
 
 
 #include "Exception.hh"
