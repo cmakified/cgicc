@@ -1,20 +1,20 @@
 /*
- *  $Id: HTTPHeaders.cc,v 1.6 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: HTTPHeaders.cc,v 1.7 1999/04/26 22:42:32 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -23,15 +23,16 @@
 // ============================================================
 // Class HTMLDoctype
 // ============================================================
-HTMLDoctype::HTMLDoctype(EDocumentType type) {
-  fType = type;
-}
+CGICCNS HTMLDoctype::HTMLDoctype(EDocumentType type)
+  : fType(type)
+{}
 
-HTMLDoctype::~HTMLDoctype()
+CGICCNS HTMLDoctype::~HTMLDoctype()
 {}
 
 void
-HTMLDoctype::render(ostream &out) const {
+CGICCNS HTMLDoctype::render(STDNS ostream &out) 	const
+{
   out << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0";
   
   switch(fType) {
@@ -68,90 +69,54 @@ HTMLDoctype::render(ostream &out) const {
 // ============================================================
 // Class HTTPCookie
 // ============================================================
-HTTPCookie::HTTPCookie(const char *name, 
-		       const char *value, 
-		       const char *expires, 
-		       const char *path,
-		       const char *domain, 
-		       bool secure) throw(Exception)
-  : fName(NULL), fValue(NULL), fExpires(NULL), fPath(NULL), 
-    fDomain(NULL), fSecure(secure)
+CGICCNS HTTPCookie::HTTPCookie()
+  : fSecure(false)
+{}
+
+CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name, 
+			       const STDNS string& value)
+  : fName(name), 
+    fValue(value),
+    fSecure(false)
+{}
+
+CGICCNS HTTPCookie::HTTPCookie(const STDNS string& name, 
+			       const STDNS string& value, 
+			       const STDNS string& expires, 
+			       const STDNS string& path,
+			       const STDNS string& domain, 
+			       bool secure)
+  : fName(name), 
+    fValue(value), 
+    fExpires(expires), 
+    fPath(path), 
+    fDomain(domain), 
+    fSecure(secure)
+{}
+
+CGICCNS HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
+  : fName(cookie.getName()), 
+    fValue(cookie.getValue()), 
+    fExpires(cookie.getExpires()), 
+    fPath(cookie.getPath()), 
+    fDomain(cookie.getDomain()), 
+    fSecure(cookie.isSecure())
+{}
+
+CGICCNS HTTPCookie::~HTTPCookie()
+{}
+
+void 
+CGICCNS HTTPCookie::render(STDNS ostream& out) 	const
 {
-  setName(name);
-  setValue(value);
-  if(expires != NULL)
-    setExpires(expires);
-  if(path != NULL)
-    setPath(path);
-  if(domain != NULL)
-    setDomain(domain);
-}
-
-HTTPCookie::HTTPCookie(const HTTPCookie& cookie) 
-  : fName(NULL), fValue(NULL), fExpires(NULL), fPath(NULL), 
-    fDomain(NULL), fSecure(cookie.isSecure())
-{
-  setName(cookie.getName());
-  setValue(cookie.getValue());
-  if(cookie.getExpires() != NULL)
-    setExpires(cookie.getExpires());
-  if(cookie.getPath() != NULL)
-    setPath(cookie.getPath());
-  if(cookie.getDomain() != NULL)
-    setDomain(getDomain());
-}
-
-HTTPCookie::~HTTPCookie() {
-  delete [] fName;
-  delete [] fValue;
-  delete [] fExpires;
-  delete [] fPath;
-  delete [] fDomain;
-}
-
-void 
-HTTPCookie::setName(const char *name) throw(Exception) 
-{ set(fName, name); }
-
-void 
-HTTPCookie::setValue(const char *value) throw(Exception) 
-{ set(fValue, value); }
-
-void 
-HTTPCookie::setExpires(const char *expires) throw(Exception) 
-{ set(fExpires, expires); }
-
-void 
-HTTPCookie::setPath(const char *path) throw(Exception) 
-{ set(fPath, path); }
-
-void 
-HTTPCookie::setDomain(const char *domain) throw(Exception) 
-{ set(fDomain, domain); }
-
-void 
-HTTPCookie::setSecure(bool secure)
-{ fSecure = secure; }
-
-void 
-HTTPCookie::set(char* &attr, const char *value) throw(Exception) {
-  delete [] attr;
-  attr = new char [ strlen(value) + 1];
-  if(attr == NULL)
-    throw Exception("new failed", ERRINFO);
-  strcpy(attr, value);
-}
-
-void 
-HTTPCookie::render(ostream& out) const {
   out << "Set-Cookie: " << getName() << '=' << getValue() << ';';
-  if(getExpires() != NULL)
-    out << " expires=" << getExpires() << ';';
-  if(getPath() != NULL)
-    out << " path=" << getPath() << ';';
-  if(getDomain() != NULL)
-    out << " domain=" << getDomain() << ';';
-  if(isSecure())
+  if(! fExpires.empty())
+    out << " expires=" << fExpires << ';';
+  if(! fPath.empty())
+    out << " path=" << fPath << ';';
+  if(! fDomain.empty())
+    out << " domain=" << fDomain << ';';
+  if(fSecure == true)
     out << " secure";
   
   out << endl;
@@ -160,154 +125,149 @@ HTTPCookie::render(ostream& out) const {
 // ============================================================
 // Class HTTPHeader
 // ============================================================
-HTTPHeader::HTTPHeader(const char *data) throw(Exception)
-  : fData(NULL)
-{
-  if(data != NULL)
-    setData(data);
-}
+CGICCNS HTTPHeader::HTTPHeader()
+{}
 
-HTTPHeader::HTTPHeader(const HTTPHeader& header) {
-  if(header.getData() != NULL)
-    setData(header.getData());
-}
+CGICCNS HTTPHeader::HTTPHeader(const STDNS string& data)
+  : fData(data)
+{}
 
-HTTPHeader::~HTTPHeader() {
-  delete [] fData;
-}
+CGICCNS HTTPHeader::HTTPHeader(const HTTPHeader& header)
+  : fData(header.getData())
+{}
 
-void
-HTTPHeader::setData(const char *data) throw(Exception) {
-  delete [] fData;
-  fData = new char [strlen(data) + 1];
-  if(fData == NULL)
-    throw Exception("new failed", ERRINFO);
-  strcpy(fData, data);
-}
+CGICCNS HTTPHeader::~HTTPHeader()
+{}
 
 // ============================================================
 // Class HTTPContentHeader
 // ============================================================
-HTTPContentHeader::HTTPContentHeader(const char *mimeType) throw(Exception) {
-  if(mimeType != NULL)
-    setData(mimeType);
-}
+CGICCNS HTTPContentHeader::HTTPContentHeader(const STDNS string& mimeType) 
+  : HTTPHeader(mimeType)
+{}
 
-HTTPContentHeader::~HTTPContentHeader()
+CGICCNS HTTPContentHeader::~HTTPContentHeader()
 {}
 
 void 
-HTTPContentHeader::render(ostream& out) const {
-  out << "Content-type: " << getData() << endl << endl;
+CGICCNS HTTPContentHeader::render(STDNS ostream& out)	const
+{
+  out << "Content-Type: " << getData() << endl << endl;
 }
 
 // ============================================================
 // Class HTTPRedirectHeader
 // ============================================================
-HTTPRedirectHeader::HTTPRedirectHeader(const char *url) throw(Exception)
+CGICCNS HTTPRedirectHeader::HTTPRedirectHeader(const STDNS string& url) 
   : HTTPHeader(url)
 {}
 
-HTTPRedirectHeader::~HTTPRedirectHeader()
+CGICCNS HTTPRedirectHeader::~HTTPRedirectHeader()
 {}
 
 void 
-HTTPRedirectHeader::render(ostream& out) const {
+CGICCNS HTTPRedirectHeader::render(STDNS ostream& out) 	const
+{
   out << "Location: " << getData() << endl << endl;
 }
 
 // ============================================================
 // Class HTTPStatusHeader
 // ============================================================
-HTTPStatusHeader::HTTPStatusHeader() throw(Exception)
-  : HTTPHeader(), fStatus(-1)
+CGICCNS HTTPStatusHeader::HTTPStatusHeader()
+  : HTTPHeader(""), 
+    fStatus(-1)
 {}
 
-HTTPStatusHeader::HTTPStatusHeader(int status, const char *message) 
-  throw(Exception)
-    : HTTPHeader(message), fStatus(status)
+CGICCNS HTTPStatusHeader::HTTPStatusHeader(int status, 
+					   const STDNS string& message) 
+  : HTTPHeader(message), 
+    fStatus(status)
 {}
 
-HTTPStatusHeader::~HTTPStatusHeader()
+CGICCNS HTTPStatusHeader::~HTTPStatusHeader()
 {}
 
 void 
-HTTPStatusHeader::render(ostream& out) const {
+CGICCNS HTTPStatusHeader::render(STDNS ostream& out) 	const
+{
   out << "Status: " << getStatusCode() << ' ' << getData() << endl << endl;
 }
 
 // ============================================================
 // Class HTTPNPHeader
 // ============================================================
-HTTPNPHeader::HTTPNPHeader() throw(Exception)
-  //: HTTPHeader("HTTP/1.0 204 No Response")
+CGICCNS HTTPNPHeader::HTTPNPHeader()
   : HTTPHeader("HTTP/1.1 204 No Response")
 {}
 
-HTTPNPHeader::~HTTPNPHeader()
+CGICCNS HTTPNPHeader::~HTTPNPHeader()
 {}
 
 void 
-HTTPNPHeader::render(ostream& out) const {
+CGICCNS HTTPNPHeader::render(STDNS ostream& out) 	const
+{
   out << getData() << endl << endl;
 }
 
 // ============================================================
 // Class HTTPHTMLHeader
 // ============================================================
-HTTPHTMLHeader::HTTPHTMLHeader() throw(Exception)
+CGICCNS HTTPHTMLHeader::HTTPHTMLHeader()
   : HTTPContentHeader("text/html")
 {}
 
-HTTPHTMLHeader::~HTTPHTMLHeader()
+CGICCNS HTTPHTMLHeader::~HTTPHTMLHeader()
 {}
 
 // ============================================================
 // Class HTTPPlainHeader
 // ============================================================
-HTTPPlainHeader::HTTPPlainHeader() throw(Exception)
+CGICCNS HTTPPlainHeader::HTTPPlainHeader()
   : HTTPContentHeader("text/plain")
 {}
 
-HTTPPlainHeader::~HTTPPlainHeader()
+CGICCNS HTTPPlainHeader::~HTTPPlainHeader()
 {}
 
 // ============================================================
 // Class HTTPGIFHeader
 // ============================================================
-HTTPGIFHeader::HTTPGIFHeader() throw(Exception)
+CGICCNS HTTPGIFHeader::HTTPGIFHeader()
   : HTTPContentHeader("image/gif")
 {}
 
-HTTPGIFHeader::~HTTPGIFHeader()
+CGICCNS HTTPGIFHeader::~HTTPGIFHeader()
 {}
 
 // ============================================================
 // Class HTTPJPEGHeader
 // ============================================================
-HTTPJPEGHeader::HTTPJPEGHeader() throw(Exception)
+CGICCNS HTTPJPEGHeader::HTTPJPEGHeader()
   : HTTPContentHeader("image/jpeg")
 {}
 
-HTTPJPEGHeader::~HTTPJPEGHeader()
+CGICCNS HTTPJPEGHeader::~HTTPJPEGHeader()
 {}
 
 // ============================================================
 // Class HTTPXBMHeader
 // ============================================================
-HTTPXBMHeader::HTTPXBMHeader() throw(Exception)
+CGICCNS HTTPXBMHeader::HTTPXBMHeader()
   : HTTPContentHeader("image/x-xbitmap")
 {}
 
-HTTPXBMHeader::~HTTPXBMHeader()
+CGICCNS HTTPXBMHeader::~HTTPXBMHeader()
 {}
 
 // ============================================================
 // Class HTTPAudioHeader
 // ============================================================
-HTTPAudioHeader::HTTPAudioHeader() throw(Exception)
+CGICCNS HTTPAudioHeader::HTTPAudioHeader()
   : HTTPContentHeader("audio/basic")
 {}
 
-HTTPAudioHeader::~HTTPAudioHeader()
+CGICCNS HTTPAudioHeader::~HTTPAudioHeader()
 {}
+
+//EOF

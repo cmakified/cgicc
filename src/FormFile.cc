@@ -1,70 +1,72 @@
 /*
- *  $Id: FormFile.cc,v 1.6 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: FormFile.cc,v 1.7 1999/04/26 22:42:27 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #include "FormFile.hh"
+#include "CgiUtils.hh"
 
-/* Create a new FormFile */
-FormFile::FormFile(const char *name, 
-		   const char *filename, 
-		   const char *dataType, 
-		   const char *data, 
-		   int dataLen) throw (Exception)
-  : FormEntry(name, filename), fDataLength(dataLen)
+CGICCNS FormFile::FormFile(const STDNS string& name, 
+			   const STDNS string& filename, 
+			   const STDNS string& dataType, 
+			   const STDNS string& data)
+  : fName(name),
+    fFilename(filename),
+    fData(data)
 {
-  fData = data;
-  if(dataType != NULL) {
-    fDataType = new char[strlen(dataType) + 1];
-    if(fDataType == NULL)
-      throw Exception("new failed", ERRINFO);
-    strcpy(fDataType, dataType);
-  }
-  else
-    fDataType = NULL;
+  fDataType = dataType.empty() ? "text/plain" : dataType;
 
-  log("Got file "); log(getFilename()); log(" ("); 
-  log((getDataType() == NULL ? "Type not specified" : getDataType()));
-  log(" / "); log(getDataLength()); logln(" bytes)");
+  LOG("Got file ") LOG(getFilename()) LOG(" (") LOG(getDataType())
+  LOG(" / ") LOG(getDataLength()) LOGLN(" bytes)")
 }
 
-/* Delete this FormEntry, removing it from the list */
-FormFile::~FormFile()
+CGICCNS FormFile::~FormFile()
+{}
+
+CGICCNS FormFile::FormFile(const FormFile& file)
 {
-  delete [] fDataType;
+  // call operator=
+  *this = file;
 }
 
-FormFile::FormFile(const FormFile& file) throw (Exception)
-  : FormEntry(file.getName(), file.getValue(), file.getDataLength())
+bool
+CGICCNS FormFile::operator== (const FormFile& file) 		const
 {
-  fDataType = new char[strlen(file.getDataType()) + 1];
-  if(fDataType == NULL)
-    throw Exception("new failed", ERRINFO);
-  strcpy(fDataType, file.getDataType());
+  return (stringsAreEqual(fName, file.fName) && 
+	  stringsAreEqual(fFilename, file.fFilename) &&
+	  stringsAreEqual(fDataType, file.fDataType));
+}
 
-  fData = file.getData();
-  fDataLength = file.getDataLength();
+CGICCNS FormFile& 
+CGICCNS FormFile::operator= (const FormFile& file)
+{
+  fName 	= file.fName;
+  fFilename 	= file.fFilename;
+  fDataType 	= file.fDataType;
+  fData 	= file.fData;
+
+  return *this;
 }
 
 void 
-FormFile::writeToStream(ostream& out) const
+CGICCNS FormFile::writeToStream(STDNS ostream& out) 		const
 {
-  out.write(getData(), getDataLength());
+  out.write(getData().data(), getDataLength());
 }
 
 //EOF

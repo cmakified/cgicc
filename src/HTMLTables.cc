@@ -1,20 +1,20 @@
 /*
- *  $Id: HTMLTables.cc,v 1.4 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: HTMLTables.cc,v 1.5 1999/04/26 22:42:32 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -23,259 +23,313 @@
 // ============================================================
 // Statics
 // ============================================================
-bool table::sState = false;
-bool caption::sState = false;
-bool thead::sState = false;
-bool tfoot::sState = false;
-bool tbody::sState = false;
-bool colgroup::sState = false;
-bool tr::sState = false;
-bool th::sState = false;
-bool td::sState = false;
+bool CGICCNS table::sState 	= false;
+bool CGICCNS caption::sState 	= false;
+bool CGICCNS thead::sState 	= false;
+bool CGICCNS tfoot::sState 	= false;
+bool CGICCNS tbody::sState 	= false;
+bool CGICCNS colgroup::sState 	= false;
+bool CGICCNS tr::sState 	= false;
+bool CGICCNS th::sState 	= false;
+bool CGICCNS td::sState 	= false;
 
 // ============================================================
 // Class table
 // ============================================================
-table::table(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS table::table() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-table::table(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS table::table(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-table::table(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS table::table(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-table::table(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS table::table(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-table::table(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS table::table(const STDNS string& text, 
+		    const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-table::~table()
+CGICCNS table::table(const HTMLAttributeList& attributes, 
+		    const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS table::~table()
 {}
 
 // ============================================================
 // Class caption
 // ============================================================
-caption::caption(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS caption::caption() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-caption::caption(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS caption::caption(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-caption::caption(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS caption::caption(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-caption::caption(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS caption::caption(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-caption::caption(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS caption::caption(const STDNS string& text, 
+			const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-caption::~caption()
+CGICCNS caption::caption(const HTMLAttributeList& attributes, 
+			const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS caption::~caption()
 {}
 
 // ============================================================
 // Class thead
 // ============================================================
-thead::thead(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS thead::thead() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-thead::thead(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS thead::thead(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-thead::thead(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS thead::thead(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-thead::thead(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS thead::thead(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-thead::thead(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS thead::thead(const STDNS string& text, 
+		    const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-thead::~thead()
+CGICCNS thead::thead(const HTMLAttributeList& attributes, 
+		    const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS thead::~thead()
 {}
 
 // ============================================================
 // Class tfoot
 // ============================================================
-tfoot::tfoot(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS tfoot::tfoot() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-tfoot::tfoot(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS tfoot::tfoot(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-tfoot::tfoot(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS tfoot::tfoot(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-tfoot::tfoot(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS tfoot::tfoot(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-tfoot::tfoot(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS tfoot::tfoot(const STDNS string& text, 
+		    const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-tfoot::~tfoot()
+CGICCNS tfoot::tfoot(const HTMLAttributeList& attributes, 
+		    const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS tfoot::~tfoot()
 {}
 
 // ============================================================
 // Class tbody
 // ============================================================
-tbody::tbody(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS tbody::tbody() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-tbody::tbody(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS tbody::tbody(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-tbody::tbody(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS tbody::tbody(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-tbody::tbody(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS tbody::tbody(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-tbody::tbody(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS tbody::tbody(const STDNS string& text, 
+		    const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-tbody::~tbody()
+CGICCNS tbody::tbody(const HTMLAttributeList& attributes, 
+		    const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS tbody::~tbody()
 {}
 
 // ============================================================
 // Class colgroup
 // ============================================================
-colgroup::colgroup(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS colgroup::colgroup() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-colgroup::colgroup(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS colgroup::colgroup(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-colgroup::colgroup(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS colgroup::colgroup(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-colgroup::colgroup(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS colgroup::colgroup(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-colgroup::colgroup(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS colgroup::colgroup(const STDNS string& text, 
+			  const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-colgroup::~colgroup()
+CGICCNS colgroup::colgroup(const HTMLAttributeList& attributes, 
+			  const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS colgroup::~colgroup()
 {}
 
 // ============================================================
 // Class col
 // ============================================================
-col::col() 
+CGICCNS col::col() 
 {}
 
-col::col(const HTMLAttributeList& attributes)
-	: HTMLElement(&attributes)
+CGICCNS col::col(const HTMLAttributeList& attributes)
+  : HTMLElement(&attributes)
 {}
 
-col::~col()
+CGICCNS col::~col()
 {}
 
 // ============================================================
 // Class tr
 // ============================================================
-tr::tr(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS tr::tr() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-tr::tr(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS tr::tr(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-tr::tr(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS tr::tr(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-tr::tr(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS tr::tr(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-tr::tr(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS tr::tr(const STDNS string& text, 
+	      const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-tr::~tr()
+CGICCNS tr::tr(const HTMLAttributeList& attributes, 
+	      const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS tr::~tr()
 {}
 
 // ============================================================
 // Class th
 // ============================================================
-th::th(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS th::th() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-th::th(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS th::th(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-th::th(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS th::th(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-th::th(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS th::th(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-th::th(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS th::th(const STDNS string& text, 
+	      const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-th::~th()
+CGICCNS th::th(const HTMLAttributeList& attributes, 
+	      const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS th::~th()
 {}
 
 // ============================================================
 // Class td
 // ============================================================
-td::td(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS td::td() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-td::td(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS td::td(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-td::td(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS td::td(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-td::td(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS td::td(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-td::td(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS td::td(const STDNS string& text, 
+	      const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-td::~td()
+CGICCNS td::td(const HTMLAttributeList& attributes, 
+	      const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS td::~td()
 {}

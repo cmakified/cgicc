@@ -1,38 +1,43 @@
 /*
- *  $Id: HTMLObjects.hh,v 1.5 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: HTMLObjects.hh,v 1.6 1999/04/26 22:42:31 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef __HTML_OBJECTS__
 #define __HTML_OBJECTS__ 1
 
+#include <string>
+
 #include "HTMLElements.hh"
+
+CGICC_BEGIN_NAMESPACE
 
 // ============================================================
 // Class img
 // ============================================================
 /** The IMG element */
-class img : public HTMLElement {
+class img : public HTMLElement 
+{
 public:
   /**@name Constructors */
   //@{
   
-  /** Create a new empty element. */
+  /** Create a new, empty element. */
   img();
   
   /**
@@ -45,23 +50,27 @@ public:
   virtual ~img();
   //@}
   
-  virtual inline const char* getName() const { return "IMG"; }
+  virtual inline STDNS string 	getName() 	const 	{ return "IMG"; }
 };
 
 // ============================================================
 // Class object
 // ============================================================
 /** The OBJECT element */
-class object : public HTMLBooleanElement {
+class object : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
-  
+
+  /** Create a new, empty element. */
+  object();  
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  object(const char *text = NULL);
+  object(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -80,7 +89,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  object(const char *text, 
+  object(const STDNS string& text, 
 	 const HTMLAttributeList& attributes);
   
   /**
@@ -96,17 +105,10 @@ public:
   virtual ~object();
   //@}
   
-  virtual inline const char* getName() const { return "OBJECT"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "OBJECT"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -116,7 +118,8 @@ private:
 // Class param
 // ============================================================
 /** The PARAM element */
-class param : public HTMLElement {
+class param : public HTMLElement 
+{
 public:
   /**@name Constructors */
   //@{
@@ -134,43 +137,47 @@ public:
   virtual ~param();
   //@}
   
-  virtual inline const char* getName() const { return "PARAM"; }
+  virtual inline STDNS string 	getName() 	const 	{ return "PARAM"; }
 };
 
 // ============================================================
-// Class map_
+// Class map
 // ============================================================
-/** The MAP element (Note difference from HTML name) */
-class map_ : public HTMLBooleanElement {
+/** The MAP element */
+class map : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
-  
+
+  /** Create a new, empty element. */
+  map();  
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  map_(const char *text = NULL);
+  map(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
    * @param attributes The HTMLAttributes contained within the element.
    */
-  map_(const HTMLAttributeList& attributes);
+  map(const HTMLAttributeList& attributes);
   
   /**
    * Create a new element, specifying an embedded HTMLElement.
    * @param embed The HTMLElement embedded inside the element.
    */
-  map_(const HTMLSimpleElement& embed);
+  map(const HTMLSimpleElement& embed);
   
   /**
    * Create a new element, specifying the enclosed text and HTMLAttributes.
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  map_(const char *text, 
-       const HTMLAttributeList& attributes);
+  map(const STDNS string& text, 
+      const HTMLAttributeList& attributes);
   
   /**
    * Create a new element, specifying the HTMLAttributes and embedded 
@@ -178,24 +185,17 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param embed The HTMLElement embedded inside the element.
    */
-  map_(const HTMLAttributeList& attributes, 
-       const HTMLSimpleElement& embed);
+  map(const HTMLAttributeList& attributes, 
+      const HTMLSimpleElement& embed);
   
   /** Destructor */
-  virtual ~map_();
+  virtual ~map();
   //@}
   
-  virtual inline const char* getName() const { return "MAP"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "MAP"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -205,12 +205,13 @@ private:
 // Class area
 // ============================================================
 /** The AREA element */
-class area : public HTMLElement {
+class area : public HTMLElement 
+{
 public:
   /**@name Constructors */
   //@{
   
-  /** Create a new empty element. */
+  /** Create a new, empty element. */
   area();
   
   /**
@@ -223,7 +224,9 @@ public:
   virtual ~area();
   //@}
   
-  virtual inline const char* getName() const { return "AREA"; }
+  virtual inline STDNS string 	getName() 	const 	{ return "AREA"; }
 };
+
+CGICC_END_NAMESPACE
 
 #endif

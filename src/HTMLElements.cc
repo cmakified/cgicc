@@ -1,20 +1,20 @@
 /*
- *  $Id: HTMLElements.cc,v 1.5 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: HTMLElements.cc,v 1.6 1999/04/26 22:42:28 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -23,28 +23,26 @@
 // ============================================================
 // Class HTMLElement
 // ============================================================
-HTMLElement::HTMLElement()
-  : fAttributes(NULL)
+CGICCNS HTMLElement::HTMLElement()
+  : fAttributes(0)
 {}
 
-HTMLElement::HTMLElement(const HTMLElement& element) throw(Exception)
-  : fAttributes(NULL)
-{
-  if(element.getAttributes() != NULL)
-    setAttributes(element.getAttributes());
-}
+CGICCNS HTMLElement::HTMLElement(const HTMLElement& element)
+  : fAttributes(element.fAttributes)
+{}
 
-HTMLElement::HTMLElement(const HTMLAttributeList *attributes) {
-  setAttributes(attributes);
-}
+CGICCNS HTMLElement::HTMLElement(const HTMLAttributeList *attributes)
+  : fAttributes(attributes)
+{}
 
-HTMLElement::~HTMLElement()
+CGICCNS HTMLElement::~HTMLElement()
 {}
 
 void
-HTMLElement::render(ostream& out) const {
+CGICCNS HTMLElement::render(STDNS ostream& out) 	const
+{
   out << '<' << getName();
-  if(getAttributes() != NULL) {
+  if(getAttributes() != 0) {
     out << ' ';
     getAttributes()->render(out);
   }
@@ -54,57 +52,37 @@ HTMLElement::render(ostream& out) const {
 // ============================================================
 // Class HTMLSimpleElement
 // ============================================================
-HTMLSimpleElement::HTMLSimpleElement()
-  : fData(NULL)
+CGICCNS HTMLSimpleElement::HTMLSimpleElement()
 {}
 
-HTMLSimpleElement::HTMLSimpleElement(const HTMLSimpleElement& element)
-  throw(Exception)
-  : HTMLElement(element), fEmbedded(NULL), fData(NULL)
-{
-  if(element.getEmbedded() != NULL)
-    setEmbedded(element.getEmbedded());
+CGICCNS HTMLSimpleElement::HTMLSimpleElement(const HTMLSimpleElement& element)
+  : HTMLElement(element), 
+    fEmbedded(element.fEmbedded),
+    fData(element.fData)
+{}
 
-  if(element.getData() != NULL)
-    setData(element.getData());
-}
+CGICCNS HTMLSimpleElement::HTMLSimpleElement(const STDNS string& data, 
+					     const HTMLAttributeList *attributes,
+					     const HTMLSimpleElement *embedded)
+  : HTMLElement(attributes), 
+    fEmbedded(embedded), 
+    fData(data)
+{}
 
-HTMLSimpleElement::HTMLSimpleElement(const char *data, 
-				     const HTMLAttributeList *attributes,
-				     const HTMLSimpleElement *embedded) 
-  throw(Exception)
-    : HTMLElement(attributes), fEmbedded(embedded), fData(NULL)
-{
-  if(data != NULL)
-    setData(data);
-  else
-    fData = NULL;
-}
-
-HTMLSimpleElement::~HTMLSimpleElement()
-{
-  delete [] fData;
-}
+CGICCNS HTMLSimpleElement::~HTMLSimpleElement()
+{}
 
 void
-HTMLSimpleElement::setData(const char *data) throw (Exception) {
-  delete [] fData;
-  fData = new char [ strlen(data) + 1 ];
-  if(fData == NULL)
-    throw Exception("new failed", ERRINFO);
-  strcpy(fData, data);
-}
-
-void
-HTMLSimpleElement::render(ostream& out) const {
+CGICCNS HTMLSimpleElement::render(STDNS ostream& out)  	const
+{
   out << '<';
   out << getName();
-  if(getAttributes() != NULL) {
+  if(getAttributes() != 0) {
     out << ' ';
     getAttributes()->render(out);
   }
   out << '>';
-  if(getEmbedded() == NULL)
+  if(getEmbedded() == 0)
     out << getData();
   else
     getEmbedded()->render(out);
@@ -114,33 +92,34 @@ HTMLSimpleElement::render(ostream& out) const {
 // ============================================================
 // Class HTMLBooleanElement
 // ============================================================
-HTMLBooleanElement::HTMLBooleanElement()
+CGICCNS HTMLBooleanElement::HTMLBooleanElement()
 {}
 
-HTMLBooleanElement::HTMLBooleanElement(const HTMLBooleanElement& element)
-  throw(Exception)
+CGICCNS HTMLBooleanElement::HTMLBooleanElement(const HTMLBooleanElement& element)
   : HTMLSimpleElement(element)
 {}
 
-HTMLBooleanElement::HTMLBooleanElement(const char *data, 
-				       const HTMLAttributeList *attributes,
-				       const HTMLSimpleElement *embedded)
-  throw(Exception)
-    : HTMLSimpleElement(data, attributes, embedded)
+CGICCNS HTMLBooleanElement::HTMLBooleanElement(const STDNS string& data, 
+					       const HTMLAttributeList *attributes,
+					       const HTMLSimpleElement *embedded,
+					       bool dataSpecified)
+    : HTMLSimpleElement(data, attributes, embedded),
+      fDataSpecified(dataSpecified)
 {}
 
-HTMLBooleanElement::~HTMLBooleanElement()
+CGICCNS HTMLBooleanElement::~HTMLBooleanElement()
 {}
 
 void
-HTMLBooleanElement::render(ostream& out) const {
-  if(getData() == NULL) {
-    if(getEmbedded() == NULL) {
+CGICCNS HTMLBooleanElement::render(STDNS ostream& out) 	const
+{
+  if(getData().empty() && ! dataSpecified()) {
+    if(getEmbedded() == 0) {
       swapState();
       out << '<';
       if(getState()) {
 	out << getName();
-	if(getAttributes() != NULL) {
+	if(getAttributes() != 0) {
 	  out << ' ';
 	  getAttributes()->render(out);
 	}
@@ -151,7 +130,7 @@ HTMLBooleanElement::render(ostream& out) const {
     }
     else {
       out << '<' << getName();
-      if(getAttributes() != NULL) {
+      if(getAttributes() != 0) {
 	out << ' ';
 	getAttributes()->render(out);
       }
@@ -163,3 +142,5 @@ HTMLBooleanElement::render(ostream& out) const {
   else
     HTMLSimpleElement::render(out);
 }
+
+//EOF

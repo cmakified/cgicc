@@ -1,20 +1,20 @@
 /*
- *  $Id: HTMLForms.cc,v 1.4 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: HTMLForms.cc,v 1.5 1999/04/26 22:42:29 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -23,259 +23,315 @@
 // ============================================================
 // Statics
 // ============================================================
-bool form::sState = false;
-bool button::sState = false;
-bool select::sState = false;
-bool optgroup::sState = false;
-bool option::sState = false;
-bool textarea::sState = false;
-bool label::sState = false;
-bool fieldset::sState = false;
-bool legend::sState = false;
+bool CGICCNS form::sState 	= false;
+bool CGICCNS button::sState 	= false;
+bool CGICCNS select::sState 	= false;
+bool CGICCNS optgroup::sState 	= false;
+bool CGICCNS option::sState 	= false;
+bool CGICCNS textarea::sState 	= false;
+bool CGICCNS label::sState 	= false;
+bool CGICCNS fieldset::sState 	= false;
+bool CGICCNS legend::sState 	= false;
 
 // ============================================================
 // Class form
 // ============================================================
-form::form(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS form::form()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-form::form(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS form::form(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-form::form(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS form::form(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-form::form(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS form::form(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-form::form(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS form::form(const STDNS string& text, 
+		   const HTMLAttributeList& attributes)
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-form::~form()
+CGICCNS form::form(const HTMLAttributeList& attributes, 
+		   const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS form::~form()
 {}
 
 // ============================================================
 // Class input
 // ============================================================
-input::input() 
+CGICCNS input::input()
 {}
 
-input::input(const HTMLAttributeList& attributes)
-	: HTMLElement(&attributes)
+CGICCNS input::input(const HTMLAttributeList& attributes)
+  : HTMLElement(&attributes)
 {}
 
-input::~input()
+CGICCNS input::~input()
 {}
 
 // ============================================================
 // Class button
 // ============================================================
-button::button(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS button::button()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-button::button(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS button::button(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-button::button(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS button::button(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-button::button(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS button::button(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-button::button(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS button::button(const STDNS string& text, 
+		       const HTMLAttributeList& attributes)
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-button::~button()
+CGICCNS button::button(const HTMLAttributeList& attributes, 
+		       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS button::~button()
 {}
 
 // ============================================================
 // Class select
 // ============================================================
-select::select(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS select::select()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-select::select(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS select::select(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-select::select(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS select::select(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-select::select(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS select::select(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-select::select(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS select::select(const STDNS string& text, 
+		       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-select::~select()
+CGICCNS select::select(const HTMLAttributeList& attributes, 
+		       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS select::~select()
 {}
 
 // ============================================================
 // Class optgroup
 // ============================================================
-optgroup::optgroup(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS optgroup::optgroup()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-optgroup::optgroup(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS optgroup::optgroup(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-optgroup::optgroup(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS optgroup::optgroup(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-optgroup::optgroup(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS optgroup::optgroup(const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-optgroup::optgroup(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS optgroup::optgroup(const STDNS string& text, 
+			   const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-optgroup::~optgroup()
+CGICCNS optgroup::optgroup(const HTMLAttributeList& attributes, 
+			   const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+       
+CGICCNS optgroup::~optgroup()
 {}
 
 // ============================================================
 // Class option
 // ============================================================
-option::option(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS option::option()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-option::option(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS option::option(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-option::option(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS option::option(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-option::option(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS option::option(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-option::option(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS option::option(const STDNS string& text, 
+		       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-option::~option()
+CGICCNS option::option(const HTMLAttributeList& attributes, 
+		       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS option::~option()
 {}
 
 // ============================================================
 // Class textarea
 // ============================================================
-textarea::textarea(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS textarea::textarea()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-textarea::textarea(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS textarea::textarea(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-textarea::textarea(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS textarea::textarea(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-textarea::textarea(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS textarea::textarea(const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-textarea::textarea(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS textarea::textarea(const STDNS string& text, 
+			   const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-textarea::~textarea()
+CGICCNS textarea::textarea(const HTMLAttributeList& attributes, 
+			   const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS textarea::~textarea()
 {}
 
 // ============================================================
 // Class label
 // ============================================================
-label::label(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS label::label()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-label::label(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS label::label(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-label::label(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS label::label(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-label::label(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS label::label(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-label::label(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS label::label(const STDNS string& text, 
+		     const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-label::~label()
+CGICCNS label::label(const HTMLAttributeList& attributes, 
+		     const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS label::~label()
 {}
 
 // ============================================================
 // Class fieldset
 // ============================================================
-fieldset::fieldset(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS fieldset::fieldset()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-fieldset::fieldset(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS fieldset::fieldset(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-fieldset::fieldset(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS fieldset::fieldset(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-fieldset::fieldset(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS fieldset::fieldset(const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-fieldset::fieldset(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS fieldset::fieldset(const STDNS string& text, 
+			   const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-fieldset::~fieldset()
+CGICCNS fieldset::fieldset(const HTMLAttributeList& attributes, 
+			   const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS fieldset::~fieldset()
 {}
 
 // ============================================================
 // Class legend
 // ============================================================
-legend::legend(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS legend::legend()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-legend::legend(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS legend::legend(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-legend::legend(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS legend::legend(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-legend::legend(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS legend::legend(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-legend::legend(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS legend::legend(const STDNS string& text, 
+		       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-legend::~legend()
+CGICCNS legend::legend(const HTMLAttributeList& attributes, 
+		       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
 {}
+
+CGICCNS legend::~legend()
+{}
+
+//EOF

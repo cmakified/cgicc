@@ -1,35 +1,40 @@
 /*
- *  $Id: HTMLElements.hh,v 1.5 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: HTMLElements.hh,v 1.6 1999/04/26 22:42:29 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef __HTML_ELEMENTS__
 #define __HTML_ELEMENTS__ 1
 
+#include <string>
+
+#include "CgiDefs.hh"
 #include "MStreamable.hh"
-#include "LinkedList.hh"
 #include "HTMLAttributes.hh"
+
+CGICC_BEGIN_NAMESPACE
 
 // ============================================================
 // Class HTMLElement
 // ============================================================
-/** An abstract class representing an HTML tag.*/
-class HTMLElement : public MStreamable {
+/** An abstract class representing an HTML tag. */
+class HTMLElement : public MStreamable 
+{
 public:
   /**@name Constructors */
   //@{
@@ -40,9 +45,8 @@ public:
   /**
    * Copy constructor.
    * @param element The HTMLElement to copy.
-   * @exception Exception
    */
-  HTMLElement(const HTMLElement& element) throw(Exception);
+  HTMLElement(const HTMLElement& element);
 
   /** Destructor */
   virtual ~HTMLElement();
@@ -56,14 +60,17 @@ public:
    * For example, HTML or BODY.
    * @return The name of this element.
    */
-  virtual inline const char* getName() const = 0;
+  virtual STDNS string   
+  getName() 					const = 0;
   
   /**
    * Get the attributes associated with this element.
    * @return An HTMLAttributeList containing all the HTMLAttributes belonging 
    * to this element.
    */
-  inline const HTMLAttributeList* getAttributes() const { return fAttributes; }
+  inline const HTMLAttributeList* 
+  getAttributes() 				const
+    { return fAttributes; }
   //@}
   
   /**@name Mutator Functions */
@@ -73,11 +80,13 @@ public:
    * @param attributes The HTMLAttributeList containing the HTMLAttributes 
    * belonging to this element.
    */
-  inline void setAttributes(const HTMLAttributeList *attributes) 
-  { fAttributes = attributes; }
+  inline void 
+  setAttributes(const HTMLAttributeList *attributes)
+    { fAttributes = attributes; }
   //@}
   
-  virtual void render(ostream& out) const;
+  virtual void 
+  render(STDNS ostream& out) 			const;
   
 protected:
   HTMLElement(const HTMLAttributeList *attributes);
@@ -94,7 +103,8 @@ private:
  * HTMLSimpleElements may be embedded within each other.
  * @see HTMLElement
  */
-class HTMLSimpleElement : public HTMLElement {
+class HTMLSimpleElement : public HTMLElement 
+{
 public:
   /**@name Constructors */
   //@{
@@ -105,9 +115,8 @@ public:
   /**
    * Copy constructor.
    * @param element The HTMLSimpleElement to copy.
-   * @exception Exception
    */
-  HTMLSimpleElement(const HTMLSimpleElement& element) throw(Exception);
+  HTMLSimpleElement(const HTMLSimpleElement& element);
 
   /** Destructor */
   virtual ~HTMLSimpleElement();
@@ -119,15 +128,19 @@ public:
   /**
    * Get the data contained in this element, if any.
    * For example, in the tag &lt;EM>foo&lt;/EM> the data is foo.
-   * @return The data contained in this element, or NULL if none.
+   * @return The data contained in this element.
    */
-  inline const char* getData() const { return fData; }
+  inline STDNS string 
+  getData()  					const
+    { return fData; }
   
   /**
    * Get the HTMLSimpleElement embedded in this element, if any.
-   * @return The embedded element, or NULL if none.
+   * @return The embedded element, or 0 if none.
    */
-  inline const HTMLSimpleElement* getEmbedded() const { return fEmbedded; }
+  inline const HTMLSimpleElement* 
+  getEmbedded() 				const
+    { return fEmbedded; }
   //@}
   
   /**@name Mutator Functions */
@@ -136,29 +149,33 @@ public:
   /**
    * Set the data contained in this element.
    * @param data The data to store in this element.
-   * @exception Exception
    */
-  void setData(const char *data) throw (Exception);
+  inline void 
+  setData(const STDNS string& data)
+    { fData = data; }
   
   /**
    * Set the HTMLSimpleElement embedded in this one.
    * @param embedded The HTMLSimpleElement to embed; takes precedence over all
    * data.
    */
-  inline void setEmbedded(const HTMLSimpleElement *embedded) 
-  { fEmbedded = embedded; }
+  inline void 
+  setEmbedded(const HTMLSimpleElement *embedded)
+    { fEmbedded = embedded; }
   //@}
   
-  virtual void render(ostream& out) const;
+  virtual void 
+  render(STDNS ostream& out) 			const;
   
 protected:
-  HTMLSimpleElement(const char *data, 
+  HTMLSimpleElement(const STDNS string& data, 
 		    const HTMLAttributeList *attributes, 
-		    const HTMLSimpleElement *embedded) throw(Exception);
+		    const HTMLSimpleElement *embedded);
+
 
 private:
-  const HTMLSimpleElement *fEmbedded;
-  char *fData;
+  const HTMLSimpleElement 	*fEmbedded;
+  STDNS string 			fData;
 };
 
 // ============================================================
@@ -169,7 +186,8 @@ private:
  * @see HTMLElement
  * @see HTMLSimpleElement
  */
-class HTMLBooleanElement : public HTMLSimpleElement {
+class HTMLBooleanElement : public HTMLSimpleElement 
+{
 public:
   /**@name Constructors */
   //@{
@@ -180,9 +198,8 @@ public:
   /**
    * Copy constructor.
    * @param element The HTMLBooleanElement to copy.
-   * @exception Exception
    */
-  HTMLBooleanElement(const HTMLBooleanElement& element) throw(Exception);
+  HTMLBooleanElement(const HTMLBooleanElement& element);
 
   /** Destructor */
   virtual ~HTMLBooleanElement();
@@ -191,21 +208,36 @@ public:
   /**@name State Functions */
   //@{
   /** Swap the state of the element */
-  virtual void swapState() const = 0;
+  virtual void 
+  swapState() 					const = 0;
   
   /**
    * Get the state of the element.
    * @return True if the element is active, false if inactive.
    */
-  virtual bool getState() const = 0;
+  virtual bool 
+  getState() 					const = 0;
   //@}
   
-  virtual void render(ostream& out) const;
+  virtual void 
+  render(STDNS ostream& out) 			const;
   
 protected:
-  HTMLBooleanElement(const char *data, 
+  HTMLBooleanElement(const STDNS string& data, 
 		     const HTMLAttributeList *attributes,
-		     const HTMLSimpleElement *embedded) throw(Exception);
+		     const HTMLSimpleElement *embedded,
+		     bool dataSpecified);
+  inline bool
+  dataSpecified() 				const
+    { return fDataSpecified; }
+
+private:
+  bool fDataSpecified;
+
 };
 
+CGICC_END_NAMESPACE
+
 #endif
+
+//EOF

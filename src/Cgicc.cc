@@ -1,24 +1,27 @@
 /*
- *  $Id: Cgicc.cc,v 1.10 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: Cgicc.cc,v 1.11 1999/04/26 22:42:26 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "Cgicc.hh"
+#include <new>
+#include <algorithm>
+#include <functional>
+#include <iterator>
 
 #if (HAVE_SYS_TIME_H && TM_IN_SYS_TIME)
 #include <sys/time.h>
@@ -26,124 +29,167 @@
 #include <time.h>
 #endif
 
-bool
-nameCompare(const FormEntry& element, void *data) {
-  const char *name = (const char*) data;
+#include "CgiUtils.hh"
+#include "Cgicc.hh"
 
-  if(stringsAreEqual(element.getName(), name, true))
-    return true;
-  else
-    return false;
-}
 
-bool
-valueCompare(const FormEntry& element, void *data) {
-  const char *value = (const char*) data;
+CGICC_BEGIN_NAMESPACE
 
-  if(stringsAreEqual(element.getValue(), value, true))
-    return true;
-  else
-    return false;
+// Handy function missing from STL
+template<class In, class Out, class Pred>
+Out 
+copy_if(In first, 
+	In last, 
+	Out res, 
+	Pred p);
+
+// ============================================================
+// Class FE_nameCompare
+// ============================================================
+class FE_nameCompare : public STDNS unary_function<FormEntry, bool>
+{
+public:
+  
+  inline explicit FE_nameCompare(const STDNS string& name)
+    : fName(name) {}
+  
+  inline bool operator() (const FormEntry& entry) 	const
+    { return stringsAreEqual(fName, entry.getName()); }
+  
+private:
+  STDNS string fName;
+};
+
+// ============================================================
+// Class FE_valueCompare
+// ============================================================
+class FE_valueCompare : public STDNS unary_function<FormEntry, bool>
+{
+public:
+  
+  inline explicit FE_valueCompare(const STDNS string& value)
+    : fValue(value) {}
+  
+  inline bool operator() (const FormEntry& entry) 	const
+    { return stringsAreEqual(fValue, entry.getValue()); }
+  
+private:
+  STDNS string fValue;
+};
+
+
+// ============================================================
+// Class FF_compare
+// ============================================================
+class FF_compare : public STDNS unary_function<FormFile, bool>
+{
+public:
+  
+  inline explicit FF_compare(const STDNS string& name)
+    : fName(name) {}
+  
+  inline bool operator() (const FormFile& entry) 	const
+    { return stringsAreEqual(fName, entry.getName()); }
+  
+private:
+  STDNS string fName;
+};
+
+CGICC_END_NAMESPACE
+
+
+// Handy function missing from STL
+// This code taken directly from 
+// "The C++ Programming Language, Third Edition" by Bjarne Stroustrup
+template<class In, class Out, class Pred>
+Out 
+CGICCNS copy_if(In first, 
+		In last, 
+		Out res, 
+		Pred p)
+{
+  while(first != last) {
+    if(p(*first))
+      *res++ = *first;
+    ++first;
+  }
+  return res;
 }
 
 // ============================================================
 // Class MultipartHeader
 // ============================================================
-class MultipartHeader {
+class CGICCNS MultipartHeader 
+{
 public:
   
-  MultipartHeader(const char *data,
-		  int dispStart, int dispEnd,
-		  int nameStart, int nameEnd,
-		  int filenameStart, int filenameEnd,
-		  int cTypeStart, int cTypeEnd) throw(Exception);
-  ~MultipartHeader();
-  
-  inline const char* getContentDisposition() const
-  { return fContentDisposition; }
-  
-  inline const char* getName() const  		{ return fName; }
-  inline const char* getFilename() const  	{ return fFilename; }
-  inline const char* getContentType() const 	{ return fContentType; }
+  MultipartHeader(const STDNS string& disposition,
+		  const STDNS string& name,
+		  const STDNS string& filename,
+		  const STDNS string& cType);
 
-  inline bool isEmpty() const { return fEmpty; }
+  MultipartHeader(const MultipartHeader& head);
+  ~MultipartHeader();
+
+  MultipartHeader&
+  operator= (const MultipartHeader& head);
+  
+  inline STDNS string 
+  getContentDisposition() 				const
+    { return fContentDisposition; }
+  
+  inline STDNS string
+  getName() 						const
+    { return fName; }
+
+  inline STDNS string 
+  getFilename() 					const
+    { return fFilename; }
+
+  inline STDNS string 
+  getContentType() 					const
+    { return fContentType; }
 
 private:
-  static int calcLen(int end, int start);
-
-  char *fContentDisposition;
-  char *fName;
-  char *fFilename;
-  char *fContentType;
-
-  bool fEmpty;
+  STDNS string fContentDisposition;
+  STDNS string fName;
+  STDNS string fFilename;
+  STDNS string fContentType;
 };
 
-int
-MultipartHeader::calcLen(int end, int start)
-{
-  if(start == -1 && end == -1)
-    return -1;
-  else
-    return (end - start);
+CGICCNS MultipartHeader::MultipartHeader(const STDNS string& disposition,
+					 const STDNS string& name,
+					 const STDNS string& filename,
+					 const STDNS string& cType)
+  : fContentDisposition(disposition),
+    fName(name),
+    fFilename(filename),
+    fContentType(cType)
+{}
+
+CGICCNS MultipartHeader::MultipartHeader(const MultipartHeader& head)
+{ 
+  // call operator=
+  *this = head;
 }
 
-MultipartHeader::MultipartHeader(const char *data,
-				 int dispStart, int dispEnd,
-				 int nameStart, int nameEnd,
-				 int filenameStart, int filenameEnd,
-				 int cTypeStart, int cTypeEnd) throw(Exception)
-  : fContentDisposition(NULL), fName(NULL), fFilename(NULL), fContentType(NULL)
-  , fEmpty(false)
+CGICCNS MultipartHeader::~MultipartHeader()
+{}
+
+CGICCNS MultipartHeader&
+CGICCNS MultipartHeader::operator= (const MultipartHeader& head)
 {
-  int dispLen = calcLen(dispEnd, dispStart);
-  int nameLen = calcLen(nameEnd, nameStart);
-  int filenameLen = calcLen(filenameEnd, filenameStart);
-  int cTypeLen = calcLen(cTypeEnd, cTypeStart);
-
-  if(dispLen != -1) {
-    fContentDisposition =  new char [dispLen + 1];
-    strncpy(fContentDisposition, data + dispStart, dispLen);
-    fContentDisposition[dispLen] = '\0';
-  }
-
-  if(nameLen != -1) {
-    fName = new char [nameLen + 1];
-    strncpy(fName, data + nameStart, nameLen);
-    fName[nameLen] = '\0';
-  }
-  
-  if(filenameLen == 0)
-    fEmpty = true;
-  else if(filenameLen != -1) {
-    // This is hairy: Netscape encodes the filenames, and IE doesn't.
-    // The RFC says they should be encoded, so I will assume they are.
-    unescapeChars(data + filenameStart, filenameLen, fFilename);
-    //fFilename = new char [filenameLen + 1];
-    //strncpy(fFilename, data + filenameStart, filenameLen);
-    //fFilename[filenameLen] = '\0';
-  }
-
-  if(cTypeLen != -1) {
-    fContentType = new char[cTypeLen + 1];
-    strncpy(fContentType, data + cTypeStart, cTypeLen);
-    fContentType[cTypeLen] = '\0';
-  }
-}
-
-MultipartHeader::~MultipartHeader()
-{
-  delete [] fContentDisposition;
-  delete [] fName;
-  delete [] fFilename;
-  delete [] fContentType;
+  fContentDisposition 	= head.fContentDisposition;
+  fName 		= head.fName;
+  fFilename 		= head.fFilename;
+  fContentType 		= head.fContentType;
 }
 
 // ============================================================
 // Class Cgicc
 // ============================================================
-Cgicc::Cgicc() throw(Exception)
-  : fEnvironment(NULL), fFormData(NULL)
+CGICCNS Cgicc::Cgicc()
+  : fEnvironment()
 {
 #if DEBUG
 #if HAVE_STRFTIME
@@ -151,269 +197,298 @@ Cgicc::Cgicc() throw(Exception)
   tm 		*date;
   char 		s[80];
   
-  now = time(NULL);
+  now = time(0);
   date = localtime(&now);
   strftime(s, 80, "%A, %B %d, %Y %I:%M:%S %p", date);
-  log("Cgicc debugging log started on ");
-  logln(s);
+  LOG("Cgicc debugging log started on ")
+  LOGLN(s)
 #else
-  logln("Cgicc debugging log started.");
+  LOGLN("Cgicc debugging log started.")
 #endif
 #endif
   
-  fEnvironment = new CgiEnvironment();
-  if(! fEnvironment)
-    throw Exception("new failed", ERRINFO);
-
-  fFormData = new LinkedList<FormEntry>();
-  if(! fFormData)
-    throw Exception("new failed", ERRINFO);
+  // this can be tweaked for performance
+  fFormData.reserve(40);
+  fFormFiles.reserve(5);
   
-  if(stringsAreEqual(getEnvironment()->getRequestMethod(), "post", true))
-    parseFormInput(getEnvironment()->getPostData());
+  if(stringsAreEqual(getEnvironment().getRequestMethod(), "post"))
+    parseFormInput(getEnvironment().getPostData());
   else
-    parseFormInput(getEnvironment()->getQueryString());
+    parseFormInput(getEnvironment().getQueryString());
 }
 
-Cgicc::~Cgicc()
+CGICCNS Cgicc::~Cgicc()
 {
-  logln("Cleaning up...");
-  delete fEnvironment;
-  delete fFormData;
-  logln("Cgicc debugging log closed.");
+  LOGLN("Cleaning up...")
+  LOGLN("Cgicc debugging log closed.")
+}
+
+STDNS string
+CGICCNS Cgicc::getCompileDate() 				const
+{ return __DATE__; }
+
+STDNS string
+CGICCNS Cgicc::getCompileTime() 				const
+{ return __TIME__; }
+
+STDNS string
+CGICCNS Cgicc::getVersion() 					const
+{ return VERSION; }
+
+STDNS string
+CGICCNS Cgicc::getHost() 					const
+{ return HOST; }
+
+void
+CGICCNS Cgicc::save(const STDNS string& filename) 		const
+{
+  LOGLN("Cgicc::save")
+  getEnvironment().save(filename);
 }
 
 void
-Cgicc::save(const char *filename) const throw(Exception) {
-  logln("Cgicc::save");
-  getEnvironment()->save(filename);
-}
+CGICCNS Cgicc::restore(const STDNS string& filename)
+{
+  LOGLN("Cgicc::restore")
+  
+  ((CgiEnvironment&)getEnvironment()).restore(filename);
 
-void
-Cgicc::restore(const char *filename) throw(Exception) {
-  logln("Cgicc::restore");
-  ((CgiEnvironment*) getEnvironment())->restore(filename);
-  fFormData->deleteAll();
-  if(stringsAreEqual(getEnvironment()->getRequestMethod(), "post", true))
-    parseFormInput(getEnvironment()->getPostData());
+  // clear the current data and re-parse the enviroment
+  fFormData.clear();
+  fFormFiles.clear();
+  if(stringsAreEqual(getEnvironment().getRequestMethod(), "post"))
+    parseFormInput(getEnvironment().getPostData());
   else
-    parseFormInput(getEnvironment()->getQueryString());
+    parseFormInput(getEnvironment().getQueryString());
 }
 
 bool 
-Cgicc::queryCheckbox(const char *elementName) const {
-  const FormEntry *found = findEntryByName(elementName);
-  return ((found != NULL) && stringsAreEqual(found->getValue(), "on", true));
+CGICCNS Cgicc::queryCheckbox(const STDNS string& elementName) 	const
+{
+  STDNS vector<FormEntry>::const_iterator iter = getElement(elementName);
+  return ((iter != fFormData.end()) && 
+	  stringsAreEqual( (*iter).getValue(), "on"));
 }
 
-LinkedList<FormEntry>::Iterator 
-Cgicc::getElement(const char *name) {
-  return fFormData->find(nameCompare, (void*) name);
+STDNS vector<CGICCNS FormEntry>::iterator 
+CGICCNS Cgicc::getElement(const STDNS string& name)
+{
+  return STDNS find_if(fFormData.begin(), fFormData.end(), 
+		       FE_nameCompare(name));
 }
 
-LinkedList<FormEntry>::ConstIterator 
-Cgicc::getElement(const char *name) const {
-  return ((const LinkedList<FormEntry>*) fFormData)->
-    find(nameCompare, (void*) name);
+STDNS vector<CGICCNS FormEntry>::const_iterator 
+CGICCNS Cgicc::getElement(const STDNS string& name) 		const
+{
+  return STDNS find_if(fFormData.begin(), fFormData.end(), 
+		       FE_nameCompare(name));
 }
 
 bool 
-Cgicc::getElementMultiple(const char *elementName, 
-			    LinkedList<FormEntry>& result) const  { 
-  return findEntriesByName(elementName, result); 
-}
-
-const FormEntry* 
-Cgicc::findEntryByName(const char *name) const {
-  return findEntry(name, true); 
-}
-
-const FormEntry* 
-Cgicc::findEntryByValue(const char *value) const {
-  return findEntry(value, false); 
-}
-
-bool
-Cgicc::findEntriesByName(const char *name,
-			   LinkedList<FormEntry>& result) const {
+CGICCNS Cgicc::getElement(const STDNS string& name, 
+			  STDNS vector<FormEntry>& result) 	const
+{ 
   return findEntries(name, true, result); 
 }
 
-bool
-Cgicc::findEntriesByValue(const char *value,
-			    LinkedList<FormEntry>& result) const { 
-  return findEntries(value, false, result); 
+STDNS vector<CGICCNS FormEntry>::iterator 
+CGICCNS Cgicc::getElementByValue(const STDNS string& value)
+{
+  return STDNS find_if(fFormData.begin(), fFormData.end(), 
+		       FE_valueCompare(value));
 }
 
-const FormEntry*
-Cgicc::findEntry(const char *param, 
-		   bool byName) const {
-  LinkedList<FormEntry>::Iterator found = 
-    (byName 	? fFormData->find(nameCompare, (void*) param)
-     		: fFormData->find(valueCompare, (void*) param));
-  
-  return (found.isValid() ? &(*found) : NULL);
+STDNS vector<CGICCNS FormEntry>::const_iterator 
+CGICCNS Cgicc::getElementByValue(const STDNS string& value) 	const
+{
+  return STDNS find_if(fFormData.begin(), fFormData.end(), 
+		       FE_valueCompare(value));
 }
 
+bool 
+CGICCNS Cgicc::getElementByValue(const STDNS string& value, 
+				 STDNS vector<FormEntry>& result) 	const
+{ 
+  return findEntries(value, true, result); 
+}
+
+STDNS vector<CGICCNS FormFile>::iterator 
+CGICCNS Cgicc::getFile(const STDNS string& name)
+{
+  return STDNS find_if(fFormFiles.begin(), fFormFiles.end(), 
+		       FF_compare(name));
+}
+
+STDNS vector<CGICCNS FormFile>::const_iterator 
+CGICCNS Cgicc::getFile(const STDNS string& name) 		const
+{
+  return STDNS find_if(fFormFiles.begin(), fFormFiles.end(), 
+		       FF_compare(name));
+}
+
+
+// implementation method
 bool
-Cgicc::findEntries(const char *param, 
-		     bool byName,
-		     LinkedList<FormEntry>& result) const {
+CGICCNS Cgicc::findEntries(const STDNS string& param, 
+			   bool byName,
+			   STDNS vector<FormEntry>& result) 	const
+{
+  // empty the target vector
+  result.clear();
+
   if(byName)
-    fFormData->findAll(nameCompare, (void*) param, result);
+    copy_if(fFormData.begin(), 
+	    fFormData.end(), 
+	    back_inserter(result),
+	    FE_nameCompare(param));
   else
-    fFormData->findAll(valueCompare, (void*) param, result);
+    copy_if(fFormData.begin(), 
+	    fFormData.end(), 
+	    back_inserter(result),
+	    FE_valueCompare(param));
   
-  return ! (result.isEmpty());
+  return ! result.empty();
 }
 
 void
-Cgicc::parseFormInput(const char *data) throw(Exception)
+CGICCNS Cgicc::parseFormInput(const STDNS string& data)
 {
-  const char *cType = "multipart/form-data;";
-  
-  if(stringsAreEqual(cType, getEnvironment()->getContentType(), 
-		     strlen(cType), true)) {
-    logln("Multipart data detected.");
+  STDNS string env 	= getEnvironment().getContentType();
+  STDNS string cType 	= "multipart/form-data";
+
+  if(stringsAreEqual(cType, env, cType.length())) {
+    LOGLN("Multipart data detected.")
+
     // Find out what the separator is
-    char *sep;
-    
-    const char *bType = "boundary=";
-    const char *env = getEnvironment()->getContentType();
-    int pos = findBytes(env, strlen(env), bType);
-    char *fSeparator = (char*) (env + pos + strlen(bType));
-    
-    sep = new char [strlen(fSeparator) + 2 + 2 + 1];
-    strcpy(sep, "--");
-    strcat(sep, fSeparator);
-    strcat(sep, "\r\n");
+    STDNS string bType 	= "boundary=";
+    unsigned int pos 	= env.find(bType);
 
-    char *sep2 = new char [strlen(fSeparator) + 2 + 2 + 2 + 1];
-    strcpy(sep2, "--");
-    strcat(sep2, fSeparator);
-    strcat(sep2, "--");
-    strcat(sep2, "\r\n");
+    // generate the separators
+    STDNS string sep = env.substr(pos + bType.length());
+    sep.append("\r\n");
+    sep.insert(0, "--");
 
-    // Extract the data between the separators
-    int start = 0, end = 0;
+    STDNS string sep2 = env.substr(pos + bType.length());
+    sep2.append("--\r\n");
+    sep2.insert(0, "--");
 
-    extractBetween(data, getEnvironment()->getContentLength(), sep, sep2, 
-		   start, end);
+    // Find the data between the separators
+    unsigned int start 		= data.find(sep);
+    unsigned int limit 		= data.find(sep2);
+    unsigned int sepLen 	= sep.length();
 
-    int dataLen = end - start;
-    
-    int extractedLen = 0;
-    while(extractedLen < dataLen) {
-      int newLen;
-      newLen = findBytes(data + start + extractedLen, 
-			 dataLen - extractedLen, 
-			 sep);
-      if(newLen == -1)
-	newLen = dataLen - extractedLen;
-      // - 2 to subtract off the trailing CR/LF sequence
-      parseMIME(data + start + extractedLen, newLen - 2);
-      extractedLen += (newLen + strlen(sep));
+    pos = 0;
+    unsigned int oldPos = start + sepLen;
+
+    while(true) {
+      pos = data.find(sep, oldPos);
+
+      if(pos == STDNS string::npos)
+	break;
+
+      // parse the data
+      parseMIME(data.substr(oldPos, pos - oldPos));
+
+      // update position
+      oldPos = pos + sepLen;
     }
   }
-  else {
-    int dataLen = strlen(data);
-    const char *sep = "&";
-    
-    int extractedLen = 0;
-    while(extractedLen < dataLen) {
-      int newLen;
-      newLen = findBytes(data + extractedLen, 
-			 dataLen - extractedLen, 
-			 sep);
-      if(newLen == -1)
-	newLen = dataLen - extractedLen;
+  else if(! data.empty()) {
+    unsigned int pos 	= 0;
+    unsigned int oldPos	= 0;
+
+    while(true) {
+      // find the '&' separating a name=value pairs
+      pos = data.find_first_of("&", oldPos);
+
+      // if no '&' was found, the rest of the string is a pair
+      if(pos == STDNS string::npos) {
+	parsePair(data.substr(oldPos));
+	break;
+      }
       
-      parsePair(data + extractedLen, newLen);      
-      extractedLen += (newLen + strlen(sep));
+      // otherwise, parse the name=value pair
+      parsePair(data.substr(oldPos, pos - oldPos));
+      
+      // update position
+      oldPos = pos + 1;
     }
   }
 }
 
-MultipartHeader*
-Cgicc::parseHeader(const char *data, int headLen)
+CGICCNS MultipartHeader
+CGICCNS Cgicc::parseHeader(const STDNS string& data)
 {
-  int dispStart, dispEnd;
-  extractBetween(data, headLen, "Content-Disposition: ", ";",
-		 dispStart, dispEnd);
+  STDNS string disposition;
+  disposition = extractBetween(data, "Content-Disposition: ", ";");
   
-  int nameStart, nameEnd;
-  extractBetween(data, headLen, "name=\"", "\"",
-		 nameStart, nameEnd);
+  STDNS string name;
+  name = extractBetween(data, "name=\"", "\"");
   
-  int filenameStart, filenameEnd;
-  extractBetween(data, headLen, "filename=\"", "\"",
-		 filenameStart, filenameEnd);
-  
-  // Why is it that Netscape uses "Content-Type: " and Microsoft
-  // uses "Content-type: " ?  To make my life more difficult?
-  // This is a hack- it's not optimal but should work.
+  STDNS string filename;
+  filename = extractBetween(data, "filename=\"", "\"");
 
-  int cTypeStart, cTypeEnd;
-  extractBetween(data, headLen, "Content-Type: ", "\r\n\r\n",
-		 cTypeStart, cTypeEnd); // for Netscape style
-  if(cTypeStart == -1 && cTypeEnd == -1)
-    extractBetween(data, headLen, "Content-type: ", "\r\n\r\n",
-		   cTypeStart, cTypeEnd); // for Microsoft style
+  STDNS string cType;
+  cType = extractBetween(data, "Content-Type: ", "\r\n\r\n");
 
-  return new MultipartHeader(data, 
-			     dispStart, dispEnd,
-			     nameStart, nameEnd,
-			     filenameStart, filenameEnd,
-			     cTypeStart, cTypeEnd);
+  // This is hairy: Netscape and IE don't encode the filenames
+  // The RFC says they should be encoded, so I will assume they are.
+  filename = unescapeString(filename);
+
+  return MultipartHeader(disposition, name, filename, cType);
 }
 
 void
-Cgicc::parsePair(const char *data, int dataLen)
+CGICCNS Cgicc::parsePair(const STDNS string& data)
 {
-  // Find the divider
-  int sepPos = 0;
-  const char *sep = "=";
-  sepPos = findBytes(data, dataLen, sep);
+  // find the '=' separating the name and value
+  unsigned int pos = data.find_first_of("=", 0);
 
-  // fix for bug reported by Sergei Prognimak
-  // need to check if sepPos == -1
-  if(sepPos == -1)
+  // if no '=' was found, return
+  if(pos == STDNS string::npos)
     return;
   
-  // Extract data, convert, and add
-  char *name;
-  char *value;
-  unescapeChars(data, sepPos, name);
-  unescapeChars(data + sepPos + 1, dataLen - sepPos - 1, value);
+  // unescape the data, and add to the form entry list
+  STDNS string name 	= unescapeString(data.substr(0, pos));
+  STDNS string value 	= unescapeString(data.substr(++pos, 
+						     STDNS string::npos));
   
-  fFormData->append(FormEntry(name, value));
-  
-  delete [] name;
-  delete [] value;
+  fFormData.push_back(FormEntry(name, value));
 }
 
 void
-Cgicc::parseMIME(const char *data, int dataLen)
+CGICCNS Cgicc::parseMIME(const STDNS string& data)
 {
   // Find the header
-  int headLen = 0;
-  const char *end = "\r\n\r\n";
-  headLen = findBytes(data, dataLen, end) + strlen(end);
+  STDNS string end = "\r\n\r\n";
+  unsigned int headLimit = data.find(end, 0);
+  
+  // Detect error
+  if(headLimit == STDNS string::npos)
+    return;
 
   // Parse the header
-  MultipartHeader *head = parseHeader(data, headLen);
+  MultipartHeader head = parseHeader(data.substr(0, headLimit));
 
-  if(head->isEmpty() == false) {
-    // Extract data
-    if(head->getFilename() == NULL)
-      fFormData->append(FormEntry(head->getName(), 
-				  data + headLen, dataLen - headLen));
-    else
-      fFormData->append(FormFile(head->getName(), head->getFilename(), 
-				 head->getContentType(), 
-				 data + headLen, dataLen - headLen));
-  }
-  delete head;
+  // Extract the value - there is still a trailing CR/LF to be subtracted off
+  unsigned int valueStart = headLimit + end.length();
+  STDNS string value = data.substr(valueStart, data.length() - valueStart - 2);
+
+  if(head.getFilename().empty())
+    fFormData.push_back(FormEntry(head.getName(), value));
+  else
+    fFormFiles.push_back(FormFile(head.getName(), 
+				  head.getFilename(), 
+				  head.getContentType(), 
+				  value));
 }
 
 //EOF
+
+
+
+
+
+
+
+

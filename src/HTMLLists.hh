@@ -1,42 +1,50 @@
 /*
- *  $Id: HTMLLists.hh,v 1.5 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: HTMLLists.hh,v 1.6 1999/04/26 22:42:31 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef __HTML_LISTS__
 #define __HTML_LISTS__ 1
 
+#include <string>
+
 #include "HTMLElements.hh"
+
+CGICC_BEGIN_NAMESPACE
 
 // ============================================================
 // Class ul
 // ============================================================
 /** The UL element */
-class ul : public HTMLBooleanElement {
+class ul : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  ul();
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  ul(const char *text = NULL);
+  ul(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -55,7 +63,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  ul(const char *text, 
+  ul(const STDNS string& text, 
      const HTMLAttributeList& attributes);
   
   /**
@@ -71,17 +79,10 @@ public:
   virtual ~ul();
   //@}
   
-  virtual inline const char* getName() const { return "UL"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "UL"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -91,16 +92,20 @@ private:
 // Class ol
 // ============================================================
 /** The OL element */
-class ol : public HTMLBooleanElement {
+class ol : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  ol();
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  ol(const char *text = NULL);
+  ol(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -119,7 +124,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  ol(const char *text, 
+  ol(const STDNS string& text, 
      const HTMLAttributeList& attributes);
   
   /**
@@ -135,17 +140,10 @@ public:
   virtual ~ol();
   //@}
   
-  virtual inline const char* getName() const { return "OL"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "OL"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -155,16 +153,20 @@ private:
 // Class li
 // ============================================================
 /** The LI element */
-class li : public HTMLBooleanElement {
+class li : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  li();
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  li(const char *text = NULL);
+  li(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -183,7 +185,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  li(const char *text, 
+  li(const STDNS string& text, 
      const HTMLAttributeList& attributes);
   
   /**
@@ -199,55 +201,52 @@ public:
   virtual ~li();
   //@}
   
-  virtual inline const char* getName() const { return "LI"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "LI"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
 };
 
 // ============================================================
-// Class dl_
+// Class dl
 // ============================================================
 /** The DL element */
-class dl_ : public HTMLBooleanElement {
+class dl : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  dl();
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  dl_(const char *text = NULL);
+  dl(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
    * @param attributes The HTMLAttributes contained within the element.
    */
-  dl_(const HTMLAttributeList& attributes);
+  dl(const HTMLAttributeList& attributes);
   
   /**
    * Create a new element, specifying an embedded HTMLElement.
    * @param embed The HTMLElement embedded inside the element.
    */
-  dl_(const HTMLSimpleElement& embed);
+  dl(const HTMLSimpleElement& embed);
   
   /**
    * Create a new element, specifying the enclosed text and HTMLAttributes.
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  dl_(const char *text, 
+  dl(const STDNS string& text, 
      const HTMLAttributeList& attributes);
   
   /**
@@ -256,24 +255,17 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param embed The HTMLElement embedded inside the element.
    */
-  dl_(const HTMLAttributeList& attributes, 
+  dl(const HTMLAttributeList& attributes, 
      const HTMLSimpleElement& embed);
   
   /** Destructor */
-  virtual ~dl_();
+  virtual ~dl();
   //@}
   
-  virtual inline const char* getName() const { return "DL"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "DL"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -283,16 +275,20 @@ private:
 // Class dt
 // ============================================================
 /** The DT element */
-class dt : public HTMLBooleanElement {
+class dt : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  dt();
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  dt(const char *text = NULL);
+  dt(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -311,7 +307,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  dt(const char *text, 
+  dt(const STDNS string& text, 
      const HTMLAttributeList& attributes);
   
   /**
@@ -327,17 +323,10 @@ public:
   virtual ~dt();
   //@}
   
-  virtual inline const char* getName() const { return "DT"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "DT"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -347,16 +336,20 @@ private:
 // Class dd
 // ============================================================
 /** The DD element */
-class dd : public HTMLBooleanElement {
+class dd : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
-  
+
+  /** Create a new, empty element. */
+  dd();
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  dd(const char *text = NULL);
+  dd(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -375,7 +368,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  dd(const char *text, 
+  dd(const STDNS string& text, 
      const HTMLAttributeList& attributes);
   
   /**
@@ -391,20 +384,15 @@ public:
   virtual ~dd();
   //@}
   
-  virtual inline const char* getName() const { return "DD"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "DD"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
 };
+
+CGICC_END_NAMESPACE
 
 #endif

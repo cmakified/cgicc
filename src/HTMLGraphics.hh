@@ -1,27 +1,31 @@
 /*
- *  $Id: HTMLGraphics.hh,v 1.5 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: HTMLGraphics.hh,v 1.6 1999/04/26 22:42:30 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef __HTML_GRAPHICS__
 #define __HTML_GRAPHICS__ 1
 
+#include <string>
+
 #include "HTMLElements.hh"
+
+CGICC_BEGIN_NAMESPACE
 
 // except for hr, use stylesheets instead of these elements
 
@@ -33,12 +37,15 @@ class tt : public HTMLBooleanElement {
 public:
   /**@name Constructors */
   //@{
+
+  /** Create a new, empty element. */
+  tt();
   
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  tt(const char *text = NULL);
+  tt(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -57,7 +64,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  tt(const char *text, 
+  tt(const STDNS string& text, 
      const HTMLAttributeList& attributes);
   
   /**
@@ -73,17 +80,10 @@ public:
   virtual ~tt();
   //@}
   
-  virtual inline const char* getName() const { return "TT"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "TT"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -98,11 +98,14 @@ public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  i();
+  
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  i(const char *text = NULL);
+  i(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -121,7 +124,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  i(const char *text, 
+  i(const STDNS string& text, 
     const HTMLAttributeList& attributes);
   
   /**
@@ -137,17 +140,10 @@ public:
   virtual ~i();
   //@}
   
-  virtual inline const char* getName() const { return "I"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "I"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -162,11 +158,14 @@ public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  b();
+  
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  b(const char *text = NULL);
+  b(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -185,7 +184,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  b(const char *text, 
+  b(const STDNS string& text, 
     const HTMLAttributeList& attributes);
   
   /**
@@ -201,17 +200,10 @@ public:
   virtual ~b();
   //@}
   
-  virtual inline const char* getName() const { return "B"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "B"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -226,11 +218,14 @@ public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  big();
+  
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  big(const char *text = NULL);
+  big(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -249,7 +244,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  big(const char *text, 
+  big(const STDNS string& text, 
       const HTMLAttributeList& attributes);
   
   /**
@@ -265,18 +260,11 @@ public:
   virtual ~big();
   //@}
   
-  virtual inline const char* getName() const { return "BIG"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
+  virtual inline STDNS string 	getName()	const	{ return "BIG"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
 
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
-  
 private:
   static bool sState;
 };
@@ -290,11 +278,14 @@ public:
   /**@name Constructors */
   //@{
   
+  /** Create a new, empty element. */
+  small();
+  
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  small(const char *text = NULL);
+  small(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -313,7 +304,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  small(const char *text, 
+  small(const STDNS string& text, 
 	const HTMLAttributeList& attributes);
   
   /**
@@ -329,17 +320,10 @@ public:
   virtual ~small();
   //@}
   
-  virtual inline const char* getName() const { return "SMALL"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "SMALL"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -354,7 +338,7 @@ public:
   /**@name Constructors */
   //@{
   
-  /** Create a new empty element. */
+  /** Create a new, empty element. */
   hr();
   
   /**
@@ -367,7 +351,9 @@ public:
   virtual ~hr();
   //@}
   
-  virtual inline const char* getName() const { return "HR"; }
+  virtual inline STDNS string 	getName() 	const 	{ return "HR"; }
 };
+
+CGICC_END_NAMESPACE
 
 #endif

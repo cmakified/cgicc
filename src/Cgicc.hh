@@ -1,20 +1,20 @@
 /*
- *  $Id: Cgicc.hh,v 1.15 1999/01/06 22:40:27 sbooth Exp $
+ *  $Id: Cgicc.hh,v 1.16 1999/04/26 22:42:26 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -22,23 +22,30 @@
 #define __CGICC__ 1
 
 /*
- * The Cgicc library, by Stephen F. Booth <mailto:sbooth@saaba.lmi.net>. 
- * The latest version can be found on http://www.lmi.net/~sbooth/cgicc/ or
- * on ftp://ftp.lmi.net/pub/Cgicc/ 
+ * The GNU Cgicc library, by Stephen F. Booth <mailto:sbooth@saaba.lmi.net>. 
+ * The latest version can be found on ftp://ftp.gnu.org/gnu/cgicc/
+ *
+ * Please mail bug reports to <mailto:bug-cgicc@gnu.org>
+ *
+ * There is a Cgicc mailing list at <mailto:cgicc@gnu.org>
+ * To subscribe, send a message to <mailto:cgicc@gnu.org> with the
+ * word "subscribe" in the subject field.
  *
  * Cgicc is intended to simplify and speed the development of C++ CGI(Common
  * Gateway Interface) applications by providing a simple, yet comprehensive  
  * set of classes that present full CGI functionality.
  */
 
+#include <vector>
+#include <string>
 
-#include "Exception.hh"
 #include "CgiDefs.hh"
 #include "FormEntry.hh"
 #include "FormFile.hh"
 #include "CgiEnvironment.hh"
 
-
+CGICC_BEGIN_NAMESPACE
+  
 class MultipartHeader;
 
 // ============================================================
@@ -52,11 +59,11 @@ class MultipartHeader;
  * int
  * main(int argc, char **argv) {
  *   try {
- *     Cgicc *cgi = new Cgicc();
+ *     Cgicc cgi;
  *     <SPAN CLASS="green">\\ do something with cgi</SPAN>
  *   }
  *
- *   catch(Exception e) {
+ *   catch(const CgiException& e) {
  *    <SPAN CLASS="green"> \\ handle the error</SPAN>
  *   }
  * }
@@ -66,188 +73,236 @@ class Cgicc {
 public:
   /**@name Constructors */
   //@{
-
-  /** 
-   * Default constructor. 
-   * @exception Exception
-   */
-  Cgicc() throw(Exception);
-
+  
+  /** Constructor */
+  Cgicc();
+  
   /** Destructor */
   ~Cgicc();
   //@}
-
+  
   /**@name Cgicc Information */
   //@{
-
+  
   /**
    * Get the date on which this library was compiled.
    * <P>This is a string of the form mmm dd yyyy.</P>
    * @return The compile date
    */
-  inline const char* getCompileDate() const 	{ return __DATE__; }
-
+  STDNS string
+  getCompileDate() 					const;
+  
   /**
    * Get the time at which this library was compiled.
    * <P>This is a string of the form hh:mm:ss in 24-hour time.</P>
    * @return The compile time
    */
-  inline const char* getCompileTime() const 	{ return __TIME__; }
-
+  STDNS string
+  getCompileTime() 					const;
+  
   /**
    * Get the version number of Cgicc.
    * <P>The version number is a string of the form #.#.</P>
    * @return The version number
    */
-  inline const char* getCgiccVersion() const 	{ return VERSION; }
-  //@}
+  STDNS string
+  getVersion() 						const;
 
+  /** 
+   * Get the platform for which Cgicc was configured.
+   * <P>The host is a string of the form processor-manufacturer-os</P>
+   * @return The host triplet.
+   */
+  STDNS string
+  getHost() 						const;
+  //@}
+  
   /**@name Form Element Access */
   //@{
-
+  
   /**
    * Query whether a checkbox is checked.
    * @param elementName The name of the element to query
    * @return True if the desired checkbox was checked, false if not
    */
-  bool queryCheckbox(const char *elementName) const;
+  bool 
+  queryCheckbox(const STDNS string& elementName) 	const;
+  
+  /**
+   * Find a radio button in a radio group, or a selected list item.
+   * @param name The name of the radio button or list item to find.
+   * @return An iterator referring to the desired element, if found.
+   */
+  inline STDNS vector<FormEntry>::iterator 
+  operator[] (const STDNS string& name)
+    { return getElement(name); }
 
   /**
    * Find a radio button in a radio group, or a selected list item.
    * @param name The name of the radio button or list item to find.
-   * @return An Iterator referring to the desired element.  If the element
-   * is not found, the Iterator will not be valid.
+   * @return An iterator referring to the desired element, if found.
    */
-  LinkedList<FormEntry>::Iterator operator[] (const char *name)
-  { return getElement(name); }
-
+  inline STDNS vector<FormEntry>::const_iterator 
+  operator[] (const STDNS string& name) 		const
+    { return getElement(name); }
+  
   /**
    * Find a radio button in a radio group, or a selected list item.
    * @param name The name of the radio button or list item to find.
-   * @return An Iterator referring to the desired element.  If the element
-   * is not found, the Iterator will not be valid.
+   * @return An iterator referring to the desired element, if found.
    */
-  LinkedList<FormEntry>::Iterator getElement(const char *name);
-
+  STDNS vector<FormEntry>::iterator 
+  getElement(const STDNS string& name);
+  
   /**
    * Find a radio button in a radio group, or a selected list item.
    * @param name The name of the radio button or list item to find.
-   * @return A ConstIterator referring to the desired element.  If the element
-   * is not found, the ConstIterator will not be valid.
+   * @return A const_iterator referring to the desired element, if found.
    */
-  LinkedList<FormEntry>::ConstIterator getElement(const char *name) const;
-
+  STDNS vector<FormEntry>::const_iterator 
+  getElement(const STDNS string& name) 			const;
+  
   /**
    * Find multiple checkboxes in a group or selected items in a list.
    * @param name The name of the checkboxes or list to find.
-   * @param result A LinkedList to hold the result.
-   * @return True if any elements were found, false if not.
+   * @param result A vector to hold the result.
+   * @return true if any elements were found, false if not.
    */
-  bool getElementMultiple(const char *elementName,
-			  LinkedList<FormEntry>& result) const;
-  //@}
-
-  /**@name Access to all form entries */
-  //@{
+  bool 
+  getElement(const STDNS string& name,
+	     STDNS vector<FormEntry>& result) 		const;
 
   /**
-   * Get all the submitted form elements.
-   * @return A LinkedList containing all the submitted elements.
+   * Find a radio button in a radio group, or a selected list item.
+   * @param value The value of the radio button or list item to find.
+   * @return An iterator referring to the desired element, if found.
    */
-  inline const LinkedList<FormEntry>& operator* () const 
-  { return *fFormData; }
+  STDNS vector<FormEntry>::iterator 
+  getElementByValue(const STDNS string& value);
   
   /**
-   * Get all the submitted form elements.
-   * @return A LinkedList containing all the submitted elements.
+   * Find a radio button in a radio group, or a selected list item.
+   * @param value The value of the radio button or list item to find.
+   * @return A const_iterator referring to the desired element, if found.
    */
-  inline const LinkedList<FormEntry>* getAllElements() const 
-  { return fFormData; }
+  STDNS vector<FormEntry>::const_iterator 
+  getElementByValue(const STDNS string& value) 		const;
+  
+  /**
+   * Find multiple checkboxes in a group or selected items in a list.
+   * @param value The value of the checkboxes or list to find.
+   * @param result A vector to hold the result.
+   * @return true if any elements were found, false if not.
+   */
+  bool 
+  getElementByValue(const STDNS string& value,
+		    STDNS vector<FormEntry>& result) 	const;
+
+  /**
+   * Get all the submitted form entries, excluding files.
+   * @return A vector containing all the submitted elements.
+   */
+  inline const STDNS vector<FormEntry>& 
+  operator* () 						const
+    { return fFormData; }
+  
+  /**
+   * Get all the submitted form elements, excluding files.
+   * @return A vector containing all the submitted elements.
+   */
+  inline const STDNS vector<FormEntry>&
+  getElements() 					const
+    { return fFormData; }
   //@}  
 
-  /**@name Searching for form entries */
+  /**@name Access to uploaded files */
   //@{
+
+  /**
+   * Find an uploaded file.
+   * @param name The name of the file.
+   * @return An iterator referring to the desired file, if found.
+   */
+  STDNS vector<FormFile>::iterator 
+  getFile(const STDNS string& name);
   
   /**
-   * Find an element in the linked list of entries by name.
-   * @param name The <EM>name</EM> of the list element to search for
-   * @return The desired list element, or NULL if not found
+   * Find an uploaded file.
+   * @param name The name of the file.
+   * @return An iterator referring to the desired file, if found.
    */
-  const FormEntry* findEntryByName(const char *name) const;
-  
-  /**
-   * Find an element in the linked list of entries by value.
-   * @param value The <EM>value</EM> of the list element to search for
-   * @return The desired list element, or NULL if not found
-   */
-  const FormEntry* findEntryByValue(const char *value) const;
+  STDNS vector<FormFile>::const_iterator 
+  getFile(const STDNS string& name) 			const;
 
-  /**
-   * Find elements in the linked list of entries by name.
-   * @param name The <EM>name</EM> of the list elements to search for.
-   * @param result Where to store the found elements, if any.
-   * @return True if any items were found, false if not.
+  /** 
+   * Get all uploaded files.
+   * @return A vector containing all the uploaded files.
    */
-  bool findEntriesByName(const char 		*name,
-			 LinkedList<FormEntry>& result) const;
-
-  /**
-   * Find elements in the linked list of entries by value.
-   * @param value The <EM>name</EM> of the list elements to search for.
-   * @param result Where to store the found elements, if any.
-   * @return True if any items were found, false if not.
-   */
-  bool findEntriesByValue(const char 			*value,
-			  LinkedList<FormEntry>& 	result) const;
-    
-  /* Find an element in the linked list of entries */
-  const FormEntry* findEntry(const char *param, 
-			     bool 	byName) const;
-
-  /* Find elements in the linked list of entries */
-  bool findEntries(const char 			*param, 
-		   bool 			byName,
-		   LinkedList<FormEntry>& 	result) const;
+  inline const STDNS vector<FormFile>&
+  getFiles() 						const
+    { return fFormFiles; }
   //@}
-
+  
   /**@name Access to the current environment */
   //@{
   
   /**
-   * Get a pointer to the current runtime environment.
-   * @return A pointer to the environment
+   * Get the current runtime environment.
+   * @return The current CGI environment.
    */
-  inline const CgiEnvironment* getEnvironment() const { return fEnvironment; }
+  inline const CgiEnvironment&
+  getEnvironment() 					const
+    { return fEnvironment;}
   //@}
-
+  
   /**@name Save and Restore */
   //@{
-
+  
   /**
    * Save the current CGI environment to a file.
    * @param filename The name of the file to which to save.
-   * @exception Exception
    */
-  void save(const char *filename) const throw(Exception);
-
+  void 
+  save(const STDNS string& filename) 			const;
+  
   /**
    * Restore from a previously-saved CGI environment.
    * @param filename The name of the file from which to restore.
-   * @exception Exception
    */
-  void restore(const char *filename) throw(Exception);
+  void 
+  restore(const STDNS string& filename);
   //@}
-
-private:
-  CgiEnvironment 	*fEnvironment;
-  LinkedList<FormEntry> *fFormData;
-
-  /* Convert query string into a linked list of FormEntriess */
-  void parseFormInput(const char *data) throw(Exception);
   
-  MultipartHeader* parseHeader(const char *data, int headLen);
-  void parsePair(const char *data, int dataLen);
-  void parseMIME(const char *data, int dataLen);
+private:
+  CgiEnvironment 		fEnvironment;
+  STDNS vector<FormEntry> 	fFormData;
+  STDNS vector<FormFile> 	fFormFiles;
+  
+  // Convert query string into a list of FormEntries
+  void 
+  parseFormInput(const STDNS string& data);
+  
+  // Parse a multipart/form-data header
+  MultipartHeader
+  parseHeader(const STDNS string& data);
+  
+  // Parse a (name=value) form entry
+  void 
+  parsePair(const STDNS string& data);
+  
+  // Parse a MIME entry for ENCTYPE=""
+  void
+  parseMIME(const STDNS string& data);
+
+  // Find elements in the list of entries
+  bool 
+  findEntries(const STDNS string& param, 
+	      bool byName,
+	      STDNS vector<FormEntry>& result) 		const;
 };
 
+CGICC_END_NAMESPACE
+
 #endif
+
+//EOF

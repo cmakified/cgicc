@@ -1,214 +1,153 @@
 /*
- *  $Id: CgiEnvironment.cc,v 1.6 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: CgiEnvironment.cc,v 1.7 1999/04/26 22:42:24 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "CgiEnvironment.hh"
+#include <new>
+#include <memory>
+#include <cstdlib>
 
-#include <stdlib.h>
+#include "CgiEnvironment.hh"
 
 // ========== Constructor/Destructor
 
-CgiEnvironment::CgiEnvironment() throw(Exception)
+CGICCNS CgiEnvironment::CgiEnvironment()
 {
-  logln("Entering CgiEnvironment::CgiEnvironment");
+  LOGLN("CgiEnvironment::CgiEnvironment")
   
   readEnvironmentVariables();
   
-  if( stringsAreEqual( getRequestMethod(), "get", true )) {
-    logln("GET method recognized");
-    fPostData = NULL;
+  if(stringsAreEqual( getRequestMethod(), "get")) {
+    LOGLN("GET method recognized")
   }
-  else if( stringsAreEqual( getRequestMethod(), "post", true )) {
-    logln("POST method recognized");
-    if( getContentLength() == 0) {
-      fPostData = NULL;
-    }
-    else {
-      fPostData = new char[ getContentLength() + 1];
-      if( ! fPostData ) 
-	throw Exception("new failed", ERRINFO);
-      
-      cin.read( fPostData, getContentLength() );
-      fPostData [getContentLength() ] = '\0';
-      if( cin.gcount() != (unsigned int) getContentLength() )
-	throw Exception("I/O error", ERRINFO);
-    }
+  else if(stringsAreEqual( getRequestMethod(), "post")) {
+    LOGLN("POST method recognized")
+    
+    char *temp = new char[getContentLength()];
+    cin.read(temp, getContentLength());
+    if(cin.gcount() != getContentLength())
+      throw CgiException("I/O error", ERRINFO);
+    fPostData = STDNS string(temp, getContentLength());
+    delete [] temp;
   }
-
-  fCookies = new LinkedList<HTTPCookie>;
-  //if( ! fCookies )
-  //throw Exception("new failed", ERRINFO);
+  
+  fCookies.reserve(10);
   parseCookies();
 }
 
-CgiEnvironment::~CgiEnvironment()
+CGICCNS CgiEnvironment::~CgiEnvironment()
 {
-  logln("CgiEnvironment::~CgiEnvironment");
-  reclaimStorage();
+  LOGLN("CgiEnvironment::~CgiEnvironment")
 }
 
 void
-CgiEnvironment::parseCookies()
+CGICCNS CgiEnvironment::parseCookies()
 {
-  const char *data = getCookies();
-  if(data != NULL) {
-    int dataLen = strlen(data);
-    const char *sep = "; ";
-    
-    int extractedLen = 0;
-    while(extractedLen <= dataLen) {
-      int newLen;
-      newLen = findBytes(data + extractedLen, 
-			 dataLen - extractedLen, 
-			 sep);
-      if(newLen == -1)
-	newLen = dataLen - extractedLen;
+  STDNS string data = getCookies();
+
+  if(! data.empty()) {
+    unsigned int pos 	= 0;
+    unsigned int oldPos	= 0;
+
+    while(true) {
+      // find the ';' terminating a name=value pair
+      pos = data.find(";", oldPos);
+
+      // if no ';' was found, the rest of the string is a single cookie
+      if(pos == STDNS string::npos) {
+	parseCookie(data.substr(oldPos));
+	return;
+      }
+
+      // otherwise, the string contains multiple cookies
+      // extract it and add the cookie to the list
+      parseCookie(data.substr(oldPos, pos - oldPos));
       
-      parseCookie(data + extractedLen, newLen);      
-      extractedLen += (newLen + strlen(sep));
+      // update pos (+1 to skip ';')
+      oldPos = pos + 1;
     }
   }
 }
 
 void
-CgiEnvironment::parseCookie(const char *data, int dataLen)
+CGICCNS CgiEnvironment::parseCookie(const STDNS string &data)
 {
-  // Find the divider
-  int sepPos = 0;
-  const char *sep = "=";
-  sepPos = findBytes(data, dataLen, sep);
-  
-  // fix for bug reported by Sergei Prognimak
-  // need to check if sepPos == -1
-  if(sepPos == -1)
+  // find the '=' separating the name and value
+  unsigned int pos = data.find("=", 0);
+
+  // if no '=' was found, return
+  if(pos == STDNS string::npos)
     return;
-
-  // Extract data, convert, and add
-  char *name;
-  char *value;
-  unescapeChars(data, sepPos, name);
-  unescapeChars(data + sepPos + 1, dataLen - sepPos - 1, value);
   
-  fCookies->append(HTTPCookie(name, value));
-  
-  delete [] name;
-  delete [] value;
+  // unescape the data, and add to the cookie list
+  STDNS string name 	= unescapeString(data.substr(0, pos));
+  STDNS string value 	= unescapeString(data.substr(++pos));
+
+  fCookies.push_back(HTTPCookie(name, value));
 }
 
-/* Read in all the environment variables */
+// Read in all the environment variables
 void
-CgiEnvironment::readEnvironmentVariables() throw(Exception)
+CGICCNS CgiEnvironment::readEnvironmentVariables()
 {
-  safeGetenv( "SERVER_SOFTWARE", fServerSoftware );
-  safeGetenv( "SERVER_NAME", fServerName );
-  safeGetenv( "GATEWAY_INTERFACE", fGatewayInterface );
-  safeGetenv( "SERVER_PROTOCOL", fServerProtocol );
+  fServerSoftware 	= safeGetenv("SERVER_SOFTWARE");
+  fServerName 		= safeGetenv("SERVER_NAME");
+  fGatewayInterface 	= safeGetenv("GATEWAY_INTERFACE");
+  fServerProtocol 	= safeGetenv("SERVER_PROTOCOL");
 
-  char *port;
-  safeGetenv( "SERVER_PORT", port );
-  fServerPort = atol(port);
-  delete [] port;
+  STDNS string port 	= safeGetenv("SERVER_PORT");
+  fServerPort 		= atol(port.c_str());
 
-  safeGetenv( "REQUEST_METHOD", fRequestMethod );
-  safeGetenv( "PATH_INFO", fPathInfo );
-  safeGetenv( "PATH_TRANSLATED", fPathTranslated );
-  safeGetenv( "SCRIPT_NAME", fScriptName );
-  safeGetenv( "QUERY_STRING", fQueryString );
-  safeGetenv( "REMOTE_HOST", fRemoteHost );
-  safeGetenv( "REMOTE_ADDR", fRemoteAddr );
-  safeGetenv( "AUTH_TYPE", fAuthType );
-  safeGetenv( "REMOTE_USER", fRemoteUser );
-  safeGetenv( "REMOTE_IDENT", fRemoteIdent );
-  safeGetenv( "CONTENT_TYPE", fContentType );
+  fRequestMethod 	= safeGetenv("REQUEST_METHOD");
+  fPathInfo 		= safeGetenv("PATH_INFO");
+  fPathTranslated 	= safeGetenv("PATH_TRANSLATED");
+  fScriptName 		= safeGetenv("SCRIPT_NAME");
+  fQueryString 		= safeGetenv("QUERY_STRING");
+  fRemoteHost 		= safeGetenv("REMOTE_HOST");
+  fRemoteAddr 		= safeGetenv("REMOTE_ADDR");
+  fAuthType 		= safeGetenv("AUTH_TYPE");
+  fRemoteUser 		= safeGetenv("REMOTE_USER");
+  fRemoteIdent 		= safeGetenv("REMOTE_IDENT");
+  fContentType 		= safeGetenv("CONTENT_TYPE");
 
-  char *length;
-  safeGetenv( "CONTENT_LENGTH", length ); 
-  fContentLength = atol(length);
-  delete [] length;
+  STDNS string length 	= safeGetenv("CONTENT_LENGTH");
+  fContentLength 	= atol(length.c_str());
 
-  safeGetenv( "HTTP_ACCEPT", fAccept );
-  safeGetenv( "HTTP_USER_AGENT", fUserAgent );
-  safeGetenv( "REDIRECT_REQUEST", fRedirectRequest );
-  safeGetenv( "REDIRECT_URL", fRedirectURL );
-  safeGetenv( "REDIRECT_STATUS", fRedirectStatus );
-  safeGetenv( "HTTP_REFERER", fReferrer );
-  safeGetenv( "HTTP_COOKIE", fCookie );
-}
-
-/* reclaim storage */
-void
-CgiEnvironment::reclaimStorage()
-{
-  logln("reclaimStorage()");
-
-  delete [] fServerSoftware;
-  delete [] fServerName;
-  delete [] fGatewayInterface;
-  delete [] fServerProtocol;
-  delete [] fRequestMethod;
-  delete [] fPathInfo;
-  delete [] fPathTranslated;
-  delete [] fScriptName;
-  delete [] fQueryString;
-  delete [] fRemoteHost;
-  delete [] fRemoteAddr;
-  delete [] fAuthType;
-  delete [] fRemoteUser;
-  delete [] fRemoteIdent;
-  delete [] fContentType;
-  delete [] fAccept;
-  delete [] fUserAgent;
-  delete [] fRedirectRequest;
-  delete [] fRedirectURL;
-  delete [] fRedirectStatus;
-  delete [] fReferrer;
-  delete [] fCookie;
-  if(fPostData != NULL)
-    delete [] fPostData;
-
-  delete fCookies;
-}
-
-/* read a string */
-void
-CgiEnvironment::readString(istream& in, char* &s)
-{
-  int dataSize = 0;
-  
-  in >> dataSize;
-  in.get(); // skip ' '
-  s = new char [dataSize + 1];
-  in.read(s, dataSize);
-  s[dataSize] = '\0';
+  fAccept 		= safeGetenv("HTTP_ACCEPT");
+  fUserAgent 		= safeGetenv("HTTP_USER_AGENT");
+  fRedirectRequest 	= safeGetenv("REDIRECT_REQUEST");
+  fRedirectURL 		= safeGetenv("REDIRECT_URL");
+  fRedirectStatus 	= safeGetenv("REDIRECT_STATUS");
+  fReferrer 		= safeGetenv("HTTP_REFERER");
+  fCookie 		= safeGetenv("HTTP_COOKIE");
 }
 
 void
-CgiEnvironment::save( const char *filename ) const throw(Exception)
+CGICCNS CgiEnvironment::save(const STDNS string& filename) 	const
 {
-  logln("save");
-  ofstream file( filename, ios::out );
+  LOGLN("CgiEnvironment::save")
+  STDNS ofstream file( filename.c_str(), ios::out );
 
   if( ! file )
-    throw Exception("I/O error", ERRINFO);
+    throw CgiException("I/O error", ERRINFO);
 
-  file << getContentLength() << ' ';
-  file << getServerPort() << ' ';
+  writeLong(file, getContentLength());
+  writeLong(file, getServerPort());
 
   writeString(file, getServerSoftware());
   writeString(file, getServerName());
@@ -233,67 +172,60 @@ CgiEnvironment::save( const char *filename ) const throw(Exception)
   writeString(file, getReferrer());
   writeString(file, getCookies());
   
-  if( stringsAreEqual( getRequestMethod(), "post", true ) )
-    writeString(file,getPostData());
-  
+  if(stringsAreEqual(getRequestMethod(), "post"))
+    writeString(file, getPostData());
+
+  if(file.bad() || file.fail())
+    throw CgiException("I/O error", ERRINFO);
+
   file.close();
 }
 
-
 void
-CgiEnvironment::restore( const char *filename ) throw(Exception)
+CGICCNS CgiEnvironment::restore(const STDNS string& filename)
 {
-  logln("restore()");
-  ifstream file( filename, ios::in );
+  LOGLN("CgiEnvironment::restore()")
+  STDNS ifstream file( filename.c_str(), ios::in );
 
   if( ! file )
-    throw Exception("I/O error", ERRINFO);
+    throw CgiException("I/O error", ERRINFO);
 
   file.flags(file.flags() & ios::skipws);
 
-  reclaimStorage();
+  fContentLength 	= readLong(file);
+  fServerPort 		= readLong(file);
 
-  file >> fContentLength;
-  file.get(); // skip trailing space
-  file >> fServerPort;
-  file.get(); // skip trailing space
-
-  readString(file, fServerSoftware);
-  readString(file, fServerName);
-  readString(file, fGatewayInterface);
-  readString(file, fServerProtocol);
-  readString(file, fRequestMethod);
-  readString(file, fPathInfo);
-  readString(file, fPathTranslated);
-  readString(file, fScriptName);
-  readString(file, fQueryString);
-  readString(file, fRemoteHost);
-  readString(file, fRemoteAddr);
-  readString(file, fAuthType);
-  readString(file, fRemoteUser);
-  readString(file, fRemoteIdent);
-  readString(file, fContentType);
-  readString(file, fAccept);
-  readString(file, fUserAgent);
-  readString(file, fRedirectRequest);
-  readString(file, fRedirectURL);
-  readString(file, fRedirectStatus);
-  readString(file, fReferrer);
-  readString(file, fCookie);
+  fServerSoftware 	= readString(file);
+  fServerName 		= readString(file);
+  fGatewayInterface 	= readString(file);
+  fServerProtocol 	= readString(file);
+  fRequestMethod 	= readString(file);
+  fPathInfo 		= readString(file);
+  fPathTranslated 	= readString(file);
+  fScriptName 		= readString(file);
+  fQueryString 		= readString(file);
+  fRemoteHost 		= readString(file);
+  fRemoteAddr 		= readString(file);
+  fAuthType 		= readString(file);
+  fRemoteUser 		= readString(file);
+  fRemoteIdent 		= readString(file);
+  fContentType 		= readString(file);
+  fAccept 		= readString(file);
+  fUserAgent 		= readString(file);
+  fRedirectRequest 	= readString(file);
+  fRedirectURL 		= readString(file);
+  fRedirectStatus	= readString(file);
+  fReferrer 		= readString(file);
+  fCookie 		= readString(file);
   
-  if( stringsAreEqual( getRequestMethod(), "post", true ) ) {
-    if(getContentLength() != 0)
-      readString(file,fPostData);
-    else
-      fPostData = NULL;
-  }
-  else
-    fPostData = NULL;
+  if(stringsAreEqual(getRequestMethod(), "post"))
+    fPostData = readString(file);
 
   file.close();
 
-  fCookies = new LinkedList<HTTPCookie>;
+  fCookies.clear();
+  fCookies.reserve(10);
   parseCookies();
 }
 
-/* End of class CgiEnvironment */
+//EOF

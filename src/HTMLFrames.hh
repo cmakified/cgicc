@@ -1,44 +1,56 @@
 /*
- *  $Id: HTMLFrames.hh,v 1.5 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: HTMLFrames.hh,v 1.6 1999/04/26 22:42:29 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef __HTML_FRAMES__
 #define __HTML_FRAMES__ 1
 
+#include <string>
+
+#include "CgiDefs.hh"
 #include "HTMLElements.hh"
 
-// not part of strict dtd
+CGICC_BEGIN_NAMESPACE
+
+// these elements not part of strict dtd
 
 // ============================================================
 // Class frameset
 // ============================================================
-/** The FRAMESET element - not part of strict DTD */
-class frameset : public HTMLBooleanElement {
+/**
+ * The FRAMESET element 
+ * FRAMESET is not part of the strict DTD.
+ */
+class frameset : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
   
+  /** Create a new element. */
+  frameset();
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  frameset(const char *text = NULL);
+  frameset(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -57,7 +69,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  frameset(const char *text, 
+  frameset(const STDNS string& text, 
 	   const HTMLAttributeList& attributes);
   
   /**
@@ -73,17 +85,10 @@ public:
   virtual ~frameset();
   //@}
   
-  virtual inline const char* getName() const { return "FRAMESET"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "FRAMESET"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -92,8 +97,12 @@ private:
 // ============================================================
 // Class frame
 // ============================================================
-/** The FRAME element - not part of strict DTD */
-class frame : public HTMLElement {
+/** 
+ * The FRAME element
+ * FRAME is not part of the strict DTD.
+ */
+class frame : public HTMLElement 
+{
 public:
   /**@name Constructors */
   //@{
@@ -111,23 +120,30 @@ public:
   virtual ~frame();
   //@}
   
-  virtual inline const char* getName() const { return "FRAME"; }
+  virtual inline STDNS string 	getName() const 	{ return "FRAME"; }
 };
 
 // ============================================================
 // Class noframes
 // ============================================================
-/** The NOFRAMES element - not part of strict DTD */
-class noframes : public HTMLBooleanElement {
+/** 
+ * The NOFRAMES element
+ * NOFRAMES is not part of the strict DTD 
+ */
+class noframes : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
   
+  /** Create a new element. */
+  noframes();
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  noframes(const char *text = NULL);
+  noframes(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -146,7 +162,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  noframes(const char *text, 
+  noframes(const STDNS string& text, 
 	   const HTMLAttributeList& attributes);
   
   /**
@@ -162,17 +178,10 @@ public:
   virtual ~noframes();
   //@}
   
-  virtual inline const char* getName() const { return "NOFRAMES"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "NOFRAMES"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
@@ -181,17 +190,24 @@ private:
 // ============================================================
 // Class iframe
 // ============================================================
-/** The IFRAME element - not part of strict DTD */
-class iframe : public HTMLBooleanElement {
+/** 
+ * The IFRAME element
+ * IFRAME is not part of the strict DTD
+ */
+class iframe : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
+
+  /** Create a new element. */
+  iframe();
   
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  iframe(const char *text = NULL);
+  iframe(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -210,7 +226,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  iframe(const char *text, 
+  iframe(const STDNS string& text, 
 	 const HTMLAttributeList& attributes);
   
   /**
@@ -226,20 +242,17 @@ public:
   virtual ~iframe();
   //@}
   
-  virtual inline const char* getName() const { return "IFRAME"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
-
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
+  virtual inline STDNS string 	getName()	const	{ return "IFRAME"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
   
 private:
   static bool sState;
 };
 
+CGICC_END_NAMESPACE
+
 #endif
+
+//EOF

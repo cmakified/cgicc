@@ -1,20 +1,20 @@
 /*
- *  $Id: HTMLFrames.cc,v 1.4 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: HTMLFrames.cc,v 1.5 1999/04/26 22:42:29 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -23,97 +23,115 @@
 // ============================================================
 // Statics
 // ============================================================
-bool frameset::sState = false;
-bool noframes::sState = false;
-bool iframe::sState = false;
+bool CGICCNS frameset::sState 	= false;
+bool CGICCNS noframes::sState 	= false;
+bool CGICCNS iframe::sState 	= false;
 
 // ============================================================
 // Class frameset
 // ============================================================
-frameset::frameset(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS frameset::frameset()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-frameset::frameset(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS frameset::frameset(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-frameset::frameset(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS frameset::frameset(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-frameset::frameset(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS frameset::frameset(const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-frameset::frameset(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS frameset::frameset(const STDNS string& text, 
+			   const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-frameset::~frameset()
+CGICCNS frameset::frameset(const HTMLAttributeList& attributes, 
+			   const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS frameset::~frameset()
 {}
 
 // ============================================================
 // Class frame
 // ============================================================
-frame::frame() 
+CGICCNS frame::frame()
 {}
 
-frame::frame(const HTMLAttributeList& attributes)
-	: HTMLElement(&attributes)
+CGICCNS frame::frame(const HTMLAttributeList& attributes)
+  : HTMLElement(&attributes)
 {}
 
-frame::~frame()
+CGICCNS frame::~frame()
 {}
 
 // ============================================================
 // Class noframes
 // ============================================================
-noframes::noframes(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS noframes::noframes()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-noframes::noframes(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS noframes::noframes(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-noframes::noframes(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS noframes::noframes(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-noframes::noframes(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS noframes::noframes(const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-noframes::noframes(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS noframes::noframes(const STDNS string& text, 
+			   const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-noframes::~noframes()
+CGICCNS noframes::noframes(const HTMLAttributeList& attributes, 
+			   const HTMLSimpleElement& embed) 
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS noframes::~noframes()
 {}
 
 // ============================================================
 // Class iframe
 // ============================================================
-iframe::iframe(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS iframe::iframe()
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-iframe::iframe(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS iframe::iframe(const STDNS string& text)
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-iframe::iframe(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS iframe::iframe(const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-iframe::iframe(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS iframe::iframe(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-iframe::iframe(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS iframe::iframe(const STDNS string& text, 
+		       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-iframe::~iframe()
+CGICCNS iframe::iframe(const HTMLAttributeList& attributes, 
+		       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS iframe::~iframe()
 {}

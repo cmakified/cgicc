@@ -1,31 +1,35 @@
 /*
- *  $Id: CgiEnvironment.hh,v 1.7 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: CgiEnvironment.hh,v 1.8 1999/04/26 22:42:24 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef __CGI_ENVIRONMENT__
 #define __CGI_ENVIRONMENT__ 1
 
-#include "Exception.hh"
-#include "LinkedList.hh"
+#include <vector>
+#include <string>
+
 #include "CgiDefs.hh"
+#include "CgiException.hh"
+#include "CgiUtils.hh"
 #include "HTTPHeaders.hh"
 
+CGICC_BEGIN_NAMESPACE
 
 // ============================================================
 // Class CgiEnvironment
@@ -33,23 +37,19 @@
 /**
  * Encapsulates all the data passed from the server to the application.
  * <P>To read in the environment, simply instantiate an object of this type.
- * </P><P>The <TT>getXXX()</TT> methods in this class, with the exception of
- * <TT>getPostData()</TT>, will <EM>never</EM> return NULL.</P>
+ * </P>
  */
 class CgiEnvironment
 {
 public:
-
+  
   friend class Cgicc;
-
+  
   /**@name Constructors */
   //@{
   
-  /** 
-   * Read in the environment.
-   * @exception Exception
-   */
-  CgiEnvironment()	throw(Exception);
+  /** Read in the environment */
+  CgiEnvironment();
   
   /** Destructor */
   ~CgiEnvironment();
@@ -61,38 +61,48 @@ public:
   
   /**
    * Get the name and version of the http server software.
-   * An example of this is Netscape-FastTrack/2.01.
-   * @return The name of the server software, or ""
+   * An example of this is Apache/1.3.4.
+   * @return The name of the server software
    */
-  inline const char* getServerSoftware() const	{ return fServerSoftware; }
+  inline STDNS string 
+  getServerSoftware() 				const
+    { return fServerSoftware; }
   
   /**
    * Get the hostname, DNS name or IP address of the http server.
-   * This is <EM>not</EM> a URL, for example www.cs.hmc.edu.
-   * @return The name of the server, or ""
+   * This is <EM>not</EM> a URL, for example www.gnu.org.
+   * @return The name of the server
    */
-  inline const char* getServerName() const	{ return fServerName; }
+  inline STDNS string 
+  getServerName() 				const
+    { return fServerName; }
   
   /**
    * Get the name and version of the gateway interface.
    * This is usually CGI/1.1.
-   * @return The name and version of the gateway interface, or ""
+   * @return The name and version of the gateway interface
    */
-  inline const char* getGatewayInterface() const { return fGatewayInterface; }
+  inline STDNS string 
+  getGatewayInterface() 			const
+    { return fGatewayInterface;}
   
   /**
    * Get the name and revision of the protocol used for this request.
    * This is usually HTTP/1.0.
-   * @return The protocol in use, or ""
+   * @return The protocol in use
    */
-  inline const char* getServerProtocol() const	{ return fServerProtocol; }
+  inline STDNS string 
+  getServerProtocol() 				const
+    { return fServerProtocol; }
   
   /**
    * Get the port number on the server to which this request was sent.
    * This will usually be 80.
    * @return The port number
    */
-  inline long getServerPort() const		{ return fServerPort; }
+  inline unsigned long
+  getServerPort() 				const
+    { return fServerPort; }
   //@}
   
   
@@ -101,71 +111,88 @@ public:
   
   /**
    * Get the HTTP cookies associated with this query, if any.
-   * @return The HTTP cookies, or ""
+   * @return The HTTP cookies
    */
-  inline const char* getCookies() const	{ return fCookie; }
-
+  inline STDNS string 
+  getCookies() 					const
+    { return fCookie; }
+  
   /**
-   * Get a LinkedList containing the HTTP cookies associated with this query.
-   * @return A list containing the HTTP cookies associated with this query.
-   * @see LinkedList
+   * Get a vector containing the HTTP cookies associated with this query.
+   * @return A vector containing the HTTP cookies associated with this query.
    * @see HTTPCookie
    */
-  inline const LinkedList<HTTPCookie>* getCookieList() const 
-  { return fCookies; }
-
+  inline const STDNS vector<HTTPCookie>& 
+  getCookieList() 				const
+    { return fCookies; }
+  
   /**
    * Get the request method used for this query.
    * This is usually one of GET or POST.
-   * @return The request method, or ""
+   * @return The request method
    */
-  inline const char* getRequestMethod() const	{ return fRequestMethod; }
+  inline STDNS string 
+  getRequestMethod()   				const
+    { return fRequestMethod; }
   
   /**
    * Get the extra path information for this request, given by the client.
-   * @return The absolute path info, or ""
+   * @return The absolute path info
    */
-  inline const char* getPathInfo() const	{ return fPathInfo; }
+  inline STDNS string
+  getPathInfo() 				const
+    { return fPathInfo; }
   
   /**
    * Get the translated path information (virtual to physical mapping).
-   * @return The translated path info, or ""
+   * @return The translated path info
    */
-  inline const char* getPathTranslated() const	{ return fPathTranslated; }
+  inline STDNS string 
+  getPathTranslated() 				const
+    { return fPathTranslated; }
   
   /**
    * Get the path to this application, for self-referencing URLs.
-   * @return The name of this application, or ""
+   * @return The name of this application
    */
-  inline const char* getScriptName() const	{ return fScriptName; }
+  inline STDNS string 
+  getScriptName() 				const
+    { return fScriptName; }
   
   /**
    * Get string following the ? in the URL which called this application.
    * This is usually only valid for scripts called with the GET method.
-   * @return The query string, or ""
+   * @return The query string
    */
-  inline const char* getQueryString() const	{ return fQueryString; }
+  inline STDNS string 
+  getQueryString()  				const
+    { return fQueryString; }
   
   /**
    * Get the length of the data read from standard in, in chars.
    * @return The data length
    */
-  inline long getContentLength() const		{ return fContentLength; }
+  inline unsigned long 
+  getContentLength() 				const
+    { return fContentLength; }
   
   /**
    * Get the content type of the attached information.
    * For POST methods, this is usually application/x-www-form-urlencoded.
-   * @return The content type, or ""
+   * @return The content type
    */
-  inline const char* getContentType() const	{ return fContentType; }
+  inline STDNS string 
+  getContentType() 				const
+    { return fContentType; }
   
   /**
    * Get the data passed via standard input.
    * This data is of MIME type getContentType().
-   * If getContentLength() == 0, this will return NULL.
-   * @return The post data, or NULL if none
+   * @return The post data.
    */
-  inline const char* getPostData() const	{ return fPostData; }
+  inline STDNS string
+  getPostData() 				const
+    { return fPostData; }
   //@}
   
   /**@name Server-specific */
@@ -174,9 +201,11 @@ public:
   /**
    * Get the page which called this application.
    * Depending on the http server software, this may not be set.
-   * @return The URL which called this application, or "".
+   * @return The URL which called this application.
    */
-  inline const char* getReferrer() const 	{ return fReferrer; }
+  inline STDNS string 
+  getReferrer() 				const
+    { return fReferrer; }
   //@}
   
   /**@name Remote user information */
@@ -184,54 +213,68 @@ public:
   
   /**
    * Get the hostname making this request.
-   * @return The remote host, or ""
+   * @return The remote host
    */
-  inline const char* getRemoteHost() const	{ return fRemoteHost; }
+  inline STDNS string 
+  getRemoteHost() 				const
+    { return fRemoteHost; }
   
   /**
    * Get the IP address of the remote host making this request.
-   * @return The remote IP address, or ""
+   * @return The remote IP address
    */
-  inline const char* getRemoteAddr() const	{ return fRemoteAddr; }
+  inline STDNS string 
+  getRemoteAddr() 				const
+    { return fRemoteAddr; }
   
   /**
    * Get the protocol-specific user authentication method used.
    * This is only applicable if the server supports user authentication,
    * and the user has authenticated.
-   * @return The authorization type, or ""
+   * @return The authorization type
    */
-  inline const char* getAuthType() const	{ return fAuthType; }
+  inline STDNS string 
+  getAuthType() 				const
+    { return fAuthType; }
   
   /**
    * Get the authenticated remote user name.
    * This is only applicable if the server supports user authentication,
    * and the user has authenticated.
-   * @return The remote username , or ""
+   * @return The remote username 
    */
-  inline const char* getRemoteUser() const	{ return fRemoteUser; }
+  inline STDNS string 
+  getRemoteUser() 				const
+    { return fRemoteUser; }
   
   /**
    * Get the remote user name retrieved from the server.
    * This is only applicable if the server supports RFC 931 
    * identification.  This variable should <EM>only</EM> be used
    * for logging.
-   * @return The remote identification, or ""
+   * @return The remote identification
    */
-  inline const char* getRemoteIdent() const	{ return fRemoteIdent; }
+  inline STDNS string 
+  getRemoteIdent()    				const
+    { return fRemoteIdent; }
   
   /**
    * Get the MIME data types accepted by the client's browser.
    * For example image/gif, image/x-xbitmap, image/jpeg, image/pjpeg.
-   * @return The accepted data types, or ""
+   * @return The accepted data types
    */
-  inline const char* getAccept() const		{ return fAccept; }
+  inline STDNS string 
+  getAccept() 					const
+    { return fAccept; }
   
   /**
    * Get the name of the browser used for this CGI request.
    * For example Mozilla/4.01 [en] (WinNT; U).
-   * @return The browser name, or ""
+   * @return The browser name
    */
-  inline const char* getUserAgent() const	{ return fUserAgent; }
+  inline STDNS string 
+  getUserAgent() 				const
+    { return fUserAgent; }
   //@}
   
   /**@name ErrorDocument handling */
@@ -241,78 +284,88 @@ public:
    * Get the redirect request.
    * This will only be valid if you are using this script as a script
    * to use in place of the default server messages.
-   * @return The redirect request, or "".
+   * @return The redirect request.
    */
-  inline const char* getRedirectRequest() const { return fRedirectRequest; }
+  inline STDNS string 
+  getRedirectRequest() 				const
+    { return fRedirectRequest; }
   
   /**
    * Get the redirect URL.
    * This will only be valid if you are using this script as a script
    * to use in place of the default server messages.
-   * @return The redirect URL, or "".
+   * @return The redirect URL.
    * @see \URL{http://hoohoo.ncsa.uiuc.edu/docs/setup/srm/ErrorDocument.html}
    */
-  inline const char* getRedirectURL() const 	{ return fRedirectURL; }
+  inline STDNS string 
+  getRedirectURL() 				const
+    { return fRedirectURL; }
   
   /**
    * Get the redirect status.
    * This will only be valid if you are using this script as a script
    * to use in place of the default server messages.
-   * @return The redirect status, or "".
+   * @return The redirect status.
    */
-  inline const char* getRedirectStatus() const 	{ return fRedirectStatus; }
+  inline STDNS string 
+  getRedirectStatus() 				const
+    { return fRedirectStatus; }
   //@}
-
+  
 protected:
   
-  void save(const char *filename) const 	throw(Exception);
-  void restore(const char *filename)		throw(Exception);
+  // Implementation of save
+  void 
+  save(const STDNS string& filename) 		const;
+  
+  // Implementation of restore
+  void 
+  restore(const STDNS string& filename);
   
 private:
+  
+  // Parse the list of cookies from a string to a vector
+  void 
+  parseCookies();
 
-  void parseCookies();
-  void parseCookie(const char *data, int dataLen);
+  // Parse a single cookie string (name=value) pair
+  void
+  parseCookie(const STDNS string& data);
   
-  /* Write a string to an ostream */
-  inline void writeString(ostream& out, const char *s) const
-  { out << strlen(s) << ' ' << s; }
+  // Read in all the environment variables
+  void 
+  readEnvironmentVariables();
   
-  /* Read a string from an istream */
-  void readString(istream& in, char* &s);
-  
-  /* Read in all the environment variables */
-  void readEnvironmentVariables() throw(Exception);
-  
-  /* reclaim storage */
-  void reclaimStorage();
-  
-  long 		fServerPort;
-  long 		fContentLength;
-  char 		*fServerSoftware;
-  char 		*fServerName;
-  char 		*fGatewayInterface;
-  char 		*fServerProtocol;
-  char 		*fRequestMethod;
-  char 		*fPathInfo;
-  char 		*fPathTranslated;
-  char 		*fScriptName;
-  char 		*fQueryString;
-  char 		*fRemoteHost;
-  char 		*fRemoteAddr;
-  char 		*fAuthType;
-  char 		*fRemoteUser;
-  char 		*fRemoteIdent;
-  char 		*fContentType;
-  char 		*fAccept;
-  char 		*fUserAgent;
-  char		*fPostData;
-  char		*fRedirectRequest;
-  char		*fRedirectURL;
-  char		*fRedirectStatus;
-  char		*fReferrer;
-  char		*fCookie;
-
-  LinkedList<HTTPCookie> *fCookies;
+  unsigned long 		fServerPort;
+  unsigned long 		fContentLength;
+  STDNS string 			fServerSoftware;
+  STDNS string 			fServerName;
+  STDNS string 			fGatewayInterface;
+  STDNS string 			fServerProtocol;
+  STDNS string 			fRequestMethod;
+  STDNS string 			fPathInfo;
+  STDNS string 			fPathTranslated;
+  STDNS string 			fScriptName;
+  STDNS string 			fQueryString;
+  STDNS string 			fRemoteHost;
+  STDNS string 			fRemoteAddr;
+  STDNS string 			fAuthType;
+  STDNS string 			fRemoteUser;
+  STDNS string 			fRemoteIdent;
+  STDNS string 			fContentType;
+  STDNS string 			fAccept;
+  STDNS string 			fUserAgent;
+  STDNS string 			fPostData;
+  STDNS string 			fRedirectRequest;
+  STDNS string 			fRedirectURL;
+  STDNS string 			fRedirectStatus;
+  STDNS string 			fReferrer;
+  STDNS string 			fCookie;
+  STDNS vector<HTTPCookie> 	fCookies;
 };
 
+CGICC_END_NAMESPACE
+
 #endif
+
+//EOF

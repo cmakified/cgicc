@@ -1,134 +1,132 @@
 /*
- *  $Id: HTMLAttributes.cc,v 1.5 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: HTMLAttributes.cc,v 1.6 1999/04/26 22:42:28 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #include "HTMLAttributes.hh"
+#include "CgiUtils.hh"
 
 // ============================================================
 // Class HTMLAttribute
 // ============================================================
-HTMLAttribute::HTMLAttribute() 
-  : fName(NULL), fValue(NULL)
+CGICCNS HTMLAttribute::HTMLAttribute()
 {}
 
-HTMLAttribute::HTMLAttribute(const char *name, 
-			     const char *value) throw(Exception)
-			       : fName(NULL), fValue(NULL)
+CGICCNS HTMLAttribute::HTMLAttribute(const STDNS string& name, 
+				     const STDNS string& value)
+  : fName(name), 
+    fValue(value)
+{}
+
+CGICCNS HTMLAttribute::HTMLAttribute(const HTMLAttribute& attribute)
+  : fName(attribute.fName), 
+    fValue(attribute.fValue)
+{}
+
+CGICCNS HTMLAttribute::~HTMLAttribute()
+{}
+
+bool
+CGICCNS HTMLAttribute::operator== (const HTMLAttribute& att) 	const
 {
-  if(name != NULL)
-    setName(name);
-  if(value != NULL)
-    setValue(value);
+  return (stringsAreEqual(fName, att.fName) 
+	  && stringsAreEqual(fValue, att.fValue));
 }
 
-HTMLAttribute::HTMLAttribute(const HTMLAttribute& attribute)
-  : fName(NULL), fValue(NULL)
+CGICCNS HTMLAttribute& 
+CGICCNS HTMLAttribute::operator= (const HTMLAttribute& att) 
 {
-  if(attribute.getName() != NULL)
-    setName(attribute.getName());
-  if(attribute.getValue() != NULL)
-    setValue(attribute.getValue());
-}
+  fName 	= att.fName;
+  fValue 	= att.fValue;
 
-HTMLAttribute::~HTMLAttribute() {
-  delete [] fName;
-  delete [] fValue;
-}
-
-void
-HTMLAttribute::setName(const char *name) throw (Exception) {
-  delete [] fName;
-  fName = new char [ strlen(name) + 1];
-  if(fName == NULL)
-    throw Exception("new failed", ERRINFO);
-  strcpy(fName, name);
-}
-
-void
-HTMLAttribute::setValue(const char *value) throw (Exception) {
-  delete [] fValue;
-  fValue = new char [ strlen(value) + 1];
-  if(fValue == NULL)
-    throw Exception("new failed", ERRINFO);  
-  strcpy(fValue, value);
+  return *this;
 }
 
 void 
-HTMLAttribute::render(ostream& out) const {
+CGICCNS HTMLAttribute::render(STDNS ostream& out) 		const
+{
   out << getName() << "=\"" << getValue() << "\"";
 }
 
 // ============================================================
 // Class HTMLAtomicAttribute
 // ============================================================
-HTMLAtomicAttribute::HTMLAtomicAttribute()
+CGICCNS HTMLAtomicAttribute::HTMLAtomicAttribute()
 {}
 
-HTMLAtomicAttribute::HTMLAtomicAttribute(const char *name) throw(Exception)
-  : HTMLAttribute(name, NULL)
+CGICCNS HTMLAtomicAttribute::HTMLAtomicAttribute(const STDNS string& name) 
+  : HTMLAttribute(name, "")
 {}
 
-HTMLAtomicAttribute::HTMLAtomicAttribute(const HTMLAtomicAttribute& attribute)
+CGICCNS HTMLAtomicAttribute::HTMLAtomicAttribute(const HTMLAtomicAttribute& attribute)
   : HTMLAttribute(attribute)
 {}
 
-HTMLAtomicAttribute::~HTMLAtomicAttribute()
+CGICCNS HTMLAtomicAttribute::~HTMLAtomicAttribute()
 {}
 
 void 
-HTMLAtomicAttribute::render(ostream& out) const {
+CGICCNS HTMLAtomicAttribute::render(STDNS ostream& out) 	const
+{
   out << getName();
 }
 
 // ============================================================
 // Class HTMLAttributeList
 // ============================================================
-HTMLAttributeList::HTMLAttributeList() 
-{}
-
-HTMLAttributeList::HTMLAttributeList(const HTMLAttribute& head) {
-  append(head);
+CGICCNS HTMLAttributeList::HTMLAttributeList()
+{
+  fAttributes.reserve(5);
 }
 
-HTMLAttributeList::HTMLAttributeList(const HTMLAttributeList& list)
-  : LinkedList(list)
+CGICCNS HTMLAttributeList::HTMLAttributeList(const HTMLAttribute& head) 
+{
+  fAttributes.reserve(5);
+  fAttributes.push_back(head);
+}
+
+CGICCNS HTMLAttributeList::HTMLAttributeList(const HTMLAttributeList& list)
+  : fAttributes(list.fAttributes)
 {}
 
-HTMLAttributeList::~HTMLAttributeList()
+CGICCNS HTMLAttributeList::~HTMLAttributeList()
 {}
 
-HTMLAttributeList&
-HTMLAttributeList::add(const char *name, const char *value) throw(Exception) { 
-  if(name != NULL && value != NULL)
-    append(HTMLAttribute(name, value));
-  else if(name != NULL && value == NULL)
-    append(HTMLAtomicAttribute(name));
+CGICCNS HTMLAttributeList&
+CGICCNS HTMLAttributeList::add(const STDNS string& name)
+{ 
+  fAttributes.push_back(HTMLAtomicAttribute(name));
   return *this;
 }
 
-// ============================================================
-// List manipulators
-// ============================================================
-HTMLAttributeList
-add(const char *name, 
-    const char *value) throw(Exception) 
-{
-  return HTMLAttributeList(HTMLAttribute(name, value));
+CGICCNS HTMLAttributeList&
+CGICCNS HTMLAttributeList::add(const STDNS string& name, 
+			       const STDNS string& value)
+{ 
+  fAttributes.push_back(HTMLAttribute(name, value));
+  return *this;
 }
 
+void 
+CGICCNS HTMLAttributeList::render(STDNS ostream& out) 	const
+{
+  STDNS vector<HTMLAttribute>::const_iterator iter;
+  for(iter = fAttributes.begin(); iter != fAttributes.end(); ++iter) {
+    out << *iter << ' ';
+  }
+}

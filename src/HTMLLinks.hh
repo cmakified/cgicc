@@ -1,42 +1,50 @@
 /*
- *  $Id: HTMLLinks.hh,v 1.5 1998/12/09 00:48:57 sbooth Exp $
+ *  $Id: HTMLLinks.hh,v 1.6 1999/04/26 22:42:30 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef __HTML_LINKS__
 #define __HTML_LINKS__ 1
 
+#include <string>
+
 #include "HTMLElements.hh"
+
+CGICC_BEGIN_NAMESPACE
 
 // ============================================================
 // Class a
 // ============================================================
 /** The A element */
-class a : public HTMLBooleanElement {
+class a : public HTMLBooleanElement 
+{
 public:
   /**@name Constructors */
   //@{
-  
+
+  /** Create a new, empty element. */
+  a();  
+
   /**
-   * Create a new element, optionally specifying the enclosed text.
+   * Create a new element, specifying the enclosed text.
    * @param text The text within the element.
    */
-  a(const char *text = NULL);
+  a(const STDNS string& text);
   
   /**
    * Create a new element, specifying the HTMLAttributes.
@@ -55,7 +63,7 @@ public:
    * @param attributes The HTMLAttributes contained within the element.
    * @param text The text within the element.
    */
-  a(const char *text, 
+  a(const STDNS string& text, 
     const HTMLAttributeList& attributes);
   
   /**
@@ -70,52 +78,47 @@ public:
   virtual ~a();
   //@}
   
-  virtual inline const char* getName() const { return "A"; }
-  
-  virtual void swapState() const	{ sState = ! sState; }
-  virtual bool getState() const 	{ return sState; }
+  virtual inline STDNS string 	getName()	const	{ return "A"; }
+  virtual inline void 		swapState() 	const 	{ sState = ! sState; }
+  virtual inline bool 		getState() 	const 	{ return sState; }
+  static inline void 		reset() 		{ sState = false; }
 
-  /**@name State functions */
-  //@{
-
-  /** Reset the element to the initial (off) state */
-  static void reset() 			{ sState = false; }
-  //@}
-  
 private:
   static bool sState;
 };
 
 // ============================================================
-// Class link_
+// Class link
 // ============================================================
 /** The LINK element */
-class link_ : public HTMLElement {
+class link : public HTMLElement 
+{
 public:
   /**@name Constructors */
   //@{
   
   /** Create a new empty element. */
-  link_();
+  link();
   
   /**
    * Create a new element, specifying the HTMLAttributes.
    * @param attributes The HTMLAttributes contained within the element.
    */
-  link_(const HTMLAttributeList& attributes);
+  link(const HTMLAttributeList& attributes);
   
   /** Destructor */
-  virtual ~link_();
+  virtual ~link();
   //@}
   
-  virtual inline const char* getName() const { return "LINK"; }
+  virtual inline STDNS string 	getName() 	const 	{ return "LINK"; }
 };
 
 // ============================================================
 // Class base
 // ============================================================
 /** The BASE element */
-class base : public HTMLElement {
+class base : public HTMLElement 
+{
 public:
   /**@name Constructors */
   //@{
@@ -133,7 +136,9 @@ public:
   virtual ~base();
   //@}
   
-  virtual inline const char* getName() const { return "BASE"; }
+  virtual inline STDNS string 	getName() 	const 	{ return "BASE"; }
 };
+
+CGICC_END_NAMESPACE
 
 #endif

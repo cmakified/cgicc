@@ -1,20 +1,20 @@
 /*
- *  $Id: HTMLLists.cc,v 1.5 1998/12/09 00:48:39 sbooth Exp $
+ *  $Id: HTMLLists.cc,v 1.6 1999/04/26 22:42:30 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -23,165 +23,201 @@
 // ============================================================
 // Statics
 // ============================================================
-bool ul::sState = false;
-bool ol::sState = false;
-bool li::sState = false;
-bool dl_::sState = false;
-bool dt::sState = false;
-bool dd::sState = false;
+bool CGICCNS ul::sState = false;
+bool CGICCNS ol::sState = false;
+bool CGICCNS li::sState = false;
+bool CGICCNS dl::sState = false;
+bool CGICCNS dt::sState = false;
+bool CGICCNS dd::sState = false;
 
 // ============================================================
 // Class ul
 // ============================================================
-ul::ul(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS ul::ul() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-ul::ul(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS ul::ul(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-ul::ul(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS ul::ul(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-ul::ul(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS ul::ul(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-ul::ul(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS ul::ul(const STDNS string& text, 
+	       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-ul::~ul()
+CGICCNS ul::ul(const HTMLAttributeList& attributes, 
+	       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS ul::~ul()
 {}
 
 // ============================================================
 // Class ol
 // ============================================================
-ol::ol(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS ol::ol() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-ol::ol(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS ol::ol(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-ol::ol(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS ol::ol(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-ol::ol(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS ol::ol(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-ol::ol(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS ol::ol(const STDNS string& text, 
+	       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-ol::~ol()
+CGICCNS ol::ol(const HTMLAttributeList& attributes, 
+	       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS ol::~ol()
 {}
 
 // ============================================================
 // Class li
 // ============================================================
-li::li(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS li::li() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-li::li(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS li::li(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-li::li(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS li::li(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-li::li(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS li::li(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-li::li(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS li::li(const STDNS string& text, 
+	       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-li::~li()
+CGICCNS li::li(const HTMLAttributeList& attributes, 
+	       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS li::~li()
 {}
 
 // ============================================================
-// Class dl_
+// Class dl
 // ============================================================
-dl_::dl_(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS dl::dl() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-dl_::dl_(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS dl::dl(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-dl_::dl_(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS dl::dl(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-dl_::dl_(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS dl::dl(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-dl_::dl_(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS dl::dl(const STDNS string& text, 
+	       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-dl_::~dl_()
+CGICCNS dl::dl(const HTMLAttributeList& attributes, 
+	       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS dl::~dl()
 {}
 
 // ============================================================
 // Class dt
 // ============================================================
-dt::dt(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS dt::dt() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-dt::dt(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS dt::dt(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-dt::dt(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS dt::dt(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-dt::dt(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS dt::dt(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-dt::dt(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS dt::dt(const STDNS string& text, 
+	       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-dt::~dt()
+CGICCNS dt::dt(const HTMLAttributeList& attributes, 
+	       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS dt::~dt()
 {}
 
 // ============================================================
 // Class dd
 // ============================================================
-dd::dd(const char *text) 
-	: HTMLBooleanElement(text, NULL, NULL)
+CGICCNS dd::dd() 
+  : HTMLBooleanElement("", 0, 0, false)
 {}
 
-dd::dd(const HTMLAttributeList& attributes)
-	: HTMLBooleanElement(NULL, &attributes, NULL)
+CGICCNS dd::dd(const STDNS string& text) 
+  : HTMLBooleanElement(text, 0, 0, true)
 {}
 
-dd::dd(const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, NULL, &embed)
+CGICCNS dd::dd(const HTMLAttributeList& attributes)
+  : HTMLBooleanElement("", &attributes, 0, false)
 {}
 
-dd::dd(const char *text, const HTMLAttributeList& attributes) 
-	: HTMLBooleanElement(text, &attributes, NULL)
+CGICCNS dd::dd(const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", 0, &embed, false)
 {}
 
-dd::dd(const HTMLAttributeList& attributes, const HTMLSimpleElement& embed)
-	: HTMLBooleanElement(NULL, &attributes, &embed)
+CGICCNS dd::dd(const STDNS string& text, 
+	       const HTMLAttributeList& attributes) 
+  : HTMLBooleanElement(text, &attributes, 0, true)
 {}
 
-dd::~dd()
+CGICCNS dd::dd(const HTMLAttributeList& attributes, 
+	       const HTMLSimpleElement& embed)
+  : HTMLBooleanElement("", &attributes, &embed, false)
+{}
+
+CGICCNS dd::~dd()
 {}
