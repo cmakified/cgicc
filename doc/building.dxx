@@ -1,4 +1,4 @@
-<!-- $Id: building.dxx,v 1.4 1998/04/06 11:03:41 sbooth Exp $ -->
+<!-- $Id: building.dxx,v 1.5 1998/04/06 11:04:21 sbooth Exp $ -->
 
 /**@name Building the Cgicc library
 
@@ -14,7 +14,6 @@ Scroll down through <TT>Makefile</TT> until you see the following lines:
 ##  would like the compiled executable to be saved.  This will usually
 ##  be $(HOME)/public_html/cgi-bin.  
 ##  If $(HOME) is not defined, be sure and supply the ABSOLUTE path.
-
 CGIDIR=         $(HOME)/public_html/cgi-bin
 
 ## If you are using a compiler other than GNU's C++ compiler (g++),
