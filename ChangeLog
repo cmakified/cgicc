@@ -1,3 +1,11 @@
+2000-10-16  Stephen F. Booth  <sbooth@gnu.org>
+
+	* demo/upload.html: New file upload demo
+	* demo/upload.cpp: New file upload demo
+	* demo/Makefile.am: Added file upload demo
+	* demo/testform.html: Removed file upload support
+	* demo/test.cpp: Removed file upload support
+
 2000-10-15  Stephen F. Booth  <sbooth@gnu.org>
 
 	* example/yourSource.cpp: Changed instances of 'Cgicc' to 'cgicc'
