@@ -10,8 +10,8 @@ Web. Cgicc performs the following functions:
    multiple-choice retrieval methods for form data.
  - Provides methods for saving and restoring CGI environments to aid
    in application debugging.
- - Provides full on-the-fly HTML generation capabilities, with support
-   for cookies and file inclusion.
+ - Provides full on-the-fly HTML 4.0 generation capabilities, with support
+   for cookies.
  - Supports HTTP file upload. 
 
 Please send bug reports, suggestions, and comments to
