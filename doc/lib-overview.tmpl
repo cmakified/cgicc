@@ -1,6 +1,6 @@
 /* -*-html-*- */
 /*
- *  $Id: lib-overview.tmpl,v 1.6 2003/07/17 05:14:39 sbooth Exp $
+ *  $Id: lib-overview.tmpl,v 1.7 2004/06/12 01:58:25 sbooth Exp $
  *
  *  Copyright (C) 2001 - 2002 Stephen F. Booth
  *
@@ -15,7 +15,8 @@
 
 /*! \page lib_overview Library Overview
 
-The GNU %cgicc library contains classes divided into two broad groups:
+The GNU %cgicc library contains classes divided into two broad groups, CGI
+classes and response generation classes.
 
 \htmlonly
 <div class="header">CGI classes</div>
@@ -64,11 +65,11 @@ of any type. The response generation classes are subdivided into two
 groups:
 
 <ol>
-<li><em>HTTP header classes</em><br />
+<li><em>HTTP header classes</em><br>
 HTTP header classes are used to indicate to the client information on
 the data being returned as a result of the CGI request.  For example,
 standard HTTP headers indicate the type, size, and modification date of
-the transmitted data.<br />
+the transmitted data.<br>
 
 An \c cgicc::HTTPCookie is a name/value pair used to store a piece of
 information about the caller using the caller's own machine.  Cookies
@@ -97,7 +98,7 @@ for data of MIME type \c text/plain.
 class used to construct a full HTTP response.
 </li>
 
-<li><em>HTML generation classes</em><br />
+<li><em>HTML generation classes</em><br>
 HTML generation classes are used to generate an HTML response
 following any HTTP headers.  To be compliant with the HTML 4.0 standard,
 the response must consist of three parts (For a complete
@@ -113,7 +114,7 @@ The %cgicc library provides one class for each HTML element defined in
 the HTML 4.0 specification.  In all cases, the name of the class
 corresponds to the name of the HTML element.  %cgicc tries to produce
 SGML (and therefore XML) compliant output- thus, atomic elements such
-as \c br as rendered as \c \<br /\>.
+as \c br as rendered as \c \<br>.
 
 There are two special HTML classes defined by %cgicc:
 

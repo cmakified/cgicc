@@ -1,17 +1,15 @@
-/* $Id: cgicc-doc.css,v 1.3 2004/06/12 00:25:11 sbooth Exp $ */
+/* $Id: cgicc-doc.css,v 1.4 2004/06/12 01:58:25 sbooth Exp $ */
 
 body { 
 	color: black; 
 	background: white; 
 }
 
-a:link 		{ color: #1f00ff }
-a:visited 	{ color: #9900dd }
-a:active 	{ color: #ff0000 }
-a:hover 	{ background-color: #eeeeee }
+a	{ text-decoration: none; }
+a:hover { text-decoration: underline; }
 
 div.unix { 
-	width: 80%; 
+	width: 100%; 
 	border: none; 
 	color: #006600; 
 	background-color: #eeeeee;
@@ -29,21 +27,21 @@ div.notice {
 	border: solid thin; 
 	margin: 1em 0; 
 	padding: 1em;
-	background: #ddd;
+	background-color: #ddd;
 }
 
 div.header { 
-	width: 95%;
+	width: 100%;
+	border: solid thin;
+	background-color: #ddd;
 	margin-left: auto;
 	margin-right: auto;
-	border: solid thin; 
-	background: #ddd;
 	text-align: center;
 	font-size: larger;
 }
 
 div.footer {
-	width: 95%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: smaller;
@@ -51,7 +49,7 @@ div.footer {
 }
 
 div.nav {
-	width: 95%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	border: solid thin; 
@@ -62,14 +60,9 @@ div.nav {
 }
 
 div.subsection {
-	width: 90%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-hr.half { 
-	width: 60%; 
-	background-color: #ff0000;
-	margin-left: auto;
-	margin-right: auto;
-}
+div.nav > a:hover { background-color: #aaffaa; }
