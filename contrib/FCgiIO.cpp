@@ -1,8 +1,8 @@
 /*
- *  $Id: FCgiIO.cpp,v 1.4 2003/07/17 03:37:50 sbooth Exp $
+ *  $Id: FCgiIO.cpp,v 1.5 2004/06/09 14:37:12 sbooth Exp $
  *
  *  Copyright (C) 2002 Steve McAndrewSmith
- *  Copyright (C) 2002 - 2003 Stephen F. Booth
+ *  Copyright (C) 2002 - 2004 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@
 
 #include "FCgiIO.h"
 
-CGICCNS FCgiIO::FCgiIO(FCGX_Request& request)
+cgicc::FCgiIO::FCgiIO(FCGX_Request& request)
   : std::ostream(&fOutBuf),
 	 fRequest(request), 
 	 fOutBuf(request.out), 
@@ -49,7 +49,7 @@ CGICCNS FCgiIO::FCgiIO(FCGX_Request& request)
   }
 }
 
-CGICCNS FCgiIO::FCgiIO(const FCgiIO& io)
+cgicc::FCgiIO::FCgiIO(const FCgiIO& io)
   : CgiInput(io),
     std::ostream(&fOutBuf),
 	 fRequest(io.fRequest), 

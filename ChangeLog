@@ -1,3 +1,7 @@
+2004-06-09  Stephen F. Booth  <sbooth@gnu.org>
+
+	* contrib/FCgiIO.cpp: Removed (amazingly obsolete) refs to CGICCNS
+
 2003-07-13  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/CgiUtils.{h,cpp}: Changed escapeString to form_urldecode
