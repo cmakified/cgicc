@@ -1,7 +1,7 @@
 /*
- *  $Id: dns.cpp,v 1.20 2004/06/28 00:25:30 sbooth Exp $
+ *  $Id: dns.cpp,v 1.21 2004/06/29 04:23:36 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,6 +55,8 @@
 #  include <netdb.h>
 #endif /* WIN32 */
 
+#include "styles.h"
+
 using namespace std;
 using namespace cgicc;
 
@@ -82,16 +84,7 @@ main(int /*argc*/,
 
     // Output the style sheet portion of the header
     cout << style() << comment() << endl;
-    cout << "body { color: black; background-color: white; }" << endl;
-    cout << "hr.half { width: 60%; align: center; }" << endl;
-    cout << "span.red, strong.red { color: red; }" << endl;
-    cout << "div.smaller { font-size: small; }" << endl;
-    cout << "div.dns { border: solid thin; margin: 1em 0; "
-	 << "background: #ddd; text-align: center; }" << endl;
-    cout << "span.blue { color: blue; }" << endl;
-    cout << "col.title { color: white; background-color: black; ";
-    cout << "font-weight: bold; text-align: center; }" << endl;
-    cout << "col.data { background-color: #ddd; text-align: left; }" << endl;
+    cout << styles;
     cout << comment() << style() << endl;
 
     cout << title("DNS Gateway") << endl;
@@ -111,7 +104,7 @@ main(int /*argc*/,
       char **p;
       
       if((int)(addr = inet_addr((**ip).c_str())) == -1) {
-	cout << cgicc::div().set("class", "dns") << endl
+	cout << cgicc::div().set("class", "notice") << endl
 	     << strong(span("ERROR").set("class","red"))
 	     << " - IP address must be of the form x.x.x.x"
 	     << endl << cgicc::div() << endl;
@@ -119,7 +112,7 @@ main(int /*argc*/,
       else {
 	hp = gethostbyaddr((char*)&addr, sizeof (addr), AF_INET);
 	if(hp == NULL) {
-	  cout << cgicc::div().set("class", "dns") << endl
+	  cout << cgicc::div().set("class", "notice") << endl
 	       << strong(span("ERROR").set("class","red")) 
 	       << " - Host information for " << em((**ip)) << " not found."
 	       << endl << cgicc::div() << endl;
@@ -131,7 +124,7 @@ main(int /*argc*/,
 	    
 	    (void) memcpy(&in.s_addr, *p, sizeof(in.s_addr));
 	    
-	    cout << cgicc::div().set("class", "dns") << endl
+	    cout << cgicc::div().set("class", "notice") << endl
 		 << span(inet_ntoa(in)).set("class","blue") 
 		 << " - " << ' ' << hp->h_name;
 	    //for(q = hp->h_aliases; *q != 0; q++)
@@ -151,7 +144,7 @@ main(int /*argc*/,
       
       hp = gethostbyname((**name).c_str());
       if(hp == NULL) {
-	cout << cgicc::div().set("class", "dns") << endl
+	cout << cgicc::div().set("class", "notice") << endl
 	     << strong(span("ERROR").set("class","red"))
 	     << " - Host information for " << em(**name) << " not found."
 	     << endl << cgicc::div() << endl;
@@ -163,7 +156,7 @@ main(int /*argc*/,
 	  
 	  (void) memcpy(&in.s_addr, *p, sizeof(in.s_addr));
 	  
-	  cout << cgicc::div().set("class", "dns") << endl
+	  cout << cgicc::div().set("class", "notice") << endl
 	       << inet_ntoa(in) << " - " << ' ' 
 	       << span(hp->h_name).set("class","blue");
 	  //	for(q = hp->h_aliases; *q != 0; q++)
@@ -175,43 +168,27 @@ main(int /*argc*/,
     
     cout << p("Please enter an IP address or a hostname.") << endl;
     
-    cout << table().set("border","0")
-		   .set("rules","none")
-		   .set("frame","void")
-		   .set("cellspacing","2").set("cellpadding","2") << endl;
-    cout << colgroup().set("span","2") << endl;
-    cout << col().set("align","center")
-		 .set("class","title")
-		 .set("span","1") << endl;
-    cout << col().set("align","left")
-		 .set("class","data")
-		 .set("span","1") << endl;
-    cout << colgroup() << endl;
+    cout << table() << endl;
     
-    cout << "<form method=\"post\" action=\"http://"
-	 << cgi.getEnvironment().getServerName();
-    if(cgi.getEnvironment().getServerPort() != 80)
-      cout << ":" << cgi.getEnvironment().getServerPort();
-    cout << cgi.getEnvironment().getScriptName() << "\">" << endl;
+    cout << "<form method=\"post\" action=\""
+	 << cgi.getEnvironment().getScriptName() << "\">" << endl;
     
     cout << tr() << endl;
-    cout << td(strong("IP Address: ")) << endl;
-    cout << td() << "<input type=\"text\" name=\"ip\"";
+    cout << td(strong("IP Address: ")).set("class", "title") << endl;
+    cout << td().set("class", "data") << "<input type=\"text\" name=\"ip\"";
     if(ip != (*cgi).end())
       cout << " value=\"" << **ip << "\">";
     else
       cout << ">";
     cout << td() << tr() << "</form>" << endl;
     
-    cout << "<form method=\"post\" action=\"http://"
-	 << cgi.getEnvironment().getServerName();
-    if(cgi.getEnvironment().getServerPort() != 80)
-      cout << ":" << cgi.getEnvironment().getServerPort();
-    cout << cgi.getEnvironment().getScriptName() << "\">" << endl;
+    cout << "<form method=\"post\" action=\""
+	 << cgi.getEnvironment().getScriptName() << "\">" << endl;
     
     cout << tr() << endl;
-    cout << td(strong("Hostname: ")) << endl;
-    cout << td() << "<input type=\"text\" name=\"hostname\"";
+    cout << td(strong("Hostname: ")).set("class", "title") << endl;
+    cout << td().set("class", "data") 
+	 << "<input type=\"text\" name=\"hostname\"";
     if(name != (*cgi).end())
       cout << " value=\"" << **name << "\">";
     else

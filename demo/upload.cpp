@@ -1,5 +1,5 @@
 /*
- *  $Id: upload.cpp,v 1.9 2004/06/28 06:40:09 sbooth Exp $
+ *  $Id: upload.cpp,v 1.10 2004/06/29 04:23:36 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -37,8 +37,6 @@
 #include "cgicc/HTTPHTMLHeader.h"
 #include "cgicc/HTMLClasses.h"
 
-#include "styles.h"
-
 #if HAVE_SYS_UTSNAME_H
 #  include <sys/utsname.h>
 #endif
@@ -46,6 +44,8 @@
 #if HAVE_SYS_TIME_H
 #  include <sys/time.h>
 #endif
+
+#include "styles.h"
 
 using namespace std;
 using namespace cgicc;
@@ -69,7 +69,9 @@ printForm(const Cgicc& cgi)
        << "<td class=\"form\">"
        << "<input type=\"checkbox\" name=\"redirect\" />"
        << "Bounce uploaded file back to browser"
-       << "</td></tr></table>" << endl;
+       << "</td></tr>" << endl;
+
+  cout << "</table>" << endl;
 
   cout << "<div class=\"center\"><p>"
        << "<input type=\"submit\" name=\"submit\" value=\"Send the file\" />"

@@ -1,5 +1,5 @@
 /*
- *  $Id: test.cpp,v 1.22 2004/06/28 00:25:31 sbooth Exp $
+ *  $Id: test.cpp,v 1.23 2004/06/29 04:23:36 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
@@ -44,6 +44,8 @@
 #  include <sys/time.h>
 #endif
 
+#include "styles.h"
+
 using namespace std;
 using namespace cgicc;
 
@@ -51,6 +53,116 @@ using namespace cgicc;
 void dumpEnvironment(const CgiEnvironment& env);
 void dumpList(const Cgicc& formData);
 void showForm(const Cgicc& formData);
+
+// Print the form for this CGI
+void
+printForm(const Cgicc& cgi)
+{
+  cout << "<form method=\"post\" action=\"" 
+       << cgi.getEnvironment().getScriptName() << "\">" << endl;
+    
+  cout << "<table>" << endl;
+
+  cout << "<tr><td class=\"title\">Your name</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"text\" name=\"name\" value=\"Uncle Bob\" />"
+       << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Your salary in millions<br />(80-120)</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"text\" name=\"bucks\" value=\"93\" />"
+       << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Hours you've wasted on the web</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"text\" name=\"time\" value=\"100\" />"
+       << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Your thoughts (on anything)</td>"
+       << "<td class=\"form\">"
+       << "<textarea name=\"thoughts\" rows=\"4\" cols=\"40\">"
+       << "I don't have any!</textarea>" << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Are you hungry?</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"checkbox\" name=\"hungry\" checked=\"checked\" />"
+       << "Yes</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Your favorite flavors of ice cream</td>"
+       << "<td class=\"form\">"
+       << "<select name=\"flavors\" multiple=\"multiple\">"
+       << "<option value=\"cookie dough\">Cookie Dough</option>"
+       << "<option value=\"rocky road\">Rocky Road</option>"
+       << "<option value=\"chocolate\">Chocolate</option>"
+       << "<option value=\"strawberry\">Strawberry</option>"
+       << "<option value=\"vanilla\">Vanilla</option>"
+       << "</select>" << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Your hair color</td>"
+       << "<td class=\"form\">"
+       << "<select name=\"hair\">"
+       << "<option value=\"blond\">Blond</option>"
+       << "<option value=\"brown\">Brown</option>"
+       << "<option value=\"red\">Red</option>"
+       << "<option value=\"black\">Black</option>"
+       << "<option value=\"white\">White</option>"
+       << "<option value=\"green\">Green</option>"
+       << "<option value=\"multicolored\">Multicolored</option>"
+       << "</select>" << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Your web browser</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"radio\" name=\"browser\" value=\"Konqueror\""
+       << " checked=\"checked\" />Konqeuror"
+       << "<input type=\"radio\" name=\"browser\" value=\"Lynx\" />Lynx"
+       << "<input type=\"radio\" name=\"browser\" value=\"Mozilla\" />Mozilla"
+       << "<input type=\"radio\" name=\"browser\" value=\"IE\" />IE"
+       << "<input type=\"radio\" name=\"browser\" value=\"Other\" />Other"
+       << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Your favorite authors</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"checkbox\" name=\"authors\" value=\"O'Brian\" />"
+       << "O'Brian"
+       << "<input type=\"checkbox\" name=\"authors\" value=\"Feynman\" />" 
+       << "Feynman"
+       << "<input type=\"checkbox\" name=\"authors\" value=\"Camus\" />Camus"
+       << "<input type=\"checkbox\" name=\"authors\" value=\"Conrad\" />Conrad"
+       << "<input type=\"checkbox\" name=\"authors\" value=\"Vergil\" />Vergil"
+       << "<input type=\"checkbox\" name=\"authors\" value=\"Plato\" />Plato"
+       << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">In the output, show</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"checkbox\" name=\"showEnv\" checked=\"checked\" />"
+       << "Data from CgiEnvironment<br />"
+       << "<input type=\"checkbox\" name=\"showFE\" checked=\"checked\" />"
+       << "All FormEntries<br />"
+       << "<input type=\"checkbox\" name=\"showForm\" checked=\"checked\" />"
+       << "Data from Cgicc"
+       << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Exception Handling</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"checkbox\" name=\"throw\" />"
+       << "Throw an exception to test error handling"
+       << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Save and Restore</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"checkbox\" name=\"save\" />"
+       <<" Save submission to a file<br />"
+       << "<input type=\"checkbox\" name=\"restore\" />"
+       << "Restore data from the last saved submission"
+       << "</td></tr>" << endl;
+
+  cout << "</table>" << endl;
+
+  cout << "<div class=\"center\"><p>"
+       << "<input type=\"submit\" name=\"submit\" value=\"Submit\" />"
+       << "<input type=\"reset\" value=\"Nevermind\" />"
+       << "</p></div></form>" << endl;
+}
 
 // Main Street, USA
 int
@@ -80,33 +192,10 @@ main(int /*argc*/,
 
     // Output the style sheet portion of the header
     cout << style() << comment() << endl;
-    cout << "body { color: black; background-color: white; }" << endl;
-    cout << "hr.half { width: 60%; align: center; }" << endl;
-    cout << "span.red, strong.red { color: red; }" << endl;
-    cout << "div.smaller { font-size: small; }" << endl;
-    cout << "div.notice { border: solid thin; padding: 1em; margin: 1em 0; "
-	 << "background: #ddd; }" << endl;
-    cout << "span.blue { color: blue; }" << endl;
-    cout << "col.title { color: white; background-color: black; ";
-    cout << "font-weight: bold; text-align: center; }" << endl;
-    cout << "col.data { background-color: #DDD; text-align: left; }" << endl;
-    cout << "td.data, tr.data { background-color: #ddd; text-align: left; }"
-	 << endl;
-    cout << "td.grayspecial { background-color: #ddd; text-align: left; }"
-	 << endl;
-    cout << "td.ltgray, tr.ltgray { background-color: #ddd; }" << endl;
-    cout << "td.dkgray, tr.dkgray { background-color: #bbb; }" << endl;
-    cout << "col.black, td.black, td.title, tr.title { color: white; " 
-	 << "background-color: black; font-weight: bold; text-align: center; }"
-	 << endl;
-    cout << "col.gray, td.gray { background-color: #ddd; text-align: center; }"
-	 << endl;
-    cout << "table.cgi { left-margin: auto; right-margin: auto; width: 90%; }"
-	 << endl;
-
+    cout << styles;
     cout << comment() << style() << endl;
 
-    cout << title() << "GNU cgicc v" << cgi.getVersion() << " Test Results" 
+    cout << title() << "GNU cgicc v" << cgi.getVersion() << " Test" 
 	 << title() << endl;
 
     cout << head() << endl;
@@ -115,7 +204,7 @@ main(int /*argc*/,
     cout << body() << endl;
 
     cout << h1() << "GNU cgi" << span("cc").set("class","red")
-	 << " v"<< cgi.getVersion() << " Test Results" << h1() << endl;
+	 << " v"<< cgi.getVersion() << " Test" << h1() << endl;
     
     // Get a pointer to the environment
     const CgiEnvironment& env = cgi.getEnvironment();
@@ -169,11 +258,10 @@ main(int /*argc*/,
     if(cgi.queryCheckbox("showForm"))
       showForm(cgi);
 
-    // Now print out a footer with some fun info
-    cout << p() << cgicc::div().set("align","center");
-    cout << a("Back to form").set("href", cgi.getEnvironment().getReferrer()) 
-	 << endl;
-    cout << cgicc::div() << br() << hr(set("class","half")) << endl;
+    // Print out the form to do it again
+    cout << br() << endl;
+    printForm(cgi);
+    cout << hr().set("class", "half") << endl;
     
     // Information on cgicc
     cout << cgicc::div().set("align","center").set("class","smaller") << endl;
@@ -276,15 +364,7 @@ dumpEnvironment(const CgiEnvironment& env)
   
   cout << cgicc::div().set("align","center") << endl;
   
-  cout << table().set("border","0").set("rules","none").set("frame","void")
-		 .set("cellspacing","2").set("cellpadding","2")
-		 .set("class","cgi") << endl;
-  cout << colgroup().set("span","2") << endl;
-  cout << col().set("align","center").set("class","title").set("span","1") 
-       << endl;
-  cout << col().set("align","left").set("class","data").set("span","1") 
-       << endl;
-  cout << colgroup() << endl;
+  cout << table() << endl;
   
   cout << tr() << td("Request Method").set("class","title") 
        << td(env.getRequestMethod()).set("class","data") << tr() << endl;
@@ -355,12 +435,7 @@ dumpList(const Cgicc& formData)
   
   cout << cgicc::div().set("align","center") << endl;
   
-  cout << table().set("border","0").set("rules","none").set("frame","void")
-		 .set("cellspacing","2").set("cellpadding","2")
-		 .set("class","cgi") << endl;
-  cout << colgroup().set("span","2") << endl;
-  cout << col().set("align","center").set("span","2") << endl;
-  cout << colgroup() << endl;
+  cout << table()<< endl;
   
   cout << tr().set("class","title") << td("Element Name") 
        << td("Element Value") << tr() << endl;
@@ -413,7 +488,7 @@ showForm(const Cgicc& formData)
   const_form_iterator thoughts = formData.getElement("thoughts");
   if(thoughts != (*formData).end() && ! (*thoughts).isEmpty()) {
     std::string temp = (*thoughts).getStrippedValue();
-    cout << "Your thoughts : " << temp << br() << endl;
+    cout << "Your thoughts: " << temp << br() << endl;
   }
   else
     cout << "You don't have any thoughts!?" << br() << endl;

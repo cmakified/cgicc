@@ -1,7 +1,7 @@
 /*
- *  $Id: cookie.cpp,v 1.6 2004/06/28 00:25:30 sbooth Exp $
+ *  $Id: cookie.cpp,v 1.7 2004/06/29 04:23:36 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -44,8 +44,37 @@
 #  include <sys/time.h>
 #endif
 
+#include "styles.h"
+
 using namespace std;
 using namespace cgicc;
+
+// Print the form for this CGI
+void
+printForm(const Cgicc& cgi)
+{
+  cout << "<form method=\"post\" action=\"" 
+       << cgi.getEnvironment().getScriptName() << "\">" << endl;
+    
+  cout << "<table>" << endl;
+
+  cout << "<tr><td class=\"title\">Cookie Name</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"text\" name=\"name\" />"
+       << "</td></tr>" << endl;
+
+  cout << "<tr><td class=\"title\">Cookie Value</td>"
+       << "<td class=\"form\">"
+       << "<input type=\"text\" name=\"value\" />"
+       << "</td></tr>" << endl;
+
+  cout << "</table>" << endl;
+
+  cout << "<div class=\"center\"><p>"
+       << "<input type=\"submit\" name=\"submit\" value=\"Set the cookie\" />"
+       << "<input type=\"reset\" value=\"Nevermind\" />"
+       << "</p></div></form>" << endl;
+}
 
 // Main Street, USA
 int
@@ -84,34 +113,11 @@ main(int /*argc*/,
 
     // Output the style sheet portion of the header
     cout << style() << comment() << endl;
-    cout << "body { color: black; background-color: white; }" << endl;
-    cout << "hr.half { width: 60%; align: center; }" << endl;
-    cout << "span.red, strong.red { color: red; }" << endl;
-    cout << "div.smaller { font-size: small; }" << endl;
-    cout << "div.notice { border: solid thin; padding: 1em; margin: 1em 0; "
-	 << "background: #ddd; }" << endl;
-    cout << "span.blue { color: blue; }" << endl;
-    cout << "col.title { color: white; background-color: black; ";
-    cout << "font-weight: bold; text-align: center; }" << endl;
-    cout << "col.data { background-color: #ddd; text-align: left; }" << endl;
-    cout << "td.data, TR.data { background-color: #ddd; text-align: left; }"
-	 << endl;
-    cout << "td.grayspecial { background-color: #ddd; text-align: left; }"
-	 << endl;
-    cout << "td.ltgray, tr.ltgray { background-color: #ddd; }" << endl;
-    cout << "td.dkgray, tr.dkgray { background-color: #bbb; }" << endl;
-    cout << "col.black, td.black, td.title, tr.title { color: white; " 
-	 << "background-color: black; font-weight: bold; text-align: center; }"
-	 << endl;
-    cout << "col.gray, td.gray { background-color: #ddd; text-align: center; }"
-	 << endl;
-    cout << "table.cgi { left-margin: auto; right-margin: auto; width: 90%; }"
-	 << endl;
-
+    cout << styles;
     cout << comment() << style() << endl;
 
     cout << title() << "GNU cgicc v" << cgi.getVersion() 
-	 << " HTTPCookie Results" << title() << endl;
+	 << " HTTPCookie" << title() << endl;
 
     cout << head() << endl;
     
@@ -145,15 +151,7 @@ main(int /*argc*/,
   
     cout << cgicc::div().set("align","center") << endl;
     
-    cout << table().set("border","0").set("rules","none").set("frame","void")
-      .set("cellspacing","2").set("cellpadding","2")
-      .set("class","cgi") << endl;
-    cout << colgroup().set("span","2") << endl;
-    cout << col().set("align","center").set("class","title").set("span","1") 
-	 << endl;
-    cout << col().set("align","left").set("class","data").set("span","1") 
-	 << endl;
-    cout << colgroup() << endl;
+    cout << table() << endl;
     
     cout << tr() << td("HTTPCookie").set("class","title")
 	 << td(env.getCookies()).set("class","data") << tr() << endl;
@@ -166,13 +164,8 @@ main(int /*argc*/,
   
     cout << cgicc::div().set("align","center") << endl;
   
-    cout << table().set("border","0").set("rules","none").set("frame","void")
-      .set("cellspacing","2").set("cellpadding","2")
-      .set("class","cgi") << endl;
-    cout << colgroup().set("span","2") << endl;
-    cout << col().set("align","center").set("span","2") << endl;
-    cout << colgroup() << endl;
-    
+    cout << table() << endl;
+
     cout << tr().set("class","title") << td("Cookie Name") 
 	 << td("Cookie Value") << tr() << endl;
     
@@ -187,11 +180,10 @@ main(int /*argc*/,
     cout << table() << cgicc::div() << endl;
     
 
-    // Now print out a footer with some fun info
-    cout << p() << cgicc::div().set("align","center");
-    cout << a("Back to form").set("href", cgi.getEnvironment().getReferrer()) 
-	 << endl;
-    cout << cgicc::div() << br() << hr(set("class","half")) << endl;
+    // Print out the form to do it again
+    cout << br() << endl;
+    printForm(cgi);
+    cout << hr().set("class", "half") << endl;
     
     // Information on cgicc
     cout << cgicc::div().set("align","center").set("class","smaller") << endl;

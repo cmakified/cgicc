@@ -1,3 +1,22 @@
+/*
+ *  $Id: styles.h,v 1.2 2004/06/29 04:23:36 sbooth Exp $
+ *
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 #ifndef _STYLES_H_
 #define _STYLES_H_ 1
 
@@ -8,50 +27,13 @@ const std::string styles =
 "span.red { color:red; }\n"
 "hr.half { width: 60%; margin-left: auto; margin-right: auto; }\n"
 "div.center { text-align: center; }\n"
-"div.notice { border: solid thin; padding: 1em; margin: 1em 0; background: #ddd; text-align: center; }"
+"div.notice { border: solid thin; padding: 1em; margin: 1em 0; "
+"background: #ddd; text-align: center; }"
 "table { width: 90%; margin-left: auto; margin-right: auto; }\n"
-"td.title { color: white; background: black; font-weight: bold; text-align: center; }\n"
-"td.data { background: #ddd; }\n"
+"tr.title, td.title { color: white; background: black; font-weight: bold; "
+"text-align: center; }\n"
+"tr.data, td.data { background: #ddd; }\n"
 "td.form { background: #ddd; text-align: center; }\n"
 ;
-
-/*
-body { color: black; background: white; }
-
-a:link { color: #1f00ff }
-a:visited { color: #9900dd }
-a:active { color: #ff0000 }
-a:hover { color: #ff0000 }
-
-hr.half { width: 60%; align: center; }
-    
-span.red, strong.red { color: red; } 
-span.green { color: green; }
-span.blue { color: blue; }
-
-p.legal { font-size: small }
-p.red { text-align: center; color: red; }
-p.center { text-align: center; }
-
-div.notice { border: solid thin; padding: 1em; margin: 1em 0; 
-  background: #ddd;}
-
-table.form { left-margin: auto; right-margin: auto; width: 90%; }
-
-col.black, td.black, td.title, tr.title { color: white;
-  background: black; font-weight: bold; text-align: center; }
-
-col.gray, td.gray { background: #DDD; text-align: center; }
-
-td.data, tr.data { background: #DDD; text-align: left; }
-td.grayspecial { background: #DDD; text-align: left; }
-td.ltgray, tr.ltgray { background: #DDD; }
-td.dkgray, tr.dkgray { background: #BBB; }
-
-div.center { text-align: center; }
-
-div.smaller { font-size: small; }
-
- */
 
 #endif /* _STYLES_H_ */
