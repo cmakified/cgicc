@@ -1,4 +1,4 @@
-/* $Id: Cgicc.cc,v 1.5 1998/04/06 11:13:33 sbooth Exp $ */
+/* $Id: Cgicc.cc,v 1.6 1998/09/18 17:47:42 sbooth Exp $ */
 
 #ifndef __CGICC__
 #include "Cgicc.hh"
@@ -280,7 +280,7 @@ Cgicc::parseFormInput(const char *data) throw(Exception)
     int dataLen = end - start;
     
     int extractedLen = 0;
-    while(extractedLen <= dataLen) {
+    while(extractedLen < dataLen) {
       int newLen;
       newLen = findBytes(data + start + extractedLen, 
 			 dataLen - extractedLen, 
@@ -297,7 +297,7 @@ Cgicc::parseFormInput(const char *data) throw(Exception)
     const char *sep = "&";
     
     int extractedLen = 0;
-    while(extractedLen <= dataLen) {
+    while(extractedLen < dataLen) {
       int newLen;
       newLen = findBytes(data + extractedLen, 
 			 dataLen - extractedLen, 
