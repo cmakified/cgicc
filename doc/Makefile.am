@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.15 2002/11/23 20:34:59 sbooth Exp $
+## $Id: Makefile.am,v 1.16 2003/07/17 05:14:39 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -8,12 +8,12 @@ docdir = $(prefix)/doc/$(PACKAGE)-$(VERSION)
 
 TEMPLATES = index.tmpl license.tmpl lists.tmpl bugs.tmpl demos.tmpl	\
 cgi-overview.tmpl tutorial.tmpl lib-overview.tmpl COPYING COPYING.LIB	\
-COPYING.DOC
+COPYING.DOC header.html footer.html cgicc-doc.css
 
 EXTRA_DIST = html
 
 IMAGES = cgicc.png
-SEDCMD1 = s!<title></title>!<title>GNU cgicc documentation version $(VERSION)</title>!g 
+SEDCMD1 = s/$$title/GNU cgicc documentation version $(VERSION)/g
 SEDCMD2 = s/$$(VERSION)/$(VERSION)/g
 
 all: html

@@ -1,5 +1,5 @@
 ## -*-sh-*-
-## $Id: Doxyfile.in,v 1.4 2002/12/04 17:04:07 sbooth Exp $
+## $Id: Doxyfile.in,v 1.5 2003/07/17 05:14:39 sbooth Exp $
 
 # Doxyfile 1.2.6
 
@@ -431,7 +431,8 @@ HTML_FOOTER            = footer.html
 # fine-tune the look of the HTML output. If the tag is left blank doxygen 
 # will generate a default style sheet 
 
-HTML_STYLESHEET        = cgicc-doc.css
+#HTML_STYLESHEET        = cgicc-doc.css
+HTML_STYLESHEET        =
 
 # If the HTML_ALIGN_MEMBERS tag is set to YES, the members of classes, 
 # files or namespaces will be aligned in HTML using tables. If set to 
@@ -467,7 +468,7 @@ TOC_EXPAND             = NO
 # top of each HTML page. The value NO (the default) enables the index and 
 # the value YES disables it. 
 
-DISABLE_INDEX          = NO
+DISABLE_INDEX          = YES
 
 # This tag can be used to set the number of enum values (range [1..20]) 
 # that doxygen will group on one line in the generated HTML documentation. 
