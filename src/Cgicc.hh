@@ -1,4 +1,4 @@
-/* $Id: Cgicc.hh,v 1.3 1998/04/02 11:09:25 sbooth Exp $ */
+/* $Id: Cgicc.hh,v 1.4 1998/04/02 20:09:32 sbooth Exp $ */
 
 #ifndef __CGICC__
 #define __CGICC__ 1
@@ -131,6 +131,13 @@ public:
    */
   bool getElementMultiple(const char *elementName,
 			  LinkedList<FormEntry>& result) const;
+  
+  /**
+   * Get all the submitted form elements.
+   * @return A LinkedList containing all the submitted elements.
+   */
+  inline const LinkedList<FormEntry>* getAllElements() const 
+  { return fFormData; }
   //@}  
 
   /**@name Searching for form entries */
@@ -177,7 +184,7 @@ public:
 		   bool 			byName,
 		   LinkedList<FormEntry>& 	result) const;
   //@}
-  
+
   /**@name Access to the current environment */
   //@{
   
