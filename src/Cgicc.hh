@@ -1,4 +1,4 @@
-/* $Id: Cgicc.hh,v 1.5 1998/04/03 09:47:04 sbooth Exp $ */
+/* $Id: Cgicc.hh,v 1.6 1998/04/06 10:01:07 sbooth Exp $ */
 
 #ifndef __CGICC__
 #define __CGICC__ 1
@@ -140,8 +140,8 @@ public:
    * Get all the submitted form elements.
    * @return A LinkedList containing all the submitted elements.
    */
-  inline const LinkedList<FormEntry>* operator* () const 
-  { return fFormData; }
+  inline const LinkedList<FormEntry>& operator* () const 
+  { return *fFormData; }
   
   /**
    * Get all the submitted form elements.
