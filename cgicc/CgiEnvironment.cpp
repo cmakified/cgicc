@@ -1,7 +1,7 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.8 2001/09/05 02:18:28 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.9 2002/02/20 03:25:50 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -29,8 +29,9 @@
 #include <cctype>
 
 #ifdef WIN32
-#include <io.h>
-#include <fcntl.h>
+# include <io.h>
+# include <fcntl.h>
+# include <stdio.h>
 #endif
 
 #include "cgicc/CgiEnvironment.h"
@@ -45,7 +46,11 @@ CGICCNS CgiEnvironment::CgiEnvironment(reader_function_t stream_reader)
 
   // On Win32, use binary read to avoid CRLF conversion
 #ifdef WIN32
-  _setmode(_fileno(stdin), _O_BINARY);
+# ifdef __BORLANDC__
+    setmode(_fileno(stdin), O_BINARY);
+# else
+    _setmode(_fileno(stdin), _O_BINARY);
+# endif
 #endif
   
   if(stringsAreEqual( getRequestMethod(), "get")) {
@@ -87,8 +92,8 @@ CGICCNS CgiEnvironment::parseCookies()
   STDNS string data = getCookies();
 
   if(! data.empty()) {
-    STDNS string::size_type pos 	= 0;
-    STDNS string::size_type oldPos	= 0;
+    STDNS string::size_type pos;
+    STDNS string::size_type oldPos = 0;
 
     while(true) {
       // find the ';' terminating a name=value pair
