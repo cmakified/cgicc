@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.17 1999/08/09 18:36:43 sbooth Exp $
+## $Id: Makefile.am,v 1.18 1999/08/10 00:09:23 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip
 
@@ -28,6 +28,12 @@ dist-hook:
 	cp -p $(srcdir)/support/mdate-sh $(distdir)/support
 	cp -p $(srcdir)/support/missing $(distdir)/support
 	cp -p $(srcdir)/support/mkinstalldirs $(distdir)/support
+	test -d $(distdir)/win || mkdir $(distdir)/win || exit 1
+	cp -p $(srcdir)/win/cgicc.dsw $(distdir)/win
+	cp -p $(srcdir)/win/cgicc.dsp $(distdir)/win
+	cp -p $(srcdir)/win/test.dsp $(distdir)/win
+	cp -p $(srcdir)/win/dns.dsp $(distdir)/win
+	cp -p $(srcdir)/win/example.dsp $(distdir)/win
 
 if MAINTAINER_MODE
 ################################################################

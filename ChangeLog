@@ -24,6 +24,9 @@
 	* cgicc/Makefile.am: config.h no longer installed.
 	* acconfig.h: Removed USE_NAMESPACES
 	* configure.in: No longer AC_DEFINE USE_NAMESPACES; AC_SUBST instead
+	* README.WIN: Added
+	* win/cgicc.{dsw,dsp},test.dsp,dns.dsp,example.dsp: Added
+	* Makefile.am: Added rules to dist-hook for Win32 files
 
 1999-08-06  Stephen F. Booth  <sbooth@saaba.lmi.net>
 

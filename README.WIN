@@ -1,0 +1,6 @@
+README for using GNU Cgicc on Windows
+=====================================
+
+The win/ subdirectory contains Microsoft Visual C++ 6.0 workspace and
+project files for the cgicc library and test and example applications.
+
