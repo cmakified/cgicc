@@ -1,3 +1,8 @@
+1999-09-27  Stephen F. Booth  <sbooth@gnu.org>
+
+	* demo/test.cpp: Changed "Remote Setdress" -> "Remote Address" in
+	HTML output.
+
 1999-09-22  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/HTMLClasses.h: Added definition of link_, to be used
