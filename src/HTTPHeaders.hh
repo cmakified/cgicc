@@ -1,4 +1,4 @@
-/* $Id: HTTPHeaders.hh,v 1.1 1998/04/01 20:49:26 sbooth Exp $ */
+/* $Id: HTTPHeaders.hh,v 1.2 1998/04/03 09:10:25 sbooth Exp $ */
 
 #ifndef __HTTP_HEADERS__
 #define __HTTP_HEADERS__ 1
@@ -25,6 +25,9 @@
  */
 class HTMLDoctype : public MStreamable {
 public:
+  /**@name Enumerations */
+  //@{
+
   /** 
    * The DTD used by this document.
    * <BR><TT>eStrict</TT> - The HTML 4.0 Strict DTD.<BR>
@@ -36,13 +39,20 @@ public:
     eTransitional,
     eFrames
   };
-  
+  //@}
+
+  /**@name Constructors */
+  //@{
+
   /**
    * Constructor.
    * @param type The version of the HTML 4.0 DTD used by this document.
    */
   HTMLDoctype(EDocumentType type = eStrict);
+
+  /** Destructor */
   virtual ~HTMLDoctype();
+  //@}
   
   virtual void render(ostream& out) const;
   
@@ -63,7 +73,7 @@ private:
  */
 class HTTPCookie : public MStreamable {
 public:
-  /**@name Constructor */
+  /**@name Constructors */
   //@{
 
   /**
@@ -93,6 +103,7 @@ public:
    */
   HTTPCookie(const HTTPCookie& cookie);
 
+  /** Destructor */
   virtual ~HTTPCookie();
   //@}
 
@@ -202,10 +213,29 @@ private:
 /** Abstract base class for all HTTP headers. */
 class HTTPHeader : public MStreamable {
 public:
-  HTTPHeader(const char *data = NULL) throw(Exception);
-  HTTPHeader(const HTTPHeader& header);
-  virtual ~HTTPHeader();
+  /**@name Constructors */
+  //@{
   
+  /**
+   * Constructor.
+   * @param data The header data.  May be NULL.
+   * @exception Exception
+   */
+  HTTPHeader(const char *data = NULL) throw(Exception);
+
+  /**
+   * Copy constructor.
+   * @param header The HTTPHeader to copy.
+   */
+  HTTPHeader(const HTTPHeader& header);
+
+  /** Destructor */
+  virtual ~HTTPHeader();
+  //@}
+
+  /**@name Header data */
+  //@{
+
   /**
    * Get the data contained in this HTTP header.
    * @return The data contained in this header.
@@ -218,6 +248,7 @@ public:
    * @exception Exception
    */
   void setData(const char *data) throw(Exception);
+  //@}
   
   virtual void render(ostream& out) const = 0;
   
@@ -237,6 +268,8 @@ public:
    * @exception Exception
    */
   HTTPContentHeader(const char *mimeType) throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPContentHeader();
 
   virtual void render(ostream& out) const;
@@ -257,6 +290,8 @@ public:
    * @exception Exception
    */
   HTTPRedirectHeader(const char *url) throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPRedirectHeader();
   
   virtual void render(ostream& out) const;
@@ -271,7 +306,7 @@ private:
 /** HTTP Status Header */
 class HTTPStatusHeader : public HTTPHeader {
 public:
-  /**@name Constructor */
+  /**@name Constructors */
   //@{
   /**
    * Create a new status header.
@@ -282,6 +317,8 @@ public:
    */
   HTTPStatusHeader(int status, 
 		   const char *message) throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPStatusHeader();
   //@}
 
@@ -321,6 +358,8 @@ public:
    * @exception Exception
    */
   HTTPNPHeader() throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPNPHeader();
   
   virtual void render(ostream& out) const;
@@ -351,6 +390,8 @@ public:
    * @exception Exception
    */
   HTTPPlainHeader() throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPPlainHeader();
 };
 
@@ -365,6 +406,8 @@ public:
    * @exception Exception
    */
   HTTPGIFHeader() throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPGIFHeader();
 };
 
@@ -379,6 +422,8 @@ public:
    * @exception Exception
    */
   HTTPJPEGHeader() throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPJPEGHeader();
 };
 
@@ -393,6 +438,8 @@ public:
    * @exception Exception
    */
   HTTPXBMHeader() throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPXBMHeader();
 };
 
@@ -407,6 +454,8 @@ public:
    * @exception Exception
    */
   HTTPAudioHeader() throw(Exception);
+
+  /** Destructor */
   virtual ~HTTPAudioHeader();
 };
 
