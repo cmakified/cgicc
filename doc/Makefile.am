@@ -1,4 +1,4 @@
-# $Id: Makefile.am,v 1.3 1998/12/11 01:38:52 sbooth Exp $
+# $Id: Makefile.am,v 1.4 1998/12/11 01:48:40 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -7,7 +7,6 @@ EXTRA_DIST = cgicc.css testform.html lmi-logo.gif
 DOC_TEMP = __doc_temp
 
 dist-hook:
-	@echo " doc++ -H -j -B ./footer.inc -d $(distdir) ./cgicc.dxx > /dev/null 2>&1"
 	doc++ -H -j -B ./footer.inc -d $(distdir) ./cgicc.dxx > /dev/null 2>&1
 
 install-data-local:
