@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.16 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.17 2004/06/26 18:04:10 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *
@@ -269,18 +269,27 @@ cgicc::Cgicc::queryCheckbox(const std::string& elementName) 	const
 	  stringsAreEqual( (*iter).getValue(), "on"));
 }
 
+std::string
+cgicc::Cgicc::operator() (const std::string& name) 		const
+{
+    std::string result;
+    const_form_iterator iter = getElement(name);
+    result = iter == fFormData.end() ? "" : iter->getValue();
+    return result;
+}
+
 cgicc::form_iterator 
 cgicc::Cgicc::getElement(const std::string& name)
 {
   return std::find_if(fFormData.begin(), fFormData.end(), 
-		       FE_nameCompare(name));
+		      FE_nameCompare(name));
 }
 
 cgicc::const_form_iterator 
 cgicc::Cgicc::getElement(const std::string& name) 		const
 {
   return std::find_if(fFormData.begin(), fFormData.end(), 
-		       FE_nameCompare(name));
+		      FE_nameCompare(name));
 }
 
 bool 
@@ -294,7 +303,7 @@ cgicc::form_iterator
 cgicc::Cgicc::getElementByValue(const std::string& value)
 {
   return std::find_if(fFormData.begin(), fFormData.end(), 
-		       FE_valueCompare(value));
+		      FE_valueCompare(value));
 }
 
 cgicc::const_form_iterator 

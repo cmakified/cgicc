@@ -1,8 +1,8 @@
 /* -*-c++-*- */
 /*
- *  $Id: Cgicc.h,v 1.13 2003/07/13 14:20:35 sbooth Exp $
+ *  $Id: Cgicc.h,v 1.14 2004/06/26 18:04:10 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2003 Stephen F. Booth
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -194,6 +194,15 @@ namespace cgicc {
     inline form_iterator 
     operator[] (const std::string& name)
     { return getElement(name); }
+
+    /*!
+     * \brief Find a radio button in a radio group, or a selected list item.
+     *
+     * \param name The name of the radio button or list item to find.
+     * \return The desired element, or an empty string if not found.
+     */
+    std::string
+    operator() (const std::string& name) 		const;
     
     /*!
      * \brief Find a radio button in a radio group, or a selected list item.
@@ -356,7 +365,7 @@ namespace cgicc {
     CgiEnvironment 		fEnvironment;
     std::vector<FormEntry> 	fFormData;
     std::vector<FormFile> 	fFormFiles;
-    
+
     // Convert query string into a list of FormEntries
     void 
     parseFormInput(const std::string& data);
