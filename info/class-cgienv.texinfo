@@ -8,7 +8,7 @@ the HTTP server specified in the CGI standard.
 
 @unnumberedsec Constructor
 
-@deftypemethod CgiEnvironment void CgiEnvironment ()
+@deftypemethod CgiEnvironment void CgiEnvironment (reader_function_t @var{stream_reader} = NULL)
 Constructor - not usually called directly.  Instead, an object of type
 @code{CgiEnvironment} is retrieved by calling the
 @code{getEnvironment()} method on @code{Cgicc}.

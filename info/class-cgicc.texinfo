@@ -7,11 +7,22 @@ retrieve information on specific HTML form elements (such as checkboxes,
 radio buttons, and text fields), on uploaded files, and to save,
 restore, and retrieve information on the CGI environment.
 
+@unnumberedsec Typedefs
+@deftypefun Typedef size_t (*reader_function_t)(void *@var{ptr}, size_t @var{count})
+Typedef for a stream reader function.  The function should attempt to
+read @var{count} items into @var{ptr}, and return the number of
+items actually read.
+@end deftypefun
+
 @unnumberedsec Constructors
 
-@deftypemethod Cgicc void Cgicc ()
+@deftypemethod Cgicc void Cgicc (reader_function_t @var{stream_reader} = NULL)
 Constructor.  Upon creation, @code{Cgicc} performs all necessary CGI
-initialization.
+initialization.  The optional parameter @var{stream_reader} may be
+specified if the CGI data comes from a source other than @code{cin}, for
+example a FastCGI function @footnote{See @url{http://www.fastcgi.com}
+for more information on FastCGI.}. The @var{stream_reader} should be a
+function that returns the number of items read, similar to @code{fread}.
 @end deftypemethod
 
 @unnumberedsec Library Information
