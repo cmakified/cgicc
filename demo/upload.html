@@ -1,94 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-   "http://www.w3.org/TR/REC-html40/loose.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-<HTML LANG="en" DIR="LTR">
+<head>
+  <!-- $Id: upload.html,v 1.2 2001/09/02 19:51:10 sbooth Exp $ -->
+  <title>GNU cgicc File Upload Test</title>
+  <link rev="made" href="mailto:sbooth@gnu.org" />
+  <link href="cgicc.css" rel="stylesheet" type="text/css" />
+</head>
 
-<HEAD>
-  <!-- $Id: upload.html,v 1.1 2000/10/17 00:22:22 sbooth Exp $ -->
+<body>
+<h1>GNU cgi<span class="red">cc</span> File Upload Test</h1>
 
-  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-  <TITLE>GNU cgicc File Upload Test</TITLE>
-  <LINK REV="made" HREF="mailto:sbooth@gnu.org">
-  <STYLE TYPE="text/css"><!--
-
-    BODY { color: black; background: white; }
-
-    A:link { color: #1F00FF }
-    A:visited { color: #9900DD }
-    A:active { color: #FF0000 }
-    A:hover { color: #FF0000 }
-
-    HR.half { width: 60%; align: center; }
-    
-    SPAN.red, STRONG.red { color: red; } 
-    SPAN.green { color: green; }
-    SPAN.blue { color: blue; }
-
-    P.legal { font-size: small }
-    P.red { text-align: center; color: red; }
-    P.center { text-align: center; }
-
-    DIV.notice { border: solid thin; padding: 1em; 
-      margin: 1em 0; background: #DDD;}
-
-    TABLE.form { left-margin: auto; right-margin: auto; width: 90%; }
-
-    COL.black, TD.black, TD.title, TR.title { color: white;
-      background: black; font-weight: bold; text-align: center; }
-
-    COL.gray, TD.gray { background: #DDD; text-align: center; }
-
-    TD.data, TR.data { background: #DDD; text-align: left; }
-    TD.grayspecial { background: #DDD; text-align: left; }
-    TD.ltgray, TR.ltgray { background: #DDD; }
-    TD.dkgray, TR.dkgray { background: #BBB; }
-
-    DIV.smaller { font-size: small; }
-
-  --></STYLE>
-</HEAD>
-
-<BODY>
-
-<H1>GNU cgi<SPAN CLASS="red">cc</SPAN> File Upload Test</H1>
 
 <!-- Change this to match your web site's address -->
-<FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/upload.cgi" 
- ENCTYPE="multipart/form-data">
+<form method="post" action="http://change_this_path/cgi-bin/upload.cgi"
+ enctype="multipart/form-data">
 
-<DIV ALIGN="center">
 
-<P>
-<TABLE 	BORDER="0" 
-	RULES="none" 
-	FRAME="void" 
-	CELLSPACING="2" 
-	CELLPADDING="2" 
-	CLASS="form">
+<div class="center">
+<table border="0" rules="none" frame="void" cellspacing="2"
+  cellpadding="2" class="form">
+<colgroup span="2">
+<col align="center" span="2" />
+</colgroup>
 
-<COLGROUP SPAN="2">
-  <COL ALIGN="center" SPAN="2">
-</COLGROUP>
+<tr>
+<td class="black">Send a file</td>
+<td class="gray">
+<input type="file" name="userfile" accept="text/plain" /></td>
+</tr>
+</table>
 
-<TR>
-  <TD CLASS="black">Send a file</TD>
-  <TD CLASS="gray"><INPUT TYPE="file" NAME="userfile" ACCEPT="text/plain"></TD>
-</TR>
+<p>
+<input type="submit" name="submit" value="Send the file" /> 
+<input type="reset" value="Nevermind" />
+</p>
 
-  </TD>
-</TR>
-
-</TABLE>
-<!-- </P> -->
-
-<P>
-  <INPUT TYPE="submit" NAME="submit" VALUE="Send the File">
-  <INPUT TYPE="reset" VALUE="Nevermind">
-</P>
-
-</DIV>
-</FORM>
-
-</BODY>
-</HTML>
-
+</div>
+</form>
+</body>
+</html>
