@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiUtils.cc,v 1.4 1999/05/25 19:16:43 sbooth Exp $
+ *  $Id: CgiUtils.cc,v 1.5 1999/05/31 17:01:42 sbooth Exp $
  *
  *  Copyright (C) 1996, 1997, 1998, 1999 Stephen F. Booth
  *
@@ -112,6 +112,7 @@ CGICCNS unescapeString(const string& src)
 {
   STDNS string result;
   STDNS string::const_iterator iter;
+  char c;
 
   for(iter = src.begin(); iter != src.end(); ++iter) {
     switch(*iter) {
@@ -120,7 +121,9 @@ CGICCNS unescapeString(const string& src)
       break;
     case '%':
       // assume well-formed input
-      result.append(1, hexToChar(*(++iter), *(++iter)));
+      // ensure evaluation order for hexToChar
+      c = *++iter;
+      result.append(1, hexToChar(c, *(++iter)));
       break;
     default:
       result.append(1, *iter);
