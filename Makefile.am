@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.29 2002/01/09 17:09:18 sbooth Exp $
+## $Id: Makefile.am,v 1.30 2002/01/09 17:16:41 sbooth Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-zip dist-bzip2
 
@@ -23,7 +23,7 @@ CLEANFILES = *~
 MAINTAINERCLEANFILES = config.guess config.sub ltmain.sh aclocal.m4 \
 	cgicc-*.tar.gz cgicc-*.diff
 
-EXTRA_DIST = acconfig.h README.WIN
+EXTRA_DIST = acconfig.h README.WIN COPYING.DOC
 
 dist-hook:
 	test -d $(distdir)/example || mkdir $(distdir)/example || exit 1
