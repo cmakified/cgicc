@@ -1,3 +1,0 @@
-@comment -*-texinfo-*-
-@node Response generation, HTTP header classes, CGI classes, Top
-@unnumbered Response generation
