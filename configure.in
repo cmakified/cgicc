@@ -1,4 +1,4 @@
-dnl $Id: configure.in,v 1.1 1998/12/10 03:00:07 sbooth Exp $
+dnl $Id: configure.in,v 1.2 1998/12/10 19:29:57 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/Cgicc.cc)
@@ -16,10 +16,15 @@ dnl Checks for libraries.
 AC_CHECK_LIB(nsl, gethostbyaddr, LIB_NET="-lnsl")
 
 dnl check whether to link against libstdc++
-AC_MSG_CHECKING("whether to link against libstdc++")
-AC_TRY_LINK([#include <iostream.h>], cout << "foo" << endl;, NEED_STDCPP=no, NEED_STDCPP=yes)
-AC_MSG_RESULT($NEED_STDCPP)
-if (test "$NEED_STDCPP" = yes); then LIBS="$LIBS -lstdc++"
+AC_CACHE_CHECK(	[whether to link against libstdc++],
+		[cgicc_cv_link_libstdcpp],
+		[	AC_TRY_LINK([#include <iostream.h>],
+				cout << "foo" << endl;,
+				cgicc_cv_link_libstdcpp=no,
+				cgicc_cv_link_libstdcpp=yes)
+		])
+if (test "$cgicc_cv_link_libstdcpp" = yes); then 
+LIBS="$LIBS -lstdc++"
 fi
 
 dnl Checks for header files.
@@ -29,17 +34,27 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 AC_STRUCT_TM
 
 dnl verify exception handling works
-AC_MSG_CHECKING("for exception handling")
-AC_TRY_COMPILE(, int i=0; try {++i;} catch(...) {--i;}, EXCEPTIONS=yes, EXCEPTIONS=no)
-AC_MSG_RESULT($EXCEPTIONS)
-if (test "$EXCEPTIONS" = no); then AC_MSG_ERROR("exception handling required")
+AC_CACHE_CHECK(	[for exception handling],
+		[cgicc_cv_cpp_exceptions],
+		[	AC_TRY_COMPILE(,
+				int i=0; try {++i;} catch(...) {--i;},
+				cgicc_cv_cpp_exceptions=yes,
+				cgicc_cv_cpp_exceptions=no)
+		])
+if (test "$cgicc_cv_cpp_exceptions" = no); then 
+AC_MSG_ERROR([exception handling required])
 fi
 
 dnl verify templates work
-AC_MSG_CHECKING("for template support")
-AC_TRY_CPP(template <class T> int foo(T arg);, TEMPLATES=yes, TEMPLATES=no)
-AC_MSG_RESULT($TEMPLATES)
-if (test "$TEMPLATES" = no); then AC_MSG_ERROR("template support required") fi
+AC_CACHE_CHECK(	[for template support],
+		[cgicc_cv_cpp_templates],
+		[	AC_TRY_CPP([template <class T> int foo(T arg);],
+				cgicc_cv_cpp_templates=yes,
+				cgicc_cv_cpp_templates=no)
+		])
+if (test "$cgicc_cv_cpp_templates" = no); then 
+AC_MSG_ERROR([template support required])
+fi
 
 dnl Checks for library functions.
 AC_HEADER_STDC
@@ -50,4 +65,5 @@ dnl setup for networking functions
 AC_SUBST(LIB_NET)
 
 
-AC_OUTPUT([Makefile src/Makefile test/Makefile doc/Makefile src/Cgicc.hh])
+AC_OUTPUT([Makefile src/Makefile src/Cgicc.hh test/Makefile doc/Makefile])
+
