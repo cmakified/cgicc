@@ -1,7 +1,7 @@
 dnl
-dnl $Id: cgicc.m4,v 1.7 2002/03/17 20:56:37 sbooth Exp $
+dnl $Id: cgicc.m4,v 1.8 2004/06/12 04:40:35 sbooth Exp $
 dnl
-dnl Copyright (C) 2000 - 2002 Stephen F. Booth
+dnl Copyright (C) 2000 - 2004 Stephen F. Booth
 dnl
 dnl This program is free software; you can redistribute it and/or modify
 dnl it under the terms of the GNU General Public License as published by
@@ -103,7 +103,7 @@ dnl
 dnl Check the cgicc installation for:
 dnl  - Presence of the 'cgicc-config' script [in PREFIX]
 dnl  - Presence of all headers [in INCLUDEDIR]
-dnl  - Installed version >= 3.1 [or MINIMUM-VERSION if specified]
+dnl  - Installed version >= 3.2.1 [or MINIMUM-VERSION if specified]
 AC_DEFUN(CGICC_CHECK_INSTALLATION,[
   CGICC_CHECK_CONFIG($1)
   CGICC_CHECK_HEADERS($2)
