@@ -1,7 +1,7 @@
 /*
- *  $Id: HTTPCookie.cpp,v 1.1 2001/09/03 16:15:44 sbooth Exp $
+ *  $Id: HTTPCookie.cpp,v 1.2 2002/02/20 03:15:44 sbooth Exp $
  *
- *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Stephen F. Booth
+ *  Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -98,5 +98,5 @@ CGICCNS HTTPCookie::render(STDNS ostream& out) 	const
   if(fSecure == true)
     out << "; Secure";
   
-  out << "; Version=1" << STDNS endl;
+  out << "; Version=1";
 }
