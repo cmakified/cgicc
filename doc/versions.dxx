@@ -1,4 +1,4 @@
-<!-- $Id: versions.dxx,v 1.3 1998/10/05 22:33:14 sbooth Exp $ -->
+<!-- $Id: versions.dxx,v 1.4 1998/12/11 22:26:36 sbooth Exp $ -->
 
 /**@name Cgicc version history
 
@@ -18,6 +18,13 @@
 <TD CLASS="black">Version</TD>
 <TD CLASS="black">Date</TD>
 <TD CLASS="black">Description</TD>
+</TR>
+
+<TR>
+<TD CLASS="dkgray">2.2.2</TD>
+<TD CLASS="dkgray">12/11/98</TD>
+<TD CLASS="dkgray">Make process changed to use autoconf, automake, and 
+libtool. Re-released under the GNU Library General Public License.</TD>
 </TR>
 
 <TR>
