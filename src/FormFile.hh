@@ -1,4 +1,4 @@
-/* $Id: FormFile.hh,v 1.5 1998/04/03 09:03:37 sbooth Exp $ */
+/* $Id: FormFile.hh,v 1.6 1998/04/04 04:38:52 sbooth Exp $ */
 
 #ifndef __FORM_FILE__
 #define __FORM_FILE__ 1
@@ -18,6 +18,12 @@
 /** 
  * Immutable class representing a file uploaded via the HTTP file upload 
  * mechanism.
+ * <P>If you are going to use file upload, remember to set the 
+ * <TT>ENCTYPE</TT> of the form to <TT>multipart/form-data</TT>:
+ * <PRE CLASS="html">
+ * &lt;FORM METHOD="POST" ACTION="..something.." ENCTYPE="multipart/form-data"&gt;
+ * </PRE>
+ * </P>
  */
 class FormFile : public FormEntry
 {
