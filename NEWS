@@ -5,6 +5,20 @@
         <bug-cgicc@gnu.org>
 ======================================================================
 
+        Major changes between versions 3.1.6 and 3.2
+        ----------------------------------------------
+
+* License changed to the Lesser GNU General Public License
+
+* HTTP header classes rewritten and refactored
+
+* HTML output now more XML-compliant
+
+* Documentation rewritten in Doxygen format
+
+* Added a demo on cookie usage
+
+
         Major changes between versions 3.1.5 and 3.1.6
         ----------------------------------------------
 
