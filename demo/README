@@ -14,12 +14,12 @@ There are three demo applications in this directory:
   'dns.cgi', a demo of a web dns gateway.  There is no html file
    associated with this application; it is run directly.
 
-To run the demo applications 'test.cgi' or 'upload.cgi', the associted
+To run the demo applications 'test.cgi' or 'upload.cgi', the associated
 html file ('test.html' or 'upload.html') must be configured for your
 particular web server.  Scroll down to line 56, which should look like
   <FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/test.cgi">
 in 'test.html', or
-  <FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/upload.cgi" 
+  <FORM METHOD="POST" ACTION="http://change_this_path/cgi-bin/upload.cgi">
 in 'upload.html'.
 
 Change the path to match your cgi-bin directory.  For example, if you
