@@ -1,4 +1,4 @@
-/* $Id: FormFile.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: FormFile.cc,v 1.2 1998/04/01 20:52:21 sbooth Exp $ */
 
 #include "FormFile.hh"
 
@@ -24,6 +24,16 @@ FormFile::FormFile(const char *name, const char *filename,
 FormFile::~FormFile()
 {
   delete [] fDataType;
+}
+
+FormFile::FormFile(const FormFile& file) 
+  : FormEntry(file.getName(), file.getValue(), file.getDataLength())
+{
+  fDataType = new char[strlen(file.getDataType()) + 1];
+  strcpy(fDataType, file.getDataType());
+
+  fData = file.getData();
+  fDataLength = file.getDataLength();
 }
 
 void 
