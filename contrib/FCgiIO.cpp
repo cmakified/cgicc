@@ -1,8 +1,8 @@
 /*
- *  $Id: FCgiIO.cpp,v 1.2 2002/12/04 17:04:07 sbooth Exp $
+ *  $Id: FCgiIO.cpp,v 1.3 2003/07/13 14:21:58 sbooth Exp $
  *
  *  Copyright (C) 2002 Steve McAndrewSmith
- *  Copyright (C) 2002 Stephen F. Booth
+ *  Copyright (C) 2002 - 2003 Stephen F. Booth
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public

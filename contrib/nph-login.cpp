@@ -1,7 +1,7 @@
 /*
- * $Id: nph-login.cpp,v 1.5 2002/12/04 17:04:07 sbooth Exp $
+ * $Id: nph-login.cpp,v 1.6 2003/07/13 14:21:58 sbooth Exp $
  *
- *  Copyright (C) 1996 - 2002 Stephen F. Booth
+ *  Copyright (C) 1996 - 2003 Stephen F. Booth
  *  Copyright (C) 2001 Peter Goedtkindt
  *
  *  This program is free software; you can redistribute it and/or modify
