@@ -1,3 +1,18 @@
+2002-11-23  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/FormEntry.{h,cpp}: Added getIntegerValue(int, int, bool&)
+	and getDoubleValue(double, double, bool&) to allow caller to
+	determine if value was adjusted to specified limits
+	(Suggested by Carsten@RollingHorse.com)
+
+2002-09-04  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc/CgiEnvironment.cpp(parseCookie): Do not unescape the
+	cookie name and data (Thanks to afm@othello.ch)
+	* doc/Makefile.am: Install into DESTDIR (Thanks to naddy@mips.inka.de)
+	* THANKS: Added Andreas Mueller and Christian Weisgerber
+	* doc/cgicc.html.in: Updated version of gcc to 3.2
+
 2002-04-02  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/FormFile.cpp: Explicitly return STDNS string from 
