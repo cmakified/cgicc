@@ -1,4 +1,4 @@
-/* $Id: HTTPHeaders.cc,v 1.1 1998/02/12 05:31:41 sbooth Exp $ */
+/* $Id: HTTPHeaders.cc,v 1.2 1998/02/23 09:30:36 sbooth Exp $ */
 
 #include "HTTPHeaders.hh"
 
@@ -95,7 +95,7 @@ HTTPCookie::setDomain(const char *domain) throw(Exception)
 { set(fDomain, domain); }
 
 void 
-HTTPCookie::setSecure(bool secure) throw(Exception) 
+HTTPCookie::setSecure(bool secure)
 { fSecure = secure; }
 
 void 
