@@ -1,6 +1,6 @@
 /* -*-c++-*- */
 /*
- *  $Id: CgiUtils.h,v 1.8 2003/07/11 14:57:36 sbooth Exp $
+ *  $Id: CgiUtils.h,v 1.9 2003/07/13 05:28:39 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -95,16 +95,43 @@ namespace cgicc {
 		  size_t n);
   
   /*!
+   * \brief Convert an ASCII string to a URL-safe string. 
+   *
+   * For example, '!' is converted to "%21" and ' ' is converted to '+'.
+   * \param src The src string containing the characters to encode
+   * \return The converted string
+   */
+  CGICC_API std::string
+  form_urldecode(const std::string& src);
+
+  /*!
    * \brief Convert encoded characters in form data to normal ASCII. 
    *
-   * For example, %21 is converted to ! and + is converted to a space.
+   * For example, "%21" is converted to '!' and '+' is converted to a space.
    * Normally, this is called internally to decode the query string or post 
    * data.
    * \param src The src string containing the encoded characters
    * \return The converted string
    */
   CGICC_API std::string
-  unescapeString(const std::string& src);
+  form_urlencode(const std::string& src);
+  
+
+  /*!
+   * \brief Convert an ASCII character to its hexadecimal equivalent.
+   *
+   * For example, after the call
+   * \code
+   * string s = charToHex(':');
+   * \endcode
+   * \c s will have a value of "3A".
+   * Normally, this is called internally to encode characters by
+   * escapeString.
+   * \param c The character to encode
+   * \return A string representing the hexadecimal value of c
+   */
+  CGICC_API std::string
+  charToHex(char c);
   
   /*!
    * \brief Convert a hex-encoded character to its ASCII equivalent.
@@ -113,15 +140,15 @@ namespace cgicc {
    * \code
    * char c = hexToChar('2', '1');
    * \endcode
-   * \c c will have a value of  '!'.
+   * \c c will have a value of '!'.
    * Normally, this is called internally to decode encoded characters in
    * the query string or post data.
-   * \param first The first character of the hex value
-   * \param second the second character of the hex value
+   * \param first The first hex digit
+   * \param second The second hex digit
    * \return The ASCII character
    */
   CGICC_API char
-  hexToChar(char first, 
+  hexToChar(char first,
 	    char second);
   
   /*!

@@ -1,5 +1,5 @@
 /*
- *  $Id: Cgicc.cpp,v 1.14 2002/12/04 17:04:06 sbooth Exp $
+ *  $Id: Cgicc.cpp,v 1.15 2003/07/13 05:28:39 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -437,7 +437,7 @@ cgicc::Cgicc::parseHeader(const std::string& data)
 
   // This is hairy: Netscape and IE don't encode the filenames
   // The RFC says they should be encoded, so I will assume they are.
-  filename = unescapeString(filename);
+  filename = form_urldecode(filename);
 
   return MultipartHeader(disposition, name, filename, cType);
 }
@@ -453,8 +453,8 @@ cgicc::Cgicc::parsePair(const std::string& data)
     return;
   
   // unescape the data, and add to the form entry list
-  std::string name 	= unescapeString(data.substr(0, pos));
-  std::string value 	= unescapeString(data.substr(++pos, 
+  std::string name 	= form_urldecode(data.substr(0, pos));
+  std::string value 	= form_urldecode(data.substr(++pos, 
 						     std::string::npos));
   
   fFormData.push_back(FormEntry(name, value));
