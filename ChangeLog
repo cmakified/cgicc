@@ -4,6 +4,8 @@
 	* cgicc/*: Added files from src/
 	* cgicc/CgiDefs.hh: Removed conditional guard from 
 	config.h #include.  Changed to #include "cgicc/config.h"
+	* cgicc/*: All #include directives for cgicc headers changed
+	from "x" to "cgicc/x".
 	* configure.in: All instances of src/ changed to cgicc/
 	* Makefile.am: All instances of src/ changed to cgicc/
 	* demo/Makefile.am: All instances of src/ changed to cgicc/
