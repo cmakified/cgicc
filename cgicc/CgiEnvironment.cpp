@@ -1,5 +1,5 @@
 /*
- *  $Id: CgiEnvironment.cpp,v 1.13 2002/04/02 17:53:03 sbooth Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.14 2002/11/23 20:29:04 sbooth Exp $
  *
  *  Copyright (C) 1996 - 2002 Stephen F. Booth
  *
@@ -139,9 +139,9 @@ CGICCNS CgiEnvironment::parseCookie(const STDNS string& data)
     if(STDNS isspace(*data_iter) == 0)
       break;			
   
-  // unescape the data, and add to the cookie list
-  STDNS string name 	= unescapeString(data.substr(wscount, pos - wscount));
-  STDNS string value 	= unescapeString(data.substr(++pos));
+  // Per RFC 2091, do not unescape the data (thanks to afm@othello.ch)
+  STDNS string name 	= data.substr(wscount, pos - wscount);
+  STDNS string value 	= data.substr(++pos);
 
   fCookies.push_back(HTTPCookie(name, value));
 }
