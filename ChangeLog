@@ -1,3 +1,8 @@
+2007-07-02  Sebastien DIAZ  <sebastien.diaz@gmail.com>
+
+	* all source: Change the license LGPL to the version 3
+
+
 2004-11-06  Stephen F. Booth  <sbooth@gnu.org>
 
 	* cgicc/CgiUtils.cpp: Fixed bug in extractBetween, now use
