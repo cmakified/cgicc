@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: test.cpp,v 1.26 2007/07/02 18:48:19 sebdiaz Exp $
+ *  $Id: test.cpp,v 1.27 2007/07/08 20:06:59 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -162,7 +162,7 @@ printForm(const Cgicc& cgi)
   cout << "</table>" << endl;
 
   cout << "<div class=\"center\"><p>"
-       << "<input type=\"submit\" name=\"submit\" value=\"Submit\" />"
+       << "<input type=\"submit\" name=\"submit\"  value=\"Submit\" />"
        << "<input type=\"reset\" value=\"Nevermind\" />"
        << "</p></div></form>" << endl;
 }
