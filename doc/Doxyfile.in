@@ -75,6 +75,7 @@ INPUT                  = ../cgicc \
                          ../demo/dns.cpp \
                          ../demo/upload.cpp \
                          ../demo/cookie.cpp \
+                         ../demo/cardgame.cpp \
                          COPYING \
                          COPYING.LIB \
                          COPYING.DOC \

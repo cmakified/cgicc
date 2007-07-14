@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: cardgame.cpp,v 1.4 2007/07/14 16:13:25 sebdiaz Exp $
+ *  $Id: cardgame.cpp,v 1.5 2007/07/14 16:39:01 sebdiaz Exp $
  *
  *  Copyright (C) 2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
  *  Part of the GNU cgicc library, http://www.gnu.org/software/cgicc
@@ -19,6 +19,13 @@
  *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
  */
+
+/*! \file cardgame.cpp
+ * \brief GNU %cgicc Card Game application
+ *
+ * Tests and demonstrates access of form data, cookie, persistance using the GNU %cgicc library.
+ */
+
 
 #include <iostream>
 #include <vector>
