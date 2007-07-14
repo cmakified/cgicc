@@ -731,8 +731,47 @@ void drawCards(vector <string> *cardList)
 	
 	for (int i=0;i<cardList->size();i++)
 	{
-		cout <<"<div style=\"position:absolute;top:50;left:"<<i*110<<"\" >"; 
+		cout <<"<div style=\"position:absolute;top:50;left:"<<i*150+150<<"\" >"; 
 		cout <<"<img border=\"0\" width=\"100\" src=\"images/"<<cardList->at(i)<<".png\" alt=\"Carte ["<<i<<"]="<<cardList->at(i)<<"\" />"<<endl;
+		cout <<"</div>";
+	}
+	cout <<"<br />";
+}
+
+void drawInfos(datasplayer *vPlayer)
+{
+	cout <<"<div style=\"position:absolute;width:140;top:50;left:"<<0<<"\" >"; 
+	cout <<"The latest Played Cards ";
+	cout <<"</div>";
+	cout <<"<div style=\"width:140;position:absolute;top:180;left:"<<0<<"\" >"; 
+	cout <<"Actual Cards in the Game<br>You are the player :"<<vPlayer->identifiant;
+	cout <<"</div>";
+	cout <<"<div style=\"width:140;position:absolute;top:375;left:"<<0<<"\" >"; 
+	cout <<"Your Cards, you can choose one card.";
+	cout <<"</div>";
+}	
+
+void drawPlayers(datasgame *pGame)
+{
+	
+	bool vFirst=false;
+	for (int i=0;i<pGame->playersList->size();i++)
+	{
+		bool afficheFirst=false;
+		if (vFirst==false&&pGame->playersList->at(i)->actualCard.compare("")!=0)
+		{
+			vFirst=true;
+			afficheFirst=true;
+		}
+		cout <<"<div style=\"outline-color:"<<((afficheFirst==false)?"black":"red")<<";outline-style:solid;outline-width:"<<((afficheFirst==false)?"1":"2")<<"px;position:absolute;top:180;left:"<<i*200+150<<"\" >"; 
+		cout <<"Name :"<<pGame->playersList->at(i)->identifiant<<"<br>";
+		cout <<"Score :"<<pGame->playersList->at(i)->points<<"<br>";
+		
+		cout <<"<img border=\"0\" width=\"100\" src=\"images/"<<pGame->playersList->at(i)->actualCard<<".png\" alt=\" \" />"<<endl;
+		if  (afficheFirst==true)
+		{	
+			cout <<"<br>The color to play";
+		}
 		cout <<"</div>";
 	}
 	cout <<"<br />";
@@ -759,7 +798,7 @@ void drawPlayerCards(datasplayer *vPlayer)
 	//affiche les cartes du joueurs
 	for (int i=0;i<vPlayer->cardsList->size();i++)
 	{
-		cout <<"<div style=\"position:absolute;top:200;left:"<<i*20<<"\" >"; 
+		cout <<"<div style=\"position:absolute;top:375;left:"<<i*20+150<<"\" >"; 
 		if (vPlayer->isPlaying==true)
 		{
 			cout <<"<a  href=\"javascript:document.forms.cards.actionner.value='playcard';document.forms.cards.card.value='"<<vPlayer->cardsList->at(i)<<"';document.forms.cards.submit();\">"; 
@@ -976,7 +1015,9 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 		}
 		else
 		{
+			cout <<"<div style=\"position:absolute;top:50;left:"<<150<<"\" >"; 
 			cout <<"<b>You can not Play this card!</b><br>\n";
+			cout <<"</div>"; 
 		}
 		
 	}
@@ -1024,7 +1065,7 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 			int cardValue=calculateCard(plCard);
 			readedGame->playersList->at(i)->actualCard="";
 			int compCard=plCard.substr(0,1).compare(readedGame->playedCards->front().substr(0,1));
-			cout <<"Comp "<<plCard<<"="<<readedGame->playedCards->front()<<"::"<<compCard<<"<br>\n";
+			
 			
 			if (theMax<cardValue&&compCard==0)
 			{
@@ -1032,13 +1073,13 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 				vWiner=i;
 
 			}
-			cout <<"Comp "<<cardValue<<"="<<theMax<<"::"<<vWiner<<"<br>\n";
+			
 			if (compCard==0)
 			{
 				total+=cardValue;
 			}
 		}
-		cout <<"THE WINNER IS "<<vWiner<<"<br>\n";
+		
 		readedGame->playersList->at(vWiner)->isPlaying=true;
 		readedGame->playersList->at(vWiner)->points+=total;
 
@@ -1087,8 +1128,10 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 	try{
 	writeGame(vPlayer,readedGame);
 	drawCards(lastPlayedCard);
-	drawCardInPlay(readedGame);
+	drawPlayers(readedGame);
+	//drawCardInPlay(readedGame);
 	drawPlayerCards(vPlayer);
+	drawInfos(vPlayer);
 	}
 	catch(std::exception &error)
 	{
