@@ -1,3 +1,25 @@
+/* -*-mode:c++; c-file-style: "gnu";-*- */
+/*
+ *  $Id: cardgame.cpp,v 1.4 2007/07/14 16:13:25 sebdiaz Exp $
+ *
+ *  Copyright (C) 2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
+ *  Part of the GNU cgicc library, http://www.gnu.org/software/cgicc
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 3 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+ */
+
 #include <iostream>
 #include <vector>
 #include <iterator>
@@ -216,7 +238,7 @@ datasgame *getGame(string pName)
 	vector <string > *cardsList= new vector<string>;
 	string identifiant;
 	string actualCard;
-	bool isPlaying;
+	bool isPlaying=false;
 	int points;
 	
 	int vNBCardsQueue1=0;
@@ -382,6 +404,7 @@ void writeValue(string pName,string pValue)
 	
 }
 
+
 void writeFileGame(string pName,string pValue)
 {
 	
@@ -414,14 +437,14 @@ void writeFileGame(string pName,string pValue)
 			if (s.find (pName)!= string::npos)
 			{
 				
-				buffer << pValue<<"\n";
+				buffer << pValue;
 				
 				haveWrited=true;
 				
 			}
 			else
 			{
-				buffer << s <<"\n";
+				buffer << s ;
 			}
 			
 		}
@@ -453,7 +476,7 @@ void writeGame(datasplayer *pPlayer,datasgame *pGame)
 	
 	datasplayer * itVectorData;
 	buffer <<pGame->playersList->size()<<"::";
-	for(int i=0;i<pGame->playersList->size(); i++)
+	for(unsigned int i=0;i<pGame->playersList->size(); i++)
 	{
 	
 		itVectorData=pGame->playersList->at(i);
@@ -473,7 +496,7 @@ void writeGame(datasplayer *pPlayer,datasgame *pGame)
 	
 	//NBCards played
 	buffer <<pGame->playedCards->size()<<"::";
-	for (int i=0;i<pGame->playedCards->size();i++)
+	for (unsigned int i=0;i<pGame->playedCards->size();i++)
 	{
 		buffer <<pGame->playedCards->at(i)<<"::";
 		
@@ -485,7 +508,7 @@ void writeGame(datasplayer *pPlayer,datasgame *pGame)
 	
 	buffer <<pGame->piocheCards->size()<<"::";
 	
-	for (int i=0;i<pGame->piocheCards->size();i++)
+	for (unsigned int i=0;i<pGame->piocheCards->size();i++)
 	{
 		buffer <<pGame->piocheCards->at(i)<<"::";
 		
@@ -707,11 +730,11 @@ datasgame * createGame(datasplayer *vPlayer)
 	
 	int vNbCards=myGame->piocheCards->size();
 	//distribution des cartes
-	for (int i=0;i<myGame->playersList->size();i++)
+	for (unsigned int i=0;i<myGame->playersList->size();i++)
 	{
 		
 		myGame->playersList->at(i)->cardsList=new vector<string>;
-		for (int j=0;j<vNbCards/myGame->playersList->size();j++)
+		for (unsigned int j=0;j<vNbCards/myGame->playersList->size();j++)
 		{
 		
 			myGame->playersList->at(i)->cardsList->push_back(myGame->piocheCards->front());
@@ -729,12 +752,46 @@ void drawCards(vector <string> *cardList)
 {
 	
 	
-	for (int i=0;i<cardList->size();i++)
+	for (unsigned int i=0;i<cardList->size();i++)
 	{
 		cout <<"<div style=\"position:absolute;top:50;left:"<<i*150+150<<"\" >"; 
 		cout <<"<img border=\"0\" width=\"100\" src=\"images/"<<cardList->at(i)<<".png\" alt=\"Carte ["<<i<<"]="<<cardList->at(i)<<"\" />"<<endl;
 		cout <<"</div>";
 	}
+	cout <<"<br />";
+}
+
+void writeWinner(datasplayer *vPlayer,datasgame *pGame)
+{
+	unsigned int winner=0;
+	int scoreOfTheWinner=0;
+	unsigned int playerId=0;
+	for (unsigned int i=0;i<pGame->playersList->size();i++)
+	{
+		if (vPlayer->identifiant.compare(pGame->playersList->at(i)->identifiant)==0)
+		{	
+			playerId=i;
+		}
+		if (scoreOfTheWinner<pGame->playersList->at(i)->points)
+		{
+			winner=i;
+			scoreOfTheWinner=pGame->playersList->at(i)->points;
+		}
+	}
+	
+	cout <<"<div style=\"position:absolute;top:50;left:"<<150<<"\" >"; 
+	if (playerId==winner)
+	{
+		cout <<"<h2>YOU WIN !</h2>"<<endl;
+		cout <<"<b>Your score is : "<<scoreOfTheWinner<<"</b>"<<endl;
+	}else
+	{
+		cout <<"<h2>YOU LOSS !</h2>"<<endl;
+		cout <<"<b>The winner is : "<<pGame->playersList->at(winner)->identifiant<<"</b>"<<endl;
+		cout <<"<b>The score is : "<<scoreOfTheWinner<<"</b>"<<endl;
+	}
+	cout <<"</div>";
+	
 	cout <<"<br />";
 }
 
@@ -755,7 +812,7 @@ void drawPlayers(datasgame *pGame)
 {
 	
 	bool vFirst=false;
-	for (int i=0;i<pGame->playersList->size();i++)
+	for (unsigned int i=0;i<pGame->playersList->size();i++)
 	{
 		bool afficheFirst=false;
 		if (vFirst==false&&pGame->playersList->at(i)->actualCard.compare("")!=0)
@@ -781,7 +838,7 @@ void drawCardInPlay(datasgame *pGame)
 {
 	
 	
-	for (int i=0;i<pGame->playedCards->size();i++)
+	for (unsigned int i=0;i<pGame->playedCards->size();i++)
 	{
 		cout <<"<div style=\"position:absolute;top:100;left:"<<i*110<<"\" >"; 
 		cout <<"<img border=\"0\" width=\"100\" src=\"images/"<<pGame->playedCards->at(i)<<".png\" alt=\"Carte ["<<i<<"]="<<pGame->playedCards->at(i)<<"\" />"<<endl;
@@ -796,7 +853,7 @@ void drawPlayerCards(datasplayer *vPlayer)
 	cout <<"<input type=\"hidden\" name=\"actionner\" value=\"\">"; 
 	cout <<"<input type=\"hidden\" name=\"card\" value=\"\">"; 
 	//affiche les cartes du joueurs
-	for (int i=0;i<vPlayer->cardsList->size();i++)
+	for (unsigned int i=0;i<vPlayer->cardsList->size();i++)
 	{
 		cout <<"<div style=\"position:absolute;top:375;left:"<<i*20+150<<"\" >"; 
 		if (vPlayer->isPlaying==true)
@@ -816,7 +873,7 @@ void playACard(datasplayer *vPlayer,datasgame *readedGame,string *card)
 {
 	
 	
-	for (int i=0;i<readedGame->playersList->size();i++)
+	for (unsigned int i=0;i<readedGame->playersList->size();i++)
 	{
 	
 		
@@ -825,7 +882,7 @@ void playACard(datasplayer *vPlayer,datasgame *readedGame,string *card)
 			
 			//vPlayer->
 			
-			for (int j=0;j<readedGame->playersList->at(i)->cardsList->size();j++)
+			for (unsigned int j=0;j<readedGame->playersList->at(i)->cardsList->size();j++)
 			{
 				
 							
@@ -854,10 +911,10 @@ void playACard(datasplayer *vPlayer,datasgame *readedGame,string *card)
 
 void turnPlayers(datasplayer *vPlayer,datasgame *readedGame)
 {
-	int IdTurn=0;
+	unsigned int IdTurn=0;
 	vPlayer->isPlaying=false;
 	//Find the player
-	for (int i=0;i<readedGame->playersList->size();i++)
+	for (unsigned int i=0;i<readedGame->playersList->size();i++)
 	{
 		
 		if (readedGame->playersList->at(i)->identifiant.compare(vPlayer->identifiant)==0)
@@ -896,13 +953,13 @@ bool testCard(datasplayer *vPlayer,datasgame *readedGame,string *card)
 	//Test if the player has a good colored card in his game
 	vPlayer->isPlaying=false;
 	//Find the player
-	for (int i=0;i<readedGame->playersList->size();i++)
+	for (unsigned int i=0;i<readedGame->playersList->size();i++)
 	{
 		
 		if (readedGame->playersList->at(i)->identifiant.compare(vPlayer->identifiant)==0)
 		{
 			
-			for (int j=0;j<readedGame->playersList->at(i)->cardsList->size();j++)
+			for (unsigned int j=0;j<readedGame->playersList->at(i)->cardsList->size();j++)
 			{
 				if (color.compare(readedGame->playersList->at(i)->cardsList->at(j).substr(0,1))==0)
 					return false;
@@ -918,6 +975,11 @@ bool testCard(datasplayer *vPlayer,datasgame *readedGame,string *card)
 
 void IAPlay(datasgame *readedGame,int pId)
 {
+	
+	if (readedGame->playersList->at(pId)->cardsList->size()==0)
+	{
+		return;
+	}
 	//If first Card in the Block
 	if (readedGame->playedCards->size()==0)
 	{
@@ -933,9 +995,9 @@ void IAPlay(datasgame *readedGame,int pId)
 	//color Finded
 	bool vColorOk=false;
 	int vId=0;
-	for (int i=0;i<readedGame->playersList->at(pId)->cardsList->size();i++)
+	for (unsigned int i=0;i<readedGame->playersList->at(pId)->cardsList->size();i++)
 	{	
-		int actualColor=color.compare(readedGame->playersList->at(pId)->cardsList->at(i).substr(0,1));
+		unsigned int actualColor=color.compare(readedGame->playersList->at(pId)->cardsList->at(i).substr(0,1));
 		
 		
 		//If the next color is not the same the card is the max
@@ -984,9 +1046,10 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 		readedGame=createGame(vPlayer);
 	
 	}
-	int thePlayer=0;
+	
+	unsigned int thePlayer=0;
 	//Find the player
-	for (int i=0;i<readedGame->playersList->size();i++)
+	for (unsigned int i=0;i<readedGame->playersList->size();i++)
 	{
 		
 		if (readedGame->playersList->at(i)->identifiant.compare(vPlayer->identifiant)==0)
@@ -1021,28 +1084,34 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 		}
 		
 	}
+	
 	//Tant que l'utilisateur n'a pas encore le droit de jouer on fait tourner l'IA
-	int vNbTurns=0;
+	unsigned int vNbTurns=0;
 	while (vNbTurns<=readedGame->playersList->size()+1&&readedGame->playersList->at(thePlayer)->isPlaying==false)
 	{	
 		vNbTurns++;
-		for (int i=0;i<readedGame->playersList->size();i++)
+		for (unsigned int i=0;i<readedGame->playersList->size();i++)
 		{
 			if (readedGame->playersList->size()<=readedGame->playedCards->size())
 			{
+				
 				break;
 			}
 			if (i==thePlayer)
 			{
 				if (readedGame->playersList->at(thePlayer)->isPlaying==true)
-				
-				break;
+				{
+					
+					break;
+				}
 			}	
 			else
 			{
 				if (readedGame->playersList->at(i)->isPlaying==true)
 				{
+					
 					IAPlay(readedGame,i);
+					
 				}
 			}
 		}
@@ -1058,7 +1127,7 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 		int vWiner=0;
 		int theMax=0;
 		int total=0;
-		for(int i=0;i<readedGame->playersList->size();i++)
+		for(unsigned int i=0;i<readedGame->playersList->size();i++)
 		{
 			string plCard=readedGame->playersList->at(i)->actualCard;
 			readedGame->playersList->at(i)->isPlaying=false;
@@ -1096,13 +1165,15 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 	{
 		vPlayer->isPlaying=true;
 	}
+	if (readedGame->playersList->at(thePlayer)->cardsList->size()!=0)
+	{
 	//Tant que l'utilisateur n'a pas encore le droit de jouer on fait tourner l'IA
 	vNbTurns=0;
 
 	while (readedGame->playersList->at(thePlayer)->isPlaying==false)
 	{	
 		vNbTurns++;
-		for (int i=0;i<readedGame->playersList->size();i++)
+		for (unsigned int i=0;i<readedGame->playersList->size();i++)
 		{
 			if (i==thePlayer)
 			{
@@ -1120,14 +1191,21 @@ void gameRules(datasplayer *vPlayer, string *action, string * card)
 		}
 		
 	}
-
+	}
 	if (readedGame->playersList->at(thePlayer)->isPlaying==true)
 	{
 		vPlayer->isPlaying=true;
 	}
 	try{
 	writeGame(vPlayer,readedGame);
-	drawCards(lastPlayedCard);
+	if (readedGame->playersList->at(thePlayer)->cardsList->size()!=0)
+	{
+		drawCards(lastPlayedCard);
+	}
+	else
+	{
+		writeWinner(vPlayer,readedGame);
+	}
 	drawPlayers(readedGame);
 	//drawCardInPlay(readedGame);
 	drawPlayerCards(vPlayer);
@@ -1157,7 +1235,7 @@ main(int argc,
        string action;
        string card;
         
-       
+      
        if (actionIn!= cgi.getElements().end() &&actionIn->getValue().empty() == false)
        {
        		action=actionIn->getValue();
@@ -1205,6 +1283,7 @@ main(int argc,
       cout << body() << endl;
       
       cout <<"<H1>Card Game</H1>";
+      cout <<"<div style=\"position:absolute;top:5;left:"<<250<<"\"><form name=\"start\"><input type=\"hidden\" name=\"actionner\" value=\"start\"><a href=\"javascript:document.forms.start.submit();\">Start a new Game</a></form></div>";
     //if the are a cookie in the stock we parse data
     	datasplayer *vPlayer;
 	if (getValue(vRet).compare("")!=0)
@@ -1217,7 +1296,7 @@ main(int argc,
 		
 		vPlayer= new datasplayer;
 		srand ( time(NULL) );     
-		int nb_aleatoire;     
+		
 		
 		stringstream buffer;
 		buffer << "P"<<(rand()%1000)+1<<"_"<<(rand()%1000)+1;
@@ -1228,7 +1307,11 @@ main(int argc,
 		writeValue(vRet,convertStructToString(vPlayer));
 		
 	}
-     	
+     	if (action.compare("start")==0)
+	{
+		writeFileGame(vPlayer->identifiant,"");
+	}
+	
      	gameRules(vPlayer,&action,&card);
       //Test Write Game
 	/*
