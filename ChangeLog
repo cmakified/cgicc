@@ -1,3 +1,8 @@
+2007-07-15  Sebastien DIAZ  <sebastien.diaz@gmail.com>
+
+	* demo/cardgame.cpp: A new demo based on a card game with persistance data,AI,Scoring, ...
+
+
 2007-07-02  Sebastien DIAZ  <sebastien.diaz@gmail.com>
 
 	* all source: Change the license LGPL to the version 3
