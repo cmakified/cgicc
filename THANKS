@@ -15,3 +15,6 @@ Carsten P. Gehrke, for his getDoubleValue bug fix.
 Bostjan Lah, for his readString bug report.
 Gilbert Fine and Jim Hull, for their form_urldecode bug fix.
 Vyacheslav Ignatyuk, for his extractBetween bug fix.
+Tomas Norambuena  for Darwin compatibility
+David Roberts  to add the XHTML support on cgicc
+Sebastien DIAZ to maintain in GNU

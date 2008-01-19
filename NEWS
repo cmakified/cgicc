@@ -2,8 +2,15 @@
 
 ======================================================================
         Please send bug reports, suggestions, and comments to
-        <bug-cgicc@gnu.org>
+        http://www.gnu.org/software/cgicc/#bug
 ======================================================================
+
+        Major changes between versions 3.2.4 and 3.2.5
+        ----------------------------------------------
+
+* Add the XHTML support from David Roberts work
+
+
 
         Major changes between versions 3.2.3 and 3.2.4
         ----------------------------------------------
