@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiUtils.h,v 1.14 2007/07/02 18:48:17 sebdiaz Exp $
+ *  $Id: CgiUtils.h,v 1.15 2008/01/19 15:43:57 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -66,8 +66,8 @@ namespace cgicc {
    * \return \c true if the strings are equal, \c false if they are not
    */
   CGICC_API bool
-  stringsAreEqual(const std::string& s1, 
-		  const std::string& s2,
+  stringsAreEqual(const std::string& ss1, 
+		  const std::string& ss2,
 		  size_t n);
   
   /*!
@@ -156,9 +156,9 @@ namespace cgicc {
    * \return The substring between the separator.
    */
   inline std::string
-  extractBetween(const std::string& data, 
-		 const std::string& separator)
-  { return extractBetween(data, separator, separator); }
+  extractBetween(const std::string& datas, 
+		 const std::string& separators)
+  { return extractBetween(datas, separators, separators); }
   
   /*!
    * \brief Write a string to an ostream.

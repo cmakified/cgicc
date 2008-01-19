@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.22 2005/02/23 01:39:25 sbooth Exp $
+## $Id: Makefile.am,v 1.23 2008/01/19 15:43:57 sebdiaz Exp $
 
 CLEANFILES = *~
 
@@ -11,12 +11,18 @@ HTMLAttributeList.cpp HTMLDoctype.cpp HTMLElement.cpp			\
 HTMLElementList.cpp HTTPContentHeader.cpp HTTPCookie.cpp		\
 HTTPHTMLHeader.cpp HTTPHeader.cpp HTTPPlainHeader.cpp			\
 HTTPRedirectHeader.cpp HTTPResponseHeader.cpp HTTPStatusHeader.cpp	\
-MStreamable.cpp
-libcgicc_la_LDFLAGS = -version-info 5:2:0
+MStreamable.cpp \
+HTTPXHTMLHeader.cpp XHTMLDoctype.cpp XMLPI.cpp
+
+libcgicc_la_LDFLAGS = -lstdc++  -version-info 5:2:0 @GNUCAP_LDFLAGS@  
 
 pkginclude_HEADERS = CgiDefs.h CgiEnvironment.h CgiInput.h CgiUtils.h	\
 Cgicc.h FormEntry.h FormFile.h HTMLAtomicElement.h HTMLAttribute.h	\
 HTMLAttributeList.h HTMLBooleanElement.h HTMLClasses.h HTMLDoctype.h	\
 HTMLElement.h HTMLElementList.h HTTPContentHeader.h HTTPCookie.h	\
 HTTPHTMLHeader.h HTTPHeader.h HTTPPlainHeader.h HTTPRedirectHeader.h	\
-HTTPResponseHeader.h HTTPStatusHeader.h MStreamable.h
+HTTPResponseHeader.h HTTPStatusHeader.h MStreamable.h \
+HTTPXHTMLHeader.h XHTMLDoctype.h XMLDeclaration.h XMLPI.h
+
+libcgicc_la_CPPFLAGS = -x c++ 
+libcgicc_la_LIBADD = 
