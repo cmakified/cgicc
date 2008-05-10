@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.18 2004/06/22 01:42:30 sbooth Exp $
+## $Id: Makefile.am,v 1.19 2008/05/10 09:46:59 sebdiaz Exp $
 
 CLEANFILES = *~ stamp
 
@@ -21,16 +21,16 @@ clean-local:
 	rm -rf html
 
 install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(docdir)
+	$(mkinstalldirs) $(DESTDIR)@htmldir@
 	for file in $(srcdir)/html/*; do \
 		bn="`basename $$file`"; \
-	 	$(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/$$bn; \
+	 	$(INSTALL_DATA) $$file $(DESTDIR)@htmldir@/$$bn; \
 	done
 
 uninstall-local:
 	for file in $(srcdir)/html/*; do \
 		bn="`basename $$file`"; \
-		rm -f $(DESTDIR)$(docdir)/$$bn; \
+		rm -f $(DESTDIR)@htmldir@/$$bn; \
 	done
 
 ## Dummy rule to build a timestamp file
