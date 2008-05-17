@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.39 2004/06/28 00:25:28 sbooth Exp $
+## $Id: Makefile.am,v 1.40 2008/05/17 09:09:06 sebdiaz Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-bzip2
 
@@ -7,6 +7,8 @@ DEMO = demo contrib
 else
 DEMO =
 endif
+
+ACLOCAL_AMFLAGS= -I m4 --install
 
 SUBDIRS = cgicc doc support $(DEMO)
 
@@ -21,6 +23,9 @@ dist-hook:
 	rm -rf $(distdir)/example/CVS
 	rm -f $(distdir)/example/autogen
 	rm -rf $(distdir)/win/CVS
+
+install-data-hook:
+	$(INSTALL_DATA) example/cgicc.m4 /usr/share/aclocal
 
 ## Tag sources before making distribution, but don't make a
 ## distribution if checks fail.
