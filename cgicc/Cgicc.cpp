@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.cpp,v 1.26 2007/07/02 18:48:17 sebdiaz Exp $
+ *  $Id: Cgicc.cpp,v 1.27 2008/05/17 09:15:58 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -349,7 +349,7 @@ cgicc::Cgicc::parseFormInput(const std::string& data)
   // Standard content type = application/x-www-form-urlencoded
   // It may not be explicitly specified
   if(true == content_type.empty() 
-     || stringsAreEqual(content_type, standard_type)) {
+     || stringsAreEqual(content_type, standard_type,standard_type.length())) {
     std::string name, value;
     std::string::size_type pos;
     std::string::size_type oldPos = 0;
