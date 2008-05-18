@@ -17,4 +17,7 @@ Gilbert Fine and Jim Hull, for their form_urldecode bug fix.
 Vyacheslav Ignatyuk, for his extractBetween bug fix.
 Tomas Norambuena  for Darwin compatibility
 David Roberts  to add the XHTML support on cgicc
+Frédéric Sagnes to bugs and patch on charset suffix
+Chris Butler to bug on Missing includes in HTMLElement.cpp
+Tiziano Müller to bugs and patch on install and makefile
 Sebastien DIAZ to maintain in GNU

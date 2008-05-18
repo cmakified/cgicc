@@ -1,14 +1,15 @@
 dnl -*-m4-*-
-dnl $Id: configure.ac,v 1.11 2005/02/23 01:48:37 sbooth Exp $
+dnl $Id: configure.ac,v 1.12 2008/05/18 19:42:41 sebdiaz Exp $
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(cgicc, 3.2.4, bug-cgicc@gnu.org)
+AC_INIT(cgicc, NOTVERSIONNEDPACKAGE, bug-cgicc@gnu.org)
 AC_CONFIG_SRCDIR(cgicc/Cgicc.cpp)
-AC_REVISION([$Revision: 1.11 $])
+AC_REVISION([$Revision: 1.12 $])
 AC_CONFIG_AUX_DIR(support)
 AC_PREFIX_DEFAULT(/usr)
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(cgicc/config.h)
+AC_CONFIG_MACRO_DIR([m4])
 
 AC_LANG_CPLUSPLUS
 
@@ -17,6 +18,11 @@ AC_PROG_CXX
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, /bin/echo)
+
+
+
+dnl Determine host system type
+
 
 dnl Checks for libraries.
 

@@ -1,3 +1,17 @@
+2008-05-18  Sebastien DIAZ  <sebastien.diaz@gmail.com>
+	
+	Corrected Bugs
+	#23253  Queries with a charset suffix in the content type do not get parsed from Frédéric Sagnes
+	#22885  Missing includes in HTMLElement.cpp from  Chris Butler
+	#22517  Version 3.2.5 identifies itself as version 3.2.4  
+	#22177  Install example/cgicc.m4 per default  from   Tiziano Müller
+	#22176  Remove stray @GNUCAP_LDFLAGS@  Fixed  from   Tiziano Müller
+	
+	Added Patches
+	#6510  Queries with a charset suffix in the content type do not get parsed from    Frédéric Sagnes
+	#6385  Fix wrong htmldir/docdir handling in doc/Makefile.am  from   Tiziano Müller
+
+
 2008-01-19  Sebastien DIAZ  <sebastien.diaz@gmail.com>
 
 	* cgicc/CgiUtils.h: Just little change

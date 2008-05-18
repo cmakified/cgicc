@@ -6,7 +6,7 @@ echo "== Creating support dir =="
 test -d support || mkdir support
  
 echo "== Running aclocal =="
-aclocal
+aclocal -I m4 --install
 
 echo "== Running autoheader =="
 autoheader
