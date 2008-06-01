@@ -4,11 +4,15 @@
         Please send bug reports, suggestions, and comments to
         http://www.gnu.org/software/cgicc/#bug
 ======================================================================
+        Major changes between versions 3.2.6 and 3.2.7
+        ----------------------------------------------
+
+* Correction of bugs on compilation   .
 
 	Major changes between versions 3.2.5 and 3.2.6
         ----------------------------------------------
-
-* Correction of bugs, see changelog file
+ 
+* Correction of bugs, see changelog file   .
 
         Major changes between versions 3.2.4 and 3.2.5
         ----------------------------------------------

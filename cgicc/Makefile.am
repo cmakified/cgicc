@@ -1,8 +1,8 @@
-## $Id: Makefile.am,v 1.25 2008/05/18 19:42:41 sebdiaz Exp $
+## $Id: Makefile.am,v 1.26 2008/06/01 18:40:27 sebdiaz Exp $
 
 CLEANFILES = *~
 
-ACLOCAL_AMFLAGS= -I m4 -I .
+ACLOCAL_AMFLAGS= 
 
 INCLUDES = -I$(top_srcdir) -I$(top_builddir)
 

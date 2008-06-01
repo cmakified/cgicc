@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.19 2008/05/10 09:46:59 sebdiaz Exp $
+## $Id: Makefile.am,v 1.20 2008/06/01 18:40:28 sebdiaz Exp $
 
 CLEANFILES = *~ stamp
 
@@ -10,7 +10,9 @@ COPYING.DOC header.html footer.html cgicc-doc.css
 
 IMAGES = cgicc.png gnu-head-sm.jpg
 
-EXTRA_DIST = html stamp
+EXTRA_DIST = html stamp index.tmpl license.tmpl lists.tmpl bugs.tmpl demos.tmpl		\
+cgi-overview.tmpl tutorial.tmpl lib-overview.tmpl COPYING COPYING.LIB	\
+COPYING.DOC header.html footer.html cgicc-doc.css cgicc.png gnu-head-sm.jpg
 
 SEDCMD1 = s/$$title/GNU cgicc documentation version $(VERSION)/g
 SEDCMD2 = s/$$(VERSION)/$(VERSION)/g

@@ -1,3 +1,8 @@
+2008-06-01  Sebastien DIAZ  <sebastien.diaz@gmail.com>
+        Corrected Bugs
+        #23341  Instalation cgicc.M4 doesn t support DESDIR 
+        #23316  distribute plain file until symbolic link
+
 2008-05-18  Sebastien DIAZ  <sebastien.diaz@gmail.com>
 	
 	Corrected Bugs
