@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: cardgame.cpp,v 1.6 2007/07/15 12:38:00 sebdiaz Exp $
+ *  $Id: cardgame.cpp,v 1.7 2009/01/03 17:26:43 sebdiaz Exp $
  *
  *  Copyright (C) 2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
  *  Part of the GNU cgicc library, http://www.gnu.org/software/cgicc
@@ -36,7 +36,7 @@
 #include <sstream>
 #include <fstream>
 #include <queue>
-
+#include <algorithm>
 #include "cgicc/CgiDefs.h"
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
@@ -1043,7 +1043,7 @@ namespace CardGameTools
 
 	void drawPlayerCards(datasplayer *vPlayer)
 	{
-		sort (vPlayer->cardsList->begin(),vPlayer->cardsList->end());
+		std::sort (vPlayer->cardsList->begin(),vPlayer->cardsList->end());
 		cout <<"<form name=\"cards\">"; 
 		cout <<"<input type=\"hidden\" name=\"actionner\" value=\"\">"; 
 		cout <<"<input type=\"hidden\" name=\"card\" value=\"\">"; 
@@ -1229,7 +1229,7 @@ namespace CardGameTools
 		//If not take the color of the first Card
 		string color=readedGame->playedCards->front().substr(0,1);
 		
-		sort(readedGame->playersList->at(pId)->cardsList->begin(),readedGame->playersList->at(pId)->cardsList->end());
+		std::sort(readedGame->playersList->at(pId)->cardsList->begin(),readedGame->playersList->at(pId)->cardsList->end());
 
 		//color Finded
 		bool vColorOk=false;

@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: dns.cpp,v 1.24 2007/07/02 18:48:19 sebdiaz Exp $
+ *  $Id: dns.cpp,v 1.25 2009/01/03 17:26:43 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -34,7 +34,8 @@
 #include <vector>
 #include <stdexcept>
 #include <iostream>
-
+#include <stdio.h>
+#include <memory.h>
 #include "cgicc/CgiDefs.h"
 #include "cgicc/Cgicc.h"
 #include "cgicc/HTTPHTMLHeader.h"
