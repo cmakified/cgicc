@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiEnvironment.cpp,v 1.24 2007/07/02 18:48:17 sebdiaz Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.25 2009/01/03 17:12:07 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -70,16 +70,20 @@ cgicc::CgiEnvironment::CgiEnvironment(CgiInput *input)
     std::vector<char> data(fContentLength);
     
     // If input is 0, use the default implementation of CgiInput
-    if(0 == input) {
-      if(local_input.read(&data[0],fContentLength) != fContentLength)
-	throw std::runtime_error("I/O error");
-    }
-    else {
-      if(input->read(&data[0], fContentLength) != fContentLength)
-	throw std::runtime_error("I/O error");
-    }
+	if ( getContentLength() )
+	{
+	// If input is 0, use the default implementation of CgiInput
+		if ( input == 0 )
+		{
+		if ( local_input.read( &data[0], getContentLength() ) != getContentLength() )
+		throw std::runtime_error("I/O error");
+		}
+		else
+		if ( input->read( &data[0], getContentLength() ) != getContentLength() )
+		throw std::runtime_error("I/O error");
 
-    fPostData = std::string(&data[0], fContentLength);
+		fPostData = std::string( &data[0], getContentLength() );
+	} 
   }
   
   fCookies.reserve(10);

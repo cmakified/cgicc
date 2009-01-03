@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiUtils.h,v 1.15 2008/01/19 15:43:57 sebdiaz Exp $
+ *  $Id: CgiUtils.h,v 1.16 2009/01/03 17:12:07 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -71,22 +71,23 @@ namespace cgicc {
 		  size_t n);
   
   /*!
-   * \brief Convert an ASCII string to a URL-safe string. 
-   *
-   * For example, '!' is converted to "%21" and ' ' is converted to '+'.
-   * \param src The src string containing the characters to encode
-   * \return The converted string
-   */
-  CGICC_API std::string
-  form_urldecode(const std::string& src);
-
-  /*!
    * \brief Convert encoded characters in form data to normal ASCII. 
    *
    * For example, "%21" is converted to '!' and '+' is converted to a space.
    * Normally, this is called internally to decode the query string or post 
    * data.
    * \param src The src string containing the encoded characters
+
+   * \return The converted string
+   */
+  CGICC_API std::string
+  form_urldecode(const std::string& src);
+
+  /*!
+   * \brief Convert an ASCII string to a URL-safe string.
+   *
+   * For example, '!' is converted to "%21" and ' ' is converted to '+'.
+   * \param src The src string containing the characters to encode
    * \return The converted string
    */
   CGICC_API std::string

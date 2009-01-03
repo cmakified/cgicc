@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.cpp,v 1.27 2008/05/17 09:15:58 sebdiaz Exp $
+ *  $Id: Cgicc.cpp,v 1.28 2009/01/03 17:12:07 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -188,7 +188,7 @@ cgicc::Cgicc::Cgicc(CgiInput *input)
   fFormData.reserve(20);
   fFormFiles.reserve(2);
 
-  parseFormInput(fEnvironment.getPostData());
+  parseFormInput(fEnvironment.getPostData(), fEnvironment.getContentType());
   parseFormInput(fEnvironment.getQueryString());
 }
 
@@ -203,7 +203,7 @@ cgicc::Cgicc::operator= (const Cgicc& cgi)
   fFormData.clear();
   fFormFiles.clear();
 
-  parseFormInput(fEnvironment.getPostData());
+  parseFormInput(fEnvironment.getPostData(), fEnvironment.getContentType());
   parseFormInput(fEnvironment.getQueryString());
   
   return *this;
@@ -240,7 +240,7 @@ cgicc::Cgicc::restore(const std::string& filename)
   fFormData.clear();
   fFormFiles.clear();
 
-  parseFormInput(fEnvironment.getPostData());
+  parseFormInput(fEnvironment.getPostData(), fEnvironment.getContentType());
   parseFormInput(fEnvironment.getQueryString());
 }
 
@@ -336,9 +336,9 @@ cgicc::Cgicc::findEntries(const std::string& param,
 }
 
 void
-cgicc::Cgicc::parseFormInput(const std::string& data)
+cgicc::Cgicc::parseFormInput(const std::string& data, const std::string &content_type)
 {
-  std::string content_type 	= fEnvironment.getContentType();
+  
   std::string standard_type	= "application/x-www-form-urlencoded";
   std::string multipart_type 	= "multipart/form-data";
 

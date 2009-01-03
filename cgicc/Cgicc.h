@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.h,v 1.18 2007/07/02 18:48:17 sebdiaz Exp $
+ *  $Id: Cgicc.h,v 1.19 2009/01/03 17:12:07 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -426,7 +426,7 @@ namespace cgicc {
 
     // Convert query string into a list of FormEntries
     void 
-    parseFormInput(const std::string& data);
+    parseFormInput(const std::string& data, const std::string& content_type = "application/x-www-form-urlencoded");
     
     // Parse a multipart/form-data header
     MultipartHeader
