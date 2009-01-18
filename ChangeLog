@@ -1,3 +1,11 @@
+2009-01-18  Sebastien DIAZ  <sebastien.diaz@gmail.com>
+        Corrected Bugs
+        #25212 	'sort' undeclared
+		#25211 	dns.cpp fails with memcpy undeclared
+		#25073 	query string is incorrectly parsed, when post enctype is multipart/form-data 
+		#24301 	CgiEnvironment constructor fails when posts have zero length
+		#23979 	Swapped documentation blocks in CgiUtils.h
+
 2008-06-01  Sebastien DIAZ  <sebastien.diaz@gmail.com>
         Corrected Bugs
         #23341  Instalation cgicc.M4 doesn t support DESDIR 

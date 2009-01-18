@@ -1,5 +1,5 @@
 dnl
-dnl $Id: cgicc.m4,v 1.9 2007/07/02 18:48:19 sebdiaz Exp $
+dnl $Id: cgicc.m4,v 1.10 2009/01/18 13:58:25 sebdiaz Exp $
 dnl
 dnl Copyright (C) 2000 - 2004 Stephen F. Booth
 dnl                      2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -28,7 +28,7 @@ dnl Check for the configuration script 'cgicc-config' in PATH.  Define
 dnl  the macros cgicc_libdir and cgicc_includedir to the values
 dnl  obtained from 'cgicc-config'.
 dnl
-AC_DEFUN(CGICC_CHECK_CONFIG, [
+AC_DEFUN([CGICC_CHECK_CONFIG], [
   AC_PATH_PROG(CGICC_CONFIG, cgicc-config, no, [$1/bin $PATH])
   if test "$CGICC_CONFIG" = no; then
     AC_MSG_ERROR(cgicc-config not found in $1/bin:$PATH)
@@ -47,7 +47,7 @@ dnl
 dnl Perform a sanity check on the cgicc installation, making sure all
 dnl  headers are present.
 dnl
-AC_DEFUN(CGICC_CHECK_HEADERS, [
+AC_DEFUN([CGICC_CHECK_HEADERS], [
   AC_REQUIRE([CGICC_CHECK_CONFIG])
   missing=
   AC_MSG_CHECKING(whether cgicc headers look good)
@@ -76,7 +76,7 @@ dnl
 dnl Verify that the installed version of cgicc is at least
 dnl  MINIMUM-VERSION, if specified, otherwise 3.2.1
 dnl
-AC_DEFUN(CGICC_CHECK_VERSION, [
+AC_DEFUN([CGICC_CHECK_VERSION], [
   AC_REQUIRE([CGICC_CHECK_CONFIG])
   cgicc_min_version=ifelse([$1], ,3.2.1,$1)
   AC_MSG_CHECKING(for cgicc version >= $cgicc_min_version)
@@ -106,7 +106,7 @@ dnl Check the cgicc installation for:
 dnl  - Presence of the 'cgicc-config' script [in PREFIX]
 dnl  - Presence of all headers [in INCLUDEDIR]
 dnl  - Installed version >= 3.2.1 [or MINIMUM-VERSION if specified]
-AC_DEFUN(CGICC_CHECK_INSTALLATION,[
+AC_DEFUN([CGICC_CHECK_INSTALLATION][
   CGICC_CHECK_CONFIG($1)
   CGICC_CHECK_HEADERS($2)
   CGICC_CHECK_VERSION($3)

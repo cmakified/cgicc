@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: HTTPRedirectHeader.cpp,v 1.8 2007/07/02 18:48:19 sebdiaz Exp $
+ *  $Id: HTTPRedirectHeader.cpp,v 1.9 2009/01/18 13:58:25 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -31,8 +31,14 @@
 // Class HTTPRedirectHeader
 // ============================================================
 cgicc::HTTPRedirectHeader::HTTPRedirectHeader(const std::string& url) 
+    : HTTPHeader(url) , fStatus(-1)
+ {}
+ 
+cgicc::HTTPRedirectHeader::HTTPRedirectHeader(const std::string& url,bool permanent) 
   : HTTPHeader(url)
-{}
+{
+  fStatus = permanent ? 301 : 302;
+}
 
 cgicc::HTTPRedirectHeader::~HTTPRedirectHeader()
 {}
@@ -40,6 +46,10 @@ cgicc::HTTPRedirectHeader::~HTTPRedirectHeader()
 void 
 cgicc::HTTPRedirectHeader::render(std::ostream& out) 	const
 {
+  if(fStatus == 301)
+    out << "Status: 301 Moved Permanently" << std::endl;
+  else if(fStatus == 302)
+    out << "Status: 302 Found" << std::endl;
   out << "Location: " << getData() << std::endl;
   
   if(false == getCookies().empty()) {

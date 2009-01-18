@@ -1,6 +1,7 @@
 Special thanks to:
 ==================
 
+Artyom , hor his help on Bugs correction.
 Christof Danzl, for his HTML generation classes and feedback.
 Gilbert Fine, for his multipart/form-data bug fix, FastCGI integration.
 Francois Degros, for his assignment operator fix.

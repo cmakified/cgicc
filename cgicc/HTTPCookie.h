@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: HTTPCookie.h,v 1.8 2007/07/02 18:48:18 sebdiaz Exp $
+ *  $Id: HTTPCookie.h,v 1.9 2009/01/18 13:58:25 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -161,6 +161,47 @@ namespace cgicc {
     /*! \name Accessor Methods */
     //@{
     
+	/*!
+     * \brief Mark this cookie as secure or unsecure.
+     *
+     */
+    inline void 
+    remove()
+    { fRemoved = true; }
+
+    /*!
+     * \brief Mark this cookie as secure or unsecure.
+    *
+     * \param removed Set removed status
+     */
+    inline void 
+    setRemoved(bool removed)
+    { fRemoved = removed; }
+ /*!
+     * \brief Determine if this is a removed cookie.
+     *
+     * \return True if this cookie is removed, false if not.
+     */
+    inline bool 
+    isRemoved()					const
+    { return fRemoved; }
+     /*!
+     * \brief Create a new partially-spefified HTTPCookie for deletion 
+     *
+     * 
+     * \param name The name of the cookie.
+     * \param domain The domain for which this cookie is valid- an empty string
+     * will use the hostname of the server which generated the cookie response.
+     * If specified, the domain <em>must</em> start with a period('.'). 
+     * \param path The subset of URLS in a domain for which the cookie is 
+     * valid, for example \c /
+     * @param secure Specifies whether this is a secure cookie.
+     */
+    HTTPCookie(const std::string& name, 
+	       const std::string& domain, 
+	       const std::string& path,
+	       bool secure);
+	
     /*!
      * \brief Get the name of this cookie.
      *
@@ -320,6 +361,7 @@ namespace cgicc {
     unsigned long 	fMaxAge;
     std::string 	fPath;
     bool 		fSecure;
+	bool		fRemoved;
   };
   
 } // namespace cgicc

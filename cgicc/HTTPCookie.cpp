@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: HTTPCookie.cpp,v 1.10 2007/07/02 18:48:18 sebdiaz Exp $
+ *  $Id: HTTPCookie.cpp,v 1.11 2009/01/18 13:58:25 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -33,7 +33,8 @@
 // ============================================================
 cgicc::HTTPCookie::HTTPCookie()
   : fMaxAge(0),
-    fSecure(false)
+    fSecure(false),
+    fRemoved(false)
 {}
 
 cgicc::HTTPCookie::HTTPCookie(const std::string& name, 
@@ -41,7 +42,8 @@ cgicc::HTTPCookie::HTTPCookie(const std::string& name,
   : fName(name),
     fValue(value),
     fMaxAge(0),
-    fSecure(false)
+    fSecure(false),
+    fRemoved(false)
 {}
 
 cgicc::HTTPCookie::HTTPCookie(const std::string& name, 
@@ -57,7 +59,8 @@ cgicc::HTTPCookie::HTTPCookie(const std::string& name,
     fDomain(domain), 
     fMaxAge(maxAge),
     fPath(path), 
-    fSecure(secure)
+    fSecure(secure),
+    fRemoved(false)
 {}
 
 cgicc::HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
@@ -68,7 +71,8 @@ cgicc::HTTPCookie::HTTPCookie(const HTTPCookie& cookie)
     fDomain(cookie.fDomain), 
     fMaxAge(cookie.fMaxAge),
     fPath(cookie.fPath), 
-    fSecure(cookie.fSecure)
+    fSecure(cookie.fSecure),
+    fRemoved(cookie.fRemoved)
 {}
 
 cgicc::HTTPCookie::~HTTPCookie()
@@ -83,7 +87,8 @@ cgicc::HTTPCookie::operator== (const HTTPCookie& cookie) const
 	  && stringsAreEqual(fDomain, cookie.fDomain)
 	  && fMaxAge == cookie.fMaxAge
 	  && stringsAreEqual(fPath, cookie.fPath)
-	  && fSecure == cookie.fSecure);
+	  && fSecure == cookie.fSecure
+	  && fRemoved == cookie.fRemoved);
 }
 
 void 
@@ -94,8 +99,10 @@ cgicc::HTTPCookie::render(std::ostream& out) 	const
     out << "; Comment=" << fComment;
   if(false == fDomain.empty())
     out << "; Domain=" << fDomain;
-  if(0 != fMaxAge)
-    out << "; Max-Age=" << fMaxAge;
+  if(fRemoved)
+    out << "; Expires=Fri, 01-Jan-1971 01:00:00 GMT;";
+  else if(0 != fMaxAge)
+      out << "; Max-Age=" << fMaxAge;
   if(false == fPath.empty())
     out << "; Path=" << fPath;
   if(true == fSecure)

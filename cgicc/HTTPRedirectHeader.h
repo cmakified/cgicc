@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: HTTPRedirectHeader.h,v 1.7 2007/07/02 18:48:19 sebdiaz Exp $
+ *  $Id: HTTPRedirectHeader.h,v 1.8 2009/01/18 13:58:25 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -60,6 +60,12 @@ namespace cgicc {
      */
     HTTPRedirectHeader(const std::string& url);
     
+	    /*!
+     * \brief Create a new redirection header with redirect status.
+     * \param url The redirection URL.
+     * \param permanent The status permanent or temporary
+     */
+    HTTPRedirectHeader(const std::string& url,bool permanent);
     /*! 
      * \brief Destructor 
      *
@@ -77,6 +83,7 @@ namespace cgicc {
     
   private:
     HTTPRedirectHeader();
+	int fStatus;
   };
   
 } // namespace cgicc
