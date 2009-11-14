@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: cgicc
+Description: GNU cgicc is an ANSI C++ compliant class library that greatly simplifies the creation of CGI applications for the World Wide Web.
+Requires: 
+Version: @VERSION@
+Libs: -L${libdir} 
+Cflags: 

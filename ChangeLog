@@ -1,3 +1,8 @@
+
+2009-11-14 Sebastien DIAZ  <sebastien.diaz@gmail.com>
+        Corrected Bugs on 3.2.10
+        UBUNTU #219307 libcgicc5-dev still missing cgicc.pc
+
 2009-11-14  Sebastien DIAZ  <sebastien.diaz@gmail.com>
 	Corrected Bugs
         #26003 : CgiEnvironment getenv

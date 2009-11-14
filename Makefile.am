@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.41 2008/06/01 18:40:27 sebdiaz Exp $
+## $Id: Makefile.am,v 1.42 2009/11/14 20:58:45 sebdiaz Exp $
 
 AUTOMAKE_OPTIONS = check-news dist-bzip2
 
@@ -20,6 +20,8 @@ EXTRA_DIST = BUGS README.WIN COPYING.DOC example win
 
 aclocaldir = $(datadir)/aclocal
 aclocal_DATA = example/cgicc.m4
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = cgicc.pc
 
 dist-hook:
 	cd $(distdir)/example && (make distclean || exit 0)

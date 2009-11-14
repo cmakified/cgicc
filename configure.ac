@@ -1,10 +1,10 @@
 dnl -*-m4-*-
-dnl $Id: configure.ac,v 1.12 2008/05/18 19:42:41 sebdiaz Exp $
+dnl $Id: configure.ac,v 1.13 2009/11/14 20:58:45 sebdiaz Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(cgicc, NOTVERSIONNEDPACKAGE, bug-cgicc@gnu.org)
 AC_CONFIG_SRCDIR(cgicc/Cgicc.cpp)
-AC_REVISION([$Revision: 1.12 $])
+AC_REVISION([$Revision: 1.13 $])
 AC_CONFIG_AUX_DIR(support)
 AC_PREFIX_DEFAULT(/usr)
 AM_INIT_AUTOMAKE
@@ -108,4 +108,4 @@ dnl Always output certain files
 AC_CONFIG_FILES([Makefile cgicc/Makefile cgicc/CgiDefs.h 
   support/Makefile support/cgicc-config doc/Makefile doc/Doxyfile])
 
-AC_OUTPUT
+AC_OUTPUT( cgicc.pc )
