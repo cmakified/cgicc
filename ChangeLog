@@ -2,6 +2,8 @@
 	Corrected Bugs
         #26003 : CgiEnvironment getenv
 	#26065 : save function
+	#26917 : 3.2.8 tar files has sym links to files that don't exist
+	#27681 : Make building on FreeBSD easier
 	
 2009-01-18  Sebastien DIAZ  <sebastien.diaz@gmail.com>
         Corrected Bugs
