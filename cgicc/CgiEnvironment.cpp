@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiEnvironment.cpp,v 1.25 2009/01/03 17:12:07 sebdiaz Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.26 2009/11/14 16:50:11 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -255,22 +255,20 @@ cgicc::CgiEnvironment::readEnvironmentVariables(CgiInput *input)
   fReferrer 		= input->getenv("HTTP_REFERER");
   fCookie 		= input->getenv("HTTP_COOKIE");
 
-#ifdef WIN32
-  // Win32 bug fix by Peter Goedtkindt
+  // Win32 bug fix by Peter Goedtkindt 
   std::string https 	= input->getenv("HTTPS");
   if(stringsAreEqual(https, "on"))
     fUsingHTTPS = true;
   else
     fUsingHTTPS = false;
-#else
-  fUsingHTTPS = (0 != getenv("HTTPS"));
-#endif
+
+
 }
 
 void
 cgicc::CgiEnvironment::save(const std::string& filename) 	const
 {
-  std::ofstream file( filename.c_str(), std::ios::out );
+  std::ofstream file( filename.c_str(), std::ios::binary |std::ios::out );
 
   if( ! file )
     throw std::runtime_error("I/O error");
@@ -314,7 +312,7 @@ cgicc::CgiEnvironment::save(const std::string& filename) 	const
 void
 cgicc::CgiEnvironment::restore(const std::string& filename)
 {
-  std::ifstream file( filename.c_str(), std::ios::in );
+  std::ifstream file( filename.c_str(), std::ios::binary | std::ios::in );
 
   if( ! file )
     throw std::runtime_error("I/O error");
