@@ -12,14 +12,15 @@ echo "== Running autoheader =="
 autoheader
 
 echo "== Running libtoolize =="
-libtoolize
+libtoolize -f -i -c
 
 echo "== Running automake =="
-automake --add-missing
+automake --add-missing -c -f
 
 echo "== Running autoconf =="
 autoconf
 
 echo "==> example"
-cd example && ./autogen
+cd example 
+./autogen
 echo "<== example"
