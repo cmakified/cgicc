@@ -2,6 +2,7 @@
         Corrected Bugs on 3.2.10
         Savannah bugs:
           bug #32742: Malformed name/value pairs not handled nicely in Cgicc.cpp
+          bug #38053, incorrect soname
 
 2009-11-14 Sebastien DIAZ  <sebastien.diaz@gmail.com>
         Corrected Bugs on 3.2.10
