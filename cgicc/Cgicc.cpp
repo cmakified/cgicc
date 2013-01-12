@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.cpp,v 1.28 2009/01/03 17:12:07 sebdiaz Exp $
+ *  $Id: Cgicc.cpp,v 1.29 2013/01/12 09:50:20 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -356,14 +356,33 @@ cgicc::Cgicc::parseFormInput(const std::string& data, const std::string &content
 
     // Parse the data in one fell swoop for efficiency
     while(true) {
-      // Find the '=' separating the name from its value
-      pos = data.find_first_of('=', oldPos);
+      // Find the '=' separating the name from its value, also have to check for '&' as its a common misplaced delimiter but is a delimiter none the less
+      pos = data.find_first_of( "&=", oldPos);
       
       // If no '=', we're finished
       if(std::string::npos == pos)
 	break;
       
       // Decode the name
+	// pos == '&', that means whatever is in name is the only name/value
+      if( data.at( pos ) == '&' )
+	  {
+	  	const char * pszData = data.c_str() + oldPos;
+		while( *pszData == '&' ) // eat up extraneous '&'
+		{
+			++pszData; ++oldPos;
+		}
+		if( oldPos >= pos )
+		{ // its all &'s
+			oldPos = ++pos;
+			continue;
+		}
+		// this becomes an name with an empty value
+		name = form_urldecode(data.substr(oldPos, pos - oldPos));
+		fFormData.push_back(FormEntry(name, "" ) );
+		oldPos = ++pos;
+		continue;
+	  }
       name = form_urldecode(data.substr(oldPos, pos - oldPos));
       oldPos = ++pos;
       
