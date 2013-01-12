@@ -1,3 +1,9 @@
+echo DONT FORGET TO CHANGE VERSION increment on Makefile.Am
+echo "libcgicc_la_LDFLAGS = -lstdc++ -version-info 5:2:0 "
+echo The version info format is CURRENT:REVISION:AGE. 
+echo "- If you have not changed the interface (bug fixes) bump the version to CURRENT : REVISION+1 : AGE "
+echo "- If you have augmented the interface (new functions)bump the version to CURRENT+1 : 0 : AGE+1 "
+echo "- If you have broken old interface (e.g. removed functions) bump the version to CURRENT+1 : 0 : 0" 
 rm -rf cgicc-$1/*
 rm -rf cgicc-$1
 cd /tmp
