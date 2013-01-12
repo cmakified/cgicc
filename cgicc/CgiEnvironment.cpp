@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: CgiEnvironment.cpp,v 1.26 2009/11/14 16:50:11 sebdiaz Exp $
+ *  $Id: CgiEnvironment.cpp,v 1.27 2013/01/12 19:57:04 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -254,6 +254,7 @@ cgicc::CgiEnvironment::readEnvironmentVariables(CgiInput *input)
   fRedirectStatus 	= input->getenv("REDIRECT_STATUS");
   fReferrer 		= input->getenv("HTTP_REFERER");
   fCookie 		= input->getenv("HTTP_COOKIE");
+  fAcceptLanguageString = input->getenv("HTTP_ACCEPT_LANGUAGE"); 
 
   // Win32 bug fix by Peter Goedtkindt 
   std::string https 	= input->getenv("HTTPS");

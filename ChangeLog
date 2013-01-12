@@ -4,6 +4,7 @@
           bug #32742: Malformed name/value pairs not handled nicely in Cgicc.cpp
           bug #38053, incorrect soname
 	  bug #36497, Form Variable Parsing Bug
+          bug #35285: CGICC does not return all data from HTML request header
 
 2009-11-14 Sebastien DIAZ  <sebastien.diaz@gmail.com>
         Corrected Bugs on 3.2.10
