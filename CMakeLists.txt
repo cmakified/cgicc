@@ -5,6 +5,9 @@
 cmake_minimum_required (VERSION 2.8.7)
 project (cgicc)
 
+option (cgicc_build_example "Build cgicc example app" OFF)
+option (cgicc_build_demo "Build cgicc demos" OFF)
+
 set (VERSION "3.2.10")
 execute_process (COMMAND hostname
 	OUTPUT_VARIABLE HOST
@@ -117,4 +120,9 @@ source_group ("Header Files"
 add_library (cgicc
 	${cgicc_SOURCES}
 	${cgicc_HEADERS})
-
+if (cgicc_build_example)
+	add_subdirectory (example)
+endif ()
+if (cgicc_build_demo)
+	add_subdirectory (demo)
+endif ()
