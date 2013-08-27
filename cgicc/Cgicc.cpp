@@ -387,7 +387,7 @@ cgicc::Cgicc::parseFormInput(const std::string& data, const std::string &content
       oldPos = ++pos;
       
       // Find the '&' or ';' separating subsequent name/value pairs
-      pos = data.find_first_of(';&', oldPos);
+      pos = data.find_first_of(";&", oldPos);
       
       // Even if an '&' wasn't found the rest of the string is a value
       value = form_urldecode(data.substr(oldPos, pos - oldPos));
