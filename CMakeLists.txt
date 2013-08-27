@@ -6,8 +6,9 @@ cmake_minimum_required (VERSION 2.8.7)
 project (cgicc)
 
 set (VERSION "3.2.10")
-execute_process (COMMAND "(hostname || uname -n) 2>/dev/null | sed 1q"
-	RESULT_VARIABLE HOST)
+execute_process (COMMAND hostname
+	OUTPUT_VARIABLE HOST
+	OUTPUT_STRIP_TRAILING_WHITESPACE)
 # Platform checks
 include (CheckIncludeFiles)
 check_include_files (dlfcn.h HAVE_DLFCN_H)
