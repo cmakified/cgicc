@@ -145,7 +145,9 @@ if (cgicc_build_doc)
 				COMMAND test ! -d ${CMAKE_CURRENT_BINARY_DIR}/html && mkdir ${CMAKE_CURRENT_BINARY_DIR}/html || /bin/true
 				COMMAND env DATE="${DATE}" VERSION="${VERSION}" ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile 
 				COMMAND cp -a *.jpg *.png cgicc-doc.css ${CMAKE_CURRENT_BINARY_DIR}/html/
-				COMMAND sed -i -e '${SED_CMD_1}' -e '${SED_CMD_2}' ${CMAKE_CURRENT_BINARY_DIR}/html/index.html)
+				COMMAND cp ${CMAKE_CURRENT_BINARY_DIR}/html/index.html ${CMAKE_CURRENT_BINARY_DIR}/html/index.html.bak
+				COMMAND sed -e '${SED_CMD_1}' -e '${SED_CMD_2}' ${CMAKE_CURRENT_BINARY_DIR}/html/index.html.bak > ${CMAKE_CURRENT_BINARY_DIR}/html/index.html
+				COMMAND rm ${CMAKE_CURRENT_BINARY_DIR}/html/index.html.bak)
 				
 	add_custom_target(docs 
 				DEPENDS  ${CMAKE_CURRENT_BINARY_DIR}/html/index.html)
