@@ -7,6 +7,7 @@ project (cgicc)
 
 option (cgicc_build_example "Build cgicc example app" OFF)
 option (cgicc_build_demo "Build cgicc demos" OFF)
+option (cgicc_build_doc "Build cgicc documentation" OFF)
 
 set (VERSION "3.2.10")
 execute_process (COMMAND hostname
@@ -125,4 +126,27 @@ if (cgicc_build_example)
 endif ()
 if (cgicc_build_demo)
 	add_subdirectory (demo)
+endif ()
+
+if (cgicc_build_doc) 
+	find_package(Doxygen)
+	if (NOT DOXYGEN_FOUND)
+		message(FATAL_ERROR 
+			"Doxygen is needed to build the documentation. Please install it correctly")
+	endif ()
+	configure_file(doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
+	SET(SED_CMD_1 "s/$$title/GNU cgicc documentation version ${VERSION}/g")
+	SET(SED_CMD_2 "s/$$(VERSION)/${VERSION}/g")
+	execute_process (COMMAND date "+%-d %b %Y" 
+		OUTPUT_VARIABLE DATE
+		OUTPUT_STRIP_TRAILING_WHITESPACE)
+	add_custom_command(OUTPUT html/index.html
+				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doc
+				COMMAND test ! -d ${CMAKE_CURRENT_BINARY_DIR}/html && mkdir ${CMAKE_CURRENT_BINARY_DIR}/html || /bin/true
+				COMMAND env DATE="${DATE}" VERSION="${VERSION}" ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile 
+				COMMAND cp -a *.jpg *.png cgicc-doc.css ${CMAKE_CURRENT_BINARY_DIR}/html/
+				COMMAND sed -i -e '${SED_CMD_1}' -e '${SED_CMD_2}' ${CMAKE_CURRENT_BINARY_DIR}/html/index.html)
+				
+	add_custom_target(docs 
+				DEPENDS  ${CMAKE_CURRENT_BINARY_DIR}/html/index.html)
 endif ()
