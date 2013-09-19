@@ -120,7 +120,7 @@ namespace cgicc {
      * \return The value of the requested environment variable, or an empty
      * string if not found.
      */
-    virtual inline std::string getenv(const char *varName)
+    virtual inline std::string getenv(const char *varName) const
     {
       return fEnv[varName];
     }
