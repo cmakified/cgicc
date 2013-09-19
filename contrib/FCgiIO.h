@@ -44,7 +44,8 @@
 #include <string>
 #include <map>
 
-#include "fcgio.h"
+#include <fcgio.h>
+
 
 #include "cgicc/CgiInput.h"
 
@@ -122,7 +123,11 @@ namespace cgicc {
      */
     virtual inline std::string getenv(const char *varName) const
     {
-      return fEnv[varName];
+      fEnv_t::const_iterator i = fEnv.find(varName);
+      if(i == fEnv.end())
+        return std::string();
+      else
+        return i->second;
     }
     //@}
     
@@ -145,7 +150,8 @@ namespace cgicc {
     fcgi_streambuf 			fOutBuf;
     fcgi_streambuf 			fErrBuf;
     std::ostream 			fErr;
-    std::map<std::string, std::string> 	fEnv;
+    typedef std::map<std::string, std::string> 	fEnv_t;
+    fEnv_t fEnv;
   };
   
 } // namespace cgicc
