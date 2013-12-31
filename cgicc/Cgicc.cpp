@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.cpp,v 1.30 2013/01/12 11:11:46 sebdiaz Exp $
+ *  $Id: Cgicc.cpp,v 1.31 2013/12/31 17:33:59 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -324,11 +324,11 @@ cgicc::Cgicc::findEntries(const std::string& param,
   result.clear();
 
   if(byName) {
-    copy_if(fFormData.begin(), fFormData.end(), 
+    cgicc::copy_if(fFormData.begin(), fFormData.end(), 
 	    std::back_inserter(result),FE_nameCompare(param));
   }
   else {
-    copy_if(fFormData.begin(), fFormData.end(), 
+    cgicc::copy_if(fFormData.begin(), fFormData.end(), 
 	    std::back_inserter(result), FE_valueCompare(param));
   }
 
