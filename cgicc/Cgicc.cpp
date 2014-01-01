@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.cpp,v 1.31 2013/12/31 17:33:59 sebdiaz Exp $
+ *  $Id: Cgicc.cpp,v 1.32 2014/01/01 09:27:35 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -387,7 +387,7 @@ cgicc::Cgicc::parseFormInput(const std::string& data, const std::string &content
       oldPos = ++pos;
       
       // Find the '&' or ';' separating subsequent name/value pairs
-      pos = data.find_first_of(';&', oldPos);
+      pos = data.find_first_of(";&", oldPos);
       
       // Even if an '&' wasn't found the rest of the string is a value
       value = form_urldecode(data.substr(oldPos, pos - oldPos));
