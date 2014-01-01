@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: Cgicc.cpp,v 1.32 2014/01/01 09:27:35 sebdiaz Exp $
+ *  $Id: Cgicc.cpp,v 1.33 2014/01/01 10:14:50 sebdiaz Exp $
  *
  *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
  *                       2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
@@ -410,12 +410,19 @@ cgicc::Cgicc::parseFormInput(const std::string& data, const std::string &content
     std::string 		bType 	= "boundary=";
     std::string::size_type 	pos 	= content_type.find(bType);
 
+    // Remove next sentence
+    std::string                 commatek=";";
+
     // generate the separators
     std::string sep1 = content_type.substr(pos + bType.length());
+    if (sep1.find(";")!=std::string::npos)
+       sep1=sep1.substr(0,sep1.find(";"));
     sep1.append("\r\n");
     sep1.insert(0, "--");
 
     std::string sep2 = content_type.substr(pos + bType.length());
+    if (sep2.find(";")!=std::string::npos)
+       sep2=sep2.substr(0,sep2.find(";"));
     sep2.append("--\r\n");
     sep2.insert(0, "--");
 
