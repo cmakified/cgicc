@@ -172,7 +172,7 @@ else
     exit 2
 fi
 
-echo "version: 1.1" > ${PACKAGE}.directive
+echo "version: 1.2" > ${PACKAGE}.directive
 echo "directory: ${DIRECTORY}" >> ${PACKAGE}.directive
 echo "filename: ${PACKAGE}" >> ${PACKAGE}.directive
 
