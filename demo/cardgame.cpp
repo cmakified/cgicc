@@ -1,6 +1,6 @@
 /* -*-mode:c++; c-file-style: "gnu";-*- */
 /*
- *  $Id: cardgame.cpp,v 1.7 2009/01/03 17:26:43 sebdiaz Exp $
+ *  $Id: cardgame.cpp,v 1.8 2014/03/28 20:37:02 sebdiaz Exp $
  *
  *  Copyright (C) 2007 Sebastien DIAZ <sebastien.diaz@gmail.com>
  *  Part of the GNU cgicc library, http://www.gnu.org/software/cgicc
@@ -175,6 +175,7 @@ namespace CardGameTools
 		for (unsigned int i=0;i<pPlayer.size();i++)
 		{
 			if (i+1<pPlayer.size())
+            {
 			if (carList[i]==':'&&carList[i+1]==':')
 			{
 				word=actualWord.str();
@@ -197,6 +198,7 @@ namespace CardGameTools
 			}else {
 				actualWord <<carList[i];
 			}
+            }
 		}
 		
 		
@@ -349,7 +351,7 @@ namespace CardGameTools
 		string identifiant;
 		string actualCard;
 		bool isPlaying=false;
-		int points;
+		int points=0;
 		
 		int vNBCardsQueue1=0;
 		int vCardsCounterQ1=0;
@@ -368,6 +370,7 @@ namespace CardGameTools
 		for (unsigned int i=0;i<vGame.size();i++)
 		{
 			if (i+1<vGame.size())
+            {
 			if (carList[i]==':'&&carList[i+1]==':')
 			{
 				
@@ -485,6 +488,7 @@ namespace CardGameTools
 						}
 					}
 				}
+            }
 				
 				
 				wordCounter++;
@@ -1483,9 +1487,6 @@ main(int argc,
       Cgicc cgi;
       
        // Get the name and value of the cookie to set
-       const_form_iterator name = cgi.getElement("name");
-       
-       const_form_iterator value = cgi.getElement("value");
        
        const_form_iterator actionIn = cgi.getElement("actionner");
        const_form_iterator playedCard = cgi.getElement("card");
