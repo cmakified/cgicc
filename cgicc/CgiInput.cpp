@@ -46,7 +46,7 @@ cgicc::CgiInput::read(char *data,
 }
 
 std::string
-cgicc::CgiInput::getenv(const char *varName) const
+cgicc::CgiInput::getenv(const char *varName)
 {
   char *var = std::getenv(varName);
   return (0 == var) ? std::string("") : var;

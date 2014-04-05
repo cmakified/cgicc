@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.20 2008/06/01 18:40:28 sebdiaz Exp $
+## $Id: Makefile.am,v 1.21 2013/12/31 17:34:00 sebdiaz Exp $
 
 CLEANFILES = *~ stamp
 
@@ -47,6 +47,9 @@ html-doc:
 	fi;
 	DATE=`date '+%-d %b %Y'` VERSION=$(VERSION) $(DOXYGEN) Doxyfile
 	cp $(IMAGES) cgicc-doc.css html
+	if test ! -d html/index.html; then \
+		echo empty> html/index.html; \
+	fi;
 	mv html/index.html html/index.html.bak
 	sed -e '$(SEDCMD1)' -e '$(SEDCMD2)' html/index.html.bak > html/index.html
 	rm -f html/index.html.bak
