@@ -44,8 +44,7 @@
 #include <string>
 #include <map>
 
-#include <fcgio.h>
-
+#include "fcgio.h"
 
 #include "cgicc/CgiInput.h"
 
@@ -150,8 +149,7 @@ namespace cgicc {
     fcgi_streambuf 			fOutBuf;
     fcgi_streambuf 			fErrBuf;
     std::ostream 			fErr;
-    typedef std::map<std::string, std::string> 	fEnv_t;
-    fEnv_t fEnv;
+    std::map<std::string, std::string> 	fEnv;
   };
   
 } // namespace cgicc
